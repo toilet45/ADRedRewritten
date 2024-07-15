@@ -62,7 +62,7 @@ export class TimeTheoremPurchaseType {
     amntPur = amntPur.sub(1);
     Currency.timeTheorems.add(amntPur);
     this.add(amntPur);
-    if (!Perk.ttFree.canBeApplied) this.currency.subtract(cost.div(this.costIncrement));
+    if (!Perk.ttFree.canBeApplied) this.currency.subtract(this.bulkCost(amntPur));
     // Can we afford another? If not, just return that we definitely bought some already
     if (this.currency.lt(cost)) return true;
     Currency.timeTheorems.add(1);

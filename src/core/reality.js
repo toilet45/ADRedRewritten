@@ -46,7 +46,7 @@ export const GlyphSelection = {
     // Code needs rewriting at a later date as it is all bitmask stuff rn, so we use a constant false fn
     // eslint-disable-next-line no-constant-condition
     if (GlyphGenerator.isUniformityActive) {
-      glyphList = GlyphGenerator.uniformGlyphSelection(level, rng, player.realities);
+      glyphList = GlyphGenerator.uniformGlyphSelections(level, rng, player.realities);
     } else {
       for (let out = 0; out < count; ++out) {
         types.push(GlyphGenerator.randomType(rng, types));
@@ -638,7 +638,7 @@ export function finishProcessReality(realityProps) {
   player.partInfinityPoint = 0;
   player.partInfinitied = 0;
   player.break = false;
-  player.IPMultPurchases = 0;
+  player.IPMultPurchases = DC.D0;
   Currency.infinityPower.reset();
   Currency.timeShards.reset();
   Replicanti.reset(true);
