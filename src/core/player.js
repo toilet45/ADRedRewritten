@@ -371,7 +371,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 83,
+  version: 100,
   infinityPower: DC.D1,
   postC4Tier: 0,
   eternityPoints: DC.D0,
@@ -928,6 +928,31 @@ window.player = {
       id: false,
     }
   },
+  ad_red: {
+    mends: DC.D0,
+    mendingPoints: DC.D0,
+    mendingRebuyables: {
+      1: new Decimal(),
+      2: new Decimal(),
+      3: new Decimal(),
+      4: new Decimal(),
+      5: new Decimal(),
+    },
+    mendingUpgradeBits: 0,
+    mendingUpgReqs: 0,
+    records:{
+      thisMend: {
+        time: DC.D0,
+        realTime: DC.D0,
+        trueTime: 0
+      },
+      bestMend: {
+        time: DC.BEMAX,
+        realTime: DC.BEMAX,
+        trueTime: 0
+      },
+    }
+  }
 };
 
 export const Player = {

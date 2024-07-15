@@ -23,6 +23,7 @@ export default {
         times.push(BBV);
       }
       return times;
+      return times;
     },
     getInfinityChallengeTimes() {
       const timesi = [];
@@ -31,12 +32,18 @@ export default {
         BBVi = new Decimal();
         BBVi.copyFrom(player.challenge.infinity.bestTimes[i]);
         timesi.push(BBVi);
+        BBVi = new Decimal();
+        BBVi.copyFrom(player.challenge.infinity.bestTimes[i]);
+        timesi.push(BBVi);
       }
+      return timesi;
       return timesi;
     },
     update() {
       this.infinityChallengesUnlocked = PlayerProgress.infinityChallengeCompleted() ||
         PlayerProgress.eternityUnlocked();
+      this.normalChallenges = this.getNormalChallengeTimes();
+      this.infinityChallenges = this.getInfinityChallengeTimes();
       this.normalChallenges = this.getNormalChallengeTimes();
       this.infinityChallenges = this.getInfinityChallengeTimes();
     }

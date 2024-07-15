@@ -51,9 +51,9 @@ export const AD = {
     isActive: dim => (dim ? dim <= MultiplierTabHelper.activeDimCount("AD") : true),
     dilationEffect: () => {
       const baseEff = (player.dilation.active || Enslaved.isRunning)
-        ? 0.75 * Effects.product(DilationUpgrade.dilationPenalty)
-        : 1;
-      return baseEff * (Effarig.isRunning ? Effarig.multDilation : 1);
+        ? new Decimal(0.75).times(Effects.product(DilationUpgrade.dilationPenalty))
+        : DC.D1;
+      return baseEff.times(Effarig.isRunning ? Effarig.multDilation : 1);
     },
     isDilated: true,
     overlay: ["Ω", "<i class='fas fa-cube' />"],
@@ -155,7 +155,7 @@ export const AD = {
       }
       return totalMult;
     },
-    powValue: () => Achievement(183).effectOrDefault(1),
+    powValue: () => Achievement(183).effectOrDefault(DC.D1),
     isActive: () => !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
@@ -253,7 +253,7 @@ export const AD = {
       }
       return totalMult;
     },
-    powValue: () => InfinityChallenge(4).reward.effectOrDefault(1),
+    powValue: () => InfinityChallenge(4).reward.effectOrDefault(DC.D1),
     isActive: () => player.break && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.CHALLENGE("infinity"),
   },
@@ -307,15 +307,15 @@ export const AD = {
       return Decimal.pow(mult, dim ? 1 : MultiplierTabHelper.activeDimCount("AD"));
     },
     powValue: () => {
-      const totalPow = getAdjustedGlyphEffect("powerpow") * getAdjustedGlyphEffect("effarigdimensions");
-      return totalPow * (player.dilation.active ? getAdjustedGlyphEffect("dilationpow") : 1);
+      const totalPow = getAdjustedGlyphEffect("powerpow").times(getAdjustedGlyphEffect("effarigdimensions"));
+      return totalPow.times((player.dilation.active ? getAdjustedGlyphEffect("dilationpow") : 1));
     },
     isActive: () => PlayerProgress.realityUnlocked() && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.GENERIC_GLYPH,
   },
   v: {
     name: "5 V-Achievement Milestone - AD Power based on Space Theorems",
-    powValue: () => VUnlocks.adPow.effectOrDefault(1),
+    powValue: () => VUnlocks.adPow.effectOrDefault(DC.D1),
     isActive: () => PlayerProgress.realityUnlocked() && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
@@ -327,21 +327,21 @@ export const AD = {
       return Decimal.pow(mult, dim ? 1 : MultiplierTabHelper.activeDimCount("AD"));
     },
     powValue: dim => {
-      const basePow = AlchemyResource.power.effectOrDefault(1) * Ra.momentumValue;
+      const basePow = AlchemyResource.power.effectOrDefault(DC.D1).times(Ra.momentumValue);
       // Not entirely accurate, but returns the geometric mean of all producing dimensions (which should be close)
       // Set to default value of 1 in non-unlocked case (arguably some sort of effect-or-default would be better,
       // but I don't want to risk breaking things).
-      let inflationPow = 1;
+      let inflationPow = DC.D1;
       if (AlchemyResource.inflation.isUnlocked) {
         if (dim) {
-          inflationPow = AntimatterDimension(dim).multiplier.gte(AlchemyResource.inflation.effectValue) ? 1.05 : 1;
+          inflationPow = AntimatterDimension(dim).multiplier.gte(AlchemyResource.inflation.effectValue) ? new Decimal(1.05) : DC.D1;
         } else {
           const inflated = AntimatterDimensions.all
             .countWhere(ad => ad.isProducing && ad.multiplier.gte(AlchemyResource.inflation.effectValue));
-          inflationPow = Math.pow(1.05, inflated / AntimatterDimensions.all.countWhere(ad => ad.isProducing));
+          inflationPow = Decimal.pow(1.05, inflated / AntimatterDimensions.all.countWhere(ad => ad.isProducing));
         }
       }
-      return basePow * inflationPow;
+      return basePow.times(inflationPow);
     },
     isActive: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.ALCHEMY,
@@ -350,7 +350,7 @@ export const AD = {
     name: "Pelle Upgrades",
     multValue: dim => Decimal.pow(PelleUpgrade.antimatterDimensionMult.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("AD")),
-    powValue: () => PelleRifts.paradox.effectOrDefault(DC.D1).toNumber(),
+    powValue: () => PelleRifts.paradox.effectOrDefault(DC.D1),
     isActive: () => Pelle.isDoomed && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.PELLE,
   },
@@ -459,20 +459,20 @@ export const AD = {
   },
   nerfV: {
     name: "V's Reality",
-    powValue: () => 0.5,
+    powValue: () => new Decimal(0.5),
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },
   nerfCursed: {
     name: "Cursed Glyphs",
     powValue: () => getAdjustedGlyphEffect("curseddimensions"),
-    isActive: () => getAdjustedGlyphEffect("curseddimensions") !== 1,
+    isActive: () => getAdjustedGlyphEffect("curseddimensions").neq(1),
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("cursed"),
   },
   nerfPelle: {
     name: "Doomed Reality",
-    multValue: 0.1,
-    powValue: () => (PelleStrikes.infinity.hasStrike ? 0.5 : 1),
+    multValue: new Decimal(0.1),
+    powValue: () => (PelleStrikes.infinity.hasStrike ? new Decimal(0.5) : DC.D1),
     isActive: () => Pelle.isDoomed,
     icon: MultiplierTabIcons.PELLE,
   }

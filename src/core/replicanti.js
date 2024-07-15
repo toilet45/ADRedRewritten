@@ -32,6 +32,7 @@ function addReplicantiGalaxies(newGalaxies) {
 // Function called externally for gaining RGs, which adjusts replicanti amount before calling the function
 // which actually adds the RG. Called externally both automatically and manually
 export function replicantiGalaxy(auto) {
+  //console.log("dold")
   if (RealityUpgrade(6).isLockingMechanics) {
     if (!auto) RealityUpgrade(6).tryShowWarningModal();
     return;
@@ -48,6 +49,7 @@ export function replicantiGalaxy(auto) {
 
 // Only called on manual RG requests
 export function replicantiGalaxyRequest() {
+  //console.log("blob")
   if (!Replicanti.galaxies.canBuyMore) return;
   if (RealityUpgrade(6).isLockingMechanics) RealityUpgrade(6).tryShowWarningModal();
   else if (player.options.confirmations.replicantiGalaxy) Modal.replicantiGalaxy.show();

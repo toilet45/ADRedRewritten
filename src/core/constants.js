@@ -4,6 +4,7 @@ window.PRESTIGE_EVENT = {
   INFINITY: 2,
   ETERNITY: 3,
   REALITY: 4,
+  AD_RED_MENDING: 5,
 };
 
 function deepFreeze(obj) {
@@ -400,6 +401,8 @@ window.PROGRESS_STAGE = {
   IMAGINARY_MACHINES: 15,
   LAITELA: 16,
   PELLE: 17,
+
+  TIER_FOUR_PRESTIGE: 18,
 };
 
 window.SPEEDRUN_SEED_STATE = {

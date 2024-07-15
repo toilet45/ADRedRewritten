@@ -12,11 +12,11 @@ export const general = {
     multValue: (ach, dim) => {
       // There is also a banked infinities gain effect, but we don't track that in the multiplier tab
       if (ach === 131) return Achievement(131).canBeApplied
-        ? Achievement(131).effects.infinitiesGain.effectOrDefault(1) : 1;
+        ? Achievement(131).effects.infinitiesGain.effectOrDefault(DC.D1) : DC.D1;
       // There is also a buy10 effect, but we don't track that in the multiplier tab
-      if (ach === 141) return Achievement(141).canBeApplied ? Achievement(141).effects.ipGain.effectOrDefault(1) : 1;
-      if (ach === 183) return 1;
-      if (!dim) return Achievement(ach).canBeApplied ? Achievement(ach).effectOrDefault(1) : 1;
+      if (ach === 141) return Achievement(141).canBeApplied ? Achievement(141).effects.ipGain.effectOrDefault(DC.D1) : DC.D1;
+      if (ach === 183) return DC.D1;
+      if (!dim) return Achievement(ach).canBeApplied ? Achievement(ach).effectOrDefault(DC.D1) : DC.D1;
 
       if (dim?.length === 2) {
         let totalEffect = DC.D1;
@@ -30,12 +30,12 @@ export const general = {
         return totalEffect;
       }
 
-      if (ach === 43) return Achievement(43).canBeApplied ? (1 + Number(dim.charAt(2)) / 100) : 1;
+      if (ach === 43) return Achievement(43).canBeApplied ? new Decimal(1 + Number(dim.charAt(2)) / 100) : DC.D1;
       return (MultiplierTabHelper.achievementDimCheck(ach, dim) && Achievement(ach).canBeApplied)
-        ? Achievement(ach).effectOrDefault(1) : 1;
+        ? Achievement(ach).effectOrDefault(DC.D1) : DC.D1;
     },
     // 183 is the only time a power effect is in an Achievement, so we special-case it here and return a x1 multiplier
-    powValue: ach => (ach === 183 ? Achievement(183).effectOrDefault(1) : 1),
+    powValue: ach => (ach === 183 ? Achievement(183).effectOrDefault(DC.D1) : new Decimal(1)),
     isActive: ach => Achievement(ach).canBeApplied,
     icon: ach => {
       const base = MultiplierTabIcons.ACHIEVEMENT;
@@ -55,22 +55,22 @@ export const general = {
       // The PASS perk doubles this effect
       if (ts === 132) {
         const passPerkMult = Perk.studyPassive.isBought ? 2 : 1;
-        return TimeStudy(ts).canBeApplied ? 1.5 * passPerkMult : 1;
+        return TimeStudy(ts).canBeApplied ? new Decimal(1.5).times(passPerkMult) : DC.D1;
       }
 
-      if (!dim) return TimeStudy(ts).canBeApplied ? TimeStudy(ts).effectOrDefault(1) : 1;
+      if (!dim) return TimeStudy(ts).canBeApplied ? TimeStudy(ts).effectOrDefault(DC.D1) : DC.D1;
       if (dim?.length === 2) {
         let totalEffect = DC.D1;
         for (let tier = 1; tier <= MultiplierTabHelper.activeDimCount(dim); tier++) {
           totalEffect = totalEffect.times((MultiplierTabHelper.timeStudyDimCheck(ts, `${dim}${tier}`) &&
-              TimeStudy(ts).isBought) ? TimeStudy(ts).effectOrDefault(1) : 1);
+              TimeStudy(ts).isBought) ? TimeStudy(ts).effectOrDefault(DC.D1) : DC.D1);
         }
         return totalEffect;
       }
       // The new Decimal() wrapper is necessary because, for some inexplicable reason, replicanti becomes
       // reactive through TS101 if that isn't there
       return (MultiplierTabHelper.timeStudyDimCheck(ts, dim) && TimeStudy(ts).isBought)
-        ? new Decimal(TimeStudy(ts).effectOrDefault(1)) : 1;
+        ? new Decimal(TimeStudy(ts).effectOrDefault(DC.D1)) : DC.D1;
     },
     isActive: ts => TimeStudy(ts).isBought,
     icon: ts => {
@@ -123,13 +123,13 @@ export const general = {
         for (let tier = 1; tier <= MultiplierTabHelper.activeDimCount(dim); tier++) {
           totalEffect = totalEffect.times(
             (MultiplierTabHelper.ECDimCheck(ec, `${dim}${tier}`) && EternityChallenge(ec).reward.canBeApplied)
-              ? EternityChallenge(ec).reward.effectOrDefault(1).clampMin(1)
+              ? EternityChallenge(ec).reward.effectOrDefault(DC.D1).clampMin(1)
               : 1);
         }
         return totalEffect;
       }
       if (ec === 2) return dim === "ID1" ? EternityChallenge(ec).reward.effectValue : DC.D1;
-      return EternityChallenge(ec).reward.effectOrDefault(1);
+      return EternityChallenge(ec).reward.effectOrDefault(DC.D1);
     },
     isActive: ec => EternityChallenge(ec).reward.canBeApplied,
     icon: ec => {

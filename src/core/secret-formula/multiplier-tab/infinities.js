@@ -25,7 +25,7 @@ export const infinities = {
   },
   timeStudy: {
     name: "Time Study 32",
-    multValue: () => TimeStudy(32).effectOrDefault(1),
+    multValue: () => TimeStudy(32).effectOrDefault(DC.D1),
     isActive: () => TimeStudy(32).isBought,
     icon: MultiplierTabIcons.TIME_STUDY,
   },
@@ -49,13 +49,13 @@ export const infinities = {
   },
   ra: {
     name: "Ra Upgrade - Multiplier based on TT",
-    multValue: () => Ra.unlocks.continuousTTBoost.effects.infinity.effectOrDefault(1),
+    multValue: () => Ra.unlocks.continuousTTBoost.effects.infinity.effectOrDefault(DC.D1),
     isActive: () => Ra.unlocks.continuousTTBoost.isUnlocked,
     icon: MultiplierTabIcons.GENERIC_RA,
   },
   singularity: {
     name: "Singularity Milestone - Power from Singularities",
-    powValue: () => SingularityMilestone.infinitiedPow.effectOrDefault(1),
+    powValue: () => SingularityMilestone.infinitiedPow.effectOrDefault(DC.D1),
     isActive: () => SingularityMilestone.infinitiedPow.canBeApplied,
     icon: MultiplierTabIcons.SINGULARITY,
   },

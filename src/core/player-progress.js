@@ -12,7 +12,11 @@ export class PlayerProgress {
   }
 
   get isRealityUnlocked() {
-    return new Decimal(this._player.realities).gt(0);
+    return new Decimal(this._player.realities).gt(0) || this.isMendingUnlocked;
+  }
+
+  get isMendingUnlocked(){
+    return new Decimal(this._player.ad_red.mends).gt(0);
   }
 
   get hasFullCompletion() {
@@ -49,6 +53,10 @@ export class PlayerProgress {
 
   static realityUnlocked() {
     return PlayerProgress.current.isRealityUnlocked;
+  }
+
+  static mendingUnlocked(){
+    return PlayerProgress.current.isMendingUnlocked;
   }
 
   static seenAlteredSpeed() {

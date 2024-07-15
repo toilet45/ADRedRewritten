@@ -228,6 +228,21 @@ export const Enslaved = {
     }
     return true;
   },
+  reset(){
+    player.celestials.enslaved.isStoring = false;
+    player.celestials.enslaved.stored = DC.D0;
+    player.celestials.enslaved.isStoringReal = false;
+    player.celestials.enslaved.storedReal = DC.D0;
+    player.celestials.enslaved.autoStoreReal = false;
+    player.celestials.enslaved.isAutoReleasing = false;
+    player.celestials.enslaved.unlocks = [];
+    player.celestials.enslaved.run = false;
+    player.celestials.enslaved.completed = false;
+    player.celestials.enslaved.tesseracts = DC.D0;
+    player.celestials.enslaved.hasSecretStudy = false;
+    player.celestials.enslaved.feltEternity = false;
+    player.celestials.enslaved.progressBits = 0;
+  },
   quotes: Quotes.enslaved,
   // Unicode f0c1.
   symbol: "\uf0c1",

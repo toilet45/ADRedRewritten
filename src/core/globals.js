@@ -90,3 +90,5 @@ export * from "./tab-notifications";
 export * from "./speedrun";
 
 export * from "./automator/script-templates";
+
+export * from "./ad-redemption/index";

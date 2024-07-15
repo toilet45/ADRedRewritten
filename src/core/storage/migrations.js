@@ -431,6 +431,33 @@ export const migrations = {
     83: player => {
       beMigration(player);
     },
+    100: player =>{ //AD: Red data (or Amalgam stuff)
+      player.ad_red = {
+        mends: DC.D0,
+        mendingPoints: DC.D0,
+        mendingRebuyables: {
+          1: new Decimal(),
+          2: new Decimal(),
+          3: new Decimal(),
+          4: new Decimal(),
+          5: new Decimal(),
+        },
+        mendingUpgradeBits: 0,
+        mendingUpgReqs: 0,
+        records:{
+          thisMend: {
+            time: DC.D0,
+            realTime: DC.D0,
+            trueTime: 0
+          },
+          bestMend: {
+            time: DC.BEMAX,
+            realTime: DC.BEMAX,
+            trueTime: 0
+          },
+        }
+      }
+    }
   },
 
   normalizeTimespans(player) {

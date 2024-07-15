@@ -15,13 +15,13 @@ export const DT = {
     multValue: () => getDilationGainPerSecond().times(getGameSpeedupForDisplay()),
     isActive: () => PlayerProgress.realityUnlocked() ||
       (PlayerProgress.dilationUnlocked() && getDilationGainPerSecond().gt(0)),
-    dilationEffect: () => (Enslaved.isRunning ? 0.85 : 1),
+    dilationEffect: () => (Enslaved.isRunning ? new Decimal(0.85) : new Decimal(1)),
     isDilated: true,
     overlay: ["Ψ"],
   },
   achievement: {
     name: "Achievements",
-    multValue: () => Achievement(132).effectOrDefault(1) * Achievement(137).effectOrDefault(1),
+    multValue: () => Achievement(132).effectOrDefault(1).times(Achievement(137).effectOrDefault(1)),
     isActive: () => (Achievement(132).canBeApplied || Achievement(137).canBeApplied) &&
       getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.ACHIEVEMENT,
@@ -85,20 +85,20 @@ export const DT = {
 
   nerfV: {
     name: "V's Reality",
-    powValue: () => 0.5,
+    powValue: () => new Decimal(0.5),
     isActive: () => V.isRunning && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.GENERIC_V,
   },
   nerfPelle: {
     name: "Doomed Reality",
-    multValue: 1e-5,
+    multValue: new Decimal(1e-5),
     isActive: () => Pelle.isDoomed && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.PELLE,
   },
   gamespeed: {
     name: "Current Game speed",
     multValue: () => getGameSpeedupForDisplay(),
-    isActive: () => getGameSpeedupForDisplay() > 1 && getDilationGainPerSecond().neq(0),
+    isActive: () => getGameSpeedupForDisplay().gt(1) && getDilationGainPerSecond().neq(0),
     ignoresNerfPowers: true,
     icon: MultiplierTabIcons.GAMESPEED,
   },

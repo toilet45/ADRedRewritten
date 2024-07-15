@@ -42,13 +42,13 @@ export const MultiplierTabHelper = {
 
     let galFrac, tickFrac;
     if (effectiveCount.lt(3)) {
-      let baseMult = 1.1245;
-      if (player.galaxies.eq(1)) baseMult = 1.11888888;
-      if (player.galaxies.eq(2)) baseMult = 1.11267177;
+      let baseMult = new Decimal(1.1245);
+      if (player.galaxies.eq(1)) baseMult = new Decimal(1.11888888);
+      if (player.galaxies.eq(2)) baseMult = new Decimal(1.11267177);
       if (NormalChallenge(5).isRunning) {
-        baseMult = 1.08;
-        if (player.galaxies.eq(1)) baseMult = 1.07632;
-        if (player.galaxies.eq(2)) baseMult = 1.072;
+        baseMult = new Decimal(1.08);
+        if (player.galaxies.eq(1)) baseMult = new Decimal(1.07632);
+        if (player.galaxies.eq(2)) baseMult = new Decimal(1.072);
       }
       // This is needed for numerical consistency with the other conditional case
       baseMult = new Decimal(baseMult).div(0.965 ** 2);
@@ -64,11 +64,11 @@ export const MultiplierTabHelper = {
       effectiveCount = effectiveCount.sub(2);
       effectiveCount = effectiveCount.mul(effects);
       effectiveCount = effectiveCount.mul(getAdjustedGlyphEffect("realitygalaxies")
-        .mul(ImaginaryUpgrade(9).effectOrDefault(0).add(1)));
+        .mul(ImaginaryUpgrade(9).effectOrDefault(DC.D0).add(1)));
       effectiveCount = effectiveCount.mul(Pelle.specialGlyphEffect.power);
 
       // These all need to be framed as INCREASING x/sec tick rate (ie. all multipliers > 1, all logs > 0)
-      const baseMult = new Decimal(0.965 ** 2).div(NormalChallenge(5).isRunning ? 0.83 : 0.8);
+      const baseMult = new Decimal(0.965 ** 2).div(NormalChallenge(5).isRunning ? new Decimal(0.83) : new Decimal(0.8));
       const logBase = Decimal.log10(baseMult);
       const logPerGalaxy = DC.D0_965.log10().mul(-1);
 
@@ -192,8 +192,7 @@ export const MultiplierTabHelper = {
     // Calculate an average black hole speedup factor
     const bh1 = BlackHole(1);
     const bh2 = BlackHole(2);
-    const avgBH = 1 + (bh1.isUnlocked ? bh1.dutyCycle * (bh1.power - 1) : 0) +
-        (bh2.isUnlocked ? bh1.dutyCycle * bh2.dutyCycle * bh1.power * (bh2.power - 1) : 0);
+    const avgBH = 1 + (bh1.isUnlocked ? bh1.dutyCycle.times(bh1.power.sub(1)) : DC.D0).add(bh2.isUnlocked ? bh1.dutyCycle.times(bh2.dutyCycle).times(bh1.power).times(bh2.power.sub(1)) : DC.D0);
 
     return {
       current: currBH,

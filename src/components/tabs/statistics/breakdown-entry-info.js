@@ -5,6 +5,7 @@ import { DC } from "@/core/constants";
 export class BreakdownEntryInfo {
   constructor(key) {
     this.key = key;
+    console.log(key)
     const keyArgs = this.key.split("_");
     const dbEntry = GameDatabase.multiplierTabValues[keyArgs[0]][keyArgs[1]];
     const args = keyArgs.length >= 3
@@ -23,7 +24,7 @@ export class BreakdownEntryInfo {
     this._ignoresNerfPowers = createGetter(dbEntry.ignoresNerfPowers, args);
     this.data = Vue.observable({
       mult: new Decimal(0),
-      pow: 0,
+      pow: new Decimal(0),
       isVisible: false,
       lastVisibleAt: 0
     });
@@ -31,8 +32,8 @@ export class BreakdownEntryInfo {
 
   update() {
     const isVisible = this.isVisible;
-    this.data.mult.fromDecimal(isVisible ? this.mult : DC.D1);
-    this.data.pow = isVisible ? this.pow : 1;
+    this.data.mult = isVisible ? this.mult : DC.D1;
+    this.data.pow = isVisible ? this.pow : DC.D1;
     this.data.isVisible = isVisible;
     if (isVisible) {
       this.data.lastVisibleAt = Date.now();
@@ -84,7 +85,7 @@ export class BreakdownEntryInfo {
   }
 
   get isVisible() {
-    return this.isActive && (this.pow !== 1 || this.mult.neq(1));
+    return this.isActive && (this.pow.neq(1) || this.mult.neq(1));
   }
 }
 

@@ -27,9 +27,9 @@ export const TD = {
       : (PlayerProgress.realityUnlocked() || TimeDimension(1).isProducing)),
     dilationEffect: () => {
       const baseEff = player.dilation.active
-        ? 0.75 * Effects.product(DilationUpgrade.dilationPenalty)
-        : 1;
-      return baseEff * (Effarig.isRunning ? Effarig.multDilation : 1);
+        ? new Decimal(0.75).times(Effects.product(DilationUpgrade.dilationPenalty))
+        : DC.D1;
+      return baseEff.times(Effarig.isRunning ? Effarig.multDilation : 1);
     },
     isDilated: true,
     overlay: ["Δ", "<i class='fa-solid fa-cube' />"],
@@ -75,7 +75,7 @@ export const TD = {
         .reduce((x, y) => x.times(y), DC.D1);
     },
     isActive: dim => (dim
-      ? ImaginaryUpgrade(14).canBeApplied || (dim === 8 && GlyphSacrifice.time.effectValue > 1)
+      ? ImaginaryUpgrade(14).canBeApplied || (dim === 8 && GlyphSacrifice.time.effectValue.gt(1))
       : TimeDimension(1).isProducing),
     icon: dim => MultiplierTabIcons.PURCHASE("TD", dim),
   },
@@ -84,7 +84,7 @@ export const TD = {
     multValue: () => (TimeDimension(8).isProducing
       ? Decimal.pow(GlyphSacrifice.time.effectValue, Math.clampMax(TimeDimension(8).bought, 1e8))
       : DC.D1),
-    isActive: () => GlyphSacrifice.time.effectValue > 1,
+    isActive: () => GlyphSacrifice.time.effectValue.gt(1),
     icon: MultiplierTabIcons.SACRIFICE("time"),
   },
   powPurchase: {
@@ -97,7 +97,7 @@ export const TD = {
   achievementMult: {
     name: "Eternity Upgrade - Achievement Multiplier",
     multValue: dim => Decimal.pow(EternityUpgrade.tdMultAchs.effectOrDefault(1),
-      dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
+      dim ? DC.D1 : new Decimal(MultiplierTabHelper.activeDimCount("TD"))),
     isActive: () => EternityUpgrade.tdMultAchs.canBeApplied && !Pelle.isDoomed,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
@@ -218,7 +218,7 @@ export const TD = {
   },
   glyph: {
     name: "Glyph Effects",
-    powValue: () => getAdjustedGlyphEffect("timepow") * getAdjustedGlyphEffect("effarigdimensions"),
+    powValue: () => getAdjustedGlyphEffect("timepow").times(getAdjustedGlyphEffect("effarigdimensions")),
     isActive: () => PlayerProgress.realityUnlocked(),
     icon: MultiplierTabIcons.GENERIC_GLYPH
   },
@@ -226,7 +226,7 @@ export const TD = {
     name: "Glyph Alchemy",
     multValue: dim => Decimal.pow(AlchemyResource.dimensionality.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
-    powValue: () => AlchemyResource.time.effectOrDefault(1) * Ra.momentumValue,
+    powValue: () => AlchemyResource.time.effectOrDefault(1).times(Ra.momentumValue),
     isActive: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
     icon: MultiplierTabIcons.ALCHEMY,
   },
@@ -240,20 +240,20 @@ export const TD = {
     name: "Pelle Rift Effects",
     multValue: dim => Decimal.pow(PelleRifts.chaos.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
-    powValue: () => PelleRifts.paradox.effectOrDefault(DC.D1).toNumber(),
+    powValue: () => PelleRifts.paradox.effectOrDefault(DC.D1),
     isActive: () => Pelle.isDoomed,
     icon: MultiplierTabIcons.PELLE,
   },
   iap: {
     name: "Shop Tab Purchases",
-    multValue: 1,
+    multValue: DC.D1,
     isActive: () => false,
     icon: MultiplierTabIcons.IAP,
   },
 
   nerfV: {
     name: "V's Reality",
-    powValue: () => 0.5,
+    powValue: () => new Decimal(0.5),
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },

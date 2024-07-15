@@ -319,6 +319,7 @@ export const DarkMatterDimensions = {
 
   reset() {
     for (const dimension of DarkMatterDimensions.all) {
+      if (dimension._tier >= 5) break;
       dimension.reset();
     }
     Currency.darkMatter.reset();

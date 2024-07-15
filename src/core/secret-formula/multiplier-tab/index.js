@@ -10,13 +10,13 @@
  *    exists in order to avoid copy-pasting extensive entries in multValue
  *  @property {Decimal} displayOverride If present, displays this string instead of multipliers. This
  *    has higher priority than isBase
- *  @property {Decimal|Number} fakeValue  Value to be used as a stand-in for a total when this entry
+ *  @property {Decimal} fakeValue  Value to be used as a stand-in for a total when this entry
  *    is the parent resource of a list of other resources. Mostly used in entries that contribute to a whole differently
  *    than how they're further broken down (eg. IP/EP contibuting as multipliers but consisting of currencies)
- *  @property {Decimal|Number} multValue  Value for multipliers given by this effect. Note that some
+ *  @property {Decimal} multValue  Value for multipliers given by this effect. Note that some
  *    entries may have a pow10 applied to them in order to "undo" logarithmic scaling in the UI
- *  @property {Number} powValue           Numerical value for powers given by this effect
- *  @property {Number} dilationEffect     Exponent to use for dilation effect
+ *  @property {Decimal} powValue           Numerical value for powers given by this effect
+ *  @property {Decimal} dilationEffect     Exponent to use for dilation effect
  *  @property {Boolean} isDilated         Denotes if the multiplier is already dilated and needs an "anti-dilation"
  *    calculation to be applied to make the numbers in the UI correct. Defaults to false
  *  @property {Boolean} isActive          Conditional determining if this component should be visible

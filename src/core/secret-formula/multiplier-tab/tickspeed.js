@@ -21,7 +21,7 @@ export const tickspeed = {
     // No point in showing this breakdown at all unless both components are nonzero; however they will always be nonzero
     // due to the way the calculation works, so we have to manually hide it here
     isActive: () => Tickspeed.perSecond.gt(1) && effectiveBaseGalaxies().gt(0),
-    dilationEffect: () => (Effarig.isRunning ? Effarig.tickDilation : 1),
+    dilationEffect: () => (Effarig.isRunning ? Effarig.tickDilation : new Decimal(1)),
     overlay: ["<i class='fa-solid fa-clock' />"],
     icon: MultiplierTabIcons.TICKSPEED,
   },

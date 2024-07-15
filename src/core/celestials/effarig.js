@@ -104,6 +104,16 @@ export const Effarig = {
     // Will return 0 if Effarig Infinity is uncompleted
     return Decimal.floor(replicantiCap().log10().div(LOG10_MAX_VALUE).sub(1));
   },
+  reset(){
+    player.celestials.effarig.relicShards = DC.D0;
+    player.celestials.effarig.unlockBits = 0;
+    player.celestials.effarig.run = false;
+    player.celestials.effarig.glyphWeights.ep = 25;
+    player.celestials.effarig.glyphWeights.repl = 25;
+    player.celestials.effarig.glyphWeights.dt = 25;
+    player.celestials.effarig.glyphWeights.eternities = 25;
+    player.celestials.effarig.autoAdjustGlyphWeights = false;
+  },
   quotes: Quotes.effarig,
   symbol: "Ϙ",
 

@@ -20,8 +20,8 @@ export const replicanti = {
   timeStudy: {
     name: "Time Studies",
     multValue: () => {
-      const preReality = Effects.product(TimeStudy(62), TimeStudy(213)) * (TimeStudy(132).isBought ? 1.5 : 1);
-      return preReality * (Perk.studyPassive.isBought && TimeStudy(132).isBought ? 2 : 1);
+      const preReality = Effects.product(TimeStudy(62), TimeStudy(213)).times(TimeStudy(132).isBought ? 1.5: 1);
+      return preReality.times(Perk.studyPassive.isBought && TimeStudy(132).isBought ? 2 : 1);
     },
     isActive: () => PlayerProgress.eternityUnlocked() && !Pelle.isDoomed,
     icon: MultiplierTabIcons.TIME_STUDY,
@@ -32,10 +32,10 @@ export const replicanti = {
       const baseEffect = (Pelle.isDoomed ? DC.D1 : getAdjustedGlyphEffect("replicationspeed"))
         .times(Pelle.specialGlyphEffect.replication);
       const alteredEffect = Math.clampMin(
-        Decimal.log10(Replicanti.amount) * getSecondaryGlyphEffect("replicationdtgain"), 1);
+        Decimal.log10(Replicanti.amount).times(getSecondaryGlyphEffect("replicationdtgain"), 1));
       return GlyphAlteration.isAdded("replication") ? baseEffect.times(alteredEffect) : baseEffect;
     },
-    isActive: () => PlayerProgress.realityUnlocked() && (!Pelle.isDoomed || Pelle.specialGlyphEffect.replication > 1),
+    isActive: () => PlayerProgress.realityUnlocked() && (!Pelle.isDoomed || Pelle.specialGlyphEffect.replication.gt(1)),
     icon: MultiplierTabIcons.GENERIC_GLYPH,
   },
   amplifierRep: {
