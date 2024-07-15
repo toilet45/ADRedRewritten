@@ -69,7 +69,8 @@ export default {
 
 <template>
   <div class="c-stats-tab">
-    <div class="l-multiplier-subtab-btn-container">
+    Coming Soon(tm)
+    <!--<div class="l-multiplier-subtab-btn-container">
       <button
         v-for="(option, index) in availableOptions"
         :key="option.key + option.isActive"
@@ -105,7 +106,7 @@ export default {
           after prestige events.
         </b>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
