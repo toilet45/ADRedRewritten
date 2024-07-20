@@ -48,26 +48,26 @@ export class TimeTheoremPurchaseType {
 
   purchase(bulk = false) {
     if (!this.canAfford) return false;
-    const cost = this.cost;
 
     if (!bulk) {
+      if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(this.cost);
       Currency.timeTheorems.add(1);
-      if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(cost);
       this.add(1);
       player.requirementChecks.reality.noPurchasedTT = false;
       return true;
     }
-    let amntPur = Decimal.log(this.currency.value.sub(this.costBase).clampMin(1), this.costIncrement).add(1)
-      .sub(Decimal.log(cost.sub(this.costBase).max(1), this.costIncrement)).floor();
+    const canBuy = this.currency.value.sub(this.costBase)
+      .clampMin(this.costIncrement.recip()).log(this.costIncrement);
+    let amntPur = canBuy.sub(this.amount).floor();
     // We can definitely afford x - 1
     amntPur = amntPur.sub(1);
     Currency.timeTheorems.add(amntPur);
     this.add(amntPur);
-    if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(this.bulkCost(amntPur));
+    if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(this.cost);
     // Can we afford another? If not, just return that we definitely bought some already
-    if (this.currency.lt(cost)) return true;
+    if (this.currency.lt(this.cost)) return true;
     Currency.timeTheorems.add(1);
-    if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(cost);
+    if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(this.cost);
     this.add(1);
     player.requirementChecks.reality.noPurchasedTT = false;
     return true;
@@ -109,8 +109,8 @@ TimeTheoremPurchaseType.ep = new class extends TimeTheoremPurchaseType {
   get costIncrement() { return DC.D2; }
 
   bulkCost(amount) {
-    if (Perk.ttFree.canBeApplied || this.currency.layer > 1) return this.cost.times(this.costIncrement.pow(amount.sub(1)));
-    return this.costIncrement.pow(amount.add(this.amount)).subtract(this.cost);
+    if (Perk.ttFree.canBeApplied || this.currency.layer > 1) return this.cost.times(this.costIncrement.pow(amount));
+    return this.cost.times(this.costIncrement.pow(amount.sub(1)));
   }
 }();
 
