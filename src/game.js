@@ -522,7 +522,6 @@ export function gameLoop(passedDiff, options = {}) {
   // expects to see identical numbers. We also don't increment the timers if the game has been beaten (Achievement 188)
   const isEndReached = Achievement(188).isUnlocked;
   if (!isEndReached) {
-    player.records.trueTimePlayed += trueDiff;
     player.records.realTimeDoomed = player.records.realTimeDoomed.add(realDiff);
     player.records.realTimePlayed = player.records.realTimePlayed.add(realDiff);
     player.records.totalTimePlayed = player.records.totalTimePlayed.add(diff);
@@ -537,6 +536,11 @@ export function gameLoop(passedDiff, options = {}) {
     }
     player.records.thisReality.realTime = player.records.thisReality.realTime.add(realDiff);
     player.records.thisReality.time = player.records.thisReality.time.add(diff);
+
+    player.records.trueTimePlayed += trueDiff;
+    player.records.thisInfinity.trueTime += trueDiff;
+    player.records.thisEternity.trueTime += trueDiff;
+    player.records.thisReality.trueTime += trueDiff;
   }
 
   DeltaTimeState.update(trueDiff, realDiff, diff);
