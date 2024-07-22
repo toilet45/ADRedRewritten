@@ -285,7 +285,7 @@ class BlackHoleState {
     const duration = this.duration;
     const fullCycle = this.cycleLength;
     const currentActivationDuration = nextDeactivation.clampMax(duration);
-    const activeCyclesUntilLastDeactivation = time.sub(nextDeactivation).floor().div(fullCycle);
+    const activeCyclesUntilLastDeactivation = time.sub(nextDeactivation).div(fullCycle).floor();
     const activeTimeUntilLastDeactivation = duration.mul(activeCyclesUntilLastDeactivation);
     const timeLeftAfterLastDeactivation = time.sub(nextDeactivation).add(fullCycle).mod(fullCycle);
     const lastActivationDuration = timeLeftAfterLastDeactivation.sub(cooldown).clampMin(0);
