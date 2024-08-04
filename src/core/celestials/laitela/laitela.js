@@ -88,13 +88,13 @@ export const Laitela = {
     // Note that tier is 1-indexed
     const unlockedDimensions = DarkMatterDimensions.all
       .filter(d => d.isUnlocked && d.tier <= maxTier);
-    for (let i = 0; i < maxTier; i++) {
+    for (let i = 0; i < unlockedDimensions.length; i++) {
       unlockedDimensions[i].buyManyInterval(Infinity);
     }
-    for (let i = 0; i < maxTier; i++) {
+    for (let i = 0; i < unlockedDimensions.length; i++) {
       unlockedDimensions[i].buyManyPowerDM(Infinity);
     }
-    for (let i = 0; i < maxTier; i++) {
+    for (let i = 0; i < unlockedDimensions.length; i++) {
       unlockedDimensions[i].buyManyPowerDE(Infinity);
     }
   },

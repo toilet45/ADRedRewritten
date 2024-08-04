@@ -468,7 +468,6 @@ export const ReplicantiUpgrade = {
       const logRemoteScaling = DC.D5;
 
       const cur = Currency.infinityPoints.value.times(TimeStudy(233).effectOrDefault(1)).log10();
-
       if (logBase.gt(cur)) return;
       let a = logCostScaling.div(2);
       let b = logBaseIncrease.sub(logCostScaling.div(2));
@@ -500,6 +499,8 @@ export const ReplicantiUpgrade = {
         .sub(remoteReplicatedGalaxyStart.pow(3).mul(logRemoteScaling).div(3))
         .add(remoteReplicatedGalaxyStart.pow(2).mul(logRemoteScaling).div(2))
         .sub(remoteReplicatedGalaxyStart.mul(logRemoteScaling).div(6));
+
+        //console.log([a, b, c, d])
 
       // eslint-disable-next-line consistent-return
       return decimalCubicSolution(a, b, c, d, false).floor().add(1);

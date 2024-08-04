@@ -54,6 +54,7 @@ export class TimeTheoremPurchaseType {
       Currency.timeTheorems.add(1);
       this.add(1);
       player.requirementChecks.reality.noPurchasedTT = false;
+      if (TimeTheorems.totalPurchased().gt(114)) PelleStrikes.ECs.trigger();
       return true;
     }
     const canBuy = this.currency.value.sub(this.costBase)
@@ -67,6 +68,7 @@ export class TimeTheoremPurchaseType {
     // Can we afford another? If not, just return that we definitely bought some already
     if (this.currency.lt(this.cost) && amntPur.neq(0)) return true;
     Currency.timeTheorems.add(1);
+    if (TimeTheorems.totalPurchased().gt(114)) PelleStrikes.ECs.trigger();
     if (!Perk.ttFree.canBeApplied && this.currency.layer <= 1) this.currency.subtract(this.cost);
     this.add(1);
     player.requirementChecks.reality.noPurchasedTT = false;

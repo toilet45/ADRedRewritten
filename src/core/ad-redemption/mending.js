@@ -114,7 +114,7 @@ export function mendingReset(){
       player.blackHolePause = false,
       player.blackHoleAutoPauseMode = 0;
       player.blackHolePauseTime = DC.D0;
-      player.blackHoleNegative = 1;
+      player.blackHoleNegative = DC.D1;
 
       //Eternity, Infinity (up to tier 2)
 
@@ -128,7 +128,7 @@ export function mendingReset(){
       player.partInfinityPoint = 0;
       player.partInfinitied = 0;
       player.break = false;
-      player.IPMultPurchases = 0;
+      player.IPMultPurchases = DC.D0;
       Currency.infinityPower.reset();
       Currency.timeShards.reset();
       Replicanti.reset(true);

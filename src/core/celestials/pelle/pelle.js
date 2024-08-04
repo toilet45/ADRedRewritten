@@ -101,8 +101,8 @@ export const Pelle = {
     player.auto.antimatterDims.isActive = true;
 
     player.buyUntil10 = true;
-    player.records.realTimeDoomed = 0;
-    for (const res of AlchemyResources.all) res.amount = 0;
+    player.records.realTimeDoomed = DC.D0;
+    for (const res of AlchemyResources.all) res.amount = DC.D0;
     AutomatorBackend.stop();
 
     // Force-unhide all tabs except for the shop tab, for which we retain the hide state instead
@@ -156,7 +156,7 @@ export const Pelle = {
     if (!this.canArmageddon && gainStuff) return;
     EventHub.dispatch(GAME_EVENT.ARMAGEDDON_BEFORE, gainStuff);
     if (gainStuff) {
-      this.cel.remnants += this.remnantsGain;
+      this.cel.remnants = this.cel.remnants.add(this.remnantsGain);
     }
     finishProcessReality({ reset: true, armageddon: true });
     disChargeAll();
@@ -497,7 +497,7 @@ export const Pelle = {
 };
 
 EventHub.logic.on(GAME_EVENT.ARMAGEDDON_AFTER, () => {
-  if (Currency.remnants.gte(1)) {
+  if (Currency.remnants.value.gte(1)) {
     Pelle.quotes.arm.show();
   }
 });

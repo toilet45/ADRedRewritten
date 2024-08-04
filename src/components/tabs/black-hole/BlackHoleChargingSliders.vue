@@ -36,13 +36,13 @@ export default {
       this.isInverted = BlackHoles.areNegative;
       this.isLaitela = Laitela.isRunning;
       this.negativeSlider = Decimal.log10(player.blackHoleNegative).toNumber();
-      this.negativeBHDivisor = Decimal.pow(10, this.negativeSlider);
+      this.negativeBHDivisor = Decimal.pow(10, -this.negativeSlider);
       const maxInversion = player.requirementChecks.reality.slowestBH.lte(1e-300);
       this.isDisabled = ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion;
     },
     adjustSliderNegative(value) {
       this.negativeSlider = -value;
-      player.blackHoleNegative = Decimal.pow10(-this.negativeSlider);
+      player.blackHoleNegative = Decimal.pow10(this.negativeSlider);
       player.requirementChecks.reality.slowestBH = Decimal.max(
         player.requirementChecks.reality.slowestBH,
         player.blackHoleNegative

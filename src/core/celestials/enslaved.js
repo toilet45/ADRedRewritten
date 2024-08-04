@@ -37,7 +37,7 @@ export const Enslaved = {
   nextTickDiff: new Decimal(50),
   isReleaseTick: false,
   autoReleaseTick: 0,
-  autoReleaseSpeed: 0,
+  autoReleaseSpeed: new Decimal(0),
   timeCap: DC.BEMAX,
   glyphLevelMin: 5000,
   currentBlackHoleStoreAmountPerMs: DC.D0,
