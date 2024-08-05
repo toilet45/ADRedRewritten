@@ -497,5 +497,32 @@ export const tabs = [
         hidable: true
       }
     ]
+  },
+  {
+    key: "mending",
+    name: "Mending",
+    UIClass: "o-tab-btn--mending",
+    hideAt: 3.1,
+    condition: () => PlayerProgress.mendingUnlocked(),
+    id: 11,
+    hidable: true,
+    subtabs:[
+      {
+        key: "upgrades",
+        name: "Mending Upgrades",
+        symbol: "?",
+        component: "MendingUpgradesTab",
+        id: 0,
+        hidable: true
+      },
+      {
+        key: "milestones",
+        name: "Mending Milestones",
+        symbol: "?",
+        component: "MendingMilestonesTab",
+        id: 1,
+        hidable: true
+      }
+    ]
   }
 ];

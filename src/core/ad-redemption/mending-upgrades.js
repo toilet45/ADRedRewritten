@@ -69,7 +69,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   }*/
 
   get isAvailableForPurchase() {
-    return (player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
+    return true;//(player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
   }
 
   get isPossible() {
@@ -93,7 +93,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
 
 class RebuyableMendingUpgradeState extends RebuyableMechanicState {
   get currency() {
-    return Currency.ad_red.mendingPoints;
+    return Currency.ad_red_mendingPoints;
   }
 
   get boughtAmount() {

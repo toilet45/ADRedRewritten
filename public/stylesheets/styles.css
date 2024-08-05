@@ -104,6 +104,10 @@ html {
 
   --color-pelle--base: crimson;
   --color-pelle--secondary: #00bcd4;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-metro,
@@ -123,6 +127,10 @@ html {
   --color-reality: #3a823d;
   --color-reality-light: #d5ffd7;
   --color-celestials: #00bcd4;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-dark {
@@ -142,6 +150,10 @@ html {
 
   --color-laitela--base: black;
   --color-laitela--accent: white;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-dark-metro {
@@ -167,6 +179,10 @@ html {
 
   --color-laitela--base: black;
   --color-laitela--accent: white;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-amoled {
@@ -185,6 +201,10 @@ html {
 
   --color-laitela--base: black;
   --color-laitela--accent: white;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-amoled-metro {
@@ -207,6 +227,10 @@ html {
 
   --color-laitela--base: black;
   --color-laitela--accent: white;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-s1 {
@@ -228,6 +252,10 @@ html {
   --color-prestige--accent: #dbd242;
 
   --color-pelle--base: #7cb727;
+
+  --color-mending: #cc2988;
+  --color-mending-dark: #57113a;
+  --color-mending-light: #f0dde8;
 }
 
 :root .t-s4 {
@@ -752,6 +780,16 @@ button:focus {
 
 .o-tab-btn--celestial:hover {
   background: var(--color-celestials);
+}
+
+.o-tab-btn--mending {
+  color: var(--color-mending);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-mending);
+}
+
+.o-tab-btn--mending:hover {
+  background: var(--color-mending);
 }
 
 /* #endregion tab buttons */

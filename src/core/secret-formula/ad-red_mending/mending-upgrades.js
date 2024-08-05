@@ -22,49 +22,49 @@ const rebuyable = props => {
 
 export const mendingUpgrades = [
   rebuyable({
-    name: "???",
+    name: "1",
     id: 1,
-    initialCost: new Decimal("1F300"),
-    costMult: new Decimal("1F300"),
+    initialCost: new Decimal("10^^300"),
+    costMult: new Decimal("10^^300"),
     textTemplate: "???",
     effect: DC.D1
   }),
   rebuyable({
-    name: "???",
+    name: "2",
     id: 2,
-    initialCost: new Decimal("1F300"),
-    costMult: new Decimal("1F300"),
+    initialCost: new Decimal("10^^300"),
+    costMult: new Decimal("10^^300"),
     textTemplate: "???",
     effect: DC.D1
   }),
   rebuyable({
-    name: "Eternal Amplifier",
+    name: "3",
     id: 3,
-    initialCost: new Decimal("1F300"),
-    costMult: new Decimal("1F300"),
-    textTemplate: "You gain {value} times more Eternities",
+    initialCost: new Decimal("10^^300"),
+    costMult: new Decimal("10^^300"),
+    textTemplate: "???",
     effect: DC.D1
   }),
   rebuyable({
-    name: "???",
+    name: "4",
     id: 4,
-    initialCost: new Decimal("1F300"),
-    costMult: new Decimal("1F300"),
+    initialCost: new Decimal("10^^300"),
+    costMult: new Decimal("10^^300"),
     textTemplate: "???",
     effect: DC.D1
   }),
   rebuyable({
-    name: "???",
+    name: "5",
     id: 5,
-    initialCost: new Decimal("1F300"),
-    costMult: new Decimal("1F300"),
+    initialCost: new Decimal("10^^300"),
+    costMult: new Decimal("10^^300"),
     textTemplate: "???",
     effect: DC.D1
   }),
   {
-    name: "???",
+    name: "6",
     id: 6,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("10^^300"),
     requirement: () => `None`,
     hasFailed: () => false,
     checkRequirement: () => true,
@@ -74,9 +74,9 @@ export const mendingUpgrades = [
     effect: () => DC.D1
   },
   {
-    name: "???",
+    name: "7",
     id: 7,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("10^^300"),
     requirement: () => `None`,
     hasFailed: () => false,
     checkRequirement: () => true,
@@ -86,9 +86,9 @@ export const mendingUpgrades = [
     effect: () => DC.D1
   },
   {
-    name: "???",
+    name: "8",
     id: 8,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("10^^300"),
     requirement: () => `None`,
     hasFailed: () => false,
     checkRequirement: () => true,
@@ -98,9 +98,9 @@ export const mendingUpgrades = [
     effect: () => DC.D1
   },
   {
-    name: "???",
+    name: "9",
     id: 9,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("10^^300"),
     requirement: () => `None`,
     hasFailed: () => false,
     checkRequirement: () => true,
@@ -110,9 +110,9 @@ export const mendingUpgrades = [
     effect: () => DC.D1
   },
   {
-    name: "???",
+    name: "10",
     id: 10,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("10^^300"),
     requirement: () => `None`,
     hasFailed: () => false,
     checkRequirement: () => true,

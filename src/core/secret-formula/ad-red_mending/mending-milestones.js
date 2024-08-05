@@ -3,7 +3,7 @@ export const mendingMilestones = {
     mends: 1,
     reward: "Infinity is always broken and all pre-Eternity autobuyers are unlocked and maxed. Gain a multiplier to various pre-Reality resources (hover for details)",
     activeCondition: () =>{
-      return `${formatX(10)} Infinities, ${formatX(100)} Infinity Points, ${fromatX(10)} Replicanti Speed, ${formatX(10)} Eternity Points, ${formatX(5)} Eternties, ${formatX(5)} Tachyon Particle, and ${formatX(20)} Dilated Time.`
+      return `${formatX(10)} Infinities, ${formatX(100)} Infinity Points, ${formatX(10)} Replicanti Speed, ${formatX(10)} Eternity Points, ${formatX(5)} Eternties, ${formatX(5)} Tachyon Particles, and ${formatX(20)} Dilated Time.`
     }
   },
   two: {

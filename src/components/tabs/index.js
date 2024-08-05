@@ -41,6 +41,8 @@ import TimeDilationTab from "./time-dilation/TimeDilationTab";
 import TimeDimensionsTab from "./time-dimensions/TimeDimensionsTab";
 import TimeStudiesTab from "./time-studies/TimeStudiesTab";
 import VTab from "./celestial-v/VTab";
+import MendingMilestonesTab from "./ad-redemption/mending/MendingMilestonesTab";
+import MendingUpgradesTab from "./ad-redemption/mending/MendingUpgradesTab";
 
 const TabComponents = {
   AntimatterDimensionsTab,
@@ -84,7 +86,9 @@ const TabComponents = {
   AlchemyTab,
   CelestialNavigationTab,
   ShopTab,
-  MultiplierBreakdownTab
+  MultiplierBreakdownTab,
+  MendingUpgradesTab,
+  MendingMilestonesTab
 };
 
 export default TabComponents;

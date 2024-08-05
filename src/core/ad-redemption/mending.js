@@ -261,6 +261,9 @@ export function mendingReset(){
       }
 
       //End resetting all the things
+      Currency.ad_red_mendingPoints.add(ad_red_gainedMendingPoints());
+      Currency.ad_red_mends.add(ad_red_gainedMends());
+      //add
       EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_RESET_AFTER);
 }
 
@@ -283,7 +286,7 @@ export class MendingMilestoneState {
     /*if (Pelle.isDoomed && this.config.givenByPelle) {
       return this.config.givenByPelle();
     }*/
-    return Currency.mends.gte(this.config.mends);
+    return Currency.ad_red_mends.gte(this.config.mends);
   }
 }
 export const MendingMilestone = mapGameDataToObject(

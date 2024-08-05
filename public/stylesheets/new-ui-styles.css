@@ -180,6 +180,10 @@ body.t-s12 {
   border-left-color: var(--color-celestials);
 }
 
+.o-tab-btn--mending::after {
+  border-left-color: var(--color-mending);
+}
+
 .tab-button.shop {
   background-color: #d9bb26;
 }

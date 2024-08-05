@@ -1377,8 +1377,64 @@ export const normalAchievements = [
   {
     id: 188,
     name: "The End",
-    description: "Beat the game.",
+    description: '"Beat" the game.',
     checkRequirement: () => GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
+  {
+    id: 191,
+    name: "I can fix it",
+    description: "Mend the Multiverse",
+    checkRequirement:() => true,
+    checkEvent: GAME_EVENT.AD_RED_MENDING_RESET_AFTER
+  },
+  {
+    id: 192,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 193,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 194,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 195,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 196,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 197,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 198,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  }
 ];
