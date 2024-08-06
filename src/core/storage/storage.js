@@ -493,7 +493,6 @@ export const GameStorage = {
       player = migrations.patchPostReality(player);
     }
 
-    debugger;
     this.saves[this.currentSlot] = player;
     this.lastUpdateOnLoad = player.lastUpdate;
 
