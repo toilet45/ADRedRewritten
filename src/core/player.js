@@ -933,10 +933,16 @@ window.player = {
     mendingPoints: DC.D0,
     mendingRebuyables: {
       1: new Decimal(),
+      6: new Decimal(),
+      11: new Decimal(),
+      16: new Decimal(),
+    },
+    mendingHybrids: {
       2: new Decimal(),
       3: new Decimal(),
-      4: new Decimal(),
-      5: new Decimal(),
+      7: new Decimal(),
+      12: new Decimal(),
+      17: new Decimal()
     },
     mendingUpgradeBits: 0,
     mendingUpgReqs: 0,

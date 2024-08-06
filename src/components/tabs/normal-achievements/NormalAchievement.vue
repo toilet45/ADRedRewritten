@@ -31,6 +31,7 @@ export default {
       garbleTimer: 0,
       garbleKey: 0,
       achievementTime: 0,
+      reward: "",
     };
   },
   computed: {
@@ -116,6 +117,10 @@ export default {
       this.isCancer = Theme.current().name === "S4" || player.secretUnlocks.cancerAchievements;
       this.showUnlockState = player.options.showHintText.achievementUnlockStates;
       this.realityUnlocked = PlayerProgress.realityUnlocked();
+      this.reward = config.reward
+      if (this.achievement.row == 18 && this.reward !== undefined) {
+        this.reward = "Rewards from doomed achievements are disabled out of pelle"
+      }
 
       this.processedName = this.processText(this.config.name, this.garbledNameTemplate);
       this.processedId = this.processText(this.displayId, this.garbledIDTemplate);
@@ -203,7 +208,7 @@ export default {
             v-if="!isObscured"
             :class="{ 'o-pelle-disabled': isDisabled }"
           >
-            Reward: {{ config.reward }}
+            Reward: {{ reward }}
             <EffectDisplay
               v-if="config.formatEffect"
               br

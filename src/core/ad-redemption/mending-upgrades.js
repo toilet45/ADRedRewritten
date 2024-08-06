@@ -109,10 +109,34 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 }
 
+class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
+  get currency() {
+    return Currency.ad_red_mendingPoints;
+  }
+
+  get boughtAmount() {
+    return player.ad_red.mendingHybrids[this.id];
+  }
+
+  set boughtAmount(value) {
+    player.ad_red.mendingHybrids[this.id] = value;
+  }
+
+  get cap() {
+    return this.config.purchaseLimit;
+  }
+
+  get isCapped() {
+    return this.boughtAmount.toNumber() > this.cap
+  }
+}
+
 MendingUpgradeState.index = mapGameData(
   GameDatabase.mending.mendingUpgrades,
-  config => (config.id < 6
+  config => (config.id % 5 == 1
     ? new RebuyableMendingUpgradeState(config)
+    : [2, 3, 7, 12, 17].includes(config.id) ?
+    new HybridRebuyableMendingUpgradeState(config)
     : new MendingUpgradeState(config))
 );
 

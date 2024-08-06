@@ -433,27 +433,33 @@ export const migrations = {
     },
     100: player =>{ //AD: Red data (or Amalgam stuff)
       player.ad_red = {
-        mends: DC.D0,
-        mendingPoints: DC.D0,
+        mends: new Decimal(),
+        mendingPoints: new Decimal(),
         mendingRebuyables: {
           1: new Decimal(),
+          6: new Decimal(),
+          11: new Decimal(),
+          16: new Decimal(),
+        },
+        mendingHybrids: {
           2: new Decimal(),
           3: new Decimal(),
-          4: new Decimal(),
-          5: new Decimal(),
+          7: new Decimal(),
+          12: new Decimal(),
+          17: new Decimal()
         },
         mendingUpgradeBits: 0,
         mendingUpgReqs: 0,
         records:{
           thisMend: {
-            time: DC.D0,
-            realTime: DC.D0,
+            time: new Decimal(),
+            realTime: new Decimal(),
             trueTime: 0
           },
           bestMend: {
-            time: DC.BEMAX,
-            realTime: DC.BEMAX,
-            trueTime: 0
+            time: new Decimal("10^^9000000000000000"),
+            realTime: new Decimal("10^^9000000000000000"),
+            trueTime: Number.MAX_VALUE,
           },
         }
       }
