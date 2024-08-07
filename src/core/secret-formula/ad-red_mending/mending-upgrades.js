@@ -1,3 +1,5 @@
+/* eslint-disable line-comment-position */
+/* eslint-disable no-inline-comments */
 import { DC } from "../../constants";
 
 const rebuyable = props => {
@@ -19,16 +21,17 @@ const rebuyable = props => {
 };
 
 const hybridRebuyable = props => {
-  const purAmnt = () => Math.min(player.ad_red.mendingHybrids[props.id].toNumber(), props.purchaseLimit)
-  props.cost = () => props.costs[purAmnt()]
-  props.effect = () =>  player.ad_red.mendingHybrids[props.id]
-  props.description = () => props.texts[player.ad_red.mendingHybrids[props.id].toNumber()].replace("{value}", format(effect[purAmnt()]),
+  const purAmnt = () => Math.min(player.ad_red.mendingHybrids[props.id].toNumber(), props.purchaseLimit);
+  props.cost = () => props.costs[purAmnt()];
+  props.effect = () => player.ad_red.mendingHybrids[props.id];
+  props.description = () => props.texts[purAmnt - 1].replace("{value}", format(effect[purAmnt()]),
     "{value2}", format(effect2[purAmnt()]));
   props.formatEffect = value => formatX(value, 2, 0);
   props.formatCost = value => format(value, 2, 0);
-  props.purchaseLimit = props.purchaseLimit
+  // eslint-disable-next-line no-self-assign
+  props.purchaseLimit = props.purchaseLimit;
   return props;
-}
+};
 
 
 export const mendingUpgrades = [
@@ -50,7 +53,8 @@ export const mendingUpgrades = [
       "ts181 and Teresa passive EP gain is always active",
       "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active",
       "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active. iM is always at cap.",
-    "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active. Remnants and iM are always at their respective caps."],
+      // eslint-disable-next-line max-len
+      "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active. Remnants and iM are always at their respective caps."],
     effect: ["hi", "hi", "hi", "hi", "hi", "hi"], // We should have some value here so do this
     effect2: ["hi", "hi", "hi", "hi", "hi", "hi"], // We should have some value here so do this
     purchaseLimit: 5
@@ -58,12 +62,18 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "3",
     id: 3,
-    initialCosts: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
-    textTemplate: ["Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}",
-      "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}",
-      "Dimension multipliers ×{value}, ^{value2}"], // Amazing code as you can tell
-    effect: [new Decimal("1"), new Decimal("1000"), new Decimal("1e20"), new Decimal("1e100"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000")],
-    effect2: [new Decimal("1"), new Decimal("1"), new Decimal("1"), new Decimal("1"), new Decimal("1"), new Decimal("1.01"), new Decimal("1.02"), new Decimal("1.03"), new Decimal("1.05"), new Decimal("1.075"), new Decimal("1.1")],
+    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
+    textTemplate: ["Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}",
+      "Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}, ^{value2}",
+      "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}",
+      // eslint-disable-next-line max-len
+      "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}"], // Amazing code as you can tell
+    effect: [new Decimal("1"), new Decimal("1000"), new Decimal("1e20"), new Decimal("1e100"), new Decimal("1e5000"),
+      new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"),
+      new Decimal("1e5000"), new Decimal("1e5000")],
+    effect2: [new Decimal("1"), new Decimal("1"), new Decimal("1"), new Decimal("1"),
+      new Decimal("1"), new Decimal("1.01"), new Decimal("1.02"), new Decimal("1.03"),
+      new Decimal("1.05"), new Decimal("1.075"), new Decimal("1.1")],
     purchaseLimit: 10
   }),
   {
