@@ -52,7 +52,7 @@ export default {
       Every completed row of purchased upgrades increases your Glyph level by {{ formatInt(1) }}.
     </div>--->
     <div
-      v-for="row in 2"
+      v-for="row in 4"
       :key="row"
       class="l-reality-upgrade-grid__row"
     >

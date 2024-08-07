@@ -27,6 +27,9 @@ export function mendingReset(){
     Laitela.reset();
     Pelle.reset();
     player.isGameEnd = false;
+    
+    lockAchievementsOnMend();
+    
     //Reality (Tier 3)
     const x = player.reality.glyphs.protectedRows;
     player.reality.glyphs.protectedRows = 0;
@@ -115,6 +118,9 @@ export function mendingReset(){
       player.blackHoleAutoPauseMode = 0;
       player.blackHolePauseTime = DC.D0;
       player.blackHoleNegative = DC.D1;
+      Player.resetRequirements("infinity");
+      Player.resetRequirements("eternity");
+      Player.resetRequirements("reality");
 
       //Eternity, Infinity (up to tier 2)
 
@@ -275,6 +281,13 @@ export function ad_red_gainedMendingPoints(){
 export function ad_red_gainedMends(){
   let x = DC.D1;
   return x;
+}
+
+function lockAchievementsOnMend() {
+  for (const achievement of Achievements.preMend) {
+    achievement.lock();
+  }
+  player.reality.achTimer = DC.D0;
 }
 
 export class MendingMilestoneState {
