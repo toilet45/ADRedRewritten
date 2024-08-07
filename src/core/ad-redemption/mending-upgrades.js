@@ -14,13 +14,13 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
     return this.config.shortDescription ? this.config.shortDescription() : "";
   }
 
-  /*get requirement() {
-    return typeof this.config.requirement === "function" ? this.config.requirement() : this.config.requirement;
-  }
-
-  get lockEvent() {
-    return typeof this.config.lockEvent === "function" ? this.config.lockEvent() : this.config.lockEvent;
-  }*/
+  // Get requirement() {
+  // return typeof this.config.requirement === "function" ? this.config.requirement() : this.config.requirement;
+  // }
+  //
+  // get lockEvent() {
+  // return typeof this.config.lockEvent === "function" ? this.config.lockEvent() : this.config.lockEvent;
+  // }
 
   get currency() {
     return Currency.ad_red_mendingPoints;
@@ -38,42 +38,42 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
     player.ad_red.mendingUpgradeBits = value;
   }
 
-  /*get hasPlayerLock() {
-    return (player.reality.reqLock.reality & (1 << this.bitIndex)) !== 0;
-  }
-
-  set hasPlayerLock(value) {
-    if (value) player.reality.reqLock.reality |= 1 << this.bitIndex;
-    else player.reality.reqLock.reality &= ~(1 << this.bitIndex);
-  }
-
-  get isLockingMechanics() {
-    const shouldBypass = this.config.bypassLock?.() ?? false;
-    return this.hasPlayerLock && this.isPossible && !shouldBypass && !this.isAvailableForPurchase;
-  }
-
-  // Required to be changed this way to avoid direct prop mutation in Vue components
-  setMechanicLock(value) {
-    this.hasPlayerLock = value;
-  }
-
-  toggleMechanicLock() {
-    this.hasPlayerLock = !this.hasPlayerLock;
-  }
-
-  // Note we don't actually show the modal if we already failed or unlocked it
-  tryShowWarningModal(specialLockText) {
-    if (this.isPossible && !this.isAvailableForPurchase) {
-      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, specialLockText });
-    }
-  }*/
+  // Get hasPlayerLock() {
+  // return (player.reality.reqLock.reality & (1 << this.bitIndex)) !== 0;
+  // }
+  //
+  // set hasPlayerLock(value) {
+  // if (value) player.reality.reqLock.reality |= 1 << this.bitIndex;
+  // else player.reality.reqLock.reality &= ~(1 << this.bitIndex);
+  // }
+  //
+  // get isLockingMechanics() {
+  // const shouldBypass = this.config.bypassLock?.() ?? false;
+  // return this.hasPlayerLock && this.isPossible && !shouldBypass && !this.isAvailableForPurchase;
+  // }
+  //
+  // // Required to be changed this way to avoid direct prop mutation in Vue components
+  // setMechanicLock(value) {
+  // this.hasPlayerLock = value;
+  // }
+  //
+  // toggleMechanicLock() {
+  // this.hasPlayerLock = !this.hasPlayerLock;
+  // }
+  //
+  // // Note we don't actually show the modal if we already failed or unlocked it
+  // tryShowWarningModal(specialLockText) {
+  // if (this.isPossible && !this.isAvailableForPurchase) {
+  //     Modal.upgradeLock.show({ upgrade: this, isImaginary: false, specialLockText });
+  // }
+  // }
 
   get isAvailableForPurchase() {
-    return true;//(player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
+    return true;// (player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
   }
 
   get isPossible() {
-    return true;//this.config.hasFailed ? !this.config.hasFailed() : true;
+    return true;// This.config.hasFailed ? !this.config.hasFailed() : true;
   }
 
   tryUnlock() {
@@ -81,13 +81,13 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
     if (!mendingReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.ad_red.mendingUpgReqs |= (1 << this.id);
     GameUI.notify.reality(`You've unlocked a Mending Upgrade: ${this.config.name}`);
-    //this.hasPlayerLock = false;
+    // This.hasPlayerLock = false;
   }
 
   onPurchased() {
     EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_UPGRADE_BOUGHT);
     const id = this.id;
-    
+
   }
 }
 
@@ -104,7 +104,7 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
     player.ad_red.mendingRebuyables[this.id] = value;
   }
 
-  get cap(){
+  get cap() {
     return this.config.cap;
   }
 }
@@ -127,17 +127,18 @@ class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get isCapped() {
-    return this.boughtAmount.toNumber() > this.cap
+    return this.boughtAmount.toNumber() > this.cap;
   }
 }
 
 MendingUpgradeState.index = mapGameData(
   GameDatabase.mending.mendingUpgrades,
-  config => (config.id % 5 == 1
+  // eslint-disable-next-line no-nested-ternary
+  config => (config.id % 5 === 1
     ? new RebuyableMendingUpgradeState(config)
-    : [2, 3, 7, 12, 17].includes(config.id) ?
-    new HybridRebuyableMendingUpgradeState(config)
-    : new MendingUpgradeState(config))
+    : [2, 3, 7, 12, 17].includes(config.id)
+      ? new HybridRebuyableMendingUpgradeState(config)
+      : new MendingUpgradeState(config))
 );
 
 /**
