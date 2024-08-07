@@ -24,8 +24,9 @@ const hybridRebuyable = props => {
   const purAmnt = () => Math.min(player.ad_red.mendingHybrids[props.id].toNumber(), props.purchaseLimit);
   props.cost = () => props.costs[purAmnt()];
   props.effect = () => player.ad_red.mendingHybrids[props.id];
-  props.description = () => props.texts[purAmnt - 1].replace("{value}", format(effect[purAmnt()]),
-    "{value2}", format(effect2[purAmnt()]));
+  props.description = () => props.texts[Math.min(purAmnt, props.purchaseLimit - 1)]
+    .replace("{value}", format(effect[purAmnt()]),
+      "{value2}", format(effect2[purAmnt()]));
   props.formatEffect = value => formatX(value, 2, 0);
   props.formatCost = value => format(value, 2, 0);
   // eslint-disable-next-line no-self-assign
