@@ -27,10 +27,11 @@ export default {
       isRebuyable: false,
       isBought: false,
       isPossible: false,
-      //isAutoUnlocked: false,
-      //isAutobuyerOn: false,
-      //canBeLocked: false,
-      //hasRequirementLock: false,
+      showCurrentEffect: false,
+      // IsAutoUnlocked: false,
+      // isAutobuyerOn: false,
+      // canBeLocked: false,
+      // hasRequirementLock: false,
     };
   },
   computed: {
@@ -55,13 +56,13 @@ export default {
       return this.config.canLock && !(this.isAvailableForPurchase || this.isBought);
     },
     isUseless() {
-      return false;//Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
+      return false;// Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
     },
   },
   watch: {
-    /*isAutobuyerOn(newValue) {
-      Autobuyer.realityUpgrade(this.upgrade.id).isActive = newValue;
-    }*/
+    // IsAutobuyerOn(newValue) {
+    // Autobuyer.realityUpgrade(this.upgrade.id).isActive = newValue;
+    // }
   },
   methods: {
     update() {
@@ -71,15 +72,16 @@ export default {
       this.isRebuyable = upgrade.isRebuyable;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
-      //this.isAutoUnlocked = Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied;
-      //this.canBeLocked = upgrade.config.canLock && !this.isAvailableForPurchase;
-      //this.hasRequirementLock = upgrade.hasPlayerLock;
-      //if (this.isRebuyable) this.isAutobuyerOn = Autobuyer.realityUpgrade(upgrade.id).isActive;
+      this.showCurrentEffect = Boolean(upgrade.config.showCurrentEffect);
+      // This.isAutoUnlocked = Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied;
+      // this.canBeLocked = upgrade.config.canLock && !this.isAvailableForPurchase;
+      // this.hasRequirementLock = upgrade.hasPlayerLock;
+      // if (this.isRebuyable) this.isAutobuyerOn = Autobuyer.realityUpgrade(upgrade.id).isActive;
     },
-    /*toggleLock(upgrade) {
-      if (this.isRebuyable) return;
-      upgrade.toggleMechanicLock();
-    }*/
+    // ToggleLock(upgrade) {
+    // if (this.isRebuyable) return;
+    // upgrade.toggleMechanicLock();
+    // }
   }
 };
 </script>
@@ -104,6 +106,7 @@ export default {
         </template>
         <template v-else>
           <EffectDisplay
+            v-if="showCurrentEffect"
             :config="config"
             br
           />

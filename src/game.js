@@ -799,15 +799,18 @@ function laitelaBeatText(disabledDim) {
 
 // This gives IP/EP/RM from the respective upgrades that reward the prestige currencies continuously
 function applyAutoprestige(diff) {
-  Currency.infinityPoints.add(TimeStudy(181).effectOrDefault(0));
+  if (TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) {
+    Currency.infinityPoints.add(gainedInfinityPoints().times(Time.deltaTime.div(100))
+      .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige))
+  }
 
-  if (TeresaUnlocks.epGen.canBeApplied) {
+  if (TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2)) {
     Currency.eternityPoints.add(player.records.thisEternity.bestEPmin.times(DC.D0_01)
       .times(getGameSpeedupFactor().times(diff.div(1000)))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if (InfinityUpgrade.ipGen.isCharged) {
+  if (InfinityUpgrade.ipGen.isCharged || MendingUpgrade(2).boughtAmount.gte(3)) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
       .times(diff.div(1000));
@@ -816,6 +819,10 @@ function applyAutoprestige(diff) {
 
   if (PelleRifts.chaos.milestones[2].canBeApplied) {
     Currency.eternityPoints.add(gainedEternityPoints().times(DC.D0_1).times(diff.div(1000)));
+  }
+
+  if (MendingUpgrade(2).boughtAmount.gte(5)) {
+    Currency.remnants.add(Pelle.remnantsGain);
   }
 }
 
