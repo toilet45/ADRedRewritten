@@ -83,7 +83,7 @@ export function breakInfinity() {
   GameUI.update();
 }
 
-export function gainedInfinityPoints() {
+export function gainedInfinityPoints(mm1gen = false) {
   const div = new Decimal(Effects.min(
     308,
     Achievement(103),
@@ -95,7 +95,7 @@ export function gainedInfinityPoints() {
       .times(Pelle.specialGlyphEffect.infinity)
       .floor();
   }
-  let ip = player.break
+  let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.log10().div(div).sub(0.75))
     : new Decimal(308 / div);
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
@@ -128,7 +128,7 @@ function totalEPMult() {
         TimeStudy(123),
         RealityUpgrade(12),
         GlyphEffect.epMult
-      );
+      ).times(MendingMilestone.one.isReached ? 10 : 1);
 }
 
 export function gainedEternityPoints() {
@@ -261,6 +261,14 @@ export function addRealityTime(trueTime, time, realTime, rm, level, realities, a
     realities, reality, level, shards.mul(ampFactor), projIM]);
 }
 
+// Yes this is a ton of params, but we also want this information stored for reasons.
+// eslint-disable-next-line max-params
+export function addMendingTime(trueTime, time, realTime, rm, level, mends, projIM, MvR) {
+  let mending = "";
+  player.records.recentMends.pop();
+  player.records.recentMends.unshift([trueTime, time, realTime, MvR, mends, mending, rm, projIM, level]);
+}
+
 export function gainedInfinities() {
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) return DC.D1;
   let infGain = Decimal.max(1, Achievement(87));
@@ -273,6 +281,11 @@ export function gainedInfinities() {
     Achievement(164),
     Ra.unlocks.continuousTTBoost.effects.infinity
   );
+
+  if (MendingMilestone.one.isReached) {
+    infGain = infGain.times(10);
+  }
+
   infGain = infGain.times(getAdjustedGlyphEffect("infinityinfmult"));
   infGain = infGain.powEffectOf(SingularityMilestone.infinitiedPow);
   return infGain;
@@ -531,17 +544,21 @@ export function gameLoop(passedDiff, options = {}) {
     player.records.thisEternity.realTime = player.records.thisEternity.realTime.add(realDiff);
     if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning) {
       player.records.thisEternity.time = player.records.thisEternity.time.add(
-        diff.times(1 + Currency.eternities.value.min(1e66).toNumber()));
+        diff.times(1 + Currency.eternitiesTotal.value.min(1e66).toNumber()));
     } else {
       player.records.thisEternity.time = player.records.thisEternity.time.add(diff);
     }
     player.records.thisReality.realTime = player.records.thisReality.realTime.add(realDiff);
     player.records.thisReality.time = player.records.thisReality.time.add(diff);
 
+    player.records.thisMend.realTime = player.records.thisMend.realTime.add(realDiff);
+    player.records.thisMend.time = player.records.thisMend.time.add(diff);
+  
     player.records.trueTimePlayed += trueDiff;
     player.records.thisInfinity.trueTime += trueDiff;
     player.records.thisEternity.trueTime += trueDiff;
     player.records.thisReality.trueTime += trueDiff;
+    player.records.thisMend.trueTime += trueDiff;
   }
 
   DeltaTimeState.update(trueDiff, realDiff, diff);
@@ -800,8 +817,9 @@ function laitelaBeatText(disabledDim) {
 // This gives IP/EP/RM from the respective upgrades that reward the prestige currencies continuously
 function applyAutoprestige(diff) {
   if (TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) {
-    Currency.infinityPoints.add(gainedInfinityPoints().times(Time.deltaTime.div(100))
-      .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige))
+    Currency.infinityPoints.add(gainedInfinityPoints(true).times(Time.deltaTime
+      .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))
+      .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
   if (TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2)) {

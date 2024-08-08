@@ -119,9 +119,25 @@ export class TimeStudyTreeLayout {
     this.rows.push(
       normalRow(    TS(231),          TS(232),          TS(233),          TS(234)     ),
       normalRow(              EC(11),                             EC(12)              ),
-      normalRow(                          TimeStudy.dilation                          ),
-      normalRow(          TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)      ),
-      normalRow(          TimeStudy.timeDimension(7), TimeStudy.timeDimension(8)      ),
+      normalRow(                          TimeStudy.dilation                          )
+    );
+
+    if (type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62 || type === STUDY_TREE_LAYOUT_TYPE.MU9 ||
+      type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT181 || type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62_181 ||
+      type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD
+    ) {
+      this.rows.push(
+        normalRow(TimeStudy.TGformula, TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)),
+        normalRow(TimeStudy.TPformula, TimeStudy.timeDimension(7), TimeStudy.timeDimension(8))
+      );
+    } else {
+      this.rows.push(
+        normalRow(TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)),
+        normalRow(TimeStudy.timeDimension(7), TimeStudy.timeDimension(8))
+      );
+    }
+
+    this.rows.push(
       normalRow(                          TimeStudy.reality                           )
     );
     /* eslint-enable no-multi-spaces, space-in-parens, func-call-spacing */
@@ -211,9 +227,21 @@ export const STUDY_TREE_LAYOUT_TYPE = {
   ALTERNATIVE_181: 2,
   ALTERNATIVE_62_181: 3,
   ALTERNATIVE_TRIAD_STUDIES: 4,
+  MU9: 5,
+  MU9_ALT62: 6,
+  MU9_ALT181: 7,
+  MU9_ALT62_181: 8,
+  MU9_TRIAD: 4,
   get current() {
     const alt62 = Perk.bypassEC5Lock.isBought;
     const alt181 = Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought;
+    if (MendingUpgrade(9).isBought) {
+      if (Ra.canBuyTriad) return this.MU9_TRIAD;
+      if (alt62 && alt181) return this.MU9_ALT62_181;
+      if (alt62) return this.MU9_ALT62;
+      if (alt181) return this.MU9_ALT181;
+      return this.MU9;
+    }
     if (Ra.canBuyTriad) return this.ALTERNATIVE_TRIAD_STUDIES;
     if (alt62 && alt181) return this.ALTERNATIVE_62_181;
     if (alt62) return this.ALTERNATIVE_62;

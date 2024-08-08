@@ -26,6 +26,11 @@ export default {
       type: String,
       required: false,
       default: ""
+    },
+    shouldCapitalize: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   data() {
@@ -61,7 +66,7 @@ export default {
         if (!this.isVisible) return;
 
         if (isString(description)) {
-          this.description = capitalize(description);
+          this.description = this.shouldCapitalize ? capitalize(description) : description;
           return;
         }
 
@@ -75,14 +80,15 @@ export default {
         if (isString(value)) {
           // This is a special case for scrambling EC6 description text
           if (this.config.scrambleText) {
-            this.description = capitalize(value).replace("*", wordShift.wordCycle(this.config.scrambleText, true));
+            this.description = value.replace("*", wordShift.wordCycle(this.config.scrambleText, true));
             this.updateFunction = () =>
-              this.description = capitalize(description())
+              this.description = description()
                 .replace("*", wordShift.wordCycle(this.config.scrambleText, true));
+            if (this.shouldCapitalize) this.description = capitalize(this.description);
             return;
           }
-          this.description = capitalize(value);
-          this.updateFunction = () => this.description = capitalize(description());
+          this.description = this.shouldCapitalize ? capitalize(value) : value;
+          this.updateFunction = () => this.description = this.shouldCapitalize ? capitalize(description()) : description();
           return;
 
 

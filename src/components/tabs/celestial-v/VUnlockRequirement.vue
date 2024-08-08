@@ -31,11 +31,20 @@ export default {
         "border-color": "var(--color-text)",
       };
     },
+    textFormat() {
+      if (MendingMilestone.three.isReached && this.dbEntry.id === 1) {
+        return `This requirement is fulfilled by the third Mending Milestone.`;
+      }
+      return `${dbEntry.format(resource)} / ${dbEntry.format(dbEntry.requirement)} ${this.dbEntry.name}`;
+    }
   },
   methods: {
     update() {
       this.resource.copyFrom(new Decimal(this.dbEntry.resource()));
       this.progress = Math.clampMax(this.dbEntry.progress(), 1);
+      if (MendingMilestone.three.isReached && this.dbEntry.id === 1) {
+        this.progress = 1;
+      }
     }
   }
 };
@@ -50,6 +59,6 @@ export default {
       class="c-v-unlock-bar__progress"
       :style="barProgressStyle"
     />
-    {{ dbEntry.format(resource) }} / {{ dbEntry.format(dbEntry.requirement) }} {{ dbEntry.name }}
+    {{ dbEntry.format(resource) }} / {{  }} {{ dbEntry.name }}
   </div>
 </template>

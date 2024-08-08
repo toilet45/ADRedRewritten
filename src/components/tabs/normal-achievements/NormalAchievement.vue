@@ -117,9 +117,9 @@ export default {
       this.isCancer = Theme.current().name === "S4" || player.secretUnlocks.cancerAchievements;
       this.showUnlockState = player.options.showHintText.achievementUnlockStates;
       this.realityUnlocked = PlayerProgress.realityUnlocked();
-      this.reward = this.reward
-      if (this.achievement.row == 18 && this.reward !== undefined) {
-        this.reward = "Rewards from Doomed Achievements are Disabled out of Pelle"
+      this.reward = this.config.reward;
+      if (this.achievement.row === 18 && this.reward !== undefined) {
+        this.reward = "Rewards from Doomed Achievements are Disabled out of Pelle";
       }
 
       this.processedName = this.processText(this.config.name, this.garbledNameTemplate);

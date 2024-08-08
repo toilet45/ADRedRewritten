@@ -195,8 +195,8 @@ export const realityUpgrades = [
     name: "The Eternal Flow",
     id: 14,
     cost: 50,
-    requirement: () => `${format(Currency.eternities.value, 2)}/${format(1e7)} Eternities`,
-    checkRequirement: () => Currency.eternities.gte(1e7),
+    requirement: () => `${format(Currency.eternitiesTotal.value, 2)}/${format(1e7)} Eternities`,
+    checkRequirement: () => Currency.eternitiesTotal.gte(1e7),
     checkEvent: [GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.REALITY_FIRST_UNLOCKED],
     description: "Gain Eternities per second equal to your Reality count",
     automatorPoints: 5,
@@ -271,7 +271,7 @@ export const realityUpgrades = [
     checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.level.gte(10)) === 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "Eternity count boosts Glyph level",
-    effect: () => Decimal.sqrt(Currency.eternities.value.plus(1).log10()).mul(0.45).max(1),
+    effect: () => Decimal.sqrt(Currency.eternitiesTotal.value.plus(1).log10()).mul(0.45).max(1),
     formatCost: value => format(value, 1, 0)
   },
   {

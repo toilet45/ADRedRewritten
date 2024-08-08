@@ -105,6 +105,10 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
     interval = interval.times(10);
   }
 
+  if (MendingMilestone.one.isReached) {
+    interval = interval.div(10);
+  }
+
   if (overCap) {
     let increases = (amount.log10().sub(replicantiCap().log10())).div(ReplicantiGrowth.scaleLog10);
     if (PelleStrikes.eternity.hasStrike && amount.gte(DC.E2000)) {

@@ -288,6 +288,8 @@ window.player = {
       [Number.MAX_VALUE, DC.BEMAX, DC.BEMAX, DC.D1, DC.D1, "", DC.D0]),
     recentRealities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, DC.BEMAX, DC.BEMAX, DC.D1, DC.D1, "", DC.D0, DC.D0]),
+    recentMends: Array.range(0, 10).map(() =>
+      [Number.MAX_VALUE, DC.BEMAX, DC.BEMAX, DC.D1, DC.D1, "", DC.D0, DC.D0, DC.D0]),
     thisInfinity: {
       time: DC.D0,
       realTime: DC.D0,
@@ -300,7 +302,7 @@ window.player = {
     bestInfinity: {
       time: DC.BEMAX,
       realTime: DC.BEMAX,
-      trueTime: 0,
+      trueTime: Number.MAX_VALUE,
       bestIPminEternity: DC.D0,
       bestIPminReality: DC.D0,
     },
@@ -318,7 +320,7 @@ window.player = {
     bestEternity: {
       time: DC.BEMAX,
       realTime: DC.BEMAX,
-      trueTime: 0,
+      trueTime: Number.MAX_VALUE,
       bestEPminReality: DC.D0,
     },
     thisReality: {
@@ -337,7 +339,7 @@ window.player = {
     bestReality: {
       time: DC.BEMAX,
       realTime: DC.BEMAX,
-      trueTime: 0,
+      trueTime: Number.MAX_VALUE,
       glyphStrength: DC.D0,
       RM: DC.D0,
       RMSet: [],
@@ -351,6 +353,21 @@ window.player = {
       iMCapSet: [],
       laitelaSet: [],
     },
+    thisMend: {
+      time: DC.D0,
+      realTime: DC.D0,
+      trueTime: 0
+    },
+    bestMend: {
+      time: DC.BEMAX,
+      realTime: DC.BEMAX,
+      trueTime: Number.MAX_VALUE,
+      highestGL: DC.D0,
+      highestMvRGained: DC.D0,
+      MvRmin: DC.D0,
+      highestiM: DC.D0,
+      highestrM: DC.D0
+    }
   },
   speedrun: {
     isUnlocked: false,
@@ -376,6 +393,7 @@ window.player = {
   postC4Tier: 0,
   eternityPoints: DC.D0,
   eternities: DC.D0,
+  eternitiesBanked: DC.D0,
   eternityUpgrades: new Set(),
   epmultUpgrades: DC.D0,
   timeShards: DC.D0,
@@ -430,6 +448,7 @@ window.player = {
     lastEP: DC.DM1,
   },
   realities: DC.D0,
+  realitiesBanked: DC.D0,
   partSimulatedReality: DC.D0,
   reality: {
     realityMachines: DC.D0,
@@ -946,18 +965,6 @@ window.player = {
     },
     mendingUpgradeBits: 0,
     mendingUpgReqs: 0,
-    records:{
-      thisMend: {
-        time: DC.D0,
-        realTime: DC.D0,
-        trueTime: 0
-      },
-      bestMend: {
-        time: DC.BEMAX,
-        realTime: DC.BEMAX,
-        trueTime: 0
-      },
-    }
   }
 };
 
@@ -1017,8 +1024,10 @@ export const Player = {
   },
 
   get infinityLimit() {
+    const postBI = true;
     const challenge = NormalChallenge.current || InfinityChallenge.current;
-    return challenge === undefined ? DC.BIMAX : challenge.goal;
+    // eslint-disable-next-line no-nested-ternary
+    return (challenge === undefined && postBI) ? DC.BEMAX : challenge === undefined ? DC.BIMAX : challenge.goal;
   },
 
   get eternityGoal() {

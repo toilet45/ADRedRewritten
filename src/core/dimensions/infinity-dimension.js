@@ -25,6 +25,8 @@ export function infinityDimensionCommonMultiplier() {
     mult = mult.times(replicantiMult());
   }
 
+  mult = mult.times(MendingUpgrade(3).config.effectTxt[MendingUpgrade(3).effectValue]);
+
   return mult;
 }
 

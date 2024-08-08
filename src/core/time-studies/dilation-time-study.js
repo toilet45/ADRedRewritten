@@ -81,6 +81,10 @@ TimeStudy.timeDimension = function(tier) {
   return DilationTimeStudyState.studies[tier - 3];
 };
 
+TimeStudy.TPformula = DilationTimeStudyState.studies[11];
+
+TimeStudy.TGformula = DilationTimeStudyState.studies[12];
+
 /**
  * @type {DilationTimeStudyState}
  */

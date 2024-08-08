@@ -70,6 +70,9 @@ export default {
           return () => Tab.dimensions.time.show();
         case 6:
           return () => Tab.reality.glyphs.show();
+        case 11:
+        case 12:
+          return true;
         default:
           throw new Error("Unrecognized Dilation study was clicked");
       }

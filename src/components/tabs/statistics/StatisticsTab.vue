@@ -35,6 +35,8 @@ export default {
       eternity: {
         isUnlocked: false,
         count: new Decimal(),
+        banked: new Decimal(),
+        projectedBanked: new Decimal(),
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -44,6 +46,7 @@ export default {
       reality: {
         isUnlocked: false,
         count: new Decimal(),
+        hasBest: false,
         best: TimeSpan.zero,
         bestReal: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -51,6 +54,18 @@ export default {
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(),
         bestRarity: 0,
+      },
+      mending: {
+        isUnlocked: false,
+        count: new Decimal(),
+        hasBest: false,
+        best: TimeSpan.zero,
+        bestReal: TimeSpan.zero,
+        this: TimeSpan.zero,
+        thisReal: TimeSpan.zero,
+        totalTimePlayed: TimeSpan.zero,
+        bestRate: new Decimal(),
+        bestLevel: 0,
       },
       matterScale: [],
       lastMatterTime: 0,
@@ -72,6 +87,12 @@ export default {
       return num.gt(0)
         ? `${this.formatDecimalAmount(num)} ${pluralize("Eternity", num.floor())}`
         : "no Eternities";
+    },
+    realityCountString() {
+      const num = this.reality.count;
+      return num.gt(0)
+        ? `${this.formatDecimalAmount(num)} ${pluralize("Reality", num.floor())}`
+        : "no Realities";
     },
     fullGameCompletions() {
       return player.records.fullGameCompletions;
@@ -120,6 +141,9 @@ export default {
       eternity.isUnlocked = isEternityUnlocked;
       if (isEternityUnlocked) {
         eternity.count.copyFrom(Currency.eternities);
+        eternity.banked.copyFrom(Currency.eternitiesBanked);
+        eternity.projectedBanked = Currency.eternities.value.div(100)
+          .mul(MendingUpgrade(7).config.effectTxt[MendingUpgrade(7).effectValue]);
         eternity.hasBest = !bestEternity.time.eq(DC.BEMAX);
         eternity.best.setFrom(bestEternity.time);
         eternity.this.setFrom(records.thisEternity.time);
@@ -133,6 +157,7 @@ export default {
 
       if (isRealityUnlocked) {
         reality.count.copyFrom(Currency.realities);
+        reality.hasBest = !bestReality.time.eq(DC.BEMAX);
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);
         reality.this.setFrom(records.thisReality.time);
@@ -145,6 +170,19 @@ export default {
         reality.thisReal.setFrom(records.thisReality.realTime);
         reality.bestRate.copyFrom(bestReality.RMmin);
         reality.bestRarity = strengthToRarity(bestReality.glyphStrength).clampMin(0);
+      }
+
+      const isMendingUnlocked = progress.isMendingUnlocked;
+      const mending = this.mending;
+      const bestMend = records.bestMend;
+      mending.isUnlocked = isMendingUnlocked;
+
+      if (isMendingUnlocked) {
+        mending.count.copyFrom(Currency.ad_red_mends);
+        mending.best.setFrom(bestMend.time);
+        mending.bestReal.setFrom(bestMend.realTime);
+        mending.this.setFrom(records.thisMend.time);
+        mending.thisReal.setFrom(records.thisMend.realTime);
       }
       this.updateMatterScale();
 
@@ -271,6 +309,10 @@ export default {
       <div>
         You have {{ eternityCountString }}<span v-if="reality.isUnlocked"> this Reality</span>.
       </div>
+      <div v-if="eternity.banked.gt(0)">
+        You have {{ formatDecimalAmount(eternity.banked.floor()) }}
+        {{ pluralize("Banked Eternity", eternity.banked.floor()) }}.
+      </div>
       <div v-if="infinity.projectedBanked.gt(0)">
         You will gain {{ formatDecimalAmount(infinity.projectedBanked.floor()) }}
         {{ pluralize("Banked Infinity", infinity.projectedBanked.floor()) }} on Eternity
@@ -306,8 +348,22 @@ export default {
         {{ isDoomed ? "Doomed Reality" : "Reality" }}
       </div>
       <div>You have {{ quantifyInt("Reality", reality.count) }}.</div>
-      <div>Your fastest game-time Reality was {{ reality.best.toStringShort() }}.</div>
-      <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
+      <div v-if="eternity.projectedBanked.gt(0)">
+        You will gain {{ formatDecimalAmount(eternity.projectedBanked.floor()) }}
+        {{ pluralize("Banked Eternity", eternity.projectedBanked.floor()) }} on Reality.
+      </div>
+      <div v-else-if="eternity.banked.gt(0)">
+        You will gain no Banked Eternities on Reality.
+      </div>
+      <div
+        v-if="reality.hasbest"
+      >
+        <div>Your fastest game-time Reality was {{ reality.best.toStringShort() }}.</div>
+        <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
+      </div>
+      <div v-else>
+        You have no fastest Reality<span v-if="mending.isUnlocked"> this Mend</span>.
+      </div>
       <div :class="{ 'c-stats-tab-doomed' : isDoomed }">
         You have spent {{ reality.this.toStringShort() }}
         in this {{ isDoomed ? "Armageddon" : "Reality" }}.
@@ -323,6 +379,27 @@ export default {
         Your best Reality Machines per minute is {{ format(reality.bestRate, 2, 2) }}.
       </div>
       <div>Your best Glyph rarity is {{ formatRarity(reality.bestRarity) }}.</div>
+      <br>
+    </div>
+    <div
+      v-if="mending.isUnlocked"
+      class="c-stats-tab-subheader c-stats-tab-general"
+    >
+      <div class="c-stats-tab-title c-stats-tab-mending">
+        Mending
+      </div>
+      <div>You have {{ quantifyInt("Mend", mending.count) }}.</div>
+      <div v-if="mending.hasBest">
+        Your fastest Mend was {{ mending.best.toStringShort() }}.
+        Your fastest real-time Mend was {{ mending.bestReal.toStringShort() }}
+      </div>
+      <div v-else>
+        You have no fastest Mend
+      </div>
+      <div>
+        You have spent {{ mending.this.toStringShort() }} in this Mend.
+        ({{ mending.thisReal.toStringShort() }} real time)
+      </div>
       <br>
     </div>
   </div>
@@ -360,5 +437,9 @@ export default {
 
 .c-stats-tab-doomed {
   color: var(--color-pelle--base);
+}
+
+.c-stats-tab-mending {
+  color: var(--color-mending);
 }
 </style>

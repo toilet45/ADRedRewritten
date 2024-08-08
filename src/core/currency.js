@@ -315,6 +315,16 @@ Currency.eternities = new class extends DecimalCurrency {
   }
 }();
 
+Currency.eternitiesBanked = new class extends DecimalCurrency {
+  get value() { return player.eternitiesBanked; }
+  set value(value) { player.eternitiesBanked = value; }
+}();
+
+Currency.eternitiesTotal = new class extends DecimalCurrency {
+  get value() { return player.eternities.add(player.eternitiesBanked); }
+  set value(value) { player.eternities = value; }
+}();
+
 Currency.eternityPoints = new class extends DecimalCurrency {
   get value() { return player.eternityPoints; }
   set value(value) {

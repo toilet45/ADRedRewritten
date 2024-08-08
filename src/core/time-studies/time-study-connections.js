@@ -151,9 +151,11 @@ TimeStudy.allConnections = (function() {
 
     [TimeStudy.dilation, TimeStudy.timeDimension(5)],
     [TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)],
+    // [TimeStudy.timeDimension(5), TimeStudy.TGformula],
     [TimeStudy.timeDimension(6), TimeStudy.timeDimension(7)],
     [TimeStudy.timeDimension(7), TimeStudy.timeDimension(8)],
-    [TimeStudy.timeDimension(8), TimeStudy.reality]
+    // [TimeStudy.timeDimension(7), TimeStudy.TPformula],
+    [TimeStudy.timeDimension(8), TimeStudy.reality],
   ].map(props => new TimeStudyConnection(props[0], props[1], props[2]));
 
   return connections;

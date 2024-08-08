@@ -430,7 +430,8 @@ export const normalTimeStudies = [
       () => EternityChallenge(2).completions > 0 || Perk.bypassEC2Lock.isBought,
       () => EternityChallenge(3).completions > 0 || Perk.bypassEC3Lock.isBought],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: () => `You gain ${formatPercents(0.01)} of your Infinity Points gained on crunch each second`,
+    description: () => `You gain ${formatPercents(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 0.01)}
+    of your Infinity Points gained on crunch each second`,
     effect: () => gainedInfinityPoints().times(Time.deltaTime.div(100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige)
   },
@@ -458,7 +459,7 @@ export const normalTimeStudies = [
     requirement: [181, () => EternityChallenge(10).completions > 0],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     description: "Antimatter Dimension multiplier based on Eternities",
-    effect: () => (DC.E13000.pow(Currency.eternities.value.div(1e6).clampMax(1))),
+    effect: () => (DC.E13000.pow(Currency.eternitiesTotal.value.div(1e6).clampMax(1))),
     cap: DC.E13000,
     formatEffect: value => formatX(value, 2, 1)
   },

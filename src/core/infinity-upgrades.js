@@ -100,6 +100,11 @@ export function totalIPMult() {
       DilationUpgrade.ipMultDT,
       GlyphEffect.ipMult
     );
+
+  if (MendingMilestone.one.isReached) {
+    ipMult = ipMult.times(100);
+  }
+
   ipMult = ipMult.times(Replicanti.amount.powEffectOf(AlchemyResource.exponential));
   return ipMult;
 }

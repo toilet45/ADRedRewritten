@@ -64,7 +64,7 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "3",
     id: 3,
-    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
+    costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3],
     texts: ["Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}",
       "Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}, ^{value2}",
       "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}",
@@ -104,13 +104,32 @@ export const mendingUpgrades = [
     }),
     effectInDesc: () => `${formatX(DC.E50, 2, 2)}, +${format(0.001, 3, 3)}`
   }),
-  {
+  hybridRebuyable({
     name: "7",
     id: 7,
-    cost: () => new Decimal("10^^300"),
-    description: () => `[TBD]`,
-    effect: () => DC.D1
-  },
+    costs: [DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8,
+      DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8],
+    texts: ["Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
+      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
+      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
+      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
+      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
+      "Eternities are banked on reality at {value}%",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
+      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%."
+    ], // Yes this a shit ton of repeat text i dont care
+    effectTxt: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50],
+    effect2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+    purchaseLimit: 20
+  }),
   {
     name: "8",
     id: 8,
@@ -121,7 +140,7 @@ export const mendingUpgrades = [
   {
     name: "9",
     id: 9,
-    cost: () => new Decimal("18"),
+    cost: new Decimal("18"),
     description: () => `Unlock 2 new dilation studies`,
     effect: () => DC.D1
   },
@@ -195,15 +214,15 @@ export const mendingUpgrades = [
   {
     name: "19",
     id: 19,
-    cost: () => new Decimal("210"),
-    description: () => `[TBD]`,
+    cost: new Decimal("210"),
+    description: () => `Unlock Ra's Memories, which go up to level 100.`,
     effect: () => DC.D1
   },
   {
     name: "20",
     id: 20,
-    cost: () => new Decimal("250"),
-    description: () => `[TBD]`,
+    cost: new Decimal("250"),
+    description: () => `Warp Reality`,
     effect: () => DC.D1
   },
 ];

@@ -35,6 +35,7 @@ export default {
       STCost: 0,
       eternityChallengeRunning: false,
       isCompleteEC: false,
+      isAlreadyActive: true
     };
   },
   computed: {
@@ -142,7 +143,11 @@ export default {
   methods: {
     update() {
       const study = this.study;
-      this.isUseless = Pelle.uselessTimeStudies.includes(this.study.id) && Pelle.isDoomed;
+      this.isAlreadyActive = true;
+      if (study.id === 181 && MendingUpgrade(2).boughtAmount.gte(1)) {
+        this.isAlreadyActive = false;
+      }
+      this.isUseless = (Pelle.uselessTimeStudies.includes(this.study.id) && Pelle.isDoomed) || !this.isAlreadyActive;
       this.isBought = study.isBought;
       this.eternityChallengeRunning = study.type === TIME_STUDY_TYPE.ETERNITY_CHALLENGE &&
         EternityChallenge.current?.id === study.id;

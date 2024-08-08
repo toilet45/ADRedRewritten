@@ -28,7 +28,7 @@ export default {
     },
     multiplierDisplay() {
       if (InfinityChallenge(3).isRunning) return `Multiply all Antimatter Dimensions by
-        ${formatX(this.galaxyCount.times(0.005).add(1.05))}`;
+        ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)}`;
       const tickmult = this.mult;
       return `${formatX(tickmult.reciprocal(), 2, 3)} faster / upgrade.`;
     },

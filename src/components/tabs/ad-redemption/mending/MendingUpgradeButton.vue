@@ -3,12 +3,10 @@ import CostDisplay from "@/components/CostDisplay";
 import DescriptionDisplay from "@/components/DescriptionDisplay";
 import EffectDisplay from "@/components/EffectDisplay";
 import HintText from "@/components/HintText";
-import PrimaryToggleButton from "@/components/PrimaryToggleButton";
 
 export default {
   name: "MendingUpgradeButton",
   components: {
-    PrimaryToggleButton,
     DescriptionDisplay,
     EffectDisplay,
     CostDisplay,
@@ -56,7 +54,8 @@ export default {
       return this.config.canLock && !(this.isAvailableForPurchase || this.isBought);
     },
     isUseless() {
-      return false;// Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
+      // Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
+      return false;
     },
   },
   watch: {
@@ -100,23 +99,21 @@ export default {
         {{ config.name }}
       </HintText>
       <span :class="{ 'o-pelle-disabled': isUseless }">
-        <DescriptionDisplay :config="config" />
-        <template v-if="($viewModel.shiftDown === isAvailableForPurchase) && !isRebuyable">
-          <br>
-        </template>
-        <template v-else>
-          <EffectDisplay
-            v-if="showCurrentEffect"
-            :config="config"
-            br
-          />
-          <CostDisplay
-            v-if="!isBought"
-            :config="config"
-            br
-            name="Multiversal Remain"
-          />
-        </template>
+        <DescriptionDisplay
+          :config="config"
+          :should-capitalize="false"
+        />
+        <EffectDisplay
+          v-if="showCurrentEffect"
+          :config="config"
+          br
+        />
+        <CostDisplay
+          v-if="!isBought"
+          :config="config"
+          br
+          name="Multiversal Remain"
+        />
       </span>
     </button>
   </div>

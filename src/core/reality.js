@@ -300,7 +300,7 @@ function updateRealityRecords(realityProps) {
     player.records.bestReality.realTime = player.records.thisReality.realTime;
     player.records.bestReality.speedSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
   }
-  player.records.bestReality.trueTime = Math.min(player.records.bestReality.trueTime, player.records.thisReality.trueTime)
+  player.records.bestReality.trueTime = Math.min(player.records.bestReality.trueTime, player.records.thisReality.trueTime);
 }
 
 function giveRealityRewards(realityProps) {
@@ -318,6 +318,8 @@ function giveRealityRewards(realityProps) {
     realityAndPPMultiplier,
     multiplier,
     MachineHandler.projectedIMCap);
+  player.eternitiesBanked = player.eternitiesBanked.add(Currency.eternities.value.div(100)
+    .mul(MendingUpgrade(7).config.effectTxt[MendingUpgrade(7).effectValue]));
   Currency.realities.add(realityAndPPMultiplier);
   Currency.perkPoints.add(realityAndPPMultiplier);
   if (TeresaUnlocks.effarig.canBeApplied) {

@@ -239,6 +239,7 @@ export function gainedEternities() {
     ? new Decimal(1)
     : new Decimal(getAdjustedGlyphEffect("timeetermult"))
       .timesEffectsOf(RealityUpgrade(3), Achievement(113))
+      .times(MendingMilestone.one.isReached ? 5 : 1)
       .pow(AlchemyResource.eternity.effectValue);
 }
 
@@ -251,7 +252,7 @@ export class EternityMilestoneState {
     if (Pelle.isDoomed && this.config.givenByPelle) {
       return this.config.givenByPelle();
     }
-    return Currency.eternities.gte(this.config.eternities);
+    return Currency.eternitiesTotal.gte(this.config.eternities);
   }
 }
 export const EternityMilestone = mapGameDataToObject(

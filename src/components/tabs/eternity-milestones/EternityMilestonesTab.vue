@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     update() {
-      this.eternityCount.copyFrom(Currency.eternities.value.floor());
+      this.eternityCount.copyFrom(Currency.eternitiesTotal.value.floor());
     },
     getMilestone(row, column) {
       return () => this.milestones[(row - 1) * 3 + column - 1];

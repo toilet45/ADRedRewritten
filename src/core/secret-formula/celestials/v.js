@@ -26,10 +26,10 @@ export const v = {
     eternities: {
       id: 2,
       name: "Eternities",
-      resource: () => Currency.eternities.value,
+      resource: () => Currency.eternitiesTotal.value,
       requirement: 1e70,
       format: x => format(x, 2),
-      progress: () => emphasizeEnd(Currency.eternities.value.max(1).log10(), 70),
+      progress: () => emphasizeEnd(Currency.eternitiesTotal.value.max(1).log10(), 70),
     },
     infinities: {
       id: 3,

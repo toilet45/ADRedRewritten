@@ -19,6 +19,7 @@ export const END_STATE_MARKERS = {
 export const GameEnd = {
   get endState() {
     if (this.removeAdditionalEnd || player.bypassEnd) return this.additionalEnd;
+    // 8.99e15 cause this code is dumb and 9e15 returns 0.99999999... and will never end up reaching END
     return Math.max(player.celestials.pelle.records.totalAntimatter.add(1).log10().add(1).log10().sub(8.7)
       .div(Decimal.log10(8.99e15).sub(8.7)).clampMax(1.5).toNumber() + this.additionalEnd, 0);
   },

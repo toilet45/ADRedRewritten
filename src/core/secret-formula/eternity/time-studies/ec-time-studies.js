@@ -8,7 +8,7 @@ export const ecTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternities",
-      current: () => Currency.eternities.value,
+      current: () => Currency.eternitiesTotal.value,
       required: completions => new Decimal(20000 + Math.min(completions, Enslaved.isRunning ? 999 : 4) * 20000),
       formatValue: formatInt
     }

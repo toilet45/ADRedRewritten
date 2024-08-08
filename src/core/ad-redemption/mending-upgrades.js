@@ -136,7 +136,7 @@ MendingUpgradeState.index = mapGameData(
   // eslint-disable-next-line no-nested-ternary
   config => (config.id % 5 === 1
     ? new RebuyableMendingUpgradeState(config)
-    : [2, 3].includes(config.id)
+    : [2, 3, 7].includes(config.id)
       ? new HybridRebuyableMendingUpgradeState(config)
       : new MendingUpgradeState(config))
 );

@@ -166,6 +166,8 @@ export function timeDimensionCommonMultiplier() {
         4)
         .clampMin(1));
   }
+
+  mult = mult.times(MendingUpgrade(3).config.effectTxt[MendingUpgrade(3).effectValue]);
   return mult;
 }
 
