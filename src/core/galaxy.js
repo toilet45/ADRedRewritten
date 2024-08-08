@@ -24,6 +24,7 @@ export class Galaxy {
   static get remoteStart() {
     let amnt = new Decimal(800);
     if (RealityUpgrade(21).isBought) amnt = DC.E5;
+    amnt = amnt.add(MendingUpgrade(11).effectOrDefault(0));
     return amnt;
   }
 
@@ -172,13 +173,14 @@ export class Galaxy {
 
   static get costScalingStart() {
     if (EternityChallenge(5).isRunning) return DC.D0;
-    return DC.E2.add(new Decimal(TimeStudy(302).effectOrDefault(0))
+    return DC.E2.add(new Decimal(TimeStudy(302).effectOrDefault(0)))
       .add(Effects.sum(
         TimeStudy(223),
         TimeStudy(224),
         EternityChallenge(5).reward,
-      )
-        .add(GlyphInfo.power.sacrificeInfo.effect())));
+      ))
+      .add(GlyphInfo.power.sacrificeInfo.effect())
+      .add(MendingUpgrade(11).effectOrDefault(0));
   }
 
   static get type() {
