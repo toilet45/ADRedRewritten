@@ -15,7 +15,7 @@ export class PlayerProgress {
     return new Decimal(this._player.realities).gt(0) || this.isMendingUnlocked;
   }
 
-  get isMendingUnlocked(){
+  get isMendingUnlocked() {
     return new Decimal(this._player.ad_red.mends).gt(0);
   }
 
@@ -55,7 +55,7 @@ export class PlayerProgress {
     return PlayerProgress.current.isRealityUnlocked;
   }
 
-  static mendingUnlocked(){
+  static mendingUnlocked() {
     return PlayerProgress.current.isMendingUnlocked;
   }
 

@@ -58,8 +58,8 @@ export const mendingUpgrades = [
       // eslint-disable-next-line max-len
       "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active. Remnants and iM are always at their respective caps."][p],
     // We should have some value here so do this
-    // effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"],
-    // effect2: ["hi", "hi", "hi", "hi", "hi", "hi"],
+    effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"],
+    effect2: ["hi", "hi", "hi", "hi", "hi", "hi"],
     purchaseLimit: 5
   }),
   hybridRebuyable({

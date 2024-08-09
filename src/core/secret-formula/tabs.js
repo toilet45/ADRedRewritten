@@ -502,11 +502,11 @@ export const tabs = [
     key: "mending",
     name: "Mending",
     UIClass: "o-tab-btn--mending",
-    hideAt: 3.1,
+    hideAt: 2.5,
     condition: () => PlayerProgress.mendingUnlocked(),
     id: 11,
     hidable: true,
-    subtabs:[
+    subtabs: [
       {
         key: "upgrades",
         name: "Mending Upgrades",
