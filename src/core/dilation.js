@@ -192,7 +192,7 @@ export function tachyonGainMultiplier() {
     RealityUpgrade(8),
     RealityUpgrade(15)
   ).times(GlyphInfo.dilation.sacrificeInfo.effect())
-  .times(MendingMilestone.one.isReached ? 5 : 1).pow(pow);
+    .times(MendingMilestone.one.isReached ? 5 : 1).pow(pow);
 }
 
 export function rewardTP() {
@@ -209,7 +209,7 @@ export function getBaseTP(antimatter, requireEternity) {
   const am = (isInCelestialReality() || Pelle.isDoomed)
     ? antimatter
     : Ra.unlocks.unlockDilationStartingTP.effectOrDefault(antimatter);
-  let baseTP = am.log10().div(400).pow(1.5);
+  let baseTP = am.max(1).log10().div(400).pow(1.5);
   if (Enslaved.isRunning) baseTP = baseTP.pow(Enslaved.tachyonNerf);
   return baseTP;
 }

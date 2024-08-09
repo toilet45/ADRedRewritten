@@ -90,7 +90,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     TimeStudy(111)
   )).toNumber();
   if (Pelle.isDisabled("IPMults")) {
-    return Decimal.pow10(player.records.thisInfinity.maxAM.log10().div(div).sub(0.75))
+    return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
       .times(Pelle.specialGlyphEffect.infinity)
       .floor();
