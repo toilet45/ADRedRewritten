@@ -322,7 +322,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   if (effects.includes(GAME_SPEED_EFFECT.FIXED_SPEED)) {
     if (EternityChallenge(12).isRunning) {
-      return Decimal.mul(1 / 1000, dev.speedUp);
+      return Decimal.mul(1 / 1000, 1/* dev.speedUp */);
     }
   }
 
@@ -370,7 +370,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
 
-  factor = factor.mul(dev.speedUp);
+  // factor = factor.mul(dev.speedUp);
 
   return factor;
 }
@@ -463,8 +463,8 @@ export function gameLoop(passedDiff, options = {}) {
     // This is really, really bad but we dont want 0 getting passed into every function on the fucking earth
   let diff = new Decimal(passDiff);
   const trueDiff = passDiff === undefined
-    ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
-    : passDiff;
+    ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7) * (dev.speedUp ?? 1)
+    : passDiff * (dev.speedUp ?? 1);
   // eslint-disable-next-line prefer-const
   let realDiff = new Decimal(trueDiff);
   if (!GameStorage.ignoreBackupTimer) player.backupTimer += trueDiff;
@@ -475,7 +475,7 @@ export function gameLoop(passedDiff, options = {}) {
   // result in a ~1 second tick rate for browsers.
   // Note that we have to explicitly call all the real-time mechanics with the existing value of realDiff, because
   // simply letting it run through simulateTime seems to result in it using zero
-  if (player.options.hibernationCatchup && passDiff === undefined && trueDiff > 6e4) {
+  if (player.options.hibernationCatchup && passDiff === undefined && trueDiff > 6e4 * (dev.speedUp ?? 1)) {
     GameIntervals.gameLoop.stop();
     simulateTime(trueDiff / 1000, true);
     trueTimeMechanics(trueDiff);
