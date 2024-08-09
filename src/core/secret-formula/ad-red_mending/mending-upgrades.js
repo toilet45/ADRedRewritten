@@ -24,7 +24,7 @@ const hybridRebuyable = props => {
   const purAmnt = () => Math.min(player.ad_red.mendingHybrids[props.id].toNumber(), props.purchaseLimit);
   props.cost = () => props.costs[purAmnt()];
   props.effect = () => player.ad_red.mendingHybrids[props.id];
-  props.description = () => props.texts[Math.min(purAmnt(), props.purchaseLimit - 1)]
+  props.description = () => props.desc(Math.min(purAmnt(), props.purchaseLimit - 1))
     .replace("{value}", format(props.effectTxt[purAmnt()]),
       "{value2}", format(props.effect2[purAmnt()]));
   props.formatEffect = value => formatX(value, 2, 0);
@@ -51,25 +51,22 @@ export const mendingUpgrades = [
     name: "2",
     id: 2,
     costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
-    texts: ["ts181 is always active",
-      "ts181 and Teresa passive EP gain is always active",
-      "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active",
-      "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active. iM is always at cap.",
+    desc: p => ["ts181 is always active.",
+      "ts181 and Teresa passive EP gain is always active.",
+      "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active.",
+      "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active. iM is always at cap.",
       // eslint-disable-next-line max-len
-      "ts181, Teresa passive EP gain and charged infinity upgrade 16 is always active. Remnants and iM are always at their respective caps."],
-    effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"], // We should have some value here so do this
-    effect2: ["hi", "hi", "hi", "hi", "hi", "hi"], // We should have some value here so do this
+      "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active. Remnants and iM are always at their respective caps."][p],
+    // We should have some value here so do this
+    // effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"],
+    // effect2: ["hi", "hi", "hi", "hi", "hi", "hi"],
     purchaseLimit: 5
   }),
   hybridRebuyable({
     name: "3",
     id: 3,
     costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3],
-    texts: ["Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}",
-      "Dimension multipliers ×{value}", "Dimension multipliers ×{value}", "Dimension multipliers ×{value}, ^{value2}",
-      "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}",
-      // eslint-disable-next-line max-len
-      "Dimension multipliers ×{value}, ^{value2}", "Dimension multipliers ×{value}, ^{value2}"], // Amazing code as you can tell
+    desc: p => `Dimension multiplers ×{value}${p >= 5 ? ", ^{value2}" : ""}`,
     effectTxt: [new Decimal("1"), new Decimal("1000"), new Decimal("1e20"), new Decimal("1e100"), new Decimal("1e5000"),
       new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"),
       new Decimal("1e5000"), new Decimal("1e5000")],
@@ -109,23 +106,8 @@ export const mendingUpgrades = [
     id: 7,
     costs: [DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8,
       DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8],
-    texts: ["Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
-      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
-      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
-      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
-      "Eternities are banked on reality at {value}%", "Eternities are banked on reality at {value}%",
-      "Eternities are banked on reality at {value}%",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%.",
-      "Eternities are banked on reality at {value}%, and Realities are banked on Mend at {value2}%."
-    ], // Yes this a shit ton of repeat text i dont care
+    desc: p => `Eternities are banked on Reality at {value}%\
+    ${p >= 11 ? ", and Realities are banked on Mend at {value2}%." : ""}`,
     effectTxt: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50],
     effect2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
     purchaseLimit: 20

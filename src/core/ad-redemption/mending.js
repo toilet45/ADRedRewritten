@@ -2,8 +2,13 @@
 import { DC } from "../constants";
 import { GlyphInfo } from "../secret-formula/reality/core-glyph-info";
 
-export function mendingResetRequest() {
+export function isMendingAvailable() {
+  return Currency.antimatter.gte(MendingMilestone.six.isReached ? DC.E5E14 : DC.BIMAX);
+}
 
+export function mendingResetRequest() {
+  if (!isMendingAvailable()) return;
+  mendingReset();
 }
 
 function getGlyphTypes() {
@@ -107,7 +112,7 @@ export function mendingReset() {
     4: new Decimal(),
     5: new Decimal(),
   };
-  player.reality.upgradeBits = 0,
+  player.reality.upgradeBits = 0;
   player.reality.upgReqs = 0;
   player.reality.imaginaryUpgradeBits = 0;
   player.reality.imaginaryUpgReqs = 0;
@@ -175,7 +180,7 @@ export function mendingReset() {
   // This has to be reset before Currency.eternities to make the bumpLimit logic work correctly
   EternityUpgrade.epMult.reset();
   Currency.eternities.reset();
-  player.bankedEternities = DC.D0l
+  player.bankedEternities = DC.D0;
   player.eternityUpgrades.clear();
   player.totalTickGained = DC.D0;
   player.eternityChalls = {};

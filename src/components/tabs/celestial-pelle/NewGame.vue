@@ -27,6 +27,9 @@ export default {
     startNewGame() {
       NG.startNewGame();
     },
+    mend() {
+      mendingResetRequest();
+    },
     openSelectionModal() {
       Modal.cosmeticSetChoice.show();
     }
@@ -47,9 +50,9 @@ export default {
     <div class="c-new-game-button-container">
       <button
         class="c-new-game-button"
-        @click="startNewGame"
+        @click="mend"
       >
-        Start over?
+        Mend the Multiverse
       </button>
     </div>
     <br>
