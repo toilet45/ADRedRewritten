@@ -157,6 +157,9 @@ export default {
 
       if (isRealityUnlocked) {
         reality.count.copyFrom(Currency.realities);
+        eternity.banked.copyFrom(Currency.realitiesBanked);
+        eternity.projectedBanked = Currency.realities.value.div(100)
+          .mul(MendingUpgrade(7).config.effect2[MendingUpgrade(7).effectValue]);
         reality.hasBest = !bestReality.time.eq(DC.BEMAX);
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);
@@ -347,7 +350,13 @@ export default {
       <div :class="realityClassObject()">
         {{ isDoomed ? "Doomed Reality" : "Reality" }}
       </div>
-      <div>You have {{ quantifyInt("Reality", reality.count) }}.</div>
+      <div>
+        You have {{ quantifyInt("Reality", reality.count) }}.<span v-if="mending.isUnlocked"> this Mend.</span>
+      </div>
+      <div v-if="reality.banked.gt(0)">
+        You have {{ formatDecimalAmount(reality.banked.floor()) }}
+        {{ pluralize("Banked Reality", reality.banked.floor()) }}.
+      </div>
       <div v-if="eternity.projectedBanked.gt(0)">
         You will gain {{ formatDecimalAmount(eternity.projectedBanked.floor()) }}
         {{ pluralize("Banked Eternity", eternity.projectedBanked.floor()) }} on Reality.
@@ -389,6 +398,10 @@ export default {
         Mending
       </div>
       <div>You have {{ quantifyInt("Mend", mending.count) }}.</div>
+      <div v-if="reality.projectedBanked.gt(0)">
+        You will gain {{ formatDecimalAmount(reality.projectedBanked.floor()) }}
+        {{ pluralize("Banked Reality", reality.projectedBanked.floor()) }} on Mend.
+      </div>
       <div v-if="mending.hasBest">
         Your fastest Mend was {{ mending.best.toStringShort() }}.
         Your fastest real-time Mend was {{ mending.bestReal.toStringShort() }}
