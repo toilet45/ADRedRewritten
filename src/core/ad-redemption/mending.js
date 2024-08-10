@@ -53,6 +53,16 @@ export function mendingReset() {
   player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
     .mul(MendingUpgrade(7).config.effect2[MendingUpgrade(7).effectValue]));
   updateMendingRecords(adRedGainedMendingPoints());
+  addMendingTime(
+    Time.thisMendTrueTime,
+    Time.thisMendTime,
+    Time.thisMendRealTime,
+    player.reality.realityMachines,
+    player.records.bestReality.glyphLevel,
+    adRedGainedMendingPoints(),
+    MachineHandler.currentIMCap,
+    adRedGainedMendingPoints()
+  );
 
   // Begin resetting the things
   // Celestials

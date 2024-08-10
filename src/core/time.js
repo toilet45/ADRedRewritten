@@ -335,6 +335,19 @@ export const Time = {
   /**
      * @returns {TimeSpan}
      */
+  get thisMendTrueTime() {
+    return this.fromMilliseconds(() => player.records.thisMend.realTime);
+  },
+  /**
+       * @param {TimeSpan} timespan
+       */
+  set thisMendTrueTime(timespan) {
+    this.toMilliseconds(timespan, value => player.records.thisMend.realTime = value);
+  },
+
+  /**
+     * @returns {TimeSpan}
+     */
   get bestMend() {
     return this.fromMilliseconds(() => player.records.bestMend.time);
   },
@@ -348,14 +361,14 @@ export const Time = {
   /**
      * @returns {TimeSpan}
      */
-  get bestMendRealTime() {
-    return this.fromMilliseconds(() => player.records.bestMend.realTime);
+  get bestMendTrueTime() {
+    return this.fromMilliseconds(() => new Decimal(player.records.bestMend.trueTime));
   },
   /**
      * @param {TimeSpan} timespan
      */
-  set bestMendRealTime(timespan) {
-    this.toMilliseconds(timespan, value => player.records.bestMend.realTime = value);
+  set bestMendTrueTime(timespan) {
+    this.toMilliseconds(timespan, value => player.records.bestMend.trueTime = value.toNumber());
   },
 
   /**
