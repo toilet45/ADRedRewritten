@@ -72,7 +72,7 @@ export default {
           return () => Tab.reality.glyphs.show();
         case 11:
         case 12:
-          return true;
+          return () => true;
         default:
           throw new Error("Unrecognized Dilation study was clicked");
       }
