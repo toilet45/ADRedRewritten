@@ -124,7 +124,15 @@ createInCategory(AutomatorCurrency, "bankedInfinities", /banked[ \t]+infinities/
   $getter: () => Currency.infinitiesBanked.value
 });
 createInCategory(AutomatorCurrency, "eternities", /eternities/i, { $getter: () => Currency.eternities.value });
+createInCategory(AutomatorCurrency, "bankedEternities", /banked[ \t]+eternities/i, {
+  $autocomplete: "banked eternities",
+  $getter: () => Currency.eternitiesBanked.value
+});
 createInCategory(AutomatorCurrency, "realities", /realities/i, { $getter: () => Currency.realities.value });
+createInCategory(AutomatorCurrency, "bankedRealities", /banked[ \t]+realities/i, {
+  $autocomplete: "banked realities",
+  $getter: () => Currency.realitiesBanked.value
+});
 
 createInCategory(AutomatorCurrency, "PendingIP", /pending[ \t]+ip/i, {
   $autocomplete: "pending IP",
