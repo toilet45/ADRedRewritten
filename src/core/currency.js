@@ -490,38 +490,14 @@ Currency.galaxyGeneratorGalaxies = new class extends DecimalCurrency {
   }
 }();
 
-Currency.ad_red_mends = new class extends DecimalCurrency{
-  get value(){
-    return player.ad_red.mends;
-  }
+// eslint-disable-next-line camelcase
+Currency.ad_red_mends = new class extends DecimalCurrency {
+  get value() { return player.ad_red.mends; }
+  set value(value) { player.ad_red.mends = new Decimal(value); }
+}();
 
-  set value(value){
-    player.ad_red.mends = new Decimal(value);
-  }
-
-  reset(){
-    super.reset();
-  }
-
-  get startingValue(){
-    return new Decimal(0);
-  }
-}
-
-Currency.ad_red_mendingPoints = new class extends DecimalCurrency{
-  get value(){
-    return player.ad_red.mendingPoints;
-  }
-
-  set value(value){
-    player.ad_red.mendingPoints = new Decimal(value);
-  }
-
-  reset(){
-    super.reset();
-  }
-
-  get startingValue(){
-    return new Decimal(0);
-  }
-}
+// eslint-disable-next-line camelcase
+Currency.ad_red_mendingPoints = new class extends DecimalCurrency {
+  get value() { return player.ad_red.mendingPoints; }
+  set value(value) { player.ad_red.mendingPoints = new Decimal(value); }
+}();

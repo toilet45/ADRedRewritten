@@ -92,6 +92,7 @@ export function mendingReset() {
   player.reality.maxRM = DC.D0;
   player.reality.imaginaryMachines = DC.D0;
   player.reality.iMCap = DC.D0;
+  player.realities = DC.D0;
   player.reality.glyphs.sac = {
     power: DC.D0,
     infinity: DC.D0,

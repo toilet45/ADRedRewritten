@@ -553,7 +553,7 @@ export function gameLoop(passedDiff, options = {}) {
 
     player.records.thisMend.realTime = player.records.thisMend.realTime.add(realDiff);
     player.records.thisMend.time = player.records.thisMend.time.add(diff);
-  
+
     player.records.trueTimePlayed += trueDiff;
     player.records.thisInfinity.trueTime += trueDiff;
     player.records.thisEternity.trueTime += trueDiff;
