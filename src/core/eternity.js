@@ -13,6 +13,7 @@ function giveEternityRewards(auto) {
   }
 
   Currency.eternities.add(newEternities);
+  Currency.eternitiesTotal.value = Currency.eternities.value.add(Currency.eternitiesBanked.value);
 
   if (EternityChallenge.isRunning) {
     const challenge = EternityChallenge.current;
@@ -252,7 +253,7 @@ export class EternityMilestoneState {
     if (Pelle.isDoomed && this.config.givenByPelle) {
       return this.config.givenByPelle();
     }
-    return Currency.eternitiesTotal.gte(this.config.eternities);
+    return Currency.eternitiesTotal.value.gte(this.config.eternities);
   }
 }
 export const EternityMilestone = mapGameDataToObject(

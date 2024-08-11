@@ -122,7 +122,7 @@ export default {
     },
     isObscured(row) {
       if (PlayerProgress.mendingUnlocked()) return false;
-      else if (this.isDoomed) return row >= 18;
+      if (this.isDoomed) return row >= 18;
       return row >= 17;
     },
     timeDisplay,

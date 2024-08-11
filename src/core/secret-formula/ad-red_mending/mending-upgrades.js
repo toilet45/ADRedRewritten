@@ -51,12 +51,12 @@ export const mendingUpgrades = [
     name: "2",
     id: 2,
     costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
-    desc: p => ["ts181 is always active.",
-      "ts181 and Teresa passive EP gain is always active.",
-      "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active.",
-      "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active. iM is always at cap.",
+    desc: p => ["Gain passive prestige currency gain (None ➜ IP)",
+      "Gain passive prestige currency gain (IP ➜ IP, EP)",
+      "Gain passive prestige currency gain (IP, EP ➜ IP, EP, RM)",
+      "Imaginary Machines are always equal to their cap (IP, EP, RM ➜ IP, EP, RM, iM)",
       // eslint-disable-next-line max-len
-      "ts181, Teresa passive EP gain and Charged Infinity Upgrade 16 is always active. Remnants and iM are always at their respective caps."][p],
+      "Remnants are always equal to their cap (IP, EP, RM, iM ➜ IP, EP, RM, iM, Remnants)"][p],
     // We should have some value here so do this
     effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"],
     effect2: ["hi", "hi", "hi", "hi", "hi", "hi"],

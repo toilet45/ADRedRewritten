@@ -54,6 +54,7 @@ export default {
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(),
         bestRarity: 0,
+        banked: new Decimal()
       },
       mending: {
         isUnlocked: false,

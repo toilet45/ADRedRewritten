@@ -502,7 +502,7 @@ export const tabs = [
     key: "mending",
     name: "Mending",
     UIClass: "o-tab-btn--mending",
-    hideAt: 2.5,
+    hideAt: 1,
     condition: () => PlayerProgress.mendingUnlocked(),
     id: 11,
     hidable: true,

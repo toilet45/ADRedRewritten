@@ -322,7 +322,7 @@ Currency.eternitiesBanked = new class extends DecimalCurrency {
 
 Currency.eternitiesTotal = new class extends DecimalCurrency {
   get value() { return player.eternities.add(player.eternitiesBanked); }
-  set value(value) { player.eternities = value; }
+  set value(value) { player.eternitiesTotal = value; }
 }();
 
 Currency.eternityPoints = new class extends DecimalCurrency {
@@ -501,3 +501,14 @@ Currency.ad_red_mendingPoints = new class extends DecimalCurrency {
   get value() { return player.ad_red.mendingPoints; }
   set value(value) { player.ad_red.mendingPoints = new Decimal(value); }
 }();
+
+Currency.realitiesBanked = new class extends DecimalCurrency {
+  get value() { return player.realitiesBanked; }
+  set value(value) { player.realitiesBanked = value; }
+}();
+
+Currency.eternitiesTotal = new class extends DecimalCurrency {
+  get value() { return player.realities.add(player.realitiesBanked); }
+  set value(value) { player.realities = value; }
+}();
+
