@@ -98,6 +98,7 @@ export function gainedInfinityPoints(mm1gen = false) {
   let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.log10().div(div).sub(0.75))
     : new Decimal(308 / div);
+  if (Enslaved.isExpanded) return ip;
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
     ip = ip.min(DC.E200);
   }
@@ -117,6 +118,7 @@ export function gainedInfinityPoints(mm1gen = false) {
 }
 
 function totalEPMult() {
+  if (Enslaved.isExpanded) return DC.D1;
   return Pelle.isDisabled("EPMults")
     ? Pelle.specialGlyphEffect.time.timesEffectOf(PelleRifts.vacuum.milestones[2])
     : getAdjustedGlyphEffect("cursedEP")
@@ -198,7 +200,7 @@ export function resetInfinityRuns() {
 // Player gains 50% of infinities they would get based on their best infinities/hour crunch if they have the
 // milestone and turned on infinity autobuyer with 1 minute or less per crunch
 export function getInfinitiedMilestoneReward(ms, considerMilestoneReached) {
-  return Autobuyer.bigCrunch.autoInfinitiesAvailable(considerMilestoneReached)
+  return Autobuyer.bigCrunch.autoInfinitiesAvailable(considerMilestoneReached) && !Enslaved.isExpanded
     ? Decimal.floor(player.records.thisEternity.bestInfinitiesPerMs.times(ms).dividedBy(2))
     : DC.D0;
 }
@@ -230,18 +232,18 @@ export function resetEternityRuns() {
 // Player gains 50% of the eternities they would get if they continuously repeated their fastest eternity, if they
 // have the auto-eternity milestone and turned on eternity autobuyer with 0 EP
 export function getEternitiedMilestoneReward(ms, considerMilestoneReached) {
-  return Autobuyer.eternity.autoEternitiesAvailable(considerMilestoneReached)
+  return Autobuyer.eternity.autoEternitiesAvailable(considerMilestoneReached) && !Enslaved.isExpanded
     ? Decimal.floor(player.records.thisReality.bestEternitiesPerMs.times(ms).dividedBy(2))
     : DC.D0;
 }
 
 function isOfflineEPGainEnabled() {
   return player.options.offlineProgress && !Autobuyer.bigCrunch.autoInfinitiesAvailable() &&
-    !Autobuyer.eternity.autoEternitiesAvailable();
+    !Autobuyer.eternity.autoEternitiesAvailable() && !Enslaved.isExpanded;
 }
 
 export function getOfflineEPGain(ms) {
-  if (!EternityMilestone.autoEP.isReached || !isOfflineEPGainEnabled()) return DC.D0;
+  if (!EternityMilestone.autoEP.isReached || !isOfflineEPGainEnabled() || Enslaved.isExpanded) return DC.D0;
   return player.records.bestEternity.bestEPminReality.times(
     TimeSpan.fromMilliseconds(new Decimal(ms)).totalMinutes.div(4));
 }
@@ -270,7 +272,7 @@ export function addMendingTime(trueTime, time, realTime, rm, level, mends, projI
 }
 
 export function gainedInfinities() {
-  if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) return DC.D1;
+  if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults") || Enslaved.isExpanded) return DC.D1;
   let infGain = Decimal.max(1, Achievement(87));
 
   infGain = infGain.timesEffectsOf(
@@ -569,7 +571,7 @@ export function gameLoop(passedDiff, options = {}) {
   // behavior of eternity farming.
   preProductionGenerateIP(diff);
 
-  if (!Pelle.isDoomed) {
+  if (!Pelle.isDoomed && !Enslaved.isExpanded) {
     passivePrestigeGen();
   }
 
@@ -691,7 +693,7 @@ function updatePrestigeRates() {
 }
 
 function passivePrestigeGen() {
-  let eternitiedGain = 0;
+  let eternitiedGain = DC.D0;
   if (RealityUpgrade(14).isBought) {
     eternitiedGain = DC.D1.timesEffectsOf(
       Achievement(113),
@@ -816,19 +818,19 @@ function laitelaBeatText(disabledDim) {
 
 // This gives IP/EP/RM from the respective upgrades that reward the prestige currencies continuously
 function applyAutoprestige(diff) {
-  if (TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) {
+  if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded) {
     Currency.infinityPoints.add(gainedInfinityPoints(true).times(Time.deltaTime
       .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if (TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2)) {
+  if ((TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2)) && !Enslaved.isExpanded) {
     Currency.eternityPoints.add(player.records.thisEternity.bestEPmin.times(DC.D0_01)
       .times(getGameSpeedupFactor().times(diff.div(1000)))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if (InfinityUpgrade.ipGen.isCharged || MendingUpgrade(2).boughtAmount.gte(3)) {
+  if ((InfinityUpgrade.ipGen.isCharged || MendingUpgrade(2).boughtAmount.gte(3)) && !Enslaved.isExpanded) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
       .times(diff.div(1000));
@@ -839,7 +841,7 @@ function applyAutoprestige(diff) {
     Currency.eternityPoints.add(gainedEternityPoints().times(DC.D0_1).times(diff.div(1000)));
   }
 
-  if (MendingUpgrade(2).boughtAmount.gte(5)) {
+  if (MendingUpgrade(2).boughtAmount.gte(5) && !Enslaved.isExpanded) {
     Currency.remnants.add(Pelle.remnantsGain);
   }
 }
@@ -867,6 +869,7 @@ function updateTachyonGalaxies() {
 }
 
 export function getTTPerSecond() {
+  if (Enslaved.isExpanded) return DC.D0;
   // All TT multipliers (note that this is equal to 1 pre-Ra)
   let ttMult = Effects.product(
     Ra.unlocks.continuousTTBoost.effects.ttGen,

@@ -67,7 +67,7 @@ export const GameCache = {
     .map(run => run[2])
     .reduce(Decimal.sumReducer).div(1000 * player.records.recentEternities.length)),
 
-  tickSpeedMultDecrease: new Lazy(() => new Decimal(10).sub(Effects.sum(
+  tickSpeedMultDecrease: new Lazy(() => (new Decimal(Enslaved.isExpanded ? 1e100 : 10)).sub(Effects.sum(
     BreakInfinityUpgrade.tickspeedCostMult,
     EternityChallenge(11).reward
   ))),

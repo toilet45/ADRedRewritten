@@ -108,6 +108,9 @@ export const Laitela = {
     this.celestial.difficultyTier = 0;
     this.celestial.singularityCapIncreases = DC.D0;
   },
+  get isDamaged() {
+    return player.celestials.laitela.damaged;
+  },
   quotes: Quotes.laitela,
   symbol: "ᛝ"
 };

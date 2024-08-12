@@ -388,7 +388,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: DC.D0,
-  version: 100,
+  version: 100.01,
   infinityPower: DC.D1,
   postC4Tier: 0,
   eternityPoints: DC.D0,
@@ -625,7 +625,8 @@ window.player = {
       hintBits: 0,
       hintUnlockProgress: 0,
       glyphHintsGiven: 0,
-      zeroHintTime: 0
+      zeroHintTime: 0,
+      expanded: false
     },
     v: {
       unlockBits: 0,
@@ -723,6 +724,7 @@ window.player = {
       singularityCapIncreases: DC.D0,
       lastCheckedMilestones: DC.D0,
       milestoneGlow: true,
+      damaged: false
     },
     pelle: {
       doomed: false,
@@ -789,6 +791,7 @@ window.player = {
         galaxies: false
       },
       showBought: false,
+      hyper: false
     }
   },
   isGameEnd: false,

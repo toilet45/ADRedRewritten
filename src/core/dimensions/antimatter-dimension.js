@@ -6,7 +6,7 @@ import { DimensionState } from "./dimension";
 // and invalidated every update.
 export function antimatterDimensionCommonMultiplier() {
   let multiplier = DC.D1;
-
+  if (Enslaved.isExpanded) return multiplier;
   multiplier = multiplier.times(Achievements.power);
 
   if (!EternityChallenge(9).isRunning) {
@@ -49,12 +49,14 @@ export function antimatterDimensionCommonMultiplier() {
 
   if (Pelle.isDoomed) multiplier = multiplier.dividedBy(10);
 
+  if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
   return multiplier;
 }
 
 export function getDimensionFinalMultiplierUncached(tier) {
   if (tier < 1 || tier > 8) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
-  if (NormalChallenge(10).isRunning && tier > 6) return DC.D1;
+  if ((NormalChallenge(10).isRunning && tier > 6) || Enslaved.isExpanded) return DC.D1;
   if (EternityChallenge(11).isRunning) {
     return Currency.infinityPower.value.pow(
       InfinityDimensions.powerConversionRate
@@ -85,10 +87,13 @@ export function getDimensionFinalMultiplierUncached(tier) {
     multiplier = multiplier.pow(1.05);
   }
 
+  if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
   return multiplier;
 }
 
 function applyNDMultipliers(mult, tier) {
+  if (Enslaved.isExpanded) return DC.D1;
   let multiplier = mult.times(GameCache.antimatterDimensionCommonMultiplier.value);
 
   let buy10Value;
@@ -138,6 +143,8 @@ function applyNDMultipliers(mult, tier) {
 
   multiplier = multiplier.clampMin(1);
 
+  if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
   return multiplier;
 }
 
@@ -173,6 +180,7 @@ function applyNDPowers(mult, tier) {
     multiplier = multiplier.pow(0.5);
   }
 
+  if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
 
   return multiplier;
 }
@@ -569,7 +577,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get multiplier() {
-    return GameCache.antimatterDimensionFinalMultipliers[this.tier].value;
+    return Enslaved.isExpanded ? DC.D1 : GameCache.antimatterDimensionFinalMultipliers[this.tier].value;
   }
 
   get cappedProductionInNormalChallenges() {

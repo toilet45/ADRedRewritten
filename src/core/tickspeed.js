@@ -20,7 +20,7 @@ export function effectiveBaseGalaxies() {
 }
 
 export function getTickSpeedMultiplier() {
-  if (InfinityChallenge(3).isRunning) return DC.D1;
+  if (InfinityChallenge(3).isRunning || Enslaved.isExpanded) return DC.D1;
   if (Ra.isRunning) return DC.C1D1_1245;
   let galaxies = effectiveBaseGalaxies();
   const effects = Effects.product(
@@ -163,6 +163,12 @@ export const Tickspeed = {
   },
 
   get costScale() {
+    if (Enslaved.isExpanded) return new ExponentialCostScaling({
+      baseCost: DC.E3,
+      baseIncrease: DC.E100,
+      costScale: new Decimal(Player.tickSpeedMultDecrease),
+      scalingCostThreshold: DC.NUMMAX
+    });
     return new ExponentialCostScaling({
       baseCost: DC.E3,
       baseIncrease: DC.E1,

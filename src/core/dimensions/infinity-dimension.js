@@ -3,6 +3,7 @@ import { DC } from "../constants";
 import { DimensionState } from "./dimension";
 
 export function infinityDimensionCommonMultiplier() {
+  if (Enslaved.isExpanded) return DC.D1;
   let mult = new Decimal(1)
     .timesEffectsOf(
       Achievement(75),
@@ -26,7 +27,7 @@ export function infinityDimensionCommonMultiplier() {
   }
 
   mult = mult.times(MendingUpgrade(3).config.effectTxt[MendingUpgrade(3).effectValue]);
-
+  if (Laitela.isDamaged) mult = mult.pow(0.6);
   return mult;
 }
 

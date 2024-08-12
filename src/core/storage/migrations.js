@@ -431,7 +431,8 @@ export const migrations = {
     83: player => {
       beMigration(player);
     },
-    100: player =>{ //AD: Red data (or Amalgam stuff)
+    // AD: Red data (or Amalgam stuff)
+    100: player => {
       player.ad_red = {
         mends: new Decimal(),
         mendingPoints: new Decimal(),
@@ -450,7 +451,7 @@ export const migrations = {
         },
         mendingUpgradeBits: 0,
         mendingUpgReqs: 0,
-        records:{
+        records: {
           thisMend: {
             time: new Decimal(),
             realTime: new Decimal(),
@@ -462,7 +463,12 @@ export const migrations = {
             trueTime: Number.MAX_VALUE,
           },
         }
-      }
+      };
+    },
+    100.01: player => {
+      player.celestials.enslaved.expanded = false;
+      player.celestials.laitela.damaged = false;
+      player.celestials.pelle.hyper = false;
     }
   },
 

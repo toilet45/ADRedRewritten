@@ -138,6 +138,7 @@ export function maxAllTimeDimensions() {
 }
 
 export function timeDimensionCommonMultiplier() {
+  if (Enslaved.isExpanded) return DC.D1;
   let mult = new Decimal(1)
     .timesEffectsOf(
       Achievement(105),
@@ -168,6 +169,7 @@ export function timeDimensionCommonMultiplier() {
   }
 
   mult = mult.times(MendingUpgrade(3).config.effectTxt[MendingUpgrade(3).effectValue]);
+  if (Laitela.isDamaged) mult = mult.pow(0.6);
   return mult;
 }
 
@@ -242,7 +244,7 @@ class TimeDimensionState extends DimensionState {
   get multiplier() {
     const tier = this._tier;
 
-    if (EternityChallenge(11).isRunning) return DC.D1;
+    if (EternityChallenge(11).isRunning || Enslaved.isExpanded) return DC.D1;
     let mult = GameCache.timeDimensionCommonMultiplier.value
       .timesEffectsOf(
         tier === 1 ? TimeStudy(11) : null,
@@ -271,6 +273,8 @@ class TimeDimensionState extends DimensionState {
     } else if (V.isRunning) {
       mult = mult.pow(0.5);
     }
+
+    if (Laitela.isDamaged) mult = mult.pow(0.6);
 
     return mult;
   }
