@@ -67,11 +67,11 @@ export const mendingUpgrades = [
     id: 3,
     costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3],
     desc: p => `Dimension multiplers ×{value}${p >= 5 ? ", ^{value2}" : ""}`,
-    effectTxt: [new Decimal("1"), new Decimal("1000"), new Decimal("1e20"), new Decimal("1e100"), new Decimal("1e5000"),
-      new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"), new Decimal("1e5000"),
-      new Decimal("1e5000"), new Decimal("1e5000")],
-    effect2: [new Decimal("1"), new Decimal("1"), new Decimal("1"), new Decimal("1"),
-      new Decimal("1"), new Decimal("1.01"), new Decimal("1.02"), new Decimal("1.03"),
+    effectTxt: [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
+      DC.E5000, DC.E5000, DC.E5000, DC.E5000,
+      DC.E5000, DC.E5000],
+    effect2: [DC.D1, DC.D1, DC.D1, DC.D1,
+      DC.D1, new Decimal("1.01"), new Decimal("1.02"), new Decimal("1.03"),
       new Decimal("1.05"), new Decimal("1.075"), new Decimal("1.1")],
     purchaseLimit: 10
   }),
@@ -108,8 +108,8 @@ export const mendingUpgrades = [
       DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8],
     desc: p => `Eternities are banked on Reality at {value}%\
     ${p >= 11 ? ", and Realities are banked on Mend at {value2}%." : ""}`,
-    effectTxt: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50],
-    effect2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+    effectTxt: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, ...Array.repeat(50, 11)],
+    effect2: [...Array.repeat(0, 11), 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
     purchaseLimit: 20
   }),
   {
