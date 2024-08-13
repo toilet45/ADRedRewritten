@@ -277,7 +277,7 @@ export const GlyphInfo = {
           : "";
         return `Distant Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
       },
-      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
+      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
     },
     hasAlchemyResource: true,
     pelleUniqueEffect: true,
@@ -348,7 +348,7 @@ export const GlyphInfo = {
           : "";
         return `Replicanti Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
       },
-      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
+      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
     },
     hasAlchemyResource: true,
     pelleUniqueEffect: true,

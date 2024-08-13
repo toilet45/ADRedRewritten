@@ -324,7 +324,8 @@ export function adRedGainedMendingPoints() {
 }
 
 export function adRedGainedMends() {
-  const x = DC.D1;
+  let x = DC.D1;
+  x = x.mul(MendingUpgrade(11).effectOrDefault(1));
   return x;
 }
 

@@ -93,6 +93,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
       .times(Pelle.specialGlyphEffect.infinity)
+      .pow(MendingUpgrade(6).effectValue.other)
       .floor();
   }
   let ip = (player.break || mm1gen)
@@ -113,6 +114,8 @@ export function gainedInfinityPoints(mm1gen = false) {
   if (GlyphAlteration.isAdded("infinity")) {
     ip = ip.pow(getSecondaryGlyphEffect("infinityIP"));
   }
+
+  ip = ip.pow(MendingUpgrade(6).effectValue.other);
 
   return ip.floor();
 }
@@ -148,6 +151,8 @@ export function gainedEternityPoints() {
   if (GlyphAlteration.isAdded("time")) {
     ep = ep.pow(getSecondaryGlyphEffect("timeEP"));
   }
+
+  ep = ep.pow(MendingUpgrade(6).effectValue.other);
 
   return ep.floor();
 }

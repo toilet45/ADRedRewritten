@@ -13,7 +13,8 @@ export const eternityChallenges = [
     reward: {
       description: "Time Dimension multiplier based on time spent this Eternity",
       effect: completions =>
-        Decimal.pow(Decimal.max(player.records.thisEternity.time.div(10), 0.9), 0.3 + (completions * 0.05)),
+        Decimal.pow(Decimal.max(player.records.thisEternity.time.div(10), 0.9),
+          MendingUpgrade(8).isBought ? 0.5 + (completions * 0.1) : 0.3 + (completions * 0.05)),
       formatEffect: value => formatX(value, 2, 1)
     },
     // These will get notation-formatted and scrambled between for the final goal
@@ -28,7 +29,7 @@ export const eternityChallenges = [
     reward: {
       description: "1st Infinity Dimension multiplier based on Infinity Power",
       effect: completions => Currency.infinityPower.value.pow(1.5 / (700 - completions * 100)).clampMin(1),
-      cap: DC.E100,
+      cap: () => (MendingUpgrade(8).isBought ? DC.E10000 : DC.E100),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -59,7 +60,7 @@ export const eternityChallenges = [
     reward: {
       description: "Infinity Dimension multiplier based on unspent IP",
       effect: completions => Currency.infinityPoints.value.pow(0.003 + completions * 0.002),
-      cap: DC.E200,
+      cap: () => (MendingUpgrade(8).isBought ? DC.E20000 : DC.E200),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -72,7 +73,7 @@ export const eternityChallenges = [
     goalIncrease: DC.E400,
     reward: {
       description: "Distant Galaxy cost scaling starts later",
-      effect: completions => completions * 5,
+      effect: completions => completions * 5 * (MendingUpgrade(8).isBought ? 10 : 1),
       formatEffect: value => `${formatInt(value)} AG later`
     }
   },
@@ -138,7 +139,7 @@ export const eternityChallenges = [
     reward: {
       description: "Infinity Dimension multiplier based on Time Shards",
       effect: completions => Currency.timeShards.value.pow(completions * 0.1).clampMin(1),
-      cap: DC.E400,
+      cap: () => (MendingUpgrade(8).isBought ? DC.E45000 : DC.E400),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -158,7 +159,7 @@ export const eternityChallenges = [
       description: "Time Dimension multiplier based on Infinities",
       effect: completions => {
         const mult = Currency.infinitiesTotal.value.times(2.783e-6).pow(0.4 + 0.1 * completions).clampMin(1);
-        return mult.powEffectOf(TimeStudy(31));
+        return mult.pow(MendingUpgrade(8).isBought ? 4 : 1).powEffectOf(TimeStudy(31));
       },
       formatEffect: value => {
         // Since TS31 is already accounted for in the effect prop, we need to "undo" it to display the base value here
@@ -202,7 +203,7 @@ export const eternityChallenges = [
     failedRestriction: "(Too slow for more)",
     reward: {
       description: "Infinity Dimension cost multipliers are reduced",
-      effect: completions => 1 - completions * 0.008,
+      effect: () => completions => 1 - (completions * (MendingUpgrade(8).isBought ? 0.02 : 0.008)),
       formatEffect: value => `x${formatPow(value, 3, 3)}`
     }
   }

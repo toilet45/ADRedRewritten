@@ -14,7 +14,8 @@ const rebuyable = props => {
     props.initialCost.times(props.costMult)
   );
   props.effect = () => props.effectCalc(player.ad_red.mendingRebuyables[props.id]);
-  props.description = () => props.textTemplate.replace("{value}", props.effectInDesc());
+  props.description = () => props.textTemplate.replace("{value}", 
+    props.effectInDesc(player.ad_red.mendingRebuyables[props.id]));
   props.formatEffect = value => formatX(value);
   props.formatCost = value => format(value, 2, 0);
   return props;
@@ -52,11 +53,11 @@ export const mendingUpgrades = [
     id: 2,
     costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
     desc: p => ["Gain passive prestige currency gain (None ➜ IP)",
-      "Gain passive prestige currency gain (IP ➜ IP, EP)",
-      "Gain passive prestige currency gain (IP, EP ➜ IP, EP, RM)",
-      "Imaginary Machines are always equal to their cap (IP, EP, RM ➜ IP, EP, RM, iM)",
+      "Gain passive prestige currency gain (IP (+EP))",
+      "Gain passive prestige currency gain (IP, EP (+RM))",
+      "Imaginary Machines are always equal to their cap (IP, EP, RM (+iM))",
       // eslint-disable-next-line max-len
-      "Remnants are always equal to their cap (IP, EP, RM, iM ➜ IP, EP, RM, iM, Remnants)"][p],
+      "Remnants are always equal to their cap (IP, EP, RM, iM, (+Remnants))"][p],
     // We should have some value here so do this
     effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"],
     effect2: ["hi", "hi", "hi", "hi", "hi", "hi"],
@@ -86,7 +87,7 @@ export const mendingUpgrades = [
     name: "5",
     id: 5,
     cost: DC.D3,
-    description: () => `Increase glyph sacrifice caps for Power and Replication glyphs by +${format(1e100, 2, 2)}`,
+    description: () => `Increase glyph sacrifice caps for Power and Replication glyphs by ${formatX(1e100, 2, 2)}`,
     effect: () => DC.E100
   },
   rebuyable({
@@ -97,9 +98,10 @@ export const mendingUpgrades = [
     textTemplate: "RM cap and EP/IP power: {value}",
     effectCalc: value => ({
       rm: DC.E50.pow(value),
+      // If above 0.01, then multiply by 100, sqrt, and div by 100 (i.e. sqrt but starting earlier)
       other: Decimal.div(value, 10).min(Decimal.div(value, 10).sqrt()).div(100).add(1)
     }),
-    effectInDesc: () => `${formatX(DC.E50, 2, 2)}, +${format(0.001, 3, 3)}`
+    effectInDesc: pur => `${formatX(DC.E50, 2, 2)}, +^${format(pur.lt(10) ? 0.001 : pur.div(10).sqrt().div(100), 3, 3)}`
   }),
   hybridRebuyable({
     name: "7",
@@ -115,8 +117,8 @@ export const mendingUpgrades = [
   {
     name: "8",
     id: 8,
-    cost: () => new Decimal("10^^300"),
-    description: () => `[TBD]`,
+    cost: new Decimal("12"),
+    description: () => `Improve the effect of some eternity challenges`,
     effect: () => DC.D1
   },
   {
@@ -129,8 +131,8 @@ export const mendingUpgrades = [
   {
     name: "10",
     id: 10,
-    cost: () => new Decimal("10^^300"),
-    description: () => `[TBD]`,
+    cost: new Decimal("25"),
+    description: () => `??`,
     effect: () => DC.D1
   },
   rebuyable({
@@ -142,54 +144,58 @@ export const mendingUpgrades = [
     effectCalc: value => new Decimal(2500).pow(value),
     effectInDesc: () => formatInt(2500)
   }),
-  {
+  hybridRebuyable({
     name: "12",
     id: 12,
-    cost: () => new Decimal("10^^300"),
-    description: () => `[TBD]`,
-    effect: () => DC.D1
-  },
+    costs: [new Decimal(50)],
+    desc: p => `TBD`,
+    effectTxt: [...Array.repeat(0, 11)],
+    effect2: [...Array.repeat(0, 11)],
+    purchaseLimit: 1
+  }),
   {
     name: "13",
     id: 13,
-    cost: () => new Decimal("10^^300"),
+    cost: new Decimal("66"),
     description: () => `[TBD]`,
     effect: () => DC.D1
   },
   {
     name: "14",
     id: 14,
-    cost: () => new Decimal("10^^300"),
+    cost: new Decimal("99"),
     description: () => `[TBD]`,
     effect: () => DC.D1
   },
   {
     name: "15",
     id: 15,
-    cost: () => new Decimal("10^^300"),
+    cost: new Decimal("123"),
     description: () => `[TBD]`,
     effect: () => DC.D1
   },
   rebuyable({
     name: "16",
     id: 16,
-    initialCost: new Decimal("10^^300"),
+    initialCost: new Decimal("150"),
     costMult: new Decimal("10^^300"),
     textTemplate: "???",
     effectCalc: () => DC.D1,
     effectInDesc: () => formatInt(1)
   }),
-  {
+  hybridRebuyable({
     name: "17",
     id: 17,
-    cost: () => new Decimal("10^^300"),
-    description: () => `[TBD]`,
-    effect: () => DC.D1
-  },
+    costs: [new Decimal(175)],
+    desc: p => `TBD`,
+    effectTxt: [...Array.repeat(0, 11)],
+    effect2: [...Array.repeat(0, 11)],
+    purchaseLimit: 1
+  }),
   {
     name: "18",
     id: 18,
-    cost: () => new Decimal("199"),
+    cost: new Decimal("199"),
     description: () => `[TBD]`,
     effect: () => DC.D1
   },
