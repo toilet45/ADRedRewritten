@@ -180,7 +180,7 @@ export function mendingReset() {
   player.galaxies = DC.D0;
   player.partInfinityPoint = 0;
   player.partInfinitied = 0;
-  player.break = false;
+  player.break = true;
   player.IPMultPurchases = DC.D0;
   Currency.infinityPower.reset();
   Currency.timeShards.reset();

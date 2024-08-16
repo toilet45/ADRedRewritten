@@ -69,7 +69,7 @@ export default {
       this.isAvailableForPurchase = upgrade.isAvailableForPurchase;
       this.canBeBought = upgrade.canBeBought;
       this.isRebuyable = upgrade.isRebuyable;
-      this.isBought = !upgrade.isRebuyable && upgrade.isBought;
+      this.isBought = (!upgrade.isRebuyable && upgrade.isBought) || upgrade.isCapped;
       this.isPossible = upgrade.isPossible;
       this.showCurrentEffect = Boolean(upgrade.config.showCurrentEffect);
       // This.isAutoUnlocked = Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied;

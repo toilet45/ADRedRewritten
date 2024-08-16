@@ -6,6 +6,11 @@ export default {
   components: {
     MendingUpgradeButton
   },
+  data() {
+    return {
+      mendingPoints: new Decimal()
+    }
+  },
   computed: {
     upgrades: () => MendingUpgrades.all,
     costScalingTooltip: () => `Prices start increasing faster above ${format(1e30)} MvR and then even faster
@@ -18,6 +23,9 @@ export default {
   methods: {
     id(row, column) {
       return (row - 1) * 5 + column - 1;
+    },
+    update() {
+      this.mendingPoints.copyFrom(Currency.ad_red_mendingPoints.value);
     }
   }
 };
@@ -25,32 +33,11 @@ export default {
 
 <template>
   <div class="l-reality-upgrade-grid">
-    <!--<div class="c-reality-upgrade-infotext">
-      Mouseover <i class="fas fa-question-circle" /> icons for additional information.
-      <br>
-      The first row of upgrades can be purchased endlessly for increasing costs
-      <span :ach-tooltip="costScalingTooltip">
-        <i class="fas fa-question-circle" />
-      </span>
-      and the rest are single-purchase.
-      <br>
-      Single-purchase upgrades also have requirements which, once completed, permanently unlock the ability
-      to purchase the upgrades at any point.
-      <span :ach-tooltip="possibleTooltip">
-        <i class="fas fa-question-circle" />
-      </span>
-      <br>
-      Locked upgrades show their requirement and effect by default; unlocked ones show
-      their effect, current bonus, and cost. Hold shift to swap this behavior.
-      <br>
-      You can shift-click upgrades with <i class="fas fa-lock-open" /> to make the game prevent you
-      from doing anything this Reality which would cause you to fail their unlock condition.
-      <span :ach-tooltip="lockTooltip">
-        <i class="fas fa-question-circle" />
-      </span>
-      <br>
-      Every completed row of purchased upgrades increases your Glyph level by {{ formatInt(1) }}.
-    </div>--->
+    <div class="c-mending-tab__header">
+      You have
+      <span class="c-mending-tab__mending-points">{{ format(mendingPoints, 2) }}</span>
+      {{ pluralize("Multiversal Remain", mendingPoints) }}.
+    </div>
     <div
       v-for="row in 4"
       :key="row"
@@ -70,4 +57,33 @@ export default {
   color: var(--color-text);
   margin: -1rem 0 1.5rem;
 }
+
+.c-mending-tab__header {
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.c-mending-tab__mending-points {
+  color: var(--color-mending);
+}
+
+/* #region themes */
+
+/* #region t-dark t-s6 t-s10 */
+
+.t-dark .c-mending-tab__mending-points,
+.t-s6 .c-mending-tab__mending-points,
+.t-s10 .c-mending-tab__mending-points {
+  text-shadow: 0 0 0.7rem;
+}
+
+/* #endregion t-dark t-s6 t-s10 */
+
+/* #region t-s1 */
+
+.t-s1 .c-mending-tab__mending-points {
+  text-shadow: 0.1rem 0.1rem 0 black;
+}
+
+/* #endregion t-s1 */
 </style>

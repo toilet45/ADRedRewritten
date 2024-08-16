@@ -463,7 +463,7 @@ Currency.singularities = new class extends DecimalCurrency {
   set value(value) { player.celestials.laitela.singularities = value; }
 }();
 
-Currency.remnants = new class extends NumberCurrency {
+Currency.remnants = new class extends DecimalCurrency {
   get value() { return player.celestials.pelle.remnants; }
   set value(value) { player.celestials.pelle.remnants = value; }
 }();

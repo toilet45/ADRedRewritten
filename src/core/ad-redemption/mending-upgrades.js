@@ -73,7 +73,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   }
 
   get isPossible() {
-    return true;// This.config.hasFailed ? !this.config.hasFailed() : true;
+    return true;// this.config.hasFailed ? !this.config.hasFailed() : true;
   }
 
   tryUnlock() {
@@ -127,7 +127,7 @@ class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get isCapped() {
-    return this.boughtAmount.toNumber() > this.cap;
+    return this.boughtAmount.toNumber() >= this.cap;
   }
 }
 

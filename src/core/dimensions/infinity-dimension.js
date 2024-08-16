@@ -199,7 +199,7 @@ class InfinityDimensionState extends DimensionState {
 
   get costMultiplier() {
     let costMult = new Decimal(this._costMultiplier);
-    EternityChallenge(12).reward.applyEffect(v => costMult = Decimal.pow(costMult, v));
+    costMult = Decimal.pow(costMult, EternityChallenge(12).reward.effectOrDefault(1));
     return costMult;
   }
 

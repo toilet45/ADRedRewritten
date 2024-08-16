@@ -203,7 +203,7 @@ export const eternityChallenges = [
     failedRestriction: "(Too slow for more)",
     reward: {
       description: "Infinity Dimension cost multipliers are reduced",
-      effect: () => completions => 1 - (completions * (MendingUpgrade(8).isBought ? 0.02 : 0.008)),
+      effect: completions => 1 - (completions * (MendingUpgrade(8).isBought ? 0.02 : 0.008)),
       formatEffect: value => `x${formatPow(value, 3, 3)}`
     }
   }
