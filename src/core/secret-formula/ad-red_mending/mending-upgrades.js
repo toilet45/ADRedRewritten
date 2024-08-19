@@ -170,7 +170,7 @@ export const mendingUpgrades = [
     name: "10",
     id: 10,
     cost: new Decimal("25"),
-    description: () => `??`,
+    description: () => `Free Tickspeed cost scaling starts at ${formatInt(2e6)} Upgrades`,
     effect: () => DC.D1
   },
   rebuyable({
@@ -186,31 +186,31 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "12",
     id: 12,
-    costs: [new Decimal(50)],
-    desc: p => `TBD`,
+    costs: [...Array.repeat(new Decimal(50), 20)],
+    desc: p => `Infinity Power conversion +${format(0.1, 1, 1)} and free Tickspeed scaling increase -${format(0.01, 2, 2)}`,
     effectTxt: [...Array.repeat(0, 11)],
     effect2: [...Array.repeat(0, 11)],
-    purchaseLimit: 1
+    purchaseLimit: 20
   }),
   {
     name: "13",
     id: 13,
     cost: new Decimal("66"),
-    description: () => `[TBD]`,
+    description: () => `Achievement Multipliers are far stronger`,
     effect: () => DC.D1
   },
   {
     name: "14",
     id: 14,
     cost: new Decimal("99"),
-    description: () => `[TBD]`,
+    description: () => `Start every Mend with all Eternity Challenges fully completed (no effect in Pelle)`,
     effect: () => DC.D1
   },
   {
     name: "15",
     id: 15,
     cost: new Decimal("123"),
-    description: () => `[TBD]`,
+    description: () => `Generate Tachyon Particles based on best Antimatter this Mend, TP formula is better`,
     effect: () => DC.D1
   },
   rebuyable({
@@ -218,7 +218,7 @@ export const mendingUpgrades = [
     id: 16,
     initialCost: new Decimal("150"),
     costMult: new Decimal("10^^300"),
-    textTemplate: "???",
+    textTemplate: `Gain 6 Multiversal Galaxies, Antimatter Galaxy cost /1.001, Galaxy Power +0.001`,
     effectCalc: () => DC.D1,
     effectInDesc: () => formatInt(1)
   }),

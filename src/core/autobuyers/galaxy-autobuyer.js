@@ -12,12 +12,13 @@ export class GalaxyAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get isUnlocked() {
+    if (MendingMilestone.one.isReached) return true;
     if (Pelle.isDisabled("galaxyAutobuyer")) return false;
     return this.canBeUpgraded;
   }
 
   get canBeUpgraded() {
-    return NormalChallenge(11).isCompleted;
+    return NormalChallenge(11).isCompleted || MendingMilestone.one.isReached;
   }
 
   get baseInterval() {

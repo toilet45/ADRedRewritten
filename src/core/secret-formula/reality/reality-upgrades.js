@@ -173,7 +173,7 @@ export const realityUpgrades = [
     description: "Eternity Point multiplier based on Reality and Time Theorem count",
     effect: () => Currency.timeTheorems.value
       .minus(DC.E3).clampMin(2)
-      .pow(Currency.realities.value.clampMax(1e4).log(2)).clampMin(1),
+      .pow((Currency.realities.value.clampMax(1e4)).clampMin(1).log(2)).clampMin(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {

@@ -10,6 +10,7 @@ export class BigCrunchAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get isUnlocked() {
+    if (MendingMilestone.one.isReached) return true;
     return Pelle.isDoomed
       ? PelleStrikes.infinity.hasStrike
       : this.canBeUpgraded;
@@ -32,7 +33,7 @@ export class BigCrunchAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get hasAdditionalModes() {
-    return EternityMilestone.bigCrunchModes.isReached;
+    return EternityMilestone.bigCrunchModes.isReached || MendingMilestone.one.isReached;
   }
 
   get increaseWithMult() {

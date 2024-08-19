@@ -24,6 +24,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   }
 
   get isUnlocked() {
+    if (MendingMilestone.one.isReached) return true;
     if (Pelle.isDisabled(`antimatterDimAutobuyer${this.tier}`)) return false;
     return this.data.isBought || this.canBeUpgraded;
   }
@@ -54,7 +55,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   }
 
   get hasUnlimitedBulk() {
-    return Achievement(61).isUnlocked;
+    return Achievement(61).isUnlocked || MendingMilestone.one.isReached;
   }
 
   get bulkCap() {

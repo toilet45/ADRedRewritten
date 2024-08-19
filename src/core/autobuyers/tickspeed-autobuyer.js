@@ -12,12 +12,13 @@ export class TickspeedAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get isUnlocked() {
+    if (MendingMilestone.one.isReached) return true;
     if (Pelle.isDisabled("tickspeedAutobuyer")) return false;
     return this.canBeUpgraded;
   }
 
   get canBeUpgraded() {
-    return NormalChallenge(9).isCompleted;
+    return NormalChallenge(9).isCompleted || MendingMilestone.one.isReached;
   }
 
   get baseInterval() {

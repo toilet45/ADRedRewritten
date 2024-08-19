@@ -177,7 +177,7 @@ export const tabs = [
     name: "Automation",
     id: 4,
     hideAt: 2.1,
-    condition: () => player.records.totalAntimatter.gte(1e40),
+    condition: () => player.records.totalAntimatter.gte(1e40) || MendingMilestone.one.isReached,
     hidable: true,
     subtabs: [
       {

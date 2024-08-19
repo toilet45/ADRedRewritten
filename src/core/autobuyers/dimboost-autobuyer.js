@@ -10,12 +10,13 @@ export class DimBoostAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get isUnlocked() {
+    if (MendingMilestone.one.isReached) return true;
     if (Pelle.isDisabled("dimBoostAutobuyer")) return false;
     return this.canBeUpgraded;
   }
 
   get canBeUpgraded() {
-    return NormalChallenge(10).isCompleted;
+    return NormalChallenge(10).isCompleted || MendingMilestone.one.isReached;
   }
 
   get baseInterval() {
