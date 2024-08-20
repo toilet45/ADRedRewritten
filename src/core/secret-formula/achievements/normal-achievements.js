@@ -1221,8 +1221,8 @@ export const normalAchievements = [
   {
     id: 166,
     name: "Nicenice.",
-    get description() { return `Get a Glyph with level exactly ${formatInt(6969)}.`; },
-    checkRequirement: () => gainedGlyphLevel().actualLevel.eq(6969),
+    get description() { return `Get a Glyph with level ${Achievement(191).isUnlocked ? "at least": 'exactly'} ${formatInt(6969)}.`; },
+    checkRequirement: () => Achievement(191).isUnlocked ? gainedGlyphLevel().actualLevel.gte(6969) : gainedGlyphLevel().actualLevel.eq(6969),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     get reward() { return `+${formatInt(69)} to Glyph level.`; },
     effect: 69
@@ -1386,7 +1386,10 @@ export const normalAchievements = [
     name: "I can fix it",
     description: "Mend the Multiverse",
     checkRequirement:() => true,
-    checkEvent: GAME_EVENT.AD_RED_MENDING_RESET_AFTER
+    checkEvent: GAME_EVENT.AD_RED_MENDING_RESET_AFTER,
+    get reward(){
+      return `Achievement 166 is changed to be "at least 6969 levels", Reality has no Achievement requirement, and no RM hardcap on the first Reality`
+    }
   },
   {
     id: 192,

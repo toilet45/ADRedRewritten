@@ -36,7 +36,7 @@ export default {
           total Time Theorems`;
       }
       if (this.id === 6) {
-        const achRows = Perk.firstPerk.isBought ? "" : ` and ${formatInt(13)} rows of Achievements`;
+        const achRows = (Perk.firstPerk.isBought || Achievement(191).isUnlocked) ? "" : ` and ${formatInt(13)} rows of Achievements`;
         return `Requirement: ${format("1e4000")} Eternity Points${achRows}`;
       }
       return "";

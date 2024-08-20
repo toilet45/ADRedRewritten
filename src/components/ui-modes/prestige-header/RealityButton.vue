@@ -27,7 +27,7 @@ export default {
       return "No Machines gained";
     },
     formatMachineStats() {
-      if (!PlayerProgress.realityUnlocked() && this.nextMachineEP.gt("1e8000")) {
+      if (!PlayerProgress.realityUnlocked() && this.nextMachineEP.gt("1e8000") && !Achievement(191).isUnlocked) {
         return `(Capped this Reality!)`;
       }
       if (this.machinesGained.gt(0) && this.machinesGained.lt(100)) {

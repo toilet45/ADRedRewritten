@@ -224,7 +224,7 @@ export const FreeTickspeed = {
   },
 
   get softcap() {
-    let softcap = FreeTickspeed.BASE_SOFTCAP;
+    let softcap = MendingUpgrade(10).isBought ? new Decimal(2e6) : FreeTickspeed.BASE_SOFTCAP;
     if (Enslaved.has(ENSLAVED_UNLOCKS.FREE_TICKSPEED_SOFTCAP)) {
       softcap = softcap.add(1e5);
     }
@@ -232,8 +232,8 @@ export const FreeTickspeed = {
   },
 
   get multToNext() {
-    if (this.amount.lt(this.softcap)) return new Decimal(this.tickmult());
-    return this.tickmult().mul(this.GROWTH_RATE.pow(this.amount.sub(this.softcap)));
+    if (this.amount.lt(this.softcap)) return new Decimal(this.tickmult().sub(0.01 * MendingUpgrade(12).boughtAmount.toNumber()));
+    return (this.tickmult().sub(0.01 * MendingUpgrade(12).boughtAmount.toNumber())).mul(this.GROWTH_RATE.pow(this.amount.sub(this.softcap)));
   },
 
   get tickExpo() {

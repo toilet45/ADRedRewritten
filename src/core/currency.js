@@ -508,7 +508,7 @@ Currency.realitiesBanked = new class extends DecimalCurrency {
 }();
 
 Currency.eternitiesTotal = new class extends DecimalCurrency {
-  get value() { return player.realities.add(player.realitiesBanked); }
-  set value(value) { player.realities = value; }
+  get value() { return player.eternities.add(player.eternitiesBanked); }
+  set value(value) { player.eternities = value; }
 }();
 

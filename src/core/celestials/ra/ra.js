@@ -257,6 +257,22 @@ export const Ra = {
     data.charged = new Set();
     data.disCharge = false;
     data.peakGamespeed = DC.D1;
+    data.alchemy = Array.repeat(0, 21)
+      .map(() => ({
+        amount: DC.D0,
+        reaction: false
+      })),
+    data.highestRefinementValue = {
+      power: DC.D0,
+      infinity: DC.D0,
+      time: DC.D0,
+      replication: DC.D0,
+      dilation: DC.D0,
+      effarig: DC.D0
+    },
+    data.momentumTime = DC.D0;
+    data.unlocks = [];
+    data.petWithRemembrance = "";
     for (const pet of Ra.pets.all) pet.reset();
   },
   memoryTick(realDiff, generateChunks) {

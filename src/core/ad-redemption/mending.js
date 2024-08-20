@@ -43,6 +43,9 @@ function updateMendingRecords(MvRgain) {
   }
 
   player.records.bestMend.trueTime = Math.min(player.records.bestMend.trueTime, player.records.thisMend.trueTime);
+  player.records.thisMend.time = DC.D0;
+  player.records.thisMend.realTime = DC.D0;
+  player.records.thisMend.trueTime = 0;
 }
 
 export function mendingReset() {
@@ -74,8 +77,6 @@ export function mendingReset() {
   Laitela.reset();
   Pelle.reset();
   player.isGameEnd = false;
-
-  lockAchievementsOnMend();
 
   // Reality (Tier 3)
   player.reality.glyphs.protectedRows = 0;
@@ -313,8 +314,13 @@ export function mendingReset() {
     iMCapSet: [],
     laitelaSet: [],
   };
-
+  lockAchievementsOnMend();
+  Currency.infinityPoints.reset();
   // End resetting all the things
+  let prebreakAch = [22, 48, 51, 52, 53, 61, 165];
+  for (let i = 0; i < prebreakAch.length; i++){
+    Achievement(prebreakAch[i]).unlock();
+  }
   EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_RESET_AFTER);
 }
 

@@ -413,7 +413,7 @@ export const InfinityDimensions = {
   },
 
   get powerConversionRate() {
-    return getAdjustedGlyphEffect("infinityrate").add(7)
+    return getAdjustedGlyphEffect("infinityrate").add(7).add(0.1 * MendingUpgrade(12).boughtAmount.toNumber())
       .add(PelleUpgrade.infConversion.effectOrDefault(0)).mul(PelleRifts.paradox.milestones[2].effectOrDefault(1));
   }
 };

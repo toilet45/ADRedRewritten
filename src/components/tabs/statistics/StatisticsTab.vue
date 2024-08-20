@@ -98,7 +98,7 @@ export default {
     mendCountString() {
       const num = this.mending.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Mend", num.floor())}`
+        ? `${this.formatDecimalAmount(num)} ${pluralize("time", num.floor())}`
         : "no Mends";
     },
     fullGameCompletions() {
@@ -188,6 +188,7 @@ export default {
       mending.isUnlocked = isMendingUnlocked;
 
       if (isMendingUnlocked) {
+        mending.hasBest = bestMend.time.neq(DC.BEMAX);
         mending.count.copyFrom(Currency.ad_red_mends);
         mending.best.setFrom(bestMend.time);
         mending.bestReal.setFrom(bestMend.realTime);
@@ -357,7 +358,7 @@ export default {
       <div :class="realityClassObject()">
         {{ isDoomed ? "Doomed Reality" : "Reality" }}
       </div>
-      <div>You have {{ realityCountString }}<span v-if="mending.isUnlocked"> this Mend</span>.</div>
+      <div>You have {{ realityCountString }}<span v-if="mending.isUnlocked"> in this Mended Multiverse</span>.</div>
       <div v-if="reality.banked.gt(0)">
         You have {{ formatDecimalAmount(reality.banked.floor()) }}
         {{ pluralize("Banked Reality", reality.banked.floor()) }}.
@@ -376,7 +377,7 @@ export default {
         <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
       </div>
       <div v-else>
-        You have no fastest Reality<span v-if="mending.isUnlocked"> this Mend</span>.
+        You have no fastest Reality<span v-if="mending.isUnlocked"> in this Mended Multiverse</span>.
       </div>
       <div :class="{ 'c-stats-tab-doomed' : isDoomed }">
         You have spent {{ reality.this.toStringShort() }}
@@ -402,7 +403,7 @@ export default {
       <div class="c-stats-tab-title c-stats-tab-mending">
         Mending
       </div>
-      <div>You have {{ mendCountString }}.</div>
+      <div>You have Medned this Multiverse {{ mendCountString }}.</div>
       <div v-if="reality.projectedBanked.gt(0)">
         You will gain {{ formatDecimalAmount(reality.projectedBanked.floor()) }}
         {{ pluralize("Banked Reality", reality.projectedBanked.floor()) }} on Mend.

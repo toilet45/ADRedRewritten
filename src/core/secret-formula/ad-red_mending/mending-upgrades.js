@@ -156,7 +156,7 @@ export const mendingUpgrades = [
     name: "8",
     id: 8,
     cost: new Decimal("12"),
-    description: () => `Improve the effect of some eternity challenges`,
+    description: () => `The rewards of Eternity Challenges 1, 2, 4, 5, 9, 10, and 12 are more effective`,
     effect: () => DC.D1
   },
   {

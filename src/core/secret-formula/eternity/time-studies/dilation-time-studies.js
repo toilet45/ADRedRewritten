@@ -51,19 +51,21 @@ export const dilationTimeStudies = [
     cost: DC.D1,
     requirement: () => TimeStudy.timeDimension(8).isBought &&
       player.records.thisReality.maxEP.add(1).log10().gte(4000) &&
-      (Perk.firstPerk.isBought || Achievements.preReality.every(a => a.isUnlocked)) &&
+      (Perk.firstPerk.isBought || Achievements.preReality.every(a => a.isUnlocked) || Achievement(191).isUnlocked) &&
       !Pelle.isDoomed
   },
   {
     id: 11,
     description: "Improve the Tachyon Particle Formula",
     cost: DC.E20,
-    requirement: () => TimeStudy.timeDimension(7).isBought && MendingUpgrade(9).isBought
+    requirement: () => TimeStudy.timeDimension(7).isBought && MendingUpgrade(9).isBought,
+    unlocked: () => MendingUpgrade(9).isBought
   },
   {
     id: 12,
     description: "Improve the gain of Tachyon Galaxies.",
     cost: DC.E29,
-    requirement: () => TimeStudy.timeDimension(5).isBought && MendingUpgrade(9).isBought
+    requirement: () => TimeStudy.timeDimension(5).isBought && MendingUpgrade(9).isBought,
+    unlocked: () => MendingUpgrade(9).isBought
   }
 ];
