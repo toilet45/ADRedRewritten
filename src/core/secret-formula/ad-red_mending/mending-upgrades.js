@@ -88,14 +88,13 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "2",
     id: 2,
-    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, new Decimal("1F300")],
-    desc: p => ["Gain passive Infinity Point gain (Currently: None ➜ IP)",
-      "Gain passive Eternity Point gain (Currently: IP)",
-      "Gain passive Reality Machine gain (Currently: IP, EP)",
-      "Imaginary Machines are always equal to their cap (Currently: IP, EP, RM)",
+    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
+    desc: p => ["Gain passive Infinity Point gain (None ➜ IP)",
+      "Gain passive Eternity Point gain (IP ➜ +EP)",
+      "Gain passive Reality Machine gain (IP, EP ➜ +rM)",
+      "Imaginary Machines are always equal to their cap (IP, EP, rM ➜ +iM)",
       // eslint-disable-next-line max-len
-      "Remnants are always equal to their cap (Currently: IP, EP, RM, iM)",
-      "Gain passive prestige point gain (Currently: IP, EP, RM, iM, Remnants)"][p],
+      "Remnants are always equal to their cap (IP, EP, rM, iM, ➜ +Remnants)"][p],
     // We should have some value here so do this
     effectTxt: ["hi", "IP", "IP, EP", "IP, EP, RM", "IP, EP, RM, iM", "IP, EP, RM, iM, Remnants"],
     effect2: ["hi", "hi", "hi", "hi", "hi", "hi"],
@@ -140,7 +139,7 @@ export const mendingUpgrades = [
       other: Decimal.div(value, 10).min(Decimal.div(value, 10).sqrt()).div(100).add(1)
     }),
     effectInDesc: pur => `${formatX(DC.E50, 2, 2)}, +^${format(pur.lt(10) ? 0.001 : pur.div(10).sqrt().div(100), 3, 3)}`,
-    // showCurrentEffect: true
+    showCurrentEffect: true // This exists to show the current effect dont remove it
   }),
   hybridRebuyable({
     name: "7",
