@@ -26,7 +26,8 @@ export default {
       achMultToBH: false,
       achMultToTP: false,
       achMultToTT: false,
-      renderedRowIndices: []
+      renderedRowIndices: [],
+      hasMended: false
     };
   },
   computed: {
@@ -87,6 +88,7 @@ export default {
       this.achMultToTP = RealityUpgrade(8).isBought;
       this.achMultToBH = VUnlocks.achievementBH.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
+      this.hasMended = PlayerProgress.mendingUnlocked();
     },
     startRowRendering() {
       const unlockedRows = [];
@@ -174,6 +176,9 @@ export default {
       <div v-if="totalCountdown.gt(0)">
         You will regain all remaining achievements after {{ timeDisplayNoDecimals(totalCountdown) }} if Auto
         Achievement <span v-if="isAutoAchieveActive">stays enabled</span><span v-else>is turned on</span>.
+      </div>
+      <div v-if="hasMended">
+        For Mending the Multiverse, the Auto Achievement timer no longer resets on Reality. 
       </div>
       <br>
     </div>

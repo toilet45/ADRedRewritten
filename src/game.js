@@ -278,7 +278,7 @@ export function addMendingTime(trueTime, time, realTime, rm, level, mends, projI
 
 export function gainedInfinities() {
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults") || Enslaved.isExpanded) return DC.D1;
-  let infGain = Decimal.max(1, Achievement(87));
+  let infGain = Effects.max(1, Achievement(87));
 
   infGain = infGain.timesEffectsOf(
     TimeStudy(32),

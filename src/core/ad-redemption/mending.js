@@ -172,7 +172,7 @@ export function mendingReset() {
 
   // Eternity, Infinity (up to tier 2)
 
-  initializeChallengeCompletions(true);
+  initializeChallengeCompletions(false);
 
   Currency.infinities.reset();
   Currency.infinitiesBanked.reset();
@@ -315,9 +315,10 @@ export function mendingReset() {
     laitelaSet: [],
   };
   lockAchievementsOnMend();
+  InfinityChallenges.clearCompletions();
   Currency.infinityPoints.reset();
   // End resetting all the things
-  let prebreakAch = [22, 48, 51, 52, 53, 61, 165];
+  let prebreakAch = [22, 47, 48, 51, 52, 53, 61, 165];
   for (let i = 0; i < prebreakAch.length; i++){
     Achievement(prebreakAch[i]).unlock();
   }
