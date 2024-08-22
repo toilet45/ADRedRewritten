@@ -231,7 +231,7 @@ export const STUDY_TREE_LAYOUT_TYPE = {
   MU9_ALT62: 6,
   MU9_ALT181: 7,
   MU9_ALT62_181: 8,
-  MU9_TRIAD: 4,
+  MU9_TRIAD: 9,
   get current() {
     const alt62 = Perk.bypassEC5Lock.isBought;
     const alt181 = Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought;

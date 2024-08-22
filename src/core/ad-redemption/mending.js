@@ -54,7 +54,7 @@ export function mendingReset() {
   Currency.ad_red_mendingPoints.add(adRedGainedMendingPoints());
   Currency.ad_red_mends.add(adRedGainedMends());
   player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
-    .mul(MendingUpgrade(7).config.effect2[MendingUpgrade(7).effectValue]));
+    .mul(MendingUpgrade(7).effects.realities));
   updateMendingRecords(adRedGainedMendingPoints());
   addMendingTime(
     Time.thisMendTrueTime,
@@ -318,8 +318,8 @@ export function mendingReset() {
   InfinityChallenges.clearCompletions();
   Currency.infinityPoints.reset();
   // End resetting all the things
-  let prebreakAch = [22, 47, 48, 51, 52, 53, 61, 165];
-  for (let i = 0; i < prebreakAch.length; i++){
+  const prebreakAch = [22, 47, 48, 51, 52, 53, 61, 165];
+  for (let i = 0; i < prebreakAch.length; i++) {
     Achievement(prebreakAch[i]).unlock();
   }
   EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_RESET_AFTER);
@@ -331,8 +331,7 @@ export function adRedGainedMendingPoints() {
 }
 
 export function adRedGainedMends() {
-  let x = DC.D1;
-  x = x.mul(MendingUpgrade(11).effectOrDefault(1));
+  const x = DC.D1;
   return x;
 }
 

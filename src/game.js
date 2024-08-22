@@ -93,7 +93,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
       .times(Pelle.specialGlyphEffect.infinity)
-      .pow(MendingUpgrade(6).effectValue.other)
+      .pow(MendingUpgrade(6).effects.other)
       .floor();
   }
   let ip = (player.break || mm1gen)
@@ -115,7 +115,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     ip = ip.pow(getSecondaryGlyphEffect("infinityIP"));
   }
 
-  ip = ip.pow(MendingUpgrade(6).effectValue.other);
+  ip = ip.pow(MendingUpgrade(6).effects.other);
 
   return ip.floor();
 }
@@ -152,7 +152,7 @@ export function gainedEternityPoints() {
     ep = ep.pow(getSecondaryGlyphEffect("timeEP"));
   }
 
-  ep = ep.pow(MendingUpgrade(6).effectValue.other);
+  ep = ep.pow(MendingUpgrade(6).effects.other);
 
   return ep.floor();
 }
@@ -271,7 +271,7 @@ export function addRealityTime(trueTime, time, realTime, rm, level, realities, a
 // Yes this is a ton of params, but we also want this information stored for reasons.
 // eslint-disable-next-line max-params
 export function addMendingTime(trueTime, time, realTime, rm, level, mends, projIM, MvR) {
-  let mending = "";
+  const mending = "";
   player.records.recentMends.pop();
   player.records.recentMends.unshift([trueTime, time, realTime, MvR, mends, mending, rm, projIM, level]);
 }

@@ -10,10 +10,6 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
     return this.config.name;
   }
 
-  get shortDescription() {
-    return this.config.shortDescription ? this.config.shortDescription() : "";
-  }
-
   // Get requirement() {
   // return typeof this.config.requirement === "function" ? this.config.requirement() : this.config.requirement;
   // }
@@ -69,26 +65,27 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   // }
 
   get isAvailableForPurchase() {
-    return true;// (player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
+    // (player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
+    return true;
   }
 
   get isPossible() {
-    return true;// this.config.hasFailed ? !this.config.hasFailed() : true;
+    // This.config.hasFailed ? !this.config.hasFailed() : true;
+    return true;
   }
 
   tryUnlock() {
     const mendingReached = PlayerProgress.mendingUnlocked();
     if (!mendingReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.ad_red.mendingUpgReqs |= (1 << this.id);
-    GameUI.notify.reality(`You've unlocked a Mending Upgrade: ${this.config.name}`);
+    GameUI.notify.mending(`You've unlocked a Mending Upgrade: ${this.config.name}`);
     // This.hasPlayerLock = false;
   }
-
-  onPurchased() {
-    EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_UPGRADE_BOUGHT);
-    const id = this.id;
-
-  }
+  // eslint-disable-next-line capitalized-comments
+  // onPurchased() {
+  //   EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_UPGRADE_BOUGHT);
+  //   const id = this.id;
+  // }
 }
 
 class RebuyableMendingUpgradeState extends RebuyableMechanicState {
@@ -107,6 +104,13 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
   get cap() {
     return this.config.cap;
   }
+
+  get effects() {
+    return this.config.effects?.();
+  }
+
+  // eslint-disable-next-line no-empty-function
+  set effects(value) {}
 }
 
 class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
@@ -129,15 +133,22 @@ class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   get isCapped() {
     return this.boughtAmount.toNumber() >= this.cap;
   }
+
+  get effects() {
+    return this.config.effects?.();
+  }
+
+  // eslint-disable-next-line no-empty-function
+  set effects(value) {}
 }
 
 MendingUpgradeState.index = mapGameData(
   GameDatabase.mending.mendingUpgrades,
   // eslint-disable-next-line no-nested-ternary
-  config => (config.id % 5 === 1
-    ? new RebuyableMendingUpgradeState(config)
-    : [2, 3, 7, 12, 17].includes(config.id)
-      ? new HybridRebuyableMendingUpgradeState(config)
+  config => (config.isHybridRebuyable
+    ? new HybridRebuyableMendingUpgradeState(config)
+    : config.isRebuyable
+      ? new RebuyableMendingUpgradeState(config)
       : new MendingUpgradeState(config))
 );
 

@@ -5739,6 +5739,12 @@ kbd {
   border-color: var(--color-reality);
 }
 
+.o-notification--mending {
+  background-color: var(--color-mending-dark);
+  border-color: var(--color-mending-dark);
+  color: white;
+}
+
 .o-notification--automator {
   background-color: var(--color-automator-active-line-background);
   border-color: var(--color-automator-active-line-outline);

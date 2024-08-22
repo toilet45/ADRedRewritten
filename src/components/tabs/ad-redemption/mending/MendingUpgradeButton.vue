@@ -1,14 +1,12 @@
 <script>
 import CostDisplay from "@/components/CostDisplay";
 import DescriptionDisplay from "@/components/DescriptionDisplay";
-import EffectDisplay from "@/components/EffectDisplay";
 import HintText from "@/components/HintText";
 
 export default {
   name: "MendingUpgradeButton",
   components: {
     DescriptionDisplay,
-    EffectDisplay,
     CostDisplay,
     HintText
   },
@@ -24,12 +22,8 @@ export default {
       canBeBought: false,
       isRebuyable: false,
       isBought: false,
-      isPossible: false,
       showCurrentEffect: false,
-      // IsAutoUnlocked: false,
-      // isAutobuyerOn: false,
-      // canBeLocked: false,
-      // hasRequirementLock: false,
+      hovering: false,
     };
   },
   computed: {
@@ -41,27 +35,18 @@ export default {
         "c-mend-upgrade-btn--useless": this.isUseless,
         "c-mend-upgrade-btn--bought": this.isBought && !this.isUseless,
         "c-mend-upgrade-btn--unavailable": !this.isBought && !this.canBeBought && this.isAvailableForPurchase,
-        "c-mend-upgrade-btn--possible": !this.isAvailableForPurchase && this.isPossible,
-        "c-mend-upgrade-btn--locked": !this.isAvailableForPurchase && !this.isPossible,
       };
     },
-    requirementConfig() {
-      return {
-        description: this.config.requirement
-      };
+    effectText() {
+      if (!this.config.formatEffect) return false;
+      const prefix = this.isCapped ? "Capped:" : "Currently:";
+      const formattedEffect = x => this.config.formatEffect(this.config.effects?.(x) ?? this.config.effect?.(x));
+      const value = formattedEffect(this.boughtAmount ?? 0);
+      const next = (!this.isCapped && this.hovering)
+        ? formattedEffect(this.boughtAmount?.add(1))
+        : undefined;
+      return { prefix, value, next };
     },
-    canLock() {
-      return this.config.canLock && !(this.isAvailableForPurchase || this.isBought);
-    },
-    isUseless() {
-      // Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
-      return false;
-    },
-  },
-  watch: {
-    // IsAutobuyerOn(newValue) {
-    // Autobuyer.realityUpgrade(this.upgrade.id).isActive = newValue;
-    // }
   },
   methods: {
     update() {
@@ -70,17 +55,9 @@ export default {
       this.canBeBought = upgrade.canBeBought;
       this.isRebuyable = upgrade.isRebuyable;
       this.isBought = (!upgrade.isRebuyable && upgrade.isBought) || upgrade.isCapped;
-      this.isPossible = upgrade.isPossible;
-      this.showCurrentEffect = Boolean(upgrade.config.showCurrentEffect);
-      // This.isAutoUnlocked = Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied;
-      // this.canBeLocked = upgrade.config.canLock && !this.isAvailableForPurchase;
-      // this.hasRequirementLock = upgrade.hasPlayerLock;
-      // if (this.isRebuyable) this.isAutobuyerOn = Autobuyer.realityUpgrade(upgrade.id).isActive;
+      this.boughtAmount = upgrade.boughtAmount;
+      this.isCapped = upgrade.isCapped;
     },
-    // ToggleLock(upgrade) {
-    // if (this.isRebuyable) return;
-    // upgrade.toggleMechanicLock();
-    // }
   }
 };
 </script>
@@ -91,6 +68,8 @@ export default {
       :class="classObject"
       class="l-mend-upgrade-btn c-mend-upgrade-btn"
       @click.exact="upgrade.purchase()"
+      @mouseover="hovering = true"
+      @mouseleave="hovering = false"
     >
       <HintText
         type="realityUpgrades"
@@ -98,16 +77,25 @@ export default {
       >
         {{ config.name }}
       </HintText>
-      <span :class="{ 'o-pelle-disabled': isUseless }">
+      <span>
         <DescriptionDisplay
           :config="config"
           :should-capitalize="false"
         />
-        <EffectDisplay
-          v-if="showCurrentEffect"
-          :config="config"
-          br
-        />
+        <span v-if="effectText">
+          <br>
+          {{ effectText.prefix }} {{ effectText.value }}
+          <template v-if="effectText.next">
+            ➜ <span
+              :class="{
+                'c-improved-effect': canBeBought,
+                'c-improved-effect--unavailable': !canBeBought,
+              }"
+            >
+              {{ effectText.next }}
+            </span>
+          </template>
+        </span>
         <CostDisplay
           v-if="!isBought"
           :config="config"
@@ -230,5 +218,15 @@ export default {
   font-weight: bold;
   color: var(--color-text);
   text-shadow: none;
+}
+
+.c-improved-effect {
+  font-weight: bold;
+  color: #00bb00;
+}
+
+.c-improved-effect--unavailable {
+  font-weight: bold;
+  color: var(--color-infinity);
 }
 </style>

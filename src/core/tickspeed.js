@@ -216,15 +216,15 @@ export const FreeTickspeed = {
   BASE_SOFTCAP: new Decimal(3e5),
   GROWTH_RATE: new Decimal(6e-6).add(1),
   GROWTH_EXP: DC.D2,
-  tickmult: () => DC.D1.add(Effects.min(1.33, TimeStudy(171)).sub(1)).mul(
-    Decimal.max(getAdjustedGlyphEffect("cursedtickspeed"), 1)),
+  tickmult: () => Effects.min(1.33, TimeStudy(171)).mul(getAdjustedGlyphEffect("cursedtickspeed").max(1))
+    .sub(MendingUpgrade(12).effects.tsScaling),
 
   get amount() {
     return player.totalTickGained;
   },
 
   get softcap() {
-    let softcap = MendingUpgrade(10).isBought ? new Decimal(2e6) : FreeTickspeed.BASE_SOFTCAP;
+    let softcap = Effects.max(FreeTickspeed.BASE_SOFTCAP, MendingUpgrade(10));
     if (Enslaved.has(ENSLAVED_UNLOCKS.FREE_TICKSPEED_SOFTCAP)) {
       softcap = softcap.add(1e5);
     }
@@ -232,8 +232,8 @@ export const FreeTickspeed = {
   },
 
   get multToNext() {
-    if (this.amount.lt(this.softcap)) return new Decimal(this.tickmult().sub(0.01 * MendingUpgrade(12).boughtAmount.toNumber()));
-    return (this.tickmult().sub(0.01 * MendingUpgrade(12).boughtAmount.toNumber())).mul(this.GROWTH_RATE.pow(this.amount.sub(this.softcap)));
+    if (this.amount.lt(this.softcap)) return this.tickmult();
+    return this.tickmult().mul(this.GROWTH_RATE.pow(this.amount.sub(this.softcap)));
   },
 
   get tickExpo() {

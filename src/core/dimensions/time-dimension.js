@@ -168,7 +168,7 @@ export function timeDimensionCommonMultiplier() {
         .clampMin(1));
   }
 
-  mult = mult.times(MendingUpgrade(3).config.effectTxt[MendingUpgrade(3).effectValue]);
+  mult = mult.times(MendingUpgrade(3).effects.mult);
   if (Laitela.isDamaged) mult = mult.pow(0.6);
   return mult;
 }

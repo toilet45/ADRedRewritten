@@ -484,7 +484,8 @@ window.player = {
             score: 0,
             effectCount: 0,
             specifiedMask: [],
-            effectScores: [...Array(GlyphInfo[t].effectIDs.length).keys()].mapToObject(e => GlyphInfo[t].effectIDs[e], () => 0),
+            effectScores: [...Array(GlyphInfo[t].effectIDs.length).keys()]
+              .mapToObject(e => GlyphInfo[t].effectIDs[e], () => 0),
           })),
       },
       createdRealityGlyph: false,
@@ -950,6 +951,7 @@ window.player = {
       id: false,
     }
   },
+  // eslint-disable-next-line camelcase
   ad_red: {
     mends: DC.D0,
     mendingPoints: DC.D0,

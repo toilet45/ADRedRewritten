@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       mendingPoints: new Decimal()
-    }
+    };
   },
   computed: {
     upgrades: () => MendingUpgrades.all,
@@ -53,11 +53,6 @@ export default {
 </template>
 
 <style scoped>
-.c-reality-upgrade-infotext {
-  color: var(--color-text);
-  margin: -1rem 0 1.5rem;
-}
-
 .c-mending-tab__header {
   font-size: 1.5rem;
   margin: 1.5rem 0;

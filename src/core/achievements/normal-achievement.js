@@ -32,7 +32,7 @@ class AchievementState extends GameMechanicState {
     return this.row < 18;
   }
 
-  get isPreMend(){
+  get isPreMend() {
     return this.row < 19;
   }
 

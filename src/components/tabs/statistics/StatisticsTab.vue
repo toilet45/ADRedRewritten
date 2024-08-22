@@ -150,7 +150,7 @@ export default {
         eternity.count.copyFrom(Currency.eternities);
         eternity.banked.copyFrom(Currency.eternitiesBanked);
         eternity.projectedBanked = Currency.eternities.value.div(100)
-          .mul(MendingUpgrade(7).config.effectTxt[MendingUpgrade(7).effectValue]);
+          .mul(MendingUpgrade(7).effects.eternities);
         eternity.hasBest = !bestEternity.time.eq(DC.BEMAX);
         eternity.best.setFrom(bestEternity.time);
         eternity.this.setFrom(records.thisEternity.time);
@@ -166,7 +166,7 @@ export default {
         reality.count.copyFrom(Currency.realities);
         reality.banked.copyFrom(Currency.realitiesBanked);
         reality.projectedBanked = Currency.realities.value.div(100)
-          .mul(MendingUpgrade(7).config.effect2[MendingUpgrade(7).effectValue]);
+          .mul(MendingUpgrade(7).effects.realities);
         reality.hasBest = !bestReality.time.eq(DC.BEMAX);
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);

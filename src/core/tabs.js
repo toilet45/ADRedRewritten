@@ -216,10 +216,10 @@ export const Tabs = (function() {
       Tab.eternity,
       Tab.reality,
       Tab.celestials,
+      Tab.mending,
       Tab.achievements,
       Tab.statistics,
       Tab.options,
-      Tab.mending
     ],
     get currentUIFormat() {
       return ui.view.newUI ? this.newUI : this.oldUI;

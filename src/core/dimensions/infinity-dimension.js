@@ -26,7 +26,7 @@ export function infinityDimensionCommonMultiplier() {
     mult = mult.times(replicantiMult());
   }
 
-  mult = mult.times(MendingUpgrade(3).config.effectTxt[MendingUpgrade(3).effectValue]);
+  mult = mult.times(MendingUpgrade(3).effects.mult);
   if (Laitela.isDamaged) mult = mult.pow(0.6);
   return mult;
 }
@@ -413,7 +413,7 @@ export const InfinityDimensions = {
   },
 
   get powerConversionRate() {
-    return getAdjustedGlyphEffect("infinityrate").add(7).add(0.1 * MendingUpgrade(12).boughtAmount.toNumber())
+    return getAdjustedGlyphEffect("infinityrate").add(7).add(MendingUpgrade(12).effects.ipConversion)
       .add(PelleUpgrade.infConversion.effectOrDefault(0)).mul(PelleRifts.paradox.milestones[2].effectOrDefault(1));
   }
 };

@@ -319,7 +319,7 @@ function giveRealityRewards(realityProps) {
     multiplier,
     MachineHandler.projectedIMCap);
   player.eternitiesBanked = player.eternitiesBanked.add(Currency.eternities.value.div(100)
-    .mul(MendingUpgrade(7).config.effectTxt[MendingUpgrade(7).effectValue]));
+    .mul(MendingUpgrade(7).effects.eternities));
   Currency.realities.add(realityAndPPMultiplier);
   Currency.perkPoints.add(realityAndPPMultiplier);
   if (TeresaUnlocks.effarig.canBeApplied) {
@@ -850,8 +850,8 @@ function lockAchievementsOnReality() {
     achievement.lock();
   }
   if (PlayerProgress.mendingUnlocked) {
-    let achKeep = [22, 47, 48, 51, 52, 53, 61];
-    for (let i = 0; i < achKeep.length; i++){
+    const achKeep = [22, 47, 48, 51, 52, 53, 61];
+    for (let i = 0; i < achKeep.length; i++) {
       Achievement(achKeep[i]).unlock();
     }
   }
