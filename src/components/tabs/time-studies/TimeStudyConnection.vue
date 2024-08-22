@@ -76,6 +76,10 @@ export class TimeStudyConnectionSetup {
     return this.connection.to;
   }
 
+  get isOverridden(){
+    return this.connection.isOverridden;
+  }
+
   /**
    * @param {TimeStudySetup[]} studies
    */
