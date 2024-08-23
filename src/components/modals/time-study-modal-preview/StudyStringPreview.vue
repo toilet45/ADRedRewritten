@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      layoutType: STUDY_TREE_LAYOUT_TYPE.NORMAL,
+      layoutType: {},
       vLevel: 0,
       renderedStudyCount: 0,
       isEnslaved: false,

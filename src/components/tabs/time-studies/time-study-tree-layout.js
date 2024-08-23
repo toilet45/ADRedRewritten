@@ -31,6 +31,7 @@ class TimeStudyRowLayout {
 }
 
 export class TimeStudyTreeLayout {
+  // eslint-disable-next-line complexity
   constructor(type, scaling = 1) {
     this.spacing = 4 * scaling;
 
@@ -61,9 +62,7 @@ export class TimeStudyTreeLayout {
       normalRow(                   null, TS(31), TS(32), TS(33)                       )
     ];
 
-    if (type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_62 || type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_62_181 ||
-      type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62_181 ||
-      type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD || type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62) {
+    if (type.alt62) {
       this.rows.push(
         normalRow(                     null, TS(41), TS(42), EC(5)                      ),
         normalRow(                               TS(51)                                 )
@@ -89,9 +88,7 @@ export class TimeStudyTreeLayout {
       normalRow(                          TS(161), TS(162)                            )
     );
 
-    if (type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_181 || type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_62_181 ||
-      type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD ||
-      type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT181 || type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62_181 ) {
+    if (type.alt181) {
       this.rows.push(
         normalRow(                         null, TS(171),  EC(2)                        ),
         normalRow(                        EC(1), TS(181),  EC(3)                        )
@@ -112,8 +109,7 @@ export class TimeStudyTreeLayout {
       wideRow  (TS(221), TS(222), TS(223), TS(224), TS(225), TS(226), TS(227), TS(228))
     );
 
-    if ((type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD) &&
-    !Pelle.isDoomed) {
+    if (type.triad && !Pelle.isDoomed) {
       this.rows.push(
         normalRow(                 TS(301), TS(302), TS(303), TS(304)                 )
       );
@@ -125,10 +121,7 @@ export class TimeStudyTreeLayout {
       normalRow(                          TimeStudy.dilation                          )
     );
 
-    if (type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62 || type === STUDY_TREE_LAYOUT_TYPE.MU9 ||
-      type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT181 || type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62_181 ||
-      type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD
-    ) {
+    if (type.mu9) {
       this.rows.push(
         normalRow(TimeStudy.TGformula, TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)),
         normalRow(TimeStudy.TPformula, TimeStudy.timeDimension(7), TimeStudy.timeDimension(8))
@@ -225,30 +218,12 @@ export class TimeStudyTreeLayout {
 }
 
 export const STUDY_TREE_LAYOUT_TYPE = {
-  NORMAL: 0,
-  ALTERNATIVE_62: 1,
-  ALTERNATIVE_181: 2,
-  ALTERNATIVE_62_181: 3,
-  ALTERNATIVE_TRIAD_STUDIES: 4,
-  MU9: 5,
-  MU9_ALT62: 6,
-  MU9_ALT181: 7,
-  MU9_ALT62_181: 8,
-  MU9_TRIAD: 9,
   get current() {
-    const alt62 = Perk.bypassEC5Lock.isBought;
-    const alt181 = Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought;
-    if (MendingUpgrade(9).isBought) {
-      if (Ra.canBuyTriad) return this.MU9_TRIAD;
-      if (alt62 && alt181) return this.MU9_ALT62_181;
-      if (alt62) return this.MU9_ALT62;
-      if (alt181) return this.MU9_ALT181;
-      return this.MU9;
-    }
-    if (Ra.canBuyTriad) return this.ALTERNATIVE_TRIAD_STUDIES;
-    if (alt62 && alt181) return this.ALTERNATIVE_62_181;
-    if (alt62) return this.ALTERNATIVE_62;
-    if (alt181) return this.ALTERNATIVE_181;
-    return this.NORMAL;
+    return {
+      alt62: Perk.bypassEC5Lock.isBought,
+      alt181: Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought,
+      triad: Ra.canBuyTriad,
+      mu9: MendingUpgrade(9).isBought
+    };
   }
 };

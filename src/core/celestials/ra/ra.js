@@ -261,7 +261,7 @@ export const Ra = {
       .map(() => ({
         amount: DC.D0,
         reaction: false
-      })),
+      }));
     data.highestRefinementValue = {
       power: DC.D0,
       infinity: DC.D0,
@@ -269,7 +269,7 @@ export const Ra = {
       replication: DC.D0,
       dilation: DC.D0,
       effarig: DC.D0
-    },
+    };
     data.momentumTime = DC.D0;
     data.unlocks = [];
     data.petWithRemembrance = "";

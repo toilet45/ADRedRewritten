@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       respec: player.respec,
-      layoutType: STUDY_TREE_LAYOUT_TYPE.NORMAL,
+      layoutType: {},
       vLevel: 0,
       renderedStudyCount: 0,
       renderedConnectionCount: 0,
