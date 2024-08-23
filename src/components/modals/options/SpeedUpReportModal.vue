@@ -10,7 +10,7 @@ export default {
     return {
       effectiveDurationText: "",
       durationText: "",
-    }
+    };
   },
   created() {
     this.effectiveDurationText = TimeSpan.fromMilliseconds(new Decimal(dev.speedUpDuration)).toString();
@@ -20,7 +20,7 @@ export default {
     delete dev.speedUpRestart;
     delete dev.speedUpStart;
   },
-}
+};
 </script>
 
 <template>

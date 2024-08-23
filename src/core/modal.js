@@ -35,8 +35,8 @@ import NewsOptionsModal from "@/components/modals/options/NewsOptionsModal";
 import NotationModal from "@/components/modals/options/NotationModal";
 import PreferredTreeModal from "@/components/modals/options/PreferredTreeModal";
 import SingleGlyphAppearanceModal from "@/components/modals/options/glyph-appearance/SingleGlyphAppearanceModal";
-import SpeedUpModal from "@/components/modals/options/SpeedUpModal"
-import SpeedUpReportModal from "@/components/modals/options/SpeedUpReportModal"
+import SpeedUpModal from "@/components/modals/options/SpeedUpModal";
+import SpeedUpReportModal from "@/components/modals/options/SpeedUpReportModal";
 
 import DeleteCompanionGlyphModal from "@/components/modals/glyph-management/DeleteCompanionGlyphModal";
 import DeleteGlyphModal from "@/components/modals/glyph-management/DeleteGlyphModal";

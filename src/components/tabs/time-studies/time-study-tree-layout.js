@@ -90,7 +90,7 @@ export class TimeStudyTreeLayout {
     );
 
     if (type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_181 || type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_62_181 ||
-      type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD || 
+      type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD ||
       type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT181 || type === STUDY_TREE_LAYOUT_TYPE.MU9_ALT62_181 ) {
       this.rows.push(
         normalRow(                         null, TS(171),  EC(2)                        ),
@@ -112,7 +112,8 @@ export class TimeStudyTreeLayout {
       wideRow  (TS(221), TS(222), TS(223), TS(224), TS(225), TS(226), TS(227), TS(228))
     );
 
-    if ((type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD) && !Pelle.isDoomed) {
+    if ((type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES || type === STUDY_TREE_LAYOUT_TYPE.MU9_TRIAD) &&
+    !Pelle.isDoomed) {
       this.rows.push(
         normalRow(                 TS(301), TS(302), TS(303), TS(304)                 )
       );
@@ -201,7 +202,7 @@ export class TimeStudyTreeLayout {
     this.enslavedStudy.setPosition(this);
 
     for (const connection of this.connections) {
-      if(!connection.isOverridden) connection.setPosition(this.studies, this.width, this.height);
+      if (!connection.isOverridden) connection.setPosition(this.studies, this.width, this.height);
     }
     this.secretStudyConnection.setPosition(this.studies.concat(this.secretStudy), this.width, this.height);
     this.enslavedStudyConnection.setPosition(this.studies.concat(this.enslavedStudy), this.width, this.height);

@@ -76,7 +76,7 @@ export class TimeStudyConnectionSetup {
     return this.connection.to;
   }
 
-  get isOverridden(){
+  get isOverridden() {
     return this.connection.isOverridden;
   }
 
