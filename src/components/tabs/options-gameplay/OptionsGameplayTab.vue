@@ -1,9 +1,9 @@
 <script>
+import { DEV } from "@/env";
 import OpenModalHotkeysButton from "@/components/OpenModalHotkeysButton";
 import OptionsButton from "@/components/OptionsButton";
 import PrimaryToggleButton from "@/components/PrimaryToggleButton";
 import SliderComponent from "@/components/SliderComponent";
-import { DEV } from "@/env";
 
 export default {
   name: "OptionsGameplayTab",
@@ -24,7 +24,7 @@ export default {
       infinityUnlocked: false,
       automatorUnlocked: false,
       automatorLogSize: 0,
-      DEV: DEV,
+      DEV,
     };
   },
   computed: {

@@ -329,6 +329,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   if (effects.includes(GAME_SPEED_EFFECT.FIXED_SPEED)) {
     if (EternityChallenge(12).isRunning) {
+      // eslint-disable-next-line capitalized-comments, no-inline-comments
       return Decimal.mul(1 / 1000, 1/* dev.speedUp */);
     }
   }
@@ -377,6 +378,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
 
+  // eslint-disable-next-line capitalized-comments
   // factor = factor.mul(dev.speedUp);
 
   return factor;
