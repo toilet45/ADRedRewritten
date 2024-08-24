@@ -335,7 +335,7 @@ export const EternityChallenges = {
         player.reality.lastAutoEC = Decimal.clampMax(player.reality.lastAutoEC, this.interval);
         return;
       }
-      if (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied) {
+      if (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || MendingUpgrade(14).isBought) {
         let next = this.nextChallenge;
         while (next !== undefined) {
           while (!next.isFullyCompleted) {

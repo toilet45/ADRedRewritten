@@ -103,6 +103,9 @@ export const GlyphSelection = {
   // that we actually generate all of them and pick randomly. In this case, we also do exactly that and then present
   // this pre-selected glyph as the only option
   get upcomingGlyphs() {
+    if (player.realities.lt(1)) {
+      return [GlyphGenerator.startingGlyph(gainedGlyphLevel())];
+    }
     if (Perk.firstPerk.isEffectActive) {
       return this.glyphList(this.choiceCount, gainedGlyphLevel(), { isChoosingGlyph: false });
     }

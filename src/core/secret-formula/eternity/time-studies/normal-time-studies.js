@@ -419,7 +419,8 @@ export const normalTimeStudies = [
     requirement: [161, 162],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Time Shard requirement for the next Tickspeed upgrade goes up slower
-      ${formatX(1.33, 0, 2)} ➜ ${formatX(1.25, 0, 2)}`,
+      ${formatX(1.33 - MendingUpgrade(12).boughtAmount.toNumber() / 100, 0, 2)}
+      ➜ ${formatX(1.25 - MendingUpgrade(12).boughtAmount.toNumber() / 100, 0, 2)}`,
     effect: () => 1.25
   },
   {

@@ -39,6 +39,30 @@ export default {
     boostText() {
       const achievementPower = formatX(this.achievementPower, 2, 3);
       const achTPEffect = formatX(this.achTPEffect, 2, 3);
+      let bhpow = this.achievementPower.gt(1e35) ? formatX(this.achievementPower.div(1e35).cbrt().mul(1e35), 2, 3)
+        : formatX(this.achievementPower, 2, 3);
+
+      if (MendingUpgrade(13).isBought) {
+        const adpow = formatX(this.achievementPower.pow(10000), 2, 3);
+        const idpow = formatX(this.achievementPower.pow(777), 2, 3);
+        const tdpow = formatX(this.achievementPower.pow(111), 2, 3);
+        const tppow = formatX(this.achievementPower.pow(10), 2, 3);
+        bhpow = this.achievementPower.pow(2).gt(1e35)
+          ? formatX(this.achievementPower.pow(2).div(1e35).cbrt().mul(1e35), 2, 3)
+          : formatX(this.achievementPower.pow(2), 2, 3);
+        const otherpow = formatX(this.achievementPower.pow(4), 2, 3);
+
+        const boostList = [];
+
+        boostList.push(`Antimatter Dimensions: ${adpow}`);
+        if (this.achMultToIDS) boostList.push(`Infinity Dimensions: ${idpow}`);
+        if (this.achMultToTDS) boostList.push(`Time Dimensions: ${tdpow}`);
+
+        if (this.achMultToTP) boostList.push(`Tachyon Particles: ${tppow}`);
+        if (this.achMultToBH) boostList.push(`Black Hole Power: ${bhpow}`);
+        if (this.achMultToTT) boostList.push(`Time Theorem production: ${otherpow}`);
+        return `${boostList.join("<br>")}`;
+      }
 
       const boostList = [];
 
@@ -49,7 +73,7 @@ export default {
       boostList.push(`${makeEnumeration(dimMultList)} Dimensions: ${achievementPower}`);
 
       if (this.achMultToTP) boostList.push(`Tachyon Particles: ${achTPEffect}`);
-      if (this.achMultToBH) boostList.push(`Black Hole Power: ${achievementPower}`);
+      if (this.achMultToBH) boostList.push(`Black Hole Power: ${bhpow}`);
       if (this.achMultToTT) boostList.push(`Time Theorem production: ${achievementPower}`);
       return `${boostList.join("<br>")}`;
     },

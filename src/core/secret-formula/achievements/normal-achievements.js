@@ -501,7 +501,7 @@ export const normalAchievements = [
     checkRequirement: () => InfinityDimension(4).isUnlocked,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Your Achievement bonus affects Infinity Dimensions.",
-    effect: () => Achievements.power
+    effect: () => Achievements.power.pow(MendingUpgrade(13).isBought ? 777 : 1)
   },
   {
     id: 76,

@@ -38,7 +38,8 @@ export class Galaxy {
    * @returns {number} Max number of galaxies (total)
    */
   static buyableGalaxies(currency, minVal = player.galaxies) {
-    const alter = GlyphAlteration.isAdded("power") ? getSecondaryGlyphEffect("powerpow") : DC.D1;
+    let alter = GlyphAlteration.isAdded("power") ? getSecondaryGlyphEffect("powerpow") : DC.D1;
+    alter = alter.div(new Decimal(1.001).pow(MendingUpgrade(16).boughtAmount));
     const dis = Galaxy.costScalingStart;
     const scale = Galaxy.costMult;
     let base = Galaxy.baseCost.sub(Effects.sum(InfinityUpgrade.resetBoost));
@@ -47,7 +48,7 @@ export class Galaxy {
     // Plz no ask how exponential math work i dont know i just code, see https://discord.com/channels/351476683016241162/439241762603663370/1210707188964659230m
     const minV = Galaxy.costScalingStart.min(Galaxy.remoteStart); // Take the smallest of the two values
     if (currency.lt(Galaxy.requirementAt(minV).amount /* Pre exponential/quadratic? */)) {
-      return Decimal.max(currency.sub(base).div(scale).floor().add(1), minVal);
+      return Decimal.max(currency.sub(base.mul(alter)).div(scale.mul(alter)).floor().add(1), minVal);
     }
 
     if (currency.lt(Galaxy.requirementAt(Galaxy.remoteStart).amount)) {
@@ -102,7 +103,7 @@ export class Galaxy {
     */
 
     if (Galaxy.requirementAt(Decimal.max(1e6, Galaxy.remoteStart)).amount.lt(currency)) {
-      return Decimal.log(currency.div(Galaxy.requirementAt(Decimal.max(1e6, Galaxy.remoteStart))), 1.008)
+      return Decimal.log(currency.div(Galaxy.requirementAt(Decimal.max(1e6, Galaxy.remoteStart))).div(alter), 1.008)
         .add(Decimal.max(1e6, Galaxy.remoteStart)).floor().max(minVal);
     }
     // Ignore BBBS' warning, even though its theoretically quite dangerous

@@ -206,17 +206,18 @@ export function rewardTP() {
 // act dynamically on this fixed base value elsewhere solves that issue
 export function getBaseTP(antimatter, requireEternity) {
   if (!Player.canEternity && requireEternity) return DC.D0;
-  const am = (isInCelestialReality() || Pelle.isDoomed)
+  const am = (isInCelestialReality() || Pelle.isDoomed || MendingUpgrade(15).isBought)
     ? antimatter
     : Ra.unlocks.unlockDilationStartingTP.effectOrDefault(antimatter);
-  let baseTP = am.max(1).log10().div(400).pow(1.5);
+  let baseTP = am.max(1).log10().div(MendingUpgrade(15).isBought ? 222 : 400).pow(1.5);
   if (Enslaved.isRunning) baseTP = baseTP.pow(Enslaved.tachyonNerf);
   return baseTP;
 }
 
 // Returns the TP that would be gained this run
 export function getTP(antimatter, requireEternity) {
-  return getBaseTP(antimatter, requireEternity).times(tachyonGainMultiplier());
+  return getBaseTP(antimatter, requireEternity).times(tachyonGainMultiplier())
+    .pow((MendingUpgrade(15).isBought ? 1.15 : 1) * (TimeStudy.TPformula.isBought ? 1.1 : 1));
 }
 
 // Returns the amount of TP gained, subtracting out current TP; used for displaying gained TP, text on the

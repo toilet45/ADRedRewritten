@@ -45,12 +45,13 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "2",
     id: 2,
-    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2],
+    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D0],
     description: p => ["Gain passive Infinity Point gain",
       "Gain passive Eternity Point gain",
       "Gain passive Reality Machine gain",
       "Imaginary Machines are always equal to their cap",
-      "Remnants are always equal to their cap"][p],
+      "Remnants are always equal to their cap",
+      "Fully Purchased"][p],
     effect: p => p,
     formatEffect: value => {
       if (value.eq(0)) return "None";
@@ -61,7 +62,7 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "3",
     id: 3,
-    costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, new Decimal("1F300")],
+    costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, DC.D0],
     // TODO: change this desc
     description: () => `Antimatter, Infinity, and Time Dimension are multipled than raised to a power`,
     effects: p => ({
@@ -99,13 +100,13 @@ export const mendingUpgrades = [
       // If above 0.01, then multiply by 100, sqrt, and div by 100 (i.e. sqrt but starting earlier)
       other: p.div(10).min(p.div(10).sqrt()).div(100).add(1)
     }),
-    formatEffect: effects => `${formatX(effects.rm)}, ${formatPow(effects.other)}`,
+    formatEffect: effects => `${formatX(effects.rm)}, ${formatPow(effects.other, 2, 4)}`,
   }),
   hybridRebuyable({
     name: "7",
     id: 7,
     costs: [DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8,
-      DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8],
+      DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D0],
     // TODO: change this desc
     // eslint-disable-next-line max-len
     description: p => `Bank some of your Eternities on Reality${p >= 10 ? ", and some of your Realities on Mend." : ""}`,
@@ -181,7 +182,7 @@ export const mendingUpgrades = [
     name: "16",
     id: 16,
     initialCost: new Decimal("150"),
-    costMult: new Decimal("10^^300"),
+    costMult: new Decimal("25"),
     description: "Gain 6 Multiversal Galaxies, Antimatter Galaxy cost /1.001, Galaxy Power +0.001",
   }),
   hybridRebuyable({

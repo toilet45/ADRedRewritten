@@ -970,6 +970,7 @@ window.player = {
     },
     mendingUpgradeBits: 0,
     mendingUpgReqs: 0,
+    multiversalGalaxies: new Decimal()
   }
 };
 

@@ -13,10 +13,12 @@ export function effectiveBaseGalaxies() {
   // this value should not be contributed to total replicanti galaxies
   replicantiGalaxies = replicantiGalaxies.add(nonActivePathReplicantiGalaxies
     .times(Effects.sum(EternityChallenge(8).reward)));
-  let freeGalaxies = player.dilation.totalTachyonGalaxies;
-  freeGalaxies = freeGalaxies.mul(DC.D1.add(Decimal.max(0, Replicanti.amount.log10().div(1e6))
+  let dilGalaxies = player.dilation.totalTachyonGalaxies;
+  dilGalaxies = dilGalaxies.mul(DC.D1.add(Decimal.max(0, Replicanti.amount.log10().div(1e6))
     .times(AlchemyResource.alternation.effectValue)));
-  return Decimal.max(player.galaxies.add(GalaxyGenerator.galaxies).add(replicantiGalaxies).add(freeGalaxies), 0);
+  const mvGalaxies = MendingUpgrade(16).boughtAmount.mul(6);
+  return Decimal.max(player.galaxies.add(GalaxyGenerator.galaxies).add(replicantiGalaxies)
+    .add(dilGalaxies).add(mvGalaxies), 0);
 }
 
 export function getTickSpeedMultiplier() {

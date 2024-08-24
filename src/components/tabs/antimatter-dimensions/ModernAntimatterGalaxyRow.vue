@@ -7,7 +7,8 @@ export default {
       galaxies: {
         normal: new Decimal(),
         replicanti: new Decimal(),
-        dilation: new Decimal()
+        dilation: new Decimal(),
+        multiversal: new Decimal()
       },
       requirement: {
         tier: 1,
@@ -44,6 +45,7 @@ export default {
       const parts = [Decimal.max(this.galaxies.normal, 0)];
       if (this.galaxies.replicanti.gt(0)) parts.push(this.galaxies.replicanti);
       if (this.galaxies.dilation.gt(0)) parts.push(this.galaxies.dilation);
+      if (this.galaxies.multiversal.gt(0)) parts.push(this.galaxies.multiversal);
       const sum = parts.map(this.formatGalaxies).join(" + ");
       if (parts.length >= 2) {
         return `${sum} = ${this.formatGalaxies(parts.sum())}`;
@@ -92,6 +94,7 @@ export default {
       this.galaxies.normal.copyFrom(player.galaxies.add(GalaxyGenerator.galaxies));
       this.galaxies.replicanti.copyFrom(Replicanti.galaxies.total);
       this.galaxies.dilation.copyFrom(player.dilation.totalTachyonGalaxies);
+      this.galaxies.multiversal.copyFrom(player.ad_red.multiversalGalaxies);
       const requirement = Galaxy.requirement;
       this.requirement.amount = requirement.amount;
       this.requirement.tier = requirement.tier;
@@ -114,7 +117,9 @@ export default {
       manualRequestGalaxyReset(this.canBulkBuy && bulk);
     },
     formatGalaxies(num) {
-      return num.gt(1e8) ? format(num, 2) : formatInt(num.toNumber());
+      // eslint-disable-next-line no-param-reassign
+      num = new Decimal(num);
+      return num.gt(1e8) ? format(num, 2) : formatInt(num);
     },
   }
 };

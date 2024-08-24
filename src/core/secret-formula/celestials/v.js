@@ -221,9 +221,11 @@ export const v = {
       description: () => `Have ${formatInt(10)} V-Achievements`,
       effect: () => Achievements.power,
       // Base rate is 60 ECs at 20 minutes each
-      format: x => (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied
-        ? "Instant (Ra upgrade)"
-        : `${TimeSpan.fromMinutes(new Decimal(1200).div(x)).toStringShort()} for full completion`),
+      // eslint-disable-next-line no-nested-ternary
+      format: x => (MendingUpgrade(14).isBoguht ? "Instant (Mending Upgrade 14)"
+        : Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied
+          ? "Instant (Ra upgrade)"
+          : `${TimeSpan.fromMinutes(new Decimal(1200).div(x)).toStringShort()} for full completion`),
       requirement: () => V.spaceTheorems >= 10
     },
     autoAutoClean: {
@@ -236,7 +238,9 @@ export const v = {
       id: 5,
       reward: "Achievement multiplier affects Black Hole power.",
       description: () => `Have ${formatInt(30)} V-Achievements`,
-      effect: () => Achievements.power,
+      effect: () => (Achievements.power.pow(MendingUpgrade(13).isBought ? 2 : 1).gt(1e35)
+        ? Achievements.power.pow(MendingUpgrade(13).isBought ? 2 : 1).div(1e35).sqrt().mul(1e35)
+        : Achievements.power.pow(MendingUpgrade(13).isBought ? 2 : 1)),
       format: x => formatX(x, 2, 0),
       requirement: () => V.spaceTheorems >= 30
     },

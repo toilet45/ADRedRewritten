@@ -399,6 +399,9 @@ export function getGameSpeedupForDisplay() {
 
 // Seperated for organisation - Very few things should need this
 export function trueTimeMechanics(trueDiff) {
+  // Upgrade multiversal galaxies in player object
+  player.ad_red.multiversalGalaxies = MendingUpgrade(16).boughtAmount.mul(6);
+
   // Ra-Nameless auto-release stored time (once every 5 ticks)
   if (Enslaved.isAutoReleasing) {
     Enslaved.autoReleaseTick++;
@@ -591,7 +594,9 @@ export function gameLoop(passedDiff, options = {}) {
   Currency.realities.add(uncountabilityGain);
   Currency.perkPoints.add(uncountabilityGain);
 
-  if (Perk.autocompleteEC1.canBeApplied) player.reality.lastAutoEC = player.reality.lastAutoEC.add(realDiff);
+  if (Perk.autocompleteEC1.canBeApplied || MendingUpgrade(14).isBought) {
+    player.reality.lastAutoEC = player.reality.lastAutoEC.add(realDiff);
+  }
 
   EternityChallenge(12).tryFail();
   Achievements._power.invalidate();
@@ -637,7 +642,7 @@ export function gameLoop(passedDiff, options = {}) {
   // dilation, but the TP gain function is also coded to behave differently if it's active
   const teresa1 = player.dilation.active && Ra.unlocks.autoTP.canBeApplied;
   const teresa25 = !isInCelestialReality() && Ra.unlocks.unlockDilationStartingTP.canBeApplied;
-  if ((teresa1 || teresa25) && !Pelle.isDoomed) rewardTP();
+  if ((teresa1 || teresa25 || MendingUpgrade(15).isBought) && !Pelle.isDoomed) rewardTP();
 
   if (Enslaved.canTickHintTimer) {
     player.celestials.enslaved.hintUnlockProgress += Enslaved.isRunning ? realDiff.clampMax(1e10).toNumber()
@@ -872,7 +877,7 @@ function updateTachyonGalaxies() {
         .div(tachyonGalaxyMult));
 
   player.dilation.totalTachyonGalaxies = player.dilation.totalTachyonGalaxies
-    .times(DilationUpgrade.galaxyMultiplier.effectValue);
+    .times(DilationUpgrade.galaxyMultiplier.effectValue).times((TimeStudy.TGformula.isBought ? 1.1 : 1)).floor();
 }
 
 export function getTTPerSecond() {
