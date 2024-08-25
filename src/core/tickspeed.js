@@ -16,7 +16,7 @@ export function effectiveBaseGalaxies() {
   let dilGalaxies = player.dilation.totalTachyonGalaxies;
   dilGalaxies = dilGalaxies.mul(DC.D1.add(Decimal.max(0, Replicanti.amount.log10().div(1e6))
     .times(AlchemyResource.alternation.effectValue)));
-  const mvGalaxies = MendingUpgrade(16).boughtAmount.mul(6);
+  const mvGalaxies = MendingUpgrade(16).effects.galaxies;
   return Decimal.max(player.galaxies.add(GalaxyGenerator.galaxies).add(replicantiGalaxies)
     .add(dilGalaxies).add(mvGalaxies), 0);
 }

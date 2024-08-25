@@ -111,6 +111,11 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
 
   // eslint-disable-next-line no-empty-function
   set effects(value) {}
+
+  onPurchased() {
+    const id = this.id;
+    if (id === 1) Autobuyer.mend.bumpAmount(DC.D3);
+  }
 }
 
 class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {

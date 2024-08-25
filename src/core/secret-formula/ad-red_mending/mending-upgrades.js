@@ -114,8 +114,9 @@ export const mendingUpgrades = [
       eternities: DC.D5.mul(p).min(50),
       realities: DC.D2.mul(p).sub(20).max(0)
     }),
-    formatEffect: effects => `${formatPercents(effects.eternities.div(100))}\
-    ${effects.realities.gt(0) ? `, ${formatPercents(effects.realities.div(100))}` : ""}`,
+    formatEffect: effects =>
+      // eslint-disable-next-line max-len
+      `${formatPercents(effects.eternities.div(100))}${effects.realities.gt(0) ? `, ${formatPercents(effects.realities.div(100))}` : ""}`,
     purchaseLimit: 20
   }),
   {
@@ -151,8 +152,7 @@ export const mendingUpgrades = [
     id: 12,
     costs: [...Array.repeat(new Decimal(50), 20)],
     // TODO: change this desc
-    // eslint-disable-next-line max-len, no-unused-vars
-    description: p => `Infinity Power conversion, and free Tickspeed scaling increase`,
+    description: () => `Infinity Power conversion, and free Tickspeed scaling increase`,
     effects: p => ({
       ipConversion: p.mul(0.1),
       tsScaling: p.mul(0.01)
@@ -164,7 +164,15 @@ export const mendingUpgrades = [
     name: "13",
     id: 13,
     cost: new Decimal("66"),
-    description: () => `Achievement multiplier is far stronger`
+    description: () => `Achievement multiplier is far stronger`,
+    effects: {
+      adPow: 10000,
+      idPow: 777,
+      tdPow: 111,
+      tpPow: 10,
+      ttGenPow: 4,
+      bhPow: 2,
+    }
   },
   {
     name: "14",
@@ -176,44 +184,54 @@ export const mendingUpgrades = [
     name: "15",
     id: 15,
     cost: new Decimal("123"),
-    description: () => `Generate Tachyon Particles based on best Antimatter this Mend, TP formula is better`
+    description: () => `Generate Tachyon Particles based on best Antimatter this Mend, TP formula is better`,
+    effects: {
+      tpDiv: 222,
+      tpPow: 1.15
+    }
   },
   rebuyable({
     name: "16",
     id: 16,
     initialCost: new Decimal("150"),
     costMult: new Decimal("25"),
-    description: "Gain 6 Multiversal Galaxies, Antimatter Galaxy cost /1.001, Galaxy Power +0.001",
+    // TODO: change this desc
+    description: "Gain Multiversal Galaxies, Antimatter Galaxy cost, Galaxy Power",
+    effects: p => ({
+      galaxies: p.mul(6),
+      agCost: Decimal.pow(1.001, p),
+      agPow: Decimal.pow(1.001, p)
+    }),
+    formatEffect: effects =>
+      `${format(effects.galaxies)}, /${format(effects.agCost, 3, 3)}, +${format(effects.agPow, 3, 3)}`
   }),
   hybridRebuyable({
     name: "17",
     id: 17,
-    costs: [new Decimal(175)],
+    costs: [new Decimal(175), ...Array.repeat(new Decimal(65), 7)],
     // eslint-disable-next-line no-unused-vars
-    description: () => `TBD`,
+    description: () => "Unlock ??? Dimensions which cost RM and generate ??? - TBD",
     // eslint-disable-next-line no-unused-vars
-    effects: () => ({}),
-    purchaseLimit: 1
+    effect: p => p,
+    formatEffect: p => format(p),
+    purchaseLimit: 8,
   }),
   {
     name: "18",
     id: 18,
     cost: new Decimal("199"),
-    description: () => `TBD`,
-    effect: () => DC.D1
+    description: "Unlock an autobuyer for Mends",
   },
   {
     name: "19",
     id: 19,
     cost: new Decimal("210"),
-    description: () => `Unlock Ra's Memories, which go up to level 100.`,
-    effect: () => DC.D1
+    description: "Unlock Ra's Memories, which go up to level 100.",
   },
   {
     name: "20",
     id: 20,
     cost: new Decimal("250"),
-    description: () => `Warp Reality`,
-    effect: () => DC.D1
+    description: "Unlock Warp Reality",
   },
 ];

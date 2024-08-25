@@ -41,7 +41,7 @@ export const eternityUpgrades = {
     id: 4,
     cost: 1e16,
     description: "Your Achievement bonus affects Time Dimensions",
-    effect: () => Achievements.power.pow(MendingUpgrade(13).isBought ? 111 : 1),
+    effect: () => Achievements.power.powEffectOf(MendingUpgrade(13).effects.tdPow),
     formatEffect: value => formatX(value, 2, 1)
   },
   tdMultTheorems: {

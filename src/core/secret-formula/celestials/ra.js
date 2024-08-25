@@ -277,7 +277,7 @@ export const ra = {
     achievementTTMult: {
       id: 26,
       reward: "Achievement multiplier applies to Time Theorem generation",
-      effect: () => Achievements.power.pow(MendingUpgrade(13).isBought ? 4 : 1),
+      effect: () => Achievements.power.powEffectOf(MendingUpgrade(13).effects.ttGenPow),
       pet: "v",
       level: 15,
       displayIcon: `<span class="fas fa-graduation-cap"></span>`,

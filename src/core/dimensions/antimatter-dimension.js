@@ -7,7 +7,7 @@ import { DimensionState } from "./dimension";
 export function antimatterDimensionCommonMultiplier() {
   let multiplier = DC.D1;
   if (Enslaved.isExpanded) return multiplier;
-  multiplier = multiplier.times(Achievements.power.pow(MendingUpgrade(13).isBought ? 10000 : 1));
+  multiplier = multiplier.times(Achievements.power.powEffectOf(MendingUpgrade(13).effects.adPow));
 
   if (!EternityChallenge(9).isRunning) {
     multiplier = multiplier.times(Currency.infinityPower.value.pow(InfinityDimensions.powerConversionRate).max(1));

@@ -400,7 +400,7 @@ export function getGameSpeedupForDisplay() {
 // Seperated for organisation - Very few things should need this
 export function trueTimeMechanics(trueDiff) {
   // Upgrade multiversal galaxies in player object
-  player.ad_red.multiversalGalaxies = MendingUpgrade(16).boughtAmount.mul(6);
+  player.ad_red.multiversalGalaxies = MendingUpgrade(16).effects.galaxies;
 
   // Ra-Nameless auto-release stored time (once every 5 ticks)
   if (Enslaved.isAutoReleasing) {
@@ -877,7 +877,7 @@ function updateTachyonGalaxies() {
         .div(tachyonGalaxyMult));
 
   player.dilation.totalTachyonGalaxies = player.dilation.totalTachyonGalaxies
-    .times(DilationUpgrade.galaxyMultiplier.effectValue).times((TimeStudy.TGformula.isBought ? 1.1 : 1)).floor();
+    .times(DilationUpgrade.galaxyMultiplier.effectValue).timesEffectOf(TimeStudy.TGformula).floor();
 }
 
 export function getTTPerSecond() {

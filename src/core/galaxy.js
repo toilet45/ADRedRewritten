@@ -38,8 +38,8 @@ export class Galaxy {
    * @returns {number} Max number of galaxies (total)
    */
   static buyableGalaxies(currency, minVal = player.galaxies) {
-    let alter = GlyphAlteration.isAdded("power") ? getSecondaryGlyphEffect("powerpow") : DC.D1;
-    alter = alter.div(new Decimal(1.001).pow(MendingUpgrade(16).boughtAmount));
+    const alter = Decimal.pow(GlyphAlteration.isAdded("power") ? getSecondaryGlyphEffect("powerpow") : DC.D1,
+      MendingUpgrade(16).effects.agCost);
     const dis = Galaxy.costScalingStart;
     const scale = Galaxy.costMult;
     let base = Galaxy.baseCost.sub(Effects.sum(InfinityUpgrade.resetBoost));

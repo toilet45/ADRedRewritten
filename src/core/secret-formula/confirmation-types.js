@@ -82,6 +82,10 @@ export const confirmationTypes = [
   }, {
     name: "Respec Shop Purchases",
     option: "respecIAP",
-    isUnlocked: () => true
+    isUnlocked: () => true,
+  }, {
+    name: "Mending",
+    option: "mend",
+    isUnlocked: () => PlayerProgress.mendingUnlocked(),
   }
 ];

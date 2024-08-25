@@ -255,6 +255,12 @@ window.AUTO_REALITY_MODE = {
   RELIC_SHARD: 5,
 };
 
+window.AUTO_MEND_MODE = {
+  AMOUNT: 0,
+  TIME: 1,
+  X_HIGHEST: 2
+};
+
 window.RECENT_PRESTIGE_RESOURCE = {
   ABSOLUTE_GAIN: 0,
   RATE: 1,

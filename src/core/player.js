@@ -63,6 +63,15 @@ window.player = {
   auto: {
     autobuyersOn: true,
     disableContinuum: false,
+    mend: {
+      mode: 0,
+      hasAdditionalModes: false,
+      amount: DC.D1,
+      increaseWithMult: true,
+      time: 1,
+      xHighest: DC.D1,
+      isActive: false
+    },
     reality: {
       mode: 0,
       rm: DC.D1,

@@ -238,9 +238,9 @@ export const v = {
       id: 5,
       reward: "Achievement multiplier affects Black Hole power.",
       description: () => `Have ${formatInt(30)} V-Achievements`,
-      effect: () => (Achievements.power.pow(MendingUpgrade(13).isBought ? 2 : 1).gt(1e35)
-        ? Achievements.power.pow(MendingUpgrade(13).isBought ? 2 : 1).div(1e35).sqrt().mul(1e35)
-        : Achievements.power.pow(MendingUpgrade(13).isBought ? 2 : 1)),
+      effect: () => (Achievements.power.powEffectOf(MendingUpgrade(13).effects.bhPow).gt(1e35)
+        ? Achievements.power.powEffectOf(MendingUpgrade(13).effects.bhPow).div(1e35).sqrt().mul(1e35)
+        : Achievements.power.powEffectOf(MendingUpgrade(13).effects.bhPow)),
       format: x => formatX(x, 2, 0),
       requirement: () => V.spaceTheorems >= 30
     },
