@@ -1542,6 +1542,16 @@ export const devMigrations = {
     player => {
       player.mending = player.redemption;
       delete player.redemption;
+    },
+    player => {
+      player.mending.rebuyables = player.mending.mendingRebuyables;
+      delete player.mending.mendingRebuyables;
+      player.mending.hybrids = player.mending.mendingHybrids;
+      delete player.mending.mendingHybrids;
+      player.mending.upgradeBits = player.mending.mendingUpgradeBits;
+      delete player.mending.mendingUpgradeBits;
+      player.mending.upgReqs = player.mending.mendingUpgReqs;
+      delete player.mending.mendingUpgReqs;
     }
   ],
 

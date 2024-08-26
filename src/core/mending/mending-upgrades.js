@@ -27,11 +27,11 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   }
 
   get bits() {
-    return player.mending.mendingUpgradeBits;
+    return player.mending.upgradeBits;
   }
 
   set bits(value) {
-    player.mending.mendingUpgradeBits = value;
+    player.mending.upgradeBits = value;
   }
 
   // Get hasPlayerLock() {
@@ -65,7 +65,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   // }
 
   get isAvailableForPurchase() {
-    // (player.mending.mendingUpgReqs & (1 << this.id)) !== 0;
+    // (player.mending.upgReqs & (1 << this.id)) !== 0;
     return true;
   }
 
@@ -77,7 +77,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   tryUnlock() {
     const mendingReached = PlayerProgress.mendingUnlocked();
     if (!mendingReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
-    player.mending.mendingUpgReqs |= (1 << this.id);
+    player.mending.upgReqs |= (1 << this.id);
     GameUI.notify.mending(`You've unlocked a Mending Upgrade: ${this.config.name}`);
     // This.hasPlayerLock = false;
   }
@@ -94,11 +94,11 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get boughtAmount() {
-    return player.mending.mendingRebuyables[this.id];
+    return player.mending.rebuyables[this.id];
   }
 
   set boughtAmount(value) {
-    player.mending.mendingRebuyables[this.id] = value;
+    player.mending.rebuyables[this.id] = value;
   }
 
   get cap() {
@@ -124,11 +124,11 @@ class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get boughtAmount() {
-    return player.mending.mendingHybrids[this.id];
+    return player.mending.hybrids[this.id];
   }
 
   set boughtAmount(value) {
-    player.mending.mendingHybrids[this.id] = value;
+    player.mending.hybrids[this.id] = value;
   }
 
   get cap() {
@@ -170,6 +170,6 @@ export const MendingUpgrades = {
   all: MendingUpgradeState.index.compact(),
   get allBought() {
     // eslint-disable-next-line max-len
-    return (player.mending.mendingUpgradeBits >> 6) + 1 === 1 << (GameDatabase.mending.mendingUpgrades.length - 5);
+    return (player.mending.upgradeBits >> 6) + 1 === 1 << (GameDatabase.mending.mendingUpgrades.length - 5);
   }
 };

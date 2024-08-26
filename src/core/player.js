@@ -964,21 +964,21 @@ window.player = {
   mending: {
     mends: DC.D0,
     mendingPoints: DC.D0,
-    mendingRebuyables: {
+    rebuyables: {
       1: new Decimal(),
       6: new Decimal(),
       11: new Decimal(),
       16: new Decimal(),
     },
-    mendingHybrids: {
+    hybrids: {
       2: new Decimal(),
       3: new Decimal(),
       7: new Decimal(),
       12: new Decimal(),
       17: new Decimal()
     },
-    mendingUpgradeBits: 0,
-    mendingUpgReqs: 0,
+    upgradeBits: 0,
+    upgReqs: 0,
     multiversalGalaxies: new Decimal()
   }
 };
