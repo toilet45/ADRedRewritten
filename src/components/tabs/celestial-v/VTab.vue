@@ -1,10 +1,10 @@
 <script>
 import CelestialQuoteHistory from "@/components/CelestialQuoteHistory";
+import { Glyphs } from "@/core/globals";
 import GlyphSetPreview from "@/components/GlyphSetPreview";
 import PrimaryButton from "@/components/PrimaryButton";
 import { V_REDUCTION_MODE } from "@/core/secret-formula";
 import VUnlockRequirement from "./VUnlockRequirement";
-import { Glyphs } from "../../../core/globals";
 
 export default {
   name: "VTab",

@@ -961,7 +961,7 @@ window.player = {
     }
   },
   // eslint-disable-next-line camelcase
-  ad_red: {
+  redemption: {
     mends: DC.D0,
     mendingPoints: DC.D0,
     mendingRebuyables: {

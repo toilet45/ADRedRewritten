@@ -189,7 +189,7 @@ export default {
 
       if (isMendingUnlocked) {
         mending.hasBest = bestMend.time.neq(DC.BEMAX);
-        mending.count.copyFrom(Currency.ad_red_mends);
+        mending.count.copyFrom(Currency.mends);
         mending.best.setFrom(bestMend.time);
         mending.bestReal.setFrom(bestMend.realTime);
         mending.this.setFrom(records.thisMend.time);

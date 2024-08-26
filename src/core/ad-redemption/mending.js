@@ -49,10 +49,10 @@ function updateMendingRecords(MvRgain) {
 }
 
 export function mendingReset() {
-  EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_RESET_BEFORE);
+  EventHub.dispatch(GAME_EVENT.MENDING_RESET_BEFORE);
   // Do this first so we can do records and stuff based on stats, without fucking anything over
-  Currency.ad_red_mendingPoints.add(adRedGainedMendingPoints());
-  Currency.ad_red_mends.add(adRedGainedMends());
+  Currency.mendingPoints.add(adRedGainedMendingPoints());
+  Currency.mends.add(adRedGainedMends());
   player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
     .mul(MendingUpgrade(7).effects.realities));
   updateMendingRecords(adRedGainedMendingPoints());
@@ -322,7 +322,7 @@ export function mendingReset() {
   for (let i = 0; i < prebreakAch.length; i++) {
     Achievement(prebreakAch[i]).unlock();
   }
-  EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_RESET_AFTER);
+  EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 
 export function adRedGainedMendingPoints() {
@@ -351,7 +351,7 @@ export class MendingMilestoneState {
     // If (Pelle.isDoomed && this.config.givenByPelle) {
     // return this.config.givenByPelle();
     // }
-    return Currency.ad_red_mends.gte(this.config.mends);
+    return Currency.mends.gte(this.config.mends);
   }
 }
 export const MendingMilestone = mapGameDataToObject(

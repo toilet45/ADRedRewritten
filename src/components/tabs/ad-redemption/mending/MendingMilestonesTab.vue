@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     update() {
-      this.mendCount.copyFrom(Currency.ad_red_mends.value.floor());
+      this.mendCount.copyFrom(Currency.mends.value.floor());
     },
     getMilestone(row, column) {
       return () => this.milestones[(row - 1) * 2 + column - 1];
@@ -65,5 +65,4 @@ export default {
 .l-mend-milestone-grid__cell {
   margin: 0.5rem 0.8rem;
 }
-
 </style>

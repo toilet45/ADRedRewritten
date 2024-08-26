@@ -2,7 +2,7 @@ import { DC } from "../../constants";
 
 const rebuyable = props => {
   props.cost = () => getHybridCostScaling(
-    player.ad_red.mendingRebuyables[props.id],
+    player.redemption.mendingRebuyables[props.id],
     DC.E30,
     props.initialCost,
     props.costMult,
@@ -12,15 +12,15 @@ const rebuyable = props => {
     props.initialCost.times(props.costMult)
   );
   const { effect, effects } = props;
-  if (props.effect) props.effect = p => effect(p ?? player.ad_red.mendingRebuyables[props.id]);
-  if (props.effects) props.effects = p => effects(p ?? player.ad_red.mendingRebuyables[props.id]);
+  if (props.effect) props.effect = p => effect(p ?? player.redemption.mendingRebuyables[props.id]);
+  if (props.effects) props.effects = p => effects(p ?? player.redemption.mendingRebuyables[props.id]);
   props.formatCost = value => format(value, 2, 0);
   props.isRebuyable = true;
   return props;
 };
 
 const hybridRebuyable = props => {
-  const purAmnt = () => Math.min(player.ad_red.mendingHybrids[props.id].toNumber(), props.purchaseLimit);
+  const purAmnt = () => Math.min(player.redemption.mendingHybrids[props.id].toNumber(), props.purchaseLimit);
   props.cost = () => props.costs[purAmnt()];
   const { effect, effects, description } = props;
   props.description = () => description(purAmnt());

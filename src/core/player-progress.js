@@ -16,7 +16,7 @@ export class PlayerProgress {
   }
 
   get isMendingUnlocked() {
-    return new Decimal(this._player.ad_red.mends).gt(0);
+    return new Decimal(this._player.redemption.mends).gt(0);
   }
 
   get hasFullCompletion() {

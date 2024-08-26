@@ -72,7 +72,6 @@ export default {
 </template>
 
 <style scoped>
-
 .l-mend-milestone {
   display: flex;
   flex-direction: column;
@@ -123,5 +122,4 @@ export default {
   border-color: var(--color-mending);
   animation: a-time-study 7s infinite;
 }
-
 </style>

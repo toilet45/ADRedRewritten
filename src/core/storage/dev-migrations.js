@@ -1533,6 +1533,11 @@ export const devMigrations = {
     player => {
       player.options.lightGlyphs = !player.options.forceDarkGlyphs;
       delete player.options.forceDarkGlyphs;
+    },
+    player => {
+      player.redemption = player.ad_red;
+      delete player.ad_red;
+      delete player.redemption.records;
     }
   ],
 

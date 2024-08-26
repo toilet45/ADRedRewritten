@@ -159,7 +159,7 @@ export default {
         percentList.push(
           [entry.ignoresNerfPowers, nerfBlacklist.includes(entry.key) ? Decimal.clampMin(perc, 0.0001) : perc]
         );
-        //console.log(percentList[0][1])
+        // Console.log(percentList[0][1])
       }
 
       // Shortly after a prestige, these may add up to a lot more than the base amount as production catches up. This
@@ -411,7 +411,6 @@ export default {
       </div>
       <div
         v-for="(entry, index) in entries"
-        
         :key="entry.key"
         @mouseover="mouseoverIndex = index"
         @mouseleave="mouseoverIndex = -1"

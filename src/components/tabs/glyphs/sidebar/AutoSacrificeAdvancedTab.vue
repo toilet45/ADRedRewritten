@@ -49,7 +49,7 @@ export default {
   },
   created() {
     this.effectScores = { ...AutoGlyphProcessor.types[this.glyphType].effectScores };
-    console.log(AutoGlyphProcessor.types[this.glyphType])
+    // Console.log(AutoGlyphProcessor.types[this.glyphType]);
   },
   methods: {
     update() {

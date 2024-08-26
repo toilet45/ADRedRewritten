@@ -180,6 +180,7 @@ export class Currency {
 /**
  * @abstract
  */
+// eslint-disable-next-line no-unused-vars
 class NumberCurrency extends Currency {
   get operations() { return MathOperations.number; }
   get startingValue() { return 0; }
@@ -491,24 +492,18 @@ Currency.galaxyGeneratorGalaxies = new class extends DecimalCurrency {
 }();
 
 // eslint-disable-next-line camelcase
-Currency.ad_red_mends = new class extends DecimalCurrency {
-  get value() { return player.ad_red.mends; }
-  set value(value) { player.ad_red.mends = new Decimal(value); }
+Currency.mends = new class extends DecimalCurrency {
+  get value() { return player.redemption.mends; }
+  set value(value) { player.redemption.mends = new Decimal(value); }
 }();
 
 // eslint-disable-next-line camelcase
-Currency.ad_red_mendingPoints = new class extends DecimalCurrency {
-  get value() { return player.ad_red.mendingPoints; }
-  set value(value) { player.ad_red.mendingPoints = new Decimal(value); }
+Currency.mendingPoints = new class extends DecimalCurrency {
+  get value() { return player.redemption.mendingPoints; }
+  set value(value) { player.redemption.mendingPoints = new Decimal(value); }
 }();
 
 Currency.realitiesBanked = new class extends DecimalCurrency {
   get value() { return player.realitiesBanked; }
   set value(value) { player.realitiesBanked = value; }
 }();
-
-Currency.eternitiesTotal = new class extends DecimalCurrency {
-  get value() { return player.eternities.add(player.eternitiesBanked); }
-  set value(value) { player.eternities = value; }
-}();
-

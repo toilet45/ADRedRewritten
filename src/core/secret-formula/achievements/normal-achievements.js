@@ -1386,7 +1386,7 @@ export const normalAchievements = [
     name: "I can fix it",
     description: "Mend the Multiverse",
     checkRequirement: () => true,
-    checkEvent: GAME_EVENT.AD_RED_MENDING_RESET_AFTER,
+    checkEvent: GAME_EVENT.MENDING_RESET_AFTER,
     get reward() {
       return `Achievement 166 is changed to be "at least 6969 levels", Reality has no Achievement requirement, and no RM hardcap on the first Reality`;
     }

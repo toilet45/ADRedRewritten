@@ -1,8 +1,9 @@
 <script>
+import { GlyphInfo } from "../../core/secret-formula/index";
+
 import ImportFilterSingleType from "./ImportFilterSingleType";
 import ModalWrapperChoice from "@/components/modals/ModalWrapperChoice";
 import PrimaryButton from "@/components/PrimaryButton";
-import { GlyphInfo } from "../../core/secret-formula/index";
 
 export default {
   name: "ImportFilterModal",

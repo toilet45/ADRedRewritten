@@ -25,7 +25,7 @@ export default {
       return (row - 1) * 5 + column - 1;
     },
     update() {
-      this.mendingPoints.copyFrom(Currency.ad_red_mendingPoints.value);
+      this.mendingPoints.copyFrom(Currency.mendingPoints.value);
     }
   }
 };

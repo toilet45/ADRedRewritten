@@ -102,7 +102,7 @@ export const ID = {
     multValue: () => (InfinityDimension(8).isProducing
       ? Decimal.pow(GlyphInfo.infinity.sacrificeInfo.effect(), Decimal.floor(InfinityDimension(8).baseAmount.div(10)))
       : DC.D1),
-    isActive: () =>GlyphInfo.infinity.sacrificeInfo.effect().gt(1),
+    isActive: () => GlyphInfo.infinity.sacrificeInfo.effect().gt(1),
     icon: MultiplierTabIcons.SACRIFICE("infinity"),
   },
   powPurchase: {

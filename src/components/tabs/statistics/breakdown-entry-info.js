@@ -5,7 +5,7 @@ import { DC } from "@/core/constants";
 export class BreakdownEntryInfo {
   constructor(key) {
     this.key = key;
-    //console.log(key)
+    // Console.log(key)
     const keyArgs = this.key.split("_");
     const dbEntry = GameDatabase.multiplierTabValues[keyArgs[0]][keyArgs[1]];
     const args = keyArgs.length >= 3

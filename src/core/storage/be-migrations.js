@@ -118,7 +118,7 @@ export function beMigration(player) {
   player.chall2Pow = D(player.chall2Pow);
   player.chall3Pow = D(player.chall3Pow);
   player.chall8TotalSacrifice = D(player.chall8TotalSacrifice);
-  //player.chall9TickspeedCostBumps = D(player.chall9TickspeedCostBumps);
+  // Player.chall9TickspeedCostBumps = D(player.chall9TickspeedCostBumps);
   player.challenge.infinity.bestTimes = player.challenge.infinity.bestTimes.map(n => ((!(n instanceof Decimal) && n > 1.6e308) ? BEMAX : D(n)));
   player.challenge.normal.bestTimes = player.challenge.normal.bestTimes.map(n => ((!(n instanceof Decimal) && n > 1.6e308) ? BEMAX : D(n)));
   player.dilation.baseTachyonGalaxies = D(player.dilation.baseTachyonGalaxies);

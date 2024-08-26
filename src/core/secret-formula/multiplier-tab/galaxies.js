@@ -24,15 +24,15 @@ export const galaxies = {
       rg = rg.times((DC.D1.add(Effects.sum(TimeStudy(132), TimeStudy(133)))));
       rg = rg.add(Replicanti.galaxies.extra);
       rg = rg.add(Decimal.min(Replicanti.galaxies.bought, ReplicantiUpgrade.galaxies.value).times(
-          Effects.sum(EternityChallenge(8).reward)));
+        Effects.sum(EternityChallenge(8).reward)));
       const mult = rg.div(Decimal.clampMin(num, 1)).times(MultiplierTabHelper.globalGalaxyMult());
       return `${formatInt(num)}, ${formatX(mult, 2, 2)} strength`;
     },
     multValue: () => {
       let rg = Replicanti.galaxies.bought;
-      rg = rg.times((new Decimal(1).add(Effects.sum(TimeStudy(132), TimeStudy(133)))));
+      rg = rg.times(new Decimal(1).add(Effects.sum(TimeStudy(132), TimeStudy(133))));
       rg = rg.add(Replicanti.galaxies.extra);
-      rg = rg.add(Math.min(Replicanti.galaxies.bought, ReplicantiUpgrade.galaxies.value).times(Effects(EternityChallenge(8).reward)));
+      rg = rg.add(Replicanti.galaxies.bought.min(ReplicantiUpgrade.galaxies.value).timesEffectOf(EternityChallenge(8).reward));
       return Decimal.pow10(rg);
     },
     isActive: () => Replicanti.areUnlocked,

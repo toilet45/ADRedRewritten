@@ -32,7 +32,7 @@ function addReplicantiGalaxies(newGalaxies) {
 // Function called externally for gaining RGs, which adjusts replicanti amount before calling the function
 // which actually adds the RG. Called externally both automatically and manually
 export function replicantiGalaxy(auto) {
-  //console.log("dold")
+  // Console.log("dold")
   if (RealityUpgrade(6).isLockingMechanics) {
     if (!auto) RealityUpgrade(6).tryShowWarningModal();
     return;
@@ -49,7 +49,7 @@ export function replicantiGalaxy(auto) {
 
 // Only called on manual RG requests
 export function replicantiGalaxyRequest() {
-  //console.log("blob")
+  // Console.log("blob")
   if (!Replicanti.galaxies.canBuyMore) return;
   if (RealityUpgrade(6).isLockingMechanics) RealityUpgrade(6).tryShowWarningModal();
   else if (player.options.confirmations.replicantiGalaxy) Modal.replicantiGalaxy.show();
@@ -504,7 +504,7 @@ export const ReplicantiUpgrade = {
         .add(remoteReplicatedGalaxyStart.pow(2).mul(logRemoteScaling).div(2))
         .sub(remoteReplicatedGalaxyStart.mul(logRemoteScaling).div(6));
 
-        //console.log([a, b, c, d])
+      // Console.log([a, b, c, d])
 
       // eslint-disable-next-line consistent-return
       return decimalCubicSolution(a, b, c, d, false).floor().add(1);

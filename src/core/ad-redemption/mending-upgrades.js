@@ -19,7 +19,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   // }
 
   get currency() {
-    return Currency.ad_red_mendingPoints;
+    return Currency.mendingPoints;
   }
 
   get bitIndex() {
@@ -27,11 +27,11 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   }
 
   get bits() {
-    return player.ad_red.mendingUpgradeBits;
+    return player.redemption.mendingUpgradeBits;
   }
 
   set bits(value) {
-    player.ad_red.mendingUpgradeBits = value;
+    player.redemption.mendingUpgradeBits = value;
   }
 
   // Get hasPlayerLock() {
@@ -65,7 +65,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   // }
 
   get isAvailableForPurchase() {
-    // (player.ad_red.mendingUpgReqs & (1 << this.id)) !== 0;
+    // (player.redemption.mendingUpgReqs & (1 << this.id)) !== 0;
     return true;
   }
 
@@ -77,28 +77,28 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   tryUnlock() {
     const mendingReached = PlayerProgress.mendingUnlocked();
     if (!mendingReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
-    player.ad_red.mendingUpgReqs |= (1 << this.id);
+    player.redemption.mendingUpgReqs |= (1 << this.id);
     GameUI.notify.mending(`You've unlocked a Mending Upgrade: ${this.config.name}`);
     // This.hasPlayerLock = false;
   }
   // eslint-disable-next-line capitalized-comments
   // onPurchased() {
-  //   EventHub.dispatch(GAME_EVENT.AD_RED_MENDING_UPGRADE_BOUGHT);
+  //   EventHub.dispatch(GAME_EVENT.MENDING_UPGRADE_BOUGHT);
   //   const id = this.id;
   // }
 }
 
 class RebuyableMendingUpgradeState extends RebuyableMechanicState {
   get currency() {
-    return Currency.ad_red_mendingPoints;
+    return Currency.mendingPoints;
   }
 
   get boughtAmount() {
-    return player.ad_red.mendingRebuyables[this.id];
+    return player.redemption.mendingRebuyables[this.id];
   }
 
   set boughtAmount(value) {
-    player.ad_red.mendingRebuyables[this.id] = value;
+    player.redemption.mendingRebuyables[this.id] = value;
   }
 
   get cap() {
@@ -120,15 +120,15 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
 
 class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   get currency() {
-    return Currency.ad_red_mendingPoints;
+    return Currency.mendingPoints;
   }
 
   get boughtAmount() {
-    return player.ad_red.mendingHybrids[this.id];
+    return player.redemption.mendingHybrids[this.id];
   }
 
   set boughtAmount(value) {
-    player.ad_red.mendingHybrids[this.id] = value;
+    player.redemption.mendingHybrids[this.id] = value;
   }
 
   get cap() {
@@ -169,6 +169,7 @@ export const MendingUpgrades = {
    */
   all: MendingUpgradeState.index.compact(),
   get allBought() {
-    return (player.ad_red.mendingUpgradeBits >> 6) + 1 === 1 << (GameDatabase.ad_red.mendingUpgrades.length - 5);
+    // eslint-disable-next-line max-len
+    return (player.redemption.mendingUpgradeBits >> 6) + 1 === 1 << (GameDatabase.redemption.mendingUpgrades.length - 5);
   }
 };

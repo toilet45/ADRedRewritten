@@ -1,10 +1,9 @@
 import { BitUpgradeState, GameMechanicState } from "../game-mechanics";
+import { DC } from "../constants";
 import { GameDatabase } from "../secret-formula/game-database";
-
 import { SpeedrunMilestones } from "../speedrun";
 
 import { Quotes } from "./quotes";
-import { DC } from "../constants";
 
 /**
  * Information about how to format runUnlocks:

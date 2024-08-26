@@ -59,6 +59,6 @@ export default {
       class="c-v-unlock-bar__progress"
       :style="barProgressStyle"
     />
-    {{ dbEntry.format(resource) }} / {{  }} {{ dbEntry.name }}
+    {{ textFormat }}
   </div>
 </template>

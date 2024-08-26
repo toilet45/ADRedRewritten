@@ -143,7 +143,7 @@ class AlchemyReaction {
   get reactionYield() {
     if (!this._product.isUnlocked || this._reagents.some(r => !r.resource.isUnlocked)) return new Decimal();
     let forcingFactor = (this._reagents
-      .map(r => r.resource.amount))
+      .map(r => r.resource.amount));
     while (forcingFactor.length > 1) {
       if (forcingFactor[0].gt(forcingFactor[1])) forcingFactor.splice(1, 1);
       else forcingFactor.splice(0, 1);
