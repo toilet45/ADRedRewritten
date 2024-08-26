@@ -174,7 +174,8 @@ export function processManualReality(sacrifice, glyphID) {
     // If this is our first Reality, lock in the initial seed and then give the companion and starting glyphs
     player.reality.seed = player.reality.initialSeed;
     Glyphs.addToInventory(GlyphGenerator.startingGlyph(gainedGlyphLevel()));
-    if (!PlayerProgress.mendingUnlocked) Glyphs.addToInventory(GlyphGenerator.companionGlyph(Currency.eternityPoints.value));
+    if (!PlayerProgress.mendingUnlocked)
+      Glyphs.addToInventory(GlyphGenerator.companionGlyph(Currency.eternityPoints.value));
   } else if (Perk.firstPerk.isEffectActive) {
     // If we have firstPerk, we pick from 4+ glyphs, and glyph generation functions as normal.
     GlyphSelection.generate(GlyphSelection.choiceCount);
@@ -303,7 +304,8 @@ function updateRealityRecords(realityProps) {
     player.records.bestReality.realTime = player.records.thisReality.realTime;
     player.records.bestReality.speedSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
   }
-  player.records.bestReality.trueTime = Math.min(player.records.bestReality.trueTime, player.records.thisReality.trueTime);
+  player.records.bestReality.trueTime =
+  Math.min(player.records.bestReality.trueTime, player.records.thisReality.trueTime);
 }
 
 function giveRealityRewards(realityProps) {
@@ -759,7 +761,8 @@ export function finishProcessReality(realityProps) {
 
   if (realityProps.restoreCelestialState || player.options.retryCelestial) restoreCelestialRuns(celestialRunState);
 
-  if ((Pelle.isDoomed && PelleUpgrade.keepAutobuyers.canBeApplied && Autobuyer.bigCrunch.hasMaxedInterval) || MendingMilestone.one.isReached) {
+  if ((Pelle.isDoomed && PelleUpgrade.keepAutobuyers.canBeApplied &&
+       Autobuyer.bigCrunch.hasMaxedInterval) || MendingMilestone.one.isReached) {
     player.break = true;
   }
 }
@@ -857,6 +860,5 @@ function lockAchievementsOnReality() {
     for (let i = 0; i < achKeep.length; i++) {
       Achievement(achKeep[i]).unlock();
     }
-  }
-  else player.reality.achTimer = DC.D0;
+  } else player.reality.achTimer = DC.D0;
 }

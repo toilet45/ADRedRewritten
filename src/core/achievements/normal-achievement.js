@@ -1,5 +1,7 @@
 import { GameMechanicState } from "../game-mechanics";
 
+import { DC } from "../constants";
+
 import { SteamRuntime } from "@/steam";
 
 class AchievementState extends GameMechanicState {
@@ -189,7 +191,7 @@ export const Achievements = {
   }),
 
   get power() {
-    if (Pelle.isDisabled("achievementMult")) return 1;
+    if (Pelle.isDisabled("achievementMult")) return DC.D1;
     return Achievements._power.value;
   },
 
