@@ -493,14 +493,14 @@ Currency.galaxyGeneratorGalaxies = new class extends DecimalCurrency {
 
 // eslint-disable-next-line camelcase
 Currency.mends = new class extends DecimalCurrency {
-  get value() { return player.redemption.mends; }
-  set value(value) { player.redemption.mends = new Decimal(value); }
+  get value() { return player.mending.mends; }
+  set value(value) { player.mending.mends = new Decimal(value); }
 }();
 
 // eslint-disable-next-line camelcase
 Currency.mendingPoints = new class extends DecimalCurrency {
-  get value() { return player.redemption.mendingPoints; }
-  set value(value) { player.redemption.mendingPoints = new Decimal(value); }
+  get value() { return player.mending.mendingPoints; }
+  set value(value) { player.mending.mendingPoints = new Decimal(value); }
 }();
 
 Currency.realitiesBanked = new class extends DecimalCurrency {

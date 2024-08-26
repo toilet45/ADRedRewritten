@@ -27,11 +27,11 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   }
 
   get bits() {
-    return player.redemption.mendingUpgradeBits;
+    return player.mending.mendingUpgradeBits;
   }
 
   set bits(value) {
-    player.redemption.mendingUpgradeBits = value;
+    player.mending.mendingUpgradeBits = value;
   }
 
   // Get hasPlayerLock() {
@@ -65,7 +65,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   // }
 
   get isAvailableForPurchase() {
-    // (player.redemption.mendingUpgReqs & (1 << this.id)) !== 0;
+    // (player.mending.mendingUpgReqs & (1 << this.id)) !== 0;
     return true;
   }
 
@@ -77,7 +77,7 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
   tryUnlock() {
     const mendingReached = PlayerProgress.mendingUnlocked();
     if (!mendingReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
-    player.redemption.mendingUpgReqs |= (1 << this.id);
+    player.mending.mendingUpgReqs |= (1 << this.id);
     GameUI.notify.mending(`You've unlocked a Mending Upgrade: ${this.config.name}`);
     // This.hasPlayerLock = false;
   }
@@ -94,11 +94,11 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get boughtAmount() {
-    return player.redemption.mendingRebuyables[this.id];
+    return player.mending.mendingRebuyables[this.id];
   }
 
   set boughtAmount(value) {
-    player.redemption.mendingRebuyables[this.id] = value;
+    player.mending.mendingRebuyables[this.id] = value;
   }
 
   get cap() {
@@ -124,11 +124,11 @@ class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get boughtAmount() {
-    return player.redemption.mendingHybrids[this.id];
+    return player.mending.mendingHybrids[this.id];
   }
 
   set boughtAmount(value) {
-    player.redemption.mendingHybrids[this.id] = value;
+    player.mending.mendingHybrids[this.id] = value;
   }
 
   get cap() {
@@ -170,6 +170,6 @@ export const MendingUpgrades = {
   all: MendingUpgradeState.index.compact(),
   get allBought() {
     // eslint-disable-next-line max-len
-    return (player.redemption.mendingUpgradeBits >> 6) + 1 === 1 << (GameDatabase.redemption.mendingUpgrades.length - 5);
+    return (player.mending.mendingUpgradeBits >> 6) + 1 === 1 << (GameDatabase.mending.mendingUpgrades.length - 5);
   }
 };

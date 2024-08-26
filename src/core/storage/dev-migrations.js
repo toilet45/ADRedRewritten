@@ -1538,6 +1538,10 @@ export const devMigrations = {
       player.redemption = player.ad_red;
       delete player.ad_red;
       delete player.redemption.records;
+    },
+    player => {
+      player.mending = player.redemption;
+      delete player.redemption;
     }
   ],
 

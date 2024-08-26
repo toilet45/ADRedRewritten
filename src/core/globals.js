@@ -91,4 +91,4 @@ export * from "./speedrun";
 
 export * from "./automator/script-templates";
 
-export * from "./ad-redemption/index";
+export * from "./mending/index";

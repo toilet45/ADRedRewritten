@@ -98,7 +98,7 @@ export default {
       this.galaxies.normal.copyFrom(player.galaxies.add(GalaxyGenerator.galaxies));
       this.galaxies.replicanti.copyFrom(Replicanti.galaxies.total);
       this.galaxies.dilation.copyFrom(player.dilation.totalTachyonGalaxies);
-      this.galaxies.multiversal.copyFrom(player.redemption.multiversalGalaxies);
+      this.galaxies.multiversal.copyFrom(player.mending.multiversalGalaxies);
       const requirement = Galaxy.requirement;
       this.requirement.amount.copyFrom(requirement.amount);
       this.requirement.tier = requirement.tier;
