@@ -237,10 +237,10 @@ window.generatePlural = function generatePlural(word) {
  * @return {string} - the formatted {value} followed by the {name} after having been pluralized based on the {value}
  */
 // eslint-disable-next-line max-params
-window.quantify = function quantify(name, value, places, placesUnder1000, formatType = format) {
+window.quantify = function quantify(name, value, places, placesUnder1000, bypassEND = false, formatType = format) {
   if (name === undefined || value === undefined) throw "Arguments must be defined";
 
-  const number = formatType(value, places, placesUnder1000);
+  const number = formatType(value, places, placesUnder1000, bypassEND);
   const plural = pluralize(name, value);
   return `${number} ${plural}`;
 };
@@ -251,10 +251,10 @@ window.quantify = function quantify(name, value, places, placesUnder1000, format
  * @param  {number|Decimal} value         - number to format
  * @return {string} - the formatted {value} followed by the {name} after having been pluralized based on the {value}
  */
-window.quantifyInt = function quantifyInt(name, value) {
+window.quantifyInt = function quantifyInt(name, value, bypassEND = false) {
   if (name === undefined || value === undefined) throw "Arguments must be defined";
 
-  const number = formatInt(value);
+  const number = formatInt(value, bypassEND);
   const plural = pluralize(name, value);
   return `${number} ${plural}`;
 };
