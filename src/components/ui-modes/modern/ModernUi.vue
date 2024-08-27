@@ -4,6 +4,11 @@ import HeaderBlackHole from "../HeaderBlackHole";
 import HeaderChallengeDisplay from "../HeaderChallengeDisplay";
 import HeaderChallengeEffects from "../HeaderChallengeEffects";
 import HeaderPrestigeGroup from "../HeaderPrestigeGroup";
+
+import MendingButton from "../prestige-header/MendingButton";
+
+import MendingPointsHeader from "../../MendingPointsHeader";
+
 import NewsTicker from "../NewsTicker";
 
 import GameSpeedDisplay from "@/components/GameSpeedDisplay";
@@ -19,12 +24,15 @@ export default {
     HeaderBlackHole,
     HeaderPrestigeGroup,
     GameSpeedDisplay,
+    MendingButton,
+    MendingPointsHeader
   },
   data() {
     return {
       bigCrunch: false,
       hasReality: false,
       newGameKey: "",
+      hasMend: false
     };
   },
   computed: {
@@ -40,6 +48,7 @@ export default {
       const crunchButtonVisible = !player.break && Player.canCrunch;
       this.bigCrunch = crunchButtonVisible && Time.bestInfinityRealTime.totalMinutes.gt(1);
       this.hasReality = PlayerProgress.realityUnlocked();
+      this.hasMend = PlayerProgress.mendingUnlocked();
       // This only exists to force a key-swap after pressing the button to start a new game; the news ticker can break
       // if it isn't redrawn
       this.newGameKey = Pelle.isDoomed;
@@ -67,6 +76,8 @@ export default {
       <NewsTicker
         v-if="news"
       />
+      <MendingPointsHeader v-if="hasMend" />
+      <MendingButton v-if="hasMend" />
       <BigCrunchButton />
       <div
         v-if="!bigCrunch"

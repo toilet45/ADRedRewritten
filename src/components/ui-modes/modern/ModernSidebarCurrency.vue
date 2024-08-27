@@ -177,4 +177,8 @@ export default {
 .o-sidebar-currency--pelle {
   color: var(--color-pelle--base);
 }
+
+.o-sidebar-currency--mending-points {
+  color: var(--color-mending);
+}
 </style>

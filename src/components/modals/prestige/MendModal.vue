@@ -2,33 +2,32 @@
 import ResetModal from "@/components/modals/prestige/ResetModal";
 
 export default {
-  name: "EternityModal",
+  name: "MendModal",
   components: {
     ResetModal
   },
   data() {
     return {
-      gainedEternityPoints: new Decimal(),
-      gainedEternities: new Decimal()
+      gainedMultiversalRemains: new Decimal(),
+      gainedMends: new Decimal()
     };
   },
   computed: {
     message() {
-      return PlayerProgress.mendingUnlocked()
-        ? `Mending will reset everything except Challenge records, and anything under the General header on the
-          Statistics tab.`
-        : `Mending will reset everything except Challenge records, and anything under the General header on the
-          Statistics tab. You will also gain a Multiversal Remain and unlock various upgrades.`;
+      return `Mending this Multiverse will reset everything except Challenge records, and anything under 
+      the General header on the Statistics tab 
+      (except total Antimatter). ${PlayerProgress.mendingUnlocked() ? `` : `You will 
+      also gain a Multiversal Remain and unlock various upgrades.`}`;
     },
-    gainedEPOnEternity() {
-      return `You will gain ${quantify("Mend", this.gainedEternities, 2)} 
-      and ${quantify("Multiversal Remain", this.gainedEternityPoints, 2)} on Mend.`;
+    gainedMvROnMend() {
+      return `You will gain ${quantify("Mend", this.gainedMends, 0, 0, true)} 
+      and ${quantify("Multiversal Remain", this.gainedMultiversalRemains, 0, 0, true)} on Mend.`;
     },
   },
   methods: {
     update() {
-      this.gainedMultiversalRemains = gainedMultiversalRemains();
-      this.gainedMends = gainedEternities();
+      this.gainedMultiversalRemains = adRedGainedMendingPoints();
+      this.gainedMends = adRedGainedMends();
     },
     handleYesClick() {
       mendingReset();
@@ -40,9 +39,9 @@ export default {
 
 <template>
   <ResetModal
-    header="You are about to Mend the Multiverse"
+    header="You are about to Mend this Multiverse"
     :message="message"
-    :gained-resources="gainedEPOnEternity"
+    :gained-resources="gainedMvROnMend"
     :confirm-fn="handleYesClick"
     confirm-option="mend"
   />

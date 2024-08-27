@@ -435,7 +435,10 @@ export const migrations = {
       player.celestials.enslaved.expanded = false;
       player.celestials.laitela.damaged = false;
       player.celestials.pelle.hyper = false;
-    }
+    },
+    100.02: player => {
+      player.options.confirmations.mend = true;
+    },
   },
 
   normalizeTimespans(player) {

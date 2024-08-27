@@ -49,7 +49,7 @@ export const GameEnd = {
     if (!this.removeAdditionalEnd && this.endState >= END_STATE_MARKERS.GAME_END &&
         ui.$viewModel.modal.progressBar === undefined) {
       player.isGameEnd = true;
-      this.additionalEnd += 20 * Math.min(diff / 1000 / 20, 0.1);
+      this.additionalEnd += this.additionalEnd >= 3 ? 25 * Math.min(diff / 1000 / 20, 0.1) : Math.min(diff / 1000 / 20, 0.1);
     }
   }
 };

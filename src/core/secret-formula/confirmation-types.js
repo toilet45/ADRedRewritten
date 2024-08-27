@@ -58,7 +58,7 @@ export const confirmationTypes = [
   }, {
     name: "Glyph Selection",
     option: "glyphSelection",
-    isUnlocked: () => Autobuyer.reality.isUnlocked,
+    isUnlocked: () => Autobuyer.reality.isUnlocked || PlayerProgress.mendingUnlocked(),
   }, {
     name: "Glyph Undo",
     option: "glyphUndo",

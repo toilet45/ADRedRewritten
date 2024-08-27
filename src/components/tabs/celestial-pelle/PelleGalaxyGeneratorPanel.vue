@@ -130,7 +130,7 @@ export default {
               v-else
               class="c-increase-cap-text c-medium-text"
             >
-              {{ format(generatedGalaxies, 2) }} / {{ format(cap, 2) }} Galaxies generated
+              {{ format(generatedGalaxies, 2) }} <span v-if="isCapped">/ {{ format(cap, 2) }}</span> Galaxies generated
             </div>
           </button>
         </div>

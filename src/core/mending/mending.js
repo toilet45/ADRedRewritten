@@ -8,7 +8,13 @@ export function isMendingAvailable() {
 
 export function mendingResetRequest() {
   if (!isMendingAvailable()) return;
-  mendingReset();
+  askMendingConfirmation();
+}
+
+export function askMendingConfirmation() {
+  if (player.options.confirmations.mend) {
+    Modal.mending.show();
+  } else mendingReset();
 }
 
 function getGlyphTypes() {

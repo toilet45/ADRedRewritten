@@ -18,6 +18,7 @@ import EternityModal from "@/components/modals/prestige/EternityModal";
 import ExitChallengeModal from "@/components/modals/prestige/ExitChallengeModal";
 import ExitDilationModal from "@/components/modals/prestige/ExitDilationModal";
 import HardResetModal from "@/components/modals/prestige/HardResetModal";
+import MendModal from "@/components/modals/prestige/MendModal";
 import RealityModal from "@/components/modals/prestige/RealityModal";
 import ReplicantiGalaxyModal from "@/components/modals/prestige/ReplicantiGalaxyModal";
 import ResetRealityModal from "@/components/modals/prestige/ResetRealityModal";
@@ -272,6 +273,8 @@ Modal.sacrifice = new Modal(SacrificeModal, 1, GAME_EVENT.DIMBOOST_AFTER);
 Modal.breakInfinity = new Modal(BreakInfinityModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
 
 Modal.s12Games = new Modal(S12GamesModal);
+
+Modal.mending = new Modal(MendModal);
 
 function getSaveInfo(save) {
   const resources = {

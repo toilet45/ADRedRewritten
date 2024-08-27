@@ -131,4 +131,12 @@ export const sidebarResources = [
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--pelle",
   },
+  {
+    id: 17,
+    optionName: "Multiversal Remains",
+    isAvailable: () => PlayerProgress.mendingUnlocked(),
+    value: () => Currency.mendingPoints,
+    formatValue: x => format(x, 2),
+    formatClass: "o-sidebar-currency--mending-points",
+  },
 ];

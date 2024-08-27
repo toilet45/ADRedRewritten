@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     willHardReset() {
-      return this.input === "Shrek is love, Shrek is life";
+      return this.input === "Lai'tela is a hot dommy mommy";
     },
     hasExtraNG() {
       return player.records.fullGameCompletions > 0;
@@ -47,7 +47,7 @@ export default {
     <div class="c-modal-message__text">
       Please confirm your desire to hard reset this save slot.
       <span class="c-modal-hard-reset-danger">Deleting your save will not unlock anything secret.</span>
-      Type in "Shrek is love, Shrek is life" to confirm.
+      Type in "Lai'tela is a hot dommy mommy" to confirm.
       <div class="c-modal-hard-reset-danger">
         THIS WILL WIPE YOUR SAVE.
         <span v-if="hasExtraNG">

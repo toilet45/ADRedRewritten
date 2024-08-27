@@ -201,9 +201,6 @@ export default {
         You will regain all remaining achievements after {{ timeDisplayNoDecimals(totalCountdown) }} if Auto
         Achievement <span v-if="isAutoAchieveActive">stays enabled</span><span v-else>is turned on</span>.
       </div>
-      <div v-if="hasMended">
-        For Mending the Multiverse, the Auto Achievement timer no longer resets on Reality.
-      </div>
       <br>
     </div>
     <div class="l-achievement-grid">

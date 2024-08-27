@@ -34,7 +34,7 @@ export default {
 
 <template>
   <div class="l-mend-milestone-grid">
-    <div>You have {{ quantify("Mend", mendCount, 3) }}.</div>
+    <div>You have Mended this Multiverse {{ quantify("time", mendCount, 3) }}.</div>
     <div
       v-for="row in rows"
       :key="row"

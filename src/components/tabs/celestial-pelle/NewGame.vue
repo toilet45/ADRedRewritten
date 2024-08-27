@@ -43,22 +43,26 @@ export default {
     :style="style"
   >
     <h2>
-      Reset the entire game, but keep Automator Scripts, Study Presets, Secret Themes, Secret Achievements, Options,
-      and Companion Glyph.
+      What have we done...<br>
+      We've won, but at what cost...<br>
+      Surely there has to be another way
     </h2>
-    <h3>You can use the button in the top-right to view the game as it is right now.</h3>
+    <h3>You can use the button in the top-right to view the Galaxy Generator aftermath.</h3>
     <div class="c-new-game-button-container">
       <button
-        class="c-new-game-button"
+        class="o-mend-button o-mend-prestige-button"
         @click="mend"
       >
-        Mend the Multiverse
+        There is another way...<br>
+        You must Mend this Multiverse!
       </button>
+      <br>
     </div>
     <br>
     <h3 v-if="hasMoreCosmetics">
-      For completing the game, you also unlock a new cosmetic set of your choice for Glyphs. These are freely
-      modifiable once you reach Reality again, but are purely visual and offer no gameplay bonuses.
+      For getting to this point, you also unlock a new cosmetic set of your choice for Glyphs. These are freely
+      modifiable once you reach Reality again, but are purely visual and offer no gameplay bonuses. (hopefully this
+      actually works this time)
       <br>
       <button
         class="c-new-game-button"
@@ -74,9 +78,11 @@ export default {
       You have unlocked all Glyph cosmetic sets!
     </h3>
     <br>
-    <h3>
+    <!--
+      <h3>
       You can also import "speedrun" to start the game again with additional tracking for speedrunning purposes.
-    </h3>
+      </h3>
+    -->
   </div>
 </template>
 

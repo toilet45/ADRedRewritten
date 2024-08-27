@@ -818,7 +818,7 @@ window.player = {
       includeAnimated: true,
     },
     notation: "Mixed scientific",
-    lnotation: "Stacked Scientific",
+    lnotation: "Extended Logarithm",
     notationDigits: {
       comma: 5,
       notation: 9
@@ -910,7 +910,8 @@ window.player = {
       antimatterGalaxy: true,
       dimensionBoost: true,
       switchAutomatorMode: true,
-      respecIAP: true
+      respecIAP: true,
+      mend: true
     },
     awayProgress: {
       antimatter: true,

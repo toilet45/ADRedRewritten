@@ -2158,6 +2158,67 @@ br {
 
 /* #endregion o-prestige-btn */
 
+/* #region o-mending-prestige-button*/
+
+.o-mend-button {
+  font-weight: bold;
+  color: var(--color-mending);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-mending);
+}
+
+.o-mend-button:hover {
+  color: black;
+  background-color: var(--color-mending);
+}
+
+.o-mend-button span {
+  transition-duration: 0.2s;
+}
+
+.o-mend-button:hover span {
+  color: black;
+}
+
+.t-metro .o-mend-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.o-mend-button--unavailable {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.c-mend-prestige-button-container {
+  display: flex;
+  flex-direction: column;
+  height: 14rem;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+}
+
+.o-mend-prestige-button {
+  width: 30rem;
+  height: 6rem;
+  font-family: Typewriter, serif;
+  font-size: 1.1rem;
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.o-mend-prestige-button br {
+  pointer-events: none;
+}
+
+.o-mend-prestige-button b {
+  pointer-events: none;
+}
+
+/* #endregion o-mending-prestige-button*/
+
 /* #region l-spoon-btn-group */
 
 .l-spoon-btn-group {

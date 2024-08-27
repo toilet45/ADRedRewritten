@@ -83,7 +83,7 @@ export default {
 }
 
 .o-mend-milestone__reward {
-  width: 25rem;
+  width: 35rem;
   height: 8rem;
   font-family: Typewriter, serif;
   font-size: 1.2rem;

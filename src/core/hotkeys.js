@@ -340,6 +340,12 @@ export const shortcuts = [
     type: "bind",
     function: () => ElectronRuntime.resetZoom(),
     visible: () => false
+  }, {
+    name: "Mend the Multiverse",
+    keys: ["n"],
+    type: "bindHotkey",
+    function: () => mendingResetRequest(),
+    visible: () => PlayerProgress.mendingUnlocked()
   },
 ];
 

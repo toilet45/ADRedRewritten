@@ -510,7 +510,7 @@ export const tabs = [
       {
         key: "upgrades",
         name: "Mending Upgrades",
-        symbol: "?",
+        symbol: "<i class='fas fa-arrow-up'></i>",
         component: "MendingUpgradesTab",
         id: 0,
         hidable: true
@@ -518,7 +518,7 @@ export const tabs = [
       {
         key: "milestones",
         name: "Mending Milestones",
-        symbol: "?",
+        symbol: "<i class='fas fa-star'></i>",
         component: "MendingMilestonesTab",
         id: 1,
         hidable: true

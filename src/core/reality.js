@@ -862,5 +862,6 @@ function lockAchievementsOnReality() {
     for (let i = 0; i < achKeep.length; i++) {
       Achievement(achKeep[i]).unlock();
     }
-  } else player.reality.achTimer = DC.D0;
+  }
+  player.reality.achTimer = DC.D0;
 }

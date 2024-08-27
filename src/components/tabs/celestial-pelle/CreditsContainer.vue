@@ -63,7 +63,7 @@ export default {
   methods: {
     update() {
       const height = (this.$refs.creditsDisplay?.offsetHeight || 0) + innerHeight;
-      this.rolling = GameEnd.endState > END_STATE_MARKERS.CREDITS_START;
+      this.rolling = false;
       this.scroll = (
         Math.clampMax(GameEnd.endState, END_STATE_MARKERS.CREDITS_END) - END_STATE_MARKERS.CREDITS_START
       ) / (END_STATE_MARKERS.SONG_END - END_STATE_MARKERS.CREDITS_START) * height;
