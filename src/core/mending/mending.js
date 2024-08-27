@@ -176,6 +176,7 @@ export function mendingReset() {
 
   Currency.infinities.reset();
   Currency.infinitiesBanked.reset();
+  if (MendingMilestone.two.isReached) Currency.infinitiesBanked.bumpTo(1e7);
 
   player.dimensionBoosts = DC.D0;
   player.galaxies = DC.D0;
@@ -192,6 +193,7 @@ export function mendingReset() {
   // This has to be reset before Currency.eternities to make the bumpLimit logic work correctly
   EternityUpgrade.epMult.reset();
   Currency.eternities.reset();
+  if (MendingMilestone.two.isReached) Currency.eternities.bumpTo(50000);
   player.bankedEternities = DC.D0;
   player.eternityUpgrades.clear();
   player.totalTickGained = DC.D0;

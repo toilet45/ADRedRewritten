@@ -637,6 +637,7 @@ export function finishProcessReality(realityProps) {
 
   Currency.infinities.reset();
   Currency.infinitiesBanked.reset();
+  if (MendingMilestone.two.isReached) Currency.infinitiesBanked.bumpTo(1e7);
   player.records.bestInfinity.time = DC.BEMAX;
   player.records.bestInfinity.realTime = DC.BEMAX;
   player.records.thisInfinity.time = DC.D0;
@@ -657,6 +658,7 @@ export function finishProcessReality(realityProps) {
   // This has to be reset before Currency.eternities to make the bumpLimit logic work correctly
   EternityUpgrade.epMult.reset();
   if (!PelleUpgrade.eternitiesNoReset.canBeApplied) Currency.eternities.reset();
+  if (MendingMilestone.two.isReached) Currency.eternities.bumpTo(50000);
   player.records.thisEternity.time = DC.D0;
   player.records.thisEternity.realTime = DC.D0;
   player.records.bestEternity.time = DC.BEMAX;
