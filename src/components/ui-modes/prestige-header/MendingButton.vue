@@ -29,7 +29,7 @@ export default {
       this.mendGoal = new Decimal(MendingMilestone.six.isUnlocked ? "1e5e14" : "1e9e15");
       this.creditsClosed = GameEnd.creditsEverClosed;
 
-      const gainedMvR = adRedGainedMendingPoints();
+      const gainedMvR = gainedMendingPoints();
       this.currentMvR.copyFrom(Currency.mendingPoints);
       this.gainedMvR.copyFrom(gainedMvR);
       this.currentMvRRate.copyFrom(gainedMvR.div(Decimal.max(0.0005, Time.thisMendRealTime.totalMinutes)));

@@ -57,20 +57,20 @@ function updateMendingRecords(MvRgain) {
 export function mendingReset() {
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_BEFORE);
   // Do this first so we can do records and stuff based on stats, without fucking anything over
-  Currency.mendingPoints.add(adRedGainedMendingPoints());
-  Currency.mends.add(adRedGainedMends());
+  Currency.mendingPoints.add(gainedMendingPoints());
+  Currency.mends.add(gainedMends());
   player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
     .mul(MendingUpgrade(7).effects.realities));
-  updateMendingRecords(adRedGainedMendingPoints());
+  updateMendingRecords(gainedMendingPoints());
   addMendingTime(
     Time.thisMendTrueTime,
     Time.thisMendTime,
     Time.thisMendRealTime,
     player.reality.realityMachines,
     player.records.bestReality.glyphLevel,
-    adRedGainedMendingPoints(),
+    gainedMendingPoints(),
     MachineHandler.currentIMCap,
-    adRedGainedMendingPoints()
+    gainedMendingPoints()
   );
 
   // Begin resetting the things
@@ -333,12 +333,12 @@ export function mendingReset() {
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 
-export function adRedGainedMendingPoints() {
+export function gainedMendingPoints() {
   const x = DC.D1;
   return x;
 }
 
-export function adRedGainedMends() {
+export function gainedMends() {
   const x = DC.D1;
   return x;
 }

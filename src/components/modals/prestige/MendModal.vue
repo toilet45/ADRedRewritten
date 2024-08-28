@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-      gainedMultiversalRemains: new Decimal(),
+      gainedMendingPoints: new Decimal(),
       gainedMends: new Decimal()
     };
   },
@@ -21,13 +21,13 @@ export default {
     },
     gainedMvROnMend() {
       return `You will gain ${quantify("Mend", this.gainedMends, 0, 0, true)} 
-      and ${quantify("Multiversal Remain", this.gainedMultiversalRemains, 0, 0, true)} on Mend.`;
+      and ${quantify("Multiversal Remain", this.gainedMendingPoints, 0, 0, true)} on Mend.`;
     },
   },
   methods: {
     update() {
-      this.gainedMultiversalRemains = adRedGainedMendingPoints();
-      this.gainedMends = adRedGainedMends();
+      this.gainedMendingPoints = gainedMendingPoints();
+      this.gainedMends = gainedMends();
     },
     handleYesClick() {
       mendingReset();

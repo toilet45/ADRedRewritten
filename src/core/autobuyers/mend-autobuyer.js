@@ -80,12 +80,12 @@ export class MendAutobuyerState extends AutobuyerState {
   get willMend() {
     switch (this.mode) {
       case AUTO_MEND_MODE.AMOUNT:
-        return adRedGainedMendingPoints().gte(this.amount);
+        return gainedMendingPoints().gte(this.amount);
       case AUTO_MEND_MODE.TIME:
         return Time.thisMendRealTime.totalSeconds.toNumber() > this.time;
       case AUTO_MEND_MODE.X_HIGHEST:
       default:
-        return adRedGainedMendingPoints().gte(this.highestPrevPrestige.times(this.xHighest));
+        return gainedMendingPoints().gte(this.highestPrevPrestige.times(this.xHighest));
     }
   }
 
