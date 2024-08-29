@@ -6,6 +6,9 @@ import HeaderChallengeEffects from "../HeaderChallengeEffects";
 import HeaderPrestigeGroup from "../HeaderPrestigeGroup";
 import NewsTicker from "../NewsTicker";
 
+import MendingButton from "../prestige-header/MendingButton";
+import MendingPointsHeader from "../../MendingPointsHeader";
+
 import BackgroundAnimations from "@/components/BackgroundAnimations";
 import GameUiComponentFixed from "@/components/GameUiComponentFixed";
 
@@ -27,6 +30,8 @@ export default {
 
     GameUiComponentFixed,
     BackgroundAnimations,
+    MendingButton,
+    MendingPointsHeader
   },
   data() {
     return {
@@ -35,6 +40,7 @@ export default {
       newGameKey: "",
       tabName: "",
       S12Windows,
+      hasMend: false
     };
   },
   computed: {
@@ -57,6 +63,7 @@ export default {
       // if it isn't redrawn
       this.newGameKey = Pelle.isDoomed;
       this.tabName = Tabs.current[this.$viewModel.subtab].name;
+      this.hasMend = PlayerProgress.mendingUnlocked();
     },
   },
 };
@@ -92,6 +99,8 @@ export default {
         <NewsTicker
           v-if="news"
         />
+        <MendingPointsHeader v-if="hasMend" />
+        <MendingButton v-if="hasMend" />
         <BigCrunchButton />
         <div
           v-if="!bigCrunch"

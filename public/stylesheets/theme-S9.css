@@ -47,7 +47,8 @@
 }
 
 .o-big-crunch-button:hover span,
-.o-eternity-button:hover span {
+.o-eternity-button:hover span, 
+.o-mend-button:hover span {
   color: transparent !important;
 }
 

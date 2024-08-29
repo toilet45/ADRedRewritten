@@ -172,6 +172,7 @@ export function mendingReset() {
   player.blackHoleAutoPauseMode = 0;
   player.blackHolePauseTime = DC.D0;
   player.blackHoleNegative = DC.D1;
+  player.records.timePlayedAtBHUnlock = DC.D0;
   Player.resetRequirements("infinity");
   Player.resetRequirements("eternity");
   Player.resetRequirements("reality");

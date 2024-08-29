@@ -2113,6 +2113,15 @@ br {
   border-color: black;
 }
 
+.t-s1 .o-mend-button:hover span {
+  color: var(--color-text);
+}
+
+.t-s1 .o-mend-button:hover {
+  color: black;
+  border-color: black;
+}
+
 .t-metro .o-eternity-button {
   box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
 }

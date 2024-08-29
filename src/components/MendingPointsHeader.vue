@@ -44,7 +44,10 @@ export default {
 .t-dark .c-mending-tab__mending-points,
 .t-s6 .c-mending-tab__mending-points,
 .t-s10 .c-mending-tab__mending-points {
-  color: white;
   text-shadow: 0 0 0.7rem;
+}
+
+.t-s1 .c-mending-tab__mending-points {
+  text-shadow: 0.1rem 0.1rem 0 black;
 }
 </style>

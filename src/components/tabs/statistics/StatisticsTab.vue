@@ -371,7 +371,7 @@ export default {
         You will gain no Banked Eternities on Reality.
       </div>
       <div
-        v-if="reality.hasbest"
+        v-if="reality.hasBest"
       >
         <div>Your fastest game-time Reality was {{ reality.best.toStringShort() }}.</div>
         <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
