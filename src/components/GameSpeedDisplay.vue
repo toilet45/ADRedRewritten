@@ -51,7 +51,7 @@ export default {
       this.isPulsing = this.baseSpeed.neq(this.pulsedSpeed) && Enslaved.canRelease(true);
       this.hasDevSpeed = dev.speedUp !== 1;
       this.currentDevSpeed = new Decimal(dev.speedUp);
-      this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning;
+      this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
     },
     formatNumber(num) {
       if (num.gte(0.001) && num.lt(1e4) && num.neq(1)) {

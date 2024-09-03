@@ -1,5 +1,7 @@
 import Mousetrap from "mousetrap";
 
+import { DEV } from "../env";
+
 import { ElectronRuntime } from "@/steam";
 
 import { GameKeyboard } from "./keyboard";
@@ -346,6 +348,13 @@ export const shortcuts = [
     type: "bindHotkey",
     function: () => mendingResetRequest(),
     visible: () => PlayerProgress.mendingUnlocked()
+  },
+  {
+    name: "[DEV] Modify Testing Speed",
+    keys: ["q"],
+    type: "bindHotkey",
+    function: () => Modal.speedUp.show(),
+    visible: () => DEV
   },
 ];
 

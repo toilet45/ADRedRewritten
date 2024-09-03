@@ -77,7 +77,7 @@ export default {
         long was the speed up effecitvely.
       </div>
       <div class="c-modal-hard-reset-danger">
-        This speed up will affect EVERYTHING except Eternity Challenge 12 or if Matter generates (NC11, IC1, IC6)
+        This speed up will affect EVERYTHING except (NC11, IC1, IC6, IC8, and EC12)
         (Singularities are not guaranteed to be affected by this)
       </div>
       <input
