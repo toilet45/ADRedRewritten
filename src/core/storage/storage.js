@@ -522,7 +522,8 @@ export const GameStorage = {
     AutomatorBackend.initializeFromSave();
     Lazy.invalidateAll();
 
-    const rawDiff = (Date.now() - player.lastUpdate) * (dev.speedUp ?? 1);
+    const rawDiff = (Date.now() - player.lastUpdate);
+    // * (dev.speedUp ?? 1);
     // We set offlineEnabled externally on importing or loading a backup; otherwise this is just a local load
     const simulateOffline = this.offlineEnabled ?? player.options.offlineProgress;
     if (simulateOffline && !Speedrun.isPausedAtStart()) {

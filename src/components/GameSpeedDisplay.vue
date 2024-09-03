@@ -11,6 +11,9 @@ export default {
       isStopped: false,
       isEC12: false,
       isPulsing: false,
+      hasDevSpeed: false,
+      currentDevSpeed: new Decimal(),
+      inMatterChallenge: false
     };
   },
   computed: {
@@ -32,7 +35,11 @@ export default {
       return this.baseSpeed.eq(1)
         ? "The game is running at normal speed."
         : `Game speed is altered: ${this.baseSpeedText}`;
-    }
+    },
+    devSpeedText() {
+      const devSpeed = this.formatNumber(this.currentDevSpeed);
+      return this.isEC12 || this.inMatterChallenge ? `TESTING SPEED HAS NO EFFECT` : `TESTING SPEED IS MODIFIED: ${devSpeed}`;
+    },
   },
   methods: {
     update() {
@@ -42,6 +49,9 @@ export default {
       this.isStopped = Enslaved.isStoringRealTime;
       this.isEC12 = EternityChallenge(12).isRunning;
       this.isPulsing = this.baseSpeed.neq(this.pulsedSpeed) && Enslaved.canRelease(true);
+      this.hasDevSpeed = dev.speedUp !== 1;
+      this.currentDevSpeed = new Decimal(dev.speedUp);
+      this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning;
     },
     formatNumber(num) {
       if (num.gte(0.001) && num.lt(1e4) && num.neq(1)) {
@@ -62,6 +72,7 @@ export default {
       {{ baseText }}
     </span>
     <span v-if="isPulsing">(<i class="fas fa-expand-arrows-alt u-fa-padding" /> {{ pulseSpeedText }})</span>
+    <span v-if="hasDevSpeed"><b class="c-devspeed"> {{ devSpeedText }} </b></span>
   </span>
 </template>
 
@@ -69,5 +80,10 @@ export default {
 .c-gamespeed {
   font-weight: bold;
   color: var(--color-text);
+}
+
+.c-devspeed {
+  font-weight: bold;
+  color: #258b25;
 }
 </style>

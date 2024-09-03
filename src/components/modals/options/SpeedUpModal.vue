@@ -33,7 +33,7 @@ export default {
       if (this.speedUp === 1) {
         if ((dev.speedUp ?? 1) === 1) return;
         Modal.speedUpReport.show();
-        delete dev.speedUp;
+        dev.speedUp = 1;
         return;
       }
       if ((dev.speedUp ?? 1) === 1) {
@@ -47,7 +47,7 @@ export default {
     },
     handleSpeedUpInput() {
       const speedUp = parseFloat(this.input);
-      if (!isFinite(speedUp) || isNaN(speedUp) || speedUp < 0 || speedUp > 100) {
+      if (!isFinite(speedUp) || isNaN(speedUp) || speedUp <= 0 || speedUp > 1e300) {
         this.displayText = "Invalid speed";
         this.isValidSpeed = false;
       } else {
@@ -73,11 +73,12 @@ export default {
     <div>
       <div>
         Set game speed up for testing purposes.
-        A report will be displayed after settings the speed up back to 1 informing how
+        A report will be displayed after setting the speed up back to 1 informing how
         long was the speed up effecitvely.
       </div>
       <div class="c-modal-hard-reset-danger">
-        This speed up will affect EVERYTHING(Singularities is not guaranteed to be affected by this)
+        This speed up will affect EVERYTHING except Eternity Challenge 12 or if Matter generates (NC11, IC1, IC6)
+        (Singularities are not guaranteed to be affected by this)
       </div>
       <input
         ref="input"
