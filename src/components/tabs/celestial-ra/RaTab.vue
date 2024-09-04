@@ -85,7 +85,7 @@ export default {
   methods: {
     update() {
       this.memoriesPerChunk.copyFrom(Ra.productionPerMemoryChunk);
-      this.isRaCapped = Ra.totalPetLevel === 100;
+      this.isRaCapped = Ra.totalPetLevel === (MendingUpgrade(19).isBought ? 700 : 100);
       this.totalLevels = Ra.totalPetLevel;
       this.showRemembrance = Ra.unlocks.effarigUnlock.canBeApplied;
       this.hasRemembrance = Ra.remembrance.isUnlocked;

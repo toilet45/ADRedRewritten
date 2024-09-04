@@ -35,6 +35,8 @@ export default {
       currentChunkMult: new Decimal(),
       nextMemoryUpgradeEstimate: "",
       nextMemoryChunkUpgradeEstimate: "",
+      maxMU19Level: 0,
+      mu19bought: false,
     };
   },
   computed: {
@@ -65,6 +67,15 @@ export default {
     memoryGainTooltip() {
       return `Based on ${this.pet.memoryGain}`;
     },
+    highestNotRaLevel() {
+      if (Ra.pets.ra.level === 100) return 7;
+      if (Ra.pets.ra.level >= 65) return 6;
+      if (Ra.pets.ra.level >= 40) return 5;
+      if (Ra.pets.ra.level >= 15) return 3;
+      if (Ra.pets.ra.level >= 8) return 2;
+      if (Ra.pets.ra.level >= 2) return 1;
+      return 0;
+    }
   },
   methods: {
     update() {
@@ -87,6 +98,8 @@ export default {
       this.chunkUpgradeCapped = pet.chunkUpgradeCapped;
       this.currentMemoryMult.copyFrom(pet.memoryUpgradeCurrentMult);
       this.currentChunkMult = pet.chunkUpgradeCurrentMult;
+      this.mu19Bought = MendingUpgrade(19).isBought;
+      this.maxMU19Level = pet.id === "ra" ? 7 : this.highestNotRaLevel();
 
       this.nextMemoryUpgradeEstimate = Ra.timeToGoalString(pet, this.memoryUpgradeCost.sub(this.memories));
       this.nextMemoryChunkUpgradeEstimate = Ra.timeToGoalString(pet, this.chunkUpgradeCost.sub(this.memories));
@@ -277,7 +290,17 @@ export default {
       <div class="l-ra-pet-milestones">
         <!-- This choice of key forces a UI update every level up -->
         <RaUpgradeIcon
-          v-for="(unlock, i) in unlocks"
+          v-for="(unlock, i) in unlocks.slice(0, 7)"
+          :key="25 * level + i"
+          :unlock="unlock"
+        />
+      </div>
+      <div
+        v-if="mu19Bought"
+        class="l-ra-pet-milestones"
+      >
+        <RaUpgradeIcon
+          v-for="(unlock, i) in unlocks.slice(7, maxMU19Level + 7)"
           :key="25 * level + i"
           :unlock="unlock"
         />
