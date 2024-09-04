@@ -1,8 +1,7 @@
 <script>
 import PseudoTimeStudyButton from "./PseudoTimeStudyButton";
 import PseudoTimeStudyConnection from "./PseudoTimeStudyConnection";
-
-import { STUDY_TREE_LAYOUT_TYPE, TimeStudyTreeLayout } from "@/components/tabs/time-studies/time-study-tree-layout";
+import TimeStudyTreeLayout from "@/components/tabs/time-studies/time-study-tree-layout";
 
 export const ForceBoughtState = {
   notBought: 0,
@@ -82,7 +81,7 @@ export default {
   },
   methods: {
     update() {
-      this.layoutType = STUDY_TREE_LAYOUT_TYPE.current;
+      this.layoutType = TimeStudyTreeLayout.current;
       this.vLevel = Ra.pets.v.level;
       this.isEnslaved = Enslaved.isRunning || Date.now() - this.delayTimer < 1000;
     },

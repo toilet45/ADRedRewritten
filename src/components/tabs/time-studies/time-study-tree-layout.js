@@ -30,7 +30,7 @@ class TimeStudyRowLayout {
   }
 }
 
-export class TimeStudyTreeLayout {
+export default class TimeStudyTreeLayout {
   // eslint-disable-next-line complexity
   constructor(type, scaling = 1) {
     this.spacing = 4 * scaling;
@@ -207,23 +207,20 @@ export class TimeStudyTreeLayout {
     return heightNoSpacing + rows.length * this.spacing;
   }
 
-  static create(type, scaling = 1) {
-    if (this._instances === undefined) {
-      this._instances = [];
-    }
-    const layout = new TimeStudyTreeLayout(type, scaling);
-    this._instances[`${type}__${scaling}`] = layout;
-    return layout;
-  }
-}
-
-export const STUDY_TREE_LAYOUT_TYPE = {
-  get current() {
+  static get current() {
     return {
       alt62: Perk.bypassEC5Lock.isBought,
       alt181: Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought,
       triad: Ra.canBuyTriad,
-      mu9: MendingUpgrade(9).isBought
     };
   }
-};
+
+  static create(type, scaling = 1) {
+    if (this._instances === undefined) {
+      this._instances = {};
+    }
+    const layout = new TimeStudyTreeLayout(type, scaling);
+    this._instances[`${Object.keys(type).filter(x => type[x]).join("")}__${scaling}`] = layout;
+    return layout;
+  }
+}
