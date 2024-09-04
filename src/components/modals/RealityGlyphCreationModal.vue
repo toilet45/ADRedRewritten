@@ -24,8 +24,8 @@ export default {
         .filter(eff => eff.glyphTypes.includes("reality"))
         .sort((a, b) => a.intID - b.intID);
       const minRealityEffectIndex = realityEffectConfigs.map(cfg => cfg.intID).min();
-      this.possibleEffects = realityEffectConfigs
-        .map(cfg => [realityGlyphEffectLevelThresholds[cfg.intID - minRealityEffectIndex], cfg.id]);
+      this.possibleEffects = [[0, "realityglyphlevel"], [9000, "realitygalaxies"], [15000, "realityrow1pow"], [25000, "realityDTglyph"]];/*realityEffectConfigs
+        .map(cfg => [realityGlyphEffectLevelThresholds[cfg.intID - minRealityEffectIndex], cfg.id]);*/
     },
     createRealityGlyph() {
       if (GameCache.glyphInventorySpace.value === 0) {

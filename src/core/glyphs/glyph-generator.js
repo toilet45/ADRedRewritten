@@ -134,20 +134,21 @@ export const GlyphGenerator = {
   realityGlyph(level) {
     const str = rarityToStrength(100);
     const effects = this.generateRealityEffects(level);
+    const rgLevel = AlchemyResource.reality.effectValue;
     return {
       id: undefined,
       idx: null,
       type: "reality",
       strength: str,
-      level,
-      rawLevel: level,
+      level: rgLevel,
+      rawLevel: rgLevel,
       effects,
     };
   },
 
   cursedGlyph() {
     const str = rarityToStrength(100);
-    const effects = GlyphInfo.cursed.effects();
+    const effects = ["cursedgalaxies", "curseddimensions", "cursedtickspeed", "cursedEP"]; //GlyphInfo.cursed.effects();
     return {
       id: undefined,
       idx: null,
