@@ -135,8 +135,8 @@ export const mendingUpgrades = [
     name: "10",
     id: 10,
     cost: new Decimal("25"),
-    description: () => `Free Tickspeed cost scaling starts at ${formatInt(2e6)} Upgrades`,
-    effect: () => DC.D2E6
+    description: () => `Free Tickspeed cost scaling starts at ${formatInt(1.9e6)} Upgrades`,
+    effect: () => new Decimal(1900000)
   },
   rebuyable({
     name: "11",

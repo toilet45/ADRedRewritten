@@ -21,7 +21,7 @@ export default {
       if (this.isStopped) {
         return "Stopped (storing real time)";
       }
-      const speed = this.formatNumber(this.baseSpeed);
+      const speed = this.formatNumber(this.baseSpeed.div(this.isEC12 ? 1 : this.currentDevSpeed));
       if (this.isEC12) {
         return `${speed} (fixed)`;
       }
@@ -32,7 +32,7 @@ export default {
     },
     baseText() {
       if (!this.hasSeenAlteredSpeed) return null;
-      return this.baseSpeed.eq(1)
+      return this.baseSpeed.div(this.currentDevSpeed).eq(1)
         ? "The game is running at normal speed."
         : `Game speed is altered: ${this.baseSpeedText}`;
     },
@@ -48,7 +48,7 @@ export default {
       this.hasSeenAlteredSpeed = PlayerProgress.seenAlteredSpeed();
       this.isStopped = Enslaved.isStoringRealTime;
       this.isEC12 = EternityChallenge(12).isRunning;
-      this.isPulsing = this.baseSpeed.neq(this.pulsedSpeed) && Enslaved.canRelease(true);
+      this.isPulsing = this.baseSpeed.neq(this.pulsedSpeed.times(this.currentDevSpeed)) && Enslaved.canRelease(true);
       this.hasDevSpeed = dev.speedUp !== 1;
       this.currentDevSpeed = new Decimal(dev.speedUp);
       this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
@@ -72,7 +72,7 @@ export default {
       {{ baseText }}
     </span>
     <span v-if="isPulsing">(<i class="fas fa-expand-arrows-alt u-fa-padding" /> {{ pulseSpeedText }})</span>
-    <span v-if="hasDevSpeed"><b class="c-devspeed"> {{ devSpeedText }} </b></span>
+    <span v-if="hasDevSpeed"><br><b class="c-devspeed"> {{ devSpeedText }} </b></span>
   </span>
 </template>
 

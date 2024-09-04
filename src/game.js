@@ -392,9 +392,9 @@ export function getGameSpeedupForDisplay() {
     !BlackHoles.areNegative &&
     !Pelle.isDisabled("blackhole")
   ) {
-    return Decimal.max(Enslaved.autoReleaseSpeed, speedFactor.div(Decimal.max(dev.SpeedUp, 1)));
+    return Decimal.max(Enslaved.autoReleaseSpeed, speedFactor);
   }
-  return speedFactor;
+  return speedFactor.div(dev.speedUp);
 }
 
 // Seperated for organisation - Very few things should need this
@@ -525,7 +525,7 @@ export function gameLoop(passedDiff, options = {}) {
 
     if (Enslaved.isStoringGameTime && !fixedSpeedActive) {
       // These variables are the actual game speed used and the game speed unaffected by time storage, respectively
-      const reducedTimeFactor = getGameSpeedupFactor();
+      const reducedTimeFactor = getGameSpeedupFactor()
       const totalTimeFactor = getGameSpeedupFactor([GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH,
         GAME_SPEED_EFFECT.BLACK_HOLE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE]);
       const amplification = Ra.unlocks.improvedStoredTime.effects.gameTimeAmplification.effectOrDefault(1);

@@ -35,7 +35,7 @@ export default {
       if (MendingMilestone.three.isReached && this.dbEntry.id === 1) {
         return `This requirement is fulfilled by the third Mending Milestone.`;
       }
-      return `${dbEntry.format(resource)} / ${dbEntry.format(dbEntry.requirement)} ${this.dbEntry.name}`;
+      return `${this.dbEntry.format(this.dbEntry.resource())} / ${this.dbEntry.format(this.dbEntry.requirement)} ${this.dbEntry.name}`;
     }
   },
   methods: {

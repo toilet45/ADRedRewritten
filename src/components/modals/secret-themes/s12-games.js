@@ -1,53 +1,39 @@
 export default {
   entries: [{
-    name: "FE000000",
-    link: "https://dan-simon.github.io/misc/fe000000/",
+    name: "AD: Resimplified",
+    link: "https://donaldino7712.github.io/ADResimplified/",
     image: "game--hex-game.png"
   },
   {
-    name: "Trimps",
-    link: "https://trimps.github.io/",
-    image: "game--trimps.png"
+    name: "AD: Rewarded",
+    link: "https://rangaz.github.io/AntimatterDimensionsWithAchievementRewards/",
+    image: "game--hex-game.png"
   },
   {
-    name: "Mine Defense",
-    link: "http://scholtek.com/minedefense",
-    image: "game--mine-defense.png"
+    name: "AD: Atomic",
+    link: "https://circle-gon.github.io/AntimatterDimensionsPostReality",
+    image: "game--hex-game.png"
   },
   {
-    name: "Wizard and Minion Idle",
-    link: "https://www.kongregate.com/games/Oninou/wami",
-    image: "game--wami.png"
+    name: "AD: Redemption Legacy (warning: bad)",
+    link: "https://toilet45.github.io/ADRedemption/",
+    image: "game--hex-game.png"
   },
   {
-    name: "Anti-Idle",
-    link: "https://www.kongregate.com/games/Tukkun/anti-idle-the-game",
-    image: "game--anti-idle.png"
+    name: "[Reserved for AD: Flux]",
+    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    image: "game--hex-game.png"
   },
   {
-    name: "Synergism",
-    link: "https://synergism.cc/",
-    image: "game--synergism.png"
+    name: "[Reserved for AD: Nullified]",
+    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    image: "game--hex-game.png"
   },
   {
-    name: "Universal Paperclips",
-    link: "https://www.decisionproblem.com/paperclips/",
-    image: "game--universal-paperclips.png"
+    name: "[Reserved for AD: Collapse]",
+    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    image: "game--hex-game.png"
   },
-  {
-    name: "Monies 2",
-    link: "https://sneekxy.nmtechgroup.com/monies2/",
-    image: "game--monies2.png"
-  },
-  {
-    name: "The First Alkahistorian",
-    link: "https://nagshell.github.io/elemental-inception-incremental/",
-    image: "game--alkahistorian.png"
-  },
-  {
-    name: "Melvor Idle",
-    link: "https://melvoridle.com/",
-    image: "game--melvor-idle.svg"
-  }],
+],
   selected: -1,
 };

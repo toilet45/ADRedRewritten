@@ -220,4 +220,30 @@ export const tabNotifications = {
     // Always externally triggered
     condition: () => true,
   },
+  mendingUnlock: {
+    id: 17,
+    tabsToHighLight: [
+      {
+        parent: "mending",
+        tab: "upgrades"
+      },
+      {
+        parent: "mending",
+        tab: "milestones"
+      }
+    ],
+    condition: () => true,
+    events: [GAME_EVENT.MENDING_RESET_AFTER]
+  },
+  mu19Bought: {
+    id: 18,
+    tabsToHighLight: [
+      {
+        parent: "celestials",
+        tab: "ra"
+      },
+    ],
+    condition: () => MendingUpgrade(19).isBought,
+    events: [GAME_EVENT.MENDING_UPGRADE_BOUGHT]
+  }
 };

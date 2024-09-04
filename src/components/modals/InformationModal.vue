@@ -29,29 +29,19 @@ export default {
     </div>
     <div class="l-socials">
       <InformationModalButton
-        name="GitHub repository"
+        name="AD:Red GitHub repository"
         icon="fa-brands fa-github"
-        link="https://github.com/IvarK/AntimatterDimensionsSourceCode"
+        link="https://github.com/toilet45/ADRedRewritten"
       />
       <InformationModalButton
-        name="r/AntimatterDimensions"
-        icon="fa-brands fa-reddit-alien"
-        link="https://www.reddit.com/r/AntimatterDimensions/"
-      />
-      <InformationModalButton
-        name="Antimatter Dimensions Discord Server"
+        name="Vanilla AD Discord Server"
         icon="fa-brands fa-discord"
         link="https://discord.gg/ST9NaXa"
       />
       <InformationModalButton
-        name="Antimatter Dimensions on Google Play"
-        icon="fa-brands fa-google-play"
-        link="https://play.google.com/store/apps/details?id=kajfosz.antimatterdimensions"
-      />
-      <InformationModalButton
-        name="Antimatter Dimensions on Steam"
-        icon="fa-brands fa-steam"
-        link="https://store.steampowered.com/app/1399720/Antimatter_Dimensions/"
+        name="AD:Red Discord Server"
+        icon="fa-brands fa-discord"
+        link="https://discord.gg/3RuXAz7rwe"
       />
       <InformationModalButton
         name="Credits"

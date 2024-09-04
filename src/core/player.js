@@ -818,7 +818,7 @@ window.player = {
       includeAnimated: true,
     },
     notation: "Mixed scientific",
-    lnotation: "Extended Logarithm",
+    lnotation: "Semi-Stacked Scientific",
     notationDigits: {
       comma: 5,
       notation: 9

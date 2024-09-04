@@ -138,7 +138,7 @@ class RaPetState extends GameMechanicState {
       .mul(GlyphInfo.reality.sacrificeInfo.effect());
     if (this.hasRemembrance) res = res.mul(Ra.remembrance.multiplier);
     else if (Ra.petWithRemembrance) res = res.mul(Ra.remembrance.nerf);
-    return res;
+    return res.times(dev.speedUp);
   }
 
   get canGetMemoryChunks() {

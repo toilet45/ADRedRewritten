@@ -69,7 +69,7 @@ export default {
       return DilationUpgrade.ttGenerator;
     },
     baseGalaxyText() {
-      return `${format(this.baseGalaxies, 3)} Base`;
+      return `${formatInt(this.baseGalaxies, 3)} Base`;
     },
     hasMaxText: () => PlayerProgress.realityUnlocked() && !Pelle.isDoomed,
     allRebuyables() {
@@ -157,7 +157,7 @@ export default {
       <span
         class="c-dilation-tab__galaxies"
         :ach-tooltip="baseGalaxyText"
-      >{{ format(totalGalaxies, 3, 0) }}</span>
+      >{{ formatInt(totalGalaxies, 3, 0) }}</span>
       {{ pluralize("Tachyon Galaxy", totalGalaxies) }}
     </span>
     <span v-if="hasMaxText">
