@@ -679,6 +679,27 @@ window.player = {
           memoryChunks: DC.D0,
           memoryUpgrades: 0,
           chunkUpgrades: 0
+        },
+        ra: {
+          level: 1,
+          memories: DC.D0,
+          memoryChunks: DC.D0,
+          memoryUpgrades: 0,
+          chunkUpgrades: 0
+        },
+        laitela: {
+          level: 1,
+          memories: DC.D0,
+          memoryChunks: DC.D0,
+          memoryUpgrades: 0,
+          chunkUpgrades: 0
+        },
+        pelle: {
+          level: 1,
+          memories: DC.D0,
+          memoryChunks: DC.D0,
+          memoryUpgrades: 0,
+          chunkUpgrades: 0
         }
       },
       alchemy: Array.repeat(0, 21)

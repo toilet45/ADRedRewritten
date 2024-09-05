@@ -118,7 +118,7 @@ export default {
       this.showUnlockState = player.options.showHintText.achievementUnlockStates;
       this.realityUnlocked = PlayerProgress.realityUnlocked();
       this.reward = this.config.reward;
-      if (this.achievement.row === 18 && this.reward !== undefined) {
+      if (this.achievement.row === 18 && this.reward !== undefined && !Pelle.isDoomed) {
         this.reward = "Rewards from Doomed Achievements are Disabled out of Pelle";
       }
 

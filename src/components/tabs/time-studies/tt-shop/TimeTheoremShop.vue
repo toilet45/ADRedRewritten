@@ -61,7 +61,7 @@ export default {
       return `${format(this.theoremGeneration, 2, 2)} TT/sec`;
     },
     totalTimeTheoremText() {
-      return `${quantify("total Time Theorem", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}`;
+      return `${quantifyInt("total Time Theorem", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}`;
     },
     minimizeArrowStyle() {
       return {
@@ -155,7 +155,7 @@ export default {
         </button>
         <p class="timetheorems">
           <span class="c-tt-amount">
-            {{ quantify("Time Theorem", theoremAmount, 2, 0, formatTimeTheoremType) }}
+            {{ quantifyInt("Time Theorem", theoremAmount, 2, 0, formatTimeTheoremType) }}
           </span>
           <span v-if="showST">
             <br>

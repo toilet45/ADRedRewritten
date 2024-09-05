@@ -43,7 +43,7 @@ export default {
       return this.buyUntil10 ? format(this.until10Cost) : format(this.singleCost);
     },
     continuumString() {
-      return formatFloat(this.continuumValue, 2);
+      return this.continuumValue.gte(1e9) ? format(this.continuumValue, 2, 2) : formatFloat(this.continuumValue, 2);
     },
     showRow() {
       return this.isShown || this.isUnlocked || this.amount.gt(0);

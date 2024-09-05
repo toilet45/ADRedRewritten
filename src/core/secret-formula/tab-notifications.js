@@ -232,8 +232,8 @@ export const tabNotifications = {
         tab: "milestones"
       }
     ],
-    condition: () => true,
-    events: [GAME_EVENT.MENDING_RESET_AFTER]
+    condition: () => !PlayerProgress.mendingUnlocked(),
+    events: [GAME_EVENT.MENDING_RESET_BEFORE]
   },
   mu19Bought: {
     id: 18,

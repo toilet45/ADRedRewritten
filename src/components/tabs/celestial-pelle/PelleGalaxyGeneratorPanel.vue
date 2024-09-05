@@ -21,6 +21,7 @@ export default {
       isCollapsed: false,
       barWidth: 0,
       capRiftName: "",
+      showCap: false
     };
   },
   computed: {
@@ -58,6 +59,7 @@ export default {
       this.sacrificeActive = GalaxyGenerator.sacrificeActive;
       this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
+      this.showCap = this.cap.lt("10^^9000000000000000");
     },
     increaseCap() {
       if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();
@@ -130,7 +132,7 @@ export default {
               v-else
               class="c-increase-cap-text c-medium-text"
             >
-              {{ format(generatedGalaxies, 2) }} <span v-if="isCapped">/ {{ format(cap, 2) }}</span> Galaxies generated
+              {{ format(generatedGalaxies, 2) }} <span v-if="showCap">/ {{ format(cap, 2) }}</span> Galaxies generated
             </div>
           </button>
         </div>

@@ -66,15 +66,6 @@ export default {
     },
     memoryGainTooltip() {
       return `Based on ${this.pet.memoryGain}`;
-    },
-    highestNotRaLevel() {
-      if (Ra.pets.ra.level === 100) return 7;
-      if (Ra.pets.ra.level >= 65) return 6;
-      if (Ra.pets.ra.level >= 40) return 5;
-      if (Ra.pets.ra.level >= 15) return 3;
-      if (Ra.pets.ra.level >= 8) return 2;
-      if (Ra.pets.ra.level >= 2) return 1;
-      return 0;
     }
   },
   methods: {
@@ -136,6 +127,15 @@ export default {
         background: this.pet.color
       };
     },
+    highestNotRaLevel() {
+      if (Ra.pets.ra.level === 100) return 7;
+      if (Ra.pets.ra.level >= 65) return 6;
+      if (Ra.pets.ra.level >= 40) return 5;
+      if (Ra.pets.ra.level >= 15) return 3;
+      if (Ra.pets.ra.level >= 8) return 2;
+      if (Ra.pets.ra.level >= 2) return 1;
+      return 0;
+    }
   },
 };
 </script>
