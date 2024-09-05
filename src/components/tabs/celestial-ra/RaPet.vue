@@ -99,7 +99,7 @@ export default {
       this.currentMemoryMult.copyFrom(pet.memoryUpgradeCurrentMult);
       this.currentChunkMult = pet.chunkUpgradeCurrentMult;
       this.mu19Bought = MendingUpgrade(19).isBought;
-      this.maxMU19Level = pet.id === "ra" ? 7 : this.highestNotRaLevel();
+      this.maxMU19Level = pet.id === "ra" ? 7 : this.highestNotRaLevel;
 
       this.nextMemoryUpgradeEstimate = Ra.timeToGoalString(pet, this.memoryUpgradeCost.sub(this.memories));
       this.nextMemoryChunkUpgradeEstimate = Ra.timeToGoalString(pet, this.chunkUpgradeCost.sub(this.memories));
