@@ -10,6 +10,16 @@ function showSecondPreferredWarning(currTree) {
   return false;
 }
 
+function showThirdPreferredWarning(currTree) {
+  const canPickThird = currTree.allowedDimPathCount === 3 && currTree.currDimPathCount < 3;
+  // Warn the layer if there are atleast 4 paths (can only pick 3), but they havent picked a third preferred.
+  if (canPickThird && TimeStudy.preferredPaths.dimension.path.length < 3 && Ra.unlocks.MvDUnlock.isUnlocked) {
+    GameUI.notify.error("You haven't selected a third preferred Dimension path.");
+    return true;
+  }
+  return false;
+}
+
 // This is only ever called from manual player actions, which means we can immediately commit them to the game state
 // eslint-disable-next-line complexity
 export function buyStudiesUntil(id, ec = -1) {
@@ -52,9 +62,10 @@ export function buyStudiesUntil(id, ec = -1) {
     studyArray.push(...NormalTimeStudies.paths[TIME_STUDY_PATH.ANTIMATTER_DIM].filter(s => (s <= id)));
   } else if (ec === 12 && ecHasRequirement) {
     studyArray.push(...NormalTimeStudies.paths[TIME_STUDY_PATH.TIME_DIM].filter(s => (s <= id)));
-  } else if (currTree.currDimPathCount === currTree.allowedDimPathCount || currTree.allowedDimPathCount === 3) {
+  } else if (currTree.currDimPathCount === currTree.allowedDimPathCount || currTree.allowedDimPathCount === 4 ||
+     (currTree.allowedDimPathCount === 3 && !Ra.unlocks.MvDUnlock.isUnlocked)) {
     studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
-    studyArray.push(...range(71, 103));
+    studyArray.push([71, 81, 91, 101, 72, 82, 92, 102, 73, 83, 93, 103, 74, 84, 94, 104]);
   } else if (TimeStudy.preferredPaths.dimension.path.length > 0) {
     studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
   } else if (currTree.currDimPathCount === 0) {
@@ -66,6 +77,7 @@ export function buyStudiesUntil(id, ec = -1) {
   if (id >= 111) studyArray.push(111);
 
   const secondPreferredWarningShown = showSecondPreferredWarning(currTree);
+  const thirdPreferredWarningShown = showThirdPreferredWarning(currTree);
 
   if (id < 121) return studyArray;
 
@@ -121,6 +133,7 @@ export function buyStudiesUntil(id, ec = -1) {
     }
 
     if (!secondPreferredWarningShown) showSecondPreferredWarning(GameCache.currentStudyTree.value);
+    if (!thirdPreferredWarningShown) showThirdPreferredWarning(GameCache.currentStudyTree.value);
 
     studyArray.push(...range(211, Math.min(lastInPrevRow, 214)));
 

@@ -169,6 +169,16 @@
   background-color: #b241e3;
 }
 
+.o-time-study-mvd-dim--available {
+  color: #cc2988;
+  border-color: #901e61;
+}
+
+.o-time-study-mvd-dim--available:hover {
+  color: #eeeeee;
+  background-color: #cc2988;
+}
+
 .o-time-study-active--available {
   color: #e60000;
   border-color: #cc0000;
@@ -295,6 +305,10 @@
   background-color: #a294a8;
 }
 
+.o-time-study-mvd-dim--unavailable {
+  background-color: #cab3c1;
+}
+
 .o-time-study-active--unavailable {
   background-color: #a89494;
 }
@@ -352,6 +366,12 @@
 .o-time-study-time-dim--bought {
   color: black;
   background-color: #b241e3;
+  border-color: black;
+}
+
+.o-time-study-mvd-dim--bought {
+  color: black;
+  background-color: #cc2988;
   border-color: black;
 }
 
@@ -446,6 +466,12 @@
   border-color: #951ec8;
 }
 
+.t-dark .o-time-study-mvd-dim--bought,
+.t-s6 .o-time-study-mvd-dim--bought,
+.t-s10 .o-time-study-mvd-dim--bought {
+  border-color: #7d1a54;
+}
+
 .t-dark .o-time-study-active--bought,
 .t-s6 .o-time-study-active--bought,
 .t-s10 .o-time-study-active--bought {
@@ -512,6 +538,10 @@
 
 .o-time-study-connection--time-dim {
   stroke: #4a3753;
+}
+
+.o-time-study-connection--mvd-dim {
+  stroke: #521137;
 }
 
 .o-time-study-connection--active {

@@ -58,7 +58,7 @@ export default class TimeStudyTreeLayout {
     /* eslint-disable no-multi-spaces, space-in-parens, func-call-spacing */
     this.rows = [
       normalRow(                       null,   TS(11),   null                         ),
-      normalRow(                           TS(21), TS(22)                             ),
+      normalRow(                   null, TS(21), TS(22), TS(305)                      ),
       normalRow(                   null, TS(31), TS(32), TS(33)                       )
     ];
 
@@ -75,15 +75,32 @@ export default class TimeStudyTreeLayout {
     }
 
     this.rows.push(
-      normalRow(                       null,   TS(61),  TS(62)                        ),
-      normalRow(                      TS(71),  TS(72),  TS(73)                        ),
-      normalRow(                      TS(81),  TS(82),  TS(83)                        ),
-      normalRow(                      TS(91),  TS(92),  TS(93)                        ),
-      normalRow(                      TS(101), TS(102), TS(103)                       ),
-      normalRow(                       EC(7),  TS(111),  null                         ),
+      normalRow(                       null,   TS(61),  TS(62)                        ));
+    if (type.mvdUnlocked) {
+      this.rows.push(
+        normalRow(                 null, TS(71),  TS(72),  TS(73), TS(74)               ),
+        normalRow(                 null, TS(81),  TS(82),  TS(83), TS(84)               ),
+        normalRow(                 null, TS(91),  TS(92),  TS(93), TS(94)               ),
+        normalRow(                 null, TS(101), TS(102), TS(103), TS(104)             ));
+    } else {
+      this.rows.push(
+        normalRow(                      TS(71),  TS(72),  TS(73)                        ),
+        normalRow(                      TS(81),  TS(82),  TS(83)                        ),
+        normalRow(                      TS(91),  TS(92),  TS(93)                        ),
+        normalRow(                      TS(101), TS(102), TS(103)                       ));
+    }
+    if (type.triadDim) {
+      this.rows.push(normalRow(null, TS(321), TS(322), TS(323), TS(324)));
+    }
+    this.rows.push(
+      normalRow(                       EC(7),  TS(111),  TS(306)                      ),
       normalRow(                      TS(121), TS(122), TS(123)                       ),
       normalRow(               EC(6), TS(131), TS(132), TS(133), EC(8)                ),
-      normalRow(                      TS(141), TS(142), TS(143)                       ),
+      normalRow(                      TS(141), TS(142), TS(143)                       ));
+    if (type.triadPace) {
+      this.rows.push(normalRow(TS(311), TS(312), TS(313)));
+    }
+    this.rows.push(
       normalRow(               null,   EC(9), TS(151),   null,   EC(4)                ),
       normalRow(                          TS(161), TS(162)                            )
     );
@@ -104,7 +121,7 @@ export default class TimeStudyTreeLayout {
     this.rows.push(
       normalRow(                               EC(10)                                 ),
       normalRow(             TS(191),          TS(192),          TS(193)              ),
-      normalRow(                               TS(201)                                ),
+      normalRow(                         null, TS(201), TS(307)                       ),
       normalRow(    TS(211),          TS(212),          TS(213),          TS(214)     ),
       wideRow  (TS(221), TS(222), TS(223), TS(224), TS(225), TS(226), TS(227), TS(228))
     );
@@ -118,7 +135,7 @@ export default class TimeStudyTreeLayout {
     this.rows.push(
       normalRow(    TS(231),          TS(232),          TS(233),          TS(234)     ),
       normalRow(              EC(11),                             EC(12)              ),
-      normalRow(                          TimeStudy.dilation                          )
+      normalRow(                  null, TimeStudy.dilation, TS(308)                   )
     );
 
     if (type.mu9) {
@@ -212,6 +229,9 @@ export default class TimeStudyTreeLayout {
       alt62: Perk.bypassEC5Lock.isBought,
       alt181: Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought,
       triad: Ra.canBuyTriad,
+      triadPace: Ra.pets.v.level >= 54,
+      triadDim: Ra.pets.v.level >= 65,
+      mvdUnlocked: Ra.pets.lai.level >= 75,
     };
   }
 

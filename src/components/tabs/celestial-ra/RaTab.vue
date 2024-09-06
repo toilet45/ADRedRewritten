@@ -56,6 +56,25 @@ export default {
           const triadCount = Ra.unlocks.unlockHardV.effectOrDefault(0);
           return `You have unlocked ${quantifyInt("Triad Study", triadCount)}.`;
         },
+      },
+      {
+        pet: Ra.pets.ra,
+        scalingUpgradeVisible: () => false,
+        scalingUpgradeText: () => `Why do u see this`,
+      },
+      {
+        pet: Ra.pets.lai,
+        scalingUpgradeVisible: () => Ra.unlocks.newDMD.isUnlocked,
+        scalingUpgradeText: () => {
+          const laieffect = Ra.unlocks.newDMD.effectOrDefault([0, 0]);
+          return `You have increased the singularity cap by ${formatInt(laieffect[1])},
+          and unlocked ${formatInt(laieffect[0])} new dimensions`;
+        },
+      },
+      {
+        pet: Ra.pets.pelle,
+        scalingUpgradeVisible: () => false,
+        scalingUpgradeText: () => `Why do u see this`,
       }
     ],
     petStyle() {

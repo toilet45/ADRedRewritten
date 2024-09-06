@@ -48,28 +48,37 @@ export const ra = {
       color: "9575cd",
       chunkGain: "Replicanti",
       memoryGain: "other Memory multipliers",
-      requiredUnlock: () => MendingUpgrade(19).isBought,
-      rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().add(1).log10().floor().pow(6),
-      memoryProductionMultiplier: () => new Decimal(1)
+      // eslint-disable-next-line no-unused-expressions, no-labels, no-unused-labels
+      requiredUnlock: () => { isUnlocked: MendingUpgrade(19).isBought; }, // I dont wanna write edgecase so this does
+      rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().add(1).log10().mul(2)
+        .floor().mul(3).pow(6),
+      memoryProductionMultiplier: () => Decimal.root(
+        Ra.unlocks.vXP.effectOrDefault(new Decimal(1))
+          .mul(Ra.unlocks.enslavedXP.effectOrDefault(new Decimal(1)))
+          .mul(Ra.unlocks.teresaXP.effectOrDefault(new Decimal(1)))
+          .mul(Ra.unlocks.effarigXP.effectOrDefault(new Decimal(1)))
+          .mul(Ra.unlocks.laiXP.effectOrDefault(new Decimal(1)))
+          .mul(Ra.unlocks.pelleXP.effectOrDefault(new Decimal(1))),
+        6) // This code sucks, if you couldnt tell
     },
     laitela: {
       id: "laitela",
       name: "Lai'tela",
       color: "#ffffff",
-      chunkGain: "???",
+      chunkGain: "Galaixes",
       memoryGain: "singularities",
       requiredUnlock: () => Ra.unlocks.laiMemoryUnlock,
-      rawMemoryChunksPerSecond: () => new Decimal(0),
+      rawMemoryChunksPerSecond: () => player.galaxies.div(100).pow(1.5),
       memoryProductionMultiplier: () => Ra.unlocks.laiXP.effectOrDefault(new Decimal(1))
     },
     pelle: {
       id: "pelle",
       name: "Pelle",
       color: "dc143c",
-      chunkGain: "???",
+      chunkGain: "Antimatter",
       memoryGain: "best AM",
       requiredUnlock: () => Ra.unlocks.pelleMemoryUnlock,
-      rawMemoryChunksPerSecond: () => new Decimal(0),
+      rawMemoryChunksPerSecond: () => Currency.antimatter.value.add(1).log10().add(1).log10().mul(4).floor(),
       memoryProductionMultiplier: () => Ra.unlocks.pelleXP.effectOrDefault(new Decimal(1))
     }
   },
@@ -282,7 +291,8 @@ export const ra = {
       id: 24,
       reward: () => `Unlock Hard V-Achievements and unlock a Triad Study every ${formatInt(6)} levels.
         Triad Studies are located at the bottom of the Time Studies page`,
-      effect: () => Math.floor(Ra.pets.v.level / 6),
+      effect: () => Math.max(12, Math.floor(Ra.pets.v.level / 6)) +
+      (2 * (Ra.pets.v.level >= 65)) + (Ra.pets.v.level >= 75), // Account for V65 and V75
       pet: "v",
       level: 6,
       displayIcon: `<span class="fas fa-trophy"></span>`,
@@ -393,7 +403,7 @@ export const ra = {
       disabledByPelle: false
     },
 
-     alchHardcapIncrease: {
+    alchHardcapIncrease: {
       id: 35,
       reward: () => `Alchemy hardcap is increased to ${formatInt(50000)},
       but harder to gain beyond ${formatInt(25000)}`,
@@ -411,7 +421,7 @@ export const ra = {
       level: 40,
       displayIcon: `?`,
       disabledByPelle: false
-    }, 
+    },
     glyphRarityUncap: {
       id: 37,
       reward: () => `Glyph rarity can go above ${formatPercents(1)} at a ${formatPow(0.2, 1, 1)} rate`,
@@ -430,7 +440,7 @@ export const ra = {
       displayIcon: `?`,
       disabledByPelle: false
     },
-     softcapDelay: {
+    softcapDelay: {
       id: 39,
       reward: () => `Glyph Rarity softcap occurs ${formatPercents(0.1)} later.
       New resources are now unlocked every ${formatInt(5)} levels`,
@@ -439,7 +449,7 @@ export const ra = {
       level: 75,
       displayIcon: `?`,
       disabledByPelle: false
-    }, 
+    },
     effarigMendLayer: {
       id: 40,
       reward: () => `Unlock the Mending layer of Effarig`,
@@ -535,8 +545,7 @@ export const ra = {
     },
     newVhard: {
       id: 50,
-      reward: () => `Unlock new v-hard achievements.
-      Improve the dimension study paths, and Time Study ${formatInt(302)}`,
+      reward: () => `Unlock new v-hard achievements and improve the dimension study paths`,
       effect: 1,
       pet: "v",
       level: 40,
@@ -781,7 +790,14 @@ export const ra = {
       reward: () => `Ublock a new dark matter dimension every ${formatInt(25)} levels. Increase the bulk singularity
       cap by ${formatInt(50)} every ${formatInt(5)} levels, gaining a ${formatX(2)} multiplier
       every ${formatInt(20)} levels`,
-      effect: 1,
+      effect: () => [
+        Math.floor(Ra.pets.lai.level / 25), // Sorry for the next equation i cant think of another way
+        Math.max(Math.floor(Ra.pets.lai.level / 5), 4) * 50 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 20) / 5), 4)) * 100 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 40) / 5), 4)) * 200 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 60) / 5), 4)) * 400 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 80) / 5), 4)) * 800
+      ],
       pet: "laitela",
       level: 25,
       displayIcon: `?`,
@@ -863,7 +879,7 @@ export const ra = {
     },
     doomMVRmult: {
       id: 85,
-      reward: () => `Dooming provides a Multiversal Remnant multiplier, and gain is based on best resources
+      reward: () => `Dooming provides a Multiversal Remain multiplier, and gain is based on best resources
       this Mend, not current`,
       effect: 1,
       pet: "pelle",

@@ -35,6 +35,7 @@ TimeStudy.allConnections = (function() {
     [TS(11), TS(22)],
 
     [TS(21), TS(31)],
+    [TS(22), TS(305), () => (Ra.pets.v.level >= 30)],
     [TS(22), TS(33)],
     [TS(22), TS(32)],
 
@@ -66,11 +67,21 @@ TimeStudy.allConnections = (function() {
     [TS(92), TS(102)],
     [TS(93), TS(103)],
 
-    [TS(101), TS(111)],
-    [TS(102), TS(111)],
-    [TS(103), TS(111)],
+    [TS(101), TS(111), () => !(Ra.pets.v.level >= 65)],
+    [TS(111), TS(321), () => (Ra.pets.v.level >= 65)],
+    [TS(321), TS(111), () => (Ra.pets.v.level >= 65)],
+    [TS(102), TS(111), () => !(Ra.pets.v.level >= 66)],
+    [TS(102), TS(322), () => (Ra.pets.v.level >= 66)],
+    [TS(322), TS(111), () => (Ra.pets.v.level >= 66)],
+    [TS(103), TS(111), () => !(Ra.pets.v.level >= 72)],
+    [TS(103), TS(323), () => (Ra.pets.v.level >= 72)],
+    [TS(323), TS(111), () => (Ra.pets.v.level >= 72)],
+    [TS(104), TS(111), () => !(Ra.pets.v.level >= 75)],
+    [TS(104), TS(324), () => (Ra.pets.v.level >= 75)],
+    [TS(324), TS(111), () => (Ra.pets.v.level >= 75)],
 
     [TS(111), EC(7)],
+    [TS(111), TS(306), () => (Ra.pets.v.level >= 36)],
 
     [TS(111), TS(121)],
     [TS(111), TS(122)],
@@ -86,9 +97,15 @@ TimeStudy.allConnections = (function() {
     [TS(132), TS(142)],
     [TS(133), TS(143)],
 
-    [TS(141), TS(151)],
-    [TS(142), TS(151)],
-    [TS(143), TS(151)],
+    [TS(141), TS(151), () => !(Ra.pets.v.level >= 54)],
+    [TS(141), TS(313), () => (Ra.pets.v.level >= 54)],
+    [TS(313), TS(151), () => (Ra.pets.v.level >= 54)],
+    [TS(142), TS(151), () => !(Ra.pets.v.level >= 60)],
+    [TS(143), TS(313), () => (Ra.pets.v.level >= 60)],
+    [TS(313), TS(151), () => (Ra.pets.v.level >= 60)],
+    [TS(143), TS(151), () => !(Ra.pets.v.level >= 65)],
+    [TS(143), TS(313), () => (Ra.pets.v.level >= 65)],
+    [TS(313), TS(151), () => (Ra.pets.v.level >= 65)],
     [TS(143), EC(4)],
 
     [TS(151), EC(9)],
@@ -122,6 +139,7 @@ TimeStudy.allConnections = (function() {
     [TS(191), TS(212)],
     [TS(193), TS(213)],
     [TS(193), TS(214)],
+    [TS(201), TS(307), () => (Ra.pets.v.level >= 42)],
 
     [TS(211), TS(221)],
     [TS(211), TS(222)],
@@ -150,6 +168,7 @@ TimeStudy.allConnections = (function() {
     [EC(12), TimeStudy.dilation],
 
     [TimeStudy.dilation, TimeStudy.timeDimension(5)],
+    [TimeStudy.dilation, TS(308), () => (Ra.pets.v.level >= 48)],
     [TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)],
     [TimeStudy.timeDimension(5), TimeStudy.TGformula, () => !MendingUpgrade(9).isBought],
     [TimeStudy.timeDimension(6), TimeStudy.timeDimension(7)],

@@ -69,6 +69,7 @@ export default {
             case TIME_STUDY_PATH.ANTIMATTER_DIM: return "o-time-study-antimatter-dim";
             case TIME_STUDY_PATH.INFINITY_DIM: return "o-time-study-infinity-dim";
             case TIME_STUDY_PATH.TIME_DIM: return "o-time-study-time-dim";
+            case TIME_STUDY_PATH.MULTIVERSAL_DIM: return "o-time-study-mvd-dim";
             case TIME_STUDY_PATH.ACTIVE: return "o-time-study-active";
             case TIME_STUDY_PATH.PASSIVE: return "o-time-study-passive";
             case TIME_STUDY_PATH.IDLE: return "o-time-study-idle";

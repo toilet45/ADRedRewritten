@@ -6,6 +6,7 @@ NormalTimeStudies.pathList = [
   { path: TIME_STUDY_PATH.ANTIMATTER_DIM, studies: [71, 81, 91, 101], name: "Antimatter Dims" },
   { path: TIME_STUDY_PATH.INFINITY_DIM, studies: [72, 82, 92, 102], name: "Infinity Dims" },
   { path: TIME_STUDY_PATH.TIME_DIM, studies: [73, 83, 93, 103], name: "Time Dims" },
+  { path: TIME_STUDY_PATH.MULTIVERSAL_DIM, studies: [74, 84, 94, 104], name: "Multiversal Dims" },
   { path: TIME_STUDY_PATH.ACTIVE, studies: [121, 131, 141], name: "Active" },
   { path: TIME_STUDY_PATH.PASSIVE, studies: [122, 132, 142], name: "Passive" },
   { path: TIME_STUDY_PATH.IDLE, studies: [123, 133, 143], name: "Idle" },
@@ -38,7 +39,7 @@ export class NormalTimeStudyState extends TimeStudyState {
   // The requiresST prop is an array containing IDs indicating other studies which, if ANY in the array are purchased,
   // will cause the study to also cost space theorems. This array is effectively assumed to be empty if not present.
   costsST() {
-    return this.config.requiresST && this.config.requiresST.some(s => TimeStudy(s).isBought);
+    return this.config.requiresST && this.config.requiresST.some(s => TimeStudy(s).isBought || s === true);
   }
 
   checkRequirement() {
@@ -131,6 +132,7 @@ TimeStudy.preferredPaths = {
     },
     set path(value) {
       const options = [1, 2, 3];
+      if (Ra.unlocks.MvDUnlock.isUnlocked) options.push(4);
       player.timestudy.preferredPaths[0] = value.filter(id => options.includes(id));
     },
     get studies() {
@@ -148,7 +150,7 @@ TimeStudy.preferredPaths = {
       return player.timestudy.preferredPaths[1];
     },
     set path(value) {
-      const options = [4, 5, 6];
+      const options = [5, 6, 7];
       player.timestudy.preferredPaths[1] = options.includes(value) ? value : 0;
     },
     get studies() {

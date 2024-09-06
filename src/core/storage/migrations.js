@@ -431,6 +431,9 @@ export const migrations = {
     83: player => {
       beMigration(player);
     },
+    100: player => {
+      player.timestudy.preferredPaths[1] += 1;
+    }
   },
 
   normalizeTimespans(player) {

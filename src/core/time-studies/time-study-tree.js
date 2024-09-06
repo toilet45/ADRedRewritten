@@ -273,7 +273,7 @@ export class TimeStudyTree {
   }
 
   get currDimPathCount() {
-    return [71, 72, 73].countWhere(x => this.purchasedStudies.includes(TimeStudy(x)));
+    return [71, 72, 73, 74].countWhere(x => this.purchasedStudies.includes(TimeStudy(x)));
   }
 
   get allowedDimPathCount() {
@@ -285,6 +285,7 @@ export class TimeStudyTree {
   get dimensionPaths() {
     const pathSet = new Set();
     const validPaths = [TIME_STUDY_PATH.ANTIMATTER_DIM, TIME_STUDY_PATH.INFINITY_DIM, TIME_STUDY_PATH.TIME_DIM];
+    if (Ra.unlocks.MvDUnlock.isUnlocked) validPaths.push(TIME_STUDY_PATH.MULTIVERSAL_DIM);
     for (const path of validPaths) {
       const pathEntry = NormalTimeStudies.pathList.find(p => p.path === path);
       for (const study of this.purchasedStudies) {

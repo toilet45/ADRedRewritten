@@ -263,6 +263,7 @@ createInCategory(StudyPath, "Passive", /passive/i, { $studyPath: TIME_STUDY_PATH
 createInCategory(StudyPath, "Active", /active/i, { $studyPath: TIME_STUDY_PATH.ACTIVE });
 createInCategory(StudyPath, "Antimatter", /antimatter/i, { $studyPath: TIME_STUDY_PATH.ANTIMATTER_DIM });
 createInCategory(StudyPath, "Time", /time/i, { $studyPath: TIME_STUDY_PATH.TIME_DIM });
+createInCategory(StudyPath, "Multiversal", /multiversal/i, { $studyPath: TIME_STUDY_PATH.MULTIVERSAL });
 createInCategory(StudyPath, "Light", /light/i, { $studyPath: TIME_STUDY_PATH.LIGHT });
 createInCategory(StudyPath, "Dark", /dark/i, { $studyPath: TIME_STUDY_PATH.DARK });
 

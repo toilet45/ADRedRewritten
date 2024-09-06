@@ -14,6 +14,12 @@ export default {
   },
   computed: {
     dimensionOptions() {
+      if (Ra.unlocks.MvDUblock.isUnlocked) return {
+        "Antimatter": TIME_STUDY_PATH.ANTIMATTER_DIM,
+        "Infinity": TIME_STUDY_PATH.INFINITY_DIM,
+        "Time": TIME_STUDY_PATH.TIME_DIM,
+        "Multiversal": TIME_STUDY_PATH.MULTIVERSAL_DIM
+      };
       return {
         "Antimatter": TIME_STUDY_PATH.ANTIMATTER_DIM,
         "Infinity": TIME_STUDY_PATH.INFINITY_DIM,
@@ -57,6 +63,7 @@ export default {
         "Antimatter": "antimatter-dim",
         "Infinity": "infinity-dim",
         "Time": "time-dim",
+        "Multiversal": "mvd-dim",
         "Active": "active",
         "Passive": "passive",
         "Idle": "idle"

@@ -691,5 +691,129 @@ export const normalTimeStudies = [
     description: "Dimensional Sacrifice multiplier is squared",
     effect: 2,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 4
+  },
+  {
+    id: 305,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 5, 21],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [21],
+    description: "Uncap the Replicanti chance upgrade, but it scales in cost and effect faster beyond the cap",
+    effect: 1,
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 5
+  },
+  {
+    id: 306,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 6, 111],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [111],
+    description: () => `Make the Eternity Point formula better ${formatInt(5)}^x ➜ ${formatInt(6)}^x`,
+    effect: 1,
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 6
+  },
+  {
+    id: 307,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 7, 201],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [201],
+    description: "Replicanti slowdown beyond the cap is halved",
+    effect: 0.5,
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 7
+  },
+  {
+    id: 308,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8, PlayerProgress.dilationUnlocked()],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [true],
+    description: "Galaxy strength is increased based on Tachyon Galaxies",
+    effect: () => player.dilation.totalTachyonGalaxies.log10().cbrt().div(4).add(1),
+    formatEffect: value => `+${formatPercents(value.sub(1), 3)}`,
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8
+  },
+  {
+    id: 311,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9, 141],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [141],
+    description: "Replicanti and Multiversal Remains gain a multiplier based on time spent in this Mend, decreasing",
+    effect: () => [Time.thisMendRealTime.div(1000).clampMin(1).log(3).recip().mul(5e12),
+      Time.thisMendRealTime.div(1000).clampMin(1).log(3).recip().mul(125)],
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9
+  },
+  {
+    id: 312,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10, 142],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [142],
+    description: "Replicanti and Multiversal Remains gain a multiplier based on time spent in this Mend",
+    effect: () => [1e4, 20],
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10
+  },
+  {
+    id: 313,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11, 143],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [143],
+    description: "Replicanti and Multiversal Remains gain a multiplier based on time spent in this Mend, increasing",
+    effect: [Time.thisMendRealTime.div(1000).clampMin(1).cbrt().mul(100),
+      Time.thisMendRealTime.div(1000).clampMin(1).cbrt().mul(5)],
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11
+  },
+  {
+    id: 321,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12, 101],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [101],
+    description: "Antimatter Dimensions gain a power effect based on Antimatter",
+    effect: () => Currency.antimatter.value.max(1).log(10).max(1).log(10).root(5).div(25).add(1),
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12
+  },
+  {
+    id: 322,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 13, 102],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [102],
+    description: "Infinity Dimensions gain a power effect based on Infinity Points",
+    effect: () => Currency.infinityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(40).add(1),
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 13
+  },
+  {
+    id: 323,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14, 103],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [103],
+    description: "Time Dimensions gain a power effect based on Eternity Points",
+    effect: () => Currency.eternityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(25).add(1),
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14
+  },
+  {
+    id: 324,
+    cost: DC.D0,
+    STCost: 12,
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15, 104],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
+    requiresST: [104],
+    description: "Multiversal Dimensions gain a multiplier based on Multiversal Remains",
+    effect: () => Currency.mendingPoints.value.max(1).log10().div(20).add(1).cbrt(),
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15
   }
 ];
