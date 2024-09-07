@@ -231,7 +231,7 @@ export default class TimeStudyTreeLayout {
       triad: Ra.canBuyTriad,
       triadPace: Ra.pets.v.level >= 54,
       triadDim: Ra.pets.v.level >= 65,
-      mvdUnlocked: Ra.pets.lai.level >= 75,
+      mvdUnlocked: Ra.pets.laitela.level >= 75,
     };
   }
 

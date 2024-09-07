@@ -65,7 +65,7 @@ export const ra = {
       id: "laitela",
       name: "Lai'tela",
       color: "#ffffff",
-      chunkGain: "Galaixes",
+      chunkGain: "Galaxies",
       memoryGain: "singularities",
       requiredUnlock: () => Ra.unlocks.laiMemoryUnlock,
       rawMemoryChunksPerSecond: () => player.galaxies.div(100).pow(1.5),
@@ -791,12 +791,12 @@ export const ra = {
       cap by ${formatInt(50)} every ${formatInt(5)} levels, gaining a ${formatX(2)} multiplier
       every ${formatInt(20)} levels`,
       effect: () => [
-        Math.floor(Ra.pets.lai.level / 25), // Sorry for the next equation i cant think of another way
-        Math.max(Math.floor(Ra.pets.lai.level / 5), 4) * 50 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 20) / 5), 4)) * 100 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 40) / 5), 4)) * 200 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 60) / 5), 4)) * 400 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.lai.level - 80) / 5), 4)) * 800
+        Math.floor(Ra.pets.laitela.level / 25), // Sorry for the next equation i cant think of another way
+        Math.max(Math.floor(Ra.pets.laitela.level / 5), 4) * 50 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 20) / 5), 4)) * 100 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 40) / 5), 4)) * 200 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 60) / 5), 4)) * 400 +
+        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 80) / 5), 4)) * 800
       ],
       pet: "laitela",
       level: 25,

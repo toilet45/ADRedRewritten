@@ -172,6 +172,16 @@ export const normalTimeStudies = [
     formatEffect: value => formatX(value, 2, 1)
   },
   {
+    id: 74,
+    cost: DC.D5,
+    requirement: [61, () => Perk.studyECRequirement.isBought ||
+      (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)],
+    reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Put smth here",
+    effect: () => DC.D1,
+    unlocked: () => false
+  },
+  {
     id: 81,
     cost: DC.D4,
     requirement: [71],
@@ -198,6 +208,15 @@ export const normalTimeStudies = [
     effect: () => DC.D1_0004.pow(player.totalTickGained),
     cap: DC.E30,
     formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 84,
+    cost: DC.D5,
+    requirement: [74],
+    reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Put smth here",
+    effect: () => DC.D1,
+    unlocked: () => false
   },
   {
     id: 91,
@@ -229,6 +248,15 @@ export const normalTimeStudies = [
     formatEffect: value => formatX(value, 2, 1)
   },
   {
+    id: 94,
+    cost: DC.D5,
+    requirement: [84],
+    reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Put smth here",
+    effect: () => DC.D1,
+    unlocked: () => false
+  },
+  {
     id: 101,
     cost: DC.D4,
     requirement: [91],
@@ -256,9 +284,18 @@ export const normalTimeStudies = [
     formatEffect: value => formatX(value, 2, 0)
   },
   {
+    id: 104,
+    cost: DC.D5,
+    requirement: [94],
+    reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Put smth here",
+    effect: () => DC.D1,
+    unlocked: () => false
+  },
+  {
     id: 111,
     cost: new Decimal(12),
-    requirement: [101, 102, 103],
+    requirement: [101, 102, 103, 104],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => (Achievement(103).canBeApplied
       ? `Make the Infinity Point formula better log(x)/${formatFloat(307.8, 1)} ➜ log(x)/${formatInt(285)}`

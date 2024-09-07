@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     dimensionOptions() {
-      if (Ra.unlocks.MvDUblock.isUnlocked) return {
+      if (Ra.unlocks.MvDUnlock.isUnlocked) return {
         "Antimatter": TIME_STUDY_PATH.ANTIMATTER_DIM,
         "Infinity": TIME_STUDY_PATH.INFINITY_DIM,
         "Time": TIME_STUDY_PATH.TIME_DIM,

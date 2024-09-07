@@ -432,6 +432,28 @@ export const migrations = {
       beMigration(player);
     },
     100: player => {
+      player.celestials.ra.pets = { ...player.celestials.ra.pets,
+        ra: {
+          level: 1,
+          memories: DC.D0,
+          memoryChunks: DC.D0,
+          memoryUpgrades: 0,
+          chunkUpgrades: 0
+        },
+        laitela: {
+          level: 1,
+          memories: DC.D0,
+          memoryChunks: DC.D0,
+          memoryUpgrades: 0,
+          chunkUpgrades: 0
+        },
+        pelle: {
+          level: 1,
+          memories: DC.D0,
+          memoryChunks: DC.D0,
+          memoryUpgrades: 0,
+          chunkUpgrades: 0
+        } };
       player.timestudy.preferredPaths[1] += 1;
     }
   },
