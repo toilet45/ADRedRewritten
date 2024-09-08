@@ -45,13 +45,13 @@ export const ra = {
     ra: {
       id: "ra",
       name: "Ra",
-      color: "9575cd",
+      color: "#9575cd",
       chunkGain: "Replicanti",
       memoryGain: "other Memory multipliers",
       // eslint-disable-next-line no-unused-expressions, no-labels, no-unused-labels
       requiredUnlock: () => { isUnlocked: MendingUpgrade(19).isBought; }, // I dont wanna write edgecase so this does
       rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().add(1).log10().mul(2)
-        .floor().mul(3).pow(6),
+        .floor().mul(3).pow(4),
       memoryProductionMultiplier: () => Decimal.root(
         Ra.unlocks.vXP.effectOrDefault(new Decimal(1))
           .mul(Ra.unlocks.enslavedXP.effectOrDefault(new Decimal(1)))
@@ -59,7 +59,7 @@ export const ra = {
           .mul(Ra.unlocks.effarigXP.effectOrDefault(new Decimal(1)))
           .mul(Ra.unlocks.laiXP.effectOrDefault(new Decimal(1)))
           .mul(Ra.unlocks.pelleXP.effectOrDefault(new Decimal(1))),
-        6) // This code sucks, if you couldnt tell
+        6).sqrt() // This code sucks, if you couldnt tell
     },
     laitela: {
       id: "laitela",
@@ -74,7 +74,7 @@ export const ra = {
     pelle: {
       id: "pelle",
       name: "Pelle",
-      color: "dc143c",
+      color: "#dc143c",
       chunkGain: "Antimatter",
       memoryGain: "best AM",
       requiredUnlock: () => Ra.unlocks.pelleMemoryUnlock,
@@ -291,7 +291,7 @@ export const ra = {
       id: 24,
       reward: () => `Unlock Hard V-Achievements and unlock a Triad Study every ${formatInt(6)} levels.
         Triad Studies are located at the bottom of the Time Studies page`,
-      effect: () => Math.max(12, Math.floor(Ra.pets.v.level / 6)) +
+      effect: () => Math.min(12, Math.floor(Ra.pets.v.level / 6)) +
       (2 * (Ra.pets.v.level >= 65)) + (Ra.pets.v.level >= 75), // Account for V65 and V75
       pet: "v",
       level: 6,

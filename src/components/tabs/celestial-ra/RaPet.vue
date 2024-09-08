@@ -40,7 +40,7 @@ export default {
     };
   },
   computed: {
-    levelCap() { return Ra.levelCap; },
+    levelCap() { return this.pet.name === "Ra" ? 100 : Ra.levelCap; },
     showScalingUpgrade() {
       return this.petConfig.scalingUpgradeVisible(this.level);
     },
@@ -81,8 +81,8 @@ export default {
     update() {
       this.isRaCapped = Ra.totalPetLevel === Ra.maxTotalPetLevel;
       const pet = this.pet;
-      this.isCapped = pet.level === Ra.levelCap;
-      this.isUnlocked = pet.isUnlocked;
+      this.isCapped = pet?.level >= Ra.levelCap;
+      this.isUnlocked = pet?.isUnlocked;
       if (!this.isUnlocked) return;
       this.level = pet.level;
       this.memories.copyFrom(pet.memories);

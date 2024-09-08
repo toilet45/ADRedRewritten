@@ -1,3 +1,4 @@
+import { isDecimal } from "../../utility/type-check";
 import { BitPurchasableMechanicState, RebuyableMechanicState } from "../game-mechanics";
 
 class MendingUpgradeState extends BitPurchasableMechanicState {
@@ -111,6 +112,34 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
 
   // eslint-disable-next-line no-empty-function
   set effects(value) {}
+
+  purchase() {
+    if (!this.canBeBought) return false;
+    if (GameEnd.creditsEverClosed) return false;
+    if (!(this.id === 1 && Currency.mends.lt(3) && !player.softlockModals.mendingUpgradeOne)) {
+      console.log(this.boughtAmount);
+      this.currency.subtract(this.cost);
+      console.log(this.cost);
+      this.boughtAmount = this.boughtAmount.add(1);
+      this.onPurchased();
+      GameUI.update();
+      return true;
+    }
+    player.softlockModals.mendingUpgradeOne = true;
+    Modal.softcapPurchase.show(
+      {
+        upgradeName: "Mending Upgrade 1",
+        exitFn: () => {
+          this.currency.subtract(this.cost);
+          this.boughtAmount = this.boughtAmount.add(1);
+          this.onPurchased();
+          GameUI.update();
+          return true;
+        }
+      }
+    );
+    return false;
+  }
 
   onPurchased() {
     const id = this.id;

@@ -986,12 +986,7 @@ window.player = {
   mending: {
     mends: DC.D0,
     mendingPoints: DC.D0,
-    rebuyables: {
-      1: new Decimal(),
-      6: new Decimal(),
-      11: new Decimal(),
-      16: new Decimal(),
-    },
+
     hybrids: {
       2: new Decimal(),
       3: new Decimal(),
@@ -999,9 +994,20 @@ window.player = {
       12: new Decimal(),
       17: new Decimal()
     },
+
+    rebuyables: {
+      1: new Decimal(),
+      6: new Decimal(),
+      11: new Decimal(),
+      16: new Decimal()
+    },
+
     upgradeBits: 0,
     upgReqs: 0,
     multiversalGalaxies: new Decimal()
+  },
+  softlockModals: {
+    mendingUpgradeOne: false
   }
 };
 

@@ -73,6 +73,7 @@ import RealityGlyphCreationModal from "@/components/modals/RealityGlyphCreationM
 import ReplaceGlyphModal from "@/components/modals/ReplaceGlyphModal";
 import SacrificeModal from "@/components/modals/SacrificeModal";
 import SingularityMilestonesModal from "@/components/modals/SingularityMilestonesModal";
+import SoftcapPurchaseModal from "@/components/modals/SoftcapPurchaseModal";
 import SpeedrunModeModal from "@/components/modals/SpeedrunModeModal";
 import StudyStringModal from "@/components/modals/StudyStringModal";
 import SwitchAutomatorEditorModal from "@/components/modals/SwitchAutomatorEditorModal";
@@ -275,6 +276,7 @@ Modal.breakInfinity = new Modal(BreakInfinityModal, 1, GAME_EVENT.ETERNITY_RESET
 Modal.s12Games = new Modal(S12GamesModal);
 
 Modal.mending = new Modal(MendModal);
+Modal.softcapPurchase = new Modal(SoftcapPurchaseModal, 1);
 
 function getSaveInfo(save) {
   const resources = {

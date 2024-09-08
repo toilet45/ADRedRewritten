@@ -56,7 +56,7 @@ export class RealityAutobuyerState extends AutobuyerState {
   // This only gets set via functions in AutobuyerInput.vue; we want to take advantage of auto-formatting when the input
   // is for a Decimal prop, but the actual value needs to be clamped to fit within a Number
   set shard(value) {
-    this.data.shard = value.clamp(0, Number.MAX_VALUE).toNumber();
+    this.data.shard = value.clamp(0, Number.MAX_VALUE);
   }
 
   toggleMode() {
@@ -90,7 +90,7 @@ export class RealityAutobuyerState extends AutobuyerState {
       const gainedLevel = gainedGlyphLevel();
       const checkModes = [AUTO_REALITY_MODE.GLYPH, AUTO_REALITY_MODE.EITHER, AUTO_REALITY_MODE.BOTH];
       const levelToCheck = checkModes.includes(this.mode)
-        ? { actualLevel: Decimal.min(this.glyph, Glyphs.levelCap), rawLevel: DC.D1 }
+        ? { actualLevel: Decimal.min(this.glyph, Glyphs.levelCap), rawLevel: new Decimal(1) }
         : gainedLevel;
       const choices = GlyphSelection.glyphList(GlyphSelection.choiceCount, levelToCheck,
         { isChoosingGlyph: false });

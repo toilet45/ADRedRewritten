@@ -128,12 +128,13 @@ export default {
           ? `${format(this.config.cost)} TT`
           : quantify("Time Theorem", this.config.cost);
       }
+
       const stStr = this.setup.isSmall
         ? `${formatInt(this.STCost)} ST`
         : quantifyInt("Space Theorem", this.STCost);
 
       const costs = [];
-      if (this.config.cost) costs.push(ttStr);
+      if (this.config.cost.neq(0)) costs.push(ttStr);
       if (this.STCost && this.showStCost) costs.push(stStr);
       return costs.join(" + ");
     },

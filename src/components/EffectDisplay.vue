@@ -84,6 +84,9 @@ export default {
         } else if (isDecimal(value)) {
           this.effectValue = Decimal.fromDecimal(value);
           this.updateEffect = () => this.effectValue.copyFrom(effect());
+        } else if (value instanceof Array) {
+          this.effectValue = cloneDeep(value);
+          this.updateEffect = () => this.effectValue = cloneDeep(effect());
         } else {
           throw new Error(`EffectDisplay config.effect is a function which returns` +
             ` unsupported type "${typeof effect}"`);

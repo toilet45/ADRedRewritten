@@ -98,10 +98,13 @@ export default class TimeStudyTreeLayout {
       normalRow(               EC(6), TS(131), TS(132), TS(133), EC(8)                ),
       normalRow(                      TS(141), TS(142), TS(143)                       ));
     if (type.triadPace) {
-      this.rows.push(normalRow(TS(311), TS(312), TS(313)));
+      this.rows.push(normalRow(null, TS(311), TS(312), TS(313), EC(4)),
+        normalRow(               EC(9), TS(151),   null,                   ));
+    } else {
+      this.rows.push(normalRow(               null,   EC(9), TS(151),   null,   EC(4) ));
     }
     this.rows.push(
-      normalRow(               null,   EC(9), TS(151),   null,   EC(4)                ),
+
       normalRow(                          TS(161), TS(162)                            )
     );
 
@@ -228,9 +231,10 @@ export default class TimeStudyTreeLayout {
     return {
       alt62: Perk.bypassEC5Lock.isBought,
       alt181: Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought,
+      mu9: MendingUpgrade(9).isBought,
       triad: Ra.canBuyTriad,
-      triadPace: Ra.pets.v.level >= 54,
-      triadDim: Ra.pets.v.level >= 65,
+      triadPace: (Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9),
+      triadDim: (Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12),
       mvdUnlocked: Ra.pets.laitela.level >= 75,
     };
   }

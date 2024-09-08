@@ -100,7 +100,7 @@ class RaPetState extends GameMechanicState {
   }
 
   get isCapped() {
-    return this.level >= Ra.levelCap;
+    return this.level >= (this.name === "Ra" ? 100 : Ra.levelCap);
   }
 
   get level() {
@@ -128,7 +128,7 @@ class RaPetState extends GameMechanicState {
   }
 
   get requiredMemories() {
-    return Ra.requiredMemoriesForLevel(this.level);
+    return Ra.requiredMemoriesForLevel(this.level, this.name);
   }
 
   get memoryChunksPerSecond() {
@@ -174,11 +174,11 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryUpgradeCapped() {
-    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(Ra.levelCap - 1).div(2));
+    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2));
   }
 
   get chunkUpgradeCapped() {
-    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(Ra.levelCap - 1).div(2));
+    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2));
   }
 
   purchaseMemoryUpgrade() {
@@ -222,8 +222,8 @@ class RaPetState extends GameMechanicState {
     this.memories = this.memories.add(newMemories);
   }
 
-  reset() {
-    this.data.level = 1;
+  reset(mu19 = false) {
+    if (!mu19) this.data.level = 1;
     this.data.memories = DC.D0;
     this.data.memoryChunks = DC.D0;
     this.data.memoryUpgrades = 0;
@@ -250,7 +250,7 @@ export const Ra = {
     }
   },
   // Dev/debug function for easier testing
-  reset() {
+  reset(mu19 = false) {
     const data = player.celestials.ra;
     data.unlockBits = 0;
     data.run = false;
@@ -273,7 +273,7 @@ export const Ra = {
     data.momentumTime = DC.D0;
     data.unlocks = [];
     data.petWithRemembrance = "";
-    for (const pet of Ra.pets.all) pet.reset();
+    for (const pet of Ra.pets.all) pet.reset(mu19);
   },
   memoryTick(realDiff, generateChunks) {
     if (!this.isUnlocked) return;
@@ -299,8 +299,8 @@ export const Ra = {
     return `${boostList.slice(0, -1).join(", ")}, and ${boostList[boostList.length - 1]}`;
   },
   // This is the exp required ON "level" in order to reach "level + 1"
-  requiredMemoriesForLevel(level) {
-    if (level >= Ra.levelCap) return DC.BEMAX;
+  requiredMemoriesForLevel(level, pet = "notRa") {
+    if (level >= Ra.levelCap || pet === "Ra" && level >= 100) return DC.BEMAX;
     const adjustedLevel = Decimal.pow(level, 2).div(10).add(level);
     const post15Scaling = Decimal.pow(1.5, Decimal.max(0, level - 15));
     return Decimal.floor(Decimal.pow(adjustedLevel, 5.52).mul(post15Scaling).mul(DC.E6));
@@ -325,6 +325,26 @@ export const Ra = {
     return this.pets.all.map(pet => (pet.isUnlocked ? pet.level : 0)).nSum();
   },
   get levelCap() {
+    if (MendingUpgrade(19).isBought) {
+      if (Ra.unlocks.finalCelMemoryInc.isUnlocked) {
+        return 100;
+      }
+      if (Ra.unlocks.secondToLastLevelInc.isUnlocked) {
+        return 90;
+      }
+      if (Ra.unlocks.anotherLevelIncAgain.isUnlocked) {
+        return 75;
+      }
+      if (Ra.unlocks.anotherLevelInc.isUnlocked) {
+        return 55;
+      }
+      if (Ra.unlocks.levelIncAgain.isUnlocked) {
+        return 40;
+      }
+      if (Ra.unlocks.levelInc.isUnlocked) {
+        return 30;
+      }
+    }
     return 25;
   },
   get maxTotalPetLevel() {

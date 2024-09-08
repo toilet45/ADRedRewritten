@@ -755,9 +755,9 @@ export const normalTimeStudies = [
     id: 307,
     cost: DC.D0,
     STCost: 12,
-    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 7, 201],
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 7, 193],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    requiresST: [201],
+    requiresST: [193],
     description: "Replicanti slowdown beyond the cap is halved",
     effect: 0.5,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 7
@@ -766,11 +766,11 @@ export const normalTimeStudies = [
     id: 308,
     cost: DC.D0,
     STCost: 12,
-    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8, PlayerProgress.dilationUnlocked()],
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8, () => PlayerProgress.dilationUnlocked()],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [true],
     description: "Galaxy strength is increased based on Tachyon Galaxies",
-    effect: () => player.dilation.totalTachyonGalaxies.log10().cbrt().div(4).add(1),
+    effect: () => player.dilation.totalTachyonGalaxies.max(1).log10().cbrt().div(4).add(1),
     formatEffect: value => `+${formatPercents(value.sub(1), 3)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8
   },
@@ -781,9 +781,10 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9, 141],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [141],
-    description: "Replicanti and Multiversal Remains gain a multiplier based on time spent in this Mend, decreasing",
-    effect: () => [Time.thisMendRealTime.div(1000).clampMin(1).log(3).recip().mul(5e12),
-      Time.thisMendRealTime.div(1000).clampMin(1).log(3).recip().mul(125)],
+    description: "Multiplier to Replicanti and Multiversal Remains, which decays over this Mend",
+    effect: () => [Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).recip().mul(1e14).add(1),
+      Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).log(3).recip().mul(500).add(1)],
+    formatEffect: value => `${formatX(value[0], 1, 1)}, ${formatX(value[1], 1, 1)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9
   },
   {
@@ -793,8 +794,9 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10, 142],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [142],
-    description: "Replicanti and Multiversal Remains gain a multiplier based on time spent in this Mend",
-    effect: () => [1e4, 20],
+    // eslint-disable-next-line max-len
+    description: () => `${formatX(5e8)} to Replicanti gain and ${formatX(50)} to Multiversal Remain gain`,
+    effect: () => [5e8, 50],
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10
   },
   {
@@ -804,9 +806,10 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11, 143],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [143],
-    description: "Replicanti and Multiversal Remains gain a multiplier based on time spent in this Mend, increasing",
-    effect: [Time.thisMendRealTime.div(1000).clampMin(1).cbrt().mul(100),
-      Time.thisMendRealTime.div(1000).clampMin(1).cbrt().mul(5)],
+    description: "Multiplier to Replicanti and Multiversal Remains, which increases over this Mend",
+    effect: () => [Time.thisMendRealTime.totalMilliseconds.clampMin(1),
+      Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).root(4).mul(5)],
+    formatEffect: value => `${formatX(value[0], 1, 1)}, ${formatX(value[1], 1, 1)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11
   },
   {
@@ -818,6 +821,7 @@ export const normalTimeStudies = [
     requiresST: [101],
     description: "Antimatter Dimensions gain a power effect based on Antimatter",
     effect: () => Currency.antimatter.value.max(1).log(10).max(1).log(10).root(5).div(25).add(1),
+    formatEffect: value => `${formatPow(value, 3, 3)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12
   },
   {
@@ -829,6 +833,7 @@ export const normalTimeStudies = [
     requiresST: [102],
     description: "Infinity Dimensions gain a power effect based on Infinity Points",
     effect: () => Currency.infinityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(40).add(1),
+    formatEffect: value => `${formatPow(value, 3, 3)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 13
   },
   {
@@ -840,6 +845,7 @@ export const normalTimeStudies = [
     requiresST: [103],
     description: "Time Dimensions gain a power effect based on Eternity Points",
     effect: () => Currency.eternityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(25).add(1),
+    formatEffect: value => `${formatPow(value, 3, 3)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14
   },
   {
@@ -851,6 +857,7 @@ export const normalTimeStudies = [
     requiresST: [104],
     description: "Multiversal Dimensions gain a multiplier based on Multiversal Remains",
     effect: () => Currency.mendingPoints.value.max(1).log10().div(20).add(1).cbrt(),
+    formatEffect: value => `${formatX(value, 3, 3)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15
   }
 ];

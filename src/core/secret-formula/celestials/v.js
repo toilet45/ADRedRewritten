@@ -21,7 +21,7 @@ export const v = {
       resource: () => Currency.realities.value,
       requirement: 10000,
       format: x => formatInt(x),
-      progress: () => Currency.realities.value.div(10000).min(1).toNumber(),
+      progress: () => Currency.realities.value.div(10000).add(MendingMilestone.three.isReached ? 1 : 0).min(1).toNumber(),
     },
     eternities: {
       id: 2,
