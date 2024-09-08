@@ -524,13 +524,13 @@ export const Glyphs = {
     if (player.reality.autoCollapse) this.collapseEmptySlots();
   },
   sortByLevel() {
-    this.sort((a, b) => Decimal.compare(a.level, b.level));
+    this.sort((a, b) => -Decimal.compare(a.level, b.level));
   },
   sortByPower() {
-    this.sort((a, b) => Decimal.compare(a.level.mul(a.strength), b.level.mul(b.strength)));
+    this.sort((a, b) => -Decimal.compare(a.level.mul(a.strength), b.level.mul(b.strength)));
   },
   sortByScore() {
-    this.sort((a, b) => Decimal.compare(AutoGlyphProcessor.filterValue(b), AutoGlyphProcessor.filterValue(a)));
+    this.sort((a, b) => -Decimal.compare(AutoGlyphProcessor.filterValue(b), AutoGlyphProcessor.filterValue(a)));
   },
   sortByEffect() {
   // Yes the naming of this function makes 0 sense but imma leave it, since it works (hopefully)
