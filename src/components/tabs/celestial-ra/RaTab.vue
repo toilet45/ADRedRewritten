@@ -63,7 +63,7 @@ export default {
         scalingUpgradeText: () => `Why do u see this`,
       },
       {
-        pet: Ra.pets.lai,
+        pet: Ra.pets.laitela,
         scalingUpgradeVisible: () => Ra.unlocks.newDMD.isUnlocked,
         scalingUpgradeText: () => {
           const laieffect = Ra.unlocks.newDMD.effectOrDefault([0, 0]);

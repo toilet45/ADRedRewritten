@@ -152,7 +152,7 @@ export function mendingReset() {
   };
   player.reality.unlockedEC = 0;
   player.reality.lastAutoEC = DC.D0;
-  player.reality.perks = new Set();
+  if (!MendingMilestone.three.isUnlocked) player.reality.perks = new Set();
   player.reality.respec = false;
   player.reality.showGlyphSacrifice = false;
   player.reality.perkPoints = DC.D0;

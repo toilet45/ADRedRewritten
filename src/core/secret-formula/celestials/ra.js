@@ -343,7 +343,7 @@ export const ra = {
       effect: 1,
       pet: "teresa",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `♫`,
       disabledByPelle: false
     },
     breakCharges: {
@@ -608,16 +608,16 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 1,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-staff-snake"></i>`,
       disabledByPelle: false
     },
     levelInc: {
       id: 57,
-      reward: () => `Unlock celestial levels up to ${formatInt(30)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(30)}`,
       effect: 1,
       pet: "ra",
       level: 2,
-      displayIcon: `?`,
+      displayIcon: `30`,
       disabledByPelle: false
     },
     scaleReduce: {
@@ -626,16 +626,16 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 5,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-arrow-down-wide-short"></i>`,
       disabledByPelle: false
     },
     levelIncAgain: {
       id: 59,
-      reward: () => `Unlock celestial levels up to ${formatInt(40)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(40)}`,
       effect: 1,
       pet: "ra",
       level: 8,
-      displayIcon: `?`,
+      displayIcon: `40`,
       disabledByPelle: false
     },
     raShopUnlock: {
@@ -644,16 +644,16 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 10,
-      displayIcon: `?`,
+      displayIcon: `<i class='fas fa-sun'></i>`,
       disabledByPelle: false
     },
     anotherLevelInc: {
       id: 61,
-      reward: () => `Unlock celestial levels up to ${formatInt(55)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(55)}`,
       effect: 1,
       pet: "ra",
       level: 15,
-      displayIcon: `?`,
+      displayIcon: `55`,
       disabledByPelle: false
     },
     laiMemoryUnlock: {
@@ -662,7 +662,7 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 25,
-      displayIcon: `?`,
+      displayIcon: `ᛝ`,
       disabledByPelle: false
     },
     memGainOutsideRa: {
@@ -676,11 +676,11 @@ export const ra = {
     },
     anotherLevelIncAgain: {
       id: 64,
-      reward: () => `Unlock celestial levels up to ${formatInt(75)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(75)}`,
       effect: 1,
       pet: "ra",
       level: 40,
-      displayIcon: `?`,
+      displayIcon: `75`,
       disabledByPelle: false
     },
     raShopNewRow: {
@@ -694,11 +694,11 @@ export const ra = {
     },
     secondToLastLevelInc: {
       id: 66,
-      reward: () => `Unlock celestial levels up to ${formatInt(90)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(90)}`,
       effect: 1,
       pet: "ra",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `90`,
       disabledByPelle: false
     },
     pelleMemoryUnlock: {
@@ -707,7 +707,7 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `♅`,
       disabledByPelle: false
     },
     raShopFinalRow: {
@@ -721,11 +721,11 @@ export const ra = {
     },
     finalCelMemoryInc: {
       id: 69,
-      reward: () => `Unlock celestial levels up to ${formatInt(100)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(75)}`,
       effect: 1,
       pet: "ra",
       level: 100,
-      displayIcon: `?`,
+      displayIcon: `100`,
       disabledByPelle: false
     },
 
@@ -751,7 +751,7 @@ export const ra = {
     laiXP: {
       id: 72,
       reward: () => `Memory gain is improved based on Singularities`,
-      effect: 1,
+      effect: () => new Decimal(1),
       pet: "laitela",
       level: 5,
       displayIcon: `?`,
@@ -759,7 +759,7 @@ export const ra = {
     },
     lockedImaginaryUpgUnlock: {
       id: 73,
-      reward: () => `Game speed is uncapped`,
+      reward: () => `Unlock more rebuyable Imaginary Upgrades`,
       effect: 1,
       pet: "laitela",
       level: 8,
@@ -890,7 +890,7 @@ export const ra = {
     pelleXP: {
       id: 86,
       reward: () => `Increase Memory Production based on your best Antimatter`,
-      effect: 1,
+      effect: () => new Decimal(1),
       pet: "pelle",
       level: 5,
       displayIcon: `?`,
