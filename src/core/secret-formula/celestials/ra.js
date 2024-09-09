@@ -475,7 +475,7 @@ export const ra = {
       effect: 1,
       pet: "enslaved",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-forward"></i>`,
       disabledByPelle: false
     },
     thirdBlackHole: {
@@ -735,7 +735,7 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 1,
-      displayIcon: `?`,
+      displayIcon: `<i class='fas fa-check'></i>`,
       disabledByPelle: false
     },
     autoSingCapIncUnlock: {

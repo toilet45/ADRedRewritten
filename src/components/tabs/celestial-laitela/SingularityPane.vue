@@ -67,7 +67,7 @@ export default {
         : null;
     },
     increaseTooltip() {
-      return this.singularityCapIncreases.gte(50)
+      return this.singularityCapIncreases.gte(Ra.unlocks.bulkSingIncrease.canBeApplied ? 200 : 50)
         ? "You cannot increase the cap any further!"
         : null;
     }

@@ -88,6 +88,7 @@ export * from "./shop";
 export * from "./tabs";
 export * from "./tab-notifications";
 export * from "./speedrun";
+export * from "./expo-black-hole";
 
 export * from "./automator/script-templates";
 

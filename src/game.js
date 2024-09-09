@@ -309,7 +309,8 @@ export const GAME_SPEED_EFFECT = {
   BLACK_HOLE: 3,
   TIME_STORAGE: 4,
   SINGULARITY_MILESTONE: 5,
-  NERFS: 6
+  NERFS: 6,
+  EXPO_BLACK_HOLE: 7
 };
 
 /**
@@ -318,11 +319,14 @@ export const GAME_SPEED_EFFECT = {
   * @param {number?} blackHolesActiveOverride A numerical value which forces all black holes up to its specified index
   *   to be active for the purposes of game speed calculation. This is only used during offline black hole stuff.
   */
+
+// eslint-disable-next-line complexity
 export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride) {
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
-      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS];
+      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS, 
+      GAME_SPEED_EFFECT.EXPO_BLACK_HOLE];
   } else {
     effects = effectsToConsider;
   }
@@ -376,9 +380,14 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
     }
   }
 
+  if (effects.includes(GAME_SPEED_EFFECT.EXPO_BLACK_HOLE)) {
+    factor = factor.pow(ExpoBlackHole(1).power);
+  }
+
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
   const forcedDisableDevspeed = EternityChallenge(12).isRunning || NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning
   // eslint-disable-next-line capitalized-comments
+  if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
   return factor;
