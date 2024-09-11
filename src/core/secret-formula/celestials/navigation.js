@@ -1496,10 +1496,10 @@ export const celestialNavigation = {
     complete: () => {
       const upgrade = DarkMatterDimension(2).unlockUpgrade;
       if (upgrade.canBeBought || upgrade.isBought) return 1;
-      if (upgrade.isAvailableForPurchase) return upgrade.currency.value / upgrade.cost;
+      if (upgrade.isAvailableForPurchase) return upgrade.currency.value.div(upgrade.cost).toNumber();
       return Laitela.difficultyTier < 1
         ? 0
-        : 30 / player.celestials.laitela.fastestCompletion;
+        : new Decimal(30).player.celestials.laitela.fastestCompletion.toNumber();
     },
     node: {
       clickAction: () => Tab.celestials.laitela.show(true),
@@ -1636,7 +1636,7 @@ export const celestialNavigation = {
           return [
             dmdText,
             `Automatically Condense ${format(20)} Singularities at once`,
-            `${format(Math.clampMax(Singularity.singularitiesGained, 20))} / ${format(20)}`
+            `${format(Decimal.clampMax(Singularity.singularitiesGained, 20))} / ${format(20)}`
           ];
         },
         angle: 15,

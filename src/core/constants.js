@@ -343,6 +343,20 @@ window.TS_REQUIREMENT_TYPE = {
   DIMENSION_PATH: 2,
 };
 
+window.CELESTIAL_STUDY_PATH = {
+  NONE: 0,
+};
+
+window.CELESTIAL_STUDY_TYPE = {
+  NORMAL: 0,
+  ETERNITY_CHALLENGE: 1,
+};
+
+window.CS_REQUIREMENT_TYPE = {
+  AT_LEAST_ONE: 0,
+  ALL: 1,
+};
+
 window.ALCHEMY_RESOURCE = {
   POWER: 0,
   INFINITY: 1,

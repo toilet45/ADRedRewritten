@@ -353,7 +353,7 @@ export const ra = {
       effect: () => Math.min(13, Math.max(0, floor((Ra.pets.teresa.level - 35) / 5))),
       pet: "teresa",
       level: 40,
-      displayIcon: `?`,
+      displayIcon: `∝`,
       disabledByPelle: false
     },
     hardTeresa: {
@@ -362,7 +362,7 @@ export const ra = {
       effect: 1,
       pet: "teresa",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `𐤑`,
       disabledByPelle: false
     },
     perkShopUpgrades: {
@@ -372,7 +372,7 @@ export const ra = {
       effect: 1,
       pet: "teresa",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `$`,
       disabledByPelle: false
     },
     passiveTeresa: {
@@ -381,7 +381,7 @@ export const ra = {
       effect: 1,
       pet: "teresa",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `Ω`,
       disabledByPelle: false
     },
     glyphSacrificeUncap: {
@@ -390,7 +390,7 @@ export const ra = {
       effect: 1,
       pet: "teresa",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-clone"></span>`,
       disabledByPelle: false
     },
     musicUniqueType: {
@@ -399,7 +399,7 @@ export const ra = {
       effect: 1,
       pet: "teresa",
       level: 100,
-      displayIcon: `?`,
+      displayIcon: `♫`,
       disabledByPelle: false
     },
 
@@ -410,7 +410,7 @@ export const ra = {
       effect: 50000,
       pet: "effarig",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `×2`,
       disabledByPelle: false
     },
     alchemyTwo: {
@@ -419,7 +419,7 @@ export const ra = {
       effect: () => Math.min(7, Math.floor((Ra.pets.effarig.level - 30) / 10)),
       pet: "effarig",
       level: 40,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-vial"></span>`,
       disabledByPelle: false
     },
     glyphRarityUncap: {
@@ -428,16 +428,16 @@ export const ra = {
       effect: 0.2,
       pet: "effarig",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-clone"></span>`,
       disabledByPelle: false
     },
     amalgamGlyphUnlock: {
       id: 38,
-      reward: () => `Unlock amalgam glyphs, which can have any ${formatInt(8)} effects from basic glyphs`,
+      reward: () => `Unlock Amalgamated Glyphs, which can have any ${formatInt(8)} effects from Basic Glyphs`,
       effect: 1,
       pet: "effarig",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `§`,
       disabledByPelle: false
     },
     softcapDelay: {
@@ -447,7 +447,7 @@ export const ra = {
       effect: () => Math.min(3, Math.floor((Ra.pets.effarig.level - 65) / 10)),
       pet: "effarig",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-clone"></span>`,
       disabledByPelle: false
     },
     effarigMendLayer: {
@@ -456,7 +456,7 @@ export const ra = {
       effect: 1,
       pet: "effarig",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `Ϙ`,
       disabledByPelle: false
     },
     allGlyphNewUnique: {
@@ -480,11 +480,11 @@ export const ra = {
     },
     thirdBlackHole: {
       id: 43,
-      reward: () => `Unlock the third black hole, which is much stronger but costs iM to upgrade`,
+      reward: () => `Unlock the 3rd Black Hole, which is much stronger but costs iM to upgrade`,
       effect: 1,
       pet: "enslaved",
       level: 40,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-circle"></span>`,
       disabledByPelle: false
     },
     timeExpansionUnlock: {
@@ -493,7 +493,7 @@ export const ra = {
       effect: 1,
       pet: "enslaved",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-link-slash"></i>`,
       disabledByPelle: false
     },
     tachyonicBoosts: {
@@ -502,7 +502,7 @@ export const ra = {
       effect: 1,
       pet: "enslaved",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `Ψ`,
       disabledByPelle: false
     },
     cheaperTess: {
@@ -511,26 +511,26 @@ export const ra = {
       effect: () => [0.1, 0.05],
       pet: "enslaved",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-cube"></i>`,
       disabledByPelle: false
     },
     weakerGamespeedSoftcap: {
       id: 47,
-      reward: () => `Dilated time is boosted by gamespeed at a much higher rate. Gamespeed softcap is weaker`,
+      reward: () => `Dilated time is boosted by gamespeed at a much higher rate. Gamespeed softcap is weakered`,
       effect: () => [5, 0.9],
       pet: "enslaved",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `Ψ`,
       disabledByPelle: false
     },
     timePowAllglyphs: {
       id: 48,
-      reward: () => `Achievements provide a power effect to Gamespeed, Effarig Glyphs game speed power is now available
+      reward: () => `Achievements provide a power effect to Gamespeed, Effarig Glyphs' game speed power is now available
       on all glyphs, and Effarig Glyphs gain a new effect`,
       effect: 1,
       pet: "enslaved",
       level: 100,
-      displayIcon: `?`,
+      displayIcon: `Ϙ`,
       disabledByPelle: false
     },
 
@@ -540,16 +540,16 @@ export const ra = {
       effect: 1,
       pet: "v",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `<i class='fas fa-brain'></i>`,
       disabledByPelle: false
     },
     newVhard: {
       id: 50,
-      reward: () => `Unlock new v-hard achievements and improve the dimension study paths`,
+      reward: () => `Unlock new Hard-V achievements and improve the Dimension Study paths`,
       effect: 1,
       pet: "v",
       level: 40,
-      displayIcon: `?`,
+      displayIcon: `⌬`,
       disabledByPelle: false
     },
     triadCheaper: {
@@ -558,37 +558,37 @@ export const ra = {
       effect: 1,
       pet: "v",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `-1`,
       disabledByPelle: false
     },
     triadCheaperAgain: {
       id: 52,
-      reward: () => `Unlock ${formatInt(2)} new triad studies,
-      and triad studies cost ${formatInt(2)} Space Theorem less`,
+      reward: () => `Unlock ${formatInt(2)} new Triad Studies,
+      and Triad Studies cost ${formatInt(2)} Space Theorems less`,
       effect: 1,
       pet: "v",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `-2`,
       disabledByPelle: false
     },
     vHardenedUnlock: {
       id: 53,
-      reward: () => `Unlock v-hardened achievements. Gain an extra Triad Study. You do not gain more Triad Studies,
-      but unlock the Celestial Study tree`,
+      reward: () => `Unlock Extreme-V achievements and gain one final Triad Study.
+      Unlock the Celestial Study Tree`,
       effect: 1,
       pet: "v",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `⏣`,
       disabledByPelle: false
     },
     celTreeUnlocks: {
       id: 54,
-      reward: () => `Unlock ${formatInt(4)} more rows of the Celestial Study tree. Unlock a new v-hardened achievement
+      reward: () => `Unlock ${formatInt(4)} more rows of the Celestial Study Tree. Unlock another Extreme-V achievement
       , and you can now buy Celestial Studies with Time Theorems`,
       effect: 1,
       pet: "v",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-project-diagram"></span>`,
       disabledByPelle: false
     },
     achArePower: {
@@ -598,7 +598,7 @@ export const ra = {
       effect: 1,
       pet: "v",
       level: 100,
-      displayIcon: `?`,
+      displayIcon: `^`,
       disabledByPelle: false
     },
 
@@ -671,7 +671,7 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `<i class='fas fa-brain'></i>`,
       disabledByPelle: false
     },
     anotherLevelIncAgain: {
@@ -689,7 +689,7 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `$`,
       disabledByPelle: false
     },
     secondToLastLevelInc: {
@@ -716,12 +716,12 @@ export const ra = {
       effect: 1,
       pet: "ra",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `$$`,
       disabledByPelle: false
     },
     finalCelMemoryInc: {
       id: 69,
-      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(75)}`,
+      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(100)}`,
       effect: 1,
       pet: "ra",
       level: 100,
@@ -735,7 +735,7 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 1,
-      displayIcon: `<i class='fas fa-check'></i>`,
+      displayIcon: `<i class="fas fa-arrows-up-down-left-right"></i>`,
       disabledByPelle: false
     },
     autoSingCapIncUnlock: {
@@ -745,7 +745,7 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 2,
-      displayIcon: `?`,
+      displayIcon: `<i class="fas fa-arrows-up-down-left-right"></i>`,
       disabledByPelle: false
     },
     laiXP: {
@@ -754,7 +754,7 @@ export const ra = {
       effect: () => new Decimal(1),
       pet: "laitela",
       level: 5,
-      displayIcon: `?`,
+      displayIcon: `<i class="fas fa-arrows-up-down-left-right"></i>`,
       disabledByPelle: false
     },
     lockedImaginaryUpgUnlock: {
@@ -763,16 +763,16 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 8,
-      displayIcon: `?`,
+      displayIcon: `<i class='fas fa-level-up-alt'></i>`,
       disabledByPelle: false
     },
     infinityDimensionContinuum: {
       id: 74,
-      reward: () => `Continuum weakly affects infinity dimensions (including caps)`,
+      reward: () => `Continuum weakly affects Infinity Dimensions (including caps)`,
       effect: 1,
       pet: "laitela",
       level: 10,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-infinity"></span>`,
       disabledByPelle: false
     },
     annihilationGain: {
@@ -782,7 +782,7 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 15,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-bolt-lightning"></i>`,
       disabledByPelle: false
     },
     newDMD: {
@@ -800,7 +800,7 @@ export const ra = {
       ],
       pet: "laitela",
       level: 25,
-      displayIcon: `?`,
+      displayIcon: `ᛝ`,
       disabledByPelle: false
     },
     universalDamageUnlock: {
@@ -809,7 +809,7 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-biohazard"></i>`,
       disabledByPelle: false
     },
     unit08improvement: {
@@ -823,11 +823,11 @@ export const ra = {
     },
     timeDimensionContinuum: {
       id: 79,
-      reward: () => `Continuum weakly affects time dimensions`,
+      reward: () => `Continuum weakly affects Time Dimensions`,
       effect: 1,
       pet: "laitela",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `Δ`,
       disabledByPelle: false
     },
     easierUD: {
@@ -836,7 +836,7 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-biohazard"></i>`,
       disabledByPelle: false
     },
     MvDUnlock: {
@@ -845,36 +845,36 @@ export const ra = {
       effect: 1,
       pet: "laitela",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-staff-snake"></i>`,
       disabledByPelle: false
     },
     newInfGlyphEffect: {
       id: 82,
-      reward: () => `nlock a new effect for infinity glyphs, which boosts continuum`,
+      reward: () => `Unlock a new effect for Infinity Glyphs, which boosts Continuum`,
       effect: 1,
       pet: "laitela",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `∞`,
       disabledByPelle: false
     },
     autoAbsorbExcessCredits: {
       id: 83,
-      reward: () => `Experimental black hole absorbs excess credits, if they would cause annihilation otherwise.
+      reward: () => `Experimental Black Hole absorbs excess Credits, if they would cause Annihilation otherwise.
       Unlock a new effect on Power Glyphs (dimboost cost)`,
       effect: 1,
       pet: "laitela",
       level: 100,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-circle"></span>`,
       disabledByPelle: false
     },
 
     undoDoom: {
       id: 84,
-      reward: () => `You can exit doom, however you will gain no reward and return to before doom`,
+      reward: () => `You can exit Doom, however you will gain no reward and return to before doom`,
       effect: 1,
       pet: "pelle",
       level: 1,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-person-through-window"></i>`,
       disabledByPelle: false
     },
     doomMVRmult: {
@@ -884,7 +884,7 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 2,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-staff-snake"></i>`,
       disabledByPelle: false
     },
     pelleXP: {
@@ -893,7 +893,7 @@ export const ra = {
       effect: () => new Decimal(1),
       pet: "pelle",
       level: 5,
-      displayIcon: `?`,
+      displayIcon: `Ω`,
       disabledByPelle: false
     },
     newIC: {
@@ -902,16 +902,16 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 8,
-      displayIcon: `?`,
+      displayIcon: `∞`,
       disabledByPelle: false
     },
     horrificGlyphUnlock: {
       id: 88,
-      reward: () => `Unlock horrific glyphs, which are harsher than Cursed glyphs but count as ${formatInt(-5)} glyphs`,
+      reward: () => `Unlock Horrific Glyphs, which are harsher than Cursed Glyphs but count as ${formatInt(-5)} equipped Glyphs`,
       effect: 1,
       pet: "pelle",
       level: 10,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-skull"></i>`,
       disabledByPelle: false
     },
     thirdGLscaleReduce: {
@@ -920,7 +920,7 @@ export const ra = {
       effect: 5.2,
       pet: "pelle",
       level: 15,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-arrow-down-wide-short"></i>`,
       disabledByPelle: false
     },
     hyperdoomUnlock: {
@@ -929,7 +929,7 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 25,
-      displayIcon: `?`,
+      displayIcon: `♇`,
       disabledByPelle: false
     },
     dimStudyPath: {
@@ -938,7 +938,7 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 30,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-staff-snake"></i>`,
       disabledByPelle: false
     },
     galaxyCostReduce: {
@@ -948,16 +948,16 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 40,
-      displayIcon: `?`,
+      displayIcon: `<i class="fas fa-bahai"></i>`,
       disabledByPelle: false
     },
     inCelImproveGain: {
       id: 93,
-      reward: () => `Memory gain is improved for a celestial if you are currently in their reality`,
+      reward: () => `Memory gain is improved for a celestial if you are currently in their Reality`,
       effect: 1,
       pet: "pelle",
       level: 50,
-      displayIcon: `?`,
+      displayIcon: `Ϟ`,
       disabledByPelle: false
     },
     tessCheapen: {
@@ -966,7 +966,7 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 65,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-cubes"></i>`,
       disabledByPelle: false
     },
     newHyperdoomShit: {
@@ -975,17 +975,17 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 75,
-      displayIcon: `?`,
+      displayIcon: `<i class='fas fa-arrow-up'></i>`,
       disabledByPelle: false
     },
     newDamagedEffects: {
       id: 96,
-      reward: () => `Unlock a new effect for damaged Glyphs. Tesseract prisms guarentee
+      reward: () => `Unlock a new effect for Damaged Glyphs. Tesseract prisms guarentee
       ${formatInt(2)} effects. Dimensions are slightly stronger`,
       effect: 1,
       pet: "pelle",
       level: 90,
-      displayIcon: `?`,
+      displayIcon: `<span class="fas fa-braille"></span>`,
       disabledByPelle: false
     },
     kohlerUnlock: {
@@ -994,7 +994,7 @@ export const ra = {
       effect: 1,
       pet: "pelle",
       level: 100,
-      displayIcon: `?`,
+      displayIcon: `<i class="fa-solid fa-staff-snake"></i>`,
       disabledByPelle: false
     },
   }

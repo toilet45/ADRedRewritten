@@ -1,5 +1,5 @@
 import { GameMechanicState } from "../game-mechanics";
-
+/* IDK if needed rn
 function showSecondPreferredWarning(currTree) {
   const canPickSecond = currTree.allowedDimPathCount === 2 && currTree.currDimPathCount < 2;
   // Show a warning if the player can choose the second preferred dimension path and hasn't yet done so.
@@ -19,14 +19,15 @@ function showThirdPreferredWarning(currTree) {
   }
   return false;
 }
-
+*/
 // This is only ever called from manual player actions, which means we can immediately commit them to the game state
 // eslint-disable-next-line complexity
+/*
 export function buyStudiesUntil(id, ec = -1) {
   let studyArray = [];
   const lastInPrevRow = Math.floor(id / 10) * 10 - 1;
-  const requestedPath = TimeStudy(id).path;
-  const currTree = GameCache.currentStudyTree.value;
+  const requestedPath = CelestialStudy(id).path;
+  const currTree = GameCache.currentCelStudyTree.value;
   // Makes an array [start, start+1, ... , end], empty if end < start
   const range = (start, end) => [...Array(Math.clampMin(end - start + 1, 0)).keys()].map(i => i + start);
   const ecHasRequirement = !Perk.studyECRequirement.isBought;
@@ -40,7 +41,7 @@ export function buyStudiesUntil(id, ec = -1) {
   studyArray.push(...range(11, Math.min(lastInPrevRow, 70)));
   studyArray.push(id);
 
-  if (id < 71) return studyArray;
+ //  if (id < 71) return studyArray;
 
   // Priority for behavior when buying in the Dimension split; we follow only the first applicable entry below:
   // - If we're buying a study within the split, we first buy just the requested path up to the requested study.
@@ -54,7 +55,7 @@ export function buyStudiesUntil(id, ec = -1) {
   // - If the player doesn't have a preferred path, we say so and do nothing (stops buying)
   // - Otherwise we do nothing (stops buying)
   if (id < 111) {
-    studyArray.push(...NormalTimeStudies.paths[requestedPath].filter(s => (s <= id)));
+    studyArray.push(...NormalCelestialStudies.paths[requestedPath].filter(s => (s <= id)));
     return studyArray;
   }
 
@@ -92,21 +93,21 @@ export function buyStudiesUntil(id, ec = -1) {
   // - Fallback case: we have more than one path and intentionally do nothing here (continues onward)
 
   if (id < 151) {
-    studyArray.push(...NormalTimeStudies.paths[TimeStudy(id).path].filter(s => (s <= id)));
+    studyArray.push(...NormalCelestialStudies.paths[TimeStudy(id).path].filter(s => (s <= id)));
     return studyArray;
   }
 
   const pacePaths = currTree.pacePaths
-    .map(pathName => NormalTimeStudies.pathList.find(p => p.name === pathName).path);
+    .map(pathName => NormalCelestialStudies.pathList.find(p => p.name === pathName).path);
   if (V.isFullyCompleted && !Pelle.isDoomed) {
-    const allPace = NormalTimeStudies.paths[TIME_STUDY_PATH.ACTIVE]
-      .concat(NormalTimeStudies.paths[TIME_STUDY_PATH.PASSIVE])
-      .concat(NormalTimeStudies.paths[TIME_STUDY_PATH.IDLE]);
+    const allPace = NormalCelestialStudies.paths[TIME_STUDY_PATH.ACTIVE]
+      .concat(NormalCelestialStudies.paths[TIME_STUDY_PATH.PASSIVE])
+      .concat(NormalCelestialStudies.paths[TIME_STUDY_PATH.IDLE]);
     studyArray.push(...allPace);
   } else if (pacePaths.length === 1) {
-    studyArray.push(...NormalTimeStudies.paths[pacePaths[0]]);
+    studyArray.push(...NormalCelestialStudies.paths[pacePaths[0]]);
   } else if (TimeStudy.preferredPaths.pace.path !== 0) {
-    studyArray.push(...TimeStudy.preferredPaths.pace.studies);
+    studyArray.push(...CelestialStudy.preferredPaths.pace.studies);
   } else if (pacePaths.length === 0) {
     GameUI.notify.error("You haven't selected a preferred Pace path.");
     return studyArray;
@@ -120,20 +121,20 @@ export function buyStudiesUntil(id, ec = -1) {
   if (!(ecHasRequirement && (ec === 11 || ec === 12))) {
     // We need to commit what we have to the game state, because the check for priorityRequirement
     // requires us knowing if we have actually purchased 201.
-    TimeStudyTree.commitToGameState(studyArray);
+    CelestialStudyTree.commitToGameState(studyArray);
     studyArray = [];
 
     // Buy the second preferred dimension path if we have one
-    if (TimeStudy.preferredPaths.dimension.path.length > 0) {
-      studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
+    if (CelestialStudy.preferredPaths.dimension.path.length > 0) {
+      studyArray.push(...CelestialStudy.preferredPaths.dimension.studies);
       // We need to commit the dimension paths to the game state in order
       // to know if we should display the second preferred path warning.
-      TimeStudyTree.commitToGameState(studyArray);
+      CelestialStudyTree.commitToGameState(studyArray);
       studyArray = [];
     }
 
-    if (!secondPreferredWarningShown) showSecondPreferredWarning(GameCache.currentStudyTree.value);
-    if (!thirdPreferredWarningShown) showThirdPreferredWarning(GameCache.currentStudyTree.value);
+    if (!secondPreferredWarningShown) showSecondPreferredWarning(GameCache.currentCelStudyTree.value);
+    if (!thirdPreferredWarningShown) showThirdPreferredWarning(GameCache.currentCelStudyTree.value);
 
     studyArray.push(...range(211, Math.min(lastInPrevRow, 214)));
 
@@ -148,26 +149,26 @@ export function buyStudiesUntil(id, ec = -1) {
   studyArray.push(...range(221, Math.max(id, 234)));
   return studyArray;
 }
+*/
 
-export function respecTimeStudies(auto) {
-  for (const study of TimeStudy.boughtNormalTS()) {
+export function respecCelestialStudies(auto) {
+  for (const study of CelestialStudy.boughtNormalCS()) {
     study.refund();
   }
-  player.timestudy.studies = [];
-  GameCache.timeStudies.invalidate();
-  player.celestials.v.STSpent = 0;
-  const ecStudy = TimeStudy.eternityChallenge.current();
+  player.celestialstudy.studies = [];
+  GameCache.celestialStudies.invalidate();
+  const ecStudy = CelestialStudy.eternityChallenge.current();
   if (ecStudy !== undefined) {
     ecStudy.refund();
     player.challenge.eternity.unlocked = 0;
   }
   if (!auto) {
-    Tab.eternity.studies.show();
+    Tab.eternity.celStudies.show();
   }
   GameCache.currentStudyTree.invalidate();
 }
 
-export class TimeStudyState extends GameMechanicState {
+export class CelestialStudyState extends GameMechanicState {
   constructor(config, type) {
     super(config);
     this.type = type;
@@ -177,21 +178,12 @@ export class TimeStudyState extends GameMechanicState {
     return this.config.cost;
   }
 
-  get STCost() {
-    let base = this.config.STCost;
-    // TODO make this Effects.sum
-    if (VUnlocks.raUnlock.canBeApplied) base -= 2;
-    if (Ra.unlocks.triadCheaper.canBeApplied) base -= 1;
-    if (Ra.unlocks.triadCheaperAgain.canBeApplied) base -= 2;
-    return Math.max(base, 0);
-  }
-
   refund() {
-    Currency.timeTheorems.add(this.cost);
+    Currency.celestialTheorems.add(this.cost);
   }
 
   get isAffordable() {
-    return Currency.timeTheorems.gte(this.cost);
+    return Currency.celestialTheorems.gte(this.cost);
   }
 
   get canBeBought() {

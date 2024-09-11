@@ -12,6 +12,7 @@ import { discordRichPresence } from "./discord-rich-presence";
 import { eternity } from "./eternity";
 import { h2p } from "./h2p";
 import { infinity } from "./infinity";
+import { mending } from "./ad-red_mending";
 import { news } from "./news";
 import { progressStages } from "./progress-checker";
 import { reality } from "./reality";
@@ -19,7 +20,7 @@ import { sidebarResources } from "./sidebar-resources";
 import { speedrunMilestones } from "./speedrun-milestones";
 import { tabNotifications } from "./tab-notifications";
 import { tabs } from "./tabs";
-import { mending } from "./ad-red_mending";
+
 
 export const GameDatabase = {
   achievements,

@@ -174,6 +174,7 @@ class AlchemyReaction {
       const diffAfter = reagentAfter.sub(prodAfter);
       cappedYield = Decimal.min(cappedYield, this.reactionYield.mul(diffBefore).div(diffBefore.sub(diffAfter)));
     }
+    // if (this._product.amount.gt(25000)) cappedYield = cappedYield.pow(0.66);
     return Decimal.clampMin(cappedYield, 0);
   }
 

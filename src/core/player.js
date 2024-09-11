@@ -433,8 +433,20 @@ window.player = {
       studies: "",
     }),
   },
+  celestialstudy: {
+    theorem: DC.D0,
+    maxTheorem: DC.D0,
+    studies: [],
+    shopMinimized: false,
+    preferredPaths: [[], 0],
+    presets: new Array(6).fill({
+      name: "",
+      studies: "",
+    }),
+  },
   eternityChalls: {},
   respec: false,
+  celRespec: false,
   eterc8ids: 50,
   eterc8repl: 40,
   dilation: {

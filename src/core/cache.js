@@ -82,6 +82,11 @@ export const GameCache = {
 
   currentStudyTree: new Lazy(() => new TimeStudyTree(TimeStudyTree.currentStudies)),
 
+  celestialStudies: new Lazy(() => NormalCelestialStudyState.studies
+    .map(s => player.celestialstudy.studies.includes(s.id))),
+
+  currentCelStudyTree: new Lazy(() => new CelestialStudyTree(CelestialStudyTree.currentStudies)),
+
   achievementPeriod: new Lazy(() => TimeSpan.fromMinutes(new Decimal(30).sub(Effects.sum(
     Perk.achievementGroup1,
     Perk.achievementGroup2,

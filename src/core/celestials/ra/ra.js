@@ -420,7 +420,7 @@ export const Ra = {
     this.updateAlchemyFlow(realityRealTime);
   },
   get alchemyResourceCap() {
-    return 25000;
+    return Ra.unlocks.alchHardcapIncrease.canBeApplied ? 50000 : 25000;
   },
   get momentumValue() {
     const hoursFromUnlock = TimeSpan.fromMilliseconds(player.celestials.ra.momentumTime).totalHours;

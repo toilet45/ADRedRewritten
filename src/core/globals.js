@@ -89,7 +89,9 @@ export * from "./tabs";
 export * from "./tab-notifications";
 export * from "./speedrun";
 export * from "./expo-black-hole";
+export * from "./celestial-theorems";
 
 export * from "./automator/script-templates";
 
 export * from "./mending/index";
+export * from "./celestial-studies";

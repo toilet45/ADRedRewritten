@@ -781,7 +781,7 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9, 141],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [141],
-    description: "Multiplier to Replicanti and Multiversal Remains, which decays over this Mend",
+    description: "Multiplier to Replicanti speed and Multiversal Remains, which decays over this Mend",
     effect: () => [Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).recip().mul(1e14).add(1),
       Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).log(3).recip().mul(500).add(1)],
     formatEffect: value => `${formatX(value[0], 1, 1)}, ${formatX(value[1], 1, 1)}`,
@@ -795,7 +795,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [142],
     // eslint-disable-next-line max-len
-    description: () => `${formatX(5e8)} to Replicanti gain and ${formatX(50)} to Multiversal Remain gain`,
+    description: () => `${formatX(5e8)} to Replicanti speed and ${formatX(50)} to Multiversal Remain gain`,
     effect: () => [5e8, 50],
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10
   },
@@ -806,7 +806,7 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11, 143],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [143],
-    description: "Multiplier to Replicanti and Multiversal Remains, which increases over this Mend",
+    description: "Multiplier to Replicanti speed and Multiversal Remains, which increases over this Mend",
     effect: () => [Time.thisMendRealTime.totalMilliseconds.clampMin(1),
       Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).root(4).mul(5)],
     formatEffect: value => `${formatX(value[0], 1, 1)}, ${formatX(value[1], 1, 1)}`,

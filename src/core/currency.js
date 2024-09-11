@@ -387,6 +387,27 @@ Currency.timeTheorems = new class extends DecimalCurrency {
   }
 }();
 
+Currency.celestalTheorems = new class extends DecimalCurrency {
+  get value() { return player.celestialstudy.theorem; }
+  set value(value) {
+    player.celestialstudy.theorem = value;
+    player.celestialstudy.maxTheorem = value;
+  }
+
+  get max() { return player.celestialstudy.maxTheorem; }
+
+  add(amount) {
+    super.add(amount);
+    player.celestialstudy.maxTheorem = player.celestialstudy.maxTheorem.plus(amount);
+  }
+
+  reset() {
+    respecCelestialStudies(true);
+    super.reset();
+    player.celestialstudy.maxTheorem = this.startingValue;
+  }
+}();
+
 Currency.tachyonParticles = new class extends DecimalCurrency {
   get value() { return player.dilation.tachyonParticles; }
   set value(value) { player.dilation.tachyonParticles = value; }
