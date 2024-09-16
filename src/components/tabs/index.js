@@ -41,7 +41,9 @@ import StatisticsTab from "./statistics/StatisticsTab";
 import TeresaTab from "./celestial-teresa/TeresaTab";
 import TimeDilationTab from "./time-dilation/TimeDilationTab";
 import TimeDimensionsTab from "./time-dimensions/TimeDimensionsTab";
+import TimeExpansionTab from "./mending/time-expansion/TimeExpansionTab";
 import TimeStudiesTab from "./time-studies/TimeStudiesTab";
+import UniversalDamageTab from "./mending/universal-damage/UniversalDamageTab";
 import VTab from "./celestial-v/VTab";
 
 const TabComponents = {
@@ -88,7 +90,9 @@ const TabComponents = {
   ShopTab,
   MultiplierBreakdownTab,
   MendingUpgradesTab,
-  MendingMilestonesTab
+  MendingMilestonesTab,
+  TimeExpansionTab,
+  UniversalDamageTab
 };
 
 export default TabComponents;

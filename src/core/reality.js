@@ -123,6 +123,7 @@ export const GlyphSelection = {
 };
 
 export function isRealityAvailable() {
+  if (Enslaved.isExpanded) return true;
   return player.records.thisReality.maxEP.gte("1e4000") && TimeStudy.reality.isBought;
 }
 
@@ -142,9 +143,13 @@ export function simulatedRealityCount(advancePartSimCounters) {
  * Triggered when the user clicks the reality button. This triggers the glyph selection
  * process, if applicable. Auto sacrifice is never triggered.
  */
-export function requestManualReality() {
+export function requestManualReality(expand = false) {
   if (GlyphSelection.active || !isRealityAvailable()) return;
   if (GameEnd.creditsEverClosed) return;
+  if (expand) {
+    // TODO seperate cases for TE and UD
+    return;
+  }
   if (player.options.confirmations.glyphSelection || ui.view.shiftDown) {
     Modal.reality.show();
     return;

@@ -110,5 +110,23 @@ GameDatabase.celestials.descriptions = [
       Doing this ${formatInt(8)} times will also give a ${formatX(8)} to Dark Energy gain.`;
     }
   },
+  {
+    name: "Pelle",
+    effects() {
+      return "THIS IS A PLACEHOLDER";
+    },
+  },
+  {
+    name: "a Time Expanded",
+    effects() {
+      return `Dimension Multipliers and Tickspeed are fixed to ${formatX(1)}
+      Base Tickspeed cost increases and cost scaling is ${format(1e100)}
+      Extrenal Infinity (Point), Eternity (Point), Time Theorem, and Dilation resource generation or 
+      multipliers are disabled.
+
+      However Gamespeed is ${formatPow(50)} stronger
+      `;
+    },
+  }
 
 ];

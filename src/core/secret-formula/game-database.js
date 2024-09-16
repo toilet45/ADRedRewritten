@@ -21,6 +21,7 @@ import { speedrunMilestones } from "./speedrun-milestones";
 import { tabNotifications } from "./tab-notifications";
 import { tabs } from "./tabs";
 
+import { expansionUpgrades } from "./celestials/expansion-upgrades";
 
 export const GameDatabase = {
   achievements,
@@ -44,7 +45,8 @@ export const GameDatabase = {
   speedrunMilestones,
   tabNotifications,
   tabs,
-  mending
+  mending,
+  expansionUpgrades
 };
 
 window.GameDatabase = GameDatabase;

@@ -2,6 +2,7 @@ import { alchemyResources } from "./alchemy";
 import { celestialNavigation } from "./navigation";
 import { effarigUnlocks } from "./effarig";
 import { enslaved } from "./enslaved";
+import { expansionUpgrades } from "./expansion-upgrades";
 import { finalSigil } from "./navigation-sigils/final-sigil";
 import { galaxyIcon } from "./navigation-sigils/galaxy-icon";
 import { pelleGalaxyGeneratorUpgrades } from "./galaxy-generator";
@@ -40,5 +41,6 @@ export const celestials = {
   singularityMilestones,
   teresa,
   quotes,
-  v
+  v,
+  expansionUpgrades
 };

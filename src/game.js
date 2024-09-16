@@ -99,7 +99,7 @@ export function gainedInfinityPoints(mm1gen = false) {
   let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
     : new Decimal(308 / div);
-  if (Enslaved.isExpanded) return ip;
+  if (Enslaved.isExpanded) return ip.timesEffectOf(ExpansionUpgrade(3));
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
     ip = ip.min(DC.E200);
   }

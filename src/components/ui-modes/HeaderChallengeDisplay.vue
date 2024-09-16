@@ -16,6 +16,8 @@ export default {
       exitText: "",
       resetCelestial: false,
       inPelle: false,
+      inExpansion: false,
+      inDamage: false
     };
   },
   computed: {
@@ -93,6 +95,8 @@ export default {
       if (this.inPelle && this.activeChallengeNames.length > 0) {
         return `${this.activeChallengeNames.join(" + ")} in a Doomed Reality. Good luck.`;
       }
+      if (this.inExpansion) return "an Expanded Reality";
+      if (this.inDamage) return "a Damaged Reality";
       if (this.inPelle) return "a Doomed Reality. Good luck.";
       if (this.activeChallengeNames.length === 0) {
         // eslint-disable-next-line max-len
@@ -112,6 +116,8 @@ export default {
       this.exitText = this.exitDisplay();
       this.resetCelestial = player.options.retryCelestial;
       this.inPelle = Pelle.isDoomed;
+      this.inExpansion = Enslaved.isExpanded;
+      this.inDamage = Laitela.isDamaged;
     },
     // Process exit requests from the inside out; Challenges first, then dilation, then Celestial Reality. If the
     // relevant option is toggled, we pass a bunch of information over to a modal - otherwise we immediately exit

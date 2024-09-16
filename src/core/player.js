@@ -662,7 +662,16 @@ window.player = {
       hintUnlockProgress: 0,
       glyphHintsGiven: 0,
       zeroHintTime: 0,
-      expanded: false
+      expanded: false,
+      enslavedPoints: DC.D0,
+      expandUpgradeBits: 0,
+      expandRebuyables: {
+        1: DC.D0,
+        2: DC.D0,
+        3: DC.D0,
+        4: DC.D0,
+        5: DC.D0
+      }
     },
     v: {
       unlockBits: 0,

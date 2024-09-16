@@ -526,3 +526,8 @@ Currency.realitiesBanked = new class extends DecimalCurrency {
   get value() { return player.realitiesBanked; }
   set value(value) { player.realitiesBanked = value; }
 }();
+
+Currency.enslavedPoints = new class extends DecimalCurrency {
+  get value() { return player.celestials.enslaved.enslavedPoints; }
+  set value(value) { player.celestials.enslaved.enslavedPoints = value; }
+}();

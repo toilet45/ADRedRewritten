@@ -522,6 +522,24 @@ export const tabs = [
         component: "MendingMilestonesTab",
         id: 1,
         hidable: true
+      },
+      {
+        key: "time_expansion",
+        name: "Time Expansion",
+        symbol: "?",
+        component: "TimeExpansionTab",
+        condition: () => Ra.unlocks.timeExpansionUnlock.canBeApplied,
+        id: 2,
+        hidable: true
+      },
+      {
+        key: "universal_damage",
+        name: "Universal Damage",
+        symbol: "?",
+        component: "UniversalDamageTab",
+        condition: () => Ra.unlocks.universalDamageUnlock.canBeApplied,
+        id: 3,
+        hidable: true
       }
     ]
   }
