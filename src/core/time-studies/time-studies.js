@@ -65,7 +65,7 @@ export function buyStudiesUntil(id, ec = -1) {
   } else if (currTree.currDimPathCount === currTree.allowedDimPathCount || currTree.allowedDimPathCount === 4 ||
      (currTree.allowedDimPathCount === 3 && !Ra.unlocks.MvDUnlock.isUnlocked)) {
     studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
-    studyArray.push([71, 81, 91, 101, 72, 82, 92, 102, 73, 83, 93, 103, 74, 84, 94, 104]);
+    studyArray.push(...range(71, 104));
   } else if (TimeStudy.preferredPaths.dimension.path.length > 0) {
     studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
   } else if (currTree.currDimPathCount === 0) {

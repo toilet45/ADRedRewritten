@@ -18,7 +18,8 @@ export default {
       bestShardRate: new Decimal(),
       bestShardRateVal: new Decimal(),
       ppGained: new Decimal(),
-      celestialRunText: ["", "", "", "", ""]
+      celestialRunText: ["", "", "", "", ""],
+      expanded: false
     };
   },
   computed: {
@@ -114,6 +115,7 @@ export default {
         "antimatter");
       this.celestialRunText = [
         [Teresa.isRunning, teresaReward, teresaThreshold]];
+      this.expanded = Enslaved.isExpanded;
     },
     handleClick() {
       if (this.canReality) {

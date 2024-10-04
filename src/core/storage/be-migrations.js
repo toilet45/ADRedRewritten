@@ -143,7 +143,7 @@ export function beMigration(player) {
   player.infinityRebuyables[2] = D(player.infinityRebuyables[2]);
   player.IPMultPurchases = D(player.IPMultPurchases);
   if (player.options.lastOpenSubtab[2] === 3) player.options.lastOpenSubtab[2] = 1;
-  player.options.lnotation = "Stacked Scientific";
+  player.options.lnotation = "Semi-Stacked Scientific";
   player.partSimulatedReality = D(player.partSimulatedReality);
   player.realities = D(player.realities);
   player.reality.achTimer = D(player.reality.achTimer);
