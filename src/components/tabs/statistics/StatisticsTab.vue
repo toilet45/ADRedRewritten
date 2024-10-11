@@ -232,7 +232,7 @@ export default {
         General
       </div>
       <div class="c-stats-tab-general">
-        <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
+        <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter {{ mending.isUnlocked ? "in this Mended Multiverse" : "" }}.</div>
         <div>You have played for {{ realTimePlayed }}. (real time)</div>
         <div v-if="reality.isUnlocked">
           Your existence has spanned {{ reality.totalTimePlayed }} of time. (game time)
@@ -391,9 +391,9 @@ export default {
         You have been Doomed for {{ realTimeDoomed.toStringShort() }}, real time.
       </div>
       <div>
-        Your best Reality Machines per minute is {{ format(reality.bestRate, 2, 2) }}.
+        Your best Reality Machines per minute {{ mending.isUnlocked ? "this Mend" : ""}} is {{ format(reality.bestRate, 2, 2) }}.
       </div>
-      <div>Your best Glyph rarity is {{ formatRarity(reality.bestRarity) }}.</div>
+      <div>Your best Glyph rarity {{ mending.isUnlocked ? "this Mend" : "" }} is {{ formatRarity(reality.bestRarity) }}.</div>
       <br>
     </div>
     <div
@@ -403,14 +403,13 @@ export default {
       <div class="c-stats-tab-title c-stats-tab-mending">
         Mending
       </div>
-      <div>You have Medned this Multiverse {{ mendCountString }}.</div>
+      <div>You have Mended this Multiverse {{ mendCountString }}.</div>
       <div v-if="reality.projectedBanked.gt(0)">
         You will gain {{ formatDecimalAmount(reality.projectedBanked.floor()) }}
         {{ pluralize("Banked Reality", reality.projectedBanked.floor()) }} on Mend.
       </div>
       <div v-if="mending.hasBest">
-        Your fastest Mend was {{ mending.best.toStringShort() }}.
-        Your fastest real-time Mend was {{ mending.bestReal.toStringShort() }}.
+        Your fastest Mend was {{ mending.best.toStringShort() }} ({{ mending.bestReal.toStringShort() }} real time).
       </div>
       <div v-else>
         You have no fastest Mend.

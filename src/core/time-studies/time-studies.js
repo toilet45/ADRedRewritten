@@ -62,10 +62,11 @@ export function buyStudiesUntil(id, ec = -1) {
     studyArray.push(...NormalTimeStudies.paths[TIME_STUDY_PATH.ANTIMATTER_DIM].filter(s => (s <= id)));
   } else if (ec === 12 && ecHasRequirement) {
     studyArray.push(...NormalTimeStudies.paths[TIME_STUDY_PATH.TIME_DIM].filter(s => (s <= id)));
-  } else if (currTree.currDimPathCount === currTree.allowedDimPathCount || currTree.allowedDimPathCount === 4 ||
-     (currTree.allowedDimPathCount === 3 && !Ra.unlocks.MvDUnlock.isUnlocked)) {
+  } else if (currTree.currDimPathCount === currTree.allowedDimPathCount ||
+     (currTree.allowedDimPathCount >= 3)) {
     studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
-    studyArray.push(...range(71, 104));
+    studyArray.push(...[71, 72, 73, 81, 82, 83, 91, 92, 93, 101, 102, 103]);
+    if (Ra.unlocks.MvDUnlock.canBeApplied) studyArray.push(...[74, 84, 94, 104]);
   } else if (TimeStudy.preferredPaths.dimension.path.length > 0) {
     studyArray.push(...TimeStudy.preferredPaths.dimension.studies);
   } else if (currTree.currDimPathCount === 0) {

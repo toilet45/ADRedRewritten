@@ -108,7 +108,10 @@ export class TimeStudyTree {
       ["dark", [222, 224, 226, 228, 232, 234]],
       ...(Ra.unlocks.unlockHardV.canBeApplied
         ? [["triad", [301, 302, 303, 304].slice(0, Ra.unlocks.unlockHardV.effectOrDefault(0))]]
-        : [])
+        : []),
+      ...(Ra.unlocks.MvDUnlock.canBeApplied
+        ? [["multiversal", [74, 84, 94, 104]]]
+        : []),
     ]);
   }
 
