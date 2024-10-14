@@ -1136,8 +1136,8 @@ export const normalAchievements = [
     get description() { return `Reality in under ${formatInt(5)} seconds (game time).`; },
     checkRequirement: () => Time.thisReality.totalSeconds.lte(5),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
-    get reward() { return `${formatPercents(new Decimal(0.1))} chance each Reality of ${formatX(2)} Realities and Perk Points.`; },
-    effect: 0.1
+    get reward() { return `${formatPercents(new Decimal(PlayerProgress.mendingUnlocked() ? 1 : 0.1))} chance each Reality of ${formatX(2)} Realities and Perk Points.`; },
+    effect: () => Achievement(191).isUnlocked ? 1 : 0.1,
   },
   {
     id: 155,
@@ -1388,7 +1388,7 @@ export const normalAchievements = [
     checkRequirement: () => true,
     checkEvent: GAME_EVENT.MENDING_RESET_AFTER,
     get reward() {
-      return `Achievement 166 is changed to be "at least 6969 levels", Reality has no Achievement requirement, and no RM hardcap on the first Reality`;
+      return `Achievement 166 is changed to be "at least 6969 levels", Achievement 154 is 100% ,Reality has no Achievement requirement, and no RM hardcap on the first Reality`;
     }
   },
   {
