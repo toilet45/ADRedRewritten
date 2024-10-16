@@ -11,6 +11,7 @@ export default {
       mendGoal: new Decimal(0),
       hover: false,
       creditsClosed: false,
+      needsDoom: true,
     };
   },
   computed: {
@@ -25,17 +26,17 @@ export default {
     update() {
       this.isVisible = PlayerProgress.mendingUnlocked();
       if (!this.isVisible) return;
-      this.canMend = Pelle.isDoomed && Currency.antimatter.value.gte(this.mendGoal);
-      this.mendGoal = new Decimal(MendingMilestone.six.isUnlocked ? "1e5e14" : "1e9e15");
+      this.canMend = (Pelle.isDoomed || MendingMilestone.six.isReached) && Currency.antimatter.value.gte(this.mendGoal);
+      this.mendGoal = new Decimal(MendingMilestone.six.isReached ? "1e5e14" : "1e9e15");
       this.creditsClosed = GameEnd.creditsEverClosed;
-
+      this.needsDoom = !MendingMilestone.six.isReached;
       const gainedMvR = gainedMendingPoints();
       this.currentMvR.copyFrom(Currency.mendingPoints);
       this.gainedMvR.copyFrom(gainedMvR);
       this.currentMvRRate.copyFrom(gainedMvR.div(Decimal.max(0.0005, Time.thisMendRealTime.totalMinutes)));
     },
     mend() {
-      if (!Player.canMend) return;
+      if (!isMendingAvailable) return;
       mendingResetRequest();
     }
   },
@@ -55,7 +56,7 @@ export default {
     <template v-if="!canMend">
       Reach {{ format(mendGoal, 2, 2) }}
       <br>
-      antimatter in a Doomed Reality
+      antimatter {{needsDoom ? "in a Doomed Reality" : ""}}
     </template>
     <template v-else>
       <b>

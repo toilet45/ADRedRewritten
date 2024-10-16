@@ -13,7 +13,10 @@ export default {
       isPulsing: false,
       hasDevSpeed: false,
       currentDevSpeed: new Decimal(),
-      inMatterChallenge: false
+      inMatterChallenge: false,
+      hasExpoBlackHoles: false,
+      expoBHSpeed: new Decimal(1),
+      trueSpeed: new Decimal(1)
     };
   },
   computed: {
@@ -34,7 +37,7 @@ export default {
       if (!this.hasSeenAlteredSpeed) return null;
       return this.baseSpeed.div(this.currentDevSpeed).eq(1)
         ? "The game is running at normal speed."
-        : `Game speed is altered: ${this.baseSpeedText}`;
+        : `Game speed is altered: ${this.baseSpeedText}${this.hasExpoBlackHoles ? `${formatPow(this.expoBHSpeed, 3, 3)} (${format(this.trueSpeed, 2, 2)})` : ``}`;
     },
     devSpeedText() {
       const devSpeed = this.formatNumber(this.currentDevSpeed);
@@ -43,7 +46,7 @@ export default {
   },
   methods: {
     update() {
-      this.baseSpeed = getGameSpeedupFactor();
+      this.baseSpeed = getGameSpeedupPreExpo();
       this.pulsedSpeed = getGameSpeedupForDisplay();
       this.hasSeenAlteredSpeed = PlayerProgress.seenAlteredSpeed();
       this.isStopped = Enslaved.isStoringRealTime;
@@ -52,6 +55,9 @@ export default {
       this.hasDevSpeed = dev.speedUp !== 1;
       this.currentDevSpeed = new Decimal(dev.speedUp);
       this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
+      this.hasExpoBlackHoles = ExpoBlackHole(1).isActive && !this.isStopped && this.baseSpeed.gt(1);
+      this.expoBHSpeed = getExpoSpeedupFactor();
+      this.trueSpeed = getGameSpeedupFactor();
     },
     formatNumber(num) {
       if (num.gte(0.001) && num.lt(1e4) && num.neq(1)) {

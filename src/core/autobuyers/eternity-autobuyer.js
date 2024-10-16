@@ -10,7 +10,7 @@ export class EternityAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return EternityMilestone.autobuyerEternity.isReached;
+    return EternityMilestone.autobuyerEternity.isReached || (MendingMilestone.seven.isReached && !Pelle.isDoomed);
   }
 
   get mode() {

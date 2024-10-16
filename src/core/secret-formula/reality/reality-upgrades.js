@@ -304,8 +304,8 @@ export const realityUpgrades = [
     name: "Cosmic Conglomerate",
     id: 21,
     cost: 100000,
-    requirement: () => `${format(player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total)
-      .add(player.galaxies), 2, 2)}/${format(2800, 2, 2)} total Galaxies from all types`,
+    requirement: () => `${formatInt(player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total)
+      .add(player.galaxies), 2, 2)}/${formatInt(2800, 2, 2)} total Galaxies from all types`,
     checkRequirement: () =>
       player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total).add(player.galaxies).gte(2800),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,

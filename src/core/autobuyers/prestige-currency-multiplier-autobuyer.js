@@ -32,7 +32,7 @@ export class EPMultAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return RealityUpgrade(13).isBought && !Pelle.isDoomed;
+    return (RealityUpgrade(13).isBought || MendingMilestone.seven.isReached) && !Pelle.isDoomed;
   }
 
   get hasUnlimitedBulk() {

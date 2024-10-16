@@ -10,7 +10,7 @@ export class RealityAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return RealityUpgrade(25).isBought;
+    return RealityUpgrade(25).isBought || (MendingMilestone.seven.isReached && !Pelle.isDoomed);
   }
 
   get canTick() {

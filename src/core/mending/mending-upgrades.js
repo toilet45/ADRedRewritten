@@ -117,9 +117,7 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
     if (!this.canBeBought) return false;
     if (GameEnd.creditsEverClosed) return false;
     if (!(this.id === 1 && Currency.mends.lt(3) && !player.softlockModals.mendingUpgradeOne)) {
-      console.log(this.boughtAmount);
       this.currency.subtract(this.cost);
-      console.log(this.cost);
       this.boughtAmount = this.boughtAmount.add(1);
       this.onPurchased();
       GameUI.update();
@@ -143,7 +141,7 @@ class RebuyableMendingUpgradeState extends RebuyableMechanicState {
 
   onPurchased() {
     const id = this.id;
-    if (id === 1) Autobuyer.mend.bumpAmount(DC.D3);
+    if (id === 1) Autobuyer.mend.bumpAmount(new Decimal(3));
   }
 }
 

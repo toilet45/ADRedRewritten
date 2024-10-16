@@ -81,7 +81,7 @@ export const v = {
     {
       id: 1,
       name: "AntiStellar",
-      description: value => `Have ${format(value)} total Galaxies from all types.`,
+      description: value => `Have ${formatInt(value)} total Galaxies from all types.`,
       values: [4000, 4300, 4600, 4900, 5200, 5500],
       condition: () => V.isRunning,
       currentValue: () => player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total).add(player.galaxies),

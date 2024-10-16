@@ -47,6 +47,10 @@ export function antimatterDimensionCommonMultiplier() {
 
   multiplier = multiplier.times(MendingUpgrade(3).effects.mult);
 
+  multiplier = multiplier.pow(Effects.product(
+    TimeStudy(321)
+  ));
+
   if (Pelle.isDoomed) multiplier = multiplier.dividedBy(10);
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);

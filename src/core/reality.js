@@ -488,9 +488,9 @@ export function beginProcessReality(realityProps) {
       if (VUnlocks.autoAutoClean.canBeApplied && player.reality.autoAutoClean) Glyphs.autoClean();
     }
   };
-  const glyphsToSample = Math.min(glyphsToProcess, 10000);
+  const glyphsToSample = Math.min(glyphsToProcess.toNumber(), 10000);
   Async.run(glyphFunction,
-    glyphsToProcess,
+    glyphsToProcess.toNumber(),
     {
       batchSize: 100,
       maxTime: 33,

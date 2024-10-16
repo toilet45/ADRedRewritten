@@ -27,6 +27,9 @@ export function infinityDimensionCommonMultiplier() {
   }
 
   mult = mult.times(MendingUpgrade(3).effects.mult);
+  mult = mult.pow(Effects.product(
+    TimeStudy(322)
+  ));
   if (Laitela.isDamaged) mult = mult.pow(0.6);
   return mult;
 }

@@ -4,6 +4,7 @@ import BlackHoleChargingSliders from "./BlackHoleChargingSliders";
 import BlackHoleStateRow from "./BlackHoleStateRow";
 import BlackHoleUnlockButton from "./BlackHoleUnlockButton";
 import BlackHoleUpgradeRow from "./BlackHoleUpgradeRow";
+import ExpoBlackHoleUpgradeRow from "./ExpoBlackHoleUpgradeRow";
 
 export default {
   name: "BlackHoleTab",
@@ -11,7 +12,8 @@ export default {
     BlackHoleUpgradeRow,
     BlackHoleStateRow,
     BlackHoleChargingSliders,
-    BlackHoleUnlockButton
+    BlackHoleUnlockButton,
+    ExpoBlackHoleUpgradeRow
   },
   data() {
     return {
@@ -26,10 +28,12 @@ export default {
       hasBH2: false,
       blackHoleUptime: [],
       stateChange: "",
+      isExpoUnlocked: false
     };
   },
   computed: {
     blackHoles: () => BlackHoles.list,
+    expoBlackHoles: () => ExpoBlackHoles.list,
     pauseModeString() {
       switch (this.pauseMode) {
         case BLACK_HOLE_PAUSE_MODE.NO_PAUSE:
@@ -70,6 +74,8 @@ export default {
 
       if (player.blackHoleNegative.lt(1) && !this.isLaitela) this.stateChange = this.isPaused ? "Uninvert" : "Invert";
       else this.stateChange = this.isPaused ? "Unpause" : "Pause";
+
+      this.isExpoUnlocked = ExpoBlackHole(1).isUnlocked;
     },
     bh2Status() {
       const bh1Remaining = BlackHole(1).timeWithPreviousActiveToNextStateChange;
@@ -224,6 +230,16 @@ export default {
           v-for="(blackHole, i) in blackHoles"
           :key="'upgrades' + i"
           :black-hole="blackHole"
+        />
+      </div>
+    </template>
+    <template v-if="isExpoUnlocked">
+      Black Hole 3 is only active if Black Holes 1 and 2 are not paused or inverted
+      <div :class="gridStyle()">
+        <ExpoBlackHoleUpgradeRow
+          v-for="(expoBlackHole, i) in expoBlackHoles"
+          :key="'upgrades' + i"
+          :expo-black-hole="expoBlackHole"
         />
       </div>
     </template>

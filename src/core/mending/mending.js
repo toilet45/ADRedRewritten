@@ -77,8 +77,10 @@ export function mendingReset() {
   // Celestials
   Teresa.reset();
   Effarig.reset();
+  if (MendingMilestone.four.isReached) player.celestials.effarig.unlockBits = 15;
   Enslaved.reset();
   V.reset();
+  if (MendingMilestone.five.isReached) V.unlockCelestial();
   Ra.reset();
   Laitela.reset();
   Pelle.reset();
@@ -130,7 +132,7 @@ export function mendingReset() {
     4: new Decimal(),
     5: new Decimal(),
   };
-  player.reality.upgradeBits = 0;
+  player.reality.upgradeBits = MendingMilestone.eleven.isReached ? 67108863 : 0;
   player.reality.upgReqs = 0;
   player.reality.imaginaryUpgradeBits = 0;
   player.reality.imaginaryUpgReqs = 0;
@@ -152,7 +154,7 @@ export function mendingReset() {
   };
   player.reality.unlockedEC = 0;
   player.reality.lastAutoEC = DC.D0;
-  if (!MendingMilestone.three.isUnlocked) player.reality.perks = new Set();
+  if (!MendingMilestone.three.isReached) player.reality.perks = new Set();
   player.reality.respec = false;
   player.reality.showGlyphSacrifice = false;
   player.reality.perkPoints = DC.D0;
@@ -323,7 +325,7 @@ export function mendingReset() {
     iMCapSet: [],
     laitelaSet: [],
   };
-  lockAchievementsOnMend();
+  if (!MendingMilestone.ten.isReached) lockAchievementsOnMend();
   InfinityChallenges.clearCompletions();
   Currency.infinityPoints.reset();
   // End resetting all the things
@@ -337,6 +339,9 @@ export function mendingReset() {
 export function gainedMendingPoints() {
   let x = DC.D1;
   x = x.mul(Decimal.pow(3, MendingUpgrade(1).boughtAmount));
+  x = x.mul(TimeStudy(311).effectValue[1]);
+  x = x.mul(TimeStudy(312).effectValue[1]);
+  x = x.mul(TimeStudy(313).effectValue[1]);
   return x;
 }
 

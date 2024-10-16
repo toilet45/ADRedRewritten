@@ -180,7 +180,7 @@ export const Enslaved = {
     return !EnslavedProgress.hintsUnlocked.hasProgress && Enslaved.has(ENSLAVED_UNLOCKS.RUN) && !Enslaved.isCompleted;
   },
   get isUnlocked() {
-    return EffarigUnlock.eternity.isUnlocked;
+    return EffarigUnlock.eternity.isUnlocked || MendingMilestone.twelve.isReached;
   },
   get realityBoostRatio() {
     return Decimal.max(1, Decimal.floor(player.celestials.enslaved.storedReal
@@ -235,7 +235,7 @@ export const Enslaved = {
     player.celestials.enslaved.storedReal = DC.D0;
     player.celestials.enslaved.autoStoreReal = false;
     player.celestials.enslaved.isAutoReleasing = false;
-    player.celestials.enslaved.unlocks = [];
+    player.celestials.enslaved.unlocks = MendingMilestone.eight.isReached ? [0, 1] : [];
     player.celestials.enslaved.run = false;
     player.celestials.enslaved.completed = false;
     player.celestials.enslaved.tesseracts = DC.D0;

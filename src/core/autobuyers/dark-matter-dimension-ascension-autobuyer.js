@@ -10,7 +10,7 @@ export class DarkMatterDimensionAscensionAutobuyerState extends IntervaledAutobu
   }
 
   get isUnlocked() {
-    return SingularityMilestone.ascensionAutobuyers.canBeApplied;
+    return SingularityMilestone.ascensionAutobuyers.canBeApplied || (MendingMilestone.nine.isReached && !Pelle.isDoomed);
   }
 
   get interval() {

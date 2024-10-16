@@ -73,10 +73,11 @@ class RealityUpgradeState extends BitPurchasableMechanicState {
   }
 
   get isAvailableForPurchase() {
-    return (player.reality.upgReqs & (1 << this.id)) !== 0;
+    return (player.reality.upgReqs & (1 << this.id)) !== 0 || MendingMilestone.eleven.isReached;
   }
 
   get isPossible() {
+    if (MendingMilestone.eleven.isReached) return true;
     return this.config.hasFailed ? !this.config.hasFailed() : true;
   }
 
@@ -139,6 +140,6 @@ export const RealityUpgrades = {
    */
   all: RealityUpgradeState.index.compact(),
   get allBought() {
-    return (player.reality.upgradeBits >> 6) + 1 === 1 << (GameDatabase.reality.upgrades.length - 5);
+    return (player.reality.upgradeBits >> 6) + 1 === 1 << (GameDatabase.reality.upgrades.length - 5) || MendingMilestone.eleven.isReached;
   }
 };

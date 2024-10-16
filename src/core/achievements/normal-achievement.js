@@ -35,6 +35,7 @@ class AchievementState extends GameMechanicState {
   }
 
   get isPreMend() {
+    if (MendingMilestone.five.isReached) return this.row < 19 && this.row > 15;
     return this.row < 19;
   }
 

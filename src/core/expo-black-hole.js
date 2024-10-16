@@ -222,7 +222,7 @@ class ExpoBlackHoleState {
   }
 
   get isPermanent() {
-    return this.dutyCycle.gte(0.9999);
+    return true;
   }
 
   /**
@@ -310,8 +310,8 @@ class ExpoBlackHoleState {
     return this.cycleLength.sub(this.phase);
   }
 
-  description(capitalized) {
-    return capitalized ? "The Expo Black Hole" : "the Expo Black Hole";
+  description() {
+    return `Black Hole ${this.id + 2}`;
   }
 }
 
@@ -336,7 +336,7 @@ export const ExpoBlackHoles = {
   },
 
   get canBeUnlocked() {
-    return Ra.unlocks.thirdBlockHold.canBeApplied && !this.areUnlocked;
+    return Ra.unlocks.thirdBlackHole.canBeApplied && !this.areUnlocked;
   },
 
   get areUnlocked() {

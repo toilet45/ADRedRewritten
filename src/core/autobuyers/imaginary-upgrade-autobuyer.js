@@ -10,7 +10,7 @@ export class ImaginaryUpgradeAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return ImaginaryUpgrade(20).canBeApplied;
+    return ImaginaryUpgrade(20).canBeApplied || (MendingMilestone.seven.isReached && !Pelle.isDoomed);
   }
 
   get hasUnlimitedBulk() {

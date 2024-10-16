@@ -137,7 +137,10 @@ function totalEPMult() {
 }
 
 export function gainedEternityPoints() {
-  let ep = DC.D5.pow(player.records.thisEternity.maxIP.plus(
+  const base = new Decimal(5).plusEffectOf(
+    TimeStudy(306)
+  );
+  let ep = base.pow(player.records.thisEternity.maxIP.plus(
     gainedInfinityPoints()).log10().div(new Decimal(308).sub(PelleRifts.recursion.effectValue)).sub(0.7))
     .times(totalEPMult());
 
@@ -393,6 +396,14 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   return factor;
 }
 
+export function getGameSpeedupPreExpo() {
+  return getGameSpeedupFactor().pow(Decimal.div(1, getExpoSpeedupFactor()));
+}
+
+export function getExpoSpeedupFactor() {
+  return ExpoBlackHole(1).power;
+  // A.mul(ExpoBlackHole(2).power);
+}
 export function getGameSpeedupForDisplay() {
   const speedFactor = getGameSpeedupFactor();
   if (

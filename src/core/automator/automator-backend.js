@@ -451,7 +451,7 @@ export const AutomatorBackend = {
   },
 
   get currentInterval() {
-    return Decimal.clampMin(Decimal.pow(0.994, Currency.realities.value).mul(500), 1);
+    return MendingMilestone.four.isReached ? new Decimal(1) : Decimal.clampMin(Decimal.pow(0.994, Currency.realities.value).mul(500), 1);
   },
 
   get currentRawText() {
