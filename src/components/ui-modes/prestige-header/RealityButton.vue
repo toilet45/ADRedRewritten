@@ -113,8 +113,18 @@ export default {
         Teresa.rewardMultiplier(Currency.antimatter.value).gt(Teresa.runRewardMultiplier),
         player.celestials.teresa.bestRunAM,
         "antimatter");
+
+      const hardTeresaReward = this.formatScalingPowerText(
+        "Glyph Cap",
+        Teresa.hardRunRewardPower,
+        Decimal.max(Teresa.hardRunRewardPower, Teresa.hardRewardMultiplier(Currency.antimatter.value)));
+      const hardTeresaThreshold = this.formatThresholdText(
+        Teresa.hardRewardMultiplier(Currency.antimatter.value).gt(Teresa.hardRunRewardPower),
+        player.celestials.teresa.hard.bestRunAM,
+        "antimatter");
       this.celestialRunText = [
-        [Teresa.isRunning, teresaReward, teresaThreshold]];
+        [Teresa.isRunning && !Teresa.hardModeToggled, teresaReward, teresaThreshold],
+        [Teresa.isRunning && Teresa.hardModeToggled, hardTeresaReward, hardTeresaThreshold]];
       this.expanded = Enslaved.isExpanded;
     },
     handleClick() {
@@ -125,13 +135,21 @@ export default {
     formatScalingMultiplierText(resource, before, after) {
       return `${resource} ${formatX(before, 2, 2)} ➜ ${formatX(after, 2, 2)}`;
     },
+    formatScalingPowerText(resource, before, after) {
+      return `${resource} ^${format(before, 2, 2)} ➜ ^${format(after, 2, 2)}`;
+    },
     formatThresholdText(condition, threshold, resourceName) {
       if (condition) return "";
       return `(${format(threshold, 2, 2)} ${resourceName} to improve)`;
     },
     // Make the button have a visual animation if Realitying will give a reward
     hasSpecialReward() {
-      if (Teresa.isRunning && Teresa.rewardMultiplier(Currency.antimatter.value).gt(Teresa.runRewardMultiplier)) {
+      if (Teresa.isRunning && !Teresa.hardModeToggled &&
+      Teresa.rewardMultiplier(Currency.antimatter.value).gt(Teresa.runRewardMultiplier)) {
+        return true;
+      }
+      if (Teresa.isRunning && Teresa.hardModeToggled &&
+      Teresa.hardRewardMultiplier(Currency.antimatter.value).gt(Teresa.hardRunRewardPower)) {
         return true;
       }
       return Currency.eternityPoints.value.max(1).log10().gte(4000) &&

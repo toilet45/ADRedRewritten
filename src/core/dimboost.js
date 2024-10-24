@@ -168,7 +168,7 @@ export class DimBoost {
   }
 
   static get startingDimensionBoosts() {
-    if (InfinityUpgrade.skipReset1.isCharged) return new Decimal(12000);
+    if (InfinityUpgrade.skipReset1.isCharged) return new Decimal(1250000);
     if (InfinityUpgrade.skipResetGalaxy.isBought || InfinityUpgrade.skipResetGalaxy.isCharged) return DC.D4;
     if (InfinityUpgrade.skipReset3.isBought || InfinityUpgrade.skipReset3.isCharged) return DC.D3;
     if (InfinityUpgrade.skipReset2.isBought || InfinityUpgrade.skipReset2.isCharged) return DC.D2;
@@ -209,7 +209,7 @@ export function skipResetsIfPossible(enteringAntimatterChallenge) {
   if (InfinityUpgrade.skipResetGalaxy.isBought && player.dimensionBoosts.lt(4)) {
     player.dimensionBoosts = DC.D4;
     if (player.galaxies.lt(1)) {
-      player.galaxies = InfinityUpgrade.skipReset2.isCharged ? new Decimal(250) : DC.D1;
+      player.galaxies = InfinityUpgrade.skipReset2.isCharged ? new Decimal(8500) : DC.D1;
     }
   } else if (InfinityUpgrade.skipReset3.isBought && player.dimensionBoosts.lt(3)) player.dimensionBoosts = DC.D3;
   else if (InfinityUpgrade.skipReset2.isBought && player.dimensionBoosts.lt(2)) player.dimensionBoosts = DC.D2;

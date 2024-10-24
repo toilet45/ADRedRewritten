@@ -32,34 +32,63 @@ export const breakInfinityUpgrades = {
     cost: DC.E4,
     description: "Antimatter Dimensions gain a multiplier based on total antimatter produced",
     effect: () => Decimal.pow(player.records.totalAntimatter.max(1).log10().add(1), 0.5),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: () =>
+        `Antimatter Dimensions gain a power based on total antimatter produced`,
+      effect: () => Decimal.log10(player.records.totalAntimatter.log10()).div(200).add(1),
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   currentAMMult: {
     id: "currentMult",
     cost: DC.E4.mul(5),
     description: "Antimatter Dimensions gain a multiplier based on current antimatter",
     effect: () => Decimal.pow(Currency.antimatter.value.max(1).log10().add(1), 0.5),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: () =>
+        `Antimatter Dimensions gain a power based on current antimatter`,
+      effect: () => Decimal.log10(Currency.antimatter.value.max(1).log10().max(1)).div(200).add(1),
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   galaxyBoost: {
     id: "postGalaxy",
     cost: new Decimal(5e11),
     description: () => `All Galaxies are ${formatPercents(0.5)} stronger`,
-    effect: 1.5
+    effect: 1.5,
+    charged: {
+      description: () =>
+        `All Galaxies are ${formatPercents(1)} stronger`,
+      effect: 2,
+    }
   },
   infinitiedMult: {
     id: "infinitiedMult",
     cost: DC.E5,
     description: "Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => Currency.infinitiesTotal.value.max(1).absLog10().times(10).add(1),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: () =>
+        `Antimatter Dimensions gain a power based on Infinities`,
+      effect: () => Decimal.log10(Currency.infinitiesTotal.value.max(1).log10().max(1)).div(50).add(1),
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   achievementMult: {
     id: "achievementMult",
     cost: DC.E6,
     description: "Antimatter Dimensions gain a multiplier based on Achievements completed",
     effect: () => Math.max(Math.pow((Achievements.effectiveCount - 30), 3) / 40, 1),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: () =>
+        `Achievement multiplier gains a power effect based on Achievements completed`,
+      effect: () => Achievements.effectiveCount / 250 + 1,
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   slowestChallengeMult: {
     id: "challengeMult",
@@ -68,7 +97,13 @@ export const breakInfinityUpgrades = {
     effect: () => Decimal.clampMin(new Decimal(50).div(Time.worstChallenge.totalMinutes), 1),
     formatEffect: value => formatX(value, 2, 2),
     hasCap: true,
-    cap: DC.D3E4
+    cap: DC.D3E4,
+    charged: {
+      description: () =>
+        `Antimatter Dimensions gain a power effect based on total EC completions`,
+      effect: () => EternityChallenges.completions / 500 + 1,
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   infinitiedGen: {
     id: "infinitiedGeneration",
@@ -88,17 +123,35 @@ export const breakInfinityUpgrades = {
         ? `${TimeSpan.fromMilliseconds(new Decimal(100)).toStringShort()} (capped)`
         : `${Time.bestInfinity.times(new Decimal(2)).toStringShort()}`;
       return `${quantify("Infinity", infinities)} every ${timeStr}`;
+    },
+    charged: {
+      description: () =>
+        `Infinity generation is raised ^${format(1.33, 2, 2)}`,
+      effect: () => 1.33,
+      formatEffect: value => `+${formatInt(value)}`
     }
   },
   autobuyMaxDimboosts: {
     id: "autobuyMaxDimboosts",
     cost: new Decimal(5e9),
-    description: "Unlock the buy max Dimension Boost Autobuyer mode"
+    description: "Unlock the buy max Dimension Boost Autobuyer mode",
+    charged: {
+      description: () =>
+        `Dimension boost multiplier is affected by achievements`,
+      effect: () => Achievements.power.add(1),
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   autobuyerSpeed: {
     id: "autoBuyerUpgrade",
     cost: DC.E15,
-    description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast"
+    description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast",
+    charged: {
+      description: () =>
+        `Post-infinity Antimatter Dimension cost scaling is reduced by -${format(0.01, 2, 2)}`,
+      effect: () => 0.01,
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   tickspeedCostMult: rebuyable({
     id: 0,

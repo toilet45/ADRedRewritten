@@ -35,7 +35,9 @@ export default {
       this.isEnabled = Teresa.hardModeToggled;
     },
     emitClick() {
-      player.celestials.teresa.hardModeToggled = !player.celestials.teresa.hardModeToggled
+      if (!Teresa.isRunning) {
+        player.celestials.teresa.hard.toggled = !player.celestials.teresa.hard.toggled;
+      }
     }
   }
 };

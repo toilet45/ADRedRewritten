@@ -615,6 +615,9 @@ class AntimatterDimensionState extends DimensionState {
         production = Decimal.pow10(Decimal.pow(log10, getAdjustedGlyphEffect("effarigantimatter")));
       }
     }
+    if (Teresa.isRunning && Teresa.hardModeToggled && tier === 1) {
+      production = production.pow(0.03);
+    }
     production = production.min(this.cappedProductionInNormalChallenges);
     return production;
   }

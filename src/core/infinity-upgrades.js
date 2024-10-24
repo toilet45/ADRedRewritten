@@ -60,32 +60,29 @@ export class InfinityUpgradeState extends SetPurchasableMechanicState {
   }
 
   get isCharged() {
-    return player.celestials.ra.charged.has(this.id);
+    return player.celestials.ra.charged.has(this.id) && !(Teresa.hardModeToggled && Teresa.isRunning);
   }
 
   get canCharge() {
-    return (this.isBought &&
-      this.hasChargeEffect &&
-      !this.isCharged &&
-      Ra.chargesLeft !== 0 &&
-      !Pelle.isDisabled("chargedInfinityUpgrades")) ||
-      (this.isBought &&
-      this.hasChargeEffect &&
-      !this.isCharged &&
-      Ra.breakChargesLeft !== 0 &&
-      !Pelle.isDisabled("chargedInfinityUpgrades") &&
-      this.id[0] === "s" &&
-      Ra.unlocks.breakCharges.isUnlocked);
+    if (Teresa.hardModeToggled && Teresa.isRunning) return false;
+    if (Pelle.isDisabled("chargedInfinityUpgrades")) return false;
+    if (this.isCharged) return false;
+    if (!this.hasChargeEffect) return false;
+    if (!this.isBought) return false;
+    return (Ra.chargesLeft !== 0 && this.id[0] !== "s") ||
+      (Ra.breakChargesLeft !== 0 && this.id[0] === "s" && Ra.unlocks.breakCharges.isUnlocked);
   }
 
   charge() {
-    if (this.id[0] !== "s") player.celestials.ra.breakCharged.add(this.id);
-    player.celestials.ra.charged.add(this.id);
+    // eslint-disable-next-line no-negated-condition
+    if (this.id[0] === "s") player.celestials.ra.breakCharged.add(this.id);
+    else player.celestials.ra.charged.add(this.id);
   }
 
   disCharge() {
-    if (this.id[0] !== "s") player.celestials.ra.breakCharged.delete(this.id);
-    player.celestials.ra.charged.delete(this.id);
+    // eslint-disable-next-line no-negated-condition
+    if (this.id[0] === "s") player.celestials.ra.breakCharged.delete(this.id);
+    else player.celestials.ra.charged.delete(this.id);
   }
 }
 

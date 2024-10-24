@@ -6098,6 +6098,45 @@ kbd {
   animation: a-teresa-run-button__icon--super-glow 1.2s infinite, a-teresa-run-button__icon--spin 5s infinite;
 }
 
+.c-hard-teresa-run-button {
+  font-weight: bold;
+  color: var(--color-teresa--base);
+  background-color: var(--color-teresa--accent);
+  border: var(--var-border-width, 0.2rem) solid var(--color-teresa--base);
+  filter: grayscale(0.85);
+}
+
+.c-hard-teresa-run-button__icon {
+  width: 12rem;
+  height: 12rem;
+  align-items: center;
+  font-size: 7rem;
+  font-weight: bold;
+  color: var(--color-teresa--base);
+  text-shadow: 0.1rem 0.1rem 0.5rem;
+  background-color: var(--color-teresa--accent);
+  border: var(--var-border-width, 0.4rem) solid var(--color-teresa--base);
+  border-radius: 50%;
+  margin: 1.5rem auto;
+  filter: grayscale(0.65);
+  transition-duration: 0.2s;
+  animation: a-teresa-run-button__icon--glow 3s infinite;
+}
+
+.c-hard-teresa-run-button__icon:hover {
+  color: var(--color-teresa--accent);
+  background-color: var(--color-teresa--base);
+  filter: grayscale(0.65);
+}
+
+.c-hard-teresa-run-button__icon--running {
+  color: var(--color-teresa--accent);
+  background-color: var(--color-teresa--base);
+  border-color: var(--color-teresa--accent);
+  filter: grayscale(0.65);
+  animation: a-teresa-run-button__icon--super-glow 1.2s infinite, a-teresa-run-button__icon--spin 5s infinite;
+}
+
 .c-celestial-run-button--clickable {
   cursor: pointer;
 }
@@ -6856,7 +6895,7 @@ kbd {
 .o-v-milestone {
   display: flex;
   flex-direction: column;
-  width: 25rem;
+  width: 30rem;
   height: 10rem;
   justify-content: space-around;
   font-size: 1.2rem;

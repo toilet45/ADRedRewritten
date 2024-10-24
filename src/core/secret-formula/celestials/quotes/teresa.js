@@ -27,5 +27,17 @@ export const teresaQuotes = {
       "You are still no match for us.",
       "I hope the others succeed where I have failed."
     ]
-  }
+  },
+  completeHardReality: {
+    id: 4,
+    lines: [
+      "You've returned, I see.",
+      "Why are you still here.",
+      "Do you want to see us fail, to fall from grace?",
+      "I do not understand why you bother us still...",
+      "Perhaps there is something I do not know yet...",
+      "Perhaps I was just ignorant...",
+      "Either way, please do not return."
+    ]
+  },
 };

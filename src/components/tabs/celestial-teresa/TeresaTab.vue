@@ -1,3 +1,4 @@
+<!-- eslint-disable camelcase -->
 <script>
 import CelestialQuoteHistory from "@/components/CelestialQuoteHistory";
 import CustomizeableTooltip from "@/components/CustomizeableTooltip";
@@ -36,6 +37,12 @@ export default {
       raisedPerkShop: false,
       isRunning: false,
       canUnlockNextPour: false,
+      hardTeresaToggled: false,
+      hard_bestAM: new Decimal(0),
+      hard_bestAMSet: [],
+      hard_lastMachines: new Decimal(0),
+      hard_lastiM: new Decimal(),
+      hard_runReward: new Decimal(),
     };
   },
   computed: {
@@ -43,6 +50,9 @@ export default {
     pouredAmountCap: () => Teresa.pouredAmountCap,
     showRunReward() {
       return this.bestAM.gt(1);
+    },
+    showHardRunReward() {
+      return this.hard_bestAM.gt(1);
     },
     upgrades() {
       const upgrades = [
@@ -79,10 +89,18 @@ export default {
     runDescription() {
       return GameDatabase.celestials.descriptions[0].effects();
     },
+    hard_runDescription() {
+      return GameDatabase.celestials.descriptions[7].effects();
+    },
     lastMachinesString() {
       return this.lastiM.eq(0)
         ? `${quantify("Reality Machine", this.lastMachines, 2)}`
         : `${quantify("Imaginary Machine", this.lastiM, 2)}`;
+    },
+    hard_lastMachinesString() {
+      return this.hard_lastiM.eq(0)
+        ? `${quantify("Reality Machine", this.hard_lastMachines, 2)}`
+        : `${quantify("Imaginary Machine", this.hard_lastiM, 2)}`;
     },
     unlockInfoTooltipArrowStyle() {
       return {
@@ -120,6 +138,7 @@ export default {
       this.isRunning = Teresa.isRunning;
       this.canUnlockNextPour = TeresaUnlocks.all
         .filter(unlock => this.rm.plus(this.pouredAmount).gte(unlock.price) && !unlock.isUnlocked).length > 0;
+      this.hardTeresaToggled = Teresa.hardModeToggled;
     },
     startRun() {
       if (this.isDoomed) return;
@@ -151,7 +170,7 @@ export default {
     </div>
     <div class="l-mechanics-container">
       <div
-        v-if="hasReality"
+        v-if="hasReality && !hardTeresaToggled"
         class="l-teresa-mechanic-container"
       >
         <div class="c-teresa-unlock c-teresa-run-button">
@@ -194,6 +213,60 @@ export default {
           class="c-teresa-unlock"
         >
           Teresa Reality reward: Glyph Sacrifice power {{ formatX(runReward, 2, 2) }}
+        </div>
+        <div
+          v-if="hasEPGen"
+          class="c-teresa-unlock"
+        >
+          <span :class="{ 'o-pelle-disabled': isDoomed }">
+            Every second, you gain {{ formatPercents(0.01) }} of your peaked Eternity Points per minute this Reality.
+          </span>
+        </div>
+      </div>
+      <div
+        v-if="hasReality && hardTeresaToggled"
+        class="l-teresa-mechanic-container"
+      >
+        <div class="c-teresa-unlock c-hard-teresa-run-button">
+          <div class="hard-flex">
+            <span :class="{ 'o-pelle-disabled': isDoomed }">
+              Start Teresa's Hardened Reality.
+            </span>
+            <HardTeresaToggle />
+          </div>
+          <div
+            :class="runButtonClassObject"
+            @click="startRun()"
+          >
+            Ϟ
+          </div>
+          {{ hard_runDescription }}
+          <br><br>
+          <div>
+            This Reality can be repeated for a stronger reward based on the antimatter gained within it.
+            <br><br>
+            <span v-if="showHardRunReward">
+              Your record antimatter in Teresa's Hardened Reality is {{ format(hard_bestAM, 2) }},
+              achieved with {{ hard_lastMachinesString }}.
+              <br><br>
+              Glyph Set used:
+              <GlyphSetPreview
+                text="Teresa's Hardened Reality: Best Glyph Set"
+                :text-hidden="true"
+                :force-name-color="false"
+                :glyphs="hard_bestAMSet"
+              />
+            </span>
+            <span v-else>
+              You have not completed Teresa's Hardened Reality yet.
+            </span>
+          </div>
+        </div>
+        <div
+          v-if="showHardRunReward"
+          class="c-teresa-unlock"
+        >
+          Teresa's Hardened Reality reward: Glyph Sacrifice Cap ^{{ format(hard_runReward, 2, 2) }}
         </div>
         <div
           v-if="hasEPGen"
@@ -287,5 +360,11 @@ export default {
   display: flex;
   position: relative;
   left: 1.75rem
+}
+
+.hard-flex {
+  display: flex;
+  position: relative;
+  left: 1rem
 }
 </style>

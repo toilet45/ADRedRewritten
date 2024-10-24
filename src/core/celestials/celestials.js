@@ -117,6 +117,14 @@ GameDatabase.celestials.descriptions = [
     },
   },
   {
+    name: "Hardened Teresa",
+    effects() {
+      return `Glyph Time Theorem generation is disabled. Charged Infinity Upgrades are disabled.
+      You gain less Infinity Points and Eternity Points (log(x)^${format(0.75, 2, 2)}).
+      Antimatter gain is raised ^${format(0.03, 2, 2)}`;
+    },
+  },
+  {
     name: "a Time Expanded",
     effects() {
       return `Dimension Multipliers and Tickspeed are fixed to ${formatX(1)}

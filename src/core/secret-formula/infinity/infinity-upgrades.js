@@ -187,9 +187,9 @@ export const infinityUpgrades = {
       `Start every reset with ${formatInt(1)} Dimension Boost, automatically unlocking the 5th Antimatter Dimension`,
     charged: {
       description: () =>
-        `Start every reset with ${formatInt(12000)} Dimension Boosts, and Dimension Boosts
+        `Start every reset with ${formatInt(1250000)} Dimension Boosts, and Dimension Boosts
       are ${formatPercents(0.01)} cheaper out of Eternity Challenge 5`,
-      effect: () => [new Decimal(12000), 0.99],
+      effect: () => [new Decimal(1250000), 0.99],
     }
   },
   skipReset2: {
@@ -200,9 +200,9 @@ export const infinityUpgrades = {
       `Start every reset with ${formatInt(2)} Dimension Boosts, automatically unlocking the 6th Antimatter Dimension`,
     charged: {
       description: () =>
-        `Start every reset with ${formatInt(250)} Antimatter Galaxies, and Antimatter Galaxies
+        `Start every reset with ${formatInt(8500)} Antimatter Galaxies, and Antimatter Galaxies
       are ${formatPercents(0.01)} cheaper.`,
-      effect: () => [new Decimal(250), 0.99],
+      effect: () => [new Decimal(8500), 0.99],
     }
   },
   skipReset3: {
@@ -214,7 +214,7 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Gain extra Dimension Boosts based on Teresa level and Infinity Count`,
-      effect: () => Currency.infinitiesTotal.value.max(1).log10().mul(Ra.pets.teresa.level).div(10).floor(),
+      effect: () => Currency.infinitiesTotal.value.max(1).log10().mul(Ra.pets.teresa.level).pow(1.25).floor(),
       formatEffect: value => `+${formatInt(value)}`
     }
   },
@@ -228,7 +228,7 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Gain extra Multiversal Galaxies based on Teresa level and Mending Count`,
-      effect: () => Currency.mends.value.max(1).log10().mul(Ra.pets.teresa.level).floor(),
+      effect: () => Currency.mends.value.max(1).pow(0.75).mul(Ra.pets.teresa.level).floor(),
       formatEffect: value => `+${formatInt(value)}`
     }
   },

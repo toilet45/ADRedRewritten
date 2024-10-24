@@ -347,7 +347,7 @@ function giveRealityRewards(realityProps) {
     Enslaved.boostReality = false;
   }
 
-  if (Teresa.isRunning) {
+  if (Teresa.isRunning && !Teresa.hardModeToggled) {
     const current = Teresa.runRewardMultiplier;
     const newMultiplier = Teresa.rewardMultiplier(player.antimatter);
     const isHigher = newMultiplier.gt(current);
@@ -361,11 +361,30 @@ function giveRealityRewards(realityProps) {
       player.celestials.teresa.bestRunAM = Currency.antimatter.value;
       player.celestials.teresa.bestAMSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
 
-      // Encode iM values into the RM variable as e10000 * iM in order to only require one prop
       player.celestials.teresa.lastRepeatedMachines = player.reality.maxRM;
       player.celestials.teresa.lastRepeatediM = Currency.imaginaryMachines.value;
     }
     Teresa.quotes.completeReality.show();
+  }
+
+  if (Teresa.isRunning && Teresa.hardModeToggled) {
+    const current = new Decimal("1e100").pow(Teresa.hardRunRewardPower);
+    const newMultiplier = new Decimal("1e100").pow(Teresa.hardRewardMultiplier(player.antimatter));
+    const isHigher = newMultiplier.gt(current);
+    const modalText = `You have completed Teresa's Hardened Reality! ${isHigher
+      ? `Since you gained more Antimatter, you increased your
+      Glyph Sacrifice Cap from ${format(current, 2, 2)} to ${format(newMultiplier, 2, 2)}`
+      : `You did not gain more Antimatter during this run, so the Glyph Sacrifice Cap
+      from Teresa's Hardened Reality did not increase`}.`;
+    Modal.message.show(modalText, {}, 2);
+    if (Currency.antimatter.gt(player.celestials.teresa.hard.bestRunAM)) {
+      player.celestials.teresa.hard.bestRunAM = Currency.antimatter.value;
+      player.celestials.teresa.hard.bestAMSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
+
+      player.celestials.teresa.hard.lastRepeatedMachines = player.reality.maxRM;
+      player.celestials.teresa.hard.lastRepeatediM = Currency.imaginaryMachines.value;
+    }
+    Teresa.quotes.completeHardReality.show();
   }
 
   if (Effarig.isRunning && !EffarigUnlock.reality.isUnlocked) {

@@ -33,7 +33,16 @@ export default {
         };
       }
       return [
-        celestialReality(Teresa, "Teresa's", "teresa"),
+        {
+          name: () => "Teresa's Reality",
+          isActive: token => token,
+          activityToken: () => Teresa.isRunning & !Teresa.hardModeToggled
+        },
+        {
+          name: () => "Teresa's Hardened Reality",
+          isActive: token => token,
+          activityToken: () => Teresa.isRunning & Teresa.hardModeToggled
+        },
         celestialReality(Effarig, "Effarig's", "effarig"),
         celestialReality(Enslaved, "The Nameless Ones'", "enslaved"),
         celestialReality(V, "V's", "v"),

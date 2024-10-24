@@ -34,6 +34,9 @@ export const Teresa = {
   rewardMultiplier(antimatter) {
     return Decimal.max(Decimal.pow(antimatter.plus(1).log10().div(1.5e8), 12), 1);
   },
+  hardRewardMultiplier(antimatter) {
+    return Decimal.max(Decimal.log10(Decimal.max(1, antimatter)).max(1).log10(), 1).div(20).add(1);
+  },
   get pouredAmount() {
     return player.celestials.teresa.pouredAmount;
   },
@@ -52,6 +55,9 @@ export const Teresa = {
   get runRewardMultiplier() {
     return this.rewardMultiplier(player.celestials.teresa.bestRunAM);
   },
+  get hardRunRewardPower() {
+    return this.hardRewardMultiplier(player.celestials.teresa.hard.bestRunAM);
+  },
   get isRunning() {
     return player.celestials.teresa.run;
   },
@@ -59,7 +65,7 @@ export const Teresa = {
     return player.celestials.teresa.bestRunAM.gt(1);
   },
   get hardModeToggled() {
-    return player.celestials.teresa.hardModeToggled
+    return player.celestials.teresa.hard.toggled;
   },
   quotes: Quotes.teresa,
   symbol: "Ϟ",
@@ -73,6 +79,15 @@ export const Teresa = {
     player.celestials.teresa.lastRepeatedMachines = DC.D0;
     player.celestials.teresa.lastRepeatediM = DC.D0;
   },
+  resetHard() {
+    player.celestials.teresa.hard = {
+      bestRunAM: DC.D1,
+      bestAMSet: [],
+      lastRepeatedMachines: DC.D0,
+      lastRepeatediM: DC.D0,
+      toggled: false,
+    };
+  }
 };
 
 class PerkShopUpgradeState extends RebuyableMechanicState {

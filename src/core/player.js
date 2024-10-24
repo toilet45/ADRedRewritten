@@ -627,10 +627,16 @@ window.player = {
       run: false,
       bestRunAM: DC.D1,
       bestAMSet: [],
+      hard: {
+        bestRunAM: DC.D1,
+        bestAMSet: [],
+        lastRepeatedMachines: DC.D0,
+        lastRepeatediM: DC.D0,
+        toggled: false,
+      },
       perkShop: Array.repeat(DC.D0, 6),
       lastRepeatedMachines: DC.D0,
       lastRepeatediM: DC.D0,
-      hardModeToggled: false
     },
     effarig: {
       relicShards: DC.D0,

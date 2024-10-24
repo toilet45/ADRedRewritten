@@ -69,6 +69,19 @@ export function playerInfinityUpgradesOnReset() {
   GameCache.dimensionMultDecrease.invalidate();
 }
 
+export function stackedLogPower(value, stacks, power) {
+  let outputVal = new Decimal(value);
+  for (let i = 0; i < stacks; i++) {
+    if (outputVal.abs().eq(0)) outputVal = new Decimal(1);
+    outputVal = outputVal.log10();
+  }
+  outputVal = outputVal.pow(power);
+  for (let i = 0; i < stacks; i++) {
+    outputVal = Decimal.pow10(outputVal);
+  }
+  return outputVal;
+}
+
 export function breakInfinity() {
   if (!Autobuyer.bigCrunch.hasMaxedInterval) return;
   if (InfinityChallenge.isRunning) return;
@@ -104,13 +117,16 @@ export function gainedInfinityPoints(mm1gen = false) {
     ip = ip.min(DC.E200);
   }
   ip = ip.times(GameCache.totalIPMult.value);
-  if (Teresa.isRunning) {
+  if (Teresa.isRunning && !Teresa.hardModeToggled) {
     ip = ip.pow(0.55);
   } else if (V.isRunning) {
     ip = ip.pow(0.5);
   } else if (Laitela.isRunning) {
     ip = dilatedValueOf(ip);
+  } else if (Teresa.isRunning && Teresa.hardModeToggled) {
+    ip = stackedLogPower(ip, 1, 0.75);
   }
+
   if (GlyphAlteration.isAdded("infinity")) {
     ip = ip.pow(getSecondaryGlyphEffect("infinityIP"));
   }
@@ -144,12 +160,14 @@ export function gainedEternityPoints() {
     gainedInfinityPoints()).log10().div(new Decimal(308).sub(PelleRifts.recursion.effectValue)).sub(0.7))
     .times(totalEPMult());
 
-  if (Teresa.isRunning) {
+  if (Teresa.isRunning && !Teresa.hardModeToggled) {
     ep = ep.pow(0.55);
   } else if (V.isRunning) {
     ep = ep.pow(0.5);
   } else if (Laitela.isRunning) {
     ep = dilatedValueOf(ep);
+  } else if (Teresa.isRunning && Teresa.hardModeToggled) {
+    ep = stackedLogPower(ep, 1, 0.75);
   }
   if (GlyphAlteration.isAdded("time")) {
     ep = ep.pow(getSecondaryGlyphEffect("timeEP"));
