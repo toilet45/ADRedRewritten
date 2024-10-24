@@ -26,6 +26,7 @@ export default {
       achMultToBH: false,
       achMultToTP: false,
       achMultToTT: false,
+      achMultToMem: false,
       renderedRowIndices: [],
       hasMended: false
     };
@@ -51,6 +52,7 @@ export default {
           ? formatX(this.achievementPower.pow(2).div(1e35).cbrt().mul(1e35), 2, 3)
           : formatX(this.achievementPower.pow(2), 2, 3);
         const otherpow = formatX(this.achievementPower.pow(4), 2, 3);
+        const mempow = formatX(this.achievementPower.cbrt(), 2, 3);
 
         const boostList = [];
 
@@ -61,6 +63,7 @@ export default {
         if (this.achMultToTP) boostList.push(`Tachyon Particles: ${tppow}`);
         if (this.achMultToBH) boostList.push(`Black Hole Power: ${bhpow}`);
         if (this.achMultToTT) boostList.push(`Time Theorem production: ${otherpow}`);
+        if (this.achMultToMem) boostList.push(`Memory Gain: ${mempow}`);
         return `${boostList.join("<br>")}`;
       }
 
@@ -112,6 +115,7 @@ export default {
       this.achMultToTP = RealityUpgrade(8).isBought;
       this.achMultToBH = VUnlocks.achievementBH.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
+      this.achMultToMem = Ra.unlocks.achToMemories.canBeApplied;
       this.hasMended = PlayerProgress.mendingUnlocked();
     },
     startRowRendering() {

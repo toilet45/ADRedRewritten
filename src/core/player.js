@@ -445,6 +445,7 @@ window.player = {
     }),
   },
   eternityChalls: {},
+  ecHighestManual: {},
   respec: false,
   celRespec: false,
   eterc8ids: 50,
@@ -600,7 +601,7 @@ window.player = {
     unlocked: false,
     activations: DC.D0,
   })),
-  expoBlackHole: Array.range(0, 1).map(id => ({
+  ImaginaryBlackHole: Array.range(0, 1).map(id => ({
     id,
     intervalUpgrades: DC.D0,
     powerUpgrades: DC.D0,
@@ -614,10 +615,10 @@ window.player = {
   blackHoleAutoPauseMode: 0,
   blackHolePauseTime: DC.D0,
   blackHoleNegative: DC.D1,
-  expoBlackHolePause: false,
-  expoBlackHoleAutoPauseMode: 0,
-  expoBlackHolePauseTime: DC.D0,
-  expoBlackHoleNegative: DC.D1,
+  ImaginaryBlackHolePause: false,
+  ImaginaryBlackHoleAutoPauseMode: 0,
+  ImaginaryBlackHolePauseTime: DC.D0,
+  ImaginaryBlackHoleNegative: DC.D1,
   celestials: {
     teresa: {
       pouredAmount: 0,
@@ -628,7 +629,8 @@ window.player = {
       bestAMSet: [],
       perkShop: Array.repeat(DC.D0, 6),
       lastRepeatedMachines: DC.D0,
-      lastRepeatediM: DC.D0
+      lastRepeatediM: DC.D0,
+      hardModeToggled: false
     },
     effarig: {
       relicShards: DC.D0,
@@ -755,6 +757,7 @@ window.player = {
       unlocks: [],
       run: false,
       charged: new Set(),
+      breakCharged: new Set(),
       disCharge: false,
       peakGamespeed: DC.D1,
       petWithRemembrance: ""

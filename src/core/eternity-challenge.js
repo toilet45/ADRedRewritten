@@ -77,6 +77,7 @@ export class EternityChallengeState extends GameMechanicState {
 
   set completions(value) {
     player.eternityChalls[this.fullId] = Math.min(value, this.maxCompletions);
+    player.ecHighestManual[this.fullId] = Math.min(value, this.maxCompletions);
   }
 
   get maxCompletions() {
@@ -89,6 +90,10 @@ export class EternityChallengeState extends GameMechanicState {
 
   get isFullyCompleted() {
     return this.completions === this.maxCompletions;
+  }
+
+  get highestManualCompletions() {
+    return player.ecHighestManual[this.fullId];
   }
 
   get maxValidCompletions() {
@@ -338,7 +343,8 @@ export const EternityChallenges = {
       if (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || MendingUpgrade(14).isBought) {
         let next = this.nextChallenge;
         while (next !== undefined) {
-          while (!next.isFullyCompleted) {
+          while (next.completions < ((Enslaved.isRunning & next.id === 1) ? 1000 : 5) ||
+        next.completions < next.highestManualCompletions) {
             next.addCompletion(true);
           }
           next = this.nextChallenge;

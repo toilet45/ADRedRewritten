@@ -69,6 +69,7 @@ html {
   --color-good: #5ac467;
   --color-good-dark: #127a20;
   --color-good-paused: #e3e638;
+  --color-good-paused-dark: #828421;
   --color-bad: #b84b5f;
   --color-gh-purple: #8957e5;
   --color-notification: red;
@@ -4298,6 +4299,45 @@ br {
   background: var(--color-bad);
 }
 
+.o-cel-modes-toggle__label {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  background: var(--color-good-paused-dark);
+  border: var(--var-border-width, 0.2rem) solid #383232;
+  border-top-right-radius: var(--var-border-radius, 0.3rem);
+  border-bottom-left-radius: var(--var-border-radius, 1rem);
+  filter: grayscale(0.1);
+  transition-duration: 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.o-cel-modes-toggle__label--active {
+  background: var(--color-good-paused);
+}
+
+.o-cel-modes-toggle__label--active-paused {
+  background: var(--color-good-paused);
+  filter: grayscale(0.4);
+}
+
+.o-cel-modes-toggle__label--disabled {
+  opacity: 0.6;
+  filter: grayscale(0.1);
+}
+
+.o-cel-modes-toggle__label--deactive-paused {
+  background: var(--color-bad);
+}
+
+
 /* #endregion o-autobuyer-toggle-checkbox */
 
 /* #region o-autobuyer-btn */
@@ -4647,6 +4687,11 @@ properly on certain themes. */
   position: absolute;
   top: -0.2rem;
   right: 1.8rem;
+}
+
+.l-cel-mode {
+  position: relative;
+  bottom: 1rem;
 }
 
 .s-base--metro .l-autobuyer-box__footer,

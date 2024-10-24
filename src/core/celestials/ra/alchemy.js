@@ -118,8 +118,7 @@ class BasicAlchemyResourceState extends AlchemyResourceState {
 
 class AdvancedAlchemyResourceState extends AlchemyResourceState {
   get cap() {
-    const reagentCaps = this.reaction.reagents.map(x => x.resource.cap);
-    return Decimal.min(...reagentCaps);
+    return this.reaction.reagents.map(x => x.resource.cap).reduce((a, b) => Decimal.min(a, b));
   }
 }
 
@@ -174,7 +173,7 @@ class AlchemyReaction {
       const diffAfter = reagentAfter.sub(prodAfter);
       cappedYield = Decimal.min(cappedYield, this.reactionYield.mul(diffBefore).div(diffBefore.sub(diffAfter)));
     }
-    // if (this._product.amount.gt(25000)) cappedYield = cappedYield.pow(0.66);
+    // If (this._product.amount.gt(25000)) cappedYield = cappedYield.pow(0.66);
     return Decimal.clampMin(cappedYield, 0);
   }
 

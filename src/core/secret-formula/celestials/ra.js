@@ -50,8 +50,7 @@ export const ra = {
       memoryGain: "other Memory multipliers",
       // eslint-disable-next-line no-unused-expressions, no-labels, no-unused-labels
       requiredUnlock: () => { isUnlocked: MendingUpgrade(19).isBought; }, // I dont wanna write edgecase so this does
-      rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().add(1).log10().mul(2)
-        .floor().mul(3).pow(4),
+      rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().max(1).root(4),
       memoryProductionMultiplier: () => Decimal.root(
         Ra.unlocks.vXP.effectOrDefault(new Decimal(1))
           .mul(Ra.unlocks.enslavedXP.effectOrDefault(new Decimal(1)))
@@ -339,7 +338,7 @@ export const ra = {
 
     musicAtHighest: {
       id: 28,
-      reward: () => `Music glyphs now generated at ${formatPercents(1)} of your highest Glyph level`,
+      reward: () => `Music glyphs now generate at ${formatPercents(1)} of your highest Glyph level`,
       effect: 1,
       pet: "teresa",
       level: 30,
@@ -350,7 +349,7 @@ export const ra = {
       id: 29,
       reward: () => `Every ${formatInt(5)} levels from ${formatInt(40)},
       gain a new charged upgrade and Break Upgrades can be charged`, // BiU 1-9, and col4 iU
-      effect: () => Math.min(13, Math.max(0, floor((Ra.pets.teresa.level - 35) / 5))),
+      effect: () => Math.min(13, Math.max(0, Math.floor((Ra.pets.teresa.level - 35) / 5))),
       pet: "teresa",
       level: 40,
       displayIcon: `∝`,
@@ -377,7 +376,8 @@ export const ra = {
     },
     passiveTeresa: {
       id: 32,
-      reward: () => `Your AM in Teresa's Reality is automatically increased based on best AM. Improve Teresa 25.`,
+      reward: () => `Your AM in Teresa's Reality is automatically increased based on best AM.
+      Improve Teresa 25 and Mending Upgrade 15.`,
       effect: 1,
       pet: "teresa",
       level: 75,
@@ -537,7 +537,7 @@ export const ra = {
     achToMemories: {
       id: 49,
       reward: () => `Achievements now provide a multiplier to Memories.`,
-      effect: 1,
+      effect: () => Achievements.power.cbrt(),
       pet: "v",
       level: 30,
       displayIcon: `<i class='fas fa-brain'></i>`,
@@ -658,7 +658,7 @@ export const ra = {
     },
     laiMemoryUnlock: {
       id: 62,
-      reward: () => `Unlock Lai'tela's Memories`,
+      reward: () => `Unlock Lai'tela's Memories. Keep Ra unlocked after Mend.`,
       effect: 1,
       pet: "ra",
       level: 25,
@@ -792,11 +792,11 @@ export const ra = {
       every ${formatInt(20)} levels`,
       effect: () => [
         Math.floor(Ra.pets.laitela.level / 25), // Sorry for the next equation i cant think of another way
-        Math.max(Math.floor(Ra.pets.laitela.level / 5), 4) * 50 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 20) / 5), 4)) * 100 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 40) / 5), 4)) * 200 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 60) / 5), 4)) * 400 +
-        Math.min(0, Math.max(Math.floor((Ra.pets.laitela.level - 80) / 5), 4)) * 800
+        Math.min(Math.floor(Ra.pets.laitela.level / 5), 4) * 50 +
+        Math.max(0, Math.min(Math.floor((Ra.pets.laitela.level - 20) / 5), 4)) * 100 +
+        Math.max(0, Math.min(Math.floor((Ra.pets.laitela.level - 40) / 5), 4)) * 200 +
+        Math.max(0, Math.min(Math.floor((Ra.pets.laitela.level - 60) / 5), 4)) * 400 +
+        Math.max(0, Math.min(Math.floor((Ra.pets.laitela.level - 80) / 5), 4)) * 800
       ],
       pet: "laitela",
       level: 25,
@@ -907,7 +907,8 @@ export const ra = {
     },
     horrificGlyphUnlock: {
       id: 88,
-      reward: () => `Unlock Horrific Glyphs, which are harsher than Cursed Glyphs but count as ${formatInt(-5)} equipped Glyphs`,
+      reward: () => `Unlock Horrific Glyphs, which are harsher than Cursed Glyphs,
+      but count as ${formatInt(-5)} equipped Glyphs`,
       effect: 1,
       pet: "pelle",
       level: 10,

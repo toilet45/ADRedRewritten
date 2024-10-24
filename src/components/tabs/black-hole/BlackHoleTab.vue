@@ -4,7 +4,7 @@ import BlackHoleChargingSliders from "./BlackHoleChargingSliders";
 import BlackHoleStateRow from "./BlackHoleStateRow";
 import BlackHoleUnlockButton from "./BlackHoleUnlockButton";
 import BlackHoleUpgradeRow from "./BlackHoleUpgradeRow";
-import ExpoBlackHoleUpgradeRow from "./ExpoBlackHoleUpgradeRow";
+import ImaginaryBlackHoleUpgradeRow from "./ImaginaryBlackHoleUpgradeRow";
 
 export default {
   name: "BlackHoleTab",
@@ -13,7 +13,7 @@ export default {
     BlackHoleStateRow,
     BlackHoleChargingSliders,
     BlackHoleUnlockButton,
-    ExpoBlackHoleUpgradeRow
+    ImaginaryBlackHoleUpgradeRow
   },
   data() {
     return {
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     blackHoles: () => BlackHoles.list,
-    expoBlackHoles: () => ExpoBlackHoles.list,
+    ImaginaryBlackHoles: () => ImaginaryBlackHoles.list,
     pauseModeString() {
       switch (this.pauseMode) {
         case BLACK_HOLE_PAUSE_MODE.NO_PAUSE:
@@ -75,7 +75,7 @@ export default {
       if (player.blackHoleNegative.lt(1) && !this.isLaitela) this.stateChange = this.isPaused ? "Uninvert" : "Invert";
       else this.stateChange = this.isPaused ? "Unpause" : "Pause";
 
-      this.isExpoUnlocked = ExpoBlackHole(1).isUnlocked;
+      this.isExpoUnlocked = ImaginaryBlackHole(1).isUnlocked;
     },
     bh2Status() {
       const bh1Remaining = BlackHole(1).timeWithPreviousActiveToNextStateChange;
@@ -236,10 +236,10 @@ export default {
     <template v-if="isExpoUnlocked">
       Black Hole 3 is only active if Black Holes 1 and 2 are not paused or inverted
       <div :class="gridStyle()">
-        <ExpoBlackHoleUpgradeRow
-          v-for="(expoBlackHole, i) in expoBlackHoles"
+        <ImaginaryBlackHoleUpgradeRow
+          v-for="(ImaginaryBlackHole, i) in ImaginaryBlackHoles"
           :key="'upgrades' + i"
-          :expo-black-hole="expoBlackHole"
+          :expo-black-hole="ImaginaryBlackHole"
         />
       </div>
     </template>

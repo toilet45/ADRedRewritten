@@ -284,6 +284,7 @@ export const Ra = {
     for (const pet of Ra.pets.all) {
       if (pet.isUnlocked) res = res.mul(pet.memoryProductionMultiplier);
     }
+    res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
     return res;
   },
   get memoryBoostResources() {
@@ -303,7 +304,10 @@ export const Ra = {
     if (level >= Ra.levelCap || pet === "Ra" && level >= 100) return DC.BEMAX;
     const adjustedLevel = Decimal.pow(level, 2).div(10).add(level);
     const post15Scaling = Decimal.pow(1.5, Decimal.max(0, level - 15));
-    return Decimal.floor(Decimal.pow(adjustedLevel, 5.52).mul(post15Scaling).mul(DC.E6));
+    const post25Scaling = Decimal.pow(1.05, Decimal.max(0, level - 25).pow(2));
+    const post65Scaling = Decimal.pow(1.2, Decimal.max(0, level - 65).pow(3));
+    return Decimal.floor(Decimal.pow(adjustedLevel, 5.52).mul(post15Scaling)
+      .mul(post25Scaling).mul(post65Scaling).mul(DC.E6));
   },
   // Returns a string containing a time estimate for gaining a specific amount of exp (UI only)
   timeToGoalString(pet, expToGain) {
@@ -316,8 +320,10 @@ export const Ra = {
     const estimate = a === 0
       ? c.neg().div(b)
       : decimalQuadraticSolution(a, b, c);
-    if (Number.isFinite(estimate)) {
-      return `in ${TimeSpan.fromSeconds(new Decimal(estimate)).toStringShort()}`;
+    if (Decimal.isFinite(estimate)) {
+      return estimate.lt(31536000 * 100)
+        ? `in ${TimeSpan.fromSeconds(new Decimal(estimate)).toStringShort()}`
+        : `in more than ${TimeSpan.fromSeconds(new Decimal(31536000 * 100)).toStringShort()}`;
     }
     return "";
   },
@@ -390,8 +396,14 @@ export const Ra = {
   get totalCharges() {
     return Ra.unlocks.chargedInfinityUpgrades.effectOrDefault(0);
   },
+  get totalBreakCharges() {
+    return Ra.unlocks.breakCharges.effectOrDefault(0);
+  },
   get chargesLeft() {
     return this.totalCharges - player.celestials.ra.charged.size;
+  },
+  get breakChargesLeft() {
+    return this.totalBreakCharges - player.celestials.ra.breakCharged.size;
   },
   get canBuyTriad() {
     return Ra.unlocks.unlockHardV.canBeApplied;

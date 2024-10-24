@@ -2,6 +2,7 @@
 import CelestialQuoteHistory from "@/components/CelestialQuoteHistory";
 import CustomizeableTooltip from "@/components/CustomizeableTooltip";
 import GlyphSetPreview from "@/components/GlyphSetPreview";
+import HardTeresaToggle from "./HardTeresaToggle";
 import PerkShopUpgradeButton from "./PerkShopUpgradeButton";
 
 export default {
@@ -10,7 +11,8 @@ export default {
     GlyphSetPreview,
     PerkShopUpgradeButton,
     CelestialQuoteHistory,
-    CustomizeableTooltip
+    CustomizeableTooltip,
+    HardTeresaToggle
   },
   data() {
     return {
@@ -153,9 +155,12 @@ export default {
         class="l-teresa-mechanic-container"
       >
         <div class="c-teresa-unlock c-teresa-run-button">
-          <span :class="{ 'o-pelle-disabled': isDoomed }">
-            Start Teresa's Reality.
-          </span>
+          <div class="flex">
+            <span :class="{ 'o-pelle-disabled': isDoomed }">
+              Start Teresa's Reality.
+            </span>
+            <HardTeresaToggle />
+          </div>
           <div
             :class="runButtonClassObject"
             @click="startRun()"
@@ -276,5 +281,11 @@ export default {
 .c-disabled-pour {
   opacity: 0.8;
   pointer-events: none;
+}
+
+.flex {
+  display: flex;
+  position: relative;
+  left: 1.75rem
 }
 </style>

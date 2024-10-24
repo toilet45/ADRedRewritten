@@ -384,11 +384,12 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.EXPO_BLACK_HOLE)) {
-    factor = factor.pow(ExpoBlackHole(1).power);
+    factor = factor.pow(ImaginaryBlackHole(1).power);
   }
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
-  const forcedDisableDevspeed = EternityChallenge(12).isRunning || NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning
+  const forcedDisableDevspeed = EternityChallenge(12).isRunning || NormalChallenge(11).isRunning ||
+    InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
   // eslint-disable-next-line capitalized-comments
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
@@ -401,8 +402,8 @@ export function getGameSpeedupPreExpo() {
 }
 
 export function getExpoSpeedupFactor() {
-  return ExpoBlackHole(1).power;
-  // A.mul(ExpoBlackHole(2).power);
+  return ImaginaryBlackHole(1).power;
+  // A.mul(ImaginaryBlackHole(2).power);
 }
 export function getGameSpeedupForDisplay() {
   const speedFactor = getGameSpeedupFactor();
@@ -420,7 +421,8 @@ export function getGameSpeedupForDisplay() {
 // Seperated for organisation - Very few things should need this
 export function trueTimeMechanics(trueDiff) {
   // Upgrade multiversal galaxies in player object
-  player.mending.multiversalGalaxies = MendingUpgrade(16).effects.galaxies;
+  player.mending.multiversalGalaxies = MendingUpgrade(16).effects.galaxies
+    .add(InfinityUpgrade.skipResetGalaxy.chargedEffect.effectOrDefault(0));
 
   // Ra-Nameless auto-release stored time (once every 5 ticks)
   if (Enslaved.isAutoReleasing) {

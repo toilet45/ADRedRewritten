@@ -152,7 +152,9 @@ export const GlyphSacrificeHandler = {
       }
     }
     if (resource.isBaseResource) {
-      resource.highestRefinementValue = this.highestRefinementValue(glyph);
+      const highest = this.highestRefinementValue(glyph);
+      const above25k = highest.gt(25000);
+      resource.highestRefinementValue = above25k ? highest.sub(25000).mul(1e7).cbrt().add(25000) : highest;
     }
     Glyphs.removeFromInventory(glyph);
   }

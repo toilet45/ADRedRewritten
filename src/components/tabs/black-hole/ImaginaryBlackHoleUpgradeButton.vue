@@ -5,7 +5,7 @@ import EffectDisplay from "@/components/EffectDisplay";
 import PrimaryToggleButton from "@/components/PrimaryToggleButton";
 
 export default {
-  name: "ExpoBlackHoleUpgradeButton",
+  name: "ImaginaryBlackHoleUpgradeButton",
   components: {
     PrimaryToggleButton,
     DescriptionDisplay,
@@ -57,7 +57,7 @@ export default {
       this.isCapped = this.config.upgrade.value === 0;
       this.isAffordable = this.config.upgrade.isAffordable && !this.isCapped;
       // A const hasAutobuyer = this.config.upgrade.hasAutobuyer;
-      // A const autobuyer = Autobuyer.expoBlackHolePower(this.config.upgrade.id);
+      // A const autobuyer = Autobuyer.ImaginaryBlackHolePower(this.config.upgrade.id);
       this.isAutoUnlocked = false;
       // A hasAutobuyer && autobuyer.isUnlocked;
       this.isAutobuyerOn = false;

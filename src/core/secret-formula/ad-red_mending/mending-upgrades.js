@@ -200,7 +200,7 @@ export const mendingUpgrades = [
     effects: p => ({
       galaxies: p.mul(6),
       agCost: Decimal.pow(1.001, p),
-      agPow: Decimal.pow(1.001, p)
+      agPow: Decimal.pow(1.001, p).sub(1)
     }),
     formatEffect: effects =>
       `${format(effects.galaxies)}, /${format(effects.agCost, 3, 3)}, +${format(effects.agPow, 3, 3)}`

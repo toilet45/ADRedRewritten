@@ -1,13 +1,13 @@
 <script>
-import ExpoBlackHoleUpgradeButton from "@/components/tabs/black-hole/ExpoBlackHoleUpgradeButton";
+import ImaginaryBlackHoleUpgradeButton from "@/components/tabs/black-hole/ImaginaryBlackHoleUpgradeButton";
 
 export default {
-  name: "ExpoBlackHoleUpgradeRow",
+  name: "ImaginaryBlackHoleUpgradeRow",
   components: {
-    ExpoBlackHoleUpgradeButton
+    ImaginaryBlackHoleUpgradeButton
   },
   props: {
-    expoBlackHole: {
+    ImaginaryBlackHole: {
       type: Object,
       required: true
     }
@@ -21,13 +21,13 @@ export default {
     };
   },
   computed: {
-    expoBlackHoleDescription() {
-      return this.expoBlackHole.description(false);
+    ImaginaryBlackHoleDescription() {
+      return this.ImaginaryBlackHole.description(false);
     },
     powerConfig() {
       return {
-        upgrade: this.expoBlackHole.powerUpgrade,
-        description: () => `Make ${this.expoBlackHoleDescription} ${formatX(1.05, 2, 2)} stronger`,
+        upgrade: this.ImaginaryBlackHole.powerUpgrade,
+        description: () => `Make ${this.ImaginaryBlackHoleDescription} ${formatX(1.05, 2, 2)} stronger`,
         effectTitle: "Current power",
         formatEffect: value => `${formatPow(value, 2, 2)}`
       };
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     update() {
-      const bh = this.expoBlackHole;
+      const bh = this.ImaginaryBlackHole;
       this.isUnlocked = bh.isUnlocked;
       this.isPermanent = bh.isPermanent;
       // We pull directly from the black hole data here (and in formatEffect above) because there are other sources
@@ -53,7 +53,7 @@ export default {
     v-if="isUnlocked"
     class="l-black-hole-upgrade-grid__row"
   >
-    <ExpoBlackHoleUpgradeButton :config="powerConfig" />
+    <ImaginaryBlackHoleUpgradeButton :config="powerConfig" />
   </div>
 </template>
 

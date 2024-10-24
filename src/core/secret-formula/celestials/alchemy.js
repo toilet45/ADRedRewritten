@@ -136,13 +136,14 @@ export const alchemyResources = {
     name: "Inflation",
     symbol: "λ",
     isBaseResource: false,
-    effect: amount => Decimal.pow10(new Decimal(6e9).sub(amount.mul(3e5)).clampMin(0)),
+    effect: amount => [Decimal.max(1.05, amount.div(21000).root(4)),
+      Decimal.pow10(new Decimal(6e9).sub(amount.mul(3e5)).clampMin(0))],
     tier: 2,
     uiOrder: 5,
     unlockedAt: 11,
     description: "provides an additional power for very large multipliers",
-    formatEffect: value => `All Antimatter Dimension multipliers are ${formatPow(1.05, 2, 2)}
-      if they are above ${format(value)} `,
+    formatEffect: value => `All Antimatter Dimension multipliers are ${formatPow(value[0], 2, 2)}
+      if they are above ${format(value[1])} `,
     reagents: [
       {
         resource: ALCHEMY_RESOURCE.POWER,
@@ -303,7 +304,7 @@ export const alchemyResources = {
     name: "Force",
     symbol: "Φ",
     isBaseResource: false,
-    effect: amount => amount.mul(5),
+    effect: amount => Decimal.max(amount, amount.div(25000).pow(2).mul(25000)).mul(5),
     tier: 4,
     uiOrder: 2,
     unlockedAt: 17,
@@ -325,7 +326,7 @@ export const alchemyResources = {
     name: "Uncountability",
     symbol: "Θ",
     isBaseResource: false,
-    effect: amount => Decimal.sqrt(amount.div(25000)).mul(160),
+    effect: amount => Decimal.sqrt(Decimal.max(amount, amount.div(25000).pow(4).mul(25000))).mul(160),
     tier: 4,
     uiOrder: 3,
     unlockedAt: 19,
@@ -373,7 +374,11 @@ export const alchemyResources = {
     name: "Multiversal",
     symbol: "Σ",
     isBaseResource: false,
-    effect: amount => Decimal.pow(amount.div(25000), 2).mul(32),
+    effect: amount =>
+      // eslint-disable-next-line no-unused-expressions
+      (Decimal.pow(amount.div(25000), 2).mul(32).gt(32)
+        ? Decimal.pow(amount.div(25000), 2).mul(32).sub(32).cbrt().add(32)
+        : Decimal.pow(amount.div(25000), 2).mul(32)),
     tier: 4,
     uiOrder: 5,
     unlockedAt: 16,

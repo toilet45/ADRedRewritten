@@ -2,7 +2,7 @@ import { isDecimal } from "../utility/type-check";
 
 import { DC } from "./constants";
 
-class ExpoBlackHoleUpgradeState {
+class ImaginaryBlackHoleUpgradeState {
   constructor(config) {
     const { getAmount, setAmount, calculateValue, initialCost, costMult } = config;
     this.incrementAmount = () => setAmount(getAmount().add(1));
@@ -37,7 +37,7 @@ class ExpoBlackHoleUpgradeState {
 
     // Keep the cycle phase consistent before and after purchase so that upgrading doesn't cause weird behavior
     // such as immediately activating it when inactive (or worse, skipping past the active segment entirely).
-    const bh = ExpoBlackHole(this.id);
+    const bh = ImaginaryBlackHole(this.id);
     const beforeProg = bh.isCharged ? DC.D1.sub(bh.stateProgress) : bh.stateProgress;
 
     Currency.imaginaryMachines.purchase(this.cost);
@@ -56,24 +56,24 @@ class ExpoBlackHoleUpgradeState {
 
     // Prevents a rare edge case where the player makes an inactive black hole permanent, locking themselves into
     // a permanently inactive black hole
-    if (bh.isPermanent) player.expoBlackHole[this.id - 1].active = true;
+    if (bh.isPermanent) player.ImaginaryBlackHole[this.id - 1].active = true;
 
     EventHub.dispatch(GAME_EVENT.EXPO_BLACK_HOLE_UPGRADE_BOUGHT);
   }
 }
 
-class ExpoBlackHoleState {
+class ImaginaryBlackHoleState {
   constructor(id) {
     this.id = id + 1;
     const blackHoleCostMultipliers = [DC.E3];
     // Interval: starts at 3600, x0.8 per upgrade, upgrade cost goes x3.5, starts at 15
-    this.intervalUpgrade = new ExpoBlackHoleUpgradeState({
+    this.intervalUpgrade = new ImaginaryBlackHoleUpgradeState({
       id: this.id,
       getAmount: () => this._data.intervalUpgrades,
       setAmount: amount => this._data.intervalUpgrades = amount,
       calculateValue: amount => Decimal.pow(0.8, amount).mul(Decimal.div(3600, Decimal.pow(10, id))),
-      initialCost: blackHoleCostMultipliers[id].mul(1e12),
-      costMult: new Decimal(1),
+      initialCost: blackHoleCostMultipliers[id].mul(1),
+      costMult: new Decimal(5),
       hasAutobuyer: false,
       onPurchase: () => {
         if (!this.isCharged) {
@@ -82,23 +82,23 @@ class ExpoBlackHoleState {
       }
     });
     // Power: starts at 5, x1.35 per upgrade, cost goes x2, starts at 20
-    this.powerUpgrade = new ExpoBlackHoleUpgradeState({
+    this.powerUpgrade = new ImaginaryBlackHoleUpgradeState({
       id: this.id,
       getAmount: () => this._data.powerUpgrades,
       setAmount: amount => this._data.powerUpgrades = amount,
-      calculateValue: amount => Decimal.pow(1.05, amount),
-      initialCost: blackHoleCostMultipliers[id].mul(1e12),
-      costMult: DC.E3,
+      calculateValue: amount => Decimal.pow(60, Decimal.pow(amount, 2)),
+      initialCost: blackHoleCostMultipliers[id].mul(1),
+      costMult: new Decimal(25),
       hasAutobuyer: true
     });
     // Duration: starts at 10, x1.5 per upgrade, cost goes x4, starts at 10
-    this.durationUpgrade = new ExpoBlackHoleUpgradeState({
+    this.durationUpgrade = new ImaginaryBlackHoleUpgradeState({
       id: this.id,
       getAmount: () => this._data.durationUpgrades,
       setAmount: amount => this._data.durationUpgrades = amount,
       calculateValue: amount => Decimal.pow(1.3, amount).mul(DC.E1.sub(id * 3)),
-      initialCost: blackHoleCostMultipliers[id].mul(1e12),
-      costMult: DC.E3,
+      initialCost: blackHoleCostMultipliers[id].mul(1),
+      costMult: new Decimal(5),
       hasAutobuyer: false
     });
   }
@@ -107,7 +107,7 @@ class ExpoBlackHoleState {
    * @private
    */
   get _data() {
-    return player.expoBlackHole[this.id - 1];
+    return player.ImaginaryBlackHole[this.id - 1];
   }
 
   /**
@@ -158,10 +158,10 @@ class ExpoBlackHoleState {
 
     // 2nd hole activation logic (not bothering generalizing since we're not adding that 3rd hole again)
     if (this.isCharged) {
-      if (ExpoBlackHole(1).isCharged) return Decimal.min(remainingTime, ExpoBlackHole(1).timeToNextStateChange);
-      return ExpoBlackHole(1).timeToNextStateChange;
+      if (ImaginaryBlackHole(1).isCharged) return Decimal.min(remainingTime, ImaginaryBlackHole(1).timeToNextStateChange);
+      return ImaginaryBlackHole(1).timeToNextStateChange;
     }
-    return ExpoBlackHole(1).timeUntilTimeActive(remainingTime);
+    return ImaginaryBlackHole(1).timeUntilTimeActive(remainingTime);
   }
 
   // Given x, return time it takes for this black hole to get x time active
@@ -203,8 +203,8 @@ class ExpoBlackHoleState {
       return `<i class="fas fa-expand-arrows-alt u-fa-padding"></i> Pulsing`;
     }
     if (Enslaved.isStoringGameTime) return `<i class="fas fa-compress-arrows-alt"></i> Charging`;
-    if (ExpoBlackHoles.areNegative) return `<i class="fas fa-caret-left"></i> Inverted`;
-    if (ExpoBlackHoles.arePaused) return `<i class="fas fa-pause"></i> Paused`;
+    if (ImaginaryBlackHoles.areNegative) return `<i class="fas fa-caret-left"></i> Inverted`;
+    if (ImaginaryBlackHoles.arePaused) return `<i class="fas fa-pause"></i> Paused`;
     if (this.isPermanent) return `<i class="fas fa-infinity"></i> Permanent`;
 
     const timeString = TimeSpan.fromSeconds(new Decimal(this.timeToNextStateChange)).toStringShort(true);
@@ -213,7 +213,7 @@ class ExpoBlackHoleState {
   }
 
   get isActive() {
-    return this.isCharged && (this.id === 1 || ExpoBlackHole(this.id - 1).isActive) && !Pelle.isDisabled("blackhole");
+    return this.isCharged && (this.id === 1 || ImaginaryBlackHole(this.id - 1).isActive) && !Pelle.isDisabled("blackhole");
   }
 
   // Proportion of active time, scaled 0 to 1
@@ -315,24 +315,24 @@ class ExpoBlackHoleState {
   }
 }
 
-ExpoBlackHoleState.list = Array.range(0, 1).map(id => new ExpoBlackHoleState(id));
+ImaginaryBlackHoleState.list = Array.range(0, 1).map(id => new ImaginaryBlackHoleState(id));
 
 /**
  * @param {number} id
- * @return {ExpoBlackHoleState}
+ * @return {ImaginaryBlackHoleState}
  */
-export function ExpoBlackHole(id) {
-  return ExpoBlackHoleState.list[id - 1];
+export function ImaginaryBlackHole(id) {
+  return ImaginaryBlackHoleState.list[id - 1];
 }
 
-export const ExpoBlackHoles = {
+export const ImaginaryBlackHoles = {
   // In seconds
   ACCELERATION_TIME: 5,
   /**
-   * @return {ExpoBlackHoleState[]}
+   * @return {ImaginaryBlackHoleState[]}
    */
   get list() {
-    return ExpoBlackHoleState.list;
+    return ImaginaryBlackHoleState.list;
   },
 
   get canBeUnlocked() {
@@ -340,25 +340,25 @@ export const ExpoBlackHoles = {
   },
 
   get areUnlocked() {
-    return ExpoBlackHole(1).isUnlocked;
+    return ImaginaryBlackHole(1).isUnlocked;
   },
 
   unlock() {
     if (!this.canBeUnlocked) return;
-    player.expoBlackHole[0].unlocked = true;
+    player.ImaginaryBlackHole[0].unlocked = true;
     EventHub.dispatch(GAME_EVENT.EXPO_BLACK_HOLE_UNLOCKED);
   },
 
   togglePause: (automatic = false) => {
     if (!BlackHoles.areUnlocked) return;
-    player.expoBlackHolePause = !player.expoBlackHolePause;
-    player.expoBlackHolePauseTime = player.records.realTimePlayed;
+    player.ImaginaryBlackHolePause = !player.ImaginaryBlackHolePause;
+    player.ImaginaryBlackHolePauseTime = player.records.realTimePlayed;
     const blackHoleString = "Expo Black Hole";
     // If black holes are going unpaused -> paused, use "inverted" or "paused" depending o
     // whether the player's using negative BH (i.e. BH inversion); if going paused -> unpaused,
     // use "unpaused".
     // eslint-disable-next-line no-nested-ternary
-    const pauseType = player.expoBlackHolePause ? (ExpoBlackHoles.areNegative ? "inverted" : "paused") : "unpaused";
+    const pauseType = player.ImaginaryBlackHolePause ? (ImaginaryBlackHoles.areNegative ? "inverted" : "paused") : "unpaused";
     const automaticString = automatic ? "automatically " : "";
     GameUI.notify.blackHole(`${blackHoleString} ${automaticString}${pauseType}`);
   },
@@ -370,15 +370,15 @@ export const ExpoBlackHoles = {
   },
 
   get arePaused() {
-    return player.expoBlackHolePause;
+    return player.ImaginaryBlackHolePause;
   },
 
   get areNegative() {
-    return this.arePaused && !Enslaved.isRunning && !Laitela.isRunning && player.expoBlackHoleNegative.lt(1);
+    return this.arePaused && !Enslaved.isRunning && !Laitela.isRunning && player.ImaginaryBlackHoleNegative.lt(1);
   },
 
   get arePermanent() {
-    return ExpoBlackHoles.list.every(bh => bh.isPermanent);
+    return ImaginaryBlackHoles.list.every(bh => bh.isPermanent);
   },
 
   updatePhases(blackHoleDiff) {
@@ -394,7 +394,7 @@ export const ExpoBlackHoles = {
       blackHole.updatePhase(activePeriods[blackHole.id - 1]);
     }
     if (autoPause) {
-      ExpoBlackHoles.togglePause(true);
+      ImaginaryBlackHoles.togglePause(true);
     }
   },
 
@@ -556,7 +556,7 @@ export const ExpoBlackHoles = {
   timeToNextPause(bhNum, steps = 100) {
     if (bhNum === 1) {
       // This is a simple case that we can do mathematically.
-      const bh = ExpoBlackHole(1);
+      const bh = ImaginaryBlackHole(1);
       // If no blackhole gaps are as long as the warmup time, we never pause.
       if (bh.interval.lte(BlackHoles.ACCELERATION_TIME)) {
         return null;
@@ -577,10 +577,10 @@ export const ExpoBlackHoles = {
     // can be 20 seconds (so it's fairly OK not to pause).
     // Precalculate some stuff that won't change (or in the case of charged and phases, stuff we'll change ourself
     // but just in this simulation) while we call this function.
-    const charged = [ExpoBlackHole(1).isCharged];
-    const phases = [ExpoBlackHole(1).phase];
-    const durations = [ExpoBlackHole(1).duration];
-    const intervals = [ExpoBlackHole(1).interval];
+    const charged = [ImaginaryBlackHole(1).isCharged];
+    const phases = [ImaginaryBlackHole(1).phase];
+    const durations = [ImaginaryBlackHole(1).duration];
+    const intervals = [ImaginaryBlackHole(1).interval];
     // This is technically somewhat incorrect, because assuming durations aren't tiny, the maximum
     // possible gap between BH2 activations is the *sum* of the intervals. However, that's still 10 seconds
     // if this conditional is true, and pausing the BH because of a 10-second activation gap
@@ -588,7 +588,7 @@ export const ExpoBlackHoles = {
     // This should also stop this function from being relatively computationally expensive
     // if both intervals are 3 seconds (so the next pause would be when they happen to align,
     // which is rare and will probably lead to a full 100 steps).
-    if (intervals[0].lte(ExpoBlackHoles.ACCELERATION_TIME)) {
+    if (intervals[0].lte(ImaginaryBlackHoles.ACCELERATION_TIME)) {
       return null;
     }
     // Make a list of things to bound phase by.
@@ -635,7 +635,7 @@ export const ExpoBlackHoles = {
     if (player.blackHoleAutoPauseMode === EXPO_BLACK_HOLE_PAUSE_MODE.NO_PAUSE) {
       return [false, realTime];
     }
-    const timeLeft = this.timeToNextPause(player.expoBlackHoleAutoPauseMode);
+    const timeLeft = this.timeToNextPause(player.ImaginaryBlackHoleAutoPauseMode);
     // Cases in which we don't pause in the given amount of real time:
     // Null = no pause, (timeLeft < 1e-9) = we auto-paused and there was maybe rounding error,
     // now the player's unpaused at this exact point (so we shouldn't pause again),

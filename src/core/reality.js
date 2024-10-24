@@ -860,13 +860,11 @@ export function isInCelestialReality() {
 function lockAchievementsOnReality() {
   if (Perk.achievementGroup5.isBought) return;
   for (const achievement of Achievements.preReality) {
-    achievement.lock();
-  }
-  if (PlayerProgress.mendingUnlocked) {
-    const achKeep = [22, 47, 48, 51, 52, 53, 61];
-    for (let i = 0; i < achKeep.length; i++) {
-      Achievement(achKeep[i]).unlock();
+    let achKeep = [];
+    if (PlayerProgress.mendingUnlocked) {
+      achKeep = [22, 47, 48, 51, 52, 53, 61];
     }
+    if (!(achKeep.includes(achievement.id))) achievement.lock();
   }
   player.reality.achTimer = DC.D0;
 }

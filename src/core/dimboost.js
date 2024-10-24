@@ -159,7 +159,8 @@ export class DimBoost {
   static get imaginaryBoosts() {
     return Ra.isRunning
       ? DC.D0
-      : ImaginaryUpgrade(12).effectOrDefault(DC.D0).mul(ImaginaryUpgrade(23).effectOrDefault(DC.D1));
+      : ImaginaryUpgrade(12).effectOrDefault(DC.D0).add(InfinityUpgrade.skipReset3.chargedEffect.effectOrDefault(DC.D0))
+        .mul(ImaginaryUpgrade(23).effectOrDefault(DC.D1));
   }
 
   static get totalBoosts() {
@@ -167,9 +168,10 @@ export class DimBoost {
   }
 
   static get startingDimensionBoosts() {
-    if (InfinityUpgrade.skipResetGalaxy.isBought) return DC.D4;
-    if (InfinityUpgrade.skipReset3.isBought) return DC.D3;
-    if (InfinityUpgrade.skipReset2.isBought) return DC.D2;
+    if (InfinityUpgrade.skipReset1.isCharged) return new Decimal(12000);
+    if (InfinityUpgrade.skipResetGalaxy.isBought || InfinityUpgrade.skipResetGalaxy.isCharged) return DC.D4;
+    if (InfinityUpgrade.skipReset3.isBought || InfinityUpgrade.skipReset3.isCharged) return DC.D3;
+    if (InfinityUpgrade.skipReset2.isBought || InfinityUpgrade.skipReset2.isCharged) return DC.D2;
     if (InfinityUpgrade.skipReset1.isBought) return DC.D1;
     return DC.D0;
   }
@@ -206,7 +208,9 @@ export function skipResetsIfPossible(enteringAntimatterChallenge) {
   if (enteringAntimatterChallenge || Player.isInAntimatterChallenge) return;
   if (InfinityUpgrade.skipResetGalaxy.isBought && player.dimensionBoosts.lt(4)) {
     player.dimensionBoosts = DC.D4;
-    if (player.galaxies.lt(1)) player.galaxies = DC.D1;
+    if (player.galaxies.lt(1)) {
+      player.galaxies = InfinityUpgrade.skipReset2.isCharged ? new Decimal(250) : DC.D1;
+    }
   } else if (InfinityUpgrade.skipReset3.isBought && player.dimensionBoosts.lt(3)) player.dimensionBoosts = DC.D3;
   else if (InfinityUpgrade.skipReset2.isBought && player.dimensionBoosts.lt(2)) player.dimensionBoosts = DC.D2;
   else if (InfinityUpgrade.skipReset1.isBought && player.dimensionBoosts.lt(1)) player.dimensionBoosts = DC.D1;
@@ -259,6 +263,7 @@ function maxBuyDimBoosts() {
   }
 
   amount = amount.sub(Effects.sum(InfinityUpgrade.resetBoost));
+  if (InfinityUpgrade.skipReset1.isCharged) amount = amount.mul(0.99);
   if (InfinityChallenge(5).isCompleted) amount = amount.sub(1);
 
   multiplierPerDB = multiplierPerDB.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));

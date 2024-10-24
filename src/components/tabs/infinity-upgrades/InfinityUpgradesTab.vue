@@ -14,8 +14,10 @@ export default {
     return {
       isUseless: false,
       chargeUnlocked: false,
-      totalCharges: 0,
+      totalChargesA: 0,
+      totalChargesB: 0,
       chargesUsed: 0,
+      breakChargesUsed: 0,
       disCharge: false,
       ipMultSoftCap: 0,
       ipMultHardCap: 0,
@@ -80,8 +82,10 @@ export default {
     update() {
       this.isUseless = Pelle.isDoomed;
       this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && !Pelle.isDoomed;
-      this.totalCharges = Ra.totalCharges;
+      this.totalChargesA = Ra.totalCharges;
+      this.totalChargesB = Ra.totalBreakCharges;
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
+      this.breakChargesUsed = Ra.totalBreakCharges - Ra.breakChargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
       this.ipMultSoftCap = GameDatabase.infinity.upgrades.ipMult.costIncreaseThreshold;
       this.ipMultHardCap = GameDatabase.infinity.upgrades.ipMult.costCap;
@@ -131,7 +135,9 @@ export default {
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
-      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Infinity Upgrades.
+      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalChargesA) }} Infinity Upgrades.
+      <!-- eslint-disable-next-line max-len -->
+      Additionally, you have used {{ formatInt(breakChargesUsed) }}/{{ formatInt(totalChargesB) }} Break Infinity Charges.
       Charged Infinity Upgrades have their effect altered.
       <br>
       Hold shift to show Charged Infinity Upgrades. You can freely respec your choices on Reality.

@@ -58,6 +58,9 @@ export const Teresa = {
   get runCompleted() {
     return player.celestials.teresa.bestRunAM.gt(1);
   },
+  get hardModeToggled() {
+    return player.celestials.teresa.hardModeToggled
+  },
   quotes: Quotes.teresa,
   symbol: "Ϟ",
   reset() {

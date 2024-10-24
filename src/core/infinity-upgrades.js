@@ -64,18 +64,27 @@ export class InfinityUpgradeState extends SetPurchasableMechanicState {
   }
 
   get canCharge() {
-    return this.isBought &&
+    return (this.isBought &&
       this.hasChargeEffect &&
       !this.isCharged &&
       Ra.chargesLeft !== 0 &&
-      !Pelle.isDisabled("chargedInfinityUpgrades");
+      !Pelle.isDisabled("chargedInfinityUpgrades")) ||
+      (this.isBought &&
+      this.hasChargeEffect &&
+      !this.isCharged &&
+      Ra.breakChargesLeft !== 0 &&
+      !Pelle.isDisabled("chargedInfinityUpgrades") &&
+      this.id[0] === "s" &&
+      Ra.unlocks.breakCharges.isUnlocked);
   }
 
   charge() {
+    if (this.id[0] !== "s") player.celestials.ra.breakCharged.add(this.id);
     player.celestials.ra.charged.add(this.id);
   }
 
   disCharge() {
+    if (this.id[0] !== "s") player.celestials.ra.breakCharged.delete(this.id);
     player.celestials.ra.charged.delete(this.id);
   }
 }

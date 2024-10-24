@@ -1,11 +1,14 @@
 import { DC } from "../../constants";
 
+function softcap(softcapStart, value) {
+  return value.gt(softcapStart) ? value.sub(softcapStart).cbrt().add(softcapStart) : value;
+}
 function dimInfinityMult() {
   return Currency.infinitiesTotal.value.times(0.2).plus(1);
 }
 function chargedDimInfinityMult() {
-  return Decimal.log10(Decimal.max(1, Currency.infinitiesTotal.value.pLog10()))
-    .mul(Math.sqrt(Ra.pets.teresa.level) / 150).add(1);
+  return softcap(new Decimal(1.2), Decimal.log10(Decimal.max(1, Currency.infinitiesTotal.value.pLog10()))
+    .mul(Math.sqrt(Ra.pets.teresa.level) / 150).add(1));
 }
 
 export const infinityUpgrades = {
@@ -18,8 +21,8 @@ export const infinityUpgrades = {
     charged: {
       description: "Antimatter Dimensions gain a power effect based on time played and Teresa level",
       effect: () =>
-        Decimal.log10(Decimal.log10(Time.totalTimePlayed.totalMilliseconds))
-          .times(Decimal.pow(Ra.pets.teresa.level, 0.5)).div(150).add(1),
+        softcap(new Decimal(1.2), Decimal.log10(Decimal.log10(Time.totalTimePlayed.totalMilliseconds))
+          .times(Decimal.pow(Ra.pets.teresa.level, 0.5)).div(150).add(1)),
       formatEffect: value => formatPow(value, 4, 4)
     }
   },
@@ -97,7 +100,7 @@ export const infinityUpgrades = {
     charged: {
       description: () => `The multiplier for buying ${formatInt(10)} Antimatter Dimensions gains ` +
         "a power effect based on Teresa level",
-      effect: () => 1 + Ra.pets.teresa.level / 200,
+      effect: () => softcap(1.25, new Decimal(1 + Ra.pets.teresa.level / 200)).toNumber(),
       formatEffect: value => formatPow(value, 3, 3)
     }
   },
@@ -123,8 +126,8 @@ export const infinityUpgrades = {
       description:
         "Antimatter Dimensions gain a power effect based on time spent in current Infinity and Teresa level",
       effect: () =>
-        Decimal.log10(Decimal.log10(Time.thisInfinity.totalMilliseconds.add(100)))
-          .times(Math.sqrt(Ra.pets.teresa.level)).div(150).add(1),
+        softcap(new Decimal(1.2), Decimal.log10(Decimal.log10(Time.thisInfinity.totalMilliseconds.add(100)))
+          .times(Math.sqrt(Ra.pets.teresa.level)).div(150).add(1)),
       formatEffect: value => formatPow(value, 4, 4)
     }
   },
@@ -137,7 +140,8 @@ export const infinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2),
     charged: {
       description: "Multiplier to 1st Antimatter Dimension based on unspent Infinity Points, powered by Teresa level",
-      effect: () => Currency.infinityPoints.value.dividedBy(2).pow(Math.sqrt(Ra.pets.teresa.level) * 1.5).plus(1),
+      effect: () => Decimal.pow10(softcap(new Decimal("1e13"),
+        Currency.infinityPoints.value.dividedBy(2).pow(Math.sqrt(Ra.pets.teresa.level) * 1.5).plus(1).log10())),
       formatEffect: value => formatX(value, 2, 2)
     }
   },
@@ -181,6 +185,12 @@ export const infinityUpgrades = {
     cost: 20,
     description: () =>
       `Start every reset with ${formatInt(1)} Dimension Boost, automatically unlocking the 5th Antimatter Dimension`,
+    charged: {
+      description: () =>
+        `Start every reset with ${formatInt(12000)} Dimension Boosts, and Dimension Boosts
+      are ${formatPercents(0.01)} cheaper out of Eternity Challenge 5`,
+      effect: () => [new Decimal(12000), 0.99],
+    }
   },
   skipReset2: {
     id: "skipReset2",
@@ -188,6 +198,12 @@ export const infinityUpgrades = {
     checkRequirement: () => InfinityUpgrade.skipReset1.isBought,
     description: () =>
       `Start every reset with ${formatInt(2)} Dimension Boosts, automatically unlocking the 6th Antimatter Dimension`,
+    charged: {
+      description: () =>
+        `Start every reset with ${formatInt(250)} Antimatter Galaxies, and Antimatter Galaxies
+      are ${formatPercents(0.01)} cheaper.`,
+      effect: () => [new Decimal(250), 0.99],
+    }
   },
   skipReset3: {
     id: "skipReset3",
@@ -195,6 +211,12 @@ export const infinityUpgrades = {
     checkRequirement: () => InfinityUpgrade.skipReset2.isBought,
     description: () =>
       `Start every reset with ${formatInt(3)} Dimension Boosts, automatically unlocking the 7th Antimatter Dimension`,
+    charged: {
+      description: () =>
+        `Gain extra Dimension Boosts based on Teresa level and Infinity Count`,
+      effect: () => Currency.infinitiesTotal.value.max(1).log10().mul(Ra.pets.teresa.level).div(10).floor(),
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   skipResetGalaxy: {
     id: "skipResetGalaxy",
@@ -203,6 +225,12 @@ export const infinityUpgrades = {
     description: () =>
       `Start every reset with ${formatInt(4)} Dimension Boosts, automatically unlocking the 8th Antimatter Dimension;
       and an Antimatter Galaxy`,
+    charged: {
+      description: () =>
+        `Gain extra Multiversal Galaxies based on Teresa level and Mending Count`,
+      effect: () => Currency.mends.value.max(1).log10().mul(Ra.pets.teresa.level).floor(),
+      formatEffect: value => `+${formatInt(value)}`
+    }
   },
   ipOffline: {
     id: "ipOffline",
