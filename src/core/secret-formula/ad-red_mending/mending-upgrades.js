@@ -46,12 +46,12 @@ export const mendingUpgrades = [
     name: "2",
     id: 2,
     costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D0],
-    description: p => ["Gain passive Infinity Point gain",
-      "Gain passive Eternity Point gain",
-      "Gain passive Reality Machine gain",
+    description: p => ["Gain passive Prestige Point gain",
+      "Gain passive Prestige Point gain",
+      "Gain passive Prestige Point gain",
       "Imaginary Machines are always equal to their cap",
       "Remnants are always equal to their cap",
-      "Fully Purchased"][p],
+      "Gain passive Prestige Point gain"][p],
     effect: p => p,
     formatEffect: value => {
       if (value.eq(0)) return "None";
@@ -64,7 +64,7 @@ export const mendingUpgrades = [
     id: 3,
     costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, DC.D0],
     // TODO: change this desc
-    description: () => `Antimatter, Infinity, and Time Dimension are multipled than raised to a power`,
+    description: () => `Antimatter, Infinity, and Time Dimensions are multipled then raised to a power`,
     effects: p => ({
       mult: [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
         DC.E5000, DC.E5000, DC.E5000, DC.E5000,

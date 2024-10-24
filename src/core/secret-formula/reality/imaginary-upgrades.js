@@ -202,10 +202,10 @@ export const imaginaryUpgrades = [
     id: 18,
     cost: 1.5e10,
     formatCost: x => format(x, 1),
-    requirement: () => `Have ${format(80000)} total Galaxies`,
+    requirement: () => `Have ${formatInt(80000)} total Galaxies`,
     hasFailed: () => false,
     checkRequirement: () => player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total)
-      .add(player.galaxies).gte(80000),
+      .add(player.galaxies).add(player.mending.multiversalGalaxies).gte(80000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 4th Dark Matter Dimension",
   },

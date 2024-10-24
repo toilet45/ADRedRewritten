@@ -49,8 +49,9 @@ export const ra = {
       chunkGain: "Replicanti",
       memoryGain: "other Memory multipliers",
       // eslint-disable-next-line no-unused-expressions, no-labels, no-unused-labels
-      requiredUnlock: () => { isUnlocked: MendingUpgrade(19).isBought; }, // I dont wanna write edgecase so this does
-      rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().max(1).root(4),
+      requiredUnlock: () => MendingUpgrade(19).isBought, // I dont wanna write edgecase so this does
+      rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().add(1).log10().mul(2)
+        .floor().mul(3).pow(4),
       memoryProductionMultiplier: () => Decimal.root(
         Ra.unlocks.vXP.effectOrDefault(new Decimal(1))
           .mul(Ra.unlocks.enslavedXP.effectOrDefault(new Decimal(1)))

@@ -73,7 +73,9 @@ export default {
       // seems more likely to be read).
       const upgrade = this.upgrade;
       this.isBought = upgrade.isBought || upgrade.isCapped;
-      this.chargePossible = Ra.unlocks.chargedInfinityUpgrades.canBeApplied &&
+      this.chargePossible = (upgrade.id === "skipReset1" || upgrade.id === "skipReset2" ||
+      upgrade.id === "skipReset3" || upgrade.id === "skipResetGalaxy"
+        ? Ra.unlocks.breakCharges.canBeApplied : Ra.unlocks.chargedInfinityUpgrades.canBeApplied) &&
         upgrade.hasChargeEffect && !Pelle.isDoomed;
       this.canBeBought = upgrade.canBeBought;
       this.canBeCharged = upgrade.canCharge;

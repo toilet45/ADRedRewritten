@@ -394,7 +394,9 @@ export const Ra = {
     return player.celestials.ra.run;
   },
   get totalCharges() {
-    return Ra.unlocks.chargedInfinityUpgrades.effectOrDefault(0);
+    let x = Ra.unlocks.chargedInfinityUpgrades.effectOrDefault(0);
+    if (Ra.unlocks.breakCharges.canBeApplied) x += 4;
+    return x;
   },
   get totalBreakCharges() {
     return Ra.unlocks.breakCharges.effectOrDefault(0);

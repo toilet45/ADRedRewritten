@@ -23,7 +23,8 @@ export default {
       ipMultHardCap: 0,
       eternityUnlocked: false,
       bottomRowUnlocked: false,
-      styleOfColumnBg: undefined
+      styleOfColumnBg: undefined,
+      breakChargeUnlocked: false
     };
   },
   computed: {
@@ -91,6 +92,7 @@ export default {
       this.ipMultHardCap = GameDatabase.infinity.upgrades.ipMult.costCap;
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
       this.bottomRowUnlocked = Achievement(41).isUnlocked;
+      this.breakChargeUnlocked = Ra.unlocks.breakCharges.canBeApplied && !Pelle.isDoomed;
     },
     btnClassObject(column) {
       const classObject = {
@@ -137,7 +139,9 @@ export default {
     <div v-if="chargeUnlocked">
       You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalChargesA) }} Infinity Upgrades.
       <!-- eslint-disable-next-line max-len -->
-      Additionally, you have used {{ formatInt(breakChargesUsed) }}/{{ formatInt(totalChargesB) }} Break Infinity Charges.
+      <div v-if="breakChargeUnlocked">
+        Additionally, you have used {{ formatInt(breakChargesUsed) }}/{{ formatInt(totalChargesB) }} Break Infinity Charges.
+      </div>
       Charged Infinity Upgrades have their effect altered.
       <br>
       Hold shift to show Charged Infinity Upgrades. You can freely respec your choices on Reality.
