@@ -35,7 +35,7 @@ export const Teresa = {
     return Decimal.max(Decimal.pow(antimatter.plus(1).log10().div(1.5e8), 12), 1);
   },
   hardRewardMultiplier(antimatter) {
-    return Decimal.max(Decimal.log10(Decimal.max(1, antimatter)).max(1).log10(), 1).div(20).add(1);
+    return Decimal.max(Decimal.log10(Decimal.max(1, antimatter)).max(1).log10(), 0).div(20).add(1);
   },
   get pouredAmount() {
     return player.celestials.teresa.pouredAmount;
@@ -63,6 +63,9 @@ export const Teresa = {
   },
   get runCompleted() {
     return player.celestials.teresa.bestRunAM.gt(1);
+  },
+  get hardRunCompleted() {
+    return player.celestials.teresa.hard.bestRunAM.gt(1);
   },
   get hardModeToggled() {
     return player.celestials.teresa.hard.toggled;
