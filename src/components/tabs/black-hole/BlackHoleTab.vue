@@ -33,7 +33,10 @@ export default {
   },
   computed: {
     blackHoles: () => BlackHoles.list,
-    ImaginaryBlackHoles: () => ImaginaryBlackHoles.list,
+    ImaginaryBlackHole: () => {
+      console.log(ImaginaryBlackHole(1));
+      return ImaginaryBlackHole(1);
+    },
     pauseModeString() {
       switch (this.pauseMode) {
         case BLACK_HOLE_PAUSE_MODE.NO_PAUSE:
@@ -237,9 +240,7 @@ export default {
       Black Hole 3 is only active if Black Holes 1 and 2 are not paused or inverted
       <div :class="gridStyle()">
         <ImaginaryBlackHoleUpgradeRow
-          v-for="(ImaginaryBlackHole, i) in ImaginaryBlackHoles"
-          :key="'upgrades' + i"
-          :expo-black-hole="ImaginaryBlackHole"
+          :key="upgrades3"
         />
       </div>
     </template>

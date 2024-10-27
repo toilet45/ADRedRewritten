@@ -348,7 +348,7 @@ export const ra = {
     },
     breakCharges: {
       id: 29,
-      reward: () => `Every ${formatInt(5)} levels from ${formatInt(40)},
+      reward: () => `Every ${formatInt(5)} levels from ${formatInt(40)} (inclusive),
       gain a new charged upgrade and Break Upgrades can be charged`, // BiU 1-9, and col4 iU
       effect: () => Math.min(13, Math.max(0, Math.floor((Ra.pets.teresa.level - 35) / 5))),
       pet: "teresa",

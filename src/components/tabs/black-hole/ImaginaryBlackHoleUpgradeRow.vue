@@ -6,12 +6,12 @@ export default {
   components: {
     ImaginaryBlackHoleUpgradeButton
   },
-  props: {
+  /* props: {
     ImaginaryBlackHole: {
       type: Object,
       required: true
     }
-  },
+  }, */
   data() {
     return {
       isUnlocked: false,
@@ -22,20 +22,21 @@ export default {
   },
   computed: {
     ImaginaryBlackHoleDescription() {
-      return this.ImaginaryBlackHole.description(false);
+      return ImaginaryBlackHole(1).description(false);
     },
     powerConfig() {
+      const x = Decimal.pow(5, player.ImaginaryBlackHole[0].powerUpgrades.mul(2).add(1));
       return {
-        upgrade: this.ImaginaryBlackHole.powerUpgrade,
-        description: () => `Make ${this.ImaginaryBlackHoleDescription} ${formatX(1.05, 2, 2)} stronger`,
+        upgrade: ImaginaryBlackHole(1).powerUpgrade,
+        description: () => `Make ${this.ImaginaryBlackHoleDescription} ${formatX(x, 2, 2)} stronger`,
         effectTitle: "Current power",
-        formatEffect: value => `${formatPow(value, 2, 2)}`
+        formatEffect: value => `${formatX(value, 2, 2)}`
       };
     },
   },
   methods: {
     update() {
-      const bh = this.ImaginaryBlackHole;
+      const bh = ImaginaryBlackHole(1);
       this.isUnlocked = bh.isUnlocked;
       this.isPermanent = bh.isPermanent;
       // We pull directly from the black hole data here (and in formatEffect above) because there are other sources

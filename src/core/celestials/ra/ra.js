@@ -96,7 +96,7 @@ class RaPetState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    return this.requiredUnlock === undefined || this.requiredUnlock.isUnlocked;
+    return this.requiredUnlock === undefined || this.requiredUnlock === true || this.requiredUnlock.isUnlocked;
   }
 
   get isCapped() {
@@ -201,6 +201,7 @@ class RaPetState extends GameMechanicState {
     this.memories = this.memories.sub(this.requiredMemories);
     this.level++;
     Ra.checkForUnlocks();
+    Ra.checkUnlockUnlocks();
   }
 
   get unlocks() {
@@ -372,6 +373,11 @@ export const Ra = {
       }
     }
   },
+  checkUnlockUnlocks() {
+    if (this.id === "enslaved" && this.level === 40) {
+      player.ImaginaryBlackHole[0].unlocked = true;
+    }
+  },
   initializeRun() {
     clearCelestialRuns();
     player.celestials.ra.run = true;
@@ -395,7 +401,7 @@ export const Ra = {
   },
   get totalCharges() {
     let x = Ra.unlocks.chargedInfinityUpgrades.effectOrDefault(0);
-    if (Ra.unlocks.breakCharges.canBeApplied) x += 4;
+    // if (Ra.unlocks.breakCharges.canBeApplied) x += 4;
     return x;
   },
   get totalBreakCharges() {

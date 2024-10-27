@@ -86,7 +86,7 @@ class ImaginaryBlackHoleState {
       id: this.id,
       getAmount: () => this._data.powerUpgrades,
       setAmount: amount => this._data.powerUpgrades = amount,
-      calculateValue: amount => Decimal.pow(60, Decimal.pow(amount, 2)),
+      calculateValue: amount => Decimal.pow(5, Decimal.pow(amount, 2)),
       initialCost: blackHoleCostMultipliers[id].mul(1),
       costMult: new Decimal(25),
       hasAutobuyer: true

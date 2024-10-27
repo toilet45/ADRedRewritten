@@ -195,6 +195,7 @@ export const GlyphGenerator = {
   musicGlyph() {
     const rng = new GlyphGenerator.MusicGlyphRNG();
     const glyph =
+      // eslint-disable-next-line max-len
       this.randomGlyph({ actualLevel: Decimal.floor(player.records.bestReality.glyphLevel.times(Ra.unlocks.musicAtHighest.canBeApplied ? 1 : 0.8)), rawLevel: DC.D1 }, rng);
     rng.finalize();
     glyph.cosmetic = "music";
@@ -243,12 +244,12 @@ export const GlyphGenerator = {
     if (GlyphInfo[type].effects().length <= 4 && Ra.unlocks.glyphEffectCount.canBeApplied) {
       return GlyphInfo[type].effects().length;
     }
-    const maxEffects = !Ra.unlocks.glyphEffectCount.canBeApplied && type === "effarig" ? 4
-      : GlyphInfo[type].effects().length;
+    const maxEffects = Math.min(GlyphInfo[type].effects().length, GlyphInfo[type].maxEffects());
+    const effectGainFactor = GlyphInfo[type].gainFactor === undefined ? (x => x) : GlyphInfo[type].gainFactor;
     let num = Decimal.min(
       maxEffects,
       // eslint-disable-next-line max-len
-      Decimal.floor(Decimal.pow(random1, DC.D1.sub((Decimal.pow(level.times(strength), 0.5)).div(100))).times(1.5).add(1))
+      effectGainFactor(Decimal.floor(Decimal.pow(random1, DC.D1.sub((Decimal.pow(level.times(strength), 0.5)).div(100))).times(1.5))).add(1)
     ).min(250).toNumber();
     // Incase someone somehow forgets to put a limit, this .min(250) is a final protection
     // If we do decide to add anything else that boosts chance of an extra effect, keeping the code like this
@@ -256,7 +257,8 @@ export const GlyphGenerator = {
     if (RealityUpgrade(17).isBought && random2 < Effects.max(0, RealityUpgrade(17)).toNumber()) {
       num = Math.min(num + 1, maxEffects);
     }
-    return Ra.unlocks.glyphEffectCount.canBeApplied ? Math.max(num, 4) : num;
+    // eslint-disable-next-line max-len
+    return (Ra.unlocks.glyphEffectCount.canBeApplied && GlyphInfo[type].gainFactor === undefined) ? Math.max(num, 4) : num;
   },
 
   // Populate a list of reality glyph effects based on level
@@ -279,9 +281,10 @@ export const GlyphGenerator = {
       const unincluded = effectValues[20] < effectValues[21] ? 20 : 21;
       effectValues[unincluded] = -1;
     }
+
     // This is timepow/infinitypow/powerpow
     for (const i of [0, 12, 16]) {
-      if (i in effectValues) {
+      if (i in effectValues && GlyphEffects[GlyphInfo[type].primaryEffect]?.intID === i) {
         effectValues[i] = 2;
       }
     }

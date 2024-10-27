@@ -43,6 +43,7 @@ export default {
       hard_lastMachines: new Decimal(0),
       hard_lastiM: new Decimal(),
       hard_runReward: new Decimal(),
+      hardModeUnlocked: false
     };
   },
   computed: {
@@ -139,6 +140,7 @@ export default {
       this.canUnlockNextPour = TeresaUnlocks.all
         .filter(unlock => this.rm.plus(this.pouredAmount).gte(unlock.price) && !unlock.isUnlocked).length > 0;
       this.hardTeresaToggled = Teresa.hardModeToggled;
+      this.hardModeUnlocked = Teresa.hardModeUnlocked;
     },
     startRun() {
       if (this.isDoomed) return;
@@ -178,7 +180,9 @@ export default {
             <span :class="{ 'o-pelle-disabled': isDoomed }">
               Start Teresa's Reality.
             </span>
-            <HardTeresaToggle />
+            <div v-if="hardModeUnlocked">
+              <HardTeresaToggle />
+            </div>
           </div>
           <div
             :class="runButtonClassObject"
@@ -244,6 +248,9 @@ export default {
           <br><br>
           <div>
             This Reality can be repeated for a stronger reward based on the antimatter gained within it.
+            <div v-if="!showHardRunReward">
+              On first completion, allow the sacrifice from Reality Glyphs to be affected by Teresa's Reality.
+            </div>
             <br><br>
             <span v-if="showHardRunReward">
               Your record antimatter in Teresa's Hardened Reality is {{ format(hard_bestAM, 2) }},

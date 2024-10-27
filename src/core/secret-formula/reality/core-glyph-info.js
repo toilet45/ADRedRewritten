@@ -49,6 +49,7 @@ export const GlyphInfo = {
     "time",
     "dilation",
     "companion",
+    "amalgam"
   ],
 
   basicGlyphTypes: [
@@ -84,7 +85,8 @@ export const GlyphInfo = {
     "replication",
     "time",
     "dilation",
-    "effarig"
+    "effarig",
+    "amalgam"
   ],
 
   rarities: [
@@ -164,6 +166,32 @@ export const GlyphInfo = {
     adjNounImportance: 6,
     color: "#000000",
     setColor: true,
+    maxEffects: Infinity
+  },
+
+  amalgam: {
+    id: "amalgam",
+    effects: () => GlyphEffects.all.filter(e => complexIncludes(e.glyphTypes, "amalgam")),
+    effectIDs: ["timepow", "timespeed", "timeetermult", "timeEP", "dilationDT", "dilationgalaxyThreshold", "dilationTTgen",
+      "dilationpow", "replicationspeed", "replicationpow", "replicationdtgain", "replicationglyphlevel", "infinitypow",
+      "infinityrate", "infinityIP", "infinityinfmult", "powerpow", "powermult", "powerdimboost", "powerbuy10"
+    ],
+    adjective: { high: "Amalgamated", mid: "Fused", low: "Mixed" },
+    noun: "Amalgam",
+    isBasic: false,
+    regularGlyphSymbol: "?",
+    cancerGlyphSymbol: "A",
+    hasSacrifice: false,
+    hasAlchemyResource: false,
+    pelleUniqueEffect: false,
+    isGenerated: true,
+    generationRequirement: () => false,
+    canCustomize: () => false,
+    adjNounImportance: 5,
+    color: "#ffffff",
+    setColor: true,
+    maxEffects: () => 4,
+    gainFactor: x => x.div(25)
   },
 
   reality: {
@@ -182,7 +210,8 @@ export const GlyphInfo = {
         if (Pelle.isDisabled("glyphsac")) return DC.D0;
         const sac = player.reality.glyphs.sac.reality.add(added ?? 0);
         // This cap is only feasibly reached with the imaginary upgrade, but we still want to cap it at a nice number
-        return Decimal.min(Decimal.sqrt(sac).div(15).add(1), 100);
+        if (sac.lt(1e101)) return Decimal.min(Decimal.sqrt(sac).div(15).add(1), 100);
+        return sac.div(1e100).log10().pow(3).add(100);
       },
       description: amount => `Multiply Memory Chunk gain by ${formatX(amount, 2, 3)}`,
       cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
@@ -194,6 +223,7 @@ export const GlyphInfo = {
     adjNounImportance: 4,
     alchemyResource: ALCHEMY_RESOURCE.REALITY,
     setColor: true,
+    maxEffects: () => Infinity,
     maxEquipped: 1,
   },
 
@@ -227,6 +257,7 @@ export const GlyphInfo = {
     color: "#e21717",
     alchemyResource: ALCHEMY_RESOURCE.EFFARIG,
     hasRarity: true,
+    maxEffects: () => (Ra.unlocks.glyphEffectCount.canBeApplied ? Infinity : 4),
     maxEquipped: 1,
   },
 
@@ -246,7 +277,7 @@ export const GlyphInfo = {
     canCustomize: false,
     adjNounImportance: 5,
     color: "#feaec9",
-    setColor: true,
+    maxEffects: () => Infinity,
   },
 
   power: {
@@ -286,7 +317,8 @@ export const GlyphInfo = {
     color: "#22aa48",
     primaryEffect: "powerpow",
     alchemyResource: ALCHEMY_RESOURCE.POWER,
-    hasRarity: true
+    hasRarity: true,
+    maxEffects: () => Infinity,
   },
 
   infinity: {
@@ -317,7 +349,8 @@ export const GlyphInfo = {
     color: "#b67f33",
     primaryEffect: "infinitypow",
     alchemyResource: ALCHEMY_RESOURCE.INFINITY,
-    hasRarity: true
+    hasRarity: true,
+    maxEffects: () => Infinity,
   },
 
   replication: {
@@ -356,7 +389,8 @@ export const GlyphInfo = {
     adjNounImportance: 1,
     color: "#03a9f4",
     alchemyResource: ALCHEMY_RESOURCE.REPLICATION,
-    hasRarity: true
+    hasRarity: true,
+    maxEffects: () => Infinity,
   },
 
   time: {
@@ -387,7 +421,8 @@ export const GlyphInfo = {
     color: "#b241e3",
     primaryEffect: "timepow",
     alchemyResource: ALCHEMY_RESOURCE.TIME,
-    hasRarity: true
+    hasRarity: true,
+    maxEffects: () => Infinity,
   },
 
   dilation: {
@@ -418,7 +453,8 @@ export const GlyphInfo = {
     adjNounImportance: 1,
     color: "#64dd17",
     alchemyResource: ALCHEMY_RESOURCE.DILATION,
-    hasRarity: true
+    hasRarity: true,
+    maxEffects: Infinity,
   }
 };
 

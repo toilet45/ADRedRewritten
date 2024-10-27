@@ -121,6 +121,7 @@ export const Enslaved = {
     }
     player.requirementChecks.reality.slowestBH = DC.D1;
     let release = player.celestials.enslaved.stored;
+    
     if (Enslaved.isRunning) {
       release = Enslaved.storedTimeInsideEnslaved(release);
       if (Time.thisReality.totalYears.add(TimeSpan.fromMilliseconds(release).totalYears.gt(1))) {

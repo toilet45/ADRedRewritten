@@ -585,11 +585,11 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get cappedProductionInNormalChallenges() {
-    const postBI = true;
+    const postBI = MendingUpgrade(20).isBought;
     const postBreak = (player.break && !NormalChallenge.isRunning) ||
       InfinityChallenge.isRunning ||
       Enslaved.isRunning;
-    if (postBI && postBreak) return DC.BIMAX;
+    if (postBI && postBreak) return DC.BEMAX;
     return postBreak ? DC.BIMAX : DC.E315;
   }
 
@@ -616,9 +616,16 @@ class AntimatterDimensionState extends DimensionState {
       }
     }
     if (Teresa.isRunning && Teresa.hardModeToggled && tier === 1) {
-      production = production.pow(0.03);
+      production = Decimal.pow10(production.max(1).log10().pow(0.9));
     }
     production = production.min(this.cappedProductionInNormalChallenges);
+    if (production.gt(DC.BIMAX)) {
+      // Return the log of what this ad makes, div by 9e15, then raise the log to the recip of log^3, then pow10
+      // This should softcap AM to a rate that grows fast but not stupidly.
+      // THIS APPLIES TO ALL ANTIMATTER DIMENSIONS. BE EXTREMELY CAREFUL TWEAKING VALUES.
+      return Decimal.pow10(production.log10().div(9e15).pow(production.log10().log10().log10()
+        .div(Math.log10(Math.log10(9e15))).recip()).mul(9e15));
+    }
     return production;
   }
 }

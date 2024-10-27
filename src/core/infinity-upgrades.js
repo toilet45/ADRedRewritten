@@ -60,7 +60,8 @@ export class InfinityUpgradeState extends SetPurchasableMechanicState {
   }
 
   get isCharged() {
-    return player.celestials.ra.charged.has(this.id) && !(Teresa.hardModeToggled && Teresa.isRunning);
+    return (player.celestials.ra.charged.has(this.id) || player.celestials.ra.breakCharged.has(this.id)) &&
+    !(Teresa.hardModeToggled && Teresa.isRunning);
   }
 
   get canCharge() {

@@ -124,7 +124,7 @@ export function gainedInfinityPoints(mm1gen = false) {
   } else if (Laitela.isRunning) {
     ip = dilatedValueOf(ip);
   } else if (Teresa.isRunning && Teresa.hardModeToggled) {
-    ip = stackedLogPower(ip, 1, 0.75);
+    ip = stackedLogPower(ip, 1, 0.7);
   }
 
   if (GlyphAlteration.isAdded("infinity")) {
@@ -167,7 +167,7 @@ export function gainedEternityPoints() {
   } else if (Laitela.isRunning) {
     ep = dilatedValueOf(ep);
   } else if (Teresa.isRunning && Teresa.hardModeToggled) {
-    ep = stackedLogPower(ep, 1, 0.75);
+    ep = stackedLogPower(ep, 1, 0.7);
   }
   if (GlyphAlteration.isAdded("time")) {
     ep = ep.pow(getSecondaryGlyphEffect("timeEP"));
@@ -402,7 +402,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.EXPO_BLACK_HOLE)) {
-    factor = factor.pow(ImaginaryBlackHole(1).power);
+    factor = factor.mul(ImaginaryBlackHole(1).power);
   }
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
@@ -420,7 +420,7 @@ export function getGameSpeedupPreExpo() {
 }
 
 export function getExpoSpeedupFactor() {
-  return ImaginaryBlackHole(1).power;
+  return new Decimal(1);
   // A.mul(ImaginaryBlackHole(2).power);
 }
 export function getGameSpeedupForDisplay() {
@@ -451,7 +451,7 @@ export function trueTimeMechanics(trueDiff) {
     Enslaved.useStoredTime(true);
     Enslaved.isReleaseTick = true;
   } else if (!Enslaved.isReleaseTick) {
-    Enslaved.nextTickDiff = trueDiff;
+    Enslaved.nextTickDiff = new Decimal(trueDiff);
   }
 
   Autobuyers.tick();
@@ -536,13 +536,12 @@ export function gameLoop(passedDiff, options = {}) {
   }
 
   trueTimeMechanics(trueDiff);
-
   if (diff === undefined || Enslaved.isReleaseTick) {
     diff = new Decimal(Enslaved.nextTickDiff);
+
   }
   // Run all the functions which only depend on real time and not game time, skipping the rest of the loop if needed
   if (realTimeMechanics(realDiff)) return;
-
 
   // We do these after autobuyers, since it's possible something there might
   // change a multiplier.
@@ -565,9 +564,9 @@ export function gameLoop(passedDiff, options = {}) {
 
     if (Enslaved.isStoringGameTime && !fixedSpeedActive) {
       // These variables are the actual game speed used and the game speed unaffected by time storage, respectively
-      const reducedTimeFactor = getGameSpeedupFactor()
+      const reducedTimeFactor = getGameSpeedupFactor();
       const totalTimeFactor = getGameSpeedupFactor([GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH,
-        GAME_SPEED_EFFECT.BLACK_HOLE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE]);
+        GAME_SPEED_EFFECT.BLACK_HOLE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.EXPO_BLACK_HOLE]);
       const amplification = Ra.unlocks.improvedStoredTime.effects.gameTimeAmplification.effectOrDefault(1);
       const beforeStore = player.celestials.enslaved.stored;
       player.celestials.enslaved.stored = Decimal.clampMax(player.celestials.enslaved.stored

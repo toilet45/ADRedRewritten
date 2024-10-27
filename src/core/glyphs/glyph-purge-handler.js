@@ -36,6 +36,7 @@ export const GlyphSacrificeHandler = {
   removeGlyph(glyph, force = false) {
     if (this.handleSpecialGlyphTypes(glyph)) return;
     if (!this.canSacrifice) this.deleteGlyph(glyph, force);
+    if (!GlyphInfo[glyph.type].hasSacrifice) this.deleteGlyph(glyph, force);
     else if (this.isRefining) this.attemptRefineGlyph(glyph, force);
     else this.sacrificeGlyph(glyph, force);
   },

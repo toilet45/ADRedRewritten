@@ -339,9 +339,9 @@ export function mendingReset() {
 export function gainedMendingPoints() {
   let x = DC.D1;
   x = x.mul(Decimal.pow(3, MendingUpgrade(1).boughtAmount));
-  x = x.mul(TimeStudy(311).effectValue[1]);
-  x = x.mul(TimeStudy(312).effectValue[1]);
-  x = x.mul(TimeStudy(313).effectValue[1]);
+  x = x.mul(TimeStudy(311).effectOrDefault([1, 1])[1]);
+  x = x.mul(TimeStudy(312).effectOrDefault([1, 1])[1]);
+  x = x.mul(TimeStudy(313).effectOrDefault([1, 1])[1]);
   return x;
 }
 
