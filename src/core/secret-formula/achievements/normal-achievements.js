@@ -1384,7 +1384,7 @@ export const normalAchievements = [
   {
     id: 191,
     name: "I can fix it",
-    description: "Mend the Multiverse",
+    description: "Mend a Multiverse",
     checkRequirement: () => true,
     checkEvent: GAME_EVENT.MENDING_RESET_AFTER,
     get reward() {
@@ -1435,9 +1435,12 @@ export const normalAchievements = [
   },
   {
     id: 198,
-    name: "???",
-    description: "???",
-    checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    name: "Hevi, where's my update?",
+    get description() { return `Mend a Multiverse in under ${formatInt(5)} hours (real time)`; },
+    checkRequirement: () => Time.thisMendRealTime.totalHours.lt(5),
+    checkEvent: GAME_EVENT.MENDING_RESET_BEFORE,
+    get reward() {
+      return "You get to meet Lai'tela in real life after 'No Nut November', but make real time pass F1.79e308 times slower";
+    }
   }
 ];
