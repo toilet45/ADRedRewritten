@@ -14,6 +14,7 @@ export default {
       hasAscended: false,
       powerDMPerAscension: new Decimal(0),
       interval: new Decimal(0),
+      actualInterval: new Decimal(0),
       powerDM: new Decimal(0),
       powerDE: new Decimal(0),
       intervalCost: new Decimal(0),
@@ -98,6 +99,24 @@ export default {
       return `Interval is capped at ${formatInt(DarkMatterDimension(this.tier).intervalPurchaseCap)}ms.
         Ascension multiplies interval by ${formatInt(this.intervalAscensionBump)},
         DM by ${formatInt(this.powerDMPerAscension)}, and DE by ${formatInt(POWER_DE_PER_ASCENSION)}.`;
+    },
+    ticksPerX() {
+      let timeIncrement = "ticks / sec";
+      let time = this.actualInterval.div(1000).recip();
+      if (this.actualInterval.div(1000).recip().gt(240)) {
+        timeIncrement = "ticks / ms";
+        time = this.actualInterval.div(1000).recip().div(1000);
+      }
+      if (this.actualInterval.div(1000).recip().gt(240e3)) {
+        timeIncrement = "ticks / μs";
+        time = this.actualInterval.div(1000).recip().div(1e6);
+      }
+      if (this.actualInterval.div(1000).recip().gt(240e6)) {
+        timeIncrement = " per sec production";
+        time = this.actualInterval.div(1000).recip();
+        return `${formatX(time, 2, 2)} ${timeIncrement}`;
+      }
+      return `${format(time, 2, 2)} ${timeIncrement}`;
     }
   },
   methods: {
@@ -108,6 +127,7 @@ export default {
       this.hasAscended = this.ascension.gt(0);
       this.powerDMPerAscension.copyFrom(dim.powerDMPerAscension);
       this.interval.copyFrom(dim.interval);
+      this.actualInterval = this.interval.div(getRealTimeSpeedupFactor());
       this.powerDM.copyFrom(dim.powerDM);
       this.powerDE.copyFrom(dim.powerDE);
       this.intervalCost.copyFrom(dim.intervalCost);
@@ -119,7 +139,7 @@ export default {
       this.canBuyPowerDE = dim.canBuyPowerDE;
       this.isIntervalCapped = dim.interval.lte(dim.intervalPurchaseCap);
       this.timer.copyFrom(dim.realDiff);
-      this.timerPercent.copyFrom(this.timer.div(this.interval));
+      this.timerPercent.copyFrom(this.timer.div(this.actualInterval));
       this.intervalAscensionBump.copyFrom(SingularityMilestone.ascensionIntervalScaling.effectOrDefault(new Decimal(1200)));
       this.intervalAfterAscension.copyFrom(dim.intervalAfterAscension);
       this.darkEnergyPerSecond.copyFrom(dim.productionPerSecond);
@@ -197,11 +217,11 @@ export default {
         <span v-html="darkEnergyText" />
       </button>
     </div>
-    <div v-if="interval.gt(200)">
+    <div v-if="actualInterval.gt(200)">
       Tick: {{ formatInt(timer) }} ms ({{ formatPercents(timerPercent, 1) }})
     </div>
     <div v-else>
-      {{ format(interval.div(1000).recip(), 2, 2) }} ticks / sec
+      {{ ticksPerX }}
     </div>
     <div>
       Dark Energy: {{ format(darkEnergyPerSecond, 2, 4) }}/s ({{ formatPercents(portionDE, 1) }} of total)
