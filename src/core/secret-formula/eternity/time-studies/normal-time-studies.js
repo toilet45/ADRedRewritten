@@ -146,7 +146,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects all other Antimatter Dimensions with reduced effect",
     effect: () => Sacrifice.totalBoost.pow(0.25).clampMin(1),
-    cap: DC.E210000,
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE16 : DC.E210000),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -158,7 +158,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects 4th Infinity Dimension with greatly reduced effect",
     effect: () => Sacrifice.totalBoost.pow(0.04).clampMin(1),
-    cap: DC.E30000,
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.E1E15 : DC.E30000),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -168,7 +168,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects 3rd Time Dimension with greatly reduced effect",
     effect: () => Sacrifice.totalBoost.pow(0.005).clampMin(1),
-    cap: DC.E1300,
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE14 : DC.E1300),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -186,8 +186,8 @@ export const normalTimeStudies = [
     cost: DC.D4,
     requirement: [71],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Base Dimension Boost power becomes ${formatX(10)}`,
-    effect: 10
+    description: () => `Base Dimension Boost power becomes ${formatX(Ra.unlocks.newVhard.isUnlocked ? 1e150 : 10)}`,
+    effect: () => (Ra.unlocks.newVhard.isUnlocked ? 1e150 : 10)
   },
   {
     id: 82,
@@ -195,8 +195,10 @@ export const normalTimeStudies = [
     requirement: [72],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Dimension Boosts affect Infinity Dimensions",
-    effect: () => DC.D1_0000109.pow(Decimal.pow(DimBoost.totalBoosts, 2)),
-    cap: DC.E1E7,
+    effect: () => (DC.D1_0000109.pow(Decimal.pow(DimBoost.totalBoosts, 2)).gt(DC.E1E7)
+      ? DC.D1_0000109.pow(Decimal.pow(DimBoost.totalBoosts, 2)).div(DC.E1E7).root(50).mul(DC.E1E7)
+      : DC.D1_0000109.pow(Decimal.pow(DimBoost.totalBoosts, 2))),
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE25 : DC.E1E7),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -205,8 +207,10 @@ export const normalTimeStudies = [
     requirement: [73],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Dimension Boost multiplier based on tick upgrades gained from TDs",
-    effect: () => DC.D1_0004.pow(player.totalTickGained),
-    cap: DC.E30,
+    effect: () => (DC.D1_0004.pow(player.totalTickGained).gt(DC.E30)
+      ? DC.D1_0004.pow(player.totalTickGained).div(DC.E30).log10().pow(50).mul(DC.E30)
+      : DC.D1_0004.pow(player.totalTickGained)),
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.E1300 : DC.E30),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -223,9 +227,13 @@ export const normalTimeStudies = [
     cost: DC.D4,
     requirement: [81],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Antimatter Dimension multiplier based on time spent in this Eternity",
-    effect: () => Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15)),
-    cap: DC.E300,
+    description: () => (Ra.unlocks.newVhard.isUnlocked
+      ? "Antimatter Dimension multiplier based on time spent in this Eternity"
+      : "Antimatter Dimension multiplier based on real time spent in this Eternity"),
+    effect: () => (Ra.unlocks.newVhard.isUnlocked
+      ? Decimal.pow10(Decimal.pow10(Time.thisEternityRealTime.totalMinutes.log(1.45).max(1)))
+      : Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15))),
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.E300),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -235,7 +243,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Infinity Dimension multiplier based on fastest Eternity time",
     effect: () => DC.D2.pow(new Decimal(60).div(Decimal.max(Time.bestEternity.totalSeconds, 2))),
-    cap: DC.C2P30,
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.C2P30),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -244,7 +252,7 @@ export const normalTimeStudies = [
     requirement: [83],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Time Dimension multiplier based on tick upgrades gained",
-    effect: () => Decimal.pow(player.totalTickGained, 0.25).clampMin(1),
+    effect: () => Decimal.pow(player.totalTickGained, Ra.unlocks.newVhard.isUnlocked ? 7.5e12 : 0.25).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -261,8 +269,9 @@ export const normalTimeStudies = [
     cost: DC.D4,
     requirement: [91],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Antimatter Dimension multiplier equal to Replicanti amount",
-    effect: () => Decimal.max(Replicanti.amount, 1),
+    description: () => (
+      `Antimatter Dimension multiplier ${Ra.unlocks.newVhard.isUnlocked ? "based on" : "equal to"} Replicanti amount`),
+    effect: () => Decimal.max(Replicanti.amount, 1).pow(Ra.unlocks.newVhard.isUnlocked ? 1e9 : 1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -271,7 +280,9 @@ export const normalTimeStudies = [
     requirement: [92],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Replicanti Galaxies boost Replicanti multiplier",
-    effect: () => DC.D5.pow(player.replicanti.galaxies),
+    effect: () => (Ra.unlocks.newVhard.isUnlocked
+      ? DC.D5.pow(player.replicanti.galaxies.pow(2))
+      : DC.D5.pow(player.replicanti.galaxies)),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -279,8 +290,11 @@ export const normalTimeStudies = [
     cost: new Decimal(6),
     requirement: [93],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Time Dimension multiplier equal to Replicanti Galaxy amount",
-    effect: () => Decimal.max(player.replicanti.galaxies, 1),
+    description: () => (
+      `Time Dimension multiplier ${Ra.unlocks.newVhard.isUnlocked ? "based on" : "equal to"} Replicanti Galaxy amount`),
+    effect: () => (Ra.unlocks.newVhard.isUnlocked
+      ? Decimal.pow10(Decimal.max(player.replicanti.galaxies, 1).pow(2.5))
+      : Decimal.max(player.replicanti.galaxies, 1)),
     formatEffect: value => formatX(value, 2, 0)
   },
   {

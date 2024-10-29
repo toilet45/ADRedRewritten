@@ -9,12 +9,13 @@ function isEND() {
 }
 
 // eslint-disable-next-line max-params
-window.format = function format(value, places = 0, placesUnder1000 = 0, bypassEND = false) {
+window.format = function format(value, places = 2, placesUnder1000 = 0, bypassEND = false) {
   if (isEND() && !bypassEND) return "END";
   // eslint-disable-next-line no-param-reassign
   if (!isDecimal(value)) value = new Decimal(value);
-  if (value.lt("e1e33")) return Notations.current.format(value, places, placesUnder1000, 3);
-  return LNotations.current.formatLDecimal(value, places);
+  if (value.lte("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
+  const actualPlaces = LNotations.current.isSlog ? places + 2 : places;
+  return LNotations.current.formatLDecimal(value, actualPlaces);
 };
 
 window.formatInt = function formatInt(value, bypassEND = false) {

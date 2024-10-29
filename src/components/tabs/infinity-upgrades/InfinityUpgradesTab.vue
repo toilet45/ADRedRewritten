@@ -19,6 +19,7 @@ export default {
       chargesUsed: 0,
       breakChargesUsed: 0,
       disCharge: false,
+      breakDisCharge: false,
       ipMultSoftCap: 0,
       ipMultHardCap: 0,
       eternityUnlocked: false,
@@ -65,11 +66,20 @@ export default {
         "o-primary-btn--charged-respec-active": this.disCharge
       };
     },
+    breakDisChargeClassObject() {
+      return {
+        "o-primary-btn--subtab-option": true,
+        "o-primary-btn--charged-respec-active": this.breakDisCharge
+      };
+    },
     offlineIpUpgrade: () => InfinityUpgrade.ipOffline
   },
   watch: {
     disCharge(newValue) {
       player.celestials.ra.disCharge = newValue;
+    },
+    breakDisCharge(newValue) {
+      player.celestials.ra.breakDisCharge = newValue;
     }
   },
   created() {
@@ -88,6 +98,7 @@ export default {
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
       this.breakChargesUsed = Ra.totalBreakCharges - Ra.breakChargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
+      this.breakDisCharge = player.celestials.ra.breakDisCharge;
       this.ipMultSoftCap = GameDatabase.infinity.upgrades.ipMult.costIncreaseThreshold;
       this.ipMultHardCap = GameDatabase.infinity.upgrades.ipMult.costCap;
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
@@ -134,6 +145,12 @@ export default {
         @click="disCharge = !disCharge"
       >
         Respec Charged Infinity Upgrades on next Reality
+      </PrimaryButton>
+      <PrimaryButton
+        :class="breakDisChargeClassObject"
+        @click="breakDisCharge = !breakDisCharge"
+      >
+        Respec Charged Break Infinity Upgrades on next Reality
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">

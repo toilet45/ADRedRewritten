@@ -1,7 +1,7 @@
 import { DC } from "../../constants";
 
 function softcap(softcapStart, value) {
-  return value.gt(softcapStart) ? value.sub(softcapStart).cbrt().add(softcapStart) : value;
+  return value.gt(softcapStart) ? value.div(softcapStart).cbrt().mul(softcapStart) : value;
 }
 function dimInfinityMult() {
   return Currency.infinitiesTotal.value.times(0.2).plus(1);

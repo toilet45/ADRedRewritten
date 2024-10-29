@@ -504,10 +504,10 @@ export const ReplicantiUpgrade = {
         .add(remoteReplicatedGalaxyStart.pow(2).mul(logRemoteScaling).div(2))
         .sub(remoteReplicatedGalaxyStart.mul(logRemoteScaling).div(6));
 
-      // Console.log([a, b, c, d])
+      // Console.log([a, b, c, d]);
 
       // eslint-disable-next-line consistent-return
-      return decimalCubicSolution(a, b, c, d, false).floor().add(1);
+      return decimalCubicSolution(a, b, c, d, true).floor().add(1);
     }
 
     autobuyerTick() {

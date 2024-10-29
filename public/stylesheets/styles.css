@@ -1607,7 +1607,7 @@ br {
 .o-primary-btn {
   height: 2.5rem;
   font-family: Typewriter, serif;
-  font-size: 1.3rem;
+  font-size: 1.275rem;
   font-weight: bold;
   color: var(--color-text);
   background-color: var(--color-base);

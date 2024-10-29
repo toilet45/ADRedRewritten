@@ -56,10 +56,13 @@ export const LNotation = (function() {
   return {
     extendedScientific: notation(N.ExtendedScientificNotation),
     stackedScientific: notation(N.StackedScientificNotation),
+    stackedMixedScientific: notation(N.StackedMixedScientificNotation),
+    simpledExtendedScientific: notation(N.SimpleExtendedScientificNotation),
     semiStackedScientific: notation(N.SemiStackedScientificNotation),
     entendedLogarithm: notation(N.ExtendedLogarithmNotation),
     tetrational: notation(N.TetrationalNotation),
     trueTetrational: notation(N.TrueTetrationalNotation),
+    hyperE: notation(N.HyperENotation),
   };
 }());
 
@@ -74,11 +77,14 @@ export const LNotations = {
   // Defined as a list here for exact order in options tab.
   all: [
     LNotation.extendedScientific,
+    LNotation.simpledExtendedScientific,
     LNotation.stackedScientific,
+    LNotation.stackedMixedScientific,
     LNotation.semiStackedScientific,
     LNotation.entendedLogarithm,
     LNotation.tetrational,
-    LNotation.trueTetrational
+    LNotation.trueTetrational,
+    LNotation.hyperE
   ],
   find: name => {
     const notation = LNotations.all.find(n => n.name === name);

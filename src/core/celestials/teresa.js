@@ -71,7 +71,7 @@ export const Teresa = {
     return player.celestials.teresa.hard.toggled;
   },
   get hardModeUnlocked() {
-    return player.celestials.ra.pets.teresa.level >= 50
+    return player.celestials.ra.pets.teresa.level >= 50;
   },
   quotes: Quotes.teresa,
   symbol: "Ϟ",

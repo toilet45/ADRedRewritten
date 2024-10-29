@@ -257,6 +257,7 @@ export const Ra = {
     data.run = false;
     data.charged = new Set();
     data.disCharge = false;
+    data.breakDisCharge = false;
     data.peakGamespeed = DC.D1;
     data.alchemy = Array.repeat(0, 21)
       .map(() => ({

@@ -140,6 +140,22 @@ export function disChargeAll() {
   EventHub.dispatch(GAME_EVENT.INFINITY_UPGRADES_DISCHARGED);
 }
 
+export function breakDisChargeAll() {
+  const upgrades = [
+    InfinityUpgrade.skipReset1,
+    InfinityUpgrade.skipReset2,
+    InfinityUpgrade.skipReset3,
+    InfinityUpgrade.skipResetGalaxy,
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.isCharged) {
+      upgrade.disCharge();
+    }
+  }
+  player.celestials.ra.breakDisCharge = false;
+  EventHub.dispatch(GAME_EVENT.BREAK_INFINITY_UPGRADES_DISCHARGED);
+}
+
 // The repeatable 2xIP upgrade has an odd cost structure - it follows a shallow exponential (step *10) up to e3M, at
 // which point it follows a steeper one (step *1e10) up to e6M before finally hardcapping. At the hardcap, there's
 // an extra bump that increases the multipler itself from e993k to e1M. All these numbers are specified in
