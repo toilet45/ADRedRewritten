@@ -473,7 +473,7 @@ export const normalTimeStudies = [
     description: () => `Time Shard requirement for the next Tickspeed upgrade goes up slower
       ${formatX(1.33 - MendingUpgrade(12).boughtAmount.toNumber() / 100, 0, 2)}
       ➜ ${formatX(1.25 - MendingUpgrade(12).boughtAmount.toNumber() / 100, 0, 2)}`,
-    effect: () => 1.25
+    effect: () => 1.25 - MendingUpgrade(12).boughtAmount.toNumber() / 100
   },
   {
     id: 181,
