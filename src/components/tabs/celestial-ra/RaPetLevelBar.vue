@@ -52,7 +52,7 @@ export default {
       return this.level + 1;
     },
     classObject() {
-      const available = this.memories.gte(this.requiredMemories) && Ra.levelCap > this.pet.level;
+      const available = this.memories.gte(this.requiredMemories) && !this.pet.isCapped;
       const pet = this.pet;
       return {
         "c-ra-level-up-btn": true,
@@ -67,13 +67,18 @@ export default {
     showNextScalingUpgrade() {
       switch (this.pet.name) {
         case "Teresa":
-          return Math.min(12, Math.floor(this.level / 2)) !== Math.min(12, Math.floor((this.level + 1) / 2));
+          if (this.level < 37) {
+            return Math.min(12, Math.floor(this.level / 2)) !== Math.min(12, Math.floor((this.level + 1) / 2));
+          }
+          return this.level % 5 === 4;
         case "Effarig":
           return AlchemyResources.all.filter(res => res.unlockedAt === this.level + 1).length > 0;
         case "Enslaved":
           return true;
         case "V":
-          return Math.min(Math.floor(this.level / 6), 4) !== Math.min(Math.floor((this.level + 1) / 6), 4);
+          return Math.min(Math.floor(this.level / 6), 12) !== Math.min(Math.floor((this.level + 1) / 6), 12);
+        case "Lai'tela":
+          return this.level >= 25 & this.level % 5 === 4;
         default:
           return false;
       }
@@ -82,7 +87,7 @@ export default {
       const effarigAlchemyResource = AlchemyResources.all.filter(res => res.unlockedAt === this.level + 1)[0];
       switch (this.pet.name) {
         case "Teresa":
-          return "You can charge an additional Infinity Upgrade";
+          return `You can charge an additional ${this.level > 35 ? "Break " : ""}Infinity Upgrade`;
         case "Effarig":
           return `Unlock the ${effarigAlchemyResource.name} resource in Glyph Alchemy, which
           ${effarigAlchemyResource.description}`;
@@ -90,6 +95,9 @@ export default {
           return `${formatX(20)} to stored game time, and you can store an additional hour of real time`;
         case "V":
           return "You can purchase an additional Triad Study";
+        case "Lai'tela":
+          return `Increase the bulk Singularity cap by ${25 * (2 ** Math.floor(this.level / 20))}
+          ${this.level % 25 === 0 ? "and unlock a new dimension" : ""}`;
         default:
           return "false";
       }

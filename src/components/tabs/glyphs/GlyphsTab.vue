@@ -32,8 +32,11 @@ export default {
     return {
       enslavedHint: "",
       showInstability: false,
+      showLogarithmicInstability: false,
       instabilityThreshold: new Decimal(),
       hyperInstabilityThreshold: new Decimal(),
+      logarithmicInstabilityThreshold: new Decimal(),
+      hyperLogarithmicInstabilityThreshold: new Decimal(),
       isInCelestialReality: false,
       canAmplify: false,
       glyphTextColors: true,
@@ -60,7 +63,11 @@ export default {
       this.resetRealityDisplayed = PlayerProgress.realityUnlocked();
       this.instabilityThreshold.copyFrom(Glyphs.instabilityThreshold);
       this.hyperInstabilityThreshold.copyFrom(Glyphs.hyperInstabilityThreshold);
+      this.logarithmicInstabilityThreshold.copyFrom(Glyphs.logarithmicInstabilityThreshold);
+      this.hyperLogarithmicInstabilityThreshold.copyFrom(Glyphs.hyperLogarithmicInstabilityThreshold);
       this.showInstability = player.records.bestReality.glyphLevel.gt(this.instabilityThreshold.sub(200));
+      this.showLogarithmicInstability = player.records.bestReality.glyphLevel
+        .gt(this.logarithmicInstabilityThreshold.sub(1e4));
       this.isInCelestialReality = isInCelestialReality();
       this.canAmplify = Enslaved.isUnlocked && !this.isInCelestialReality;
       this.autoRestartCelestialRuns = player.options.retryCelestial;
@@ -156,6 +163,14 @@ export default {
           Glyph levels higher than {{ formatInt(instabilityThreshold) }} are harder to reach.
           <br>
           This effect is even stronger above level {{ formatInt(hyperInstabilityThreshold) }}.
+        </div>
+        <div v-if="showLogarithmicInstability">
+          <br>
+          Glyphs are becoming extremely unstable.
+          <br>
+          Glyph levels higher than {{ formatInt(logarithmicInstabilityThreshold) }} are becoming far harder to reach.
+          <br>
+          This becomes even stronger when reaching levels above {{ formatInt(hyperLogarithmicInstabilityThreshold) }}.
         </div>
         <SingleGlyphCustomzationPanel />
         <ExpandingControlBox

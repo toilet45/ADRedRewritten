@@ -130,10 +130,15 @@ export default {
       this.hasPerkShop = TeresaUnlocks.shop.isUnlocked;
       this.raisedPerkShop = Ra.unlocks.perkShopIncrease.canBeApplied;
       this.bestAM.copyFrom(player.celestials.teresa.bestRunAM);
+      this.hard_bestAM.copyFrom(player.celestials.teresa.hard.bestRunAM);
       this.bestAMSet = cloneDeep(Glyphs.copyForRecords(player.celestials.teresa.bestAMSet));
+      this.hard_bestAMSet = cloneDeep(Glyphs.copyForRecords(player.celestials.teresa.hard.bestAMSet));
       this.lastMachines.copyFrom(player.celestials.teresa.lastRepeatedMachines);
       this.lastiM.copyFrom(player.celestials.teresa.lastRepeatediM);
+      this.hard_lastMachines.copyFrom(player.celestials.teresa.hard.lastRepeatedMachines);
+      this.hard_lastiM.copyFrom(player.celestials.teresa.hard.lastRepeatediM);
       this.runReward.copyFrom(Teresa.runRewardMultiplier);
+      this.hard_runReward.copyFrom(Teresa.hardRunRewardPower);
       this.perkPoints.copyFrom(Currency.perkPoints.value);
       this.rm.copyFrom(Currency.realityMachines);
       this.isRunning = Teresa.isRunning;

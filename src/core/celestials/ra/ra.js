@@ -100,7 +100,8 @@ class RaPetState extends GameMechanicState {
   }
 
   get isCapped() {
-    return this.level >= (this.name === "Ra" ? 100 : Ra.levelCap);
+    // eslint-disable-next-line no-nested-ternary
+    return this.level >= (this.name === "Ra" ? (MendingUpgrade(20).isBought ? 100 : 39) : Ra.levelCap);
   }
 
   get level() {
@@ -214,7 +215,7 @@ class RaPetState extends GameMechanicState {
     const seconds = realDiff.div(1000);
     const newMemoryChunks = generateChunks
       ? seconds.mul(this.memoryChunksPerSecond)
-      : 0;
+      : DC.D0;
     // Adding memories from half of the gained chunks this tick results in the best mathematical behavior
     // for very long simulated ticks
     const newMemories = seconds.mul(this.memoryChunks.add(newMemoryChunks.div(2)))
@@ -287,15 +288,18 @@ export const Ra = {
       if (pet.isUnlocked) res = res.mul(pet.memoryProductionMultiplier);
     }
     res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
+    res = res.mul(Ra.unlocks.memGainOutsideRa.canBeApplied && !Ra.isRunning ? 20 : 1);
     return res;
   },
   get memoryBoostResources() {
     const boostList = [];
     for (const pet of Ra.pets.all) {
-      if (new Decimal(pet.memoryProductionMultiplier).neq(1)) boostList.push(pet.memoryGain);
+      if (new Decimal(pet.memoryProductionMultiplier).neq(1) && pet.name !== "Ra") boostList.push(pet.memoryGain);
     }
     if (Achievement(168).isUnlocked) boostList.push("Achievement 168");
     if (Ra.unlocks.continuousTTBoost.canBeApplied) boostList.push("current TT");
+    if (Ra.unlocks.achToMemories.canBeApplied) boostList.push("Achievement Multiplier");
+    if (Ra.unlocks.memGainOutsideRa.canBeApplied & !Ra.isRunning) boostList.push("Ra level 30");
 
     if (boostList.length === 1) return `${boostList[0]}`;
     if (boostList.length === 2) return `${boostList[0]} and ${boostList[1]}`;
@@ -304,10 +308,10 @@ export const Ra = {
   // This is the exp required ON "level" in order to reach "level + 1"
   requiredMemoriesForLevel(level, pet = "notRa") {
     if (level >= Ra.levelCap || pet === "Ra" && level >= 100) return DC.BEMAX;
-    const adjustedLevel = Decimal.pow(level, 2).div(10).add(level);
-    const post15Scaling = Decimal.pow(1.5, Decimal.max(0, level - 15));
-    const post25Scaling = Decimal.pow(1.05, Decimal.max(0, level - 25).pow(2));
-    const post65Scaling = Decimal.pow(1.2, Decimal.max(0, level - 65).pow(3));
+    const adjustedLevel = Decimal.pow(level, 2).div(10).add(level - (Ra.unlocks.scaleReduce ? 3 : 0)).max(1);
+    const post15Scaling = Decimal.pow(1.5, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 17 : 15)));
+    const post25Scaling = Decimal.pow(1.05, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 27 : 25)).pow(2));
+    const post65Scaling = Decimal.pow(1.2, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 67 : 65)).pow(3));
     return Decimal.floor(Decimal.pow(adjustedLevel, 5.52).mul(post15Scaling)
       .mul(post25Scaling).mul(post65Scaling).mul(DC.E6));
   },
@@ -319,9 +323,10 @@ export const Ra = {
       : Ra.productionPerMemoryChunk.mul(pet.memoryUpgradeCurrentMult).mul(pet.memoryChunksPerSecond).div(2);
     const b = Ra.productionPerMemoryChunk.mul(pet.memoryUpgradeCurrentMult).mul(pet.memoryChunks);
     const c = expToGain.neg();
-    const estimate = a === 0
+    let estimate = a.eq(0)
       ? c.neg().div(b)
       : decimalQuadraticSolution(a, b, c);
+    estimate = estimate.div(getRealTimeSpeedupFactor());
     if (Decimal.isFinite(estimate)) {
       return estimate.lt(31536000 * 100)
         ? `in ${TimeSpan.fromSeconds(new Decimal(estimate)).toStringShort()}`
@@ -401,8 +406,8 @@ export const Ra = {
     return player.celestials.ra.run;
   },
   get totalCharges() {
-    let x = Ra.unlocks.chargedInfinityUpgrades.effectOrDefault(0);
-    // if (Ra.unlocks.breakCharges.canBeApplied) x += 4;
+    const x = Ra.unlocks.chargedInfinityUpgrades.effectOrDefault(0);
+    // If (Ra.unlocks.breakCharges.canBeApplied) x += 4;
     return x;
   },
   get totalBreakCharges() {

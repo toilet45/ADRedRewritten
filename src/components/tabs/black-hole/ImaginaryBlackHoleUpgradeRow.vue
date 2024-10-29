@@ -33,6 +33,15 @@ export default {
         formatEffect: value => `${formatX(value, 2, 2)}`
       };
     },
+    rtPowerConfig() {
+      return {
+        upgrade: ImaginaryBlackHole(1).rtPowerUpgrade,
+        // eslint-disable-next-line max-len
+        description: () => `Make ${this.ImaginaryBlackHoleDescription} ${formatPercents(0.2)} stronger for real time.`,
+        effectTitle: "Current real time power",
+        formatEffect: value => `${formatX(value, 2, 2)}`
+      };
+    },
   },
   methods: {
     update() {
@@ -55,6 +64,7 @@ export default {
     class="l-black-hole-upgrade-grid__row"
   >
     <ImaginaryBlackHoleUpgradeButton :config="powerConfig" />
+    <ImaginaryBlackHoleUpgradeButton :config="rtPowerConfig" />
   </div>
 </template>
 

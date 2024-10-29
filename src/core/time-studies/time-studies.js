@@ -182,8 +182,8 @@ export class TimeStudyState extends GameMechanicState {
     let base = this.config.STCost;
     // TODO make this Effects.sum
     if (VUnlocks.raUnlock.canBeApplied) base -= 2;
-    if (Ra.unlocks.triadCheaper.canBeApplied) base -= 1;
-    if (Ra.unlocks.triadCheaperAgain.canBeApplied) base -= 2;
+    if (Ra.unlocks.triadCheaper.canBeApplied && this.isTriad) base -= 1;
+    if (Ra.unlocks.triadCheaperAgain.canBeApplied && this.isTriad) base -= 2;
     return Math.max(base, 0);
   }
 

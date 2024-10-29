@@ -22,6 +22,9 @@ export default {
       maxDT: new Decimal(),
       toMaxTooltip: "",
       isHovering: false,
+      hasTachyonicBoosts: false,
+      baseBoosts: new Decimal(),
+      totalBoosts: new Decimal()
     };
   },
   computed: {
@@ -71,6 +74,9 @@ export default {
     baseGalaxyText() {
       return `${formatInt(this.baseGalaxies, 3)} Base`;
     },
+    baseBoostText() {
+      return `${formatInt(this.baseBoosts, 3)} Base`;
+    },
     hasMaxText: () => PlayerProgress.realityUnlocked() && !Pelle.isDoomed,
     allRebuyables() {
       const upgradeRows = [];
@@ -107,8 +113,11 @@ export default {
         this.dilatedTimeIncome = rawDTGain;
       }
       this.galaxyThreshold.copyFrom(player.dilation.nextThreshold);
+      this.hasTachyonicBoosts = Ra.unlocks.tachyonicBoosts.isUnlocked;
       this.baseGalaxies.copyFrom(player.dilation.baseTachyonGalaxies);
       this.totalGalaxies.copyFrom(player.dilation.totalTachyonGalaxies);
+      this.baseBoosts.copyFrom(player.dilation.baseTachyonicBoosts);
+      this.totalBoosts.copyFrom(player.dilation.totalTachyonicBoosts);
       this.hasPelleDilationUpgrades = PelleRifts.paradox.milestones[0].canBeApplied;
       if (this.baseGalaxies.lt(500) && DilationUpgrade.doubleGalaxies.isBought) {
         this.tachyonGalaxyGain = new Decimal(DilationUpgrade.doubleGalaxies.effectValue);
@@ -159,6 +168,14 @@ export default {
         :ach-tooltip="baseGalaxyText"
       >{{ formatInt(totalGalaxies, 3, 0) }}</span>
       {{ pluralize("Tachyon Galaxy", totalGalaxies) }}
+    </span>
+    <span v-if="hasTachyonicBoosts">
+      Due to Nameless 65, you have also Gained
+      <span
+        class="c-dilation-tab__galaxies"
+        :ach-tooltip="baseBoostText"
+      >{{ formatInt(totalBoosts, 3, 0) }}</span>
+      {{ pluralize("Tachyonic Boost", totalBoosts) }}
     </span>
     <span v-if="hasMaxText">
       Your maximum Dilated Time reached this Reality is

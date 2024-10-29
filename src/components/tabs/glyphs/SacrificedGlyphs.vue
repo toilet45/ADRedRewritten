@@ -56,6 +56,10 @@ export default {
     },
     hasSeenRealityGlyph() {
       return player.reality.glyphs.createdRealityGlyph;
+    },
+    seenRealityGlyphText() {
+      return `Reality Glyphs ${Teresa.hardRunCompleted ? ""
+        : "are unaffected by this multiplier and "}have no altered effects.`;
     }
   },
   created() {
@@ -167,7 +171,7 @@ export default {
         Glyph sacrifice values are multiplied by {{ formatX(teresaMult, 2, 2) }};
         Teresa was last done at {{ lastMachines }}.
         <span v-if="hasSeenRealityGlyph">
-          Reality Glyphs are unaffected by this multiplier and have no altered effects.
+          {{ seenRealityGlyphText }}
         </span>
       </div>
       <template v-for="type in types">

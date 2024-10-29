@@ -458,6 +458,8 @@ window.player = {
     nextThreshold: DC.E3,
     baseTachyonGalaxies: DC.D0,
     totalTachyonGalaxies: DC.D0,
+    baseTachyonicBoosts: DC.D0,
+    totalTachyonicBoosts: DC.D0,
     upgrades: new Set(),
     rebuyables: {
       1: new Decimal(),
@@ -606,6 +608,7 @@ window.player = {
     intervalUpgrades: DC.D0,
     powerUpgrades: DC.D0,
     durationUpgrades: DC.D0,
+    rtPowerUpgrades: DC.D0,
     phase: DC.D0,
     active: false,
     unlocked: false,

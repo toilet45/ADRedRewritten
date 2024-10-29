@@ -334,11 +334,26 @@ export function getGlyphLevelInputs() {
     const excess = (level.sub(begin)).div(rate);
     return begin.plus(rate.div(2).times(Decimal.sqrt(excess.times(4).add(1)).sub(1)));
   };
+  // The logarithmic softcap starts at begin and rate determines how quickly level scales after the cap,
+  // turning a quadratic pre-cap to an exponential post-cap increase. For example, with begin = 1000 and rate = 400:
+  // - Scaled level 1400 requires +1000 more base levels from the start of the cap (ie. level 2000)
+  // - Scaled level 1800 requires +1223 more base levels from scaled 1400 (ie. level 3223)
+  // - Scaled level 3200 requires +1568 more levels from scaled 2800 (i.e. level 10998)
+  // - Each additional 400 scale requires another multiplier to apply to the gap.
+  const logScaleSoftcap = (level, begin, rate) => {
+    if (level.lt(begin)) return level;
+    const excess = (level.sub(begin)).log10().div(3);
+    return begin.plus(rate.pow(excess));
+  };
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.instability, new Decimal(500)
     .mul(MendingUpgrade(4).effectOrDefault(1)));
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.hyperInstability, new Decimal(400)
     .mul(MendingUpgrade(4).effectOrDefault(1)));
 
+  scaledLevel = logScaleSoftcap(scaledLevel, staticFactors.logarithmicInstability,
+    new Decimal(250).div(MendingUpgrade(4).effectOrDefault(1)));
+  scaledLevel = logScaleSoftcap(scaledLevel, staticFactors.hyperLogarithmicInstability,
+    new Decimal(175).div(MendingUpgrade(4).effectOrDefault(1)));
   const scalePenalty = scaledLevel.gt(0) ? baseLevel.div(scaledLevel) : DC.D1;
   const incAfterInstability = staticFactors.achievements.add(staticFactors.realityUpgrades);
   baseLevel = baseLevel.add(incAfterInstability);
@@ -365,6 +380,8 @@ export function staticGlyphWeights() {
   const perkShop = PerkShopUpgrade.glyphLevel.effectOrDefault(DC.D1);
   const instability = Glyphs.instabilityThreshold;
   const hyperInstability = Glyphs.hyperInstabilityThreshold;
+  const logarithmicInstability = Glyphs.logarithmicInstabilityThreshold;
+  const hyperLogarithmicInstability = Glyphs.hyperLogarithmicInstabilityThreshold;
   const realityUpgrades = [Array.range(1, 5).every(x => RealityUpgrade(x).boughtAmount.gt(0))]
     .concat(Array.range(1, 4).map(x => Array.range(1, 5).every(y => RealityUpgrade(5 * x + y).isBought)))
     .filter(x => x)
@@ -374,6 +391,8 @@ export function staticGlyphWeights() {
     perkShop,
     instability,
     hyperInstability,
+    logarithmicInstability,
+    hyperLogarithmicInstability,
     realityUpgrades,
     achievements
   };

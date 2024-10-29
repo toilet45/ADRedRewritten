@@ -135,6 +135,17 @@ GameDatabase.celestials.descriptions = [
       However Gamespeed is ${formatPow(50)} stronger
       `;
     },
+  },
+  {
+    name: "Universal Damage",
+    effects() {
+      return `Enter a heavily nerfed Mend. All mending upgrades, apart from 5, 6, 11, 12, 
+      16, 19 and 20,are disabled. All regular dimensions are raised ^${format(0.6, 1, 1)}. Dark Matter
+      is uncapped, but above the Dark Matter cap, it does not provide any boost to Continuum,
+      and the cost of Dark Matter Dimensions begin to scale rapidly above the cap. Begin the
+      Mend with Lai'tela unlocked and with all 8 dimensions, even if you have not unlocked them
+      through Lai'tela levels.`;
+    },
   }
 
 ];

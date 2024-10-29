@@ -228,10 +228,10 @@ export const normalTimeStudies = [
     requirement: [81],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => (Ra.unlocks.newVhard.isUnlocked
-      ? "Antimatter Dimension multiplier based on time spent in this Eternity"
-      : "Antimatter Dimension multiplier based on real time spent in this Eternity"),
+      ? "Antimatter Dimension multiplier based on real time spent in this Eternity"
+      : "Antimatter Dimension multiplier based on time spent in this Eternity"),
     effect: () => (Ra.unlocks.newVhard.isUnlocked
-      ? Decimal.pow10(Decimal.pow10(Time.thisEternityRealTime.totalMinutes.log(1.45).max(1)))
+      ? Decimal.pow10(Decimal.pow10(Time.thisEternityRealTime.totalMinutes.log(1.25).max(1)))
       : Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15))),
     cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.E300),
     formatEffect: value => formatX(value, 2, 1)
@@ -242,7 +242,8 @@ export const normalTimeStudies = [
     requirement: [82],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Infinity Dimension multiplier based on fastest Eternity time",
-    effect: () => DC.D2.pow(new Decimal(60).div(Decimal.max(Time.bestEternity.totalSeconds, 2))),
+    effect: () => DC.D2.pow(new Decimal(60).div(Decimal.max(Time.bestEternity.totalSeconds,
+      Ra.unlocks.newVhard.isUnlocked ? DC.EE18.recip() : 2))),
     cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.C2P30),
     formatEffect: value => formatX(value, 2, 1)
   },

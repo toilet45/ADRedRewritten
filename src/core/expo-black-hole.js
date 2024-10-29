@@ -8,7 +8,7 @@ class ImaginaryBlackHoleUpgradeState {
     this.incrementAmount = () => setAmount(getAmount().add(1));
     this._lazyValue = new Lazy(() => calculateValue(getAmount()));
     this._lazyCost = new Lazy(() => getHybridCostScaling(getAmount(),
-      DC.E15,
+      DC.E35,
       initialCost,
       costMult,
       new Decimal(0.2),
@@ -89,6 +89,16 @@ class ImaginaryBlackHoleState {
       calculateValue: amount => Decimal.pow(5, Decimal.pow(amount, 2)),
       initialCost: blackHoleCostMultipliers[id].mul(1),
       costMult: new Decimal(25),
+      hasAutobuyer: true
+    });
+    // Power: starts at 5, x1.35 per upgrade, cost goes x2, starts at 20
+    this.rtPowerUpgrade = new ImaginaryBlackHoleUpgradeState({
+      id: this.id,
+      getAmount: () => this._data.rtPowerUpgrades,
+      setAmount: amount => this._data.rtPowerUpgrades = amount,
+      calculateValue: amount => Decimal.pow(1.2, amount),
+      initialCost: blackHoleCostMultipliers[id].mul(25),
+      costMult: new Decimal(10),
       hasAutobuyer: true
     });
     // Duration: starts at 10, x1.5 per upgrade, cost goes x4, starts at 10

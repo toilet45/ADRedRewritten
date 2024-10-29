@@ -20,7 +20,7 @@ export default {
   methods: {
     update() {
       this.expanded = Enslaved.isExpanded;
-      this.enslavedPoints.copyFrom(Currency.enslavedPoints.value)
+      this.enslavedPoints.copyFrom(Currency.enslavedPoints.value);
     },
     id(row, column) {
       return (row - 1) * 5 + column - 1;

@@ -121,7 +121,7 @@ export const Enslaved = {
     }
     player.requirementChecks.reality.slowestBH = DC.D1;
     let release = player.celestials.enslaved.stored;
-    
+
     if (Enslaved.isRunning) {
       release = Enslaved.storedTimeInsideEnslaved(release);
       if (Time.thisReality.totalYears.add(TimeSpan.fromMilliseconds(release).totalYears.gt(1))) {
@@ -129,6 +129,7 @@ export const Enslaved = {
       }
     }
     if (autoRelease) release = release.mul(0.01);
+    release = gameSpeedupSoftcap(release);
     this.nextTickDiff = Decimal.clampMax(release, this.timeCap);
     this.isReleaseTick = true;
     // Effective gamespeed from stored time assumes a "default" 50 ms update rate for consistency

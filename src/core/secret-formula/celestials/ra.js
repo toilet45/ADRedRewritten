@@ -434,7 +434,7 @@ export const ra = {
     },
     amalgamGlyphUnlock: {
       id: 38,
-      reward: () => `Unlock Amalgamated Glyphs, which can have any ${formatInt(8)} effects from Basic Glyphs`,
+      reward: () => `Unlock Amalgamated Glyphs, which can have any ${formatInt(4)} effects from Basic Glyphs`,
       effect: 1,
       pet: "effarig",
       level: 65,
@@ -677,7 +677,9 @@ export const ra = {
     },
     anotherLevelIncAgain: {
       id: 64,
-      reward: () => `Increase Memory Level caps of the other Celestials to ${formatInt(75)}`,
+      reward: () => (MendingUpgrade(20).isBought
+        ? `Increase Memory Level caps of the other Celestials to ${formatInt(75)}`
+        : `Requires Mending Upgrade 20 to be Purcharsed to unlock`),
       effect: 1,
       pet: "ra",
       level: 40,

@@ -341,12 +341,16 @@ export const GAME_SPEED_EFFECT = {
   *   to be active for the purposes of game speed calculation. This is only used during offline black hole stuff.
   */
 
+export function gameSpeedupSoftcap(speed) {
+  if (speed.lt("1e500")) return speed;
+  return speed.div("1e500").log10().div(308).mul(0.95).mul(308).pow10().mul("1e500");
+}
 // eslint-disable-next-line complexity
 export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride) {
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
-      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS, 
+      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS,
       GAME_SPEED_EFFECT.EXPO_BLACK_HOLE];
   } else {
     effects = effectsToConsider;
@@ -412,9 +416,13 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
+  gameSpeedupSoftcap(factor);
   return factor;
 }
 
+export function getRealTimeSpeedupFactor() {
+  return ImaginaryBlackHole(1).isActive ? ImaginaryBlackHole(1).rtPowerUpgrade.value : new Decimal(1);
+}
 export function getGameSpeedupPreExpo() {
   return getGameSpeedupFactor().pow(Decimal.div(1, getExpoSpeedupFactor()));
 }
@@ -464,7 +472,7 @@ export function trueTimeMechanics(trueDiff) {
 
 // Separated out for organization; however this is also used in more than one spot in gameLoop() as well. Returns
 // true if the rest of the game loop should be skipped
-export function realTimeMechanics(realDiff) {
+export function realTimeMechanics(realDiff, trueDiff) {
   // Ra memory generation bypasses stored real time, but memory chunk generation is disabled when storing real time.
   // This is in order to prevent players from using time inside of Ra's reality for amplification as well
   Ra.memoryTick(realDiff, !Enslaved.isStoringRealTime);
@@ -481,6 +489,14 @@ export function realTimeMechanics(realDiff) {
     player.records.thisInfinity.realTime = player.records.thisInfinity.realTime.add(realDiff);
     player.records.thisEternity.realTime = player.records.thisEternity.realTime.add(realDiff);
     player.records.thisReality.realTime = player.records.thisReality.realTime.add(realDiff);
+    player.records.thisMend.realTime = player.records.thisMend.realTime.add(realDiff);
+
+    player.records.trueTimePlayed += trueDiff;
+    player.records.thisInfinity.trueTime += trueDiff;
+    player.records.thisEternity.trueTime += trueDiff;
+    player.records.thisReality.trueTime += trueDiff;
+    player.records.thisMend.trueTime += trueDiff;
+
     Enslaved.storeRealTime(realDiff);
     // Most autobuyers will only tick usefully on the very first tick, but this needs to be here in order to allow
     // the autobuyers unaffected by time storage to tick as well
@@ -516,11 +532,12 @@ export function gameLoop(passedDiff, options = {}) {
   let diff = new Decimal(passDiff);
   const trueDiff = passDiff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7) /* (dev.speedUp ?? 1)*/
-    : passDiff /* (dev.speedUp ?? 1)*/;
+    : passDiff;
   // eslint-disable-next-line prefer-const
   let realDiff = new Decimal(trueDiff);
   if (!GameStorage.ignoreBackupTimer) player.backupTimer += trueDiff;
 
+  realDiff = realDiff.mul(getRealTimeSpeedupFactor());
   // For single ticks longer than a minute from the GameInterval loop, we assume that the device has gone to sleep or
   // hibernation - in those cases we stop the interval and simulate time instead. The gameLoop interval automatically
   // restarts itself at the end of the simulateTime call. This will not trigger for an unfocused game, as this seems to
@@ -531,17 +548,17 @@ export function gameLoop(passedDiff, options = {}) {
     GameIntervals.gameLoop.stop();
     simulateTime(trueDiff / 1000, true);
     trueTimeMechanics(trueDiff);
-    realTimeMechanics(realDiff);
+    realTimeMechanics(realDiff, trueDiff);
     return;
   }
 
   trueTimeMechanics(trueDiff);
   if (diff === undefined || Enslaved.isReleaseTick) {
     diff = new Decimal(Enslaved.nextTickDiff);
-
   }
+  diff = diff.mul(getRealTimeSpeedupFactor());
   // Run all the functions which only depend on real time and not game time, skipping the rest of the loop if needed
-  if (realTimeMechanics(realDiff)) return;
+  if (realTimeMechanics(realDiff, trueDiff)) return;
 
   // We do these after autobuyers, since it's possible something there might
   // change a multiplier.
@@ -921,6 +938,14 @@ function updateTachyonGalaxies() {
 
   player.dilation.totalTachyonGalaxies = player.dilation.totalTachyonGalaxies
     .times(DilationUpgrade.galaxyMultiplier.effectValue).timesEffectOf(TimeStudy.TGformula).floor();
+
+  if (Ra.unlocks.tachyonicBoosts.canBeApplied) {
+    player.dilation.baseTachyonicBoosts = Decimal.max(player.dilation.baseTachyonicBoosts,
+      DC.D1.plus(Decimal.floor(Decimal.log(Currency.dilatedTime.value.dividedBy(1000), thresholdMult.root(5)).pow(2))));
+    player.dilation.totalTachyonicBoosts = player.dilation.baseTachyonicBoosts;
+
+    player.dilation.totalTachyonicBoosts = player.dilation.totalTachyonicBoosts.mul(1);
+  }
 }
 
 export function getTTPerSecond() {

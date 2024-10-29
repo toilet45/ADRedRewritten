@@ -240,7 +240,7 @@ export function getTachyonReq() {
 
 export function getDilationTimeEstimate(goal) {
   const currentDTGain = getDilationGainPerSecond();
-  const rawDTGain = currentDTGain.times(getGameSpeedupForDisplay());
+  const rawDTGain = currentDTGain.times(getGameSpeedupForDisplay()).mul(getRealTimeSpeedupFactor());
   const currentDT = Currency.dilatedTime.value;
   if (currentDTGain.eq(0)) return null;
   if (PelleRifts.paradox.isActive) {
