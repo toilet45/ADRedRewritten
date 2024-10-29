@@ -233,7 +233,7 @@ export const normalTimeStudies = [
     effect: () => (Ra.unlocks.newVhard.isUnlocked
       ? Decimal.pow10(Decimal.pow10(Time.thisEternityRealTime.totalMinutes.log(1.25).max(1)))
       : Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15))),
-    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.E300),
+    cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE21 : DC.E300),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
