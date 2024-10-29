@@ -88,6 +88,6 @@ export default {
 <template>
   <span v-if="isVisible">
     <br v-if="br">
-    {{ label }} {{ quantify(name, cost, 0, 0, formatCost) }}
+    {{ label }} {{ quantify(name, cost, 2, 2, formatCost) }}
   </span>
 </template>
