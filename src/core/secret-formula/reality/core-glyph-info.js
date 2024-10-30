@@ -454,7 +454,7 @@ export const GlyphInfo = {
     color: "#64dd17",
     alchemyResource: ALCHEMY_RESOURCE.DILATION,
     hasRarity: true,
-    maxEffects: Infinity,
+    maxEffects: () => Infinity,
   }
 };
 
