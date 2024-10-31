@@ -283,6 +283,19 @@ export const Time = {
   /**
    * @returns {TimeSpan}
    */
+  get thisRealityTrueTime() {
+    return this.fromMilliseconds(() => new Decimal(player.records.thisReality.trueTime));
+  },
+  /**
+     * @param {TimeSpan} timespan
+     */
+  set thisRealityTrueTime(timespan) {
+    this.toMilliseconds(timespan, value => player.records.thisReality.trueTime = value);
+  },
+
+  /**
+   * @returns {TimeSpan}
+   */
   get bestReality() {
     return this.fromMilliseconds(() => player.records.bestReality.time);
   },

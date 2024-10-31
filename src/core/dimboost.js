@@ -32,7 +32,8 @@ export class DimBoost {
         Achievement(117),
         Achievement(142),
         GlyphEffect.dimBoostPower,
-        PelleRifts.recursion.milestones[0]
+        PelleRifts.recursion.milestones[0],
+        BreakInfinityUpgrade.autobuyMaxDimboosts.chargedEffect
       ).powEffectsOf(InfinityUpgrade.dimboostMult.chargedEffect);
     if (GlyphAlteration.isAdded("effarig")) boost = boost.pow(getSecondaryGlyphEffect("effarigforgotten"));
     return boost;
@@ -160,7 +161,7 @@ export class DimBoost {
     return Ra.isRunning
       ? DC.D0
       : ImaginaryUpgrade(12).effectOrDefault(DC.D0).add(InfinityUpgrade.skipReset3.chargedEffect.effectOrDefault(DC.D0))
-        .mul(ImaginaryUpgrade(23).effectOrDefault(DC.D1));
+        .mul(ImaginaryUpgrade(23).effectOrDefault(DC.D1)).add(player.dilation.totalTachyonicBoosts);
   }
 
   static get totalBoosts() {

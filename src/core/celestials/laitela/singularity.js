@@ -243,12 +243,13 @@ export const Singularity = {
 
   // Time (in seconds) to go from 0 DE to the condensing requirement
   get timePerCondense() {
-    return this.cap.div(Currency.darkEnergy.productionPerSecond);
+    return this.cap.div(Currency.darkEnergy.productionPerSecond).div(getRealTimeSpeedupFactor());
   },
 
   // Time (in seconds) to reach the condensing requirement from *current* DE
   get timeUntilCap() {
-    return this.cap.minus(Currency.darkEnergy.value).div(Currency.darkEnergy.productionPerSecond);
+    return this.cap.minus(Currency.darkEnergy.value).div(Currency.darkEnergy.productionPerSecond)
+      .div(getRealTimeSpeedupFactor());
   },
 
   // Total additional time auto-condense will wait after reaching the condensing requirement

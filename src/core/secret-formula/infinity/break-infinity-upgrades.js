@@ -37,7 +37,7 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Antimatter Dimensions gain a power based on total antimatter produced`,
       effect: () => Decimal.log10(player.records.totalAntimatter.log10()).div(200).add(1),
-      formatEffect: value => `+${formatInt(value)}`
+      formatEffect: value => `^${format(value, 4, 4)}`
     }
   },
   currentAMMult: {
@@ -50,7 +50,7 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Antimatter Dimensions gain a power based on current antimatter`,
       effect: () => Decimal.log10(Currency.antimatter.value.max(1).log10().max(1)).div(200).add(1),
-      formatEffect: value => `+${formatInt(value)}`
+      formatEffect: value => `^${format(value, 4, 4)}`
     }
   },
   galaxyBoost: {
@@ -74,7 +74,7 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Antimatter Dimensions gain a power based on Infinities`,
       effect: () => Decimal.log10(Currency.infinitiesTotal.value.max(1).log10().max(1)).div(50).add(1),
-      formatEffect: value => `+${formatInt(value)}`
+      formatEffect: value => `^${format(value, 4, 4)}`
     }
   },
   achievementMult: {
@@ -87,7 +87,7 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Achievement multiplier gains a power effect based on Achievements completed`,
       effect: () => Achievements.effectiveCount / 250 + 1,
-      formatEffect: value => `+${formatInt(value)}`
+      formatEffect: value => `^${format(value, 4, 4)}`
     }
   },
   slowestChallengeMult: {
@@ -102,7 +102,7 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Antimatter Dimensions gain a power effect based on total EC completions`,
       effect: () => EternityChallenges.completions / 500 + 1,
-      formatEffect: value => `+${formatInt(value)}`
+      formatEffect: value => `^${format(value, 4, 4)}`
     }
   },
   infinitiedGen: {
@@ -128,7 +128,6 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Infinity generation is raised ^${format(1.33, 2, 2)}`,
       effect: () => 1.33,
-      formatEffect: value => `+${formatInt(value)}`
     }
   },
   autobuyMaxDimboosts: {
@@ -138,8 +137,8 @@ export const breakInfinityUpgrades = {
     charged: {
       description: () =>
         `Dimension boost multiplier is affected by achievements`,
-      effect: () => Achievements.power.add(1),
-      formatEffect: value => `+${formatInt(value)}`
+      effect: () => Achievements.power.pow(30).add(1),
+      formatEffect: value => `${formatX(value, 2, 2)}`
     }
   },
   autobuyerSpeed: {
@@ -150,7 +149,6 @@ export const breakInfinityUpgrades = {
       description: () =>
         `Post-infinity Antimatter Dimension cost scaling is reduced by -${format(0.01, 2, 2)}`,
       effect: () => 0.01,
-      formatEffect: value => `+${formatInt(value)}`
     }
   },
   tickspeedCostMult: rebuyable({

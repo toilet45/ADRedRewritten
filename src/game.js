@@ -343,7 +343,7 @@ export const GAME_SPEED_EFFECT = {
 
 export function gameSpeedupSoftcap(speed) {
   if (speed.lt("1e500")) return speed;
-  return speed.div("1e500").log10().div(308).mul(0.95).mul(308).pow10().mul("1e500");
+  return speed.div("1e500").log10().div(308).mul(0.75).mul(308).pow10().mul("1e500");
 }
 // eslint-disable-next-line complexity
 export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride) {
@@ -406,7 +406,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.EXPO_BLACK_HOLE)) {
-    factor = factor.mul(ImaginaryBlackHole(1).power);
+    factor = factor.mul(ImaginaryBlackHole(1).isActive ? ImaginaryBlackHole(1).power : 1);
   }
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
@@ -829,17 +829,17 @@ function laitelaRealityTick(realDiff) {
 
   // Setting entropy to -1 on completion prevents the modal from showing up repeatedly
   if (laitelaInfo.entropy.gte(1)) {
-    let completionText = `Lai'tela's Reality has been destabilized after ${Time.thisRealityRealTime.toStringShort()}.`;
+    let completionText = `Lai'tela's Reality has been destabilized after ${Time.thisRealityTrueTime.toStringShort()}.`;
     laitelaInfo.entropy = DC.DM1;
     const oldInfo = {
       fastestCompletion: laitelaInfo.fastestCompletion,
       difficultyTier: laitelaInfo.difficultyTier,
       realityReward: Laitela.realityReward
     };
-    laitelaInfo.thisCompletion = Time.thisRealityRealTime.totalSeconds;
+    laitelaInfo.thisCompletion = Time.thisRealityTrueTime.totalSeconds;
     laitelaInfo.fastestCompletion = laitelaInfo.thisCompletion.clampMax(laitelaInfo.fastestCompletion);
     clearCelestialRuns();
-    const destabilising = Time.thisRealityRealTime.totalSeconds.lte(30);
+    const destabilising = Time.thisRealityTrueTime.totalSeconds.lte(30);
     if (destabilising) {
       laitelaInfo.difficultyTier++;
       laitelaInfo.fastestCompletion = new Decimal(300);

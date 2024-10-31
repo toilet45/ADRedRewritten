@@ -2,7 +2,9 @@ import { DC } from "../constants";
 // This actually deals with both sacrifice and refining, but I wasn't 100% sure what to call it
 export const GlyphSacrificeHandler = {
   // Anything scaling on sacrifice caps at this value, even though the actual sacrifice values can go higher
-  maxSacrificeForEffects: DC.E100,
+  get maxSacrificeForEffects() {
+    return DC.E100.pow(Teresa.hardRunCompleted ? Teresa.hardRunRewardPower : 1);
+  },
   // This is used for glyph UI-related things in a few places, but is handled here as a getter which is only called
   // sparingly - that is, whenever the cache is invalidated after a glyph is sacrificed. Thus it only gets recalculated
   // when glyphs are actually sacrificed, rather than every render cycle.
@@ -46,7 +48,15 @@ export const GlyphSacrificeHandler = {
   },
   glyphSacrificeGain(glyph) {
     if (!this.canSacrifice || Pelle.isDoomed) return DC.D0;
-    if (glyph.type === "reality") return glyph.level.mul(Achievement(171).effectOrDefault(1)).div(100);
+    // eslint-disable-next-line max-len
+    if (glyph.type === "reality" && !Teresa.hardRunCompleted) return glyph.level.mul(Achievement(171).effectOrDefault(1)).div(100);
+    if (glyph.type === "reality") {
+      const pre10kFactor = Decimal.pow(Decimal.clampMax(glyph.level, 10000).add(10), 2.5);
+      const post10kFactor = Decimal.clampMin(Decimal.sub(glyph.level, 1e4), 0).div(100).add(1);
+      const power = Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.effectOrDefault(1);
+      return Decimal.pow(pre10kFactor.mul(post10kFactor).mul(Teresa.runRewardMultiplier)
+        .mul(Achievement(171).effectOrDefault(1)), power);
+    }
     const pre10kFactor = Decimal.pow(Decimal.clampMax(glyph.level, 10000).add(10), 2.5);
     const post10kFactor = Decimal.clampMin(Decimal.sub(glyph.level, 1e4), 0).div(100).add(1);
     const power = Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.effectOrDefault(1);

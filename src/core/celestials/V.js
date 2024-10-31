@@ -40,10 +40,10 @@ class VRunUnlockState extends GameMechanicState {
     const stepCount = this.config.reductionStepSize ? this.config.reductionStepSize : 1;
     if (this.config.isHard) {
       // The numbers come from inside of nextHardReductionCost, this is an effective bulk-buy factor
-      const modifiedStepCount = (Math.pow(1.15, stepCount) - 1) / 0.15;
-      return modifiedStepCount * V.nextHardReductionCost(player.celestials.v.goalReductionSteps[this.id]);
+      const modifiedStepCount = Decimal.pow(1.15, stepCount).sub(1).div(0.15);
+      return modifiedStepCount.mul(V.nextHardReductionCost(player.celestials.v.goalReductionSteps[this.id]));
     }
-    return stepCount * V.nextNormalReductionCost();
+    return Decimal.mul(stepCount, V.nextNormalReductionCost());
   }
 
   get tiersReduced() {
@@ -224,10 +224,10 @@ export const V = {
     return this.spaceTheorems >= 66;
   },
   nextNormalReductionCost() {
-    return 1000;
+    return DC.E3;
   },
   nextHardReductionCost(currReductionSteps) {
-    return 1000 * Math.pow(1.15, currReductionSteps);
+    return Decimal.pow(1.15, currReductionSteps).mul(1e3);
   },
   quotes: Quotes.v,
   symbol: "⌬"

@@ -60,6 +60,14 @@ export default {
     seenRealityGlyphText() {
       return `Reality Glyphs ${Teresa.hardRunCompleted ? ""
         : "are unaffected by this multiplier and "}have no altered effects.`;
+    },
+    sacrificeCapsText() {
+      if (MendingUpgrade(5).isBought) {
+        return `All effects from Power and Replication Glyph Sacrifice can no longer
+        be increased once they reach ${format(this.maxSacrifice.mul(1e100))}.
+        All other effects from Glyph Sacrifice can no longer be increased once they reach ${format(this.maxSacrifice)}`;
+      }
+      return `All effects from Glyph Sacrifice can no longer be increased once they reach ${format(this.maxSacrifice)}`;
     }
   },
   created() {
@@ -159,7 +167,7 @@ export default {
           <span :style="boostStyle">{{ format(boostThreshold) }} - a boost depending on Glyph Sacrifice</span>
         </b>
         <br><br>
-        All effects from Glyph Sacrifice can no longer be increased once they reach {{ format(maxSacrifice) }}.
+        {{ sacrificeCapsText }}
       </div>
     </div>
     <br>

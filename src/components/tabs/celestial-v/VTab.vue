@@ -132,9 +132,14 @@ export default {
       return info.isUnlocked;
     },
     mode(hex) {
+      if (hex.config.id === 9 || hex.config.id === 10) return "divided";
       return hex.config.mode === V_REDUCTION_MODE.SUBTRACTION ? "reduced" : "divided";
     },
     reductionValue(hex) {
+      if (hex.config.id === 9) return format(Decimal.pow10(hex.conditionValue).pow10()
+        .div(Decimal.pow10(hex.conditionValue - hex.reduction.toNumber()).pow10()));
+      if (hex.config.id === 10) return format(Decimal.pow10(hex.conditionValue)
+        .div(Decimal.pow10(hex.conditionValue - hex.reduction.toNumber())));
       return hex.config.mode === V_REDUCTION_MODE.SUBTRACTION
         ? formatInt(hex.reduction)
         : format(Decimal.pow10(hex.reduction));

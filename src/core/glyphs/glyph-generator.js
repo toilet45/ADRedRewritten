@@ -221,7 +221,8 @@ export const GlyphGenerator = {
   randomStrength(rng) {
     // Technically getting this upgrade really changes glyph gen but at this point almost all
     // the RNG is gone anyway.
-    if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied) return rarityToStrength(100);
+    // eslint-disable-next-line max-len
+    if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied && !Ra.unlocks.glyphRarityUncap.canBeApplied) return rarityToStrength(100);
     let result = GlyphGenerator.strengthMultiplier.mul(GlyphGenerator.gaussianBellCurve(rng));
     const relicShardFactor = Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied
       ? new Decimal(1) : rng.uniform();
@@ -231,7 +232,9 @@ export const GlyphGenerator = {
     result = result.add(increasedRarity.div(40));
     // Raise the result to the next-highest 0.1% rarity.
     result = Decimal.ceil(result.times(400)).div(400);
-    return Decimal.min(result, rarityToStrength(100));
+    if (!Ra.unlocks.glyphRarityUncap.canBeApplied) return Decimal.min(result, rarityToStrength(100));
+    result = result.times(40).pow(0.2).add(100).div(40).add(1);
+    return result;
   },
 
   // eslint-disable-next-line max-params

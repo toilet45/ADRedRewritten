@@ -785,7 +785,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [true],
     description: "Galaxy strength is increased based on Tachyon Galaxies",
-    effect: () => player.dilation.totalTachyonGalaxies.max(1).log10().cbrt().div(4).add(1),
+    effect: () => player.dilation.totalTachyonGalaxies.max(1).log10().add(1),
     formatEffect: value => `+${formatPercents(value.sub(1), 3)}`,
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8
   },

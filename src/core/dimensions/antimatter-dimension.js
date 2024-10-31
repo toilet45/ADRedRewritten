@@ -48,7 +48,12 @@ export function antimatterDimensionCommonMultiplier() {
   multiplier = multiplier.times(MendingUpgrade(3).effects.mult);
 
   multiplier = multiplier.pow(Effects.product(
-    TimeStudy(321)
+    TimeStudy(321),
+    BreakInfinityUpgrade.currentAMMult.chargedEffect,
+    BreakInfinityUpgrade.totalAMMult.chargedEffect,
+    BreakInfinityUpgrade.infinitiedMult.chargedEffect,
+    BreakInfinityUpgrade.achievementMult.chargedEffect,
+    BreakInfinityUpgrade.slowestChallengeMult.chargedEffect
   ));
 
   if (Pelle.isDoomed) multiplier = multiplier.dividedBy(10);
