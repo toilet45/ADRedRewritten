@@ -16,6 +16,7 @@ export default {
       realTimeDoomed: TimeSpan.zero,
       totalAntimatter: new Decimal(),
       realTimePlayed: TimeSpan.zero,
+      trueTimePlayed: TimeSpan.zero,
       timeSinceCreation: 0,
       uniqueNews: 0,
       totalNews: 0,
@@ -30,6 +31,7 @@ export default {
         best: TimeSpan.zero,
         this: TimeSpan.zero,
         thisReal: TimeSpan.zero,
+        thisTrue: TimeSpan.zero,
         bestRate: new Decimal(),
       },
       eternity: {
@@ -41,6 +43,7 @@ export default {
         best: TimeSpan.zero,
         this: TimeSpan.zero,
         thisReal: TimeSpan.zero,
+        thisTrue: TimeSpan.zero,
         bestRate: new Decimal(),
       },
       reality: {
@@ -49,8 +52,10 @@ export default {
         hasBest: false,
         best: TimeSpan.zero,
         bestReal: TimeSpan.zero,
+        bestTrue: TimeSpan.zero,
         this: TimeSpan.zero,
         thisReal: TimeSpan.zero,
+        thisTrue: TimeSpan.zero,
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(),
         bestRarity: 0,
@@ -62,12 +67,15 @@ export default {
         hasBest: false,
         best: TimeSpan.zero,
         bestReal: TimeSpan.zero,
+        bestTrue: TimeSpan.zero,
         this: TimeSpan.zero,
         thisReal: TimeSpan.zero,
+        thisTrue: TimeSpan.zero,
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(),
         bestLevel: 0,
       },
+      hasSeenRealTimeSpeedup: false,
       matterScale: [],
       lastMatterTime: 0,
       paperclips: 0,
@@ -116,6 +124,7 @@ export default {
       const records = player.records;
       this.totalAntimatter.copyFrom(records.totalAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
+      this.trueTimePlayed.setFrom(new Decimal(records.trueTimePlayed));
       this.fullTimePlayed = TimeSpan.fromMilliseconds(
         new Decimal(records.previousRunRealTime.add(records.realTimePlayed)));
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
@@ -196,6 +205,16 @@ export default {
         mending.thisReal.setFrom(records.thisMend.realTime);
       }
       this.updateMatterScale();
+      this.hasSeenRealTimeSpeedup = Decimal.neq(player.records.realTimePlayed, player.records.trueTimePlayed);
+
+      if (this.hasSeenRealTimeSpeedup) {
+        this.infinity.thisTrue.setFrom(new Decimal(player.records.thisInfinity.trueTime));
+        this.eternity.thisTrue.setFrom(new Decimal(player.records.thisEternity.trueTime));
+        this.reality.thisTrue.setFrom(new Decimal(player.records.thisReality.trueTime));
+        this.mending.thisTrue.setFrom(new Decimal(player.records.thisMend.trueTime));
+        this.reality.bestTrue.setFrom(new Decimal(player.records.bestReality.trueTime));
+        this.mending.bestTrue.setFrom(new Decimal(player.records.bestMend.trueTime));
+      }
 
       this.isDoomed = Pelle.isDoomed;
       this.realTimeDoomed.setFrom(player.records.realTimeDoomed);
@@ -232,7 +251,11 @@ export default {
         General
       </div>
       <div class="c-stats-tab-general">
+        <!-- eslint-disable-next-line max-len -->
         <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter {{ mending.isUnlocked ? "in this Mended Multiverse" : "" }}.</div>
+        <div v-if="hasSeenRealTimeSpeedup">
+          You have played {{ trueTimePlayed }} of actual time.
+        </div>
         <div>You have played for {{ realTimePlayed }}. (real time)</div>
         <div v-if="reality.isUnlocked">
           Your existence has spanned {{ reality.totalTimePlayed }} of time. (game time)
@@ -302,6 +325,9 @@ export default {
         <span v-if="reality.isUnlocked">
           ({{ infinity.thisReal.toStringShort() }} real time)
         </span>
+        <span v-if="hasSeenRealTimeSpeedup">
+          ({{ infinity.thisTrue.toStringShort() }} actual time)
+        </span>
       </div>
       <div>
         Your best Infinity Points per minute
@@ -343,6 +369,9 @@ export default {
         <span v-if="reality.isUnlocked">
           ({{ eternity.thisReal.toStringShort() }} real time)
         </span>
+        <span v-if="hasSeenRealTimeSpeedup">
+          ({{ eternity.thisTrue.toStringShort() }} actual time)
+        </span>
       </div>
       <div>
         Your best Eternity Points per minute
@@ -375,6 +404,9 @@ export default {
       >
         <div>Your fastest game-time Reality was {{ reality.best.toStringShort() }}.</div>
         <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
+        <div v-if="hasSeenRealTimeSpeedup">
+          Your fastest actual-time Reality was {{ reality.bestTrue.toStringShort() }}.
+        </div>
       </div>
       <div v-else>
         You have no fastest Reality<span v-if="mending.isUnlocked"> in this Mended Multiverse</span>.
@@ -382,7 +414,9 @@ export default {
       <div :class="{ 'c-stats-tab-doomed' : isDoomed }">
         You have spent {{ reality.this.toStringShort() }}
         in this {{ isDoomed ? "Armageddon" : "Reality" }}.
-        ({{ reality.thisReal.toStringShort() }} real time)
+        ({{ reality.thisReal.toStringShort() }} real time) <span v-if="hasSeenRealTimeSpeedup">
+          ({{ reality.thisTrue.toStringShort() }} actual time)
+        </span>
       </div>
       <div
         v-if="isDoomed"
@@ -391,11 +425,15 @@ export default {
         You have been Doomed for {{ realTimeDoomed.toStringShort() }}, real time.
       </div>
       <div>
-        Your best Reality Machines per minute {{ mending.isUnlocked ? "this Mend" : ""}} is {{ format(reality.bestRate, 2, 2) }}.
+        <!-- eslint-disable-next-line max-len -->
+        Your best Reality Machines per minute {{ mending.isUnlocked ? "this Mend" : "" }} is {{ format(reality.bestRate, 2, 2) }}.
       </div>
+      <!-- eslint-disable-next-line max-len -->
       <div>Your best Glyph rarity {{ mending.isUnlocked ? "this Mend" : "" }} is {{ formatRarity(reality.bestRarity) }}.</div>
       <br>
     </div>
+    <br>
+    <br>
     <div
       v-if="mending.isUnlocked"
       class="c-stats-tab-subheader c-stats-tab-general"

@@ -85,6 +85,7 @@ class VRunUnlockState extends GameMechanicState {
     while (this.completions < this.config.values.length &&
     Decimal.gte(playerData.runRecords[this.id], this.conditionValue)) {
       if (!V.isFlipped && this.config.isHard) continue;
+      if (!V.isFlipped && this.config.isExtra && !Ra.unlocks.newVhard.isUnlocked) continue;
       this.completions++;
       GameUI.notify.success(`You have unlocked V-Achievement
         '${this.config.name}' tier ${formatInt(this.completions)}`);
@@ -202,11 +203,11 @@ export const V = {
     player.celestials.v = {
       unlockBits: 0,
       run: false,
-      runUnlocks: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      runUnlocks: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       STSpent: 0,
       runGlyphs: [[], [], [], [], [], [], [], [], []],
-      runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0],
+      runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
     };
     this.spaceTheorems = 0;
   },

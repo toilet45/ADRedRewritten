@@ -191,7 +191,56 @@ export const v = {
       maxShardReduction: () => 500,
       perReductionStep: 5,
       mode: V_REDUCTION_MODE.SUBTRACTION,
-      isHard: true
+      isHard: true,
+    },
+    {
+      id: 9,
+      name: "7 Studies later",
+      description: value => `Reach ${format(new Decimal(value).pow10().pow10())} antimatter
+      with at most ${formatInt(7)} studies bought in this reality, and no dilation.`,
+      // This achievement has internally negated values since the check is always greater than
+      values: [15, 15.4, 15.7, 16, 16.2],
+      condition: () => V.isRunning && player.requirementChecks.reality <= 7 && !TimeStudy.dilation.isBought,
+      currentValue: () => player.antimatter.max(1).log10().max(1).log10(),
+      formatRecord: x => format(x),
+      shardReduction: tiers => 0.002 * tiers,
+      maxShardReduction: () => 0.5,
+      reductionStepSize: 10,
+      mode: V_REDUCTION_MODE.SUBTRACTION,
+      isHard: true,
+      isExtra: true,
+    },
+    {
+      id: 10,
+      name: "The Dilated",
+      description: value => `Get ${format(Decimal.pow10(value))} Dilated Time, with 5 empty glyph slots and a
+      /${format(1e300)} Black Hole, without entering EC12 or discharging`,
+      values: [2500, 3700, 4900, 6000, 7000],
+      condition: () => V.isRunning && player.requirementChecks.reality.slowestBH.lte("1e-300") &&
+      Glyphs.activeList.length === 0,
+      currentValue: () => player.dilation.dilatedTime.max(1).log10(),
+      formatRecord: x => `${formatInt(1)} / ${format(Decimal.pow(10, x))}`,
+      shardReduction: tiers => tiers / 2,
+      maxShardReduction: () => 1000,
+      reductionStepSize: 4,
+      mode: V_REDUCTION_MODE.DIVISION,
+      isHard: true,
+      isExtra: true,
+    },
+    {
+      id: 11,
+      name: "Oh fuck i dont have ideas",
+      description: value => `Reach a Glyph of level ${formatInt(value)}.`,
+      values: [6500, 7000, 8000, 9000, 10000],
+      condition: () => V.isRunning,
+      currentValue: () => gainedGlyphLevel().actualLevel,
+      formatRecord: x => formatInt(x),
+      shardReduction: tiers => Math.floor(500 * tiers),
+      maxShardReduction: () => 500,
+      perReductionStep: 5,
+      mode: V_REDUCTION_MODE.SUBTRACTION,
+      isHard: true,
+      isExtra: true,
     }
   ],
   unlocks: {

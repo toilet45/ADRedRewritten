@@ -794,6 +794,12 @@ export function finishProcessReality(realityProps) {
        Autobuyer.bigCrunch.hasMaxedInterval) || MendingMilestone.one.isReached) {
     player.break = true;
   }
+
+  player.records.thisInfinity.trueTime = 0;
+  player.records.thisEternity.trueTime = 0;
+  player.records.thisReality.trueTime = 0;
+  player.records.bestInfinity.trueTime = 0;
+  player.records.bestEternity.trueTime = 0;
 }
 
 function restoreCelestialRuns(celestialRunState) {

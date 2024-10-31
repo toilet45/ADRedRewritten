@@ -8,15 +8,25 @@ export const MatterScale = {
 
   estimate(matter) {
     if (!matter) return ["There is no antimatter yet."];
-    if (matter.gt(DC.BIMAX)) {
+    if (matter.gt(DC.EE16)) {
+      const size = this.macroScaleLengths(matter.log10().div(6.25e34));
       return [
-        `You have alot of antimatter`
+        `If each digit of your antimatter count was written at a planck length, your antimatter count would be`,
+        `equal to ${format(matter.log10().div(6.25e34).div(size.amount), 2, 2)} ${size.name}`,
+      ];
+    }
+    if (matter.gt(DC.EE14)) {
+      return [
+        `It would take ${formatX(matter.log10().div(2437102080 * 300), 2)}`,
+        "of the current age of the Universe to write out your antimatter count",
+        `at ${formatInt(3)} numbers a second`
       ];
     }
     if (matter.gt(DC.E1_5E12)) {
       return [
         `It would take ${roundAndStr(matter.log10().div(2437102080 * 3))}%`,
-        "of the current age of the Universe to write out your antimatter count"
+        "of the current age of the Universe to write out your antimatter count",
+        `at ${formatInt(3)} numbers a second`
       ];
     }
     if (matter.gt(new Decimal("1e7200000000"))) {
@@ -29,7 +39,8 @@ export const MatterScale = {
     if (matter.gt(DC.E1E7)) {
       return [
         `It would take ${roundAndStr(matter.log10().div(2437102080 * 3))}%`,
-        " of the average American lifespan to write out your antimatter count"
+        " of the average American lifespan to write out your antimatter count",
+        `at ${formatInt(3)} numbers a second`
       ];
     }
     if (matter.gt(DC.E10000)) {
@@ -65,6 +76,23 @@ export const MatterScale = {
 
   macroScale(matter) {
     const macro = this.macroObjects;
+    const last = macro.last();
+    if (matter.gte(last.amount)) return last;
+    let low = 0;
+    let high = macro.length;
+    while (low !== high) {
+      const mid = Math.floor((low + high) / 2);
+      if (macro[mid].amount.lte(matter)) {
+        low = mid + 1;
+      } else {
+        high = mid;
+      }
+    }
+    return macro[high - 1];
+  },
+
+  macroScaleLengths(matter) {
+    const macro = this.macroLengths;
     const last = macro.last();
     if (matter.gte(last.amount)) return last;
     let low = 0;
@@ -117,5 +145,30 @@ export const MatterScale = {
     { amount: new Decimal("3.4e80"), name: "observable universes", verb: "make" },
     { amount: new Decimal("1e113"), name: "Dimensions", verb: "make" },
     { amount: DC.C2P1024, name: "Infinity Dimensions", verb: "make" },
+  ],
+
+  macroLengths: [
+    { amount: new Decimal("0.835e-15"), name: "protons" },
+    { amount: new Decimal("11.7e-15"), name: "uranium nuclei" },
+    { amount: new Decimal("1.06e-10"), name: "hydrogen atoms" },
+    { amount: new Decimal("4e-7"), name: "large viruses" },
+    { amount: new Decimal("3e-5"), name: "skin cells" },
+    { amount: new Decimal("0.005"), name: "lengths of rice" },
+    { amount: new Decimal("0.232"), name: "baseballs" },
+    { amount: new Decimal("12"), name: "double-decker buses" },
+    { amount: new Decimal("2300"), name: "lengths of the largest dam in the world" },
+    { amount: new Decimal("42195"), name: "marathons" },
+    { amount: new Decimal(3.1415926535 * 974.6e3), name: "times around Ceres" },
+    { amount: new Decimal(40.075e6), name: "times around the equator" },
+    { amount: new Decimal(3.1415926535 * 1.39e9), name: "times around the Sun" },
+    { amount: new Decimal("150e9"), name: "astronomical units (AU)" },
+    { amount: new Decimal("5.9e12"), name: "travels from pluto to the sun" },
+    { amount: new Decimal("62.03e12"), name: "around the event horizon of the largest black hole" },
+    { amount: new Decimal("30.857e15"), name: "Parsecs" },
+    { amount: new Decimal("1.9e18"), name: "travels to closest star identical to ours" },
+    { amount: new Decimal("1.54e21"), name: "travels to the most recent naked eye supernova" },
+    { amount: new Decimal("30.857e21"), name: "Megaparsecs" },
+    { amount: new Decimal("30.857e24"), name: "Gigaparsecs" },
+    { amount: new Decimal("2.764e27"), name: "Loops of the observable universe" },
   ]
 };

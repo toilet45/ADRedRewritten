@@ -28,6 +28,7 @@ export default {
       isRunning: false,
       hasAlchemy: false,
       tempVal: undefined,
+      hasV40: false,
     };
   },
   computed: {
@@ -41,8 +42,19 @@ export default {
     },
     // If V is flipped, change the layout of the grid
     hexGrid() {
+      // eslint-disable-next-line no-nested-ternary
       return this.isFlipped && this.wantsFlipped
-        ? [
+        ? (this.hasV40 ? [
+          VRunUnlocks.all[6],
+          VRunUnlocks.all[9],
+          {},
+          VRunUnlocks.all[11],
+          { isRunButton: true },
+          VRunUnlocks.all[7],
+          VRunUnlocks.all[8],
+          VRunUnlocks.all[10],
+          {}
+        ] : [
           VRunUnlocks.all[6],
           {},
           {},
@@ -52,7 +64,7 @@ export default {
           VRunUnlocks.all[8],
           {},
           {}
-        ]
+        ])
         : [
           VRunUnlocks.all[0],
           VRunUnlocks.all[1],
@@ -107,6 +119,7 @@ export default {
       this.wantsFlipped = player.celestials.v.wantsFlipped;
       this.isRunning = V.isRunning;
       this.hasAlchemy = Ra.unlocks.unlockGlyphAlchemy.canBeApplied;
+      this.hasV40 = Ra.unlocks.newVhard.isUnlocked;
     },
     unlockCelestial() {
       if (V.canUnlockCelestial) V.unlockCelestial();
