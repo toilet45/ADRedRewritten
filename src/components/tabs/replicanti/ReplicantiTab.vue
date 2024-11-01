@@ -44,6 +44,7 @@ export default {
       scrambledText: "",
       maxReplicanti: new Decimal(),
       estimateToMax: 0,
+      seenRGcap: false,
     };
   },
   computed: {
@@ -125,6 +126,9 @@ export default {
       return this.estimateToMax.lt(0.01)
         ? "Currently Increasing"
         : TimeSpan.fromSeconds(this.estimateToMax).toStringShort();
+    },
+    endlesslyCapped() {
+      return this.seenRGcap ? `up to ${formatInt(1e7)} times` : "endlessly";
     }
   },
   methods: {
@@ -170,6 +174,7 @@ export default {
         Replicanti.galaxies.max.gte(1) || PlayerProgress.eternityUnlocked();
       this.maxReplicanti.copyFrom(player.records.thisReality.maxReplicanti);
       this.estimateToMax = this.calculateEstimate();
+      this.seenRGcap = player.replicanti.hasSeenCap;
     },
     vacuumText() {
       return wordShift.wordCycle(PelleRifts.vacuum.name);
@@ -237,6 +242,11 @@ export default {
           class="max-accent"
         >{{ format(maxReplicanti, 2) }}</span>.
       </div>
+      <div
+        v-if="hasSeenCap"
+      >
+        Max Replicanti Upgrade caps at {{ formatInt(1e7) }} purchases.
+      </div>
       <br>
       <div v-if="isInEC8">
         You have {{ quantifyInt("purchase", ec8Purchases) }} left within Eternity Challenge 8.
@@ -247,12 +257,12 @@ export default {
         <ReplicantiUpgradeButton :setup="maxGalaxySetup" />
       </div>
       <div>
-        The Max Replicanti Galaxy upgrade can be purchased endlessly, but costs increase
+        The Max Replicanti Galaxy upgrade can be purchased {{ endlesslyCapped }}, but costs increase
         <br>
         more rapidly above {{ formatInt(distantRG) }} Replicanti Galaxies
         and even more so above {{ formatInt(remoteRG) }} Replicanti Galaxies.
       </div>
-      <br><br>
+      <br>
       <ReplicantiGainText />
       <br>
       <ReplicantiGalaxyButton v-if="canSeeGalaxyButton" />

@@ -428,6 +428,14 @@ export const ReplicantiUpgrade = {
       return this.baseCost.dividedByEffectsOf(TimeStudy(233), PelleRifts.vacuum.milestones[1]);
     }
 
+    get cap() {
+      return Effects.min(1e7);
+    }
+
+    get isCapped() {
+      return this.value.gte(this.cap);
+    }
+
     get baseCost() { return player.replicanti.galCost; }
     set baseCost(value) { player.replicanti.galCost = value; }
 
@@ -514,9 +522,9 @@ export const ReplicantiUpgrade = {
       // This isn't a hot enough autobuyer to worry about doing an actual inverse.
       const bulk = this.bulkPurchaseCalc();
       if (!bulk || bulk.floor().sub(this.value).lte(0)) return;
-      Currency.infinityPoints.subtract(this.baseCostAfterCount(this.value).sub(1));
-      this.value = this.value.add(bulk.sub(this.value));
-      this.baseCost = this.baseCostAfterCount(this.value);
+      Currency.infinityPoints.subtract(this.baseCostAfterCount(this.value.max(this.cap)).sub(1));
+      this.value = this.value.add(bulk.sub(this.value.max(this.cap)));
+      this.baseCost = this.baseCostAfterCount(this.value.max(this.cap));
       // The code is weird and if we add one the whole thing goes out to like double + 1, for no reason, so
       // we will instead just do 1 purchase call instead, which can also prevent us overbuying by 1
     }

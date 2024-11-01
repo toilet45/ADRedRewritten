@@ -418,6 +418,7 @@ window.player = {
     boughtGalaxyCap: DC.D0,
     galaxies: DC.D0,
     galCost: DC.E170,
+    hasSeenCap: false,
   },
   timestudy: {
     theorem: DC.D0,
@@ -1030,11 +1031,9 @@ window.player = {
       id: false,
     }
   },
-  // eslint-disable-next-line camelcase
   mending: {
     mends: DC.D0,
     mendingPoints: DC.D0,
-
     hybrids: {
       2: new Decimal(),
       3: new Decimal(),
@@ -1042,17 +1041,16 @@ window.player = {
       12: new Decimal(),
       17: new Decimal()
     },
-
     rebuyables: {
       1: new Decimal(),
       6: new Decimal(),
       11: new Decimal(),
       16: new Decimal()
     },
-
     upgradeBits: 0,
     upgReqs: 0,
-    multiversalGalaxies: new Decimal()
+    multiversalGalaxies: new Decimal(),
+    firstMend: 0,
   },
   softlockModals: {
     mendingUpgradeOne: false

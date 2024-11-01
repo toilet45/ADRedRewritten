@@ -678,7 +678,7 @@ export const Glyphs = {
     return this.instabilityThreshold.add(3000);
   },
   get logarithmicInstabilityThreshold() {
-    return this.instabilityThreshold.add(71000);
+    return this.instabilityThreshold.add(74000);
   },
   get hyperLogarithmicInstabilityThreshold() {
     return this.logarithmicInstabilityThreshold.add(50000);

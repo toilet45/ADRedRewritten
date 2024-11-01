@@ -45,6 +45,9 @@ export default {
       if (!this.isCapped) {
         this.costDescription = setup.formatCost(upgrade.cost);
       }
+      if (this.isCapped && upgrade.id === 3) {
+        player.replicanti.hasSeenCap = true;
+      }
       const autobuyer = Autobuyer.replicantiUpgrade(upgrade.id);
       this.isAutoUnlocked = autobuyer.isUnlocked;
       this.isAutobuyerOn = autobuyer.isActive;

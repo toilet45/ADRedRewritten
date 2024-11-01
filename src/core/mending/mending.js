@@ -56,6 +56,9 @@ function updateMendingRecords(MvRgain) {
 
 export function mendingReset() {
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_BEFORE);
+  if (player.mending.firstMend === 0) {
+    player.mending.firstMend = Date.now();
+  }
   // Do this first so we can do records and stuff based on stats, without fucking anything over
   Currency.mendingPoints.add(gainedMendingPoints());
   Currency.mends.add(gainedMends());
