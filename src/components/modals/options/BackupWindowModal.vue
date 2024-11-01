@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       // Used to force a key-swap whenever a save happens, to make unused slots immediately update
-      nextSave: 0,
+      nextSave: new Decimal(0),
       ignoreOffline: false,
     };
   },
@@ -84,7 +84,7 @@ export default {
       <div class="c-entry-container">
         <BackupEntry
           v-for="slot in backupSlots"
-          :key="nextSave + slot.id"
+          :key="nextSave.toNumber() + slot.id"
           class="l-backup-entry"
           :slot-data="slot"
         />

@@ -59,7 +59,7 @@ export const eternityChallenges = [
     failedRestriction: "(Too many Infinities for more)",
     reward: {
       description: "Infinity Dimension multiplier based on unspent IP",
-      effect: completions => Currency.infinityPoints.value.pow(0.003 + completions * 0.002),
+      effect: completions => Decimal.max(1, Currency.infinityPoints.value.pow(0.003 + completions * 0.002)),
       cap: () => (MendingUpgrade(8).isBought ? DC.E20000 : DC.E200),
       formatEffect: value => formatX(value, 2, 1)
     }

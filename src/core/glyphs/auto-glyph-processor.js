@@ -138,7 +138,7 @@ export const AutoGlyphProcessor = {
   },
   getRidOfGlyph(glyph) {
     // Auto clean calls this function too, which chokes without a special case for these types
-    if (!GlyphInfo[type].hasAlchemyResource && !GlyphInfo[type].hasSacrifice) {
+    if (!GlyphInfo[glyph.type].hasAlchemyResource && !GlyphInfo[glyph.type].hasSacrifice) {
       GlyphSacrificeHandler.deleteGlyph(glyph, true);
       return;
     }

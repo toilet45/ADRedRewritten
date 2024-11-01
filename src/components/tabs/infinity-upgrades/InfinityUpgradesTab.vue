@@ -147,6 +147,7 @@ export default {
         Respec Charged Infinity Upgrades on next Reality
       </PrimaryButton>
       <PrimaryButton
+        v-if="breakChargeUnlocked"
         :class="breakDisChargeClassObject"
         @click="breakDisCharge = !breakDisCharge"
       >
