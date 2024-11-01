@@ -62,9 +62,9 @@ export const AutoGlyphProcessor = {
         if (glyphEffectCount < typeCfg.effectCount) {
           return strengthToRarity(glyph.strength).sub(200 * (typeCfg.effectCount - glyphEffectCount));
         }
+        const missingEffects = [...new Set([...typeCfg.specifiedMask, ...glyph.effects])].length - glyph.effects.length;
         // The missing effect count can be gotten by taking the full filter bitmask, removing only the bits which are
         // present on both the filter and the glyph, and then counting the bits up
-        const missingEffects = countValuesFromBitmask(typeCfg.specifiedMask - (typeCfg.specifiedMask & glyph.effects));
         return strengthToRarity(glyph.strength).sub(200 * missingEffects);
       }
       case AUTO_GLYPH_SCORE.EFFECT_SCORE: {

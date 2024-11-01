@@ -156,8 +156,8 @@ export default {
     </div>
     <div v-if="chargeUnlocked">
       You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalChargesA) }} Infinity Upgrades.
-      <!-- eslint-disable-next-line max-len -->
       <div v-if="breakChargeUnlocked">
+        <!-- eslint-disable-next-line max-len -->
         Additionally, you have used {{ formatInt(breakChargesUsed) }}/{{ formatInt(totalChargesB) }} Break Infinity Charges.
       </div>
       Charged Infinity Upgrades have their effect altered.

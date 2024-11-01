@@ -61,7 +61,6 @@ export function mendingReset() {
   Currency.mends.add(gainedMends());
   player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
     .mul(MendingUpgrade(7).effects.realities));
-  updateMendingRecords(gainedMendingPoints());
   addMendingTime(
     Time.thisMendTrueTime,
     Time.thisMendTime,
@@ -72,6 +71,7 @@ export function mendingReset() {
     MachineHandler.currentIMCap,
     gainedMendingPoints()
   );
+  updateMendingRecords(gainedMendingPoints());
 
   // Begin resetting the things
   // Celestials
@@ -350,9 +350,9 @@ export function gainedMends() {
   return x;
 }
 
-function lockAchievementsOnMend() {
+export function lockAchievementsOnMend() {
   for (const achievement of Achievements.preMend) {
-    achievement.lock();
+    if (!MendingMilestone.three.isReached || !Achievements.preReality) achievement.lock();
   }
   player.reality.achTimer = DC.D0;
 }

@@ -1,5 +1,7 @@
 import { GameMechanicState, SetPurchasableMechanicState } from "./game-mechanics";
 import { DC } from "./constants";
+// eslint-disable-next-line sort-imports
+import { BreakInfinityUpgrade } from "./break-infinity-upgrades";
 
 class ChargedInfinityUpgradeState extends GameMechanicState {
   constructor(config, upgrade) {
@@ -146,6 +148,15 @@ export function breakDisChargeAll() {
     InfinityUpgrade.skipReset2,
     InfinityUpgrade.skipReset3,
     InfinityUpgrade.skipResetGalaxy,
+    BreakInfinityUpgrade.totalAMMult,
+    BreakInfinityUpgrade.currentAMMult,
+    BreakInfinityUpgrade.galaxyBoost,
+    BreakInfinityUpgrade.infinitiedMult,
+    BreakInfinityUpgrade.achievementMult,
+    BreakInfinityUpgrade.slowestChallengeMult,
+    BreakInfinityUpgrade.infinitiedGen,
+    BreakInfinityUpgrade.autobuyMaxDimboosts,
+    BreakInfinityUpgrade.autobuyerSpeed,
   ];
   for (const upgrade of upgrades) {
     if (upgrade.isCharged) {

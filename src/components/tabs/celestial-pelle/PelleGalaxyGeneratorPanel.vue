@@ -59,7 +59,7 @@ export default {
       this.sacrificeActive = GalaxyGenerator.sacrificeActive;
       this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
-      this.showCap = this.cap.lt("10^^9000000000000000");
+      this.showCap = this.cap.lt("10^^9000000000000");
     },
     increaseCap() {
       if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();

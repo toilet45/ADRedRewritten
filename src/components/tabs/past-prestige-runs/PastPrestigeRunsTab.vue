@@ -9,6 +9,18 @@ export default {
   data() {
     return {
       layers: {
+        mending: {
+          name: "Mend",
+          plural: "Mends",
+          currency: "MvR",
+          condition: () => PlayerProgress.mendingUnlocked(),
+          getRuns: () => player.records.recentMends,
+          extra: ["iM Cap", "Highest RM", "Highest Level"],
+          showExtra: [() => true, () => true, () => true],
+          formatExtra: [x => format(x, 2), x => format(x, 2), x => formatInt(x)],
+          allowRate: [false, false, false],
+          rateString: ["", "", ""]
+        },
         reality: {
           name: "Reality",
           plural: "Realities",

@@ -74,7 +74,7 @@ export class MendAutobuyerState extends AutobuyerState {
   }
 
   get timeToNextTick() {
-    return Math.clampMin(this.time - Time.thisMendRealTime.totalSeconds.toNumber(), 0);
+    return Math.clampMin(this.time - Time.thisMendTrueTime.totalSeconds.toNumber(), 0);
   }
 
   get willMend() {

@@ -50,7 +50,7 @@ export const GalaxyGenerator = {
   },
 
   get isCapped() {
-    return this.generationCap === this.generatedGalaxies;
+    return Decimal.eq(this.generationCap, this.generatedGalaxies);
   },
 
   get sacrificeActive() {

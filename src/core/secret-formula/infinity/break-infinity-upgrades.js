@@ -60,8 +60,8 @@ export const breakInfinityUpgrades = {
     effect: 1.5,
     charged: {
       description: () =>
-        `All Galaxies are ${formatPercents(1)} stronger`,
-      effect: 2,
+        `All Galaxies are ${formatPercents(7.5)} stronger`,
+      effect: 8.5,
     }
   },
   infinitiedMult: {

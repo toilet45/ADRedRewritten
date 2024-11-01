@@ -4802,6 +4802,7 @@ properly on certain themes. */
 .l-break-infinity-upgrade-grid {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .l-break-infinity-upgrade-grid__row {

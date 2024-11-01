@@ -47,15 +47,6 @@ export function antimatterDimensionCommonMultiplier() {
 
   multiplier = multiplier.times(MendingUpgrade(3).effects.mult);
 
-  multiplier = multiplier.pow(Effects.product(
-    TimeStudy(321),
-    BreakInfinityUpgrade.currentAMMult.chargedEffect,
-    BreakInfinityUpgrade.totalAMMult.chargedEffect,
-    BreakInfinityUpgrade.infinitiedMult.chargedEffect,
-    BreakInfinityUpgrade.achievementMult.chargedEffect,
-    BreakInfinityUpgrade.slowestChallengeMult.chargedEffect
-  ));
-
   if (Pelle.isDoomed) multiplier = multiplier.dividedBy(10);
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
@@ -178,7 +169,13 @@ function applyNDPowers(mult, tier) {
       InfinityUpgrade.thisInfinityTimeMult.chargedEffect,
       AlchemyResource.power,
       Achievement(183),
-      PelleRifts.paradox
+      PelleRifts.paradox,
+      TimeStudy(321),
+      BreakInfinityUpgrade.currentAMMult.chargedEffect,
+      BreakInfinityUpgrade.totalAMMult.chargedEffect,
+      BreakInfinityUpgrade.infinitiedMult.chargedEffect,
+      BreakInfinityUpgrade.achievementMult.chargedEffect,
+      BreakInfinityUpgrade.slowestChallengeMult.chargedEffect
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));

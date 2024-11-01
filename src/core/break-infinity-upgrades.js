@@ -73,11 +73,13 @@ export class BreakInfinityUpgradeState extends SetPurchasableMechanicState {
   charge() {
     // eslint-disable-next-line no-negated-condition
     player.celestials.ra.breakCharged.add(this.id);
+    GameCache.dimensionMultDecrease.invalidate();
   }
 
   disCharge() {
     // eslint-disable-next-line no-negated-condition
     player.celestials.ra.breakCharged.delete(this.id);
+    GameCache.dimensionMultDecrease.invalidate();
   }
 
   onPurchased() {
