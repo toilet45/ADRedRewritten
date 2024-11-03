@@ -121,10 +121,10 @@ export default {
         You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Infinity Upgrades. <br>
         <!-- eslint-disable-next-line max-len -->
         Additionally, you have used {{ formatInt(breakChargesUsed) }}/{{ formatInt(totalBreakCharges) }} Break Infinity Charges.
+        Charged Break Infinity Upgrades have their effect altered.
+        <br>
+        Hold shift to show Charged Break Infinity Upgrades. You can freely respec your choices on Reality.<br>
       </div>
-      Charged Break Infinity Upgrades have their effect altered.
-      <br>
-      Hold shift to show Charged Break Infinity Upgrades. You can freely respec your choices on Reality.<br>
       <BreakInfinityButton class="l-break-infinity-tab__break-btn" />
       <div
         class="l-break-infinity-upgrade-grid l-break-infinity-tab__grid"

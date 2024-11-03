@@ -355,7 +355,18 @@ export function gainedMends() {
 
 export function lockAchievementsOnMend() {
   for (const achievement of Achievements.preMend) {
-    if (!MendingMilestone.three.isReached || !Achievements.preReality) achievement.lock();
+    if (!Achievements.preReality) achievement.lock();
+  }
+  if (MendingMilestone.three.isReached) {
+    Perk.achievementGroup5.onPurchased();
+    Achievement(146).unlock();
+  }
+  if (MendingMilestone.five.isReached) {
+    for (let i = 141; i < 159; i++) {
+      if (i % 10 > 0 && i % 10 < 9) {
+        Achievement(i).unlock();
+      }
+    }
   }
   player.reality.achTimer = DC.D0;
 }

@@ -81,8 +81,8 @@ export const eternityChallenges = [
     id: 6,
     // The asterisk, if present, will get replaced with strings generated from the scramble text
     description: () => {
-      if (Enslaved.isRunning) return "you *. The cost of upgrading your max Replicanti Galaxies is massively reduced.";
-      return "you cannot gain Antimatter Galaxies normally. The cost of upgrading your max Replicanti" +
+      if (Enslaved.isRunning) return "You *. The cost of upgrading your max Replicanti Galaxies is massively reduced.";
+      return "You cannot gain Antimatter Galaxies normally. The cost of upgrading your max Replicanti" +
               " Galaxies is massively reduced.";
     },
     goal: DC.E850,
