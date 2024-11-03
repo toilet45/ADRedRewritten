@@ -33,7 +33,7 @@ export default {
     },
     textFormat() {
       if (MendingMilestone.three.isReached && this.dbEntry.id === 1) {
-        return `This requirement is fulfilled by the third Mending Milestone.`;
+        return `0 / 0 Realities (3 Mend Milestone)`;
       }
       return `${this.dbEntry.format(this.dbEntry.resource())} / ${this.dbEntry.format(this.dbEntry.requirement)} ${this.dbEntry.name}`;
     }
