@@ -174,9 +174,9 @@ export const normalTimeStudies = [
   {
     id: 74,
     cost: DC.D5,
-    requirement: [61, () => Perk.studyECRequirement.isBought ||
-      (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)],
-    reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    requirement: [61, () => (Perk.studyECRequirement.isBought ||
+      (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)) && Ra.unlocks.MvDUnlock.canBeApplied],
+    reqType: TS_REQUIREMENT_TYPE.ALL,
     description: "Put smth here",
     effect: () => DC.D1,
     unlocked: () => false

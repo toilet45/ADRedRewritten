@@ -2375,6 +2375,31 @@ br {
 /* #endregion IP Amount */
 
 /* #region EP Amount */
+.c-game-header__penteract-available {
+  font-family: Typewriter, serif;
+  color: #2ee675;
+  background: #111117;
+  border-width: var(--var-border-width, 0.2rem) solid;
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-tesseract-shift 5s infinite;
+  cursor: pointer;
+}
+
+.s-base--dark .c-game-header__penteract-available {
+  background: #eeeeee;
+  animation: a-tesseract-shift-dark 5s infinite;
+}
+
+.c-infinity-dim-tab__penteract-available:hover {
+  color: #30803b;
+  background: black;
+}
+
+.s-base--dark .c-infinity-dim-tab__penteract-available:hover {
+  background: white;
+}
 
 .l-game-header__eternity-points {
   position: absolute;

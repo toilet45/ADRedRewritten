@@ -25,6 +25,7 @@ export default {
       creditsClosed: false,
       showEPRate: false,
       isDilation: false,
+      canBuyPenteract: false
     };
   },
   computed: {
@@ -113,6 +114,7 @@ export default {
       this.canEternity = Player.canEternity;
       this.eternityGoal.copyFrom(Player.eternityGoal);
       this.headerTextColored = player.options.headerTextColored;
+      this.canBuyPenteract = Penteracts.canBuyPenteract;
 
       if (!this.canEternity) {
         this.type = EP_BUTTON_DISPLAY_TYPE.CANNOT_ETERNITY;
@@ -168,7 +170,10 @@ export default {
       this.failedRestriction = status.failedRestriction;
       this.hasMoreCompletions = status.hasMoreCompletions;
       this.nextGoalAt.copyFrom(status.nextGoalAt);
-    }
+    },
+    switchToTime() {
+      Tab.dimensions.time.show(true);
+    },
   },
 };
 
@@ -180,13 +185,14 @@ const EP_BUTTON_DISPLAY_TYPE = {
   DILATION: 3,
   NORMAL_EXPLORE_NEW_CONTENT: 4,
   DILATION_EXPLORE_NEW_CONTENT: 5,
-  CHALLENGE_RUPG: 6
+  CHALLENGE_RUPG: 6,
+  PENTERACT: 7
 };
 </script>
 
 <template>
   <button
-    v-if="isVisible"
+    v-if="isVisible && !canBuyPenteract"
     :class="buttonClassObject"
     class="o-prestige-button"
     onclick="eternityResetRequest()"
@@ -264,6 +270,16 @@ const EP_BUTTON_DISPLAY_TYPE = {
         </template>
       </template>
     </template>
+  </button>
+  <button
+    v-else-if="canBuyPenteract"
+    class="o-prestige-button c-game-header__penteract-available"
+    :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
+    @click="switchToTime"
+  >
+    <b>
+      You have enough Eternity Points to buy a Penteract
+    </b>
   </button>
 </template>
 

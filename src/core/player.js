@@ -683,7 +683,8 @@ window.player = {
         3: DC.D0,
         4: DC.D0,
         5: DC.D0
-      }
+      },
+      penteracts: DC.D0
     },
     v: {
       unlockBits: 0,

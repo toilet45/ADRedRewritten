@@ -4,6 +4,7 @@ import { DimensionState } from "./dimension";
 
 export function buySingleTimeDimension(tier, auto = false) {
   const dim = TimeDimension(tier);
+  if (dim.bought.gte(TimeDimensions.purchaseCap)) return false;
   if (tier > 4) {
     if (!TimeStudy.timeDimension(tier).isBought) return false;
     if (RealityUpgrade(13).isLockingMechanics && Currency.eternityPoints.gte(dim.cost)) {
@@ -90,7 +91,7 @@ export function calcHighestPurchaseableTD(tier, currency) {
 export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) {
   const canSpend = Currency.eternityPoints.value.times(portionToSpend);
   const dim = TimeDimension(tier);
-  if (canSpend.lt(dim.cost)) return false;
+  if (canSpend.lt(dim.cost) || dim.bought.gte(TimeDimensions.purchaseCap)) return false;
   if (tier > 4) {
     if (!TimeStudy.timeDimension(tier).isBought) return false;
     if (RealityUpgrade(13).isLockingMechanics) {
@@ -368,6 +369,10 @@ export const TimeDimensions = {
 
   get scalingPast1e6000() {
     return 4;
+  },
+
+  get purchaseCap() {
+    return new Decimal(5e14);
   },
 
   tick(diff) {

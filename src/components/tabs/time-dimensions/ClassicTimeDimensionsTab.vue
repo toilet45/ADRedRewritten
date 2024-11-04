@@ -19,10 +19,22 @@ export default {
       incomeType: "",
       areAutobuyersUnlocked: false,
       showLockedDimCostNote: true,
+      penteractsUnlocked: false,
+      penteractCost: new Decimal(0),
+      canBuyPenteracts: false,
+      boughtPenteracts: new Decimal(0),
+      extraPenteracts: new Decimal(0),
+      totalDimCap: new Decimal(0),
+      nextDimCapIncrease: new Decimal(0),
+      creditsClosed: false
     };
   },
   computed: {
     costIncreases: () => TimeDimension(1).costIncreaseThresholds,
+    pentractCountString() {
+      const extra = this.extraPenteracts.gt(0) ? ` + ${format(this.extraPenteracts, 2, 2)}` : "";
+      return `${format(this.boughtPenteracts)}${extra}`;
+    },
   },
   methods: {
     update() {
@@ -35,6 +47,14 @@ export default {
       this.shardsPerSecond.copyFrom(TimeDimension(1).productionPerRealSecond);
       this.incomeType = EternityChallenge(7).isRunning ? "Eighth Infinity Dimensions" : "Time Shards";
       this.areAutobuyersUnlocked = Autobuyer.timeDimension(1).isUnlocked;
+      this.penteractsUnlocked = false;
+      this.penteractCost.copyFrom(Penteracts.nextCost);
+      this.canBuyPenteracts = false;
+      this.boughtPenteracts.copyFrom(Penteracts.bought);
+      this.extraPenteracts.copyFrom(Penteracts.extra);
+      this.totalDimCap = new Decimal(5e14);
+      this.nextDimCapIncrease.copyFrom(Penteracts.nextPenteractIncrease);
+      this.creditsClosed = GameEnd.creditsEverClosed;
     },
     maxAll() {
       tryUnlockTimeDimensions();
@@ -42,6 +62,9 @@ export default {
     },
     toggleAllAutobuyers() {
       toggleAllTimeDims();
+    },
+    buyPenteract() {
+      Penteracts.buyPenteract();
     }
   }
 };
@@ -77,6 +100,25 @@ export default {
         Tickspeed upgrade gained.
       </p>
     </div>
+    <div
+      v-if="penteractsUnlocked"
+      class="l-infinity-dim-tab__enslaved-reward-container"
+    >
+      <button
+        class="c-infinity-dim-tab__tesseract-button"
+        :class="{
+          'c-infinity-dim-tab__tesseract-button--disabled': !canBuyPenteracts,
+          'o-pelle-disabled-pointer': creditsClosed
+        }"
+        @click="buyPenteract"
+      >
+        <p>
+          Buy a Penteract ({{ pentractCountString }})
+        </p>
+        <p>Increase Time Dimension caps by {{ format(nextDimCapIncrease, 2) }}</p>
+        <p><b>Costs: {{ format(penteractCost) }} EP</b></p>
+      </button>
+    </div>
     <div>
       The amount each additional upgrade requires will start
       increasing above {{ formatInt(tickspeedSoftcap) }} Tickspeed upgrades.
@@ -102,6 +144,8 @@ export default {
         Hold shift to see the Eternity Point cost for locked Time Dimensions.
       </div>
       Any 8th Time Dimensions purchased above {{ format(1e8) }} will not further increase the multiplier.
+      <br>
+      Time Dimensions cannot be bought past {{ format(totalDimCap, 2, 2) }} purchases.
     </div>
   </div>
 </template>

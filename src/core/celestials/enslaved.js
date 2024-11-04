@@ -337,6 +337,57 @@ export const Tesseracts = {
   },
 };
 
+export const Penteracts = {
+  get bought() {
+    return player.celestials.enslaved.penteracts;
+  },
+
+  get extra() {
+    return new Decimal(0);
+  },
+  // -1 + x = x - 1, so do this to reduce making more decimals than necessary
+
+  get effectivePentCount() {
+    return this.bought.add(this.extra);
+  },
+
+  buyPenteract() {
+    if (!this.canBuyPenteract) return;
+    if (GameEnd.creditsEverClosed) return;
+    player.celestials.enslaved.penteracts = player.celestials.enslaved.penteracts.add(1);
+  },
+
+  // This used to be an array, but tess costs are just a super easy thing to calculate in BE so i dont care
+
+  costs(index) {
+    // Start at ee18 EP, then ee21, ee24, etc (hexa put better cost scaling)
+    return new Decimal("ee18").times(Decimal.pow("e1000", index.add(1)));
+    // eslint-disable-next-line no-param-reassign
+    // index = index.add(1);
+    // if (index.lte(3)) return Decimal.pow10(index.times(2e7));
+    // return Decimal.pow10((index.sub(3)).factorial().times(Decimal.pow(2, index.sub(3))).times(6e7));
+  },
+
+  get nextCost() {
+    return this.costs(this.bought);
+  },
+
+  get canBuyPenteract() {
+    return Currency.eternityPoints.gte(Penteracts.nextCost) && false;
+    // && "whatever the TE upgrade is"
+  },
+
+  pentCapIncrease(count = this.bought) {
+    const totalCount = count;
+    const base = totalCount.lt(1) ? DC.D0 : new Decimal(2e13);
+    return base;
+  },
+
+  get nextPenteractIncrease() {
+    return this.pentCapIncrease(this.bought.add(1)).sub(this.pentCapIncrease(this.bought));
+  },
+};
+
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
   if (Tab.celestials.enslaved.isOpen) Enslaved.quotes.initial.show();
 });
