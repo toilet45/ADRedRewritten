@@ -328,7 +328,9 @@ export function mendingReset() {
     iMCapSet: [],
     laitelaSet: [],
   };
-  if (!MendingMilestone.ten.isReached) lockAchievementsOnMend();
+  if (!MendingMilestone.ten.isReached) {
+    lockAchievementsOnMend();
+  }
   InfinityChallenges.clearCompletions();
   Currency.infinityPoints.reset();
   // End resetting all the things
@@ -355,7 +357,7 @@ export function gainedMends() {
 
 export function lockAchievementsOnMend() {
   for (const achievement of Achievements.preMend) {
-    if (!Achievements.preReality) achievement.lock();
+    achievement.lock();
   }
   if (MendingMilestone.three.isReached) {
     Perk.achievementGroup5.onPurchased();

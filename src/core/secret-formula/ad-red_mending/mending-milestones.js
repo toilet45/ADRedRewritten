@@ -13,11 +13,11 @@ export const mendingMilestones = {
   },
   three: {
     mends: 3,
-    reward: "Start all Mends with all perks purchased. V's Reality Requirement is no longer required to unlock V."
+    reward: "Start all Mends with all perks purchased and the Automator unlocked. V's Reality Requirement is now 0 Realities."
   },
   four: {
     mends: 5,
-    reward: "Start every Mend with Effarig's shop completely bought out and the Automator unlocked (at full speed)"
+    reward: "Start every Mend with Effarig's shop completely bought out and the Automator at full speed"
   },
   five: {
     mends: 7,
