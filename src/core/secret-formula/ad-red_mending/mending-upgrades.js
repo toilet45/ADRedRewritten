@@ -206,11 +206,18 @@ export const mendingUpgrades = [
       `${format(effects.galaxies)}, /${format(effects.agCost, 3, 3)}, +${format(effects.agPow, 3, 3)}`
   }),
   hybridRebuyable({
-    name: "17",
+    name: "QoL Bonanza",
     id: 17,
     costs: [new Decimal(175), ...Array.repeat(new Decimal(65), 7)],
     // eslint-disable-next-line no-unused-vars
-    description: () => "Unlock ??? Dimensions which cost RM and generate ??? - TBD",
+    description: p => ["Start every Mend with Continuum unlocked",
+      "Automatically purchase and sacrifice Music Glyphs",
+      "Music Glyphs cost 0 Perk Points",
+      "Unlock autobuyers for Ra Memory Levels",
+      "Remove unlock requirements from Imaginary Upgrades",
+      `???`,
+      "Automatically purchase non rebuyable Imaginary Upgrades",
+      `Imaginary Machines start generating at ${formatInt(0)} RM`][p],
     // eslint-disable-next-line no-unused-vars
     effect: p => p,
     formatEffect: p => format(p),
