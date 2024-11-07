@@ -179,6 +179,7 @@ function applyNDPowers(mult, tier) {
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
+  multiplier = multiplier.pow(MendingUpgrade(3).effects.pow);
 
   multiplier = multiplier.pow(VUnlocks.adPow.effectOrDefault(1));
 

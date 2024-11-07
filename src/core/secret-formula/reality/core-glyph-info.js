@@ -374,7 +374,7 @@ export const GlyphInfo = {
         return Decimal.floor(Decimal.pow(base, 1.2).times(1500));
       },
       description: amount => {
-        const cap = GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
+        const cap = GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1));
         const nextDistantGalaxy = Decimal.pow10(Decimal.root((amount.add(1)).div(1500), 1.2)
           .times(100)).sub(1);
         const nextGalaxyText = amount.lt(cap.log10().mul(15))
