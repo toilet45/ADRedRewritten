@@ -119,7 +119,7 @@ export function mendingReset() {
     trash: AUTO_GLYPH_REJECT.SACRIFICE,
     simple: 0,
     types: Object.keys(getGlyphTypes())
-      .filter(t => GlyphInfo.alchemyGlyphTypes.includes(t.id))
+      .filter(t => GlyphInfo.generatedGlyphTypes.includes(t.id))
       .mapToObject(t => t.id, t => ({
         rarity: new Decimal(),
         score: 0,

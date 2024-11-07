@@ -1394,8 +1394,8 @@ export const normalAchievements = [
   {
     id: 192,
     name: "???",
-    description: "???",
-    checkRequirement: () => false,
+    description: "Unlock the Galaxy Generator without unlocking Time Dilation",
+    checkRequirement: () => GalaxyGenerator.generatedGalaxies.gt(0) && !PlayerProgress.dilationUnlocked(),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
