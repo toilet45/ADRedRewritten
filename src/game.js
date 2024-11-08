@@ -902,7 +902,7 @@ function applyAutoprestige(diff) {
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if ((InfinityUpgrade.ipGen.isCharged || MendingUpgrade(2).boughtAmount.gte(3)) && !Enslaved.isExpanded) {
+  if ((InfinityUpgrade.ipGen.isCharged || (MendingUpgrade(2).boughtAmount.gte(3) && !Pelle.isDoomed)) && !Enslaved.isExpanded) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
       .times(diff.div(1000));

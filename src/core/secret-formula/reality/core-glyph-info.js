@@ -180,8 +180,10 @@ export const GlyphInfo = {
     noun: "Amalgam",
     isBasic: false,
     regularGlyphSymbol: "§",
-    cancerGlyphSymbol: "A", //that S symbol people keep drawing if that's possible
+    cancerGlyphSymbol: "S",
+    // That S symbol people keep drawing if that's possible
     hasSacrifice: false,
+    // Possible sac effect: "Raise (multiply for power and rep) other sac effects by x (up to ^1.3 / x1.3)"
     hasAlchemyResource: false,
     pelleUniqueEffect: false,
     isGenerated: false,
