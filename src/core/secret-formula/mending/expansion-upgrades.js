@@ -13,11 +13,11 @@ const rebuyable = props => {
   );
   const effect = props.effect;
   props.effect = () => effect;
-  props.description = () => props.textTemplate.replace("{value}", format(effect));
   if (props.id === 5) {
-    let desc = props.textTemplate.replace("{value}", format(1));
-    desc = desc.replace("{C}", format(effect(DC.D1).sub(1))).replace("{V}", format(effect(DC.D1)));
-    props.description = () => desc;
+    props.description = () => props.textTemplate.replace("{value}", format(effect))
+      .replace("{C}", format(effect(DC.D1).sub(1))).replace("{V}", format(effect(DC.D1)));
+  } else {
+    props.description = () => props.textTemplate.replace("{value}", format(effect));
   }
   props.formatEffect = value => formatX(value, 2, 0);
   props.formatCost = value => format(value, 2, 0);
