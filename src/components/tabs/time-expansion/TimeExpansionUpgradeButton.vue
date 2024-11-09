@@ -1,3 +1,5 @@
+<!-- eslint-disable no-inline-comments -->
+<!-- eslint-disable line-comment-position -->
 <script>
 import CostDisplay from "@/components/CostDisplay";
 import DescriptionDisplay from "@/components/DescriptionDisplay";
@@ -50,7 +52,7 @@ export default {
       };
     },
     isUseless() {
-      return false; //Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
+      return false; // Pelle.disabledRUPGs.includes(this.upgrade.id) && Pelle.isDoomed;
     },
   },
   watch: {
@@ -66,8 +68,8 @@ export default {
       this.isRebuyable = upgrade.isRebuyable;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
-      this.isAutoUnlocked = false; //Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied;
-      if (this.isRebuyable) this.isAutobuyerOn = false;//Autobuyer.realityUpgrade(upgrade.id).isActive;
+      this.isAutoUnlocked = false; // Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied;
+      if (this.isRebuyable) this.isAutobuyerOn = false;// Autobuyer.realityUpgrade(upgrade.id).isActive;
     },
   }
 };

@@ -437,6 +437,7 @@ window.player = {
   celestialstudy: {
     theorem: DC.D0,
     maxTheorem: DC.D0,
+    purchased: DC.D0,
     studies: [],
     shopMinimized: false,
     preferredPaths: [[], 0],

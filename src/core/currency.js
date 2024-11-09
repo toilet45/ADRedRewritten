@@ -387,7 +387,7 @@ Currency.timeTheorems = new class extends DecimalCurrency {
   }
 }();
 
-Currency.celestalTheorems = new class extends DecimalCurrency {
+Currency.celestialTheorems = new class extends DecimalCurrency {
   get value() { return player.celestialstudy.theorem; }
   set value(value) {
     player.celestialstudy.theorem = value;

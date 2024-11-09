@@ -62,7 +62,7 @@ class RebuyableExpansionUpgradeState extends RebuyableMechanicState {
 }
 
 ExpansionUpgradeState.index = mapGameData(
-  GameDatabase.expansionUpgrades,
+  GameDatabase.mending.expansionUpgrades,
   config => (config.id < 6
     ? new RebuyableExpansionUpgradeState(config)
     : new ExpansionUpgradeState(config))
@@ -80,6 +80,7 @@ export const ExpansionUpgrades = {
    */
   all: ExpansionUpgradeState.index.compact(),
   get allBought() {
-    return (player.celestials.enslaved.expandUpgradeBits >> 6) + 1 === 1 << (GameDatabase.expansionUpgrades.length - 5);
+    return (player.celestials.enslaved.expandUpgradeBits >> 6) + 1 ===
+    1 << (GameDatabase.mending.expansionUpgrades.length - 5);
   }
 };

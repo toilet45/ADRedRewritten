@@ -13,7 +13,8 @@ export const mendingMilestones = {
   },
   three: {
     mends: 3,
-    reward: "Start all Mends with all perks purchased and the Automator unlocked. V's Reality Requirement is now 0 Realities."
+    reward: `Start all Mends with all perks purchased and the Automator unlocked.
+    V's Reality Requirement is now 0 Realities.`
   },
   four: {
     mends: 5,

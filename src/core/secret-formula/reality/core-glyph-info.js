@@ -303,13 +303,15 @@ export const GlyphInfo = {
         return Decimal.floor(Decimal.pow(base, 1.2).times(750));
       },
       description: amount => {
-        const cap = GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
+        const cap = GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1));
         const nextDistantGalaxy = Decimal.pow10(Decimal.root(amount.add(1).div(750), 1.2)
           .times(100)).sub(1);
         const nextGalaxyText = amount.lt(cap.log10().mul(7.5))
           ? ` (next at ${format(nextDistantGalaxy, 2, 2)})`
           : "";
-        return `Distant Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
+        if (amount.gt(750)) return `Distant Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
+        return `Distant Galaxy scaling starts ${formatInt(amount)} later${amount.gt(750) ? ` and Remote Galaxy scaling starts ${formatInt(amount.sub(750))} later` : ``}
+        ${nextGalaxyText}`;
       },
       cap: () => GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
     },

@@ -120,8 +120,7 @@ GameDatabase.celestials.descriptions = [
     name: "Hardened Teresa",
     effects() {
       return `Glyph Time Theorem generation is disabled. Charged Infinity Upgrades are disabled.
-      You gain considerably less Infinity Points and Eternity Points (log(x)^${format(0.7, 2, 2)}).
-      Antimatter gain is reduced log(x)^${format(0.9, 2, 2)}`;
+      You gain considerably less Antimatter, Infinity Points and Eternity Points (exponent^${format(0.55, 2, 2)}).`;
     },
   },
   {
@@ -129,21 +128,21 @@ GameDatabase.celestials.descriptions = [
     effects() {
       return `Dimension Multipliers and Tickspeed are fixed to ${formatX(1)}
       Base Tickspeed cost increases and cost scaling is ${format(1e100)}
-      Extrenal Infinity (Point), Eternity (Point), Time Theorem, and Dilation resource generation or 
-      multipliers are disabled.
+      Most External Currency Generation/Multipliers are disabled while Expanded, such as:
+      Infinity (Points), Eternity (Points), Time Theorems and Dilated Time.
+      Mending Upgrade 15 is disabled.
 
-      However Gamespeed is ${formatPow(50)} stronger
-      `;
+      Gamespeed is considerably stronger (x^${formatInt(50)}) to compensate.`;
     },
   },
   {
     name: "Universal Damage",
     effects() {
-      return `Enter a heavily nerfed Mend. All mending upgrades, apart from 5, 6, 11, 12, 
-      16, 19 and 20,are disabled. All regular dimensions are raised ^${format(0.6, 1, 1)}. Dark Matter
-      is uncapped, but above the Dark Matter cap, it does not provide any boost to Continuum,
-      and the cost of Dark Matter Dimensions begin to scale rapidly above the cap. Begin the
-      Mend with Lai'tela unlocked and with all 8 dimensions, even if you have not unlocked them
+      return `Enter a heavily nerfed Mend. Only Mending Upgrades 5, 6, 11, 12, 16, 19 and 20 are enabled.
+      All regular dimensions are raised ^${format(0.6, 1, 1)}.
+      Dark Matter is uncapped, but above the Dark Matter cap, it does not provide any boost to Continuum.
+      The cost of Dark Matter Dimensions begin to scale rapidly above the Dark Matter Cap.
+      Begin the Mend with Lai'tela unlocked and with all 8 dimensions, even if you have not unlocked them
       through Lai'tela levels.`;
     },
   }

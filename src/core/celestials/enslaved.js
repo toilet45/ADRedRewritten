@@ -248,6 +248,9 @@ export const Enslaved = {
   get isExpanded() {
     return player.celestials.enslaved.expanded;
   },
+  /* expand() {
+    player.celestials.enslaved.expanded = true;
+  }, */
   quotes: Quotes.enslaved,
   // Unicode f0c1.
   symbol: "\uf0c1",

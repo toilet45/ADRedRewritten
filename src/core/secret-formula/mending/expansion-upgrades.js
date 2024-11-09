@@ -14,6 +14,11 @@ const rebuyable = props => {
   const effect = props.effect;
   props.effect = () => effect;
   props.description = () => props.textTemplate.replace("{value}", format(effect));
+  if (props.id === 5) {
+    let desc = props.textTemplate.replace("{value}", format(1));
+    desc = desc.replace("{C}", format(effect(DC.D1).sub(1))).replace("{V}", format(effect(DC.D1)));
+    props.description = desc;
+  }
   props.formatEffect = value => formatX(value, 2, 0);
   props.formatCost = value => format(value, 2, 0);
   return props;
@@ -27,7 +32,7 @@ export const expansionUpgrades = [
     initialCost: new Decimal(100),
     costMult: new Decimal(10),
     textTemplate: "Glyph Levels +{value} in Time Expansion",
-    effect: DC.D1
+    effect: DC.E1
   }),
   rebuyable({
     name: "Expansion Upgrade 2",
@@ -43,7 +48,7 @@ export const expansionUpgrades = [
     initialCost: new Decimal(500),
     costMult: new Decimal(20),
     textTemplate: "Infinity Point and Eternity Point gain x{value}",
-    effect: DC.D1
+    effect: DC.D2
   }),
   rebuyable({
     name: "Expansion Upgrade 4",
@@ -58,8 +63,8 @@ export const expansionUpgrades = [
     id: 5,
     initialCost: DC.D3,
     costMult: new Decimal(50),
-    textTemplate: "Increase hyper logarithim scaling base by {value}",
-    effect: DC.D1,
+    textTemplate: "Increase hyper logarithm scaling base by {value} ({C}^log²(x) -> {V}^log²(x))",
+    effect: DC.D5,
   }),
   {
     name: "Expansion Upgrade 6",
@@ -74,7 +79,7 @@ export const expansionUpgrades = [
     id: 7,
     cost: 15,
     description: "Memory gain is boosted based on Gamespeed",
-    // Is x40 at e400 Gamespeed, TODO: softcap at 50x?
+    // Is x40 at e400 Gamespeed, TODO: softcap at 50x? --- Nope, needs buff
     effect: () => Decimal.max(1, (getGameSpeedupFactor().add(1)).log10().div(10)),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -90,7 +95,6 @@ export const expansionUpgrades = [
     name: "Expansion Upgrade 9",
     id: 9,
     cost: 15,
-    // There are two locking events - equipping a glyph with too low a level, and equipping a second glyph
     description: "Start Time Expansion with Infinity Challenge 4 and 5 completed",
     effect: () => DC.D1
   },
@@ -114,7 +118,7 @@ export const expansionUpgrades = [
     name: "Expansion Upgrade 12",
     id: 12,
     cost: 50,
-    description: () => `Gamespeed softcap applies every ${format("1e400")} instead of every ${format(1e300)}`,
+    description: () => `Gamespeed softcap applies every ${format("1e400")} instead of every ${format("1e308")}`,
     effect: () => new Decimal("1e400"),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -130,7 +134,7 @@ export const expansionUpgrades = [
     id: 14,
     cost: 50,
     description: "Unlock Hypercubes",
-    shortDescription: () => `Continuous Eternity generation`,
+    shortDescription: () => `Hypercube Unlock`,
     effect: () => DC.D1,
   },
   {

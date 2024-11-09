@@ -19,8 +19,8 @@ import InfinityChallengesTab from "./infinity-challenges/InfinityChallengesTab";
 import InfinityDimensionsTab from "./infinity-dimensions/InfinityDimensionsTab";
 import InfinityUpgradesTab from "./infinity-upgrades/InfinityUpgradesTab";
 import LaitelaTab from "./celestial-laitela/LaitelaTab";
-import MendingMilestonesTab from "./mending/MendingMilestonesTab";
-import MendingUpgradesTab from "./mending/MendingUpgradesTab";
+import MendingMilestonesTab from "./mending-milestones/MendingMilestonesTab";
+import MendingUpgradesTab from "./mending-upgrades/MendingUpgradesTab";
 import MultiplierBreakdownTab from "./statistics/MultiplierBreakdownTab";
 import NormalAchievementsTab from "./normal-achievements/NormalAchievementsTab";
 import NormalChallengesTab from "./normal-challenges/NormalChallengesTab";
@@ -41,9 +41,9 @@ import StatisticsTab from "./statistics/StatisticsTab";
 import TeresaTab from "./celestial-teresa/TeresaTab";
 import TimeDilationTab from "./time-dilation/TimeDilationTab";
 import TimeDimensionsTab from "./time-dimensions/TimeDimensionsTab";
-import TimeExpansionTab from "./mending/time-expansion/TimeExpansionTab";
+import TimeExpansionTab from "./time-expansion/TimeExpansionTab";
 import TimeStudiesTab from "./time-studies/TimeStudiesTab";
-import UniversalDamageTab from "./mending/universal-damage/UniversalDamageTab";
+import UniversalDamageTab from "./universal-damage/UniversalDamageTab";
 import VTab from "./celestial-v/VTab";
 
 const TabComponents = {

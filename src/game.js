@@ -124,7 +124,7 @@ export function gainedInfinityPoints(mm1gen = false) {
   } else if (Laitela.isRunning) {
     ip = dilatedValueOf(ip);
   } else if (Teresa.isRunning && Teresa.hardModeToggled) {
-    ip = stackedLogPower(ip, 1, 0.7);
+    ip = stackedLogPower(ip, 1, 0.55);
   }
 
   if (GlyphAlteration.isAdded("infinity")) {
@@ -167,7 +167,7 @@ export function gainedEternityPoints() {
   } else if (Laitela.isRunning) {
     ep = dilatedValueOf(ep);
   } else if (Teresa.isRunning && Teresa.hardModeToggled) {
-    ep = stackedLogPower(ep, 1, 0.7);
+    ep = stackedLogPower(ep, 1, 0.55);
   }
   if (GlyphAlteration.isAdded("time")) {
     ep = ep.pow(getSecondaryGlyphEffect("timeEP"));

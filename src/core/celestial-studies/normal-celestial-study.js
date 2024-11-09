@@ -32,19 +32,8 @@ export class NormalCelestialStudyState extends CelestialStudyState {
     return this.config.unlocked?.() ?? true;
   }
 
-  get isTriad() {
-    return this.id > 300;
-  }
-
   get isBought() {
     return GameCache.celestialStudies.value[this.id];
-  }
-
-  // The requiresST prop is an array containing IDs indicating other studies which, if ANY in the array are purchased,
-  // will cause the study to also cost space theorems. This array is effectively assumed to be empty if not present.
-  costsST() {
-    if (this.config.id === 308) return true;
-    return this.config.requiresST && this.config.requiresST.some(s => TimeStudy(s).isBought || s === true);
   }
 
   checkRequirement() {
@@ -75,7 +64,7 @@ export class NormalCelestialStudyState extends CelestialStudyState {
     return this.isBought;
   }
 
-  purchase(auto = false) {
+  purchase() {
     if (this.isBought || !this.isAffordable || !this.canBeBought) return false;
     if (GameEnd.creditsEverClosed) return false;
     player.celestialstudy.studies.push(this.id);

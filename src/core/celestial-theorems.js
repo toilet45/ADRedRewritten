@@ -50,7 +50,6 @@ export class CelestialTheoremPurchaseType {
     if (!this.canAfford) return false;
 
     if (!bulk) {
-      if (this.currency.layer <= 1) this.currency.subtract(this.cost);
       Currency.celestialTheorems.add(1);
       this.add(1);
       return true;
@@ -62,11 +61,9 @@ export class CelestialTheoremPurchaseType {
     amntPur = amntPur.sub(1).max(0);
     Currency.celestialTheorems.add(amntPur);
     this.add(amntPur);
-    if (this.currency.layer <= 1 && amntPur.neq(0)) this.currency.subtract(this.cost);
     // Can we afford another? If not, just return that we definitely bought some already
     if (this.currency.lt(this.cost) && amntPur.neq(0)) return true;
     Currency.timeTheorems.add(1);
-    if (this.currency.layer <= 1) this.currency.subtract(this.cost);
     this.add(1);
     return true;
   }
@@ -81,5 +78,10 @@ export class CelestialTheoremPurchaseType {
 }
 
 export const CelestialTheorems = {
-
+  buyOne() {
+    return false;
+  },
+  buyMax() {
+    return false;
+  }
 };

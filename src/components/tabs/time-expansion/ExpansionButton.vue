@@ -40,6 +40,7 @@ export default {
     :class="isUnlocked ? 'o-expansion-btn--unlocked' : 'o-expansion-btn--locked'"
     @click="expand()"
   >
+    <!-- why is there an isUnlocked condition here, the tab isnt visible till Name 50 anyways -->
     <span v-if="!isUnlocked">Reach Nameless level 50 to unlock</span>
     <span v-else-if="!isRunning">
       Expand your Reality.
@@ -47,7 +48,7 @@ export default {
     <span v-else-if="hasGain">
       {{ disableText }}
       <br>
-      Gain {{ quantify("Tachyon Particle", enslavedPointGain, 2, 1) }}.
+      Gain {{ quantify("Time Remnant", enslavedPointGain, 2, 1) }}.
     </span>
     <span v-else>
       {{ disableText }}
