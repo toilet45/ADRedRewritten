@@ -61,12 +61,12 @@ class RebuyableExpansionUpgradeState extends RebuyableMechanicState {
   }
 }
 
-ExpansionUpgradeState.index = mapGameData(
+/*ExpansionUpgradeState.index = mapGameData(
   GameDatabase.mending.expansionUpgrades,
   config => (config.id < 6
     ? new RebuyableExpansionUpgradeState(config)
     : new ExpansionUpgradeState(config))
-);
+);*/
 
 /**
  * @param {number} id
@@ -74,13 +74,13 @@ ExpansionUpgradeState.index = mapGameData(
  */
 export const ExpansionUpgrade = id => ExpansionUpgradeState.index[id];
 
-export const ExpansionUpgrades = {
+/*export const ExpansionUpgrades = {
   /**
    * @type {(ExpansionUpgradeState|ExpansionUpgradeState)[]}
-   */
-  all: ExpansionUpgradeState.index.compact(),
-  get allBought() {
-    return (player.celestials.enslaved.expandUpgradeBits >> 6) + 1 ===
-    1 << (GameDatabase.mending.expansionUpgrades.length - 5);
-  }
-};
+   **/
+  //all: ExpansionUpgradeState.index.compact(),
+  //get allBought() {
+   // return (player.celestials.enslaved.expandUpgradeBits >> 6) + 1 ===
+  //  1 << (GameDatabase.mending.expansionUpgrades.length - 5);
+ // }
+//};
