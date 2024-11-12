@@ -35,7 +35,7 @@ export const MachineHandler = {
   },
 
   get isIMUnlocked() {
-    return Currency.realityMachines.value.gte(this.hardcapRM) || Currency.imaginaryMachines.gt(0);
+    return Currency.realityMachines.value.gte(this.hardcapRM) || Currency.imaginaryMachines.gt(0) || MendingUpgrade(17).boughtAmount.gt(7);
   },
 
   get baseIMCap() {

@@ -71,7 +71,11 @@ export default {
     },
     showCostTitle() {
       return this.cost.log10().lte(1e6);
-    }
+    },
+    amountText() {
+      const amount = this.tier < 8 ? format(this.amount, 2) : formatInt(this.amount);
+      return `${amount}`;
+    },
   },
   watch: {
     isAutobuyerOn(newValue) {
@@ -123,7 +127,7 @@ export default {
       :tier="tier"
       :name="name"
       :multiplier-text="formatX(multiplier, 2, 1)"
-      :amount-text="format(amount, 2)"
+      :amount-text="amountText"
       :rate="rateOfChange"
     />
     <div class="l-dim-row-multi-button-container c-modern-dim-tooltip-container">

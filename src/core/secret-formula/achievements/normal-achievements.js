@@ -1400,41 +1400,37 @@ export const normalAchievements = [
   },
   {
     id: 193,
-    name: "???",
-    description: "???",
+    name: "Achievement 168 is a lie...",
+    description: "Purchase Mending Upgrade 19",
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
     id: 194,
-    name: "???",
-    description: "???",
+    name: "DOMAIN EXPANSION: FISTFULL OF NAMELESS",
+    description: "Expand your Reality",
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
     id: 195,
     name: "???",
-    description: "???",
+    description: "something about hard Teresa",
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
     id: 196,
-    name: "???",
-    description: "???",
+    name: "That's a lotta damage",
+    description: "Damage your Universe",
     checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Dark Matter Dimensions gain a boost based on ???`;
+    }
   },
   {
     id: 197,
-    name: "???",
-    description: "???",
-    checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
-  },
-  {
-    id: 198,
     name: "Hevi, where's my update?",
     get description() { return `Mend a Multiverse in under ${formatInt(5)} hours (real time)`; },
     checkRequirement: () => Time.thisMendRealTime.totalHours.lt(5),
@@ -1442,5 +1438,68 @@ export const normalAchievements = [
     get reward() {
       return "You get to meet Lai'tela in real life after 'No Nut November', but make real time pass F1.79e308 times slower";
     }
-  }
+  },
+  {
+    id: 198,
+    name: "No, we are not going to pull a NG+3",
+    description: "Reach END antimatter while in Nameless' Reality, ECx, and Challenge (whatever the hardest broken one is)",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 201,
+    name: "Limit Break^2",
+    description: "Warp Reality",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 202,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 203,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 204,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 205,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 206,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 207,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 208,
+    name: "???",
+    description: "???",
+    checkRequirement: () => false,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
 ];

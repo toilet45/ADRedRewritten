@@ -25,7 +25,7 @@ export function getTickSpeedMultiplier() {
   if (InfinityChallenge(3).isRunning || Enslaved.isExpanded) return ExpansionUpgrade(8).effectOrDefault(DC.D1);
   if (Ra.isRunning) return DC.C1D1_1245;
   let galaxies = effectiveBaseGalaxies();
-  const effects = Effects.product(
+  let effects = Effects.product(
     InfinityUpgrade.galaxyBoost,
     InfinityUpgrade.galaxyBoost.chargedEffect,
     BreakInfinityUpgrade.galaxyBoost,
@@ -39,6 +39,7 @@ export function getTickSpeedMultiplier() {
     PelleUpgrade.galaxyPower,
     PelleRifts.decay.milestones[1]
   );
+  effects = effects.mul(MendingUpgrade(16).effects.agPow);
   if (galaxies.lt(3)) {
     // Magic numbers are to retain balancing from before while displaying
     // them now as positive multipliers rather than negative percentages

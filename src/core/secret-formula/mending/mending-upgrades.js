@@ -196,21 +196,21 @@ export const mendingUpgrades = [
     initialCost: new Decimal("150"),
     costMult: new Decimal("25"),
     // TODO: change this desc
-    description: "Gain Multiversal Galaxies, Antimatter Galaxy cost, Galaxy Power",
+    description: "Gain Multiversal Galaxies, Divide Antimatter Galaxy cost, Increase power of all Galaxies",
     effects: p => ({
       galaxies: p.mul(6),
       agCost: Decimal.pow(1.001, p),
-      agPow: Decimal.pow(1.001, p).sub(1)
+      agPow: Decimal.pow(1.001, p)
     }),
     formatEffect: effects =>
-      `${format(effects.galaxies)}, /${format(effects.agCost, 3, 3)}, +${format(effects.agPow, 3, 3)}`
+      `+${format(effects.galaxies)} MG, /${format(effects.agCost, 3, 3)}, +${formatPercents(effects.agPow.sub(1), 3, 3)}`
   }),
   hybridRebuyable({
     name: "QoL Bonanza",
     id: 17,
     costs: [new Decimal(175), ...Array.repeat(new Decimal(65), 7)],
     // eslint-disable-next-line no-unused-vars
-    description: p => ["Start every Mend with Continuum unlocked",
+    description: p => ["Start every Mend with Continuum unlocked (works in Pelle)",
       "Automatically purchase and sacrifice Music Glyphs",
       "Music Glyphs cost 0 Perk Points",
       "Unlock autobuyers for Ra Memory Levels",
