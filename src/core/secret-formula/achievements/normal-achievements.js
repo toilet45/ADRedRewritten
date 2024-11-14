@@ -1403,7 +1403,10 @@ export const normalAchievements = [
     name: "Achievement 168 is a lie...",
     description: "Purchase Mending Upgrade 19",
     checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return "TBD";
+    }
   },
   {
     id: 194,
@@ -1436,12 +1439,12 @@ export const normalAchievements = [
     checkRequirement: () => Time.thisMendRealTime.totalHours.lt(5),
     checkEvent: GAME_EVENT.MENDING_RESET_BEFORE,
     get reward() {
-      return "You get to meet Lai'tela in real life after 'No Nut November', but make real time pass F1.79e308 times slower";
+      return "TBD";
     }
   },
   {
     id: 198,
-    name: "No, we are not going to pull a NG+3",
+    name: "No...we are not about to pull a NG+3",
     description: "Reach END antimatter while in Nameless' Reality, ECx, and Challenge (whatever the hardest broken one is)",
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER

@@ -85,8 +85,19 @@ export const mendingUpgrades = [
     name: "5",
     id: 5,
     cost: DC.D3,
-    description: () => `Increase glyph sacrifice caps for Power and Replication glyphs by ${formatX(1e100, 2, 2)}`,
-    effect: () => DC.E100
+    description: () => MendingUpgrade(19).isBought ? `Mends multiply pre level 25 Memory gain for the first four Celestials and Dark Matter gain` :
+     `Mends multiply Memory and Dark Matter gain`,
+    effect: () => {
+      let x = Currency.mends.value.add(1);
+      // Softcap at x20
+      if (x.gt(20)) {
+        x = x.div(20);
+        x = x.pow(0.33);
+        x = x.times(20);
+      }
+      return x;
+    },
+    formatEffect: value => formatX(value, 2, 2)
   },
   rebuyable({
     name: "6",

@@ -73,7 +73,9 @@ export default {
       // seems more likely to be read).
       const upgrade = this.upgrade;
       this.isBought = upgrade.isBought || upgrade.isCapped;
-      this.chargePossible = (upgrade.id[0] === "s" ? Ra.unlocks.breakCharges.canBeApplied
+      // Cheap Solution, but it works for now
+      this.chargePossible = (new Decimal(upgrade.cost).gte(1000) ||
+      upgrade.id[0] === "s" ? Ra.unlocks.breakCharges.canBeApplied
         : Ra.unlocks.chargedInfinityUpgrades.canBeApplied) &&
         upgrade.hasChargeEffect && !Pelle.isDoomed;
       this.canBeBought = upgrade.canBeBought;

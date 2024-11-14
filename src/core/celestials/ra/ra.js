@@ -92,7 +92,10 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryProductionMultiplier() {
-    return this.config.memoryProductionMultiplier();
+    let x = this.config.memoryProductionMultiplier();
+    x = x.times(this.level < 25 && (this.name === "Teresa" || this.name === "Effarig" ||
+       this.name === "The Nameless Ones" || this.name === "V") ? MendingUpgrade(5).effectOrDefault(1) : 1);
+    return x;
   }
 
   get isUnlocked() {
@@ -300,6 +303,7 @@ export const Ra = {
     if (Ra.unlocks.continuousTTBoost.canBeApplied) boostList.push("current TT");
     if (Ra.unlocks.achToMemories.canBeApplied) boostList.push("Achievement Multiplier");
     if (Ra.unlocks.memGainOutsideRa.canBeApplied & !Ra.isRunning) boostList.push("Ra level 30");
+    if (MendingUpgrade(5).isBought) boostList.push("Mending Upgrade 5");
 
     if (boostList.length === 1) return `${boostList[0]}`;
     if (boostList.length === 2) return `${boostList[0]} and ${boostList[1]}`;

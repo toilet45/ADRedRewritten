@@ -338,6 +338,7 @@ export function mendingReset() {
   for (let i = 0; i < prebreakAch.length; i++) {
     Achievement(prebreakAch[i]).unlock();
   }
+  Tab.dimensions.antimatter.show();
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 

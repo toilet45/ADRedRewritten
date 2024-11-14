@@ -298,12 +298,12 @@ export const GlyphInfo = {
       effect: added => {
         if (Pelle.isDisabled("glyphsac")) return DC.D0;
         const sac = player.reality.glyphs.sac.power.add(added ?? 0);
-        const capped = Decimal.min(sac, GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1)));
+        const capped = Decimal.min(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
         const base = Decimal.log10(capped.add(1)).div(100);
         return Decimal.floor(Decimal.pow(base, 1.2).times(750));
       },
       description: amount => {
-        const cap = GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1));
+        const cap = GlyphSacrificeHandler.maxSacrificeForEffects;
         const nextDistantGalaxy = Decimal.pow10(Decimal.root(amount.add(1).div(750), 1.2)
           .times(100)).sub(1);
         const nextGalaxyText = amount.lt(cap.log10().mul(7.5))
@@ -313,7 +313,7 @@ export const GlyphInfo = {
         return `Distant Galaxy scaling starts ${formatInt(amount)} later${amount.gt(750) ? ` and Remote Galaxy scaling starts ${formatInt(amount.sub(750))} later` : ``}
         ${nextGalaxyText}`;
       },
-      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
+      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
     },
     hasAlchemyResource: true,
     pelleUniqueEffect: true,
@@ -373,12 +373,12 @@ export const GlyphInfo = {
       effect: added => {
         if (Pelle.isDisabled("glyphsac")) return DC.D0;
         const sac = player.reality.glyphs.sac.replication.add(added ?? 0);
-        const capped = Decimal.min(sac, GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1)));
+        const capped = Decimal.min(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
         const base = Decimal.log10(capped.add(1)).div(100);
         return Decimal.floor(Decimal.pow(base, 1.2).times(1500));
       },
       description: amount => {
-        const cap = GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1));
+        const cap = GlyphSacrificeHandler.maxSacrificeForEffects;
         const nextDistantGalaxy = Decimal.pow10(Decimal.root((amount.add(1)).div(1500), 1.2)
           .times(100)).sub(1);
         const nextGalaxyText = amount.lt(cap.log10().mul(15))
@@ -386,7 +386,7 @@ export const GlyphInfo = {
           : "";
         return `Replicanti Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
       },
-      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects.mul(MendingUpgrade(5).effectOrDefault(1))
+      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
     },
     hasAlchemyResource: true,
     pelleUniqueEffect: true,

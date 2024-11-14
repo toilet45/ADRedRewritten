@@ -39,10 +39,10 @@ export default {
     },
     effectText() {
       if (!this.config.formatEffect) return false;
-      const prefix = this.isCapped ? "Capped:" : "Currently:";
+      const prefix = this.isCapped && this.config.id !== 5 ? "Capped:" : "Currently:";
       const formattedEffect = x => this.config.formatEffect(this.config.effects?.(x) ?? this.config.effect?.(x));
       const value = formattedEffect(this.boughtAmount ?? 0);
-      const next = (!this.isCapped && this.hovering)
+      const next = (!this.isCapped && this.hovering && this.config.id !== 5)
         ? formattedEffect(this.boughtAmount?.add(1))
         : undefined;
       return { prefix, value, next };
