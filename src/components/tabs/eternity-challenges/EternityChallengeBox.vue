@@ -74,7 +74,8 @@ export default {
       this.isCompleted = challenge.isFullyCompleted;
       this.completions = challenge.completions;
       this.showGoalSpan = PlayerProgress.realityUnlocked();
-      this.canBeUnlocked = TimeStudy.eternityChallenge(challenge.id).canBeBought;
+      this.canBeUnlocked = challenge.id < 13 ? TimeStudy.eternityChallenge(challenge.id).canBeBought
+        : CelestialStudy.eternityChallenge(13).canBeBought;
 
       this.lastGoal = (Enslaved.isRunning && this.challenge.id === 1)
         ? wordShift.wordCycle(this.config.scrambleText.map(x => format(x)))
