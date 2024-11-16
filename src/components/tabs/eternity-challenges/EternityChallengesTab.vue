@@ -21,6 +21,7 @@ export default {
       untilNextEC: TimeSpan.zero,
       untilAllEC: TimeSpan.zero,
       hasECR: false,
+      hasCelStudies: false,
     };
   },
   computed: {
@@ -55,7 +56,7 @@ export default {
       this.hasUpgradeLock = RealityUpgrade(12).isLockingMechanics ||
         (ImaginaryUpgrade(15).isLockingMechanics && shouldPreventEC7 &&
           !Array.range(1, 6).some(ec => !EternityChallenge(ec).isFullyCompleted));
-      const remainingCompletions = EternityChallenges.remainingCompletions;
+      const remainingCompletions = EternityChallenges.remainingAutoCompletions;
       this.remainingECTiers = remainingCompletions;
       if (remainingCompletions !== 0) {
         const autoECInterval = EternityChallenges.autoComplete.interval;
@@ -64,6 +65,7 @@ export default {
         this.untilAllEC.setFrom(untilNextEC.add(autoECInterval.times(remainingCompletions - 1)));
       }
       this.hasECR = Perk.studyECRequirement.isBought;
+      this.hasCelStudies = Ra.unlocks.vHardenedUnlock.canBeApplied;
     },
     isChallengeVisible(challenge) {
       if (challenge.id >= 13) return challenge.completions > 0 || challenge.isUnlocked || challenge.hasUnlocked;
@@ -101,16 +103,27 @@ export default {
         <br>
       </div>
     </div>
-    <div>
+    <div v-if="!hasCelStudies">
       Complete Eternity Challenges again for a bigger reward, maximum of {{ formatInt(5) }} times.<br>
+      The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
+    </div>
+    <div v-else>
+      Complete Eternity Challenges again for a bigger reward,
+      maximum of {{ formatInt(EternityChallenge(13).completions + 5) }} times.<br>
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
     </div>
     <div v-if="!hasECR">
       When you respec out of an unlocked Eternity Challenge, you don't need to redo the secondary requirement<br>
       in order to unlock it again until you complete it; only the Time Theorems are required.
     </div>
-    <div v-if="unlockedCount !== 12">
+    <div v-if="unlockedCount <= 12">
       You have seen {{ formatInt(unlockedCount) }} out of {{ formatInt(12) }} Eternity Challenges.
+    </div>
+    <div v-else-if="hasCelStudies && unlockedCount !== 25">
+      You have seen {{ formatInt(unlockedCount) }} out of {{ formatInt(25) }} Eternity Challenges.
+    </div>
+    <div v-else-if="hasCelStudies">
+      You have seen all {{ formatInt(25) }} Eternity Challenges.
     </div>
     <div v-else>
       You have seen all {{ formatInt(12) }} Eternity Challenges.

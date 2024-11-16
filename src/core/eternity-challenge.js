@@ -332,6 +332,12 @@ export const EternityChallenges = {
       .nSum();
   },
 
+  get remainingAutoCompletions() {
+    return EternityChallenges.all
+      .map(ec => ec.highestManualCompletions - ec.completions)
+      .nSum();
+  },
+
   autoComplete: {
     tick() {
       const shouldPreventEC7 = TimeDimension(1).amount.gt(0);
