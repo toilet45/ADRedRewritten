@@ -290,7 +290,7 @@ export const eternityChallenges = [
     id: 18,
     description: () => `Continuum is set to +${formatInt(0)}% purchases. All Tickspeed and Dimension Multipliers are
     disabled, except for buy ${formatInt(10)}. Buy ${formatInt(10)} multiplier is capped at ${formatX(2)}.
-    Passive IP gain is disabled. Replicanti speed is ${formatX("1e1750")}`,
+    Passive IP gain is disabled. Replicanti speed is ${formatX("1e-1750")}`,
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
@@ -308,7 +308,8 @@ export const eternityChallenges = [
     goalIncrease: DC.E50,
     reward: {
       description: "IP boosts Replicanti Speed",
-      effect: completions => completions * 5 + 1,
+      effect: completions => Currency.infinityPoints.value.max(1).log10().max(1).log10()
+        .pow(0.2).mul(completions * 5 + 1),
       formatEffect: value => `^${format(value, 3, 3)}`
     }
   },
