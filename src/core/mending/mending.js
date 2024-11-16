@@ -343,12 +343,27 @@ export function mendingReset() {
 }
 
 export function gainedMendingPoints() {
+  const oneTimeIDs = [8, 9, 10, 13, 14, 15, 18, 19, 20];
+  let oneTimeMult = DC.D1;
+  for (let i = 0; i < oneTimeIDs.length; i++) {
+    if (MendingUpgrade(oneTimeIDs[i]).isBought) {
+      oneTimeMult = oneTimeMult.mul(1.15);
+    }
+  }
+  const hybridAmount = MendingUpgrade(2).boughtAmount.add(MendingUpgrade(3).boughtAmount).add(
+    MendingUpgrade(7).boughtAmount).add(MendingUpgrade(12).boughtAmount).add(MendingUpgrade(17).boughtAmount);
+
+  const rebuyMult = new Decimal(0.02).times((MendingUpgrade(1).boughtAmount).add(
+    MendingUpgrade(6).boughtAmount).add(MendingUpgrade(11).boughtAmount).add(MendingUpgrade(16).boughtAmount));
+
   let x = DC.D1;
+  x = x.mul(Decimal.pow(1.15, hybridAmount));
+  x = x.mul(rebuyMult.add(1));
   x = x.mul(Decimal.pow(3, MendingUpgrade(1).boughtAmount));
   x = x.mul(TimeStudy(311).effectOrDefault([1, 1])[1]);
   x = x.mul(TimeStudy(312).effectOrDefault([1, 1])[1]);
   x = x.mul(TimeStudy(313).effectOrDefault([1, 1])[1]);
-  return x;
+  return x.floor();
 }
 
 export function gainedMends() {
