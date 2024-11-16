@@ -523,7 +523,7 @@ export const tabs = [
         id: 1,
         hidable: true
       },
-      /* {
+      {
         key: "time_expansion",
         name: "Time Expansion",
         symbol: "?",
@@ -540,7 +540,7 @@ export const tabs = [
         condition: () => Ra.unlocks.universalDamageUnlock.canBeApplied,
         id: 3,
         hidable: true
-      } */
+      }
     ]
   }
 ];

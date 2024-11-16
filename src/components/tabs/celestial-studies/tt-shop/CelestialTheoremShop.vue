@@ -1,4 +1,4 @@
-<!--<script>
+<script>
 import CelestialStudySaveLoadButton from "./CelestialStudySaveLoadButton";
 import CelestialTheoremBuyButton from "./CelestialTheoremBuyButton";
 
@@ -179,4 +179,4 @@ export default {
 .checkbox-margin {
   margin: 0 0.4rem;
 }
-</style>-->
+</style>

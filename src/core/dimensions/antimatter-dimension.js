@@ -80,9 +80,9 @@ export function getDimensionFinalMultiplierUncached(tier) {
     multiplier = Effarig.multiplier(multiplier);
   } else if (V.isRunning) {
     multiplier = multiplier.pow(0.5);
-  } /* else if (Teresa.isRunning && Teresa.hardModeToggled) {
+  } else if (Teresa.isRunning && Teresa.hardModeToggled) {
     multiplier = stackedLogPower(multiplier, 1, 0.55);
-  } */
+  }
 
   // This power effect goes intentionally after all the nerf effects and shouldn't be moved before them
   if (AlchemyResource.inflation.isUnlocked && multiplier.gte(AlchemyResource.inflation.effectValue)) {
@@ -91,14 +91,14 @@ export function getDimensionFinalMultiplierUncached(tier) {
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
 
-  /* if (multiplier.gt(DC.BIMAX)) {
+  if (multiplier.gt(DC.BIMAX)) {
     // Equal to 10^(log(x)/9e15)^(log^2(log(x)/9e15)^-1/3)
     // THIS AFFECTS ALL ANTIMATTER DIMENSIONS. BE EXTREMELY CAUTION WHEN TWEAKING
     // THIS IS A VERY POWERFUL SOFTCAP AND SMALL CHANGES CAN CAUSE OOM^3 OF CHANGE
     const adjMult = multiplier.log10().div(9e15);
     const log2adjMult = adjMult.log10().log10();
-    multiplier = Decimal.pow10(adjMult.pow(log2adjMult.cbrt().recip()));
-  } */
+    multiplier = Decimal.pow10(adjMult.pow(log2adjMult.cbrt().recip()).mul(9e15));
+  }
   return multiplier;
 }
 

@@ -134,7 +134,7 @@ export class CelestialStudyTree {
   // This reads off all the studies in the import string and splits them into invalid and valid study IDs. We hold on
   // to invalid studies for additional information to present to the player
   parseStudyImport(input) {
-    const studyDB = GameDatabase.eternity.celestialStudies.normal.map(s => s.id);
+    const studyDB = GameDatabase.mending.celestialStudies.normal.map(s => s.id);
     const output = [];
     const studiesString = CelestialStudyTree.truncateInput(input).split("|")[0];
     if (studiesString.length) {
@@ -165,7 +165,7 @@ export class CelestialStudyTree {
     }
     // Note: parseInt() seems to silently ignore the presence of "!"
     const ecID = parseInt(ecString, 10);
-    const ecDB = GameDatabase.eternity.celestialStudies.ec;
+    const ecDB = GameDatabase.mending.celestialStudies.ec;
     // Specifically exclude 0 because saved presets will contain it by default
     if (!ecDB.map(c => c.id).includes(ecID) && ecID !== 0) {
       this.invalidStudies.push(`EC${ecID}`);

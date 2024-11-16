@@ -1,5 +1,4 @@
-<!-- eslint-disable max-len -->
-<!--<script>
+<script>
 import HoverMenu from "./HoverMenu";
 
 export default {
@@ -293,4 +292,3 @@ export default {
   background: transparent;
 }
 </style>
- -->

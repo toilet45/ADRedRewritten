@@ -81,6 +81,7 @@ export class EternityChallengeState extends GameMechanicState {
   }
 
   get maxCompletions() {
+    if (this.id === 25) return 1;
     return Enslaved.isRunning && this.id === 1 ? 1000 : 5;
   }
 

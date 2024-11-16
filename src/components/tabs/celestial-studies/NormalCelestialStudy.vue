@@ -1,5 +1,4 @@
 <!-- eslint-disable vue/html-comment-indent -->
-<!--
 <script>
 import DescriptionDisplay from "@/components/DescriptionDisplay";
 import EffectDisplay from "@/components/EffectDisplay";
@@ -69,6 +68,3 @@ export default {
 <style scoped>
 
 </style>
--->
-
-<template> <div> yoc</div> </template>

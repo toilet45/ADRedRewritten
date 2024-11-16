@@ -132,7 +132,7 @@ export class ECCelestialStudyState extends CelestialStudyState {
 
 
 ECCelestialStudyState.studies = mapGameData(
-  GameDatabase.eternity.celestialStudies.ec,
+  GameDatabase.mending.celestialStudies.ec,
   config => new ECCelestialStudyState(config)
 );
 

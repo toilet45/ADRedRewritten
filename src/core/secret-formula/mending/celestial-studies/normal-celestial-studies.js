@@ -1,5 +1,6 @@
 import { DC } from "../../../constants";
 
+// eslint-disable-next-line multiline-comment-style
 /* Leftover code
 const thisInfinityMult = thisInfinity => {
   // All "this inf time" or "best inf time" mults are * 10

@@ -1,4 +1,4 @@
-<!--<script>
+<script>
 export default {
   props: {
     budget: Decimal,
@@ -44,4 +44,4 @@ export default {
   >
     {{ isLocked ? `Requires V level 75 to unlock` : formatCost(cost) }}
   </button>
-</template>-->
+</template>

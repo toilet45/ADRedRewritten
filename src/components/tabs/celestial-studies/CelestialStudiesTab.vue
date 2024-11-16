@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 import ECCelestialStudy from "./ECcelStudy";
 import NormalCelestialStudy from "./NormalCelestialStudy";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -162,4 +162,4 @@ export default {
 
 <style scoped>
 
-</style>-->
+</style>

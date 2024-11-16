@@ -13,13 +13,15 @@ const rebuyable = props => {
   );
   const effect = props.effect;
   props.effect = () => effect;
-  if (props.id === 5) {
-    props.description = () => props.textTemplate.replace("{value}", format(effect))
-      .replace("{C}", format(effect(DC.D1).sub(1))).replace("{V}", format(effect(DC.D1)));
-  } else {
-    props.description = () => props.textTemplate.replace("{value}", format(effect));
-  }
-  props.formatEffect = value => formatX(value, 2, 0);
+  props.description = () => props.textTemplate.replace("{value}", format(effect));
+  props.formatEffect = value => {
+    if (props.id === 1) return formatInt(value);
+    if (props.id === 2) return value.lt(11) ? `+${formatPercents(value.sub(1), 2, 0)}` : formatX(value, 2, 2);
+    if (props.id === 3) return format(value, 2, 0);
+    if (props.id === 4) return format(value, 2, 0);
+    if (props.id === 5) return `${formatInt(value)}^log²(x) -> ${formatInt(value.add(5))}^log²(x)`;
+    return formatX(value, 2, 0);
+  };
   props.formatCost = value => format(value, 2, 0);
   return props;
 };
@@ -32,7 +34,7 @@ export const expansionUpgrades = [
     initialCost: new Decimal(100),
     costMult: new Decimal(10),
     textTemplate: "Glyph Levels +{value} in Time Expansion",
-    effect: DC.E1
+    effect: () => DC.E1.mul(player.celestials.enslaved.expandRebuyables[1])
   }),
   rebuyable({
     name: "Expansion Upgrade 2",
@@ -40,7 +42,7 @@ export const expansionUpgrades = [
     initialCost: new Decimal(1000),
     costMult: new Decimal(1000),
     textTemplate: "Equipped Glyphs are {value}% stronger",
-    effect: DC.D1
+    effect: () => player.celestials.enslaved.expandRebuyables[2].div(100).add(1)
   }),
   rebuyable({
     name: "Expansion Upgrade 3",
@@ -48,7 +50,7 @@ export const expansionUpgrades = [
     initialCost: new Decimal(500),
     costMult: new Decimal(20),
     textTemplate: "Infinity Point and Eternity Point gain x{value}",
-    effect: DC.D2
+    effect: () => DC.D2.pow(player.celestials.enslaved.expandRebuyables[3])
   }),
   rebuyable({
     name: "Expansion Upgrade 4",
@@ -56,15 +58,15 @@ export const expansionUpgrades = [
     initialCost: new Decimal(1000),
     costMult: new Decimal(30),
     textTemplate: "Multiply Gamespeed by x{value} after softcaps",
-    effect: new Decimal(1e10)
+    effect: () => new Decimal(1e10).mul(player.celestials.enslaved.expandRebuyables[4])
   }),
   rebuyable({
     name: "Expansion Upgrade 5",
     id: 5,
     initialCost: DC.D3,
     costMult: new Decimal(50),
-    textTemplate: "Increase hyper logarithm scaling base by {value} ({C}^log²(x) -> {V}^log²(x))",
-    effect: DC.D5,
+    textTemplate: "Increase hyper logarithm scaling base by {value}",
+    effect: () => DC.D5.mul(player.celestials.enslaved.expandRebuyables[5]).add(2),
   }),
   {
     name: "Expansion Upgrade 6",

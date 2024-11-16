@@ -186,7 +186,7 @@ export const GlyphInfo = {
     // Possible sac effect: "Raise (multiply for power and rep) other sac effects by x (up to ^1.3 / x1.3)"
     hasAlchemyResource: false,
     pelleUniqueEffect: false,
-    isGenerated: false,
+    isGenerated: true,
     generationRequirement: () => Ra.unlocks.amalgamGlyphUnlock.canBeApplied,
     canCustomize: () => false,
     adjNounImportance: 5,

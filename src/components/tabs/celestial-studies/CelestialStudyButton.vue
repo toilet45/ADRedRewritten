@@ -1,4 +1,4 @@
-<!--<script>
+<script>
 import CostDisplay from "@/components/CostDisplay";
 
 export default {
@@ -169,4 +169,3 @@ export class CelestialStudySetup {
 <style scoped>
 
 </style>
--->

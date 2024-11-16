@@ -1,4 +1,4 @@
-<!--<script>
+<script>
 import HintText from "@/components/HintText";
 import CelestialStudyButton from "./CelestialStudyButton";
 
@@ -104,4 +104,3 @@ export default {
 <style scoped>
 
 </style>
--->

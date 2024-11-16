@@ -1,4 +1,4 @@
-<!--<script>
+<script>
 export default {
   name: "CelestialStudyConnection",
   props: {
@@ -102,4 +102,4 @@ export class CelestialStudyConnectionSetup {
 
 <style scoped>
 
-</style>-->
+</style>

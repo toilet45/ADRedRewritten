@@ -4,12 +4,15 @@ const specialInfinityGlyphDisabledEffectText = () => (PelleRifts.chaos.milestone
   ? "The Pelle-Specific effect from Infinity Glyphs is also disabled."
   : "");
 
+// eslint-disable-next-line capitalized-comments
+// superGoals are the goals after 5, except for EC1 in Nameless, which are after 1000.
 export const eternityChallenges = [
   {
     id: 1,
     description: "Time Dimensions are disabled.",
     goal: DC.E1800,
     goalIncrease: DC.E200,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "Time Dimension multiplier based on time spent this Eternity",
       effect: completions =>
@@ -26,6 +29,7 @@ export const eternityChallenges = [
     goal: DC.E975,
     pelleGoal: DC.E1750,
     goalIncrease: DC.E175,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "1st Infinity Dimension multiplier based on Infinity Power",
       effect: completions => Currency.infinityPower.value.pow(1.5 / (700 - completions * 100)).clampMin(1),
@@ -39,6 +43,7 @@ export const eternityChallenges = [
     goal: DC.E600,
     pelleGoal: DC.E925,
     goalIncrease: DC.E75,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: () => `Increase the multiplier for buying ${formatInt(10)} Antimatter Dimensions`,
       effect: completions => completions * 0.72,
@@ -51,6 +56,7 @@ export const eternityChallenges = [
       number of Infinities or else you will fail the Challenge.`,
     goal: DC.E2750,
     goalIncrease: DC.E550,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     restriction: completions => Math.max(16 - 4 * completions, 0),
     checkRestriction: restriction => Currency.infinities.lte(restriction),
     formatRestriction: restriction => (restriction === 0
@@ -71,6 +77,7 @@ export const eternityChallenges = [
     goal: DC.E750,
     pelleGoal: DC.E1400,
     goalIncrease: DC.E400,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "Distant Galaxy cost scaling starts later",
       effect: completions => completions * 5 * (MendingUpgrade(8).isBought ? 10 : 1),
@@ -88,6 +95,7 @@ export const eternityChallenges = [
     goal: DC.E850,
     pelleGoal: DC.E1500,
     goalIncrease: DC.E250,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "Further reduce Antimatter Dimension cost multiplier growth",
       effect: completions => completions * 0.2,
@@ -106,6 +114,7 @@ export const eternityChallenges = [
     goal: DC.E2000,
     pelleGoal: DC.E2700,
     goalIncrease: DC.E530,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     effect: () => TimeDimension(1).productionPerSecond,
     reward: {
       description: "1st Time Dimension produces 8th Infinity Dimensions",
@@ -120,6 +129,7 @@ export const eternityChallenges = [
     goal: DC.E1300,
     pelleGoal: DC.E2800,
     goalIncrease: DC.E900,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "Infinity Power strengthens Replicanti Galaxies",
       effect: completions => {
@@ -136,6 +146,7 @@ export const eternityChallenges = [
     goal: DC.E1750,
     pelleGoal: DC.E2900,
     goalIncrease: DC.E250,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "Infinity Dimension multiplier based on Time Shards",
       effect: completions => Currency.timeShards.value.pow(completions * 0.1).clampMin(1),
@@ -154,6 +165,7 @@ export const eternityChallenges = [
     goal: DC.E3000,
     pelleGoal: DC.E3200,
     goalIncrease: DC.E300,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     effect: () => Decimal.pow(Currency.infinitiesTotal.value, 950).clampMin(1).pow(TimeStudy(31).effectOrDefault(1)),
     reward: {
       description: "Time Dimension multiplier based on Infinities",
@@ -178,6 +190,7 @@ export const eternityChallenges = [
     pelleGoal: DC.E11200,
     goalIncrease: DC.E200,
     pelleGoalIncrease: DC.E1400,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     reward: {
       description: "Further reduce Tickspeed cost multiplier growth",
       effect: completions => completions * 0.07,
@@ -197,6 +210,7 @@ export const eternityChallenges = [
     goal: DC.E110000,
     pelleGoal: DC.E208000,
     goalIncrease: DC.E12000,
+    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
     restriction: completions => Math.max(10 - 2 * completions, 1) / 10,
     checkRestriction: restriction => Time.thisEternity.totalSeconds.lt(restriction),
     formatRestriction: restriction => `in ${quantify("in-game second", restriction, 0, 1)} or less.`,
@@ -206,5 +220,177 @@ export const eternityChallenges = [
       effect: completions => 1 - (completions * (MendingUpgrade(8).isBought ? 0.02 : 0.008)),
       formatEffect: value => `x${formatPow(value, 3, 3)}`
     }
-  }
+  },
+  {
+    id: 13,
+    description: () => `IP gain exponent is raised ^${format(0.03, 2, 2)}.
+    Gamespeed does not affect Passive IP gain`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Maximum Completions for Eternity Challenges 1-12 are increased",
+      effect: completions => completions,
+      formatEffect: value => `+${formatInt(value)}`
+    }
+  },
+  {
+    id: 14,
+    description: () => `1st Antimatter Dimension Production exponent ^${format(0.025, 3, 3)}.
+    Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Gain more rows of Celestial Study Tree",
+      effect: completions => completions,
+      formatEffect: value => `+${formatInt(value)}`
+    }
+  },
+  {
+    id: 15,
+    description: () => `Dimension multipliers are devided by the number your have. IP gain is log10.
+    Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "IP exponent is raised to a power",
+      effect: completions => completions / 1000 + 1,
+      formatEffect: value => `^${format(value, 3, 3)}`
+    }
+  },
+  {
+    id: 16,
+    description: () => `Dimensions multipliers are all set to ${formatX(1)}. AD multipliers are increased
+    by antimatter, ID multipliers by IP and TD multipliers by EP. Gamespeed is capped at ${formatX(1, 0, 0)}.
+    Infinity Power improves IP gain. Tickspeed is disabled. IP multipliers outside of ID are disabled.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Infinity Power provides a power effect to IP exponent",
+      effect: completions => Currency.infinityPower.value.max(1).log10().max(1).log10().mul(completions).div(1e5),
+      formatEffect: value => `^${format(value, 3, 6)}`
+    }
+  },
+  {
+    id: 17,
+    description: () => `Tickspeed multiplier is ${formatX(1)}, Infinity Dimensions are disabled.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "IP exponent is raised to a power",
+      effect: completions => completions / 1000 + 1,
+      formatEffect: value => `^${format(value, 3, 3)}`
+    }
+  },
+  {
+    id: 18,
+    description: () => `Continuum is set to +${formatInt(0)}% purchases. All Tickspeed and Dimension Multipliers are
+    disabled, except for buy ${formatInt(10)}. Buy ${formatInt(10)} multiplier is capped at ${formatX(2)}.
+    Passive IP gain is disabled. Replicanti speed is ${formatX("1e1750")}`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Buy 10 exponent is raised to a power",
+      effect: completions => completions / 15 + 1,
+      formatEffect: value => `^${format(value, 3, 3)}`
+    }
+  },
+  {
+    id: 19,
+    description: () => `All IP multipliers are disabled. IP gain is based on Replicanti`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "IP boosts Replicanti Speed",
+      effect: completions => completions * 5 + 1,
+      formatEffect: value => `^${format(value, 3, 3)}`
+    }
+  },
+  {
+    id: 20,
+    description: () => `You are in EC1-18, without any nerfs to IP gain/generation.
+    IP generation is unaffected by Gamespeed, and IP exponent is raised ${formatPow(0.25, 2, 2)}`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Maximum Completions for Eternity Challenges 1-19 are increased",
+      effect: completions => completions,
+      formatEffect: value => `+${formatInt(value)}`
+    }
+  },
+  {
+    id: 21,
+    description: () => `All continuous production/generation is logarthmic.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Memory production multiplier",
+      effect: completions => Decimal.pow(50, Math.pow(completions, 2)),
+      formatEffect: value => `${formatX(value)}`
+    }
+  },
+  {
+    id: 22,
+    description: () => `IP gain is reduced based on Antimatter.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Boost to Eternity Challenge 21",
+      effect: completions => Math.pow(completions, 1.5) + 1,
+      formatEffect: value => `^${format(value)}`
+    }
+  },
+  {
+    id: 23,
+    description: () => `IP gain and Dimension production are only affected by tickspeed.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Power effect to tickspeed exponent",
+      effect: completions => Decimal.pow(3, completions).cbrt(),
+      formatEffect: value => `^${format(value)}`
+    }
+  },
+  {
+    id: 24,
+    description: () => `IP gain and Dimension production are only affected by AD and ID purchases.`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    reward: {
+      description: "Power effect to AD1 exponent",
+      effect: completions => Decimal.pow(1.15, completions),
+      formatEffect: value => `^${format(value)}`
+    }
+  },
+  {
+    id: 25,
+    description: () => `Suffering`,
+    // Actual effects:
+    // AD1 production is log(log(x))
+    // Tickspeed is locked to 1x
+    // Gamespeed is locked to 1000x game, 1e6x real.
+    // IP gain exponent ^0.25
+    // Glyphs provide no effect while in the EC.
+    // Replicanti multiplier is 1x.
+    goal: DC.F4,
+    pelleGoal: DC.E10,
+    goalIncrease: DC.E10,
+    // Only has 1 completion, so no need to edge case or whatever.
+    reward: {
+      description: "Unlock a new glyph.",
+      effect: completions => completions,
+      formatEffect: value => (Decimal.gt(value, 0.5) ? "Unlocked" : "Locked")
+    }
+  },
 ];

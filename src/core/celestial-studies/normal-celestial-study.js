@@ -84,7 +84,7 @@ export class NormalCelestialStudyState extends CelestialStudyState {
 }
 
 NormalCelestialStudyState.studies = mapGameData(
-  GameDatabase.eternity.celestialStudies.normal,
+  GameDatabase.mending.celestialStudies.normal,
   config => new NormalCelestialStudyState(config)
 );
 
