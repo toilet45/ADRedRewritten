@@ -6,6 +6,7 @@ import AutomatorTab from "./automator/AutomatorTab";
 import BlackHoleTab from "./black-hole/BlackHoleTab";
 import BreakInfinityTab from "./break-infinity/BreakInfinityTab";
 import CelestialNavigationTab from "./celestial-navigation/CelestialNavigationTab";
+import CelestialStudiesTab from "./celestial-studies/CelestialStudiesTab";
 import ChallengeRecordsTab from "./challenge-records/ChallengeRecordsTab";
 import EffarigTab from "./celestial-effarig/EffarigTab";
 import EnslavedTab from "./celestial-enslaved/EnslavedTab";
@@ -92,7 +93,8 @@ const TabComponents = {
   MendingUpgradesTab,
   MendingMilestonesTab,
   TimeExpansionTab,
-  UniversalDamageTab
+  UniversalDamageTab,
+  CelestialStudiesTab
 };
 
 export default TabComponents;

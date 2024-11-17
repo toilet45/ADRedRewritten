@@ -536,6 +536,41 @@ button:focus {
   background: #652f2f;
 }
 
+.l-ct-buy-button {
+  width: 50rem;
+  z-index: 1;
+  margin: 0.3rem;
+}
+
+.c-ct-buy-button {
+  font-family: Typewriter, serif;
+  font-size: 1.35rem;
+  font-weight: bold;
+  border: 0.1rem solid #691fa5;
+  border-radius: var(--var-border-radius, 4px);
+  transition-duration: 0.2s;
+}
+
+.c-ct-buy-button--unlocked {
+  color: #3aacd6;
+  background: #232028;
+  cursor: pointer;
+}
+
+.c-ct-buy-button--unlocked:hover {
+  color: #232028;
+  background: #3aacd6;
+}
+
+.c-ct-buy-button--locked {
+  color: black;
+  background: #4a4a4a;
+}
+
+.c-ct-buy-button--locked:hover {
+  background: #652f2f;
+}
+
 .timetheorems {
   flex: 1 0 auto;
   text-align: center;

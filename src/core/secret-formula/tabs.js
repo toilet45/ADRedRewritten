@@ -333,6 +333,15 @@ export const tabs = [
         condition: () => PlayerProgress.dilationUnlocked() || PlayerProgress.realityUnlocked(),
         id: 3,
         hidable: true,
+      },
+      {
+        key: "celstudies",
+        name: "Celestial Studies",
+        symbol: "<i class='fas fa-book'></i>",
+        component: "CelestialStudiesTab",
+        id: 4,
+        hidable: true,
+        condition: () => Ra.unlocks.vHardenedUnlock.canBeApplied
       }
     ],
   },

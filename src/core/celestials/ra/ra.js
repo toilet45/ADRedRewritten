@@ -1,5 +1,6 @@
 import { DC } from "../../constants";
 import { GameMechanicState } from "../../game-mechanics";
+import { MendingUpgrade } from "../../globals";
 import { Quotes } from "../quotes";
 
 class RaUnlockState extends GameMechanicState {
@@ -104,7 +105,7 @@ class RaPetState extends GameMechanicState {
 
   get isCapped() {
     // eslint-disable-next-line no-nested-ternary
-    return this.level >= (this.name === "Ra" ? (MendingUpgrade(20).isBought ? 100 : 39) : Ra.levelCap);
+    return this.level >= (this.name === "Ra" ? (MendingUpgrade(20).isBought ? 100 : 25) : Ra.levelCap);
   }
 
   get level() {
@@ -132,7 +133,7 @@ class RaPetState extends GameMechanicState {
   }
 
   get requiredMemories() {
-    return Ra.requiredMemoriesForLevel(this.level, this.name);
+    return Ra.requiredMemoriesForLevel(this.level);
   }
 
   get memoryChunksPerSecond() {
@@ -201,6 +202,7 @@ class RaPetState extends GameMechanicState {
 
   levelUp() {
     if (this.memories.lt(this.requiredMemories)) return;
+    if (this.isCapped) return;
 
     this.memories = this.memories.sub(this.requiredMemories);
     this.level++;
@@ -292,6 +294,7 @@ export const Ra = {
     }
     res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
     res = res.mul(Ra.unlocks.memGainOutsideRa.canBeApplied && !Ra.isRunning ? 20 : 1);
+    res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
     return res;
   },
   get memoryBoostResources() {
@@ -310,8 +313,8 @@ export const Ra = {
     return `${boostList.slice(0, -1).join(", ")}, and ${boostList[boostList.length - 1]}`;
   },
   // This is the exp required ON "level" in order to reach "level + 1"
-  requiredMemoriesForLevel(level, pet = "notRa") {
-    if (level >= Ra.levelCap || pet === "Ra" && level >= 100) return DC.BEMAX;
+  requiredMemoriesForLevel(level) {
+    if (level >= (MendingUpgrade(19).isBought ? 100 : 25)) return DC.BEMAX;
     const adjustedLevel = Decimal.pow(level, 2).div(10).add(level - (Ra.unlocks.scaleReduce ? 3 : 0)).max(1);
     const post15Scaling = Decimal.pow(1.5, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 17 : 15)));
     const post25Scaling = Decimal.pow(1.05, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 27 : 25)).pow(2));

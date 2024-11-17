@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     update() {
-      this.showCost = this.study.id !== 192 || !Enslaved.isRunning;
+      this.showCost = true;
     },
   }
 };

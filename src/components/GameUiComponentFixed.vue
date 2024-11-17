@@ -1,6 +1,7 @@
 <script>
 import CelestialQuoteHistoryDisplay from "@/components/modals/celestial-quotes/CelestialQuoteHistoryDisplay";
 import CelestialQuoteModal from "@/components/modals/celestial-quotes/CelestialQuoteModal";
+import CelestialTheoremShop from "@/components/tabs/celestial-studies/ct-shop/CelestialTheoremShop";
 import CreditsContainer from "@/components/tabs/celestial-pelle/CreditsContainer";
 import FadeAway from "@/components/tabs/celestial-pelle/FadeAway";
 import HowToPlay from "@/components/HowToPlay";
@@ -18,6 +19,7 @@ export default {
   components: {
     HowToPlay,
     TimeTheoremShop,
+    CelestialTheoremShop,
     ModernSidebar,
     SaveTimer,
     SpeedrunStatus,
@@ -67,6 +69,10 @@ export default {
     <HowToPlay :style="hideIfMatoFullscreen" />
     <TimeTheoremShop
       v-if="view.subtab === 'studies'"
+      class="l-time-studies-tab__tt-shop"
+    />
+    <CelestialTheoremShop
+      v-if="view.subtab === 'celstudies'"
       class="l-time-studies-tab__tt-shop"
     />
     <ModernSidebar

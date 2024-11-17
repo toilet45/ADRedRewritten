@@ -80,8 +80,8 @@ export function getDimensionFinalMultiplierUncached(tier) {
     multiplier = Effarig.multiplier(multiplier);
   } else if (V.isRunning) {
     multiplier = multiplier.pow(0.5);
-  } else if (Teresa.isRunning && Teresa.hardModeToggled) {
-    multiplier = stackedLogPower(multiplier, 1, 0.55);
+  } else if (Teresa.isRunning && Teresa.hardModeToggled && tier === 1) {
+    multiplier = stackedLogPower(multiplier, 1, 0.75);
   }
 
   // This power effect goes intentionally after all the nerf effects and shouldn't be moved before them

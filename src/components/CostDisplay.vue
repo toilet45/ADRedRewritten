@@ -27,7 +27,9 @@ export default {
   data() {
     return {
       isVisible: false,
-      cost: 0
+      cost: 0,
+      placesUnder1000: 2,
+      places: 2,
     };
   },
   watch: {
@@ -39,6 +41,9 @@ export default {
         this.isVisible = cost !== undefined;
         if (!this.isVisible) return;
         this.formatCost = config.formatCost ?? format;
+
+        this.places = config.places ?? 2;
+        this.placesUnder1000 = config.placesUnder1000 ?? 2;
 
         if (isNumber(cost)) {
           this.cost = cost;
@@ -70,6 +75,7 @@ export default {
 
         throw new Error(`CostDisplay config.cost is a function which returns` +
           ` unsupported type "${typeof value}"`);
+
       }
     }
   },
@@ -88,6 +94,6 @@ export default {
 <template>
   <span v-if="isVisible">
     <br v-if="br">
-    {{ label }} {{ quantify(name, cost, 2, 2, formatCost) }}
+    {{ label }} {{ quantify(name, cost, places, placesUnder1000, formatCost) }}
   </span>
 </template>

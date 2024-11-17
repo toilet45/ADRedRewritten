@@ -520,11 +520,12 @@ export const ReplicantiUpgrade = {
 
     autobuyerTick() {
       // This isn't a hot enough autobuyer to worry about doing an actual inverse.
-      const bulk = this.bulkPurchaseCalc();
-      if (!bulk || bulk.floor().sub(this.value).lte(0)) return;
-      Currency.infinityPoints.subtract(this.baseCostAfterCount(this.value.min(this.cap)).sub(1));
-      this.value = this.value.add(bulk.sub(this.value.min(this.cap)));
-      this.baseCost = this.baseCostAfterCount(this.value.min(this.cap));
+      let bulk = this.bulkPurchaseCalc();
+      if (!bulk || bulk.clampMax(this.cap).floor().sub(this.value).lte(0)) return;
+      bulk = bulk.clampMax(this.cap);
+      Currency.infinityPoints.subtract(this.baseCostAfterCount(bulk.sub(1)));
+      this.value = this.value.add(bulk.sub(this.value));
+      this.baseCost = this.baseCostAfterCount(this.value);
       // The code is weird and if we add one the whole thing goes out to like double + 1, for no reason, so
       // we will instead just do 1 purchase call instead, which can also prevent us overbuying by 1
     }

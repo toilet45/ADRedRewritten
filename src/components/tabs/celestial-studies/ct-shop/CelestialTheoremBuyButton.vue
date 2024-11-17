@@ -38,7 +38,7 @@ export default {
 
 <template>
   <button
-    class="l-tt-buy-button c-tt-buy-button"
+    class="l-ct-buy-button c-ct-buy-button"
     :class="enabledClass"
     @click="action"
   >

@@ -222,9 +222,7 @@ class InfinityDimensionState extends DimensionState {
     if (Enslaved.isRunning) {
       return DC.D1;
     }
-    return InfinityDimensions.capIncrease.add(this.tier === 8
-      ? DC.BEMAX
-      : InfinityDimensions.HARDCAP_PURCHASES);
+    return InfinityDimensions.capIncrease.add(InfinityDimensions.HARDCAP_PURCHASES).pow(this.tier === 8 ? 1.75 : 1);
   }
 
   get isCapped() {

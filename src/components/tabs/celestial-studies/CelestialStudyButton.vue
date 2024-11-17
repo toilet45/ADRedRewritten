@@ -81,7 +81,8 @@ export default {
       return this.eternityChallengeRunning ? "o-time-study-eternity-challenge--running" : "";
     },
     config() {
-      return { ...this.study.config, formatCost: value => (value.gte(1e6) ? format(value) : formatInt(value)) };
+      return { ...this.study.config, formatCost: value => (value.gte(1e6) ? format(value, 0, 0) : formatInt(value)),
+        places: 0, placesUnder1000: 0 };
     },
     showDefaultCostDisplay() {
       return !this.setup.isSmall && !this.doomedRealityStudy && this.showCost;
@@ -90,12 +91,12 @@ export default {
       let ttStr;
       if (this.config.cost.lte(1e6)) {
         ttStr = this.setup.isSmall
-          ? `${formatInt(this.config.cost)} CT`
-          : quantifyInt("Celestial Theorem", this.config.cost);
+          ? `${formatInt(this.config.cost, 0, 0)} CT`
+          : quantifyInt("Celestial Theorem", this.config.cost, 0, 0);
       } else {
         ttStr = this.setup.isSmall
-          ? `${format(this.config.cost)} CT`
-          : quantify("Celestial Theorem", this.config.cost);
+          ? `${format(this.config.cost, 0, 0)} CT`
+          : quantify("Celestial Theorem", this.config.cost, 0, 0);
       }
 
       const costs = [];

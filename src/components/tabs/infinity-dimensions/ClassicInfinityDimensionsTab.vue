@@ -23,6 +23,7 @@ export default {
       nextDimCapIncrease: new Decimal(0),
       tesseractCost: new Decimal(0),
       totalDimCap: new Decimal(0),
+      eighthDimCap: new Decimal(),
       canBuyTesseract: false,
       enslavedCompleted: false,
       boughtTesseracts: new Decimal(0),
@@ -59,6 +60,7 @@ export default {
       this.nextDimCapIncrease.copyFrom(Tesseracts.nextTesseractIncrease);
       this.tesseractCost.copyFrom(Tesseracts.nextCost);
       this.totalDimCap.copyFrom(InfinityDimensions.totalDimCap);
+      this.eighthDimCap.copyFrom(this.totalDimCap.pow(1.75));
       this.canBuyTesseract = Tesseracts.canBuyTesseract;
       this.enslavedCompleted = Enslaved.isCompleted;
       this.boughtTesseracts.copyFrom(Tesseracts.bought);
@@ -142,7 +144,11 @@ export default {
       All Infinity Dimensions except for the 8th are limited to a maximum of {{ format(totalDimCap, 2) }}
       purchases each.
     </div>
-    <div>You are getting {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+    <div
+      v-if="powerPerSecond.lt('ee12')"
+    >
+      You are getting {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} per second.
+    </div>
     <b
       v-if="isEC8Running"
       class="l-infinity-dim-tab__ec8-purchases"

@@ -52,7 +52,7 @@ export default {
       this.canBuyPenteracts = false;
       this.boughtPenteracts.copyFrom(Penteracts.bought);
       this.extraPenteracts.copyFrom(Penteracts.extra);
-      this.totalDimCap = new Decimal(5e14);
+      this.totalDimCap = TimeDimensions.purchaseCap;
       this.nextDimCapIncrease.copyFrom(Penteracts.nextPenteractIncrease);
       this.creditsClosed = GameEnd.creditsEverClosed;
     },
@@ -123,7 +123,9 @@ export default {
       The amount each additional upgrade requires will start
       increasing above {{ formatInt(tickspeedSoftcap) }} Tickspeed upgrades.
     </div>
-    <div>
+    <div
+      v-if="shardsPerSecond.lt('ee12')"
+    >
       You are getting {{ format(shardsPerSecond, 2, 0) }} {{ incomeType }} per second.
     </div>
     <div class="l-dimensions-container">

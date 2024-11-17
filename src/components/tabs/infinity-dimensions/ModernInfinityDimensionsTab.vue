@@ -142,7 +142,11 @@ export default {
       All Infinity Dimensions except for the 8th are limited to a maximum of {{ format(totalDimCap, 2) }}
       purchases each.
     </div>
-    <div>You are getting {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+    <div
+      v-if="powerPerSecond.lt('ee12')"
+    >
+      You are getting {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} per second.
+    </div>
     <b
       v-if="isEC8Running"
       class="l-infinity-dim-tab__ec8-purchases"

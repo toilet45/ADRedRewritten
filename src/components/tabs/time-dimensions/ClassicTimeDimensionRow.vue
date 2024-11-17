@@ -52,7 +52,10 @@ export default {
     },
     tooltipContents() {
       if (this.showTTCost) return `${this.formattedEPCost}<br>${this.timeEstimate}`;
-      if (this.isCapped) return `Nameless prevents the purchase of more than ${format(1)} Time Dimension`;
+      if (this.isCapped & this.bought.lt(TimeDimensions.purchaseCap)) {
+        return `Nameless prevents the purchase of more than ${format(1)} Time Dimension`;
+      }
+      if (this.isCapped) return `Time Dimensions are capped at ${format(TimeDimensions.purchaseCap)} purchases.`;
       return `Purchased ${quantifyInt("time", this.bought)}`;
     },
     showRow() {
@@ -89,7 +92,7 @@ export default {
     update() {
       const tier = this.tier;
       const dimension = TimeDimension(tier);
-      this.isCapped = (Enslaved.isRunning && dimension.bought.gt(0)) || dimension.bought.gte(TimeDimensions.purchaseCap);
+      this.isCapped = dimension.bought.gte(Enslaved.isRunning ? 1 : TimeDimensions.purchaseCap);
       this.isUnlocked = dimension.isUnlocked;
       this.multiplier.copyFrom(dimension.multiplier);
       this.amount.copyFrom(dimension.amount);

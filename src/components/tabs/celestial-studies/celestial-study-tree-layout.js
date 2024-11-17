@@ -58,8 +58,8 @@ export default class CelestialStudyTreeLayout {
     /* eslint-disable no-multi-spaces, space-in-parens, func-call-spacing, capitalized-comments */
     this.rows = [
       normalRow(                       null,   CS(11),   null                         ),
-    /*  normalRow(                           CS(21), CS(22)                             ),
-      normalRow(                   null, CS(31), CS(32), CS(33)                       ) */
+      normalRow(                           CS(21), CS(22)                             ),
+      normalRow(                           CS(31), CS(32)                             )
     ];
 
     /* this.rows.push(

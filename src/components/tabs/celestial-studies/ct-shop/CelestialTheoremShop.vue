@@ -24,13 +24,13 @@ export default {
     minimized() {
       return this.minimizeAvailable && this.shopMinimized;
     },
-    formatTimeTheoremType() {
+    formatCelestialTheoremType() {
       if (this.theoremAmount.gte(1e6)) {
         return format;
       }
       return formatInt;
     },
-    totalTimeTheoremText() {
+    totalCelestialTheoremText() {
       return `${quantifyInt("total Celestial Theorem", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}`;
     },
     minimizeArrowStyle() {
@@ -44,7 +44,7 @@ export default {
     },
     shopBottomRowHeightStyle() {
       return {
-        height: this.hasTTAutobuyer ? "6.7rem" : "4.4rem",
+        height: "4.4rem",
       };
     }
   },
@@ -62,11 +62,11 @@ export default {
       CelestialTheorems.buyMax(false);
     },
     update() {
-      this.theoremAmount.copyFrom(Currency.timeTheorems);
-      this.totalTimeTheorems.copyFrom(Currency.timeTheorems.max);
+      this.theoremAmount.copyFrom(Currency.celestialTheorems);
+      this.totalTimeTheorems.copyFrom(Currency.celestialTheorems.max);
       this.shopMinimized = player.timestudy.shopMinimized;
-      this.hasTTAutobuyer = Autobuyer.timeTheorem.isUnlocked;
-      this.minimizeAvailable = DilationUpgrade.ttGenerator.isBought || this.hasTTAutobuyer;
+      this.hasTTAutobuyer = false;
+      this.minimizeAvailable = false;
       this.amAmnt.copyFrom(TimeTheoremPurchaseType.am.currency);
       this.amCost.copyFrom(TimeTheoremPurchaseType.am.cost);
     },
@@ -92,7 +92,7 @@ export default {
         </button>
         <p class="timetheorems">
           <span class="c-tt-amount">
-            {{ quantifyInt("Celestial Theorem", theoremAmount, 2, 0, formatTimeTheoremType) }}
+            {{ quantifyInt("Celestial Theorem", theoremAmount, 2, 0, formatCelestialTheoremType) }}
           </span>
         </p>
         <div class="l-load-tree-area">
@@ -106,7 +106,7 @@ export default {
           </div>
           <div class="tt-gen-container">
             <span>
-              You have {{ totalTimeTheoremText }}.
+              You have {{ totalCelestialTheoremText }}.
             </span>
           </div>
         </div>

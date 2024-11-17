@@ -108,7 +108,8 @@ export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) 
   }
 
   if (Enslaved.isRunning) return buySingleTimeDimension(tier);
-  const pur = Decimal.sub(calcHighestPurchaseableTD(tier, canSpend), dim.bought).clampMin(0);
+  let pur = Decimal.sub(calcHighestPurchaseableTD(tier, canSpend), dim.bought);
+  pur = pur.clampMin(0).clampMax(TimeDimensions.purchaseCap);
   const cost = dim.nextCost(pur.add(dim.bought).sub(1));
   if (pur.lte(0)) return false;
   Currency.eternityPoints.subtract(cost);
@@ -373,7 +374,7 @@ export const TimeDimensions = {
   },
 
   get purchaseCap() {
-    return new Decimal(5e14);
+    return DC.E18;
   },
 
   tick(diff) {

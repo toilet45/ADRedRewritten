@@ -39,8 +39,403 @@ export const normalCelestialStudies = [
     // All requirements of an empty array will always evaluate to true, so this study is always purchasable
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: "TBD",
-    effect: () => new Decimal(1),
+    description: () => `Tickspeed exponent ${formatX(1e4, 0, 0)}`,
+    effect: () => DC.E4,
+  },
+  {
+    id: 21,
+    cost: DC.D1,
+    requirement: [11],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
-  }
+  },
+  {
+    id: 22,
+    cost: DC.D1,
+    requirement: [11],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 31,
+    cost: DC.D1,
+    requirement: [21],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 32,
+    cost: DC.D1,
+    requirement: [22],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 41,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 42,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 43,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 44,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 51,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 52,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 53,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 54,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 61,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 62,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 63,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 64,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 71,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 72,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 81,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 91,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 92,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 93,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 101,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 102,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 103,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 111,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 112,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 113,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 121,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 131,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 132,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 151,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 152,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 171,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 172,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 181,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 182,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 183,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 184,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 185,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 186,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 187,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 188,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
+  {
+    id: 191,
+    cost: DC.D1,
+    requirement: [],
+    reqType: CS_REQUIREMENT_TYPE.ALL,
+    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    effect: () => DC.E4,
+    formatEffect: value => formatX(value, 2, 1)
+  },
 ];
