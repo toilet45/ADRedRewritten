@@ -77,7 +77,7 @@ export class EternityChallengeState extends GameMechanicState {
 
   set completions(value) {
     player.eternityChalls[this.fullId] = Math.min(value, this.maxCompletions);
-    if (!Enslaved.isRunning) player.ecHighestManual[this.fullId] = Math.min(value, this.maxCompletions);
+    if (!Enslaved.isRunning) player.ecHighestManual[this.fullId] = Math.min(Math.max(value, player.ecHighestManual[this.fullId]), this.maxCompletions);
   }
 
   get maxCompletions() {
