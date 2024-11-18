@@ -118,7 +118,7 @@ export function mendingReset() {
     select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
     trash: AUTO_GLYPH_REJECT.SACRIFICE,
     simple: 0,
-    types: Object.keys(getGlyphTypes())
+    /* types: Object.keys(getGlyphTypes())
       .filter(t => GlyphInfo.generatedGlyphTypes.includes(t.id))
       .mapToObject(t => t.id, t => ({
         rarity: new Decimal(),
@@ -126,7 +126,7 @@ export function mendingReset() {
         effectCount: 0,
         specifiedMask: [],
         effectScores: Array.repeat(0, t.effects().length).mapToObject(e => t.effects()[e].id, n => n),
-      }))
+      }))*/
   };
   player.reality.rebuyables = {
     1: new Decimal(),
