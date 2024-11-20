@@ -225,8 +225,8 @@ export const mendingUpgrades = [
       "Automatically purchase and sacrifice Music Glyphs",
       "Music Glyphs cost 0 Perk Points",
       "Unlock autobuyers for Ra Memory Levels",
+      `Unlock the ability to bump equipped glyphs to highest level on Reality`,
       "Remove unlock requirements from Imaginary Upgrades",
-      `???`,
       "Automatically purchase non rebuyable Imaginary Upgrades",
       `Imaginary Machines start generating at ${formatInt(0)} RM`][p],
     // eslint-disable-next-line no-unused-vars
