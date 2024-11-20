@@ -137,7 +137,7 @@ export const news = [
   {
     id: "a29",
     text: `If you are not playing on Kongregate, Steam, or https://ivark.github.io/AntimatterDimensions/,
-      the site is bootleg.`
+      the site is bootleg...but this is a mod so that doesn't matter`
   },
   {
     id: "a30",
@@ -2594,6 +2594,11 @@ export const news = [
       fast. Update, just 5 hours.`
   },
   {
+    id: "a390",
+    text:
+      `fatty jumpscare`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.value.max(1).log10().eq(15); }
@@ -2919,11 +2924,13 @@ export const news = [
   {
     id: "l54",
     get text() {
-      const names = [];
+      const names = ["Flux", "Meta", "Atomic", "Quantum", "Fundemantal", "Existence", "Fatty", "Mulligan", "Glitch", "V", "Paradox", "Galactic"];
       if (PlayerProgress.infinityUnlocked()) names.push("Infinity");
       if (PlayerProgress.eternityUnlocked()) names.push("Eternity");
       if (PlayerProgress.dilationUnlocked()) names.push("Dilation");
       if (PlayerProgress.realityUnlocked()) names.push("Reality");
+      if (PlayerProgress.mendingUnlocked()) names.push("Mended");
+      if (player.reality.warped) names.push("Warped");
 
       const game1Name = names.randomElement();
       let game2Name = names.randomElement();
@@ -3278,6 +3285,41 @@ export const news = [
       average per-player credit earn rates on a daily basis, and we'll be making constant adjustments to ensure that
       players have challenges that are compelling, rewarding, and of course attainable via gameplay.`,
     get unlocked() { return PlayerProgress.realityUnlocked(); }
+  },
+  {
+    id: "l89",
+    text: `arp`,
+    get unlocked() { return player.reality.warped; }
+  },
+  {
+    id: "l90",
+    text: `It's Fatty Friday`,
+    get unlocked() { return new Date().getDay() === 5; }
+  },
+  {
+    id: "l91",
+    text: `It's Mulligan Monday`,
+    get unlocked() { return new Date().getDay() === 1; }
+  },
+  {
+    id: "l90",
+    text: `It's Fatty Feburary, where every day is a Fatty Friday`,
+    get unlocked() { return new Date().getMonth() === 2; }
+  },
+  {
+    id: "l91",
+    text: `It's MulliMarch, where every day is a Mulligan Monday`,
+    get unlocked() { return new Date().getMonth() === 3; }
+  },
+  {
+    id: "l91",
+    text: `DO YOU REMEMBER?`,
+    get unlocked() { return new Date().getMonth() === 9 && new Date().getDate() === 21; }
+  },
+  {
+    id: "l91",
+    text: `DID YOU REMEMBER?`,
+    get unlocked() { return new Date().getMonth() === 9 && new Date().getDate() === 22; }
   },
   {
     id: "r1",

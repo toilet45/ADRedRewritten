@@ -594,6 +594,7 @@ window.player = {
     },
     achTimer: new Decimal(),
     hasCheckedFilter: false,
+    warped: false
   },
   blackHole: Array.range(0, 2).map(id => ({
     id,
