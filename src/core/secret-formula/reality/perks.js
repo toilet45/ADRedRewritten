@@ -187,8 +187,8 @@ export const perks = {
     label: "ATD",
     family: PERK_FAMILY.DILATION,
     get description() {
-      return `Auto-unlock Time Dimensions 5-8 
-      ${MendingUpgrade(9).isBought ? `, and the Mending Upgrade 9 Dilation Studies,` : ``}
+      return `Auto-unlock Time Dimensions 5-8
+      ${MendingUpgrade(9).isBought ? `, and the Mending Upgrade 9 Dilation Studies,` : ` `}
        once you can afford them.`;
     },
     automatorPoints: 5,

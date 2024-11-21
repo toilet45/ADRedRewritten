@@ -810,10 +810,10 @@ function passivePrestigeGen() {
 function applyAutoUnlockPerks() {
   if (!TimeDimension(8).isUnlocked && Perk.autounlockTD.canBeApplied) {
     for (let dim = 5; dim <= 8; ++dim) TimeStudy.timeDimension(dim).purchase();
-    if (MendingUpgrade(9).isBought) {
-      TimeStudy.TGformula.purchase(true);
-      TimeStudy.TPformula.purchase(true);
-    }
+  }
+  if (MendingUpgrade(9).isBought && Perk.autounlockTD.canBeApplied) {
+    TimeStudy.TGformula.purchase(true);
+    TimeStudy.TPformula.purchase(true);
   }
   if (Perk.autounlockDilation3.canBeApplied) buyDilationUpgrade(DilationUpgrade.ttGenerator.id);
   if (Perk.autounlockReality.canBeApplied) TimeStudy.reality.purchase(true);

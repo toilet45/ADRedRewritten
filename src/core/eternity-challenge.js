@@ -319,6 +319,14 @@ export const EternityChallenges = {
    */
   all: EternityChallenge.index.compact(),
 
+  get vanillaECs() {
+    const a = [];
+    for (let i = 0; i < 12; i++) {
+      a.push(EternityChallenges.all[i]);
+    }
+    return a;
+  },
+
   get completions() {
     return EternityChallenges.all
       .map(ec => ec.completions)

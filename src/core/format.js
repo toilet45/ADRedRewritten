@@ -13,7 +13,7 @@ window.format = function format(value, places = 2, placesUnder1000 = 0, bypassEN
   if (isEND() && !bypassEND) return "END";
   // eslint-disable-next-line no-param-reassign
   if (!isDecimal(value)) value = new Decimal(value);
-  if (value.lte("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
+  if (value.lte("ee18")) return Notations.current.format(value, places, placesUnder1000, 3);
   const actualPlaces = LNotations.current.isSlog ? places + 2 : places;
   return LNotations.current.formatLDecimal(value, actualPlaces);
 };

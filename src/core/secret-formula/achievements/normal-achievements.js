@@ -1195,7 +1195,7 @@ export const normalAchievements = [
       return `Complete all the Eternity Challenges ${formatInt(5)} times with less than ${formatInt(1)}
       second (game time) in your current Reality.`;
     },
-    checkRequirement: () => EternityChallenges.all.map(ec => ec.completions).min().gte(5) &&
+    checkRequirement: () => EternityChallenges.vanillaECs.map(ec => ec.completions).min().gte(5) &&
       Time.thisReality.totalSeconds.lte(1),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },

@@ -140,7 +140,7 @@ export const mendingUpgrades = [
     name: "9",
     id: 9,
     cost: new Decimal("18"),
-    description: () => `Unlock 2 new dilation studies`
+    description: () => `Unlock 2 new Dilation studies (affected by ATD)`
   },
   {
     name: "10",
