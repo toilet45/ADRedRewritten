@@ -231,7 +231,7 @@ export const mendingUpgrades = [
       `Imaginary Machines start generating at ${formatInt(0)} RM`][p],
     // eslint-disable-next-line no-unused-vars
     effect: p => p,
-    formatEffect: p => format(p),
+    formatEffect: p => `${format(p)} / ${formatInt(8)}`,
     purchaseLimit: 8,
   }),
   {
