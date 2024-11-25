@@ -44,6 +44,9 @@ export default {
       if (this.availableCharges > 0) {
         arr.push(`Charge more Infinity Upgrades (${formatInt(this.availableCharges)} available)`);
       }
+      if (!Laitela.continuumActive && ImaginaryUpgrade(15).canBeApplied) {
+        arr.push(`Enable Continuum`);
+      }
       return arr;
     },
     canBeExpanded() {

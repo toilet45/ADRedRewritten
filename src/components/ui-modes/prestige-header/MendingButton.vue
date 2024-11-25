@@ -63,6 +63,7 @@ export default {
         Mend this Multiverse for
         <span>{{ format(gainedMvR, 2) }}</span>
         <span> Multiversal {{ pluralize("Remain", gainedMvR) }}</span>
+        <span> ({{ format(currentMvRRate, 2, 2) }}/min)</span>
       </b>
     </template>
   </button>
