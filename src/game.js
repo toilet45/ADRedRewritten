@@ -804,6 +804,9 @@ function passivePrestigeGen() {
     Currency.infinities.add(infGen.floor());
     player.partInfinitied = infGen.minus(infGen.floor()).toNumber();
   }
+  if (MendingMilestone.eight.isReached) {
+    player.celestials.teresa.pouredAmount = Math.max(1e24, Math.max(Currency.realityMachines.value.toNumber(), player.celestials.teresa.pouredAmount))
+  }
 }
 
 // Applies all perks which automatically unlock things when passing certain thresholds, needs to be checked every tick

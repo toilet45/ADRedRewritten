@@ -81,7 +81,7 @@ export default {
     update() {
       this.isRaCapped = Ra.totalPetLevel === Ra.maxTotalPetLevel;
       const pet = this.pet;
-      this.isCapped = pet?.level >= (MendingUpgrade(19).isBought ? 100 : 25);
+      this.isCapped = pet?.level >= this.levelCap;
       this.isUnlocked = pet?.isUnlocked;
       if (!this.isUnlocked) return;
       this.level = pet.level;

@@ -10,7 +10,7 @@ export class SingularityAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return SingularityMilestone.autoCondense.canBeApplied || (MendingMilestone.nine.isReached && !Pelle.isDoomed);
+    return SingularityMilestone.autoCondense.canBeApplied || (MendingMilestone.eleven.isReached && !Pelle.isDoomed);
   }
 
   get bulk() {

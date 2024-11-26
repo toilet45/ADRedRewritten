@@ -84,12 +84,13 @@ export function mendingReset() {
   Enslaved.reset();
   V.reset();
   if (MendingMilestone.five.isReached) V.unlockCelestial();
-  Ra.reset();
+  Ra.reset(Ra.unlocks.keepMemoriesOnMend.canBeApplied);
   Laitela.reset();
   Pelle.reset();
   player.isGameEnd = false;
 
   // Reality (Tier 3)
+  const protectedSlots = player.reality.glyphs.protectedRows;
   player.reality.glyphs.protectedRows = 0;
   for (let g = 0; g < 120; g++) {
     const glyph = Glyphs.inventory[g];
@@ -100,6 +101,7 @@ export function mendingReset() {
     const glyph = Glyphs.inventory[h];
     if (glyph !== null && glyph.type !== "companion") GlyphSacrificeHandler.deleteGlyph(glyph, true);
   }
+  player.reality.glyphs.protectedRows = protectedSlots;
   player.reality.realityMachines = DC.D0;
   player.reality.maxRM = DC.D0;
   player.reality.imaginaryMachines = DC.D0;
@@ -114,11 +116,12 @@ export function mendingReset() {
     effarig: DC.D0,
     reality: DC.D0
   };
+  const filterTypesCopy = player.reality.glyphs.filter.types;
   player.reality.glyphs.filter = {
     select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
     trash: AUTO_GLYPH_REJECT.SACRIFICE,
     simple: 0,
-    /* types: Object.keys(getGlyphTypes())
+    types: Object.keys(getGlyphTypes())
       .filter(t => GlyphInfo.generatedGlyphTypes.includes(t.id))
       .mapToObject(t => t.id, t => ({
         rarity: new Decimal(),
@@ -126,8 +129,9 @@ export function mendingReset() {
         effectCount: 0,
         specifiedMask: [],
         effectScores: Array.repeat(0, t.effects().length).mapToObject(e => t.effects()[e].id, n => n),
-      }))*/
+      }))
   };
+  player.reality.glyphs.filter.types = filterTypesCopy;
   player.reality.rebuyables = {
     1: new Decimal(),
     2: new Decimal(),
@@ -135,7 +139,7 @@ export function mendingReset() {
     4: new Decimal(),
     5: new Decimal(),
   };
-  player.reality.upgradeBits = MendingMilestone.eleven.isReached ? 67108863 : 0;
+  player.reality.upgradeBits = MendingMilestone.nine.isReached ? 67108863 : 0;
   player.reality.upgReqs = 0;
   player.reality.imaginaryUpgradeBits = 0;
   player.reality.imaginaryUpgReqs = 0;

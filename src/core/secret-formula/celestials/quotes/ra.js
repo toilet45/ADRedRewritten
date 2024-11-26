@@ -127,4 +127,32 @@ export const raQuotes = {
       "I do not want to hurt you too.",
     ]
   },
+  mu19: {
+    id: 14,
+    requirement: () => Ra.pets.ra.level >= 2,
+    lines: [
+      "Oh, you have returned?",
+      "What is that? You want to know more about myself?",
+      "...",
+      "umm",
+      "Huh...I thought I remembered everything..."
+    ]
+  },
+  store: {
+    id: 15,
+    requirement: () => Ra.pets.ra.level >= 10,
+    lines: [
+      "Hello Destroyer",
+      "I've just gotten back from Teresa's shop for some bread...",
+      "...wait, shop! I remember having a shop of my own",
+    ]
+  },
+  lai: {
+    id: 16,
+    requirement: () => Ra.pets.laitela.level >= 2,
+    lines: [
+      "Destroyer, I remember something about Lai",
+      "She secretly...[this is placeholder text, so we'll never know]",
+    ]
+  }
 };

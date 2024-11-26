@@ -10,11 +10,11 @@ export class DarkMatterDimensionAutobuyerState extends IntervaledAutobuyerState 
   }
 
   get isUnlocked() {
-    return SingularityMilestone.darkDimensionAutobuyers.canBeApplied || (MendingMilestone.nine.isReached && !Pelle.isDoomed);
+    return SingularityMilestone.darkDimensionAutobuyers.canBeApplied || (MendingMilestone.eleven.isReached && !Pelle.isDoomed);
   }
 
   get interval() {
-    return 1000 * SingularityMilestone.darkAutobuyerSpeed.effectValue;
+    return MendingMilestone.eleven.isReached ? 0 : 1000 * SingularityMilestone.darkAutobuyerSpeed.effectValue;
   }
 
   get hasUnlimitedBulk() {

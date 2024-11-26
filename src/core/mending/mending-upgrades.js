@@ -83,10 +83,18 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
     // This.hasPlayerLock = false;
   }
   // eslint-disable-next-line capitalized-comments
-  // onPurchased() {
-  //   EventHub.dispatch(GAME_EVENT.MENDING_UPGRADE_BOUGHT);
-  //   const id = this.id;
-  // }
+
+  onPurchased() {
+    EventHub.dispatch(GAME_EVENT.MENDING_UPGRADE_BOUGHT);
+    const id = this.id;
+    switch (id) {
+      case 19: {
+        Achievement(193).unlock();
+        break;
+      }
+      default:
+    }
+  }
 }
 
 class RebuyableMendingUpgradeState extends RebuyableMechanicState {

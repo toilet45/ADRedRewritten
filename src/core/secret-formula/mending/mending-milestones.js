@@ -31,16 +31,15 @@ export const mendingMilestones = {
   },
   seven: {
     mends: 15,
-    reward: "Start every Mend with all Eternity and Reality autobuyers (except Lai'tela resources)"
+    reward: "Start every Mend with all Eternity and Reality autobuyers (except Lai'tela resources) and both Black Holes being permanent."
   },
   eight: {
     mends: 20,
-    reward: `Teresa's container is set to your highest Reality Machine amount this Mend.
-    Start every Mend with both Nameless Upgrades`
+    reward: `Teresa's container automatically fills and start Mends both Nameless Upgrades`
   },
   nine: {
     mends: 30,
-    reward: "Lai'tela autobuyers are permanently unlocked"
+    reward: "Start Mends with all Reality Upgrades purchased"
   },
   ten: {
     mends: 50,
@@ -48,11 +47,11 @@ export const mendingMilestones = {
   },
   eleven: {
     mends: 70,
-    reward: "Start Mends with all Reality Upgrades purchased"
+    reward: "Lai'tela autobuyers are permanently unlocked and are instant"
   },
   twelve: {
     mends: 80,
-    reward: "Start Mends with the Black Hole, and the first four Celestials unlocked"
+    reward: "[TBD]"
   },
   thirteen: {
     mends: 100,

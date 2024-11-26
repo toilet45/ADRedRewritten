@@ -76,7 +76,7 @@ export const Teresa = {
   quotes: Quotes.teresa,
   symbol: "Ϟ",
   reset() {
-    player.celestials.teresa.pouredAmount = MendingMilestone.eight.isReached ? 1e24 : 0;
+    player.celestials.teresa.pouredAmount = 0;
     player.celestials.teresa.unlockBits = 0;
     player.celestials.teresa.run = false;
     player.celestials.teresa.bestRunAM = DC.D1;

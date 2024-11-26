@@ -11,6 +11,7 @@ import { pelleUpgrades } from "./pelle-upgrades";
 import { perkShop } from "./perk-shop";
 import { quotes } from "./quotes";
 import { ra } from "./ra";
+import { raShopUpgrades } from "./ra-shop-upgrades";
 import { singularityMilestones } from "./singularity-milestones";
 import { teresa } from "./teresa";
 import { v } from "./v";
@@ -37,6 +38,7 @@ export const celestials = {
   },
   perkShop,
   ra,
+  raShopUpgrades,
   singularityMilestones,
   teresa,
   quotes,

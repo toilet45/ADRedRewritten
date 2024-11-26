@@ -222,7 +222,7 @@ class BlackHoleState {
   }
 
   get isPermanent() {
-    return this.dutyCycle.gte(0.9999);
+    return this.dutyCycle.gte(0.9999) || MendingMilestone.seven.isReached;
   }
 
   /**

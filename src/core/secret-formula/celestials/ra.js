@@ -605,7 +605,7 @@ export const ra = {
 
     keepMemoriesOnMend: {
       id: 56,
-      reward: () => `Keep Ra Levels on Mend, but not Memories or Memory Chunks`,
+      reward: () => `Keep Ra Levels on Mend, but not Memories nor Memory Chunks`,
       effect: 1,
       pet: "ra",
       level: 1,

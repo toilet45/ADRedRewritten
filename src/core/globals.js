@@ -26,6 +26,7 @@ export * from "./celestials/enslaved";
 export * from "./celestials/V";
 export * from "./celestials/ra/ra";
 export * from "./celestials/ra/alchemy";
+export * from "./celestials/ra/shop-upgrades";
 export * from "./celestials/laitela/laitela";
 export * from "./celestials/laitela/dmd";
 export * from "./celestials/laitela/singularity";
