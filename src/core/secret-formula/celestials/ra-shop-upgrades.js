@@ -22,7 +22,7 @@ const rebuyable = props => {
 
 export const raShopUpgrades = [
   rebuyable({
-    name: "Temporal Amplifier",
+    name: "???",
     id: 1,
     initialCost: DC.D1,
     costMult: new Decimal("1F300"),
@@ -30,7 +30,7 @@ export const raShopUpgrades = [
     effect: DC.D1
   }),
   rebuyable({
-    name: "Replicative Amplifier",
+    name: "???",
     id: 2,
     initialCost: DC.D1,
     costMult: new Decimal("1F300"),
@@ -38,7 +38,7 @@ export const raShopUpgrades = [
     effect: DC.D1
   }),
   rebuyable({
-    name: "Eternal Amplifier",
+    name: "???",
     id: 3,
     initialCost: DC.D2,
     costMult: new Decimal("1F300"),
@@ -46,7 +46,7 @@ export const raShopUpgrades = [
     effect: DC.D1
   }),
   rebuyable({
-    name: "Superluminal Amplifier",
+    name: "???",
     id: 4,
     initialCost: DC.D2,
     costMult: new Decimal("1F300"),
@@ -54,7 +54,7 @@ export const raShopUpgrades = [
     effect: DC.D1
   }),
   rebuyable({
-    name: "Boundless Amplifier",
+    name: "???",
     id: 5,
     initialCost: DC.D3,
     costMult: new Decimal(50),
@@ -62,7 +62,7 @@ export const raShopUpgrades = [
     effect: DC.D1
   }),
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 6,
     cost: new Decimal("1F300"),
     description: "???",
@@ -70,7 +70,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 7,
     cost: new Decimal("1F300"),
     description: "???",
@@ -78,7 +78,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 8,
     cost: new Decimal("1F300"),
     description: "???",
@@ -86,7 +86,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 9,
     cost: new Decimal("1F300"),
     description: "???",
@@ -94,7 +94,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 10,
     cost: new Decimal("1F300"),
     description: "???",
@@ -102,7 +102,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 11,
     cost: new Decimal("1F300"),
     description: "???",
@@ -110,7 +110,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 12,
     cost: new Decimal("1F300"),
     description: "???",
@@ -118,7 +118,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 13,
     cost: new Decimal("1F300"),
     description: "???",
@@ -126,7 +126,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 14,
     cost: new Decimal("1F300"),
     description: "???",
@@ -134,7 +134,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 15,
     cost: new Decimal("1F300"),
     description: "???",
@@ -142,7 +142,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 16,
     cost: new Decimal("1F300"),
     description: "???",
@@ -150,7 +150,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 17,
     cost: new Decimal("1F300"),
     description: "???",
@@ -158,7 +158,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 18,
     cost: new Decimal("1F300"),
     description: "???",
@@ -166,7 +166,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 19,
     cost: new Decimal("1F300"),
     description: "???",
@@ -174,7 +174,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 20,
     cost: new Decimal("1F300"),
     description: "???",
@@ -182,7 +182,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 21,
     cost: new Decimal("1F300"),
     description: "???",
@@ -190,7 +190,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 22,
     cost: new Decimal("1F300"),
     description: "???",
@@ -198,7 +198,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 23,
     cost: new Decimal("1F300"),
     description: "???",
@@ -206,7 +206,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 24,
     cost: new Decimal("1F300"),
     description: "???",
@@ -214,7 +214,7 @@ export const raShopUpgrades = [
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Cosmically Duplicate",
+    name: "???",
     id: 25,
     cost: new Decimal("1F300"),
     description: "???",

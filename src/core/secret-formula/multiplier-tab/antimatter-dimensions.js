@@ -150,7 +150,7 @@ export const AD = {
 
       if (dim) return allMult.times(dimMults[dim]);
       let totalMult = DC.D1;
-      for (let tier = 1; tier <= MultiplierTabHelper.activeDimCount("AD"); tier++) {
+      for (let tier = 1; tier <= MultiplierTabHelper.activeDimCount(`AD`); tier++) {
         totalMult = totalMult.times(dimMults[tier]).times(allMult);
       }
       return totalMult;

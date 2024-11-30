@@ -69,46 +69,43 @@ export default {
 
 <template>
   <div class="c-stats-tab">
-    Coming Soon(tm)
-    <!--
-      <div class="l-multiplier-subtab-btn-container">
+    <div class="l-multiplier-subtab-btn-container">
       <button
-      v-for="(option, index) in availableOptions"
-      :key="option.key + option.isActive"
-      :class="subtabClassObject(option)"
-      @click="clickSubtab(index)"
+        v-for="(option, index) in availableOptions"
+        :key="option.key + option.isActive"
+        :class="subtabClassObject(option)"
+        @click="clickSubtab(index)"
       >
-      {{ option.text }}
+        {{ option.text }}
       </button>
-      </div>
-      <div class="c-list-container">
+    </div>
+    <div class="c-list-container">
       <span
-      v-for="symbol in resourceSymbols"
-      :key="symbol"
+        v-for="symbol in resourceSymbols"
+        :key="symbol"
       >
-      <span
-      class="c-symbol-overlay"
-      v-html="symbol"
-      />
+        <span
+          class="c-symbol-overlay"
+          v-html="symbol"
+        />
       </span>
       <MultiplierBreakdownEntry
-      :key="resource.key"
-      :resource="resource"
-      :is-root="true"
+        :key="resource.key"
+        :resource="resource"
+        :is-root="true"
       />
       <div class="c-multiplier-tab-text-line">
-      Note: Entries are only expandable if they contain multiple sources which can be different values.
-      For example, any effects which affect all Dimensions of any type equally will not expand into a
-      list of eight identical numbers.
-      <br>
-      <b>
-      Some entries may cause lag if expanded out fully. Resizing happens over 200 ms (instead of instantly)
-      in order to reduce possible adverse effects due to photosensitivity. This may cause some visual weirdness
-      after prestige events.
-      </b>
+        Note: Entries are only expandable if they contain multiple sources which can be different values.
+        For example, any effects which affect all Dimensions of any type equally will not expand into a
+        list of eight identical numbers.
+        <br>
+        <b>
+          Some entries may cause lag if expanded out fully. Resizing happens over 200 ms (instead of instantly)
+          in order to reduce possible adverse effects due to photosensitivity. This may cause some visual weirdness
+          after prestige events.
+        </b>
       </div>
-      </div>
-    -->
+    </div>
   </div>
 </template>
 

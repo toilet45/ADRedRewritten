@@ -173,7 +173,7 @@ class AlchemyReaction {
       const diffAfter = reagentAfter.sub(prodAfter);
       cappedYield = Decimal.min(cappedYield, this.reactionYield.mul(diffBefore).div(diffBefore.sub(diffAfter)));
     }
-    // If (this._product.amount.gt(25000)) cappedYield = cappedYield.pow(0.66);
+    //if (this._product.amount.gt(25000)) cappedYield = cappedYield.div(10);
     return Decimal.clampMin(cappedYield, 0);
   }
 
@@ -230,7 +230,7 @@ class AlchemyReaction {
       }
       // The minimum reaction yield is 0.05 so the cap is actually reached
       const effectiveYield = Decimal.clampMin(reactionYield.mul(this.reactionProduction), 0.05);
-      this._product.amount = Decimal.clampMax(this._product.amount.add(effectiveYield), cap);
+      this._product.amount = Decimal.min(Decimal.clampMax(this._product.amount.add(effectiveYield), cap), cap);
     }
   }
 }

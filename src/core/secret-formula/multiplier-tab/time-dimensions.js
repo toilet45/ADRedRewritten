@@ -40,7 +40,7 @@ export const TD = {
     multValue: dim => {
       const getMult = td => {
         const d = TimeDimension(td);
-        const bought = td === 8 ? Math.clampMax(d.bought, 1e8) : d.bought;
+        const bought = td === 8 ? Decimal.clampMax(d.bought, 1e8) : d.bought;
         return Decimal.pow(d.powerMultiplier, bought);
       };
       if (dim) return getMult(dim);
@@ -75,16 +75,16 @@ export const TD = {
         .reduce((x, y) => x.times(y), DC.D1);
     },
     isActive: dim => (dim
-      ? ImaginaryUpgrade(14).canBeApplied || (dim === 8 && GlyphSacrifice.time.effectValue.gt(1))
+      ? ImaginaryUpgrade(14).canBeApplied || (dim === 8 && GlyphInfo.time.sacrificeInfo.effect())
       : TimeDimension(1).isProducing),
     icon: dim => MultiplierTabIcons.PURCHASE("TD", dim),
   },
   timeGlyphSacrifice: {
     name: "Time Glyph Sacrifice",
     multValue: () => (TimeDimension(8).isProducing
-      ? Decimal.pow(GlyphSacrifice.time.effectValue, Math.clampMax(TimeDimension(8).bought, 1e8))
+      ? Decimal.pow(GlyphInfo.time.sacrificeInfo.effect(), Math.clampMax(TimeDimension(8).bought, 1e8))
       : DC.D1),
-    isActive: () => GlyphSacrifice.time.effectValue.gt(1),
+    isActive: () => GlyphInfo.time.sacrificeInfo.effect().gt(1),
     icon: MultiplierTabIcons.SACRIFICE("time"),
   },
   powPurchase: {

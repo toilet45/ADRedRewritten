@@ -213,6 +213,57 @@ window.player = {
     singularity: { isActive: false },
     ipMultBuyer: { isActive: false, },
     epMultBuyer: { isActive: false, },
+    musicGlyphs: { isActive: false, },
+    raMemories: {
+      teresa: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+      effarig: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+      enslaved: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+      v: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+      ra: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+      laitela: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+      pelle: {
+        upgrades: Array.range(0, 3).map(() => ({
+          isActive: true,
+        })),
+        isActive: false,
+      },
+    },
+    tesseract: { isActive: false },
+    penteract: { isActive: false, },
+    nonRebuyableUpgrade: {
+      reality: { isActive: false },
+      imaginary: { isActive: false },
+    }
   },
   infinityPoints: DC.D0,
   infinities: DC.D0,
@@ -559,6 +610,7 @@ window.player = {
     },
     perks: new Set(),
     respec: false,
+    updateGLOnReality: false,
     showGlyphSacrifice: false,
     showSidebarPanel: GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT,
     autoSort: 0,
@@ -776,7 +828,13 @@ window.player = {
       peakGamespeed: DC.D1,
       petWithRemembrance: "",
       shop: {
-        rebuyables: new Set(),
+        rebuyables: {
+          1: new Decimal(),
+          2: new Decimal(),
+          3: new Decimal(),
+          4: new Decimal(),
+          5: new Decimal(),
+        },
         upgradeBits: 0
       },
       raPoints: DC.D0
@@ -786,7 +844,7 @@ window.player = {
       maxDarkMatter: DC.D0,
       run: false,
       quoteBits: 0,
-      dimensions: Array.range(0, 4).map(() =>
+      dimensions: Array.range(0, 8).map(() =>
         ({
           amount: DC.D0,
           intervalUpgrades: DC.D0,

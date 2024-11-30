@@ -15,6 +15,7 @@ export default {
       currentDevSpeed: new Decimal(),
       inMatterChallenge: false,
       hasImaginaryBlackHoles: false,
+      speedUncapped: false
     };
   },
   computed: {
@@ -25,6 +26,9 @@ export default {
       const speed = this.formatNumber(this.baseSpeed.div(this.isEC12 ? 1 : this.currentDevSpeed));
       if (this.isEC12) {
         return `${speed} (fixed)`;
+      }
+      if (this.baseSpeed.gte(1e300) && !this.speedUncapped) {
+        return `${speed} (capped)`;
       }
       return `${speed}`;
     },
@@ -55,6 +59,7 @@ export default {
       // eslint-disable-next-line max-len
       this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
       //this.hasImaginaryBlackHoles = ImaginaryBlackHole(1).isActive && !this.isStopped && this.baseSpeed.gt(1);
+      this.speedUncapped = Ra.unlocks.gamespeedUncap.canBeApplied;
     },
     formatNumber(num) {
       if (num.gte(0.001) && num.lt(1e4) && num.neq(1)) {

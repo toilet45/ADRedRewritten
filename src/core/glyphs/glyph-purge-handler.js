@@ -49,7 +49,7 @@ export const GlyphSacrificeHandler = {
   glyphSacrificeGain(glyph) {
     if (!this.canSacrifice || Pelle.isDoomed) return DC.D0;
     // eslint-disable-next-line max-len
-    if (glyph.type === "reality" && !Teresa.hardRunCompleted) return glyph.level.mul(Achievement(171).effectOrDefault(1)).div(100);
+    if (glyph.type === "reality" && !Teresa.hardRunCompleted) return new Decimal(glyph.level).mul(Achievement(171).effectOrDefault(1)).div(100);
     if (glyph.type === "reality") {
       const pre10kFactor = Decimal.pow(Decimal.clampMax(glyph.level, 10000).add(10), 2.5);
       const post10kFactor = Decimal.clampMin(Decimal.sub(glyph.level, 1e4), 0).div(100).add(1);
@@ -165,7 +165,7 @@ export const GlyphSacrificeHandler = {
     if (resource.isBaseResource) {
       const highest = this.highestRefinementValue(glyph);
       const above25k = highest.gt(25000);
-      resource.highestRefinementValue = above25k ? highest.sub(25000).mul(1e7).cbrt().add(25000) : highest;
+      resource.highestRefinementValue = above25k ? highest.sub(25000).mul(1e5).cbrt().add(25000) : highest;
     }
     Glyphs.removeFromInventory(glyph);
   }

@@ -87,7 +87,7 @@ export const multiplierTabTree = {
     ["tickspeedUpgrades_purchased", "tickspeedUpgrades_free"]
   ],
   tickspeed_galaxies: [
-    ["galaxies_antimatter", "galaxies_replicanti", "galaxies_tachyon", "galaxies_nerfPelle"]
+    ["galaxies_antimatter", "galaxies_replicanti", "galaxies_tachyon", "galaxies_multiversal", "galaxies_nerfPelle"]
   ],
   infinities_total: [
     getProps("infinities")

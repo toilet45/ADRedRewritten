@@ -8,11 +8,11 @@ import PrimaryToggleButton from "@/components/PrimaryToggleButton";
 // show them as nerfs
 const nerfBlacklist = ["IP_base", "EP_base", "TP_base"];
 
-function padPercents(percents) {
+/*function padPercents(percents) {
   // Add some padding to percents to prevent text flicker
   // Max length is for "-100.0%"
   return percents.padStart(7, "\xa0");
-}
+}*/
 
 export default {
   name: "MultiplierBreakdownEntry",
@@ -118,7 +118,15 @@ export default {
       }
       this.dilationExponent = this.resource.dilationEffect;
       this.isDilated = this.dilationExponent.neq(1);
-      this.calculatePercents();
+      //this.calculatePercents();
+      const powList = this.entries.map(e => e.data.pow);
+      const totalPosPow = powList.filter(p => p.gt(1)).reduce((x, y) => x.times(y), new Decimal(1));
+      const totalNegPow = powList.filter(p => p.lt(1)).reduce((x, y) => x.times(y), new Decimal(1));
+      const log10Mult = (this.resource.fakeValue ?? this.resource.mult).log10().div(totalPosPow);
+      const isEmpty = log10Mult.eq(0);
+      if (!isEmpty) {
+        this.lastNotEmptyAt = this.now;
+      }
       this.now = Date.now();
       this.replacePowers = player.options.multiplierTab.replacePowers && this.allowPowerToggle;
       this.inNC12 = NormalChallenge(12).isRunning;
@@ -132,7 +140,7 @@ export default {
       this.rollingAverage.clear();
       this.update();
     },
-    calculatePercents() {
+    /*calculatePercents() {
       const powList = this.entries.map(e => e.data.pow);
       const totalPosPow = powList.filter(p => p.gt(1)).reduce((x, y) => x.times(y), new Decimal(1));
       const totalNegPow = powList.filter(p => p.lt(1)).reduce((x, y) => x.times(y), new Decimal(1));
@@ -183,14 +191,14 @@ export default {
       this.averagedPercentList = this.rollingAverage.average;
       this.totalMultiplier = Decimal.pow10(log10Mult);
       this.totalPositivePower = totalPosPow;
-    },
+    },*/
     styleObject(index) {
-      const netPerc = this.averagedPercentList.sum();
-      const isNerf = this.averagedPercentList[index].lt(0);
-      const iconObj = this.entries[index].icon;
-      const percents = this.averagedPercentList[index];
-      const barSize = perc => (perc.gt(0) ? perc.times(netPerc) : perc.times(-1));
-      return {
+      // const netPerc = this.averagedPercentList.sum();
+      // const isNerf = this.averagedPercentList[index].lt(0);
+      // const iconObj = this.entries[index].icon;
+      //const percents = this.averagedPercentList[index];
+      // const barSize = perc => (perc.gt(0) ? perc.times(netPerc) : perc.times(-1));
+      /* return {
         position: "absolute",
         top: `${new Decimal(100).times(this.averagedPercentList.slice(0, index).map(p => barSize(p)).sum())}%`,
         height: `${new Decimal(100).times(barSize(percents))}%`,
@@ -201,7 +209,7 @@ export default {
         background: isNerf
           ? `repeating-linear-gradient(-45deg, var(--color-bad), ${iconObj?.color} 0.8rem)`
           : iconObj?.color,
-      };
+      };*/
     },
     singleEntryClass(index) {
       return {
@@ -227,25 +235,26 @@ export default {
       };
     },
     entryString(index) {
-      const percents = this.percentList[index];
+      /*const percents = this.percentList[index];
       if (percents.lt(0) && !nerfBlacklist.includes(this.entries[index].key)) {
         return this.nerfString(index);
-      }
+      }*/
 
       // We want to handle very small numbers carefully to distinguish between "disabled/inactive" and
       // "too small to be relevant"
-      let percString;
+      /*let percString;
       if (percents.eq(0)) percString = formatPercents(0);
       else if (percents.eq(1)) percString = formatPercents(1);
       else if (percents.lt(0.001)) percString = `<${formatPercents(0.001, 1)}`;
       else if (percents.gt(0.9995)) percString = `~${formatPercents(1)}`;
       else percString = formatPercents(percents, 1);
-      percString = padPercents(percString);
+      percString = '' //padPercents(percString);*/
 
       // Display both multiplier and powers, but make sure to give an empty string if there's neither
       const entry = this.entries[index];
       if (!entry.data.isVisible) {
-        return `${percString}: ${entry.name}`;
+        return `${entry.name}`;
+        //return `${percString}: ${entry.name}`;
       }
       const overrideStr = entry.displayOverride;
       let valueStr;
@@ -276,11 +285,11 @@ export default {
         valueStr = values.length === 0 ? "" : `(${values.join(", ")})`;
       }
 
-      return `${percString}: ${entry.name} ${valueStr}`;
+      return `${entry.name} ${valueStr}`; //`${percString}: ${entry.name} ${valueStr}`;
     },
     nerfString(index) {
       const entry = this.entries[index];
-      const percString = padPercents(formatPercents(this.percentList[index], 1));
+      const percString = ``//padPercents(formatPercents(this.percentList[index], 1));
 
       // Display both multiplier and powers, but make sure to give an empty string if there's neither
       const overrideStr = entry.displayOverride;
@@ -304,7 +313,7 @@ export default {
         valueStr = values.length === 0 ? "" : `(${values.join(", ")})`;
       }
 
-      return `${percString}: ${entry.name} ${valueStr}`;
+      return `${entry.name} ${valueStr}`; //`${percString}: ${entry.name} ${valueStr}`;
     },
     totalString() {
       const resource = this.resource;
@@ -358,25 +367,6 @@ export default {
 
 <template>
   <div :class="containerClass">
-    <div
-      v-if="!isEmpty"
-      class="c-stacked-bars"
-    >
-      <div
-        v-for="(perc, index) in averagedPercentList"
-        :key="100 + index"
-        :style="styleObject(index)"
-        :class="{ 'c-bar-highlight' : mouseoverIndex === index }"
-        @mouseover="mouseoverIndex = index"
-        @mouseleave="mouseoverIndex = -1"
-        @click="showGroup[index] = !showGroup[index]"
-      >
-        <span
-          class="c-bar-overlay"
-          v-html="barSymbol(index)"
-        />
-      </div>
-    </div>
     <div />
     <div class="c-info-list">
       <div class="c-total-mult">

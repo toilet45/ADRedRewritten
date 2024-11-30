@@ -439,7 +439,8 @@ export function getGameSpeedupForDisplay() {
     !BlackHoles.areNegative &&
     !Pelle.isDisabled("blackhole")
   ) {
-    return Decimal.max(Enslaved.autoReleaseSpeed, speedFactor);
+    const x = Decimal.max(Enslaved.autoReleaseSpeed, speedFactor);
+    return Ra.unlocks.gamespeedUncap.canBeApplied ? x : x.clampMax(1e300);
   }
   return speedFactor.div(dev.speedUp);
 }
@@ -805,7 +806,8 @@ function passivePrestigeGen() {
     player.partInfinitied = infGen.minus(infGen.floor()).toNumber();
   }
   if (MendingMilestone.eight.isReached) {
-    player.celestials.teresa.pouredAmount = Math.max(1e24, Math.max(Currency.realityMachines.value.toNumber(), player.celestials.teresa.pouredAmount))
+    player.celestials.teresa.pouredAmount = Math.min(1e24, Decimal.max(Currency.realityMachines.value, player.celestials.teresa.pouredAmount).toNumber())
+    Teresa.checkForUnlocks();
   }
 }
 

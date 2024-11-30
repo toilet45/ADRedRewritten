@@ -168,7 +168,7 @@ export const imaginaryUpgrades = [
     : `Reach ${format("1e1500000000000")} antimatter without
       ever having any 1st Infinity Dimensions`,
     hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : player.requirementChecks.reality.maxID1.gt(0) && MendingUpgrade(17).boughtAmount.lt(5),
-    checkRequirement: () => player.requirementChecks.reality.maxID1.eq(0) && player.antimatter.add(1).log10().gte(1.5e12),
+    checkRequirement: () => (player.requirementChecks.reality.maxID1.eq(0) && player.antimatter.add(1).log10().gte(1.5e12)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     // This upgrade lock acts in multiple different conditions, but isn't 100% foolproof and also blocks a few edge
@@ -240,7 +240,7 @@ export const imaginaryUpgrades = [
     requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
     : `Have a Continuum increase of at least ${formatPercents(1)}`,
     hasFailed: () => false,
-    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(2),
+    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(2) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Unlock Autobuyers for repeatable Imaginary Upgrades and generate Imaginary Machines
       ${formatInt(10)} times faster`,
@@ -254,8 +254,8 @@ export const imaginaryUpgrades = [
     requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
     : `Reach ${format("1e7400000000000")} antimatter with Continuum disabled for the entire Reality`,
     hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !player.requirementChecks.reality.noContinuum,
-    checkRequirement: () => player.requirementChecks.reality.noContinuum &&
-      Currency.antimatter.value.max(1).log10().gte(7.4e12),
+    checkRequirement: () => (player.requirementChecks.reality.noContinuum &&
+      Currency.antimatter.value.max(1).log10().gte(7.4e12)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     lockEvent: "enable Continuum",
@@ -274,8 +274,8 @@ export const imaginaryUpgrades = [
       at least ${formatInt(4)} Cursed Glyphs equipped`,
     // Note: 4 cursed glyphs is -12 glyph count, but equipping a positive glyph in the last slot is allowed
     hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Effarig.isRunning || player.requirementChecks.reality.maxGlyphs > -10,
-    checkRequirement: () => Effarig.isRunning && player.requirementChecks.reality.maxGlyphs < -10 &&
-      Currency.antimatter.value.add(1).log10().gte(1.5e11),
+    checkRequirement: () => (Effarig.isRunning && player.requirementChecks.reality.maxGlyphs < -10 &&
+      Currency.antimatter.value.add(1).log10().gte(1.5e11)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `All Glyph Sacrifice totals are increased to ${format(1e100)}`,
     effect: () => new Decimal(1e100),
@@ -289,8 +289,8 @@ export const imaginaryUpgrades = [
     : `Reach Glyph level ${formatInt(20000)} in Ra's Reality with
       at most ${formatInt(0)} Glyphs equipped`,
     hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Ra.isRunning || player.requirementChecks.reality.maxGlyphs > 0,
-    checkRequirement: () => Ra.isRunning && player.requirementChecks.reality.maxGlyphs <= 0 &&
-      gainedGlyphLevel().actualLevel.gte(20000),
+    checkRequirement: () => (Ra.isRunning && player.requirementChecks.reality.maxGlyphs <= 0 &&
+      gainedGlyphLevel().actualLevel.gte(20000)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Increase free Dimboost count based on Tesseract count",
     effect: () => Tesseracts.effectiveCount.pow(2).div(4).floor(),
@@ -308,8 +308,8 @@ export const imaginaryUpgrades = [
     : `Have ${formatInt(13000)} Antimatter Galaxies in Ra's Reality
       with a fully inverted Black Hole`,
     hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Ra.isRunning || player.requirementChecks.reality.slowestBH.gt(1e-300),
-    checkRequirement: () => Ra.isRunning && player.requirementChecks.reality.slowestBH.lte(1e-300) &&
-      player.galaxies.gte(13000),
+    checkRequirement: () => (Ra.isRunning && player.requirementChecks.reality.slowestBH.lte(1e-300) &&
+      player.galaxies.gte(13000)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     // Three locking events: uninvert, discharge, and entering (but not auto-completing) EC12
@@ -328,8 +328,8 @@ export const imaginaryUpgrades = [
       at least ${formatInt(4)} empty Glyph slots`,
     hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Laitela.isRunning || Laitela.maxAllowedDimension !== 0 ||
       Glyphs.activeWithoutCompanion.length > 1,
-    checkRequirement: () => Laitela.isRunning && Laitela.maxAllowedDimension === 0 &&
-      Glyphs.activeWithoutCompanion.length <= 1 && TimeStudy.reality.isBought,
+    checkRequirement: () => (Laitela.isRunning && Laitela.maxAllowedDimension === 0 &&
+      Glyphs.activeWithoutCompanion.length <= 1 && TimeStudy.reality.isBought) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     lockEvent: "equip another non-Companion Glyph",

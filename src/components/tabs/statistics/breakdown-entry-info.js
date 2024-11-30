@@ -49,7 +49,7 @@ export class BreakdownEntryInfo {
   }
 
   get pow() {
-    return this._powValue() ?? new Decimal(1);
+    return new Decimal(this._powValue() ?? new Decimal(1));
   }
 
   get dilationEffect() {

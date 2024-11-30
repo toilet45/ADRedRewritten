@@ -7,7 +7,7 @@ import { DimensionState } from "../../dimensions/dimension";
 
 const INTERVAL_COST_MULT = DC.D5;
 const POWER_DM_COST_MULT = DC.E1;
-const POWER_DE_COST_MULTS = [1.65, 1.6, 1.55, 1.5];
+const POWER_DE_COST_MULTS = [1.65, 1.6, 1.55, 1.5, 1.45, 1.4, 1.35, 1.3]; //TODO: make hexa balance this
 
 const INTERVAL_START_COST = DC.E1;
 const POWER_DM_START_COST = DC.E1;
@@ -24,7 +24,7 @@ const COST_MULT_PER_TIER = 1200;
 export class DarkMatterDimensionState extends DimensionState {
 
   static get dimensionCount() {
-    return 4;
+    return 8;
   }
 
   constructor(tier) {
@@ -41,7 +41,8 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get isUnlocked() {
-    return this.unlockUpgrade.isBought;
+    if (this.tier < 5) return this.unlockUpgrade.isBought;
+    return false;
   }
 
   get ascensions() {
@@ -113,7 +114,7 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get adjustedStartingCost() {
-    const tiers = [null, 0, 2, 5, 13];
+    const tiers = [null, 0, 2, 5, 13, 34, 89, 233, 610]; // to balance (idk if they were intended to be every other fibonacci number)
     return Decimal.pow(COST_MULT_PER_TIER, tiers[this.tier]).mul(10)
       .mul(SingularityMilestone.darkDimensionCostReduction.effectOrDefault(1));
   }
@@ -296,7 +297,7 @@ export const DarkMatterDimensions = {
 
   tick(realDiff) {
     if (!Laitela.isUnlocked) return;
-    for (let tier = 4; tier >= 1; tier--) {
+    for (let tier = 8; tier >= 1; tier--) {
       const dim = DarkMatterDimension(tier);
       if (!dim.isUnlocked) continue;
       dim.realDiff = dim.realDiff.add(realDiff);
@@ -320,7 +321,7 @@ export const DarkMatterDimensions = {
 
   reset() {
     for (const dimension of DarkMatterDimensions.all) {
-      if (dimension._tier >= 5) break;
+      if (dimension._tier >= 9) break;
       dimension.reset();
     }
     Currency.darkMatter.reset();

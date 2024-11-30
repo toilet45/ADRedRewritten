@@ -2,13 +2,15 @@
 import CelestialQuoteHistory from "@/components/CelestialQuoteHistory";
 import RaPet from "./RaPet";
 import RaPetRemembranceButton from "./RaPetRemembranceButton";
+import ShopUpgradeButton from "./ShopUpgradeButton";
 
 export default {
   name: "RaTab",
   components: {
     RaPet,
     RaPetRemembranceButton,
-    CelestialQuoteHistory
+    CelestialQuoteHistory,
+    ShopUpgradeButton
   },
   data() {
     return {
@@ -24,9 +26,12 @@ export default {
       petWithRemembrance: "",
       isRunning: false,
       memoryBoosts: "",
+      shopUnlocked: false,
+      raPoints: new Decimal()
     };
   },
   computed: {
+    upgrades: () => RaUpgrades.all,
     laitelaUnlock: () => Laitela.isUnlocked,
     pets: () => [
       {
@@ -104,6 +109,9 @@ export default {
     isDoomed: () => Pelle.isDoomed,
   },
   methods: {
+    id(row, column) {
+      return (row - 1) * 5 + column - 1;
+    },
     update() {
       this.memoriesPerChunk.copyFrom(Ra.productionPerMemoryChunk);
       this.isRaCapped = Ra.totalPetLevel === (MendingUpgrade(19).isBought ? 700 : 100);
@@ -116,6 +124,8 @@ export default {
       this.petWithRemembrance = Ra.petWithRemembrance;
       this.isRunning = Ra.isRunning;
       this.memoryBoosts = Ra.memoryBoostResources;
+      this.shopUnlocked = Ra.unlocks.raShopUnlock.canBeApplied;
+      this.raPoints.copyFrom(Currency.raPoints.value);
     },
     startRun() {
       if (this.isDoomed) return;
@@ -212,5 +222,31 @@ export default {
         </div>
       </div>
     </div>
+    <div
+      v-if="shopUnlocked"
+      class="l-reality-upgrade-grid"
+    >
+      <div class="c-ra-point-text">
+        You have {{ format(raPoints, 2) }} Ra Points
+      </div>
+      <div
+        v-for="row in 5"
+        :key="row"
+        class="l-reality-upgrade-grid__row"
+      >
+        <ShopUpgradeButton
+          v-for="column in 5"
+          :key="id(row, column)"
+          :upgrade="upgrades[id(row, column)]"
+        />
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.c-ra-point-text {
+  color: var(--color-text);
+  font-size: 1.5rem;
+}
+</style>

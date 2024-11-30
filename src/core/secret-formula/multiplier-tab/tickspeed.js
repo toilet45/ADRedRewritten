@@ -53,7 +53,8 @@ export const tickspeed = {
       const ag = player.galaxies.add(GalaxyGenerator.galaxies);
       const rg = Replicanti.galaxies.total;
       const tg = player.dilation.totalTachyonGalaxies;
-      return `${format(tg.add(ag).add(rg))} Total`;
+      const mg = player.mending.multiversalGalaxies;
+      return `${format(tg.add(ag).add(rg).add(mg))} Total`;
     },
     multValue: () => Decimal.pow10(MultiplierTabHelper.decomposeTickspeed().galaxies.mul(100)),
     isActive: true,

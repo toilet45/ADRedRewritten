@@ -21,7 +21,7 @@ export const galaxies = {
     displayOverride: () => {
       const num = Replicanti.galaxies.total;
       let rg = Replicanti.galaxies.bought;
-      rg = rg.times((DC.D1.add(Effects.sum(TimeStudy(132), TimeStudy(133)))));
+      rg = rg.times((new Decimal(1).add(Effects.sum(TimeStudy(132), TimeStudy(133)))));
       rg = rg.add(Replicanti.galaxies.extra);
       rg = rg.add(Decimal.min(Replicanti.galaxies.bought, ReplicantiUpgrade.galaxies.value).times(
         Effects.sum(EternityChallenge(8).reward)));
@@ -51,6 +51,22 @@ export const galaxies = {
       return Decimal.pow10(num.times(mult));
     },
     isActive: () => player.dilation.totalTachyonGalaxies.gt(0),
+    icon: MultiplierTabIcons.SPECIFIC_GLYPH("dilation"),
+  },
+  multiversal: {
+    name: "Multivesal Galaxies",
+    displayOverride: () => {
+      const num = player.mending.multiversalGalaxies;
+      const mg = player.mending.multiversalGalaxies;
+      const mult = mg.div(Decimal.clampMin(num, 1)).times(MultiplierTabHelper.globalGalaxyMult());
+      return `${formatInt(num)}, ${formatX(mult, 2, 2)} strength`;
+    },
+    multValue: () => {
+      const num = player.mending.multiversalGalaxies;
+      const mult = new Decimal(1);
+      return Decimal.pow10(num.times(mult));
+    },
+    isActive: () => player.mending.multiversalGalaxies.gt(0),
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("dilation"),
   },
   nerfPelle: {

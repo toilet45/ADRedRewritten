@@ -828,6 +828,16 @@ export const Glyphs = {
       this.addToInventory(GlyphGenerator.cursedGlyph());
       GameUI.notify.error("Created a Cursed Glyph");
     }
+  },
+  updateEquippedGlyphLevels(level) {
+    for (let i = 0; i < this.active.length; i++) {
+      if (this.active[i] !== null) {
+        if (!["companion", "cursed", "reality"].includes(this.active[i].type)) {
+          console.log([level, this.active[i].level]);
+          this.active[i].level = Decimal.max(level, this.active[i].level);
+        }
+      }
+    }
   }
 };
 
@@ -842,6 +852,7 @@ export function recalculateAllGlyphs() {
     calculateGlyph(player.reality.glyphs.inventory[i]);
   }
   Glyphs.updateRealityGlyphEffects();
+  if (player.reality.updateGLOnReality) Glyphs.updateEquippedGlyphLevels(gainedGlyphLevel().actualLevel);
   Glyphs.refresh();
 }
 

@@ -16,6 +16,8 @@ export default {
       undoAvailable: false,
       undoVisible: false,
       cosmeticGlow: false,
+      updateLvUnlock: false,
+      updateLv: player.reality.updateGLOnReality
     };
   },
   computed: {
@@ -33,6 +35,12 @@ export default {
       return this.respec
         ? `Respec is active and will place your currently - equipped Glyphs into your inventory after ${reset}.`
         : `Your currently-equipped Glyphs will stay equipped on ${reset}.`;
+    },
+    lvTooltip() {
+      const reset = Pelle.isDoomed ? "Armageddon" : "Reality";
+      return this.updateLv
+        ? `Your currently-equipped Glyphs' levels will update on ${reset} if gained Glyph level is higher.`
+        : `Your currently-equipped Glyphs' levels will not change on ${reset}.`;
     },
     undoTooltip() {
       if (!this.undoSlotsAvailable) return "You do not have available inventory space to unequip Glyphs to";
@@ -61,9 +69,28 @@ export default {
         cursor: "pointer",
       };
     },
+    glyphLvStyle() {
+      if (this.updateLv) {
+        return {
+          color: "var(--color-reality-light)",
+          "background-color": "var(--color-reality)",
+          "border-color": "#094e0b",
+          cursor: "pointer",
+        };
+      }
+      return {
+        cursor: "pointer",
+      };
+    },
     // "Armageddon" causes the button to have text overflow, so we conditionally make the button taller; this doesn't
     // cause container overflow due to another button being removed entirely when doomed
     unequipClass() {
+      return {
+        "l-glyph-equip-button": this.isDoomed,
+        "l-glyph-equip-button-short": !this.isDoomed,
+      };
+    },
+    lvClass() {
       return {
         "l-glyph-equip-button": this.isDoomed,
         "l-glyph-equip-button-short": !this.isDoomed,
@@ -84,6 +111,8 @@ export default {
       this.undoVisible = TeresaUnlocks.undo.canBeApplied;
       this.undoAvailable = this.undoVisible && this.undoSlotsAvailable && player.reality.glyphs.undo.length > 0;
       this.cosmeticGlow = player.reality.glyphs.cosmetics.glowNotification;
+      this.updateLvUnlock = MendingUpgrade(3).boughtAmount.gt(4);
+      this.updateLv = player.reality.updateGLOnReality;
     },
     glyphPositionStyle(idx) {
       const angle = 2 * Math.PI * idx / this.slotCount;
@@ -113,6 +142,9 @@ export default {
     },
     toggleRespec() {
       player.reality.respec = !player.reality.respec;
+    },
+    toggleLvlUpdate() {
+      player.reality.updateGLOnReality = !player.reality.updateGLOnReality;
     },
     toggleRespecIntoProtected() {
       player.options.respecIntoProtected = !player.options.respecIntoProtected;
@@ -196,6 +228,16 @@ export default {
         @click="toggleRespec"
       >
         {{ unequipText }}
+      </button>
+      <button
+        v-if="updateLvUnlock"
+        class="l-glyph-equip-button c-reality-upgrade-btn"
+        :class="lvClass"
+        :style="glyphLvStyle"
+        :ach-tooltip="lvTooltip"
+        @click="toggleLvlUpdate"
+      >
+        Update equipped Glyph Levels on Reality
       </button>
       <button
         v-if="undoVisible"

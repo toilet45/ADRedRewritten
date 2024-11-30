@@ -532,7 +532,7 @@ Currency.enslavedPoints = new class extends DecimalCurrency {
   set value(value) { player.celestials.enslaved.enslavedPoints = value; }
 }();
 
-Currency.enslavedPoints = new class extends DecimalCurrency {
-  get value() { return player.celestials.ra.enslavedPoints; }
-  set value(value) { player.celestials.ra.enslavedPoints = value; }
+Currency.raPoints = new class extends DecimalCurrency {
+  get value() { return player.celestials.ra.raPoints; }
+  set value(value) { player.celestials.ra.raPoints = value; }
 }();

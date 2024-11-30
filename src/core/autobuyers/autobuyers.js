@@ -13,6 +13,7 @@ import { GalaxyAutobuyerState } from "./galaxy-autobuyer";
 import { ImaginaryUpgradeAutobuyerState } from "./imaginary-upgrade-autobuyer";
 import { InfinityDimensionAutobuyerState } from "./infinity-dimension-autobuyer";
 import { MendAutobuyerState } from "./mend-autobuyer";
+import { MusicGlyphAutobuyerState } from "./music-glyph-autobuyer";
 import { RealityAutobuyerState } from "./reality-autobuyer";
 import { RealityUpgradeAutobuyerState } from "./reality-upgrade-autobuyer";
 import { ReplicantiGalaxyAutobuyerState } from "./replicanti-galaxy-autobuyer";
@@ -22,6 +23,15 @@ import { SingularityAutobuyerState } from "./singularity-autobuyer";
 import { TickspeedAutobuyerState } from "./tickspeed-autobuyer";
 import { TimeDimensionAutobuyerState } from "./time-dimension-autobuyer";
 import { TimeTheoremAutobuyerState } from "./time-theorem-autobuyer";
+
+import { PenteractAutobuyerState, TesseractAutobuyerState } from "./eract-autobuyers";
+
+import { EffarigMemoryAutobuyerState, EnslavedMemoryAutobuyerState,
+  LaitelaMemoryAutobuyerState, PelleMemoryAutobuyerState, RaMemoryAutobuyerState,
+  TeresaMemoryAutobuyerState, VMemoryAutobuyerState } from "./memory-autobuyer";
+
+import { NonRepeatableImaginaryUpgradeAutobuyerState, NonRepeatableRealityUpgradeAutobuyerState } from "./nr-reality-upgrade-autobuyer";
+
 
 export const Autobuyer = {
   annihilation: new AnnihilationAutobuyerState(),
@@ -48,6 +58,18 @@ export const Autobuyer = {
   timeDimension: TimeDimensionAutobuyerState.createAccessor(),
   timeTheorem: new TimeTheoremAutobuyerState(),
   mend: new MendAutobuyerState(),
+  musicGlyph: new MusicGlyphAutobuyerState(),
+  teresaMem: TeresaMemoryAutobuyerState.createAccessor(),
+  effarigMem: EffarigMemoryAutobuyerState.createAccessor(),
+  enslavedMem: EnslavedMemoryAutobuyerState.createAccessor(),
+  vMem: VMemoryAutobuyerState.createAccessor(),
+  raMem: RaMemoryAutobuyerState.createAccessor(),
+  laitelaMem: LaitelaMemoryAutobuyerState.createAccessor(),
+  pelleMem: PelleMemoryAutobuyerState.createAccessor(),
+  tesseract: new TesseractAutobuyerState(),
+  penteract: new PenteractAutobuyerState(),
+  nrReality: new NonRepeatableRealityUpgradeAutobuyerState(),
+  nrImaginary: new NonRepeatableImaginaryUpgradeAutobuyerState()
 };
 
 export const Autobuyers = (function() {
@@ -74,6 +96,11 @@ export const Autobuyers = (function() {
     Autobuyer.darkMatterDimsAscension,
     Autobuyer.singularity,
     Autobuyer.annihilation,
+    Autobuyer.musicGlyph,
+    Autobuyer.tesseract,
+    Autobuyer.nrReality,
+    Autobuyer.nrImaginary,
+    Autobuyer.penteract
   ];
 
   const singleComplex = [
@@ -88,6 +115,13 @@ export const Autobuyers = (function() {
     Autobuyer.blackHolePower.zeroIndexed,
     Autobuyer.realityUpgrade.zeroIndexed,
     Autobuyer.imaginaryUpgrade.zeroIndexed,
+    Autobuyer.teresaMem.zeroIndexed,
+    Autobuyer.effarigMem.zeroIndexed,
+    Autobuyer.enslavedMem.zeroIndexed,
+    Autobuyer.vMem.zeroIndexed,
+    Autobuyer.raMem.zeroIndexed,
+    Autobuyer.laitelaMem.zeroIndexed,
+    Autobuyer.pelleMem.zeroIndexed,
   ];
   const all = dimensions.concat(prestige, singleComplex, arrays);
   const multiple = [
@@ -99,6 +133,13 @@ export const Autobuyers = (function() {
     Autobuyer.blackHolePower,
     Autobuyer.realityUpgrade,
     Autobuyer.imaginaryUpgrade,
+    Autobuyer.teresaMem,
+    Autobuyer.effarigMem,
+    Autobuyer.enslavedMem,
+    Autobuyer.vMem,
+    Autobuyer.raMem,
+    Autobuyer.laitelaMem,
+    Autobuyer.pelleMem,
   ];
 
   return {

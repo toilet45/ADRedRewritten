@@ -65,9 +65,9 @@ export const perkShop = {
   }),
   musicGlyph: rebuyable({
     id: 4,
-    description: () => `Receive a Music Glyph of a random type that is ${formatPercents(0.8)} of your highest level.
+    description: () => `Receive a Music Glyph of a random type that is ${formatPercents(Ra.unlocks.musicAtHighest.canBeApplied ? 1 : 0.8)} of your highest level.
       (Try clicking it!)`,
-    cost: () => 1,
+    cost: () => MendingUpgrade(17).boughtAmount.gt(2) ? 0 : 1,
     formatCost: value => formatInt(value),
     costCap: () => Number.MAX_VALUE,
     cap: () => Number.MAX_VALUE
@@ -76,7 +76,7 @@ export const perkShop = {
   fillMusicGlyph: rebuyable({
     id: 5,
     description: () => `Fill all empty slots in your inventory with Music Glyphs`,
-    cost: () => Math.clampMin(GameCache.glyphInventorySpace.value, 1),
+    cost: () => MendingUpgrade(17).boughtAmount.gt(2) ? 0 : Math.clampMin(GameCache.glyphInventorySpace.value, 1),
     otherReq: () => GameCache.glyphInventorySpace.value > 0,
     formatCost: value => formatInt(value),
     costCap: () => Number.MAX_VALUE,

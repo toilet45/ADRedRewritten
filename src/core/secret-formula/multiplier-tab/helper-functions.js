@@ -187,13 +187,13 @@ export const MultiplierTabHelper = {
   blackHoleSpeeds() {
     const currBH = BlackHoles.list
       .filter(bh => bh.isUnlocked)
-      .map(bh => (bh.isActive ? bh.power : 1))
-      .reduce((x, y) => x * y, 1);
+      .map(bh => (bh.isActive ? bh.power : DC.D1))
+      .reduce((x, y) => x.times(y), DC.D1);
 
     // Calculate an average black hole speedup factor
     const bh1 = BlackHole(1);
     const bh2 = BlackHole(2);
-    const avgBH = 1 + (bh1.isUnlocked ? bh1.dutyCycle.times(bh1.power.sub(1)) : DC.D0).add(bh2.isUnlocked ? bh1.dutyCycle.times(bh2.dutyCycle).times(bh1.power).times(bh2.power.sub(1)) : DC.D0);
+    const avgBH = Decimal.add(1, (bh1.isUnlocked ? bh1.dutyCycle.times(bh1.power.sub(1)) : DC.D0).add(bh2.isUnlocked ? bh1.dutyCycle.times(bh2.dutyCycle).times(bh1.power).times(bh2.power.sub(1)) : DC.D0));
 
     return {
       current: currBH,
