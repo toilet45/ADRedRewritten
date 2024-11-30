@@ -833,7 +833,6 @@ export const Glyphs = {
     for (let i = 0; i < this.active.length; i++) {
       if (this.active[i] !== null) {
         if (!["companion", "cursed", "reality"].includes(this.active[i].type)) {
-          console.log([level, this.active[i].level]);
           this.active[i].level = Decimal.max(level, this.active[i].level);
         }
       }
