@@ -455,6 +455,17 @@ export const migrations = {
           chunkUpgrades: 0
         } };
       player.timestudy.preferredPaths[1] += 1;
+    },
+    101: player => {
+      player.celestials.laitela.dimensions = player.celestials.laitela.dimensions.concat(Array.range(0, 4).map(() =>
+        ({
+          amount: new Decimal(),
+          intervalUpgrades: new Decimal(),
+          powerDMUpgrades: new Decimal(),
+          powerDEUpgrades: new Decimal(),
+          realDiff: new Decimal(),
+          ascensionCount: new Decimal()
+        })));
     }
   },
 
