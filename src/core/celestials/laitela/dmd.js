@@ -41,8 +41,14 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get isUnlocked() {
-    if (this.tier < 5) return this.unlockUpgrade.isBought;
-    return false;
+    switch (this.tier) {
+      case 8: return Ra.pets.laitela.level >= 100;
+      case 7: return Ra.pets.laitela.level >= 75;
+      case 6: return Ra.pets.laitela.level >= 50;
+      case 5: return Ra.pets.laitela.level >= 25;
+      default:
+        return this.unlockUpgrade.isBought;
+    }
   }
 
   get ascensions() {

@@ -20,16 +20,19 @@ export default {
       maxAutobuy: 0,
       maxAutoAscend: 0,
       autoSingularityFactor: 0,
+      dmd5Plus: false
     };
   },
   computed: {
     autobuyStr() {
-      return this.maxAutobuy === 4
+      if (this.maxAutobuy === 8) return "ON (all DMD)";
+      return this.maxAutobuy === 4 && !this.dmd5Plus
         ? "ON (all DMD)"
         : `ON (max. DMD ${this.maxAutobuy})`;
     },
     autoAscendStr() {
-      return this.maxAutoAscend === 4
+      if (this.maxAutoAscend === 8) return "ON (all DMD)";
+      return this.maxAutoAscend === 4 && !this.dmd5Plus
         ? "ON (all DMD)"
         : `ON (max. DMD ${this.maxAutoAscend})`;
     },
@@ -68,6 +71,7 @@ export default {
       this.maxAutobuy = SingularityMilestone.darkDimensionAutobuyers.effectValue;
       this.maxAutoAscend = SingularityMilestone.ascensionAutobuyers.effectValue;
       this.autoSingularityFactor = SingularityMilestone.autoCondense.effectValue;
+      this.dmd5Plus = DarkMatterDimension(5).isUnlocked;
     },
   }
 };
