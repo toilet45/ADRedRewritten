@@ -70,10 +70,10 @@ export default {
       this.isRebuyable = upgrade.isRebuyable;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
-      this.isAutoUnlocked = ImaginaryUpgrade(20).canBeApplied || MendingMilestone.seven.isReached;
+      this.isAutoUnlocked = (ImaginaryUpgrade(20).canBeApplied || MendingMilestone.seven.isReached) && upgrade.id < 26;
       this.canBeLocked = upgrade.config.canLock && !this.isAvailableForPurchase;
       this.hasRequirementLock = upgrade.hasPlayerLock;
-      if (this.isRebuyable) this.isAutobuyerOn = Autobuyer.imaginaryUpgrade(upgrade.id).isActive;
+      if (this.isRebuyable && upgrade.id < 26) this.isAutobuyerOn = Autobuyer.imaginaryUpgrade(upgrade.id).isActive;
       this.etaText = this.getETAText();
     },
     getETAText() {

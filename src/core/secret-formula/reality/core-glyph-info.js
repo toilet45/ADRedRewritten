@@ -76,7 +76,8 @@ export const GlyphInfo = {
     "time",
     "dilation",
     "effarig",
-    "reality"
+    "reality",
+    "amalgam"
   ],
 
   generatedGlyphTypes: [
@@ -177,12 +178,22 @@ export const GlyphInfo = {
       "infinityrate", "infinityIP", "infinityinfmult", "powerpow", "powermult", "powerdimboost", "powerbuy10"
     ],
     adjective: { high: "Amalgamated", mid: "Fused", low: "Mixed" },
-    noun: "Amalgam",
+    noun: "Amalgamation",
     isBasic: false,
     regularGlyphSymbol: "§",
     cancerGlyphSymbol: "S",
     // That S symbol people keep drawing if that's possible
-    hasSacrifice: false,
+    hasSacrifice: true,
+    sacrificeInfo: {
+      id: "almalgam",
+      effect: added => {
+        if (Pelle.isDisabled("glyphsac")) return DC.D0;
+        const sac = DC.D1;
+        return sac;
+      },
+      description: amount => `Other Glyph sacrifice effects are boosted by ${formatPow(amount, 2, 2)} (${formatX(amount, 2, 2)} for Power and Replicantion)`,
+      cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
+    },
     // Possible sac effect: "Raise (multiply for power and rep) other sac effects by x (up to ^1.3 / x1.3)"
     hasAlchemyResource: false,
     pelleUniqueEffect: false,

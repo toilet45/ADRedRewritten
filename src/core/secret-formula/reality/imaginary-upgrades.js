@@ -335,4 +335,44 @@ export const imaginaryUpgrades = [
     lockEvent: "equip another non-Companion Glyph",
     description: "Unlock Pelle, Celestial of Antimatter",
   },
+  rebuyable({
+    name: "???",
+    id: 26,
+    initialCost: new Decimal('1F300'),
+    costMult: new Decimal('1F300'),
+    description: () => `???`,
+    effect: 1
+  }),
+  rebuyable({
+    name: "???",
+    id: 27,
+    initialCost: new Decimal('1F300'),
+    costMult: new Decimal('1F300'),
+    description: () => `???`,
+    effect: 1
+  }),
+  rebuyable({
+    name: "???",
+    id: 28,
+    initialCost: new Decimal('1F300'),
+    costMult: new Decimal('1F300'),
+    description: () => `???`,
+    effect: 1
+  }),
+  rebuyable({
+    name: "???",
+    id: 29,
+    initialCost: new Decimal('1F300'),
+    costMult: new Decimal('1F300'),
+    description: () => `???`,
+    effect: 1
+  }),
+  rebuyable({
+    name: "???",
+    id: 30,
+    initialCost: new Decimal('1F300'),
+    costMult: new Decimal('1F300'),
+    description: () => `???`,
+    effect: 1
+  }),
 ];

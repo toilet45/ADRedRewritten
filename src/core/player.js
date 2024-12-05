@@ -263,7 +263,11 @@ window.player = {
     nonRebuyableUpgrade: {
       reality: { isActive: false },
       imaginary: { isActive: false },
-    }
+    },
+    singCap: {
+      multiplier: DC.E3,
+      isActive: true
+    },
   },
   infinityPoints: DC.D0,
   infinities: DC.D0,
@@ -542,7 +546,8 @@ window.player = {
         replication: DC.D0,
         dilation: DC.D0,
         effarig: DC.D0,
-        reality: DC.D0
+        reality: DC.D0,
+        amalgam: DC.D0
       },
       undo: [],
       sets: new Array(7).fill({
@@ -603,6 +608,11 @@ window.player = {
       8: new Decimal(),
       9: new Decimal(),
       10: new Decimal(),
+      26: new Decimal(),
+      27: new Decimal(),
+      28: new Decimal(),
+      29: new Decimal(),
+      30: new Decimal(),
     },
     reqLock: {
       reality: 0,

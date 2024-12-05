@@ -22,6 +22,7 @@ export default {
       isUnlocked: false,
       // Used to hide the input box if the game is auto-sacrificing every tick without resource resets
       isHiddenSacrifice: false,
+      isSingCapText: false
     };
   },
   computed: {
@@ -30,12 +31,16 @@ export default {
     },
     isSacrifice() {
       return this.name === "Dimensional Sacrifice";
+    },
+    isSingCap() {
+      return this.name === "Singularity Cap";
     }
   },
   methods: {
     update() {
       this.isUnlocked = this.autobuyer.isUnlocked;
       this.isHiddenSacrifice = this.isSacrifice && Achievement(118).canBeApplied;
+      this.isSingCapText = this.isSingCap;
     },
   }
 };
@@ -61,7 +66,7 @@ export default {
         v-else-if="autobuyer.hasInput"
         class="c-autobuyer-box__small-text"
       >
-        Multiplier:
+        {{ isSingCap ? 'Interval (ms):' : 'Multiplier:' }}
         <AutobuyerInput
           class="c-small-autobuyer-input"
           :autobuyer="autobuyer"

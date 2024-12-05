@@ -20,6 +20,7 @@ import { ReplicantiGalaxyAutobuyerState } from "./replicanti-galaxy-autobuyer";
 import { ReplicantiUpgradeAutobuyerState } from "./replicanti-upgrade-autobuyer";
 import { SacrificeAutobuyerState } from "./sacrifice-autobuyer";
 import { SingularityAutobuyerState } from "./singularity-autobuyer";
+import { SingularityCapAutobuyerState } from "./singulaity-cap-autobuyer";
 import { TickspeedAutobuyerState } from "./tickspeed-autobuyer";
 import { TimeDimensionAutobuyerState } from "./time-dimension-autobuyer";
 import { TimeTheoremAutobuyerState } from "./time-theorem-autobuyer";
@@ -69,7 +70,8 @@ export const Autobuyer = {
   tesseract: new TesseractAutobuyerState(),
   penteract: new PenteractAutobuyerState(),
   nrReality: new NonRepeatableRealityUpgradeAutobuyerState(),
-  nrImaginary: new NonRepeatableImaginaryUpgradeAutobuyerState()
+  nrImaginary: new NonRepeatableImaginaryUpgradeAutobuyerState(),
+  singCap: new SingularityCapAutobuyerState()
 };
 
 export const Autobuyers = (function() {
@@ -100,7 +102,8 @@ export const Autobuyers = (function() {
     Autobuyer.tesseract,
     Autobuyer.nrReality,
     Autobuyer.nrImaginary,
-    Autobuyer.penteract
+    Autobuyer.penteract,
+    Autobuyer.singCap,
   ];
 
   const singleComplex = [

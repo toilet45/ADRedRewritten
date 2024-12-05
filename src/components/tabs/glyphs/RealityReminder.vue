@@ -15,6 +15,7 @@ export default {
       purchasableTS: 0,
       hasDilated: 0,
       availableCharges: 0,
+      cappedTDs: false
     };
   },
   computed: {
@@ -29,7 +30,7 @@ export default {
       if (this.unpurchasedDilationUpgrades > 0) {
         arr.push(`Purchase the remaining Dilation Upgrades (${formatInt(this.unpurchasedDilationUpgrades)} left)`);
       }
-      if (this.currLog10EP.gt(this.cheapestLog10TD.mul(1.3))) {
+      if (this.currLog10EP.gt(this.cheapestLog10TD.mul(1.3)) && !this.cappedTDs) {
         arr.push(`Purchase more TDs (cheapest: ${format(Decimal.pow10(this.cheapestLog10TD))} EP)`);
       }
       if (this.currLog10EP.gt(this.multEPLog10Cost.mul(1.3))) {
@@ -94,6 +95,7 @@ export default {
       this.hasDilated = Perk.startTP.canBeApplied ? player.dilation.lastEP.gt(0)
         : player.dilation.tachyonParticles.gt(0);
       this.availableCharges = Ra.chargesLeft;
+      this.cappedTDs = TimeDimension(8).amount.gte(TimeDimensions.purchaseCap);
     },
     clicked() {
       if (!this.canBeExpanded) return;
