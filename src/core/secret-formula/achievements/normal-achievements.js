@@ -1250,7 +1250,7 @@ export const normalAchievements = [
     id: 171,
     name: "The god is delighted",
     description: "Sacrifice every sacrificable Glyph type at least once.",
-    checkRequirement: () => Object.values(player.reality.glyphs.sac).every(s => s.gt(0)),
+    checkRequirement: () => Object.values(player.reality.glyphs.sac).toSpliced(7, 1).every(s => s.gt(0)),
     checkEvent: GAME_EVENT.GLYPHS_CHANGED,
     get reward() { return `Glyph sacrifice is ${formatX(2)} stronger.`; },
     effect: 2,

@@ -466,6 +466,9 @@ export const migrations = {
           realDiff: new Decimal(),
           ascensionCount: new Decimal()
         })));
+    },
+    102: player => {
+      player.reality.glyphs.sac.amalgam = new Decimal();
     }
   },
 
