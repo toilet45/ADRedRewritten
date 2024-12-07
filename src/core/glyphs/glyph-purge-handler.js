@@ -116,7 +116,7 @@ export const GlyphSacrificeHandler = {
     return this.glyphRawRefinementGain(glyph).div(this.glyphRefinementEfficiency);
   },
   attemptRefineGlyph(glyph, force) {
-    if (glyph.type === "reality") return;
+    if (glyph.type === "reality" || glyph.type === "amalgam") return;
     if (glyph.type === "cursed") {
       Glyphs.removeFromInventory(glyph);
       return;
