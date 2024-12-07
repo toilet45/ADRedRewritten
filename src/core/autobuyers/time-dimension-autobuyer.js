@@ -33,6 +33,10 @@ export class TimeDimensionAutobuyerState extends IntervaledAutobuyerState {
     return true;
   }
 
+  get disabledByContinuum() {
+    return Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied;
+  }
+
   tick() {
     // We specifically call these two things before actually running the TD autobuyer code because that behavior
     // is desirable to gameplay, but simply reordering the autobuyers overall has undesired side-effects. There

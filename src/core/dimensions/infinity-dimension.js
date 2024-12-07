@@ -135,7 +135,7 @@ class InfinityDimensionState extends DimensionState {
       (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension)) {
       return DC.D0;
     }
-    let production = this.amount;
+    let production = this.totalAmount;
     if (EternityChallenge(11).isRunning) {
       return production;
     }
@@ -194,7 +194,7 @@ class InfinityDimensionState extends DimensionState {
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
     }
-    return this.amount.gt(0);
+    return this.totalAmount.gt(0);
   }
 
   get baseCost() {
@@ -233,6 +233,21 @@ class InfinityDimensionState extends DimensionState {
     return this._baseCost.times(Decimal.pow(this.costMultiplier, this.purchaseCap));
   }
 
+  get continuumValue() {
+    if (Pelle.isDoomed || !this.isUnlocked || !Laitela.continuumActive || !Ra.unlocks.infinityDimensionContinuum.canBeApplied) return DC.D0;
+    const logMoney = Currency.infinityPoints.value.log10();
+    const logMult = Decimal.log10(this.costMultiplier);
+    const logBase = this.baseCost.log10();
+    let contValue = (logMoney.sub(logBase)).div(logMult);
+    contValue = contValue.times(DC.D1.add(Laitela.matterExtraPurchaseFactor)).div(10);
+    contValue = Decimal.clampMax(contValue, this.purchaseCap.times(10));
+    return Decimal.clampMin(contValue, 0);
+  }
+
+  get totalAmount() {
+    return this.amount.max(this.continuumValue.times(10));
+  }
+
   resetAmount() {
     this.amount = new Decimal(this.baseAmount);
   }
@@ -259,7 +274,7 @@ class InfinityDimensionState extends DimensionState {
   // Only ever called from manual actions
   buySingle() {
     if (!this.isUnlocked) return this.unlock();
-    if (!this.isAvailableForPurchase) return false;
+    if (!this.isAvailableForPurchase || (Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied)) return false;
     if (ImaginaryUpgrade(15).isLockingMechanics) {
       const lockString = this.tier === 1
         ? "purchase a 1st Infinity Dimension"
@@ -282,7 +297,7 @@ class InfinityDimensionState extends DimensionState {
   }
 
   buyMax(auto) {
-    if (!this.isAvailableForPurchase) return false;
+    if (!this.isAvailableForPurchase || (Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied)) return false;
     if (ImaginaryUpgrade(15).isLockingMechanics) {
       const lockString = this.tier === 1
         ? "purchase a 1st Infinity Dimension"

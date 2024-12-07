@@ -29,6 +29,7 @@ export default {
       extraTesseracts: new Decimal(0),
       creditsClosed: false,
       showLockedDimCostNote: true,
+      isContinuumActive: false
     };
   },
   computed: {
@@ -64,6 +65,7 @@ export default {
       this.boughtTesseracts.copyFrom(Tesseracts.bought);
       this.extraTesseracts.copyFrom(Tesseracts.extra);
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.isContinuumActive = Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied;
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -80,7 +82,10 @@ export default {
 
 <template>
   <div class="l-infinity-dim-tab">
-    <div class="c-subtab-option-container">
+    <div
+      v-if="!isContinuumActive"
+      class="c-subtab-option-container"
+    >
       <PrimaryButton
         v-if="!isEC8Running"
         class="o-primary-btn--subtab-option"

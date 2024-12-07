@@ -24,6 +24,8 @@ export default {
       anyUnlocked: false,
       displayLabelAsGroup: false,
       parentActive: false,
+      raInfinity: false,
+      raTime: false
     };
   },
   computed: {
@@ -49,6 +51,17 @@ export default {
     isADBox() {
       return this.name === Autobuyer.antimatterDimension.groupName;
     },
+    isIDBox() {
+      return this.name === Autobuyer.infinityDimension.groupName;
+    },
+    isTDBox() {
+      return this.name === Autobuyer.timeDimension.groupName;
+    },
+    continuumDims() {
+      if (this.raTime) return "Antimatter, Infinity, and Time";
+      if (this.raInfinity) return "Antimatter and Infinity";
+      return "Antimatter";
+    },
     showAutobuyers() {
       // Only display the Antimatter Dimension Autobuyers if the bulk is the same and there are any of them unlocked
       if (this.isADBox) return this.anyUnlocked && this.displayLabelAsGroup;
@@ -62,6 +75,8 @@ export default {
       this.anyUnlocked = type.anyUnlocked;
       this.displayLabelAsGroup = (type.allMaxedInterval ?? true) && (type.allUnlimitedBulk ?? true);
       this.parentActive = type.isActive;
+      this.raInfinity = Ra.unlocks.infinityDimensionContinuum.canBeApplied;
+      this.raTime = Ra.unlocks.timeDimensionContinuum.canBeApplied;
     },
     toggleGroup() {
       this.type.toggle();
@@ -72,7 +87,7 @@ export default {
 
 <template>
   <span
-    v-if="showAutobuyers && !(isADBox && continuumActive)"
+    v-if="showAutobuyers && !((isADBox && continuumActive) || (isIDBox && continuumActive && raInfinity) || (isTDBox && continuumActive && raTime))"
     class="c-autobuyer-box-row"
   >
     <AutobuyerGroupToggleLabel
@@ -108,10 +123,10 @@ export default {
     </div>
   </span>
   <span
-    v-else-if="isADBox && continuumActive"
+    v-else-if="(isADBox && continuumActive) || (isIDBox && continuumActive && raInfinity) || (isTDBox && continuumActive && raTime)"
     class="c-autobuyer-box-row"
   >
-    Continuum replaces your Antimatter Dimension and Tickspeed Autobuyers, as your production multipliers
+    Continuum replaces your {{ continuumDims }} Dimension and Tickspeed Autobuyers, as your production multipliers
     <br>
     now automatically and continuously scale based on how many purchases you would have had otherwise.
   </span>

@@ -36,6 +36,8 @@ export default {
       hardcap: new Decimal(0),
       eternityReached: false,
       enslavedRunning: false,
+      isContinuumActive: false,
+      continuumValue: new Decimal(0),
     };
   },
   computed: {
@@ -47,6 +49,7 @@ export default {
     },
     costDisplay() {
       if (this.isUnlocked || this.shiftDown) {
+        if (this.isContinuumActive) return "Continuum";
         if (this.isCapped) return "Capped";
         return this.showCostTitle ? `Cost: ${format(this.cost)} IP` : `${format(this.cost)} IP`;
       }
@@ -79,6 +82,9 @@ export default {
       const amount = this.tier < 8 ? format(this.amount, 2) : formatInt(this.amount);
       return `${amount}`;
     },
+    continuumString() {
+      return this.continuumValue.gte(1e9) ? format(this.continuumValue, 2, 2) : formatFloat(this.continuumValue, 2);
+    },
   },
   watch: {
     isAutobuyerOn(newValue) {
@@ -96,7 +102,7 @@ export default {
       this.multiplier.copyFrom(dimension.multiplier);
       this.baseAmount.copyFrom(dimension.baseAmount);
       this.purchases.copyFrom(dimension.purchases);
-      this.amount.copyFrom(dimension.amount);
+      this.amount.copyFrom(dimension.totalAmount);
       this.rateOfChange.copyFrom(dimension.rateOfChange);
       this.isAutobuyerUnlocked = autobuyer.isUnlocked;
       this.cost.copyFrom(dimension.cost);
@@ -110,11 +116,15 @@ export default {
       this.isAutobuyerOn = autobuyer.isActive;
       this.eternityReached = PlayerProgress.eternityUnlocked();
       this.enslavedRunning = Enslaved.isRunning;
+      this.isContinuumActive = Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied;
+      if (this.isContinuumActive) this.continuumValue = dimension.continuumValue;
     },
     buySingleInfinityDimension() {
+      if (this.isContinuumActive) return;
       InfinityDimension(this.tier).buySingle();
     },
     buyMaxInfinityDimension() {
+      if (this.isContinuumActive) return;
       InfinityDimension(this.tier).buyMax(false);
     },
   }
@@ -136,6 +146,17 @@ export default {
     />
     <div class="l-dim-row-multi-button-container">
       <PrimaryButton
+        v-if="isContinuumActive"
+        class="o-primary-btn--buy-id o-continuum c-dim-tooltip-container"
+        :class="{ 'l-dim-row-small-text': hasLongText }"
+      >
+        Continuum: {{ continuumString }}
+        <div class="c-dim-purchase-count-tooltip">
+          Continuum produces all of your Infinity Dimensions
+        </div>
+      </PrimaryButton>
+      <PrimaryButton
+        v-else
         :enabled="isAvailableForPurchase || (!isUnlocked && canUnlock)"
         class="o-primary-btn--buy-id o-primary-btn--buy-dim c-dim-tooltip-container"
         :class="{ 'l-dim-row-small-text': hasLongText }"
@@ -146,20 +167,36 @@ export default {
           {{ capTooltip }}
         </div>
       </PrimaryButton>
-      <PrimaryToggleButton
-        v-if="isAutobuyerUnlocked && !isEC8Running"
-        v-model="isAutobuyerOn"
-        class="o-primary-btn--id-auto"
-        label="Auto:"
-      />
-      <PrimaryButton
-        v-else
-        :enabled="isAvailableForPurchase && isUnlocked"
-        class="o-primary-btn--id-auto"
-        @click="buyMaxInfinityDimension"
-      >
-        Buy Max
-      </PrimaryButton>
+      <div v-if="!isContinuumActive">
+        <PrimaryToggleButton
+          v-if="isAutobuyerUnlocked && !isEC8Running"
+          v-model="isAutobuyerOn"
+          class="o-primary-btn--id-auto"
+          label="Auto:"
+        />
+        <PrimaryButton
+          v-else
+          :enabled="isAvailableForPurchase && isUnlocked"
+          class="o-primary-btn--id-auto"
+          @click="buyMaxInfinityDimension"
+        >
+          Buy Max
+        </PrimaryButton>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.o-continuum {
+  border-color: var(--color-laitela--accent);
+  color: var(--color-laitela--accent);
+  background: var(--color-laitela--base);
+}
+
+.o-continuum:hover {
+  border-color: var(--color-laitela--accent);
+  color: var(--color-laitela--base);
+  background: var(--color-laitela--accent);
+}
+</style>

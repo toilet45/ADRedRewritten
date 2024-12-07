@@ -26,7 +26,8 @@ export default {
       extraPenteracts: new Decimal(0),
       totalDimCap: new Decimal(0),
       nextDimCapIncrease: new Decimal(0),
-      creditsClosed: false
+      creditsClosed: false,
+      isContinuumUnlocked: false
     };
   },
   computed: {
@@ -55,6 +56,7 @@ export default {
       this.totalDimCap = TimeDimensions.purchaseCap;
       this.nextDimCapIncrease.copyFrom(Penteracts.nextPenteractIncrease);
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.isContinuumUnlocked = Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied;
     },
     maxAll() {
       tryUnlockTimeDimensions();
@@ -72,7 +74,10 @@ export default {
 
 <template>
   <div class="l-time-dim-tab l-centered-vertical-tab">
-    <div class="c-subtab-option-container">
+    <div
+      v-if="!isContinuumUnlocked"
+      class="c-subtab-option-container"
+    >
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="maxAll"

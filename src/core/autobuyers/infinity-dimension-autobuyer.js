@@ -41,6 +41,10 @@ export class InfinityDimensionAutobuyerState extends IntervaledAutobuyerState {
     return InfinityDimensions.canAutobuy() && this.dimension.isAvailableForPurchase && super.canTick;
   }
 
+  get disabledByContinuum() {
+    return Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied;
+  }
+
   tick() {
     super.tick();
     this.dimension.buyMax(true);

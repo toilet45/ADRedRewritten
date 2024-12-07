@@ -258,7 +258,7 @@ class TimeDimensionState extends DimensionState {
       );
 
     const dim = TimeDimension(tier);
-    const bought = tier === 8 ? Decimal.clampMax(dim.bought, 1e8) : dim.bought;
+    const bought = tier === 8 ? Decimal.clampMax(dim.bought, 1e8) : (Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied ? dim.continuumValue : dim.bought);
     mult = mult.times(Decimal.pow(dim.powerMultiplier, bought));
 
     mult = mult.pow(getAdjustedGlyphEffect("timepow"));
@@ -291,9 +291,9 @@ class TimeDimensionState extends DimensionState {
       return DC.D0;
     }
     if (EternityChallenge(11).isRunning) {
-      return this.amount;
+      return this.totalAmount;
     }
-    let production = this.amount.times(this.multiplier);
+    let production = this.totalAmount.times(this.multiplier);
     if (EternityChallenge(7).isRunning) {
       production = production.times(Tickspeed.perSecond);
     }
@@ -309,7 +309,7 @@ class TimeDimensionState extends DimensionState {
       return DC.D0;
     }
     const toGain = TimeDimension(tier + 1).productionPerSecond;
-    const current = Decimal.max(this.amount, 1);
+    const current = Decimal.max(this.totalAmount, 1);
     return toGain.times(10).dividedBy(current).times(getGameSpeedupForDisplay());
   }
 
@@ -320,7 +320,7 @@ class TimeDimensionState extends DimensionState {
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
     }
-    return this.amount.gt(0);
+    return this.totalAmount.gt(0);
   }
 
   get baseCost() {
@@ -348,6 +348,40 @@ class TimeDimensionState extends DimensionState {
   get requirementReached() {
     return this._tier < 5 ||
       (TimeStudy.timeDimension(this._tier).isAffordable && TimeStudy.timeDimension(this._tier - 1).isBought);
+  }
+
+  get continuumValue() {
+    if (Pelle.isDoomed || !this.isUnlocked ||
+      !Laitela.continuumActive || !Ra.unlocks.timeDimensionContinuum.canBeApplied) return DC.D0;
+    const firstThreshold = new Decimal([null, 647, 323, 214, 160, 0, 0, 0, 0][this.tier]);
+    const secondThreshold = new Decimal([null, 1991, 1150, 808, 623, 0, 0, 0, 0][this.tier]);
+    const e6kThreshold = this.e6000ScalingAmount;
+    const mult = this.costMultiplier;
+
+    const logMoney = Currency.eternityPoints.value.log10();
+    let logMult = Decimal.log10(mult);
+    let logBase = this.baseCost.log10();
+    let contValue = (logMoney.sub(logBase)).div(logMult);
+    if (this.tier < 5) {
+      if (contValue.gt(firstThreshold)) {
+        logMult = Decimal.log10(mult.times(1.5));
+        logBase = this.nextCost(firstThreshold).log10();
+        contValue = firstThreshold.add((logMoney.sub(logBase)).div(logMult));
+      }
+      if (contValue.gt(secondThreshold)) {
+        logMult = Decimal.log10(mult.times(2.2));
+        logBase = this.nextCost(firstThreshold).log10();
+        contValue = secondThreshold.add((logMoney.sub(logBase)).div(logMult));
+      }
+    }
+    contValue = Decimal.min(contValue, (contValue.sub(e6kThreshold)).div(TimeDimensions.scalingPast1e6000).add(e6kThreshold));
+    contValue = contValue.times(DC.D1.add(Laitela.matterExtraPurchaseFactor)).div(10);
+    contValue = Decimal.clampMax(contValue, TimeDimensions.purchaseCap.times(10));
+    return Decimal.clampMin(contValue, 0);
+  }
+
+  get totalAmount() {
+    return this.amount.max(this.continuumValue);
   }
 
   tryUnlock() {
