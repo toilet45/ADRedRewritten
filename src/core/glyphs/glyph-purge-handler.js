@@ -95,7 +95,7 @@ export const GlyphSacrificeHandler = {
     return glyphMaxValue.mul(this.glyphRefinementEfficiency).mul(rarityModifier);
   },
   glyphRefinementGain(glyph) {
-    if (!Ra.unlocks.unlockGlyphAlchemy.canBeApplied || !generatedTypes.includes(glyph.type)) return DC.D0;
+    if (!Ra.unlocks.unlockGlyphAlchemy.canBeApplied || !generatedTypes.includes(glyph.type) || glyph.type === "amalgam") return DC.D0;
     const resource = this.glyphAlchemyResource(glyph);
     if (!resource.isUnlocked) return DC.D0;
     const glyphActualValue = this.glyphRawRefinementGain(glyph);
