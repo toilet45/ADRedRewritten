@@ -873,6 +873,6 @@ export const normalTimeStudies = [
     description: "Multiversal Dimensions gain a multiplier based on Multiversal Remains",
     effect: () => Currency.mendingPoints.value.max(1).log10().div(20).add(1).cbrt(),
     formatEffect: value => `${formatX(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15 && Ra.unlocks.MvDUnlock.canBeApplied
   }
 ];

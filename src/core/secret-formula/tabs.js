@@ -464,7 +464,7 @@ export const tabs = [
         name: "Ra",
         symbol: "<i class='fas fa-sun'></i>",
         component: "RaTab",
-        condition: () => VUnlocks.raUnlock.isUnlocked,
+        condition: () => VUnlocks.raUnlock.isUnlocked || Ra.isUnlocked,
         id: 5,
         hidable: true,
       },

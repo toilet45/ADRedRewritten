@@ -407,7 +407,7 @@ export const ra = {
     alchHardcapIncrease: {
       id: 35,
       reward: () => `Alchemy hardcap is increased to ${formatInt(50000)},
-      but harder to gain beyond ${formatInt(25000)}`,
+      but harder to gain beyond ${formatInt(25000)}. Pelle's Alchemy requirement is changed to require at least level ${formatInt(25000)} resources`,
       effect: 50000,
       pet: "effarig",
       level: 30,

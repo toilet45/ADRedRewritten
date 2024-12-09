@@ -117,7 +117,7 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
       increases = increases.sub(Decimal.log10(5).times(DC.E2000.sub(replicantiCap()).log10())
         .div(ReplicantiGrowth.scaleLog10));
     }
-    interval = interval.times(Decimal.pow(ReplicantiGrowth.scaleFactor, increases));
+    interval = interval.times(Decimal.pow(ReplicantiGrowth.scaleFactor, increases.times(TimeStudy(307).effectOrDefault(1))));
   }
 
   interval = interval.divide(totalReplicantiSpeedMult(overCap));
@@ -345,11 +345,11 @@ export const ReplicantiUpgrade = {
     get baseCost() { return player.replicanti.chanceCost; }
     set baseCost(value) { player.replicanti.chanceCost = value; }
 
-    get costIncrease() { return 1e15; }
+    get costIncrease() { return this.value.gte(1) ? Decimal.pow(DC.E1000, Decimal.pow(1.25, (this.value.times(100)).sub(1))) : DC.E15; }
 
     get cap() {
-      // Chance never goes over 100%.
-      return DC.D1;
+      // Chance never goes over 100%...unless TS305
+      return TimeStudy(305).isBought ? DC.BEMAX : DC.D1;
     }
 
     get isCapped() {
@@ -364,11 +364,11 @@ export const ReplicantiUpgrade = {
       // Fixed price increase of 1e15; so total cost for N upgrades is:
       // cost + cost * 1e15 + cost * 1e30 + ... + cost * 1e15^(N-1) == cost * (1e15^N - 1) / (1e15 - 1)
       // N = log(IP * (1e15 - 1) / cost + 1) / log(1e15)
-      let N = Currency.infinityPoints.value.times(this.costIncrease - 1)
+      let N = Currency.infinityPoints.value.times(this.costIncrease.sub(1))
         .dividedBy(this.cost).plus(1).log(this.costIncrease);
       N = Decimal.round(Decimal.min(N.floor().div(100).add(this.value), this.cap).sub(this.value).mul(100));
       if (N.lte(0)) return;
-      const totalCost = this.cost.times(Decimal.pow(this.costIncrease, N).minus(1).dividedBy(this.costIncrease - 1));
+      const totalCost = this.cost.times(Decimal.pow(this.costIncrease, N).minus(1).dividedBy(this.costIncrease.sub(1)));
       Currency.infinityPoints.subtract(totalCost);
       this.baseCost = this.baseCost.times(Decimal.pow(this.costIncrease, N));
       this.value = this.nearestPercent(N.div(100).add(this.value));

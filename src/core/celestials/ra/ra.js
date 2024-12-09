@@ -407,7 +407,7 @@ export const Ra = {
     return Decimal.min(10, Decimal.max(0, Currency.timeTheorems.value.add(1).log10().sub(350)).div(50));
   },
   get isUnlocked() {
-    return V.spaceTheorems >= 36;
+    return V.spaceTheorems >= 36 || Ra.pets.ra.level >= 25;
   },
   get isRunning() {
     return player.celestials.ra.run;

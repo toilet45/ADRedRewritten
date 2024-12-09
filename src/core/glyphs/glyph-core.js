@@ -625,6 +625,7 @@ export const Glyphs = {
     let toBeDeleted = 0;
     for (const glyph of Glyphs.inventory) {
       if (glyph !== null && glyph.idx >= this.protectedSlots && !AutoGlyphProcessor.wouldKeep(glyph)) {
+        console.log(glyph.type);
         if (deleteGlyphs) AutoGlyphProcessor.getRidOfGlyph(glyph);
         toBeDeleted++;
       }

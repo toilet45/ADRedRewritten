@@ -299,7 +299,7 @@ export const v = {
       },
       description: () => `Have ${formatInt(36)} V-Achievements`,
       effect: 2,
-      requirement: () => V.spaceTheorems >= 36
+      requirement: () => V.spaceTheorems >= 36 || Ra.pets.ra.level >= 25
     }
   }
 };

@@ -81,8 +81,8 @@ TimeStudy.allConnections = (function() {
     [TS(103), TS(323), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14)],
     [TS(323), TS(111), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14)],
     [TS(104), TS(111), () => (!(Ra.pets.laitela.level >= 75) || !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15))],
-    [TS(104), TS(324), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15 && Ra.pets.laitela.level >= 75)],
-    [TS(324), TS(111), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15)],
+    [TS(104), TS(324), () => !((Ra.unlocks.unlockHardV.effectOrDefault(0) && Ra.unlocks.MvDUnlock.canBeApplied) >= 15 && Ra.pets.laitela.level >= 75)],
+    [TS(324), TS(111), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15 && Ra.unlocks.MvDUnlock.canBeApplied)],
 
     [TS(111), EC(7)],
     [TS(111), TS(306), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 6)],

@@ -19,7 +19,8 @@ export default {
       completedRows: 0,
       cappedResources: 0,
       hasStrike: false,
-      hasGalaxyGenerator: false
+      hasGalaxyGenerator: false,
+      alchIncreasedCap: false
     };
   },
   computed: {
@@ -38,12 +39,13 @@ export default {
       this.isDoomed = Pelle.isDoomed;
       if (!this.isDoomed) {
         this.completedRows = Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked));
-        this.cappedResources = AlchemyResources.all.countWhere(r => r.capped);
+        this.cappedResources = AlchemyResources.all.countWhere(r => r.amount.gte(25000));
         this.canEnterPelle = this.completedRows === this.totalRows &&
           this.cappedResources === this.totalAlchemyResources;
       }
       this.hasStrike = PelleStrikes.all.some(s => s.hasStrike);
       this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0);
+      this.alchIncreasedCap = Ra.unlocks.alchHardcapIncrease.canBeApplied;
     },
     toggleBought() {
       Pelle.cel.showBought = !Pelle.cel.showBought;
@@ -94,12 +96,12 @@ export default {
       class="pelle-unlock-requirements"
     >
       You must have {{ formatInt(totalRows) }} rows of Achievements
-      and all of your Glyph Alchemy Resources capped to unlock Pelle, Celestial of Antimatter.
+      and all of your Glyph Alchemy Resources {{ alchIncreasedCap ? `at least level ${formatInt(25000)}` : 'capped' }} to unlock Pelle, Celestial of Antimatter.
       <br>
       <br>
       {{ formatInt(completedRows) }} / {{ formatInt(totalRows) }} Achievement rows completed
       <br>
-      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} capped Alchemy Resources
+      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} {{alchIncreasedCap ? `level ${formatInt(25000)}` : 'capped'}} Alchemy Resources
     </div>
   </div>
 </template>
