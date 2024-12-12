@@ -125,6 +125,13 @@ CelestialStudy.boughtNormalCS = function() {
   return player.celestialstudy.studies.map(id => CelestialStudy(id));
 };
 
+/**
+ * @returns {Number}
+ */
+CelestialStudy.totalVisibleRows = function() {
+  return 6;
+};
+
 /* Not finalized yet
 CelestialStudy.preferredPaths = {
   dimension: {
