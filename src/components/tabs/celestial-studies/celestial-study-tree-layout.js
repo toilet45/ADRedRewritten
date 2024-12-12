@@ -52,6 +52,8 @@ export default class CelestialStudyTreeLayout {
     const CS = id => (CelestialStudy(id).isUnlocked ? CelestialStudy(id) : null);
     const EC = id => CelestialStudy.eternityChallenge(id);
 
+    this.rowsToShow = 6;
+
     /**
      * @type {CelestialStudyRow[]}
      */
@@ -59,7 +61,25 @@ export default class CelestialStudyTreeLayout {
     this.rows = [
       normalRow(                       null,   CS(11),   null                         ),
       normalRow(                           CS(21), CS(22)                             ),
-      normalRow(                           CS(31), CS(32)                             )
+      normalRow(                   null, CS(31), CS(32), EC(13)                       ),
+      normalRow(                  CS(41), CS(42), CS(43), CS(44)                      ),
+      normalRow(                  CS(51), CS(52), CS(53), CS(54)                      ),
+      normalRow(                  CS(61), CS(62), CS(63), CS(64)                      ),
+      normalRow(                     CS(71),   EC(14),   CS(72)                       ),
+      normalRow(                     EC(15),   EC(81),   EC(16)                       ),
+      normalRow(                     CS(91),   EC(92),   CS(93)                       ),
+      normalRow(                    EC(17),   CS(101),   EC(18)                       ),
+      normalRow(                   CS(111),   CS(112),   CS(113)                      ),
+      normalRow(                      null,   CS(121),   null                         ),
+      normalRow(                      CS(131),   null,   CS(132)                      ),
+      normalRow(                      null,   EC(19),   null                          ),
+      normalRow(                      CS(151),   null,   CS(152)                      ),
+      normalRow(                      null,   EC(20),   null                          ),
+      normalRow(                          CS(171), CS(172)                            ),
+      wideRow  (CS(181), CS(182), CS(183), CS(184), CS(185), CS(186), CS(187), CS(188)),
+      normalRow(                     EC(21),   null,   EC(22)                         ),
+      normalRow(                    EC(23),   CS(191),   EC(24)                       ),
+      normalRow(                      null,   EC(25),   null                          ),
     ];
 
     /* this.rows.push(
@@ -98,7 +118,7 @@ export default class CelestialStudyTreeLayout {
      * @type {CelestialStudySetup[]}
      */
     this.studies = [];
-    for (let rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < Math.min(this.rowsToShow, this.rows.length); rowIndex++) {
       const row = this.rows[rowIndex];
       for (let columnIndex = 0; columnIndex < row.items.length; columnIndex++) {
         const study = row.items[columnIndex];

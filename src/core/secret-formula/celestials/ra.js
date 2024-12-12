@@ -472,7 +472,7 @@ export const ra = {
 
     gamespeedUncap: {
       id: 42,
-      reward: () => `Game speed is uncapped`,
+      reward: () => `Game speed is uncapped, and Time Dimension 8 purchases above 1e8 affect the multiplier.`,
       effect: 1,
       pet: "enslaved",
       level: 30,

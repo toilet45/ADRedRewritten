@@ -92,6 +92,10 @@ export default {
       this.cheapestLog10TD = Decimal.min(...TimeDimensions.all.map(x => x.cost.log10()));
       this.multEPLog10Cost = EternityUpgrade.epMult.cost.log10();
       this.purchasableTS = NormalTimeStudyState.studies.countWhere(s => s && s.canBeBought && !s.isBought);
+      // If we can only afford x triads, dont bother saying we can afford more.
+      this.purchasableTS -= NormalTimeStudyState.studies.countWhere(s => s && s.isTriad &&
+      !s.isBought && s.canBeBought) -
+      Math.floor((V.spaceTheorems - player.celestials.v.STSpent) / TimeStudy(301).STCost);
       this.hasDilated = Perk.startTP.canBeApplied ? player.dilation.lastEP.gt(0)
         : player.dilation.tachyonParticles.gt(0);
       this.availableCharges = Ra.chargesLeft;

@@ -1,0 +1,616 @@
+.l-cel-studies-tab {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+.l-cel-studies-tab__tree {
+  margin-top: 1.5rem;
+  margin-bottom: 12.5rem;
+}
+
+.l-cel-study-options {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-cel-study-options > * {
+  margin: 0.2rem;
+}
+
+.l-cel-study-tree {
+  position: relative;
+}
+
+.l-cel-study {
+  position: absolute;
+  z-index: 1;
+}
+
+.l-cel-study-connection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* #region o-cel-study */
+
+.c-pelle-useless {
+  width: 18rem;
+  height: 10rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: crimson;
+  border: 0.1rem solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  text-decoration: line-through;
+}
+
+.c-pelle-useless-available {
+  animation: a-cel-study 7s infinite;
+  cursor: pointer;
+}
+
+.c-pelle-useless--unavailable {
+  color: black;
+  filter: grayscale(90%);
+  animation: none;
+}
+
+.c-pelle-useless--unavailable:hover {
+  background-color: var(--color-bad);
+  filter: grayscale(0%);
+  cursor: default;
+}
+
+.c-pelle-useless--bought {
+  background-color: crimson;
+  filter: grayscale(50%);
+}
+
+.o-cel-study {
+  width: 18rem;
+  height: 10rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: black;
+  border: 0.1rem solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+}
+
+.o-cel-study--available {
+  animation: a-cel-study 7s infinite;
+  cursor: pointer;
+}
+
+.o-cel-study--available:hover {
+  background-color: #00bcd4;
+  animation: none;
+}
+
+.o-cel-study--unavailable {
+  color: black;
+}
+
+.o-cel-study--unavailable:hover {
+  background-color: var(--color-bad);
+}
+
+.t-metro .o-cel-study--unavailable,
+.t-inverted-metro .o-cel-study--unavailable,
+.t-s1 .o-cel-study--unavailable,
+.t-s8 .o-cel-study--unavailable {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 black;
+}
+
+.s-base--metro .o-cel-study--unavailable,
+.t-s1 .o-cel-study--unavailable {
+  color: black;
+  border: none;
+}
+
+@keyframes a-cel-study {
+  0% { box-shadow: inset 0 0 0.3rem 0; }
+  50% { box-shadow: inset 0 0 2rem 0; }
+  100% { box-shadow: inset 0 0 0.3rem 0; }
+}
+
+.o-cel-study--small {
+  width: 12rem;
+  font-size: 0.85rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.o-cel-study-normal--available {
+  color: var(--color-eternity);
+  border-color: var(--color-eternity);
+}
+
+.o-cel-study-normal--available:hover {
+  color: white;
+  background-color: var(--color-eternity);
+  border-color: black;
+}
+
+.o-cel-study-pre-v--available {
+  color: #22aa48;
+  border-color: #198036;
+}
+
+.o-cel-study-pre-v--available:hover {
+  color: #eeeeee;
+  background-color: #22aa48;
+}
+
+.o-cel-study-post-v--available {
+  color: #b67f33;
+  border-color: #8b6227;
+}
+
+.o-cel-study-post-v--available:hover {
+  color: #eeeeee;
+  background-color: #b67f33;
+}
+
+.o-cel-study-time-dim--available {
+  color: #b241e3;
+  border-color: #951ec8;
+}
+
+.o-cel-study-time-dim--available:hover {
+  color: #eeeeee;
+  background-color: #b241e3;
+}
+
+.o-cel-study-mvd-dim--available {
+  color: #cc2988;
+  border-color: #901e61;
+}
+
+.o-cel-study-mvd-dim--available:hover {
+  color: #eeeeee;
+  background-color: #cc2988;
+}
+
+.o-cel-study-active--available {
+  color: #e60000;
+  border-color: #cc0000;
+}
+
+.o-cel-study-active--available:hover {
+  color: #eeeeee;
+  background-color: #e60000;
+}
+
+.o-cel-study-passive--available {
+  color: #5e33b6;
+  border-color: #4b288f;
+}
+
+.o-cel-study-passive--available:hover {
+  color: #eeeeee;
+  background-color: #5e33b6;
+}
+
+.o-cel-study-idle--available {
+  color: #0080ff;
+  border-color: #0066cc;
+}
+
+.o-cel-study-idle--available:hover {
+  color: #eeeeee;
+  background-color: #0080ff;
+}
+
+.o-cel-study-dark--available,
+.o-cel-study-light--available:hover {
+  color: black;
+  background-color: white;
+  border-color: black;
+}
+
+.o-cel-study-light--available,
+.o-cel-study-dark--available:hover {
+  color: white;
+  background-color: black;
+  border-color: white;
+}
+
+.o-cel-study-eternity-challenge--available {
+  color: #490066;
+  background-color: white;
+  border-color: black;
+}
+
+.o-cel-study-eternity-challenge--available:hover {
+  color: white;
+  background-color: #490066;
+}
+
+.o-cel-study-eternity-challenge--complete {
+  box-shadow: inset 0 0 3rem var(--color-good-dark);
+}
+
+.o-cel-study-dilation--available {
+  color: #64dd17;
+  background-color: black;
+  border-color: #64dd17;
+  animation: a-cel-study-dilation 10s infinite;
+}
+
+.o-cel-study-dilation--available:hover {
+  color: #64dd17;
+  background-color: white;
+  animation: a-cel-study-dilation 10s infinite;
+}
+
+.o-cel-study-reality--available {
+  color: var(--color-reality);
+  background-color: white;
+  border-color: var(--color-reality);
+}
+
+.o-cel-study-reality--available:hover {
+  color: white;
+  background-color: var(--color-reality);
+}
+
+.o-cel-study-triad--available {
+  color: var(--color-v--base);
+  background: black;
+  border-color: black;
+  animation: a-cel-study 1.5s infinite;
+}
+
+.o-cel-study-triad--available:hover {
+  color: black;
+  background: var(--color-v--base);
+}
+
+@keyframes a-cel-study-dilation {
+  0% { box-shadow: inset 0.5rem  0       2rem; }
+  25% { box-shadow: inset 0       0.5rem  2rem; }
+  50% { box-shadow: inset -0.5rem 0       2rem; }
+  75% { box-shadow: inset 0       -0.5rem 2rem; }
+  100% { box-shadow: inset 0.5rem  0       2rem; }
+}
+
+.o-cel-study-normal--unavailable {
+  background-color: #9e9e9e;
+}
+
+.t-dark .o-cel-study--unavailable:hover,
+.t-s6 .o-cel-study--unavailable:hover,
+.t-s10 .o-cel-study--unavailable:hover {
+  background-color: var(--color-bad);
+  border-color: var(--color-bad);
+}
+
+.o-cel-study-antimatter-dim--unavailable {
+  background-color: #94a89a;
+}
+
+.o-cel-study-infinity-dim--unavailable {
+  background-color: #a8a094;
+}
+
+.o-cel-study-time-dim--unavailable {
+  background-color: #a294a8;
+}
+
+.o-cel-study-mvd-dim--unavailable {
+  background-color: #cab3c1;
+}
+
+.o-cel-study-active--unavailable {
+  background-color: #a89494;
+}
+
+.o-cel-study-passive--unavailable {
+  background-color: #9b94a8;
+}
+
+.o-cel-study-idle--unavailable {
+  background-color: #949ea8;
+}
+
+.o-cel-study-dark--unavailable {
+  background-color: #858585;
+}
+
+.o-cel-study-light--unavailable {
+  background-color: #b8b8b8;
+}
+
+.o-cel-study-eternity-challenge--unavailable {
+  background-color: #9e9e9e;
+}
+
+.o-cel-study-dilation--unavailable {
+  background-color: #9ca894;
+}
+
+.o-cel-study-reality--unavailable {
+  background-color: #94a895;
+}
+
+.o-cel-study-triad--unavailable {
+  background-color: #a8a494;
+}
+
+.o-cel-study-normal--bought {
+  color: black;
+  background-color: var(--color-eternity);
+  border-color: black;
+}
+
+.o-cel-study-antimatter-dim--bought {
+  color: black;
+  background-color: #22aa48;
+  border-color: black;
+}
+
+.o-cel-study-infinity-dim--bought {
+  color: black;
+  background-color: #b67f33;
+  border-color: black;
+}
+
+.o-cel-study-time-dim--bought {
+  color: black;
+  background-color: #b241e3;
+  border-color: black;
+}
+
+.o-cel-study-mvd-dim--bought {
+  color: black;
+  background-color: #cc2988;
+  border-color: black;
+}
+
+.o-cel-study-active--bought {
+  color: black;
+  background-color: #e60000;
+  border-color: black;
+}
+
+.o-cel-study-passive--bought {
+  color: black;
+  background-color: #5e33b6;
+  border-color: black;
+}
+
+.o-cel-study-idle--bought {
+  color: black;
+  background-color: #0080ff;
+  border-color: black;
+}
+
+.o-cel-study-dark--bought {
+  color: white;
+  background-color: black;
+  border-color: white;
+  border-width: 0.3rem;
+  border-style: double;
+}
+
+.o-cel-study-light--bought {
+  color: black;
+  background-color: white;
+  border-color: black;
+  border-width: 0.3rem;
+  border-style: double;
+}
+
+.o-cel-study-eternity-challenge--bought {
+  color: white;
+  background-color: #490066;
+  border-color: black;
+}
+
+.o-cel-study-eternity-challenge--running {
+  color: var(--color-eternity);
+  background-color: black;
+  border: 0.1rem solid var(--color-eternity);
+  animation: a-eternity-challenge-running 6s infinite;
+}
+
+@keyframes a-eternity-challenge-running {
+  0% { box-shadow: inset 1rem  0       3rem #490066; }
+  25% { box-shadow: inset 0     0.5rem  3rem #490066; }
+  50% { box-shadow: inset -1rem 0       3rem #490066; }
+  75% { box-shadow: inset 0     -0.5rem 3rem #490066; }
+  100% { box-shadow: inset 1rem  0       3rem #490066; }
+}
+
+.o-cel-study-dilation--bought {
+  color: black;
+  background-color: #64dd17;
+  border-color: black;
+}
+
+.o-cel-study-reality--bought {
+  color: black;
+  background-color: var(--color-reality);
+  border-color: black;
+}
+
+.o-cel-study-triad--bought {
+  color: black;
+  background-color: var(--color-v--base);
+  border-color: black;
+}
+
+.t-dark .o-cel-study-antimatter-dim--bought,
+.t-s6 .o-cel-study-antimatter-dim--bought,
+.t-s10 .o-cel-study-antimatter-dim--bought {
+  border-color: #198036;
+}
+
+.t-dark .o-cel-study-infinity-dim--bought,
+.t-s6 .o-cel-study-infinity-dim--bought,
+.t-s10 .o-cel-study-infinity-dim--bought {
+  border-color: #8b6227;
+}
+
+.t-dark .o-cel-study-time-dim--bought,
+.t-s6 .o-cel-study-time-dim--bought,
+.t-s10 .o-cel-study-time-dim--bought {
+  border-color: #951ec8;
+}
+
+.t-dark .o-cel-study-mvd-dim--bought,
+.t-s6 .o-cel-study-mvd-dim--bought,
+.t-s10 .o-cel-study-mvd-dim--bought {
+  border-color: #7d1a54;
+}
+
+.t-dark .o-cel-study-active--bought,
+.t-s6 .o-cel-study-active--bought,
+.t-s10 .o-cel-study-active--bought {
+  border-color: #cc0000;
+}
+
+.t-dark .o-cel-study-passive--bought,
+.t-s6 .o-cel-study-passive--bought,
+.t-s10 .o-cel-study-passive--bought {
+  border-color: #4b288f;
+}
+
+.t-dark .o-cel-study-idle--bought,
+.t-s6 .o-cel-study-idle--bought,
+.t-s10 .o-cel-study-idle--bought {
+  border-color: #0066cc;
+}
+
+.o-cel-study--secret {
+  opacity: 0;
+  transition: opacity 1s;
+  transition-delay: 1s;
+  cursor: pointer;
+}
+
+.o-cel-study--secret-unlocked {
+  opacity: 1;
+  transition: opacity 1s;
+  transition-delay: 0s;
+  cursor: pointer;
+}
+
+.o-cel-study--enslaved {
+  opacity: 0.02;
+  background: var(--color-enslaved--base);
+  transition: all 1s;
+  animation: a-cel-study 0.5s infinite;
+  cursor: pointer;
+}
+
+.o-cel-study--enslaved-unlocked {
+  opacity: 1;
+  background: var(--color-eternity);
+  animation: a-cel-study 2s infinite;
+  cursor: default;
+}
+
+/* #endregion o-cel-study */
+
+.o-cel-study-connection {
+  stroke: #444444;
+  /* This one should be px, because it rem svg behaves weirdly under scale */
+  stroke-width: 16px;
+  transition: stroke 0.3s;
+}
+
+.o-cel-study-connection--antimatter-dim {
+  stroke: #37533f;
+}
+
+.o-cel-study-connection--infinity-dim {
+  stroke: #534737;
+}
+
+.o-cel-study-connection--time-dim {
+  stroke: #4a3753;
+}
+
+.o-cel-study-connection--mvd-dim {
+  stroke: #521137;
+}
+
+.o-cel-study-connection--active {
+  stroke: #533737;
+}
+
+.o-cel-study-connection--passive {
+  stroke: #403753;
+}
+
+.o-cel-study-connection--idle {
+  stroke: #374553;
+}
+
+.o-cel-study-connection--eternity-challenge {
+  stroke: #4b3753;
+}
+
+.o-cel-study-connection--dilation {
+  stroke: #759362;
+}
+
+.o-cel-study-connection--bought {
+  stroke: black;
+}
+
+.s-base--dark .o-cel-study-connection--bought {
+  stroke: #bbbbbb;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--antimatter-dim {
+  stroke: #22aa48;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--infinity-dim {
+  stroke: #b67f33;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--time-dim {
+  stroke: #b241e3;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--active {
+  stroke: #ff0100;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--passive {
+  stroke: #5e33b6;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--idle {
+  stroke: #0080ff;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--eternity-challenge {
+  stroke: #490066;
+}
+
+.o-cel-study-connection--bought.o-cel-study-connection--dilation {
+  stroke: #64dd17;
+}
+
+.o-cel-study-connection--secret {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.o-cel-study-connection--secret-unlocked {
+  opacity: 1;
+  transition: opacity 1s;
+  transition-delay: 1s;
+}

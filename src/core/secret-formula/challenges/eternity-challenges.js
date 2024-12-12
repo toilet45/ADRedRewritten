@@ -12,7 +12,12 @@ export const eternityChallenges = [
     description: "Time Dimensions are disabled.",
     goal: DC.E1800,
     goalIncrease: DC.E200,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "Time Dimension multiplier based on time spent this Eternity",
       effect: completions =>
@@ -29,7 +34,12 @@ export const eternityChallenges = [
     goal: DC.E975,
     pelleGoal: DC.E1750,
     goalIncrease: DC.E175,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "1st Infinity Dimension multiplier based on Infinity Power",
       effect: completions => Currency.infinityPower.value.pow(1.5 / (700 - completions * 100)).clampMin(1),
@@ -43,7 +53,12 @@ export const eternityChallenges = [
     goal: DC.E600,
     pelleGoal: DC.E925,
     goalIncrease: DC.E75,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: () => `Increase the multiplier for buying ${formatInt(10)} Antimatter Dimensions`,
       effect: completions => completions * 0.72,
@@ -56,7 +71,12 @@ export const eternityChallenges = [
       number of Infinities or else you will fail the Challenge.`,
     goal: DC.E2750,
     goalIncrease: DC.E550,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     restriction: completions => Math.max(16 - 4 * completions, 0),
     checkRestriction: restriction => Currency.infinities.lte(restriction),
     formatRestriction: restriction => (restriction === 0
@@ -77,7 +97,12 @@ export const eternityChallenges = [
     goal: DC.E750,
     pelleGoal: DC.E1400,
     goalIncrease: DC.E400,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "Distant Galaxy cost scaling starts later",
       effect: completions => completions * 5 * (MendingUpgrade(8).isBought ? 10 : 1),
@@ -95,7 +120,12 @@ export const eternityChallenges = [
     goal: DC.E850,
     pelleGoal: DC.E1500,
     goalIncrease: DC.E250,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "Further reduce Antimatter Dimension cost multiplier growth",
       effect: completions => completions * 0.2,
@@ -114,7 +144,12 @@ export const eternityChallenges = [
     goal: DC.E2000,
     pelleGoal: DC.E2700,
     goalIncrease: DC.E530,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     effect: () => TimeDimension(1).productionPerSecond,
     reward: {
       description: "1st Time Dimension produces 8th Infinity Dimensions",
@@ -129,7 +164,12 @@ export const eternityChallenges = [
     goal: DC.E1300,
     pelleGoal: DC.E2800,
     goalIncrease: DC.E900,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "Infinity Power strengthens Replicanti Galaxies",
       effect: completions => {
@@ -146,7 +186,12 @@ export const eternityChallenges = [
     goal: DC.E1750,
     pelleGoal: DC.E2900,
     goalIncrease: DC.E250,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "Infinity Dimension multiplier based on Time Shards",
       effect: completions => Currency.timeShards.value.pow(completions * 0.1).clampMin(1),
@@ -165,7 +210,12 @@ export const eternityChallenges = [
     goal: DC.E3000,
     pelleGoal: DC.E3200,
     goalIncrease: DC.E300,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     effect: () => Decimal.pow(Currency.infinitiesTotal.value, 950).clampMin(1).pow(TimeStudy(31).effectOrDefault(1)),
     reward: {
       description: "Time Dimension multiplier based on Infinities",
@@ -190,7 +240,12 @@ export const eternityChallenges = [
     pelleGoal: DC.E11200,
     goalIncrease: DC.E200,
     pelleGoalIncrease: DC.E1400,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     reward: {
       description: "Further reduce Tickspeed cost multiplier growth",
       effect: completions => completions * 0.07,
@@ -210,7 +265,12 @@ export const eternityChallenges = [
     goal: DC.E110000,
     pelleGoal: DC.E208000,
     goalIncrease: DC.E12000,
-    superGoals: [DC.EE15, DC.EE18, DC.EE20, DC.EE25, DC.E5E27],
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: 5,
     restriction: completions => Math.max(10 - 2 * completions, 1) / 10,
     checkRestriction: restriction => Time.thisEternity.totalSeconds.lt(restriction),
     formatRestriction: restriction => `in ${quantify("in-game second", restriction, 0, 1)} or less.`,
@@ -228,6 +288,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Maximum Completions for Eternity Challenges 1-12 are increased",
       effect: completions => completions,
@@ -241,6 +307,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Gain more rows of Celestial Study Tree",
       effect: completions => completions,
@@ -254,6 +326,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "IP exponent is raised to a power",
       effect: completions => completions / 1000 + 1,
@@ -268,6 +346,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Infinity Power provides a power effect to IP exponent",
       effect: completions => Currency.infinityPower.value.max(1).log10().max(1).log10().mul(completions).div(1e5),
@@ -280,6 +364,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "IP exponent is raised to a power",
       effect: completions => completions / 1000 + 1,
@@ -294,6 +384,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Buy 10 exponent is raised to a power",
       effect: completions => completions / 15 + 1,
@@ -306,6 +402,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "IP boosts Replicanti Speed",
       effect: completions => Currency.infinityPoints.value.max(1).log10().max(1).log10()
@@ -320,6 +422,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Maximum Completions for Eternity Challenges 1-19 are increased",
       effect: completions => completions,
@@ -332,9 +440,16 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Memory production multiplier",
-      effect: completions => Decimal.pow(50, Math.pow(completions, 2)),
+      // eslint-disable-next-line max-len
+      effect: completions => Decimal.pow(Decimal.pow(50, Math.pow(completions, 2)), EternityChallenge(22).effectOrDefault(1)),
       formatEffect: value => `${formatX(value)}`
     }
   },
@@ -344,6 +459,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Boost to Eternity Challenge 21",
       effect: completions => Math.pow(completions, 1.5) + 1,
@@ -356,6 +477,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Power effect to tickspeed exponent",
       effect: completions => Decimal.pow(3, completions).cbrt(),
@@ -368,6 +495,12 @@ export const eternityChallenges = [
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     reward: {
       description: "Power effect to AD1 exponent",
       effect: completions => Decimal.pow(1.15, completions),
@@ -387,6 +520,12 @@ export const eternityChallenges = [
     goal: DC.F4,
     pelleGoal: DC.E10,
     goalIncrease: DC.E10,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
     // Only has 1 completion, so no need to edge case or whatever.
     reward: {
       description: "Unlock a new glyph.",

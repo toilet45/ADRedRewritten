@@ -412,8 +412,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
   const forcedDisableDevspeed = EternityChallenge(12).isRunning || NormalChallenge(11).isRunning ||
     InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
-  // eslint-disable-next-line capitalized-comments
-  if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMax(1e300);
+  if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMin(1e-300).clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
   gameSpeedupSoftcap(factor);

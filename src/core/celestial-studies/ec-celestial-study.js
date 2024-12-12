@@ -102,7 +102,7 @@ export class ECCelestialStudyState extends CelestialStudyState {
     return this.cachedCurrentRequirement;
   }
 
-  /* TODO: decide if we want these to be afftected by ECR
+  /* TODO: decide if we want these to be afftected by ECR - no
   get allSecondaryRequirementsMet() {
     return Perk.studyECRequirement.isBought || !this.hasForbiddenStudies && this.isEntryGoalMet;
   }

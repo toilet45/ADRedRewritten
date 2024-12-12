@@ -154,6 +154,14 @@ export class EternityChallengeState extends GameMechanicState {
     return this.goalAtCompletions(this.completions);
   }
 
+  get scaled() {
+    return this.config.scaled;
+  }
+
+  get scaleStart() {
+    return this.config.scaleStart;
+  }
+
   get isGoalReached() {
     return player.records.thisEternity.maxIP.gte(this.currentGoal);
   }
@@ -170,10 +178,19 @@ export class EternityChallengeState extends GameMechanicState {
 
   completionsAtIP(ip) {
     if (ip.lt(this.initialGoal)) return 0;
-    let completions = (ip.dividedBy(this.initialGoal)).log10().div(this.goalIncrease.log10()).add(1);
-    if (completions.gt(5)) {
-      if (ip.lt(this.config.superGoals[0])) return Math.max(5, this.maxCompletions);
-      completions = this.config.superGoals.findLast(e => e.lte(ip));
+    const completions = (ip.dividedBy(this.initialGoal)).log10().div(this.goalIncrease.log10()).add(1);
+    if (completions.gt(scaleStart)) {
+      sCompletions = new Decimal(scaleStart);
+      switch (this.scaled.goalIncreaseType) {
+        case "exponential":
+          sCompletions += ip.log10().div(this.scaled.goal.log10()).log(this.scaled.goalIncrease);
+          break;
+        default:
+          break;
+      }
+
+      sCompletions = sCompletions.floor();
+      return sCompletions.toNumber();
     }
     return Decimal.min(Decimal.floor(completions), this.maxCompletions).toNumber();
   }

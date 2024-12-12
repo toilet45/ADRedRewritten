@@ -258,7 +258,10 @@ class TimeDimensionState extends DimensionState {
       );
 
     const dim = TimeDimension(tier);
-    const bought = tier === 8 ? Decimal.clampMax(dim.bought, 1e8) : (Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied ? dim.continuumValue : dim.bought);
+    // eslint-disable-next-line no-nested-ternary
+    const bought = (!Ra.unlocks.gamespeedUncap.canBeApplied && tier === 8)
+      ? Decimal.clampMax(dim.bought, 1e8)
+      : (Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied ? dim.continuumValue : dim.bought);
     mult = mult.times(Decimal.pow(dim.powerMultiplier, bought));
 
     mult = mult.pow(getAdjustedGlyphEffect("timepow"));

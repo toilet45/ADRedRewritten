@@ -38,9 +38,11 @@ export default {
       <span class="c-mending-tab__mending-points">{{ format(mendingPoints, 2) }}</span>
       {{ pluralize("Multiversal Remain", mendingPoints) }}.
     </div>
+    <!-- eslint-disable max-len -->
     Each upgrade in the first column can be bought endlessly and gives an additive {{ formatX(1.02, 2, 2) }} multiplier to Multiversal Remain gain. <br>
-    Mending Upgrade 3 and all second column upgrades can be bought a finite amount of times and give a compounding {{ formatX(1.15, 2, 2) }} multiplier to Multiversal Remain gain per purchase. <br>
-    The other upgrades are one time purchases and also and give a compounding {{ formatX(1.15, 2, 2) }} Multiplier to Multiversal Remain gain.
+    Mending Upgrade 3 and all second column upgrades can be bought a finite amount of times and give a compounding {{ formatX(Math.cbrt(1.15), 3, 3) }} multiplier to Multiversal Remain gain per purchase. <br>
+    The other upgrades are one time purchases and give a compounding {{ formatX(Math.sqrt(1.15), 3, 3) }} Multiplier to Multiversal Remain gain.
+    <!-- eslint-enable max-len -->
     <div
       v-for="row in 4"
       :key="row"

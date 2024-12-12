@@ -127,7 +127,7 @@ export default {
         :class="respecClassObject"
         @click="respec = !respec"
       >
-        Respec Celestial Studies on next Eternity
+        Respec Celestial Studies on next Reality
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"

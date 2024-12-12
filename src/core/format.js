@@ -79,6 +79,10 @@ window.formatX = function formatX(value, places, placesUnder1000) {
   return `×${format(value, places, placesUnder1000)}`;
 };
 
+window.formatDiv = function formatDiv(value, places, placesUnder1000) {
+  return `÷${format(value, places, placesUnder1000)}`;
+};
+
 window.formatPow = function formatPow(value, places, placesUnder1000) {
   return `^${format(value, places, placesUnder1000)}`;
 };
@@ -108,11 +112,6 @@ window.formatMachines = function formatMachines(realPart, imagPart, bypassEND = 
 
 window.formatTet = function formatTet(value, places, placesUnder1000) {
   return `^^${format(value, places, placesUnder1000)}`;
-};
-
-window.formatSmallEffects = function formatSmallEffects(value, places, placesUnder1000) {
-  return value.abs().lt(11) ? formatPercents(value.sub(1), places, placesUnder1000)
-    : formatX(value.sub(1), places, placesUnder1000);
 };
 
 window.timeDisplay = function timeDisplay(ms) {

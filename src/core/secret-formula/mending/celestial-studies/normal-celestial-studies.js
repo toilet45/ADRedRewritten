@@ -46,35 +46,32 @@ export const normalCelestialStudies = [
     id: 21,
     cost: DC.D1,
     requirement: [11],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.SOME,
+    description: () => `Weaken the base galaxy -> tickspeed equation, but make galaxy power far stronger.
+    Replicanti Galaxies are raised ${formatPow(0.7, 1, 1)} for tickspeed equations.`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
   },
   {
     id: 22,
     cost: DC.D1,
     requirement: [11],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    reqType: CS_REQUIREMENT_TYPE.SOME,
+    description: () => `Dimensional Boost exponent ${formatPow(2)}. Improve Break Upgrade 8.`,
+    effect: () => [2, Achievements.power.pow(30).add(1).log10().pow(1.25).pow10()],
   },
   {
     id: 31,
     cost: DC.D1,
     requirement: [21],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_A,
+    description: () => `Improve some glyph effects.`
   },
   {
     id: 32,
     cost: DC.D1,
     requirement: [22],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_A,
+    description: () => `Improve the production of all dimensions significantly`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -82,53 +79,48 @@ export const normalCelestialStudies = [
     id: 41,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
+    description: () => `Improve glyph sacrifice effects`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
   },
   {
     id: 42,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
+    description: () => `Improve glyph alchemy effects`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
   },
   {
     id: 43,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
+    description: () => `Improve time shard to tickspeed conversion softcap`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
   },
   {
     id: 44,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
+    description: () => `All dimension production exponents are ${formatX(10)}`,
+    effect: () => DC.E1,
   },
   {
     id: 51,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Power glyph sacrfice effect is squared, and affects remote scaling.`,
+    effect: () => DC.D2,
   },
   {
     id: 52,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Equipped Reality Glyphs provide a much stronger galaxy strength boost`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -137,7 +129,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Time Dimension caps are muliplied based on Time Glyph Sacrifice`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -146,7 +138,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Antimatter Dimensions gain a power effect based on Power Glyph Sacrifice`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -155,7 +147,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Infinity Glyph Sacrifice is raised to a power, based on the number of equipped Infinity Glyphs`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -164,7 +156,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Time Glyph Sacrifice is raised to a power, based on the number of equipped Time Glyphs`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -173,7 +165,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Infinity Glyph Sacrifice delays the Infinity Dimension hardcap.`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -182,7 +174,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `All dimension exponents gain a very small power, based on Tachyon Particles`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -191,34 +183,31 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph sacrifice is calculated using a value ${formatX("1e200")} the cap/sacrifice value`,
+    effect: () => DC.E200,
   },
   {
     id: 72,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `All glyph effects providing a power effect to a dimension are ${formatX(1.1, 1, 1)}`,
+    effect: () => 1.1,
   },
   {
     id: 81,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Game speed is raised ${formatPow(1.75, 2, 2)}`,
+    effect: () => 1.75,
   },
   {
     id: 91,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Delay the Antimatter softcap based on Antimatter`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -227,7 +216,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Delay the Infinity Point softcap based on Infinity Points`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -236,16 +225,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
-  },
-  {
-    id: 101,
-    cost: DC.D1,
-    requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Delay the Eternity Point softcap based on Eternity Points`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -253,26 +233,17 @@ export const normalCelestialStudies = [
     id: 102,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
-  },
-  {
-    id: 103,
-    cost: DC.D1,
-    requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_C,
+    description: () => `Raise Infinity Point gain based on Mends`,
+    effect: () => 4,
+    formatEffect: value => formatPow(value, 2, 2)
   },
   {
     id: 111,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Delay Antimatter softcap based on Infinity Points`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -281,7 +252,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Delay Infinity Point softcap based on Eternity Points`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -290,7 +261,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Delay Eternity Point softcap based on Imaginary Machines`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -299,7 +270,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    description: () => `Replicanti speed is boosted based on Infinity Points`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -307,26 +278,24 @@ export const normalCelestialStudies = [
     id: 131,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
+    description: () => `Tachyon Galaxies are ${formatX(15)} stronger`,
+    effect: () => 15,
   },
   {
     id: 132,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
+    description: () => `Antimatter Galaxies are ${formatX(30)} stronger`,
+    effect: () => 30,
   },
   {
     id: 151,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
+    description: () => `Multiversal Dimensions are gain a multiplier based on Replicanti`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -334,8 +303,8 @@ export const normalCelestialStudies = [
     id: 152,
     cost: DC.D1,
     requirement: [],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
+    description: () => `Multiversal Dimensions gain a multiplier based on Tachyon Particles`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -344,98 +313,80 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Tickspeed exponent ${formatX(1.2, 1, 1)}`,
+    effect: () => 1.2,
   },
   {
     id: 172,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Galaxy Power +${formatInt(1550)}%`,
+    effect: () => 15.5,
   },
   {
     id: 181,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Power Glyphs are far stronger`,
   },
   {
     id: 182,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Infinity Glyphs are far stronger`,
   },
   {
     id: 183,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Time Glyphs are far stronger`,
   },
   {
     id: 184,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Replication Glyphs are far stronger`,
   },
   {
     id: 185,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Dilation Glyphs are far stronger`,
   },
   {
     id: 186,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Effarig Glyphs are far stronger`,
   },
   {
     id: 187,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Glyph effects that occur on Reality Glyphs are far stronger`,
   },
   {
     id: 188,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Effects on Amalgam glyphs are far stronger.`,
   },
   {
     id: 191,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Tickspeed exponent ${formatX(1e4)}`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `All Dimension exponents are raised to a power based on Mends`,
+    effect: () => 1.1,
+    formatEffect: value => formatPow(value, 2, 2)
   },
 ];

@@ -381,7 +381,17 @@ window.CELESTIAL_STUDY_TYPE = {
 
 window.CS_REQUIREMENT_TYPE = {
   AT_LEAST_ONE: 0,
+  SOME: 0,
   ALL: 1,
+  CHOICE_A: 2,
+  CHOICE_B1: 3,
+  CHOICE_B2: 4,
+  CHOICE_C: 5,
+  CHOICE_D: 6,
+  CHOICE_E: 7,
+  CHOICE_F: 8,
+  CHOICE_G1: 9,
+  CHOICE_G2: 10
 };
 
 window.ALCHEMY_RESOURCE = {

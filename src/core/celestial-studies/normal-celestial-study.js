@@ -36,6 +36,8 @@ export class NormalCelestialStudyState extends CelestialStudyState {
     return GameCache.celestialStudies.value[this.id];
   }
 
+  // Its just a bunch of case cases its really not that complex.
+  /* eslint-disable max-len, complexity */
   checkRequirement() {
     const check = req => (typeof req === "number"
       ? CelestialStudy(req).isBought
@@ -43,12 +45,31 @@ export class NormalCelestialStudyState extends CelestialStudyState {
     switch (this.config.reqType) {
       case CS_REQUIREMENT_TYPE.AT_LEAST_ONE:
         return this.config.requirement.some(r => check(r));
-      case TS_REQUIREMENT_TYPE.ALL:
+      case CS_REQUIREMENT_TYPE.ALL:
         return this.config.requirement.every(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_A:
+        return !(CelestialStudy(31).isBought || CelestialStudy(32).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_B1:
+        return !(CelestialStudy(41).isBought || CelestialStudy(42).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_B2:
+        return !(CelestialStudy(43).isBought || CelestialStudy(44).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_C:
+        return !(CelestialStudy(91).isBought || CelestialStudy(92).isBought || CelestialStudy(93).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_D:
+        return !(CelestialStudy(131).isBought || CelestialStudy(132).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_E:
+        return !(CelestialStudy(151).isBought || CelestialStudy(152).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_F:
+        return !(CelestialStudy(171).isBought || CelestialStudy(172).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_G1:
+        return !(CelestialStudy(181).isBought || CelestialStudy(182).isBought || CelestialStudy(183).isBought || CelestialStudy(184).isBought) && this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_G2:
+        return !(CelestialStudy(185).isBought || CelestialStudy(186).isBought || CelestialStudy(187).isBought || CelestialStudy(188).isBought) && this.config.requirement.some(r => check(r));
       default:
         throw Error(`Unrecognized CS requirement type: ${this.reqType}`);
     }
   }
+  /* eslint-enable max-len, complexity */
 
   // This checks for and forbids buying studies due to being part of a set which can't normally be bought
   // together (eg. active/passive/idle and light/dark) unless the player has the requisite ST.

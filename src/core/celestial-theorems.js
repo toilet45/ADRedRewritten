@@ -21,7 +21,7 @@ export class CelestialTheoremPurchaseType {
   */
   get currency() { throw new NotImplementedError(); }
 
-  get cost() { return this.costBase.times(this.costIncrement.pow(this.amount)); }
+  get cost() { return this.costBase.pow(this.costIncrement.mul(this.amount)); }
 
   /**
    * @abstract
@@ -34,10 +34,7 @@ export class CelestialTheoremPurchaseType {
   get costIncrement() { throw new NotImplementedError(); }
 
   get bulkPossible() {
-    if (Perk.ttFree.canBeApplied) {
-      return this.currency.value.divide(this.cost).log10().div(this.costIncrement.log10()).add(1).floor();
-    }
-    return Decimal.affordGeometricSeries(this.currency.value, this.cost, this.costIncrement, 0);
+    return this.currency.value.div(this.costBase).max(1).log(this.costIncrement).add(1);
   }
 
   // Note: This is actually just the cost of the largest term of the geometric series. If buying EP without the
@@ -48,23 +45,10 @@ export class CelestialTheoremPurchaseType {
 
   purchase(bulk = false) {
     if (!this.canAfford) return false;
-
-    if (!bulk) {
-      Currency.celestialTheorems.add(1);
-      this.add(1);
-      return true;
-    }
-    const canBuy = this.currency.value.sub(this.costBase)
-      .clampMin(this.costIncrement.recip()).log(this.costIncrement);
-    let amntPur = canBuy.sub(this.amount).floor();
-    // We can definitely afford x - 1
-    amntPur = amntPur.sub(1).max(0);
-    Currency.celestialTheorems.add(amntPur);
-    this.add(amntPur);
-    // Can we afford another? If not, just return that we definitely bought some already
-    if (this.currency.lt(this.cost) && amntPur.neq(0)) return true;
-    Currency.timeTheorems.add(1);
-    this.add(1);
+    Currency.celestialTheorems.add(
+      bulk
+        ? this.currency.value.div(this.costBase).max(1).log(this.costIncrement).add(1).sub(this.amount)
+        : 1);
     return true;
   }
 
@@ -76,6 +60,15 @@ export class CelestialTheoremPurchaseType {
     this.amount = DC.D0;
   }
 }
+
+CelestialTheoremPurchaseType.am = new class extends CelestialTheoremPurchaseType {
+  get amount() { return player.celestialstudy.purchased; }
+  set amount(value) { player.celestialstudy.purchased = value; }
+
+  get currency() { return Currency.antimatter; }
+  get costBase() { return DC.E20000; }
+  get costIncrement() { return new Decimal(1.05); }
+}();
 
 export const CelestialTheorems = {
   buyOne() {

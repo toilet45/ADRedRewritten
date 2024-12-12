@@ -117,18 +117,15 @@ export const glyphEffects = {
     id: "dilationgalaxyThreshold",
     intID: 5,
     glyphTypes: [() => "dilation", () => "amalgam"],
-    singleDesc: "Tachyon Galaxy threshold multiplier ×{value}",
+    singleDesc: "Tachyon Galaxy threshold multiplier ÷{value}",
     genericDesc: "Tachyon Galaxy cost multiplier",
-    shortDesc: "TG threshold ×{value}",
+    shortDesc: "TG threshold ÷{value}",
     effect: (level, strength) => {
       const val = Decimal.pow(level, 0.17).times(Decimal.pow(strength, 0.35)).div(100)
         .add(GlyphAlteration.sacrificeBoost("dilation").div(50)).neg().add(1);
-      if (val.lt(0.1)) {
-        return new Decimal(0.1);
-      }
-      return val;
+      return val.max(level.mul(strength).div(3.5).log10().mul(2).recip());
     },
-    formatEffect: x => format(x, 3, 3),
+    formatEffect: x => format(x.recip(), 3, 3),
     alteredColor: () => GlyphAlteration.getBoostColor("dilation"),
     alterationType: ALTERATION_TYPE.BOOST,
     combine: effects => {
