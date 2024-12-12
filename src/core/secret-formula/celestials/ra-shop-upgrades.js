@@ -24,7 +24,7 @@ export const raShopUpgrades = [
   rebuyable({
     name: "???",
     id: 1,
-    initialCost: DC.D1,
+    initialCost: DC.E50,
     costMult: new Decimal("1F300"),
     textTemplate: "You gain ??? {value} times faster",
     effect: DC.D1
@@ -32,7 +32,7 @@ export const raShopUpgrades = [
   rebuyable({
     name: "???",
     id: 2,
-    initialCost: DC.D1,
+    initialCost: DC.E55,
     costMult: new Decimal("1F300"),
     textTemplate: "You gain ??? {value} times faster",
     effect: DC.D1
@@ -40,7 +40,7 @@ export const raShopUpgrades = [
   rebuyable({
     name: "???",
     id: 3,
-    initialCost: DC.D2,
+    initialCost: DC.E60,
     costMult: new Decimal("1F300"),
     textTemplate: "You gain {value} times more ???",
     effect: DC.D1
@@ -48,7 +48,7 @@ export const raShopUpgrades = [
   rebuyable({
     name: "???",
     id: 4,
-    initialCost: DC.D2,
+    initialCost: DC.E65,
     costMult: new Decimal("1F300"),
     textTemplate: "You gain {value} times more ???",
     effect: DC.D1
@@ -56,19 +56,19 @@ export const raShopUpgrades = [
   rebuyable({
     name: "???",
     id: 5,
-    initialCost: DC.D3,
+    initialCost: DC.E75,
     costMult: new Decimal(50),
     textTemplate: "You gain {value} times more ???",
     effect: DC.D1
   }),
-  {
+  rebuyable({
     name: "???",
     id: 6,
-    cost: new Decimal("1F300"),
-    description: "???",
-    effect: () => DC.D1,
-    formatEffect: value => formatX(value, 2, 2)
-  },
+    initialCost: DC.E105,
+    costMult: new Decimal(50),
+    textTemplate: "You gain {value} times more ???",
+    effect: DC.D1
+  }),
   {
     name: "???",
     id: 7,
@@ -208,14 +208,6 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 24,
-    cost: new Decimal("1F300"),
-    description: "???",
-    effect: () => DC.D1,
-    formatEffect: value => formatX(value, 2, 2)
-  },
-  {
-    name: "???",
-    id: 25,
     cost: new Decimal("1F300"),
     description: "???",
     effect: () => DC.D1,

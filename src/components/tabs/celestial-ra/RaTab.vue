@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     id(row, column) {
-      return (row - 1) * 5 + column - 1;
+      return (row - 1) * 6 + column - 1;
     },
     update() {
       this.memoriesPerChunk.copyFrom(Ra.productionPerMemoryChunk);
@@ -125,7 +125,7 @@ export default {
       this.isRunning = Ra.isRunning;
       this.memoryBoosts = Ra.memoryBoostResources;
       this.shopUnlocked = Ra.unlocks.raShopUnlock.canBeApplied;
-      this.raPoints.copyFrom(Currency.raPoints.value);
+      this.raPoints.copyFrom(Ra.pets.ra.memories);
     },
     startRun() {
       if (this.isDoomed) return;
@@ -227,15 +227,15 @@ export default {
       class="l-reality-upgrade-grid"
     >
       <div class="c-ra-point-text">
-        You have {{ format(raPoints, 2) }} Ra Points
+        You have {{ format(raPoints, 2) }} Ra Memories
       </div>
       <div
-        v-for="row in 5"
+        v-for="row in 4"
         :key="row"
         class="l-reality-upgrade-grid__row"
       >
         <ShopUpgradeButton
-          v-for="column in 5"
+          v-for="column in 6"
           :key="id(row, column)"
           :upgrade="upgrades[id(row, column)]"
         />

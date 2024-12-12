@@ -351,7 +351,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
       GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS,
-      GAME_SPEED_EFFECT.EXPO_BLACK_HOLE];
+      GAME_SPEED_EFFECT.EXPO_BLACK_HOLE, GAME_SPEED_EFFECT.SOFTCAP];
   } else {
     effects = effectsToConsider;
   }
@@ -415,7 +415,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMin(1e-300).clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
-  gameSpeedupSoftcap(factor);
+  if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   return factor;
 }
 

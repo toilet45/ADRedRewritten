@@ -85,8 +85,9 @@ export const mendingUpgrades = [
     name: "5",
     id: 5,
     cost: DC.D3,
-    description: () => MendingUpgrade(19).isBought ? `Mends multiply pre level 25 Memory gain for the first four Celestials and Dark Matter gain` :
-     `Mends multiply Memory and Dark Matter gain`,
+    description: () => (MendingUpgrade(19).isBought
+      ? `Mends multiply pre level 25 Memory gain for the first four Celestials and Dark Matter gain`
+      : `Mends multiply Memory and Dark Matter gain`),
     effect: () => {
       let x = Currency.mends.value.add(1);
       // Softcap at x20

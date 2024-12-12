@@ -152,7 +152,7 @@ export default {
   text-align: center;
   font-family: Typewriter, serif;
   font-size: 1rem;
-  color: var(--color-effarig--base);
+  color: #000;
   background-color: var(--color-background);
   border: var(--var-border-width, 0.2rem) solid var(--color-effarig--base);
   border-radius: var(--var-border-radius, 0.5rem);
@@ -161,7 +161,7 @@ export default {
 }
 
 .s-base--dark .c-expansion-upgrade-btn {
-  color: var(--color-v--base);
+  color: #000;
 }
 
 .c-expansion-upgrade-btn__requirement {
@@ -174,7 +174,7 @@ export default {
 }
 
 .c-expansion-upgrade-btn--unavailable {
-  color: var(--color-v--base);
+  color: #000;
   background-color: var(--color-glyph-undo-disabled);
   cursor: default;
 }

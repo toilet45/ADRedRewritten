@@ -47,8 +47,9 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [11],
     reqType: CS_REQUIREMENT_TYPE.SOME,
-    description: () => `Weaken the base galaxy -> tickspeed equation, but make galaxy power far stronger.
-    Replicanti Galaxies are raised ${formatPow(0.7, 1, 1)} for tickspeed equations.`,
+    // Actually describing this effect is WAYYY too much text, so just leave it vague like this
+    description: () => `Galaxies directly affect tickspeed less, but Galaxy Power is far stronger.
+    Replicanti Galaxies affect tickspeed even less.`,
     effect: () => DC.E4,
   },
   {
@@ -64,23 +65,23 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [21],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_A,
-    description: () => `Improve some glyph effects.`
+    description: () => `Improve some Glyph Effects.`
   },
   {
     id: 32,
     cost: DC.D1,
     requirement: [22],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_A,
-    description: () => `Improve the production of all dimensions significantly`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    description: () => `Improve the production of all Dimensions significantly based on Mends`,
+    effect: () => Currency.mends.value.max(1).div(25).add(1),
+    formatEffect: value => formatPow(value, 2, 2)
   },
   {
     id: 41,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
-    description: () => `Improve glyph sacrifice effects`,
+    description: () => `Improve Glyph Sacrifice effects`,
     effect: () => DC.E4,
   },
   {
@@ -88,7 +89,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
-    description: () => `Improve glyph alchemy effects`,
+    description: () => `Improve Glyph Alchemy effects`,
     effect: () => DC.E4,
   },
   {
@@ -96,7 +97,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
-    description: () => `Improve time shard to tickspeed conversion softcap`,
+    description: () => `Weaken the Time Shard to Tickspeed conversion softcap`,
     effect: () => DC.E4,
   },
   {
@@ -104,7 +105,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
-    description: () => `All dimension production exponents are ${formatX(10)}`,
+    description: () => `All dimension production ${formatPow(10)}`,
     effect: () => DC.E1,
   },
   {
@@ -112,7 +113,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Power glyph sacrfice effect is squared, and affects remote scaling.`,
+    description: () => `Power glyph sacrfice effect is squared, and affects Remote Galaxy scaling.`,
     effect: () => DC.D2,
   },
   {
@@ -120,7 +121,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Equipped Reality Glyphs provide a much stronger galaxy strength boost`,
+    description: () => `Equipped Reality Glyphs provide a much stronger Galaxy Strength boost`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -174,7 +175,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `All dimension exponents gain a very small power, based on Tachyon Particles`,
+    description: () => `All Dimension Exponents gain a very small power, based on Tachyon Particles`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -183,7 +184,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph sacrifice is calculated using a value ${formatX("1e200")} the cap/sacrifice value`,
+    description: () => `Glyph Sacrifice is calculated using a value ${formatX("1e200")} the cap/sacrifice value`,
     effect: () => DC.E200,
   },
   {
@@ -191,7 +192,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `All glyph effects providing a power effect to a dimension are ${formatX(1.1, 1, 1)}`,
+    description: () => `All Glyph Effects providing a power effect to a Dimension are ${formatX(1.1, 1, 1)}`,
     effect: () => 1.1,
   },
   {
@@ -329,49 +330,49 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Power Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Power Glyphs are far stronger`,
   },
   {
     id: 182,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Infinity Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Infinity Glyphs are far stronger`,
   },
   {
     id: 183,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Time Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Time Glyphs are far stronger`,
   },
   {
     id: 184,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Replication Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Replication Glyphs are far stronger`,
   },
   {
     id: 185,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Dilation Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Dilation Glyphs are far stronger`,
   },
   {
     id: 186,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Effarig Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Effarig Glyphs are far stronger`,
   },
   {
     id: 187,
     cost: DC.D1,
     requirement: [],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Glyph effects that occur on Reality Glyphs are far stronger`,
+    description: () => `Glyph Effects that occur on Reality Glyphs are far stronger`,
   },
   {
     id: 188,

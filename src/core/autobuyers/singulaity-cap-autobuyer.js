@@ -44,11 +44,11 @@ export class SingularityCapAutobuyerState extends AutobuyerState {
   }
 
   tick() {
-    const duration = Singularity.cap.div(Currency.darkEnergy.productionPerSecond);
-    if (duration.lt(((this.multiplier.div(1000)).times(Math.sqrt(10))))) {
+    const duration = Singularity.cap.div(Currency.darkEnergy.productionPerSecond).div(getRealTimeSpeedupFactor());
+    if (duration.lt((this.multiplier.div(10000)))) {
       Singularity.increaseCap();
     }
-    if (duration.gt(((this.multiplier.div(1000)).times(Math.sqrt(10))))) {
+    if (duration.gt((this.multiplier.div(1000)))) {
       Singularity.decreaseCap();
     }
   }
