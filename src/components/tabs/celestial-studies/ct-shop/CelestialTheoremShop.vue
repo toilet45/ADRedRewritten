@@ -91,7 +91,7 @@ export default {
           <i class="fas fa-cog" />
         </button>
         <p class="timetheorems">
-          <span class="c-tt-amount">
+          <span class="c-ct-amount">
             {{ quantifyInt("Celestial Theorem", theoremAmount, 2, 0, formatCelestialTheoremType) }}
           </span>
         </p>

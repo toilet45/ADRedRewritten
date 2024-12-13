@@ -17,6 +17,7 @@ export default {
       effectValue: 0,
       isColored: true,
       willSacrifice: false,
+      sacCap: new Decimal()
     };
   },
   computed: {
@@ -63,10 +64,10 @@ export default {
       return matchType && (this.hasDragover || (keybindActive && validSac));
     },
     formatNewAmount() {
-      return format(this.currentSacrifice.sacrificeValue, 2, 2);
+      return format(this.currentSacrifice.sacrificeValue.clampMax(this.sacCap), 2, 2);
     },
     formatTotalAmount() {
-      return format(this.amount.add(this.currentSacrifice.sacrificeValue), 2, 2);
+      return format(this.amount.add(this.currentSacrifice.sacrificeValue).clampMax(this.sacCap), 2, 2);
     },
   },
   created() {
@@ -82,6 +83,7 @@ export default {
       this.willSacrifice = AutoGlyphProcessor.sacMode === AUTO_GLYPH_REJECT.SACRIFICE ||
         (AutoGlyphProcessor.sacMode === AUTO_GLYPH_REJECT.REFINE_TO_CAP &&
           this.currentSacrifice.refineValue === 0);
+      this.sacCap = Glyphs.sacCap;
     }
   }
 };

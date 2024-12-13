@@ -29,6 +29,9 @@ export default {
       hasAlchemy: false,
       tempVal: undefined,
       hasV40: false,
+      difficulty: 0,
+      showHardButton: false,
+      showEXButton: false
     };
   },
   computed: {
@@ -42,40 +45,45 @@ export default {
     },
     // If V is flipped, change the layout of the grid
     hexGrid() {
+      switch (this.difficulty) {
+        case 2:
+          return [VRunUnlocks.all[12], {}, {}, {}, { isRunButton: true }, VRunUnlocks.all[13], VRunUnlocks.all[14], {}, {}];
+        case 1:
+          return (this.hasV40 ? [
+            VRunUnlocks.all[6],
+            VRunUnlocks.all[9],
+            {},
+            VRunUnlocks.all[11],
+            { isRunButton: true },
+            VRunUnlocks.all[7],
+            VRunUnlocks.all[8],
+            VRunUnlocks.all[10],
+            {}
+          ] : [
+            VRunUnlocks.all[6],
+            {},
+            {},
+            {},
+            { isRunButton: true },
+            VRunUnlocks.all[7],
+            VRunUnlocks.all[8],
+            {},
+            {}
+          ]);
+        default:
+          return [
+            VRunUnlocks.all[0],
+            VRunUnlocks.all[1],
+            {},
+            VRunUnlocks.all[5],
+            { isRunButton: true },
+            VRunUnlocks.all[2],
+            VRunUnlocks.all[4],
+            VRunUnlocks.all[3],
+            {}
+          ];
+      }
       // eslint-disable-next-line no-nested-ternary
-      return this.isFlipped && this.wantsFlipped
-        ? (this.hasV40 ? [
-          VRunUnlocks.all[6],
-          VRunUnlocks.all[9],
-          {},
-          VRunUnlocks.all[11],
-          { isRunButton: true },
-          VRunUnlocks.all[7],
-          VRunUnlocks.all[8],
-          VRunUnlocks.all[10],
-          {}
-        ] : [
-          VRunUnlocks.all[6],
-          {},
-          {},
-          {},
-          { isRunButton: true },
-          VRunUnlocks.all[7],
-          VRunUnlocks.all[8],
-          {},
-          {}
-        ])
-        : [
-          VRunUnlocks.all[0],
-          VRunUnlocks.all[1],
-          {},
-          VRunUnlocks.all[5],
-          { isRunButton: true },
-          VRunUnlocks.all[2],
-          VRunUnlocks.all[4],
-          VRunUnlocks.all[3],
-          {}
-        ];
     },
     vUnlock: () => VUnlocks.vAchievementUnlock,
     runMilestones() {
@@ -120,6 +128,9 @@ export default {
       this.isRunning = V.isRunning;
       this.hasAlchemy = Ra.unlocks.unlockGlyphAlchemy.canBeApplied;
       this.hasV40 = Ra.unlocks.newVhard.isUnlocked;
+      this.difficulty = V.difficulty;
+      this.showHardButton = Ra.unlocks.unlockHardV.canBeApplied;
+      this.showEXButton = Ra.unlocks.vHardenedUnlock.canBeApplied;
     },
     unlockCelestial() {
       if (V.canUnlockCelestial) V.unlockCelestial();
@@ -172,8 +183,14 @@ export default {
       const b = 255 - 20 * completions;
       return `rgb(${r},${g},${b})`;
     },
-    toggleFlipped() {
-      player.celestials.v.wantsFlipped = !this.wantsFlipped;
+    toggleNormal() {
+      V.difficulty = 0;
+    },
+    toggleHard() {
+      V.difficulty = 1;
+    },
+    toggleEX() {
+      V.difficulty = 2;
     },
     createCursedGlyph() {
       Glyphs.giveCursedGlyph();
@@ -206,16 +223,28 @@ export default {
     </div>
     <div v-else>
       <div
-        v-if="isFlipped"
         class="c-v-info-text"
       >
         <PrimaryButton
+          v-if="showHardButton || showEXButton"
           class="o-primary-btn--subtab-option"
-          @click="toggleFlipped"
+          @click="toggleNormal"
         >
-          <span v-if="wantsFlipped">Hide</span>
-          <span v-else>Show</span>
-          Hard V
+          Show Normal V
+        </PrimaryButton>
+        <PrimaryButton
+          v-if="showHardButton"
+          class="o-primary-btn--subtab-option"
+          @click="toggleHard"
+        >
+          Show Hard V
+        </PrimaryButton>
+        <PrimaryButton
+          v-if="showEXButton"
+          class="o-primary-btn--subtab-option"
+          @click="toggleEX"
+        >
+          Show Extreme V
         </PrimaryButton>
         <PrimaryButton
           class="o-primary-btn--subtab-option l-cursed-glyph-creation"
@@ -224,7 +253,7 @@ export default {
           Create a Cursed Glyph
         </PrimaryButton>
         <br>
-        Cursed Glyphs can be created here or in the Effarig tab.
+        Cursed Glyphs can be created here, the Effarig tab, or the Glyphs tab.
         <br>
         Cursed Glyphs count as {{ formatInt(-3) }} Glyphs for the purposes of all requirements related to Glyph count.
         <br>
@@ -234,6 +263,12 @@ export default {
         instead of {{ formatInt(1) }}.
         <br>
         Goal reduction is significantly more expensive for Hard V-Achievements.
+        <div
+          v-if="showEXButton"
+        >
+          <br>
+          Each Extreme V-Achievement counts as x V-Achievements and will reward Celestial Theorems instead
+        </div>
       </div>
       <div
         v-if="showReduction"

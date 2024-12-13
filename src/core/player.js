@@ -761,6 +761,7 @@ window.player = {
       // The -10 is for glyph count, as glyph count for V is stored internally as a negative number
       runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
       wantsFlipped: true,
+      difficulty: 0
     },
     ra: {
       pets: {
@@ -844,6 +845,7 @@ window.player = {
           3: new Decimal(),
           4: new Decimal(),
           5: new Decimal(),
+          6: new Decimal(),
         },
         upgradeBits: 0
       },

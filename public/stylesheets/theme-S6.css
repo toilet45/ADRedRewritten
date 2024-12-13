@@ -30,6 +30,11 @@ body.t-s6 {
   text-shadow: 0 0 7px #64dd17;
 }
 
+.t-s6 .c-ct-amount {
+  color: var(--color-teresa--base);
+  text-shadow: 0 0 7px var(--color-teresa--base);
+}
+
 .t-s6 .c-tt-buy-button--unlocked {
   color: #3aacd6;
   background: black;

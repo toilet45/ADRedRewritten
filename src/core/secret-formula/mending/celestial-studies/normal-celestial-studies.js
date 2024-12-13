@@ -141,7 +141,7 @@ export const normalCelestialStudies = [
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Antimatter Dimensions gain a power effect based on Power Glyph Sacrifice`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => formatPow(value, 2, 1)
   },
   {
     id: 61,
@@ -150,7 +150,7 @@ export const normalCelestialStudies = [
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Infinity Glyph Sacrifice is raised to a power, based on the number of equipped Infinity Glyphs`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => formatPow(value, 2, 1)
   },
   {
     id: 62,
@@ -159,7 +159,7 @@ export const normalCelestialStudies = [
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Glyph Sacrifice is raised to a power, based on the number of equipped Time Glyphs`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => formatPow(value, 2, 1)
   },
   {
     id: 63,
@@ -177,7 +177,7 @@ export const normalCelestialStudies = [
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `All Dimension Exponents gain a very small power, based on Tachyon Particles`,
     effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => formatPow(value, 2, 1)
   },
   {
     id: 71,

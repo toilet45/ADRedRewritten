@@ -22,6 +22,7 @@ export default {
       untilAllEC: TimeSpan.zero,
       hasECR: false,
       hasCelStudies: false,
+      EC13Completions: 0
     };
   },
   computed: {
@@ -66,6 +67,7 @@ export default {
       }
       this.hasECR = Perk.studyECRequirement.isBought;
       this.hasCelStudies = Ra.unlocks.vHardenedUnlock.canBeApplied;
+      this.EC13Completions = EternityChallenge(13).completions;
     },
     isChallengeVisible(challenge) {
       if (challenge.id >= 13) return challenge.completions > 0 || challenge.isUnlocked || challenge.hasUnlocked;
@@ -109,7 +111,7 @@ export default {
     </div>
     <div v-else>
       Complete Eternity Challenges again for a bigger reward,
-      maximum of {{ formatInt(EternityChallenge(13).completions + 5) }} times.<br>
+      maximum of {{ formatInt(EC13Completions + 5) }} times.<br>
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
     </div>
     <div v-if="!hasECR">
@@ -120,7 +122,7 @@ export default {
       You have seen {{ formatInt(unlockedCount) }} out of {{ formatInt(12) }} Eternity Challenges.
     </div>
     <div v-else-if="hasCelStudies && unlockedCount !== 25">
-      You have seen {{ formatInt(unlockedCount) }} out of {{ formatInt(25) }} Eternity Challenges.
+      You have seen {{ formatInt(unlockedCount) }} Eternity Challenges.
     </div>
     <div v-else-if="hasCelStudies">
       You have seen all {{ formatInt(25) }} Eternity Challenges.

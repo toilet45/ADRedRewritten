@@ -21,7 +21,8 @@ export default {
   },
   data: () => ({
     showCost: true,
-    showSTCost: false
+    showSTCost: false,
+    isUseless: false
   }),
   computed: {
     study() {
@@ -29,9 +30,9 @@ export default {
     },
     hintText() {
       const id = this.study.id;
-      if (!this.setup.path) return id;
+      if (!this.setup.path) return `C${id}`;
       const pathEntry = CelestialStudies.pathList.find(p => p.path === this.setup.path);
-      return `${id} ${pathEntry.name}`;
+      return `C${id} ${pathEntry.name}`;
     },
   },
   methods: {

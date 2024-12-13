@@ -50,7 +50,7 @@ class RebuyableRaUpgradeState extends RebuyableMechanicState {
 
 RaUpgradeState.index = mapGameData(
   GameDatabase.celestials.raShopUpgrades,
-  config => (config.id < 6
+  config => (config.id < 7
     ? new RebuyableRaUpgradeState(config)
     : new RaUpgradeState(config))
 );
@@ -67,6 +67,6 @@ export const RaUpgrades = {
    */
   all: RaUpgradeState.index.compact(),
   get allBought() {
-    return (player.celestials.ra.shop.upgradeBits >> 6) + 1 === 1 << (GameDatabase.celestials.ra.shopUpgrades.length - 5);
+    return (player.celestials.ra.shop.upgradeBits >> 7) + 1 === 1 << (GameDatabase.celestials.ra.shopUpgrades.length - 6);
   }
 };

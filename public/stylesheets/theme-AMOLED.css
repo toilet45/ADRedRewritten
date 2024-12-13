@@ -13,6 +13,11 @@ input.t-amoled {
   text-shadow: 0 0 7px #64dd17;
 }
 
+.t-amoled .c-ct-amount {
+  color: var(--color-teresa--base);
+  text-shadow: 0 0 7px var(--color-teresa--base);
+}
+
 .t-amoled .c-tt-buy-button--unlocked {
   color: #3aacd6;
   background: black;

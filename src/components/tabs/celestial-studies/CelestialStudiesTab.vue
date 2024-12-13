@@ -121,7 +121,7 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="exportStudyTree"
       >
-        Export tree
+        Export Celestial tree
       </PrimaryButton>
       <PrimaryButton
         :class="respecClassObject"
@@ -133,7 +133,7 @@ export default {
         class="o-primary-btn--subtab-option"
         onclick="Modal.studyString.show({ id: -1 })"
       >
-        Import tree
+        Import Celestial tree
       </PrimaryButton>
     </div>
     <div

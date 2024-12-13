@@ -103,7 +103,7 @@ export default {
             v-if="!isBought"
             :config="config"
             br
-            name="Memories"
+            name="Memory"
           />
         </template>
       </span>

@@ -223,6 +223,12 @@ export const V = {
   get isFullyCompleted() {
     return this.spaceTheorems >= 66;
   },
+  get difficulty() {
+    return player.celestials.v.difficulty;
+  },
+  set difficulty(value) {
+    player.celestials.v.difficulty = value;
+  },
   nextNormalReductionCost() {
     return DC.E3;
   },

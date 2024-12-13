@@ -10,6 +10,11 @@ body.t-s11 {
   text-shadow: 0 0 7px #64dd17;
 }
 
+.t-s11 .c-ct-amount {
+  color: var(--color-teresa--base);
+  text-shadow: 0 0 7px var(--color-teresa--base);
+}
+
 .t-s11 .c-tt-buy-button--unlocked {
   color: #3aacd6;
   background: black;

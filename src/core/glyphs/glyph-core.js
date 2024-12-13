@@ -625,7 +625,6 @@ export const Glyphs = {
     let toBeDeleted = 0;
     for (const glyph of Glyphs.inventory) {
       if (glyph !== null && glyph.idx >= this.protectedSlots && !AutoGlyphProcessor.wouldKeep(glyph)) {
-        console.log(glyph.type);
         if (deleteGlyphs) AutoGlyphProcessor.getRidOfGlyph(glyph);
         toBeDeleted++;
       }
@@ -683,6 +682,11 @@ export const Glyphs = {
   },
   get hyperLogarithmicInstabilityThreshold() {
     return this.logarithmicInstabilityThreshold.add(50000);
+  },
+  get sacCap() {
+    let x = DC.E100;
+    x = x.pow(Teresa.hardRunRewardPower);
+    return x;
   },
   clearUndo() {
     player.reality.glyphs.undo = [];

@@ -13,6 +13,11 @@ input.t-amoled-metro {
   text-shadow: 0 0 7px #64dd17;
 }
 
+.t-amoled-metro .c-ct-amount {
+  color: var(--color-teresa--base);
+  text-shadow: 0 0 7px var(--color-teresa--base);
+}
+
 .t-amoled-metro .c-tt-buy-button--unlocked {
   color: #3aacd6;
   background: black;

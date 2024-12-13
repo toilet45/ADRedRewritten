@@ -17,7 +17,8 @@ export default {
       undoVisible: false,
       cosmeticGlow: false,
       updateLvUnlock: false,
-      updateLv: player.reality.updateGLOnReality
+      updateLv: player.reality.updateGLOnReality,
+      cursedUnlocked: false
     };
   },
   computed: {
@@ -113,6 +114,7 @@ export default {
       this.cosmeticGlow = player.reality.glyphs.cosmetics.glowNotification;
       this.updateLvUnlock = MendingUpgrade(3).boughtAmount.gt(4);
       this.updateLv = player.reality.updateGLOnReality;
+      this.cursedUnlocked = Ra.unlocks.unlockHardV.canBeApplied;
     },
     glyphPositionStyle(idx) {
       const angle = 2 * Math.PI * idx / this.slotCount;
@@ -183,6 +185,9 @@ export default {
         const sound = idx + (increaseSound ? 6 : 1);
         new Audio(`audio/note${sound}.mp3`).play();
       }
+    },
+    createCursedGlyph() {
+      Glyphs.giveCursedGlyph();
     }
   }
 };
@@ -264,6 +269,13 @@ export default {
       >
         Open Glyph Visual Options
       </button>
+      <button
+        v-if="cursedUnlocked"
+        class="l-cursed-glyph-creation c-reality-upgrade-btn"
+        @click="createCursedGlyph"
+      >
+        Create a Cursed Glyph
+      </button>
     </div>
   </div>
 </template>
@@ -283,5 +295,12 @@ export default {
   width: 100%;
   height: 2.5rem;
   margin: 0.25rem 0.5rem;
+}
+
+.l-cursed-glyph-creation {
+  width: 100%;
+  height: 2.5rem;
+  margin: 0.25rem 0.5rem;
+  background: var(--color-effarig--base);
 }
 </style>
