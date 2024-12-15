@@ -103,6 +103,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     TimeStudy(111)
   )).toNumber();
   if (Pelle.isDisabled("IPMults")) {
+    if (EternityChallenge(14).isRunning) return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75));
     return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
       .times(Pelle.specialGlyphEffect.infinity)
@@ -132,6 +133,9 @@ export function gainedInfinityPoints(mm1gen = false) {
   }
 
   ip = ip.pow(MendingUpgrade(6).effects.other);
+
+  if (EternityChallenge(13).isRunning) ip = ip.pow(0.03);
+  if (EternityChallenge(15).isRunning) ip = ip.min(1).log10();
 
   return ip.floor();
 }
@@ -361,6 +365,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
       // eslint-disable-next-line capitalized-comments, no-inline-comments
       return Decimal.mul(1 / 1000, 1/* dev.speedUp */);
     }
+    if (EternityChallenge(16).isRunning) return DC.D1;
   }
 
   let factor = DC.D1;
@@ -568,7 +573,7 @@ export function gameLoop(passedDiff, options = {}) {
   GameCache.timeDimensionCommonMultiplier.invalidate();
   GameCache.totalIPMult.invalidate();
 
-  const fixedSpeedActive = EternityChallenge(12).isRunning;
+  const fixedSpeedActive = EternityChallenge(12).isRunning || EternityChallenge(16).isRunning;
   if (!Enslaved.isReleaseTick && !fixedSpeedActive) {
     let speedFactor;
     if (options.blackHoleSpeedup === undefined) {
@@ -894,8 +899,9 @@ function laitelaBeatText(disabledDim) {
 
 // This gives IP/EP/RM from the respective upgrades that reward the prestige currencies continuously
 function applyAutoprestige(diff) {
+  const disableIPSpeedBoost = EternityChallenge(13).isRunning || EternityChallenge(14).isRunning || EternityChallenge(15).isRunning;
   if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded) {
-    Currency.infinityPoints.add(gainedInfinityPoints(true).times(Time.deltaTime
+    Currency.infinityPoints.add(gainedInfinityPoints(true).times((disableIPSpeedBoost ? 1 : Time.deltaTime)
       .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }

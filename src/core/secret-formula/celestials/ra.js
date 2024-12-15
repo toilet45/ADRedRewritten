@@ -562,34 +562,33 @@ export const ra = {
       displayIcon: `-1`,
       disabledByPelle: false
     },
-    triadCheaperAgain: {
-      id: 52,
-      reward: () => `Unlock ${formatInt(2)} new Triad Studies,
-      and Triad Studies cost ${formatInt(2)} Space Theorems less`,
-      effect: 1,
-      pet: "v",
-      level: 65,
-      displayIcon: `-2`,
-      disabledByPelle: false
-    },
     vHardenedUnlock: {
-      id: 53,
-      reward: () => `Unlock Extreme-V achievements and gain one final Triad Study.
-      Unlock the Celestial Study Tree`,
+      id: 52,
+      reward: () => `Unlock Extreme-V achievements and the Celestial Study Tree. Gain TWO new Triad Studies.`,
       effect: 1,
       pet: "v",
-      level: 75,
+      level: 60,
       displayIcon: `⏣`,
       disabledByPelle: false
     },
     celTreeUnlocks: {
+      id: 53,
+      reward: () => `Unlock ${formatInt(2)} final Triad Studies,
+      and ${formatInt(4)} more rows of the Celestial Study Tree. Unlock another Extreme-V achievement,
+      and you can now buy Celestial Studies with Time Theorems`,
+      effect: 4,
+      pet: "v",
+      level: 75,
+      displayIcon: `<span class="fas fa-project-diagram"></span>`,
+      disabledByPelle: false
+    },
+    triadCheaperAgain: {
       id: 54,
-      reward: () => `Unlock ${formatInt(4)} more rows of the Celestial Study Tree. Unlock another Extreme-V achievement
-      , and you can now buy Celestial Studies with Time Theorems`,
+      reward: () => `Triad Studies cost ${formatInt(2)} Space Theorems less`,
       effect: 1,
       pet: "v",
       level: 90,
-      displayIcon: `<span class="fas fa-project-diagram"></span>`,
+      displayIcon: `-2`,
       disabledByPelle: false
     },
     achArePower: {

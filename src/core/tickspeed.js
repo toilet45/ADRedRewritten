@@ -22,6 +22,8 @@ export function effectiveBaseGalaxies() {
 }
 
 export function getTickSpeedMultiplier() {
+  const disabledByECs = EternityChallenge(16).isRunning || EternityChallenge(17).isRunning || EternityChallenge(18).isRunning;
+  if (disabledByECs) return DC.D1;
   if (InfinityChallenge(3).isRunning || Enslaved.isExpanded) return ExpansionUpgrade(8).effectOrDefault(DC.D1);
   if (Ra.isRunning) return DC.C1D1_1245;
   let galaxies = effectiveBaseGalaxies();

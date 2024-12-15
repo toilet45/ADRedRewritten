@@ -52,7 +52,7 @@ export default class CelestialStudyTreeLayout {
     const CS = id => (CelestialStudy(id).isUnlocked ? CelestialStudy(id) : null);
     const EC = id => CelestialStudy.eternityChallenge(id);
 
-    this.rowsToShow = 6;
+    this.rowsToShow = CelestialStudy.totalVisibleRows();
 
     /**
      * @type {CelestialStudyRow[]}
@@ -66,8 +66,8 @@ export default class CelestialStudyTreeLayout {
       normalRow(                  CS(51), CS(52), CS(53), CS(54)                      ),
       normalRow(                  CS(61), CS(62), CS(63), CS(64)                      ),
       normalRow(                     CS(71),   EC(14),   CS(72)                       ),
-      normalRow(                     EC(15),   EC(81),   EC(16)                       ),
-      normalRow(                     CS(91),   EC(92),   CS(93)                       ),
+      normalRow(                     EC(15),   CS(81),   EC(16)                       ),
+      normalRow(                     CS(91),   CS(92),   CS(93)                       ),
       normalRow(                    EC(17),   CS(102),   EC(18)                       ),
       normalRow(                   CS(111),   CS(112),   CS(113)                      ),
       normalRow(                      null,   CS(121),   null                         ),

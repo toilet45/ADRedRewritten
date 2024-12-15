@@ -90,7 +90,8 @@ export class InfinityUpgradeState extends SetPurchasableMechanicState {
 }
 
 export function totalIPMult() {
-  if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.INFINITY) {
+  const disabledByECs = EternityChallenge(14).isRunning || EternityChallenge(15).isRunning;
+  if ((Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.INFINITY) || disabledByECs) {
     return DC.D1;
   }
   let ipMult = DC.D1

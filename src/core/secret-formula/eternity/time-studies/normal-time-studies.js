@@ -825,7 +825,7 @@ export const normalTimeStudies = [
     effect: () => [Time.thisMendRealTime.totalMilliseconds.clampMin(1),
       Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).root(4).mul(5)],
     formatEffect: value => `${formatX(value[0], 1, 1)}, ${formatX(value[1], 1, 1)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10
   },
   {
     id: 321,
@@ -837,7 +837,7 @@ export const normalTimeStudies = [
     description: "Antimatter Dimensions gain a power effect based on Antimatter",
     effect: () => Currency.antimatter.value.max(1).log(10).max(1).log(10).root(5).div(25).add(1),
     formatEffect: value => `${formatPow(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11
   },
   {
     id: 322,
@@ -849,7 +849,7 @@ export const normalTimeStudies = [
     description: "Infinity Dimensions gain a power effect based on Infinity Points",
     effect: () => Currency.infinityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(40).add(1),
     formatEffect: value => `${formatPow(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 13
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12
   },
   {
     id: 323,
@@ -861,7 +861,7 @@ export const normalTimeStudies = [
     description: "Time Dimensions gain a power effect based on Eternity Points",
     effect: () => Currency.eternityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(25).add(1),
     formatEffect: value => `${formatPow(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14
+    unlocked: () => Ra.unlocks.celTreeUnlocks.canBeApplied,
   },
   {
     id: 324,
@@ -873,6 +873,6 @@ export const normalTimeStudies = [
     description: "Multiversal Dimensions gain a multiplier based on Multiversal Remains",
     effect: () => Currency.mendingPoints.value.max(1).log10().div(20).add(1).cbrt(),
     formatEffect: value => `${formatX(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15 && Ra.unlocks.MvDUnlock.canBeApplied
+    unlocked: () => Ra.unlocks.celTreeUnlocks.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
   }
 ];

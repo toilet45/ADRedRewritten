@@ -1,4 +1,6 @@
 <script>
+import PrimaryButton from "../../PrimaryButton";
+
 import BreakInfinityButton from "./BreakInfinityButton";
 import InfinityUpgradeButton from "@/components/InfinityUpgradeButton";
 
@@ -6,7 +8,8 @@ export default {
   name: "BreakInfinityTab",
   components: {
     BreakInfinityButton,
-    InfinityUpgradeButton
+    InfinityUpgradeButton,
+    PrimaryButton
   },
   data() {
     return {

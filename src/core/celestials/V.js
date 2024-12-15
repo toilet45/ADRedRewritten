@@ -183,8 +183,10 @@ export const V = {
   },
   unlockCelestial() {
     player.celestials.v.unlockBits |= (1 << VUnlocks.vAchievementUnlock.id);
-    GameUI.notify.success("You have unlocked V, The Celestial Of Achievements!", 10000);
-    V.quotes.unlock.show();
+    if (!MendingMilestone.five.isReached) {
+      GameUI.notify.success("You have unlocked V, The Celestial Of Achievements!", 10000);
+      V.quotes.unlock.show();
+    }
   },
   initializeRun() {
     clearCelestialRuns();

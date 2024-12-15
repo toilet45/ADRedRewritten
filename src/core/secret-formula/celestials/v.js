@@ -227,16 +227,19 @@ export const v = {
     },
     {
       id: 11,
-      name: "Placeholder Name",
-      description: value => `Reach a Glyph of level ${formatInt(value)}.`,
-      values: [6500, 7000, 8000, 9000, 10000],
-      condition: () => V.isRunning && false,
-      currentValue: () => gainedGlyphLevel().actualLevel,
-      formatRecord: x => formatInt(x),
+      name: "Schindler's Reality",
+      description: value => `Reach ${format(Decimal.pow10(value), 2, 2)} antimatter in Time Dilation and Eternity Challenge 10 without
+        equipped Glyphs, Triad Studies, or Charged Upgrades.`,
+      values: [5e14, 8e14, 2e15, 5e15, 9e15],
+      condition: () => V.isRunning && EternityChallenge(10).isRunning && player.dilation.active &&
+        Glyphs.activeWithoutCompanion.length === 0 && player.requirementChecks.reality.noTriads &&
+        player.celestials.ra.charged.size === 0 && player.celestials.ra.breakCharged.size === 0,
+      currentValue: () => Currency.antimatter.value.log10(),
+      formatRecord: x => `${format(Decimal.pow10(x))}`,
       shardReduction: tiers => Math.floor(500 * tiers),
       maxShardReduction: () => 500,
-      perReductionStep: 5,
-      mode: V_REDUCTION_MODE.SUBTRACTION,
+      perReductionStep: 50, //e9e15 -> e8.95e15
+      mode: V_REDUCTION_MODE.DIVISION,
       isHard: true,
       isExtra: true,
     },

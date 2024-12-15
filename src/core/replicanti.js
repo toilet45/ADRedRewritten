@@ -559,7 +559,7 @@ export const ReplicantiUpgrade = {
 
 export const Replicanti = {
   get areUnlocked() {
-    return player.replicanti.unl;
+    return player.replicanti.unl && !EternityChallenge(18).isRunning;
   },
   reset(force = false) {
     const unlocked = force ? false : EternityMilestone.unlockReplicanti.isReached;

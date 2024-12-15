@@ -7,6 +7,9 @@ import { DimensionState } from "./dimension";
 export function antimatterDimensionCommonMultiplier() {
   let multiplier = DC.D1;
   if (Enslaved.isExpanded) return multiplier;
+  if (EternityChallenge(16).isRunning || EternityChallenge(18).isRunning) {
+    return multiplier;
+  }
   multiplier = multiplier.times(Achievements.power.powEffectOf(MendingUpgrade(13).effects.adPow));
 
   if (!EternityChallenge(9).isRunning) {
@@ -112,7 +115,7 @@ function applyNDMultipliers(mult, tier) {
   } else {
     buy10Value = Decimal.floor(AntimatterDimension(tier).bought.div(10));
   }
-
+  if (EternityChallenge(18).isRunning) return multiplier.times(Decimal.pow(AntimatterDimensions.buyTenMultiplier, buy10Value));
   multiplier = multiplier.times(Decimal.pow(AntimatterDimensions.buyTenMultiplier, buy10Value));
   multiplier = multiplier.times(DimBoost.multiplierToNDTier(tier));
 
@@ -154,6 +157,8 @@ function applyNDMultipliers(mult, tier) {
   multiplier = multiplier.clampMin(1);
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
+  if (EternityChallenge(15).isRunning) multiplier = multiplier.div(AntimatterDimension(tier).amount.clampMin(1));
 
   return multiplier;
 }
@@ -198,6 +203,8 @@ function applyNDPowers(mult, tier) {
   }
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
+  if (EternityChallenge(14).isRunning && tier === 1) multiplier = multiplier.pow(0.025);
 
   return multiplier;
 }
@@ -664,7 +671,7 @@ export const AntimatterDimensions = {
 
   get buyTenMultiplier() {
     if (NormalChallenge(7).isRunning) return DC.D2.min(DimBoost.totalBoosts.div(5).add(1));
-
+    if (EternityChallenge(18).isRunning) return DC.D2;
     let mult = DC.D2.plusEffectsOf(
       Achievement(141).effects.buyTenMult,
       EternityChallenge(3).reward

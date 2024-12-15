@@ -1,4 +1,10 @@
+import { DC } from "../constants";
+
+import { EternityChallenge, Ra } from "../globals";
+
 import { CelestialStudyState } from "./celestial-studies";
+
+
 
 export const NormalCelestialStudies = {};
 
@@ -129,7 +135,7 @@ CelestialStudy.boughtNormalCS = function() {
  * @returns {Number}
  */
 CelestialStudy.totalVisibleRows = function() {
-  return 6;
+  return (DC.D6.plusEffectsOf(Ra.unlocks.celTreeUnlocks, EternityChallenge(14).reward)).toNumber();
 };
 
 /* Not finalized yet

@@ -114,7 +114,8 @@ export function mendingReset() {
     replication: DC.D0,
     dilation: DC.D0,
     effarig: DC.D0,
-    reality: DC.D0
+    reality: DC.D0,
+    amalgam: DC.D0
   };
   const filterTypesCopy = player.reality.glyphs.filter.types;
   player.reality.glyphs.filter = {
@@ -154,6 +155,11 @@ export function mendingReset() {
     8: new Decimal(),
     9: new Decimal(),
     10: new Decimal(),
+    26: new Decimal(),
+    27: new Decimal(),
+    28: new Decimal(),
+    29: new Decimal(),
+    30: new Decimal(),
   };
   player.reality.reqLock = {
     reality: 0,
@@ -256,7 +262,6 @@ export function mendingReset() {
   resetTickspeed();
   AchievementTimers.marathon2.reset();
   Currency.infinityPoints.reset();
-  Tab.dimensions.antimatter.show();
   Lazy.invalidateAll();
   ECTimeStudyState.invalidateCachedRequirements();
   player.reality.hasCheckedFilter = false;
@@ -342,7 +347,9 @@ export function mendingReset() {
   for (let i = 0; i < prebreakAch.length; i++) {
     Achievement(prebreakAch[i]).unlock();
   }
-  Tab.dimensions.antimatter.show();
+  if (!MendingUpgrade(18).isBought) {
+    Tab.dimensions.antimatter.show();
+  }
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 

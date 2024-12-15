@@ -42,6 +42,6 @@ export default {
     :class="enabledClass"
     @click="action"
   >
-    {{ isLocked ? `Requires V level 90 to unlock` : formatCost(cost) }}
+    {{ isLocked ? `Requires V level 75 to unlock` : formatCost(cost) }}
   </button>
 </template>

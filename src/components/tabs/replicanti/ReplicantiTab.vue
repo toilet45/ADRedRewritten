@@ -45,6 +45,7 @@ export default {
       maxReplicanti: new Decimal(),
       estimateToMax: 0,
       seenRGcap: false,
+      EC18Running: false
     };
   },
   computed: {
@@ -175,6 +176,7 @@ export default {
       this.maxReplicanti.copyFrom(player.records.thisReality.maxReplicanti);
       this.estimateToMax = this.calculateEstimate();
       this.seenRGcap = player.replicanti.hasSeenCap;
+      this.EC18Running = EternityChallenge(18).isRunning;
     },
     vacuumText() {
       return wordShift.wordCycle(PelleRifts.vacuum.name);
@@ -196,16 +198,27 @@ export default {
 <template>
   <div class="l-replicanti-tab">
     <br>
-    <PrimaryButton
-      v-if="!isUnlocked"
-      :enabled="isUnlockAffordable"
-      class="o-primary-btn--replicanti-unlock"
-      onclick="Replicanti.unlock();"
-    >
-      Unlock Replicanti
-      <br>
-      Cost: {{ format(unlockCost) }} IP
-    </PrimaryButton>
+    <template v-if="!isUnlocked">
+      <PrimaryButton
+        v-if="EC18Running"
+        :enabled="false"
+        class="o-primary-btn--replicanti-unlock"
+      >
+        Locked
+        <br>
+        Eternity Challenge 18
+      </PrimaryButton>
+      <PrimaryButton
+        v-else
+        :enabled="isUnlockAffordable"
+        class="o-primary-btn--replicanti-unlock"
+        onclick="Replicanti.unlock();"
+      >
+        Unlock Replicanti
+        <br>
+        Cost: {{ format(unlockCost) }} IP
+      </PrimaryButton>
+    </template>
     <template v-else>
       <div
         v-if="isDoomed"

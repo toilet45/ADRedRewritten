@@ -101,7 +101,7 @@ export const breakInfinityUpgrades = {
     charged: {
       description: () =>
         `Antimatter Dimensions gain a power effect based on total EC completions`,
-      effect: () => EternityChallenges.completions / 500 + 1,
+      effect: () => new Decimal(EternityChallenges.completions / 500 + 1),
       formatEffect: value => `^${format(value, 4, 4)}`
     }
   },

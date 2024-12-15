@@ -4,6 +4,9 @@ import { DimensionState } from "./dimension";
 
 export function infinityDimensionCommonMultiplier() {
   if (Enslaved.isExpanded) return DC.D1;
+  if (EternityChallenge(16).isRunning || EternityChallenge(18).isRunning) {
+    return DC.D1;
+  }
   let mult = new Decimal(1)
     .timesEffectsOf(
       Achievement(75),
@@ -132,7 +135,7 @@ class InfinityDimensionState extends DimensionState {
 
   get productionPerSecond() {
     if (EternityChallenge(2).isRunning || EternityChallenge(10).isRunning ||
-      (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension)) {
+      (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension) || EternityChallenge(17).isRunning) {
       return DC.D0;
     }
     let production = this.totalAmount;
