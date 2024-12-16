@@ -36,16 +36,16 @@ export const raShopUpgrades = [
   rebuyable({
     name: "???",
     id: 1,
-    initialCost: DC.E50,
-    costMult: new Decimal("1e20"),
+    initialCost: new Decimal(1e22),
+    costMult: new Decimal("1e6"),
     textTemplate: "You gain Memories {value} times faster",
     effect: DC.D4
   }),
   rebuyable({
     name: "???",
     id: 2,
-    initialCost: DC.E55,
-    costMult: new Decimal("1e25"),
+    initialCost: new Decimal(1e30),
+    costMult: new Decimal("1e10"),
     textTemplate: "Raise Memory Chunk gain by ^{value}",
     effect: DC.D1_02
   }),
@@ -91,7 +91,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 8,
-    cost: new Decimal(1e18),
+    cost: new Decimal(1e24),
     description: "The upgrade on the left affects all Celestials",
     effect: () => DC.D1,
   },

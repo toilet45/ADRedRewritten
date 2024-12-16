@@ -208,7 +208,7 @@ export const V = {
       runUnlocks: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       STSpent: 0,
-      runGlyphs: [[], [], [], [], [], [], [], [], []],
+      runGlyphs: [[], [], [], [], [], [], [], [], [], [], [], []],
       runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
     };
     this.spaceTheorems = 0;
