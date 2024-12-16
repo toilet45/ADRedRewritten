@@ -137,6 +137,8 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
 export function totalReplicantiSpeedMult(overCap) {
   let totalMult = DC.D1;
 
+  if (EternityChallenge(18).isRunning) return new Decimal("1e-1750");
+
   // These are the only effects active in Pelle - the function shortcuts everything else if we're in Pelle
   totalMult = totalMult.times(PelleRifts.decay.effectValue);
   totalMult = totalMult.times(Pelle.specialGlyphEffect.replication);
@@ -559,7 +561,7 @@ export const ReplicantiUpgrade = {
 
 export const Replicanti = {
   get areUnlocked() {
-    return player.replicanti.unl && !EternityChallenge(18).isRunning;
+    return player.replicanti.unl;
   },
   reset(force = false) {
     const unlocked = force ? false : EternityMilestone.unlockReplicanti.isReached;

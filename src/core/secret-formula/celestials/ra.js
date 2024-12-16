@@ -472,7 +472,7 @@ export const ra = {
 
     gamespeedUncap: {
       id: 42,
-      reward: () => `Game speed is uncapped, and Time Dimension 8 purchases above 1e8 affect the multiplier.`,
+      reward: () => `Game speed is uncapped, and remove the 8th Time Dimension multiplier hardcap.`,
       effect: 1,
       pet: "enslaved",
       level: 30,
@@ -640,7 +640,7 @@ export const ra = {
     },
     raShopUnlock: {
       id: 60,
-      reward: () => `Unlock the first ${formatInt(2)} rows of Ra's Shop`,
+      reward: () => `Unlock Ra's Shop`,
       effect: 1,
       pet: "ra",
       level: 10,
@@ -687,7 +687,7 @@ export const ra = {
     },
     raShopNewRow: {
       id: 65,
-      reward: () => `Unlock the next row of Ra's Shop`,
+      reward: () => `Unlock another row of Ra's Shop`,
       effect: 1,
       pet: "ra",
       level: 50,
@@ -714,7 +714,7 @@ export const ra = {
     },
     raShopFinalRow: {
       id: 68,
-      reward: () => `Unlock the next row of Ra's Shop`,
+      reward: () => `Unlock another row of Ra's Shop`,
       effect: 1,
       pet: "ra",
       level: 90,

@@ -321,7 +321,7 @@ export const eternityChallenges = [
   },
   {
     id: 15,
-    description: () => `Dimension multipliers are devided by the number your have. IP gain is log10.
+    description: () => `Dimension multipliers are divided by the number your have. IP gain is log10.
     Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
     goal: DC.E100,
     pelleGoal: DC.E100,
@@ -380,7 +380,7 @@ export const eternityChallenges = [
     id: 18,
     description: () => `Continuum is set to +${formatInt(0)}% purchases. All Tickspeed and Dimension Multipliers are
     disabled, except for buy ${formatInt(10)}. Buy ${formatInt(10)} multiplier is capped at ${formatX(2)}.
-    Passive IP gain is disabled. Replicanti speed is ${formatX("1e-1750")}`,
+    Passive IP gain is disabled. Replicanti speed is divided by ${format("1e1750")}`,
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
@@ -417,8 +417,7 @@ export const eternityChallenges = [
   },
   {
     id: 20,
-    description: () => `You are in EC1-18, without any nerfs to IP gain/generation.
-    IP generation is unaffected by Gamespeed, and IP exponent is raised ${formatPow(0.25, 2, 2)}`,
+    description: () => "You are trapped in EC3-18 excluding EC10 and EC11, without IP generation nerfs. All IP multipliers are disabled",
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,

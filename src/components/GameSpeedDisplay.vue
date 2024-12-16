@@ -15,7 +15,9 @@ export default {
       currentDevSpeed: new Decimal(),
       inMatterChallenge: false,
       hasImaginaryBlackHoles: false,
-      speedUncapped: false
+      speedUncapped: false,
+      realSpeed: new Decimal(),
+      hasSeenRealAlteredSpeed: false
     };
   },
   computed: {
@@ -41,6 +43,14 @@ export default {
         ? "The game is running at normal speed."
         : `Game speed is altered: ${this.baseSpeedText}`;
     },
+    baseRealSpeedText() {
+      const realSpeed = this.formatNumber(this.realSpeed);
+      return `${realSpeed}`;
+    },
+    baseRealText() {
+      if (this.realSpeed.eq(1)) return `Real time is passing at normal speed.`;
+      return `Real time is altered: ${this.baseRealSpeedText}`;
+    },
     devSpeedText() {
       const devSpeed = this.formatNumber(this.currentDevSpeed);
       return this.isEC12 || this.inMatterChallenge ? `TESTING SPEED HAS NO EFFECT` : `TESTING SPEED IS MODIFIED: ${devSpeed}`;
@@ -60,6 +70,8 @@ export default {
       this.inMatterChallenge = NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
       //this.hasImaginaryBlackHoles = ImaginaryBlackHole(1).isActive && !this.isStopped && this.baseSpeed.gt(1);
       this.speedUncapped = Ra.unlocks.gamespeedUncap.canBeApplied;
+      this.realSpeed = getRealTimeSpeedupFactor();
+      this.hasSeenRealAlteredSpeed = ImaginaryBlackHole(1).isUnlocked;
     },
     formatNumber(num) {
       if (num.gte(0.001) && num.lt(1e4) && num.neq(1)) {
@@ -80,6 +92,10 @@ export default {
       {{ baseText }}
     </span>
     <span v-if="isPulsing">(<i class="fas fa-expand-arrows-alt u-fa-padding" /> {{ pulseSpeedText }})</span>
+    <span
+      v-if="hasSeenRealAlteredSpeed"
+      class="c-realspeed">
+      <br>{{ baseRealText }}</span>
     <span v-if="hasDevSpeed"><br><b class="c-devspeed"> {{ devSpeedText }} </b></span>
   </span>
 </template>
@@ -93,5 +109,10 @@ export default {
 .c-devspeed {
   font-weight: bold;
   color: #258b25;
+}
+
+.c-realspeed {
+  font-weight: bold;
+  color: #c0a821;
 }
 </style>

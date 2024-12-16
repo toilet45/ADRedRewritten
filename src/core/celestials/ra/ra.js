@@ -1,6 +1,5 @@
 import { DC } from "../../constants";
 import { GameMechanicState } from "../../game-mechanics";
-import { MendingUpgrade } from "../../globals";
 import { Quotes } from "../quotes";
 
 class RaUnlockState extends GameMechanicState {
@@ -133,7 +132,13 @@ class RaPetState extends GameMechanicState {
   }
 
   get requiredMemories() {
-    return Ra.requiredMemoriesForLevel(this.level);
+    let x = Ra.requiredMemoriesForLevel(this.level);
+    if (this.level >= 75) x = x.div(Effects.sum(RaUpgrade(3)));
+    if (this.level >= 100) {
+      x = x.div(Effects.sum(RaUpgrade(6)));
+      if (this.name === "Pelle") x = x.div(RaUpgrade(24).effectOrDefault(1));
+    }
+    return x;
   }
 
   get memoryChunksPerSecond() {
@@ -155,11 +160,11 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryUpgradeCurrentMult() {
-    return Decimal.pow(1.3, this.data.memoryUpgrades);
+    return Decimal.pow(1.3, this.data.memoryUpgrades).timesEffectOf(RaUpgrade(1));
   }
 
   get chunkUpgradeCurrentMult() {
-    return Decimal.pow(1.5, this.data.chunkUpgrades);
+    return Decimal.pow(1.5, this.data.chunkUpgrades).powEffectOf(RaUpgrade(2));
   }
 
   get memoryUpgradeCost() {
@@ -179,11 +184,11 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryUpgradeCapped() {
-    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2));
+    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24 + Effects.sum(RaUpgrade(5)).toNumber()).div(2));
   }
 
   get chunkUpgradeCapped() {
-    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2));
+    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24 + Effects.sum(RaUpgrade(5)).toNumber()).div(2));
   }
 
   purchaseMemoryUpgrade() {
@@ -233,8 +238,15 @@ class RaPetState extends GameMechanicState {
     if (!mu19) this.data.level = 1;
     this.data.memories = DC.D0;
     this.data.memoryChunks = DC.D0;
-    this.data.memoryUpgrades = 0;
-    this.data.chunkUpgrades = 0;
+    const cel5Plus = (this.name === "Ra" || this.name === "Lai'tela" || this.name === "Pelle");
+    if ((cel5Plus && !RaUpgrade(8).canBeApplied)) {
+      this.data.memoryUpgrades = 0;
+      this.data.chunkUpgrades = 0;
+    }
+    if ((!cel5Plus && !RaUpgrade(7).canBeApplied)) {
+      this.data.memoryUpgrades = 0;
+      this.data.chunkUpgrades = 0;
+    }
   }
 }
 
@@ -375,7 +387,7 @@ export const Ra = {
     for (const unl of Ra.unlocks.all) {
       unl.unlock();
     }
-
+    if (Ra.pets.enslaved.level >= 40) ImaginaryBlackHoles.unlock();
     Ra.checkForQuotes();
   },
   checkForQuotes() {

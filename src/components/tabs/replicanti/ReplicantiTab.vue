@@ -45,7 +45,7 @@ export default {
       maxReplicanti: new Decimal(),
       estimateToMax: 0,
       seenRGcap: false,
-      EC18Running: false
+      externallyDisabled: false
     };
   },
   computed: {
@@ -176,7 +176,7 @@ export default {
       this.maxReplicanti.copyFrom(player.records.thisReality.maxReplicanti);
       this.estimateToMax = this.calculateEstimate();
       this.seenRGcap = player.replicanti.hasSeenCap;
-      this.EC18Running = EternityChallenge(18).isRunning;
+      this.externallyDisabled = false;
     },
     vacuumText() {
       return wordShift.wordCycle(PelleRifts.vacuum.name);
@@ -200,13 +200,13 @@ export default {
     <br>
     <template v-if="!isUnlocked">
       <PrimaryButton
-        v-if="EC18Running"
+        v-if="externallyDisabled"
         :enabled="false"
         class="o-primary-btn--replicanti-unlock"
       >
         Locked
         <br>
-        Eternity Challenge 18
+        External Factor
       </PrimaryButton>
       <PrimaryButton
         v-else

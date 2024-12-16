@@ -252,7 +252,7 @@ export const v = {
       values: [15, 15.4, 15.7, 16, 16.2],
       condition: () => V.isRunning && player.requirementChecks.reality.maxStudies <= 7 && !TimeStudy.dilation.isBought,
       currentValue: () => player.antimatter.max(1).log10().max(1).log10(),
-      formatRecord: x => format(x.pow10().pow10()),
+      formatRecord: x => format(Decimal.pow10(x).pow10()),
       shardReduction: tiers => 0.002 * tiers,
       maxShardReduction: () => 0.5,
       mode: V_REDUCTION_MODE.SUBTRACTION,
