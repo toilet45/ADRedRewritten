@@ -256,7 +256,7 @@ export default {
         >{{ format(maxReplicanti, 2) }}</span>.
       </div>
       <div
-        v-if="hasSeenCap"
+        v-if="seenRGcap"
       >
         Max Replicanti Upgrade caps at {{ formatInt(1e7) }} purchases.
       </div>

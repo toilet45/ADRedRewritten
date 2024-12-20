@@ -475,5 +475,11 @@ export const AD = {
     powValue: () => (PelleStrikes.infinity.hasStrike ? new Decimal(0.5) : DC.D1),
     isActive: () => Pelle.isDoomed,
     icon: MultiplierTabIcons.PELLE,
+  },
+  mu3: {
+    name: "Mending Upgrade 3",
+    multValue: () => MendingUpgrade(3).effects.mult,
+    powValue: () => MendingUpgrade(3).effects.pow,
+    isActive: () => MendingUpgrade(3).boughtAmount.gt(0)
   }
 };

@@ -294,5 +294,11 @@ export const ID = {
     powValue: () => new Decimal(0.5),
     isActive: () => PelleStrikes.powerGalaxies.hasStrike,
     icon: MultiplierTabIcons.PELLE,
+  },
+  mu3: {
+    name: "Mending Upgrade 3",
+    multValue: () => MendingUpgrade(3).effects.mult,
+    powValue: () => MendingUpgrade(3).effects.pow,
+    isActive: () => MendingUpgrade(3).boughtAmount.gt(0)
   }
 };

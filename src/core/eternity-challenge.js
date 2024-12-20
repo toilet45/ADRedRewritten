@@ -179,11 +179,11 @@ export class EternityChallengeState extends GameMechanicState {
   completionsAtIP(ip) {
     if (ip.lt(this.initialGoal)) return 0;
     const completions = (ip.dividedBy(this.initialGoal)).log10().div(this.goalIncrease.log10()).add(1);
-    if (completions.gt(scaleStart)) {
-      sCompletions = new Decimal(scaleStart);
+    if (completions.gt(this.scaleStart)) {
+      let sCompletions = new Decimal(this.scaleStart);
       switch (this.scaled.goalIncreaseType) {
         case "exponential":
-          sCompletions += ip.log10().div(this.scaled.goal.log10()).log(this.scaled.goalIncrease);
+          sCompletions = sCompletions.add(ip.log10().div(this.scaled.goal.log10()).log(this.scaled.goalIncrease));
           break;
         default:
           break;

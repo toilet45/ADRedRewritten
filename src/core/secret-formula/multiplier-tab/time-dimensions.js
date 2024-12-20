@@ -263,4 +263,10 @@ export const TD = {
     isActive: () => getAdjustedGlyphEffect("curseddimensions") !== 1,
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("cursed"),
   },
+  mu3: {
+    name: "Mending Upgrade 3",
+    multValue: () => MendingUpgrade(3).effects.mult,
+    powValue: () => MendingUpgrade(3).effects.pow,
+    isActive: () => MendingUpgrade(3).boughtAmount.gt(0)
+  }
 };
