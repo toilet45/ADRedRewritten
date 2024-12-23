@@ -13,8 +13,9 @@ const rebuyable = props => {
   );
   const effect = props.effect;
   props.effect = () => effect;
-  props.description = () => props.textTemplate.replace("{value}", format(effect, 2, 2));
-  props.formatEffect = value => {
+  props.description = () => props.textTemplate.replace("{value}", props.formatting(effect));
+  // eslint-disable-next-line no-unused-expressions, no-sequences, no-inline-comments, spaced-comment
+  props.formatEffect = value => props.formatting(value), /*{
     switch (props.id) {
       case 2:
         return formatPow(value, 2, 2);
@@ -26,7 +27,7 @@ const rebuyable = props => {
       default:
         return formatX(value, 2, 0);
     }
-  };
+  }; */
   props.formatCost = value => format(value, 2, 0);
   return props;
 };
@@ -38,7 +39,8 @@ export const raShopUpgrades = [
     id: 1,
     initialCost: new Decimal(1e22),
     costMult: new Decimal("1e6"),
-    textTemplate: "You gain Memories {value} times faster",
+    formatting: value => formatX(value, 2, 2),
+    textTemplate: "Memory gain {value}",
     effect: DC.D4
   }),
   rebuyable({
@@ -46,7 +48,8 @@ export const raShopUpgrades = [
     id: 2,
     initialCost: new Decimal(1e30),
     costMult: new Decimal("1e10"),
-    textTemplate: "Raise Memory Chunk gain by ^{value}",
+    formatting: value => formatPow(value, 2, 2),
+    textTemplate: "Memory Chunk gain {value}",
     effect: DC.D1_02
   }),
   rebuyable({
@@ -54,7 +57,8 @@ export const raShopUpgrades = [
     id: 3,
     initialCost: DC.E60,
     costMult: new Decimal("1e30"),
-    textTemplate: "Post-Level 75 Memory requirements are divided by /{value}",
+    formatting: value => formatDiv(value, 2, 2),
+    textTemplate: "Post-Level 75 Memory requirements {value}",
     effect: DC.E1
   }),
   rebuyable({
@@ -62,7 +66,8 @@ export const raShopUpgrades = [
     id: 4,
     initialCost: DC.E65,
     costMult: new Decimal("1e35"),
-    textTemplate: "Memory Chunk softcap starts x{value} later",
+    formatting: value => formatX(value, 2, 2),
+    textTemplate: "Memory Chunk Softcap start value: {value}",
     effect: DC.D1_3
   }),
   rebuyable({
@@ -70,7 +75,8 @@ export const raShopUpgrades = [
     id: 5,
     initialCost: DC.E75,
     costMult: new Decimal(50),
-    textTemplate: "Recollection and Fragmentation purchase caps are raised by {value}",
+    formatting: value => `+${format(value, 2, 2)}`,
+    textTemplate: "Recollection and Fragmentation purchase caps are increased by {value}",
     effect: DC.D1
   }),
   rebuyable({
@@ -78,7 +84,8 @@ export const raShopUpgrades = [
     id: 6,
     initialCost: DC.E105,
     costMult: new Decimal(1e50),
-    textTemplate: "Level 100 Memory requirement /{value}",
+    formatting: value => formatDiv(value, 2, 2),
+    textTemplate: "Level 100 Memory requirement {value}",
     effect: DC.E2
   }),
   {
