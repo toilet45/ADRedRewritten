@@ -120,4 +120,9 @@ export const IP = {
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: DC.E2,
+    isActive: () => MendingMilestone.one.isReached
+  }
 };

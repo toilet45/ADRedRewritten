@@ -101,4 +101,9 @@ export const EP = {
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: DC.E1,
+    isActive: () => MendingMilestone.one.isReached
+  }
 };

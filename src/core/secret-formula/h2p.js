@@ -1050,7 +1050,7 @@ will not be lost or overwritten.
 <br>
 <b>Hotkey: U</b> will pause/unpause the Automator.
 `,
-      isUnlocked: () => Player.automatorUnlocked,
+      isUnlocked: () => Player.automatorUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["automation", "reality", "code", "script", "endgame", "lategame"],
       tab: "automation/automator"
     }, {
@@ -1106,7 +1106,7 @@ in large chunks instead of more continuously. This may have potentially adverse 
 behavior while offline, depending on how exactly your script depends on the game state to work properly.
 Additionally, the PAUSE command may behave oddly due to it also being based on real time.
 `,
-      isUnlocked: () => Player.automatorUnlocked,
+      isUnlocked: () => Player.automatorUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["automation", "reality", "code", "script", "endgame", "lategame"],
       tab: "automation/automator"
     }, {
@@ -1193,7 +1193,7 @@ but the same cost multipliers.
 <br>
 <b>Hotkey: B</b> will pause/unpause the Black Holes.
 `,
-      isUnlocked: () => player.blackHole[0].unlocked,
+      isUnlocked: () => player.blackHole[0].unlocked || PlayerProgress.mendingUnlocked,
       tags: ["reality", "time", "speed", "duration", "interval", "rm", "endgame", "lategame"],
       tab: "reality/hole"
     }, {
@@ -1216,7 +1216,7 @@ the game will depend on the Celestial.
 Celestials are timeless entities. Unless otherwise stated, any new mechanics introduced by Celestials are not affected
 by game speed multipliers and instead refer specifically to real time instead of game time.
 `,
-      isUnlocked: () => Teresa.isUnlocked,
+      isUnlocked: () => Teresa.isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["reality", "challenges", "endgame", "lategame"],
       tab: "celestials/celestial-navigation"
     }, {
@@ -1244,7 +1244,7 @@ ${Teresa.runCompleted
       "reach a higher amount of antimatter on this repeat run."
     : "(More information available - complete Teresa's Reality)"}
 `,
-      isUnlocked: () => Teresa.isUnlocked,
+      isUnlocked: () => Teresa.isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["rm", "endgame", "lategame", "perks", "sacrifice", "boo", "ghost", "celestial"],
       tab: "celestials/teresa"
     }, {
@@ -1288,7 +1288,7 @@ ${Ra.unlocks.glyphEffectCount.canBeApplied
 <br>
 <br>
 `,
-      isUnlocked: () => TeresaUnlocks.effarig.canBeApplied,
+      isUnlocked: () => TeresaUnlocks.effarig.canBeApplied || PlayerProgress.mendingUnlocked,
       tags: ["glyph", "sacrifice", "shards", "reality", "spectralflame", "lategame", "endgame", "celestial"],
       tab: "celestials/effarig"
     }, {
@@ -1358,7 +1358,7 @@ When loading a set, you can be Level and/or Rarity sensitive. The best Glyph fro
 will always be the one equipped. Just like other groups of circular Glyphs, you can click any of them
 in order to bring up a modal summarizing the whole set of Glyphs.
 `,
-      isUnlocked: () => EffarigUnlock.adjuster.isUnlocked,
+      isUnlocked: () => EffarigUnlock.adjuster.isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["glyph", "weight", "adjustment", "sacrifice", "filter", "threshold", "set", "save", "reality", "lategame",
         "endgame"],
       tab: "celestials/glyphfilter"
@@ -1415,7 +1415,7 @@ ${Enslaved.isCompleted
 <br>
 The Nameless Ones will not directly unlock the next Celestial.
 `,
-      isUnlocked: () => EffarigUnlock.eternity.isUnlocked,
+      isUnlocked: () => EffarigUnlock.eternity.isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["reality", "time", "blackhole", "lategame", "endgame", "testers", "celestial",
         ...credits.people.map(p => p.name)
       ],
@@ -1440,7 +1440,7 @@ You can see additional information about your current Tesseract count and the co
 Dimensions tab. Additionally, your current Infinity Points will now also show a percentage towards the next Tesseract.
 If affordable, the Infinity button itself will visually change and bring you to the Infinity Dimension tab when clicked.
 `,
-      isUnlocked: () => Enslaved.isCompleted,
+      isUnlocked: () => Enslaved.isCompleted || PlayerProgress.mendingUnlocked,
       tags: ["reality", "lategame", "endgame", "tesseract", "id", "celestial"],
       tab: "celestials/tesseract"
     }, {
@@ -1495,9 +1495,9 @@ ${VUnlocks.vAchievementUnlock.isUnlocked
       Celestial.`
     : "<span style='color: var(--color-bad);'>(unlock V's Reality to see further details)</span>"}
 `,
-      isUnlocked: () => Achievement(151).isUnlocked,
+      isUnlocked: () => Achievement(151).isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["reality", "lategame", "endgame", "girlfriend", "challenges", "achievement", "space", "theorems",
-        "study", "triad", "celestial"],
+        "study", "triad", "celestial", "bio's true love", "bio's husband", "daddy", "feet"],
       tab: "celestials/v"
     }, {
       name: "Ra, Celestial of the Forgotten",
@@ -1576,7 +1576,7 @@ matter how many Time Glyphs you refine, you can never have more than
 ${formatInt(GlyphSacrificeHandler.levelRefinementValue(8000))} of the Time resource until you refine another Time Glyph
 with a higher refinement value.
 `,
-      isUnlocked: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
+      isUnlocked: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied || PlayerProgress.mendingUnlocked,
       // Oh god I'm so sorry this is so many words
       tags: ["reality", "lategame", "endgame", "ra", "effarig", "alchemy", "power", "infinity", "time", "replication",
         "dilation", "cardinality", "eternity", "dimensionality", "inflation", "alternation", "synergism", "momentum",
@@ -1605,7 +1605,7 @@ To activate or deactivate a reaction, click the circle corresponding to the reac
 be applied, moving lines will be shown from all reagents to the product. If a connection is a solid line, that means
 that the reaction cannot proceed due to not having enough of that reagent to get more of the product due to its cap.
 `,
-      isUnlocked: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
+      isUnlocked: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied || PlayerProgress.mendingUnlocked,
       tags: ["reality", "lategame", "endgame", "ra", "effarig", "alchemy", "power", "infinity", "time", "replication",
         "dilation", "cardinality", "eternity", "dimensionality", "inflation", "alternation", "synergism", "momentum",
         "decoherence", "force", "exponential", "uncountability", "boundless", "unpredictability", "multiversal",
@@ -1638,7 +1638,7 @@ modifiers to game speed.
 <br>
 Imaginary Machine upgrades will unlock the final two Celestials.
 `,
-      isUnlocked: () => MachineHandler.isIMUnlocked,
+      isUnlocked: () => MachineHandler.isIMUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["imaginary", "machines", "reality", "lategame", "endgame"],
       tab: "reality/imag_upgrades"
     }, {
@@ -1687,8 +1687,8 @@ to Dark Energy gain.
 <br>
 Lai'tela will not directly unlock the next Celestial.
 `,
-      isUnlocked: () => Laitela.isUnlocked,
-      tags: ["omsi", "reality", "dark", "matter", "dimensions", "lategame", "endgame", "ascend", "celestial"],
+      isUnlocked: () => Laitela.isUnlocked || PlayerProgress.mendingUnlocked,
+      tags: ["omsi", "reality", "dark", "matter", "dimensions", "lategame", "endgame", "ascend", "celestial", "waifu", "mommy", "feet", "simp", "bio's wife", "r34"],
       tab: "celestials/laitela"
     }, {
       name: "Continuum",
@@ -1714,7 +1714,7 @@ so all the related autobuyer settings for these autobuyers are now hidden on tha
 `,
       // Apparently continuumUnlocked is really important in a lot of places and if we keep it unlocked
       // Things break, so we check for the iMU instead.
-      isUnlocked: () => ImaginaryUpgrade(15).isBought,
+      isUnlocked: () => ImaginaryUpgrade(15).isBought || PlayerProgress.mendingUnlocked,
       tags: ["continuum", "purchase", "reality", "lategame", "endgame"],
       tab: ""
     }, {
@@ -1749,7 +1749,7 @@ Independently of the milestone type, milestones also have an icon indicating wha
 <br>
 <i class="fas fa-compress-arrows-alt"></i> These milestones improve Lai'tela based on something outside of Lai'tela
 `,
-      isUnlocked: () => Laitela.isUnlocked,
+      isUnlocked: () => Laitela.isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["reality", "lategame", "endgame", "laitela", "dark"],
       tab: ""
     }, {
@@ -1793,7 +1793,7 @@ ${Pelle.isDoomed
     : "<span style='color: var(--color-bad);'><b>You must Doom your Reality to read the rest of this entry.</b></span>"
 }
 `,
-      isUnlocked: () => Pelle.isUnlocked,
+      isUnlocked: () => Pelle.isUnlocked || PlayerProgress.mendingUnlocked,
       tags: ["reality", "antimatter", "lategame", "endgame", "final", "hevipelle", "celestial", "doom"],
       tab: "celestials/pelle"
     }, {
@@ -1814,7 +1814,7 @@ ${PelleStrikes.eternity.hasStrike
     : ""}
 In addition, each Rift offers three milestone rewards for filling them up to a certain percentage.
 `,
-      isUnlocked: () => PelleStrikes.infinity.hasStrike,
+      isUnlocked: () => PelleStrikes.infinity.hasStrike || PlayerProgress.mendingUnlocked,
       tags: ["reality", "antimatter", "lategame", "endgame", "final", "pelle", "strike", "rift", "celestial"],
       tab: "celestials/pelle"
     }, {
@@ -1830,10 +1830,16 @@ Generated Galaxies. Replicanti or Tachyon Galaxies cannot be spent for purchasin
 <br>
 The <b>Galaxy Generator</b> has a maximum number of Galaxies it can generate, which can only be increased by draining
 Rifts once the current cap has been reached.`,
-      isUnlocked: () => Pelle.hasGalaxyGenerator,
+      isUnlocked: () => Pelle.hasGalaxyGenerator || PlayerProgress.mendingUnlocked,
       tags: ["reality", "antimatter", "lategame", "endgame", "final", "pelle", "galaxy",
         "galaxies", "generator", "celestial"],
       tab: "celestials/pelle"
+    },
+    {
+      name: "Mending",
+      info: () => `Mending is the 4th prestige layer`,
+      isUnlocked: () => PlayerProgress.mendingUnlocked,
+      tags: ["new content"]
     }
   ]
 };

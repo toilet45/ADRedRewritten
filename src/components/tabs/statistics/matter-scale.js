@@ -1,7 +1,7 @@
 import { DC } from "@/core/constants";
 
 function roundAndStr(decimal, amnt = 4) {
-  return decimal.toString().substring(0, amnt + Math.ceil(decimal.log10().toNumber()));
+  return decimal.toString().substring(0, amnt + Math.max(0, Math.ceil(decimal.log10().toNumber())));
 }
 export const MatterScale = {
   proton: new Decimal("2.82e-45"),

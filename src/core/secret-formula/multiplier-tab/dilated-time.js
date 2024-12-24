@@ -102,4 +102,9 @@ export const DT = {
     ignoresNerfPowers: true,
     icon: MultiplierTabIcons.GAMESPEED,
   },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: () => new Decimal(20),
+    isActive: () => MendingMilestone.one.isReached
+  }
 };

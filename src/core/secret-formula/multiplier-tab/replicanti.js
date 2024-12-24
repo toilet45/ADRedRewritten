@@ -80,4 +80,9 @@ export const replicanti = {
     isActive: () => false,
     icon: MultiplierTabIcons.IAP,
   },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: DC.E1,
+    isActive: () => MendingMilestone.one.isReached
+  }
 };

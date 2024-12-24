@@ -1,3 +1,5 @@
+import { DC } from "../../constants";
+
 import { MultiplierTabIcons } from "./icons";
 
 // See index.js for documentation
@@ -39,4 +41,9 @@ export const eternities = {
     isActive: () => AlchemyResource.eternity.canBeApplied,
     icon: MultiplierTabIcons.ALCHEMY,
   },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: DC.D5,
+    isActive: () => MendingMilestone.one.isReached
+  }
 };

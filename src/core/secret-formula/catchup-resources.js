@@ -155,7 +155,7 @@ export const catchupResources = [
     name: "Reality",
     id: 20,
     requiredStage: PROGRESS_STAGE.EARLY_REALITY,
-    description: () => `Reality is the third and final main reset layer. Reaching ${format(DC.E4000)} Eternity Points
+    description: () => `Reality is the third ${PlayerProgress.mendingUnlocked ? "" : "and final"} main reset layer. Reaching ${format(DC.E4000)} Eternity Points
       gives you the option to reset everything up to this point in exchange for unlocking new content and gaining
       access to new resources.`
   },
@@ -367,4 +367,12 @@ export const catchupResources = [
       another nerf to the Doomed Reality. Accompanying every Strike is a Rift, which is a mechanic which lets you drain
       a different resource in exchange for a boost. These are permanent and remain unlocked after Armageddon.`
   },
+  {
+    name: "Mending",
+    id: 47,
+    openH2pEntry: "Mending",
+    requiredStage: PROGRESS_STAGE.TIER_FOUR_PRESTIGE,
+    description: () => `Mending is the fourth major prestige layer, unlocked by reaching
+      ${format(DC.END)} Antimatter inside a Doomed Reality`
+  }
 ];

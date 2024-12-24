@@ -59,4 +59,9 @@ export const infinities = {
     isActive: () => SingularityMilestone.infinitiedPow.canBeApplied,
     icon: MultiplierTabIcons.SINGULARITY,
   },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: DC.E1,
+    isActive: () => MendingMilestone.one.isReached
+  }
 };

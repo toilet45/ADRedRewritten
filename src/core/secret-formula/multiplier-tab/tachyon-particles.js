@@ -72,5 +72,10 @@ export const TP = {
     powValue: () => Enslaved.tachyonNerf,
     isActive: () => Enslaved.isRunning,
     icon: MultiplierTabIcons.GENERIC_ENSLAVED,
+  },
+  mm1: {
+    name: "1 Mend Milestone",
+    multValue: DC.D5,
+    isActive: () => MendingMilestone.one.isReached
   }
 };

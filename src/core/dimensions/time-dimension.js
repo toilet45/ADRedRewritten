@@ -141,7 +141,7 @@ export function maxAllTimeDimensions() {
 
 export function timeDimensionCommonMultiplier() {
   if (Enslaved.isExpanded) return DC.D1;
-  if (EternityChallenge(16).isRunning || EternityChallenge(18)) {
+  if (EternityChallenge(16).isRunning || EternityChallenge(18).isRunning) {
     return DC.D1;
   }
   let mult = new Decimal(1)
