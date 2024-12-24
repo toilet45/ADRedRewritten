@@ -121,7 +121,7 @@ export const IP = {
     icon: MultiplierTabIcons.GENERIC_V,
   },
   mm1: {
-    name: "1 Mend Milestone",
+    name: "Mending Milestone 1",
     multValue: DC.E2,
     isActive: () => MendingMilestone.one.isReached
   }

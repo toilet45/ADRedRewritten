@@ -49,7 +49,8 @@ export const GlyphInfo = {
     "time",
     "dilation",
     "companion",
-    "amalgam"
+    "amalgam",
+    "musical"
   ],
 
   basicGlyphTypes: [
@@ -168,6 +169,28 @@ export const GlyphInfo = {
     color: "#000000",
     setColor: true,
     maxEffects: Infinity
+  },
+
+  musical: {
+    id: "musical",
+    effects: () => GlyphEffects.all.filter(e => complexIncludes(e.glyphTypes, "amalgam")),
+    effectIDs: ["musicalCosmeticBoost", "musicalADpow", "musicalIPpow", "musicalRealmul", "musicalPPtoGS", "musicalSacrificeBoost"],
+    adjective: { high: "Perfected", mid: "Musical", low: "Loud" },
+    noun: "Melody",
+    isBasic: false,
+    regularGlyphSymbol: "♫",
+    cancerGlyphSymbol: "3",
+    hasAlchemyResource: false,
+    pelleUniqueEffect: false,
+    isGenerated: true,
+    generationRequirement: () => Ra.unlocks.musicUniqueType.canBeApplied,
+    canCustomize: () => false,
+    adjNounImportance: 5,
+    color: "#ffffff",
+    setColor: true,
+    hasRarity: true,
+    maxEffects: () => 3,
+    gainFactor: x => x.pow(0.5).div(50).max(1)
   },
 
   amalgam: {

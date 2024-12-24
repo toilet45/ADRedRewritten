@@ -11,7 +11,8 @@ export const orderedEffectList = ["powerpow", "infinitypow", "replicationpow", "
   "effarigforgotten", "effarigdimensions", "effarigantimatter",
   "cursedgalaxies", "cursedtickspeed", "curseddimensions", "cursedEP",
   "realityglyphlevel", "realitygalaxies", "realityrow1pow", "realityDTglyph",
-  "companiondescription", "companionEP"];
+  "musicalCosmeticBoost", "musicalADpow", "musicalIPpow", "musicalRealmul", "musicalPPtoGS",
+  "musicalSacrificeBoost", "companiondescription", "companionEP"];
 
 function getGlyphTypes() {
   const v = { ...GlyphInfo };

@@ -103,7 +103,7 @@ export const DT = {
     icon: MultiplierTabIcons.GAMESPEED,
   },
   mm1: {
-    name: "1 Mend Milestone",
+    name: "Mending Milestone 1",
     multValue: () => new Decimal(20),
     isActive: () => MendingMilestone.one.isReached
   }

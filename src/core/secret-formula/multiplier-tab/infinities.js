@@ -60,7 +60,7 @@ export const infinities = {
     icon: MultiplierTabIcons.SINGULARITY,
   },
   mm1: {
-    name: "1 Mend Milestone",
+    name: "Mending Milestone 1",
     multValue: DC.E1,
     isActive: () => MendingMilestone.one.isReached
   }

@@ -42,7 +42,7 @@ export const eternities = {
     icon: MultiplierTabIcons.ALCHEMY,
   },
   mm1: {
-    name: "1 Mend Milestone",
+    name: "Mending Milestone 1",
     multValue: DC.D5,
     isActive: () => MendingMilestone.one.isReached
   }

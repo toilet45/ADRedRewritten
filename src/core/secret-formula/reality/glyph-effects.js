@@ -585,12 +585,24 @@ export const glyphEffects = {
     id: "realitygalaxies",
     intID: 33,
     glyphTypes: [() => "reality"],
-    singleDesc: "All Galaxies are {value} stronger",
-    totalDesc: "All Galaxy strength +{value}",
-    shortDesc: "Galaxy Strength +{value}",
+    singleDesc: () => (GlyphAlteration.isAdded("reality")
+      ? "All Galaxies are {value} stronger, Replicanti Galaxy Cap ×{value2}"
+      : "All Galaxies are {value} stronger"),
+    totalDesc: () => (GlyphAlteration.isAdded("reality")
+      ? "All Galaxy strength +{value}, RG Cap ×{value2}"
+      : "All Galaxy strength +{value}"),
+    shortDesc: () => (GlyphAlteration.isAdded("reality")
+      ? "Galaxy Strength +{value} and Replicanti Galaxy Cap ×{value2}"
+      : "Galaxy Strength +{value}"),
+    genericDesc: () => (GlyphAlteration.isAdded("reality")
+      ? "Galaxy Strength +{value} and Replicanti Galaxy Cap multiplied by x"
+      : "Galaxy Strength +x"),
     effect: level => Decimal.pow(level.div(100000), 0.5).add(1),
     formatEffect: x => formatPercents(x.sub(1), 2),
+    formatSecondaryEffect: x => formatPercents(x.sub(1), 2),
     combine: GlyphCombiner.multiply,
+    alteredColor: () => GlyphAlteration.getAdditionColor("reality"),
+    alterationType: ALTERATION_TYPE.ADDITION
   },
   realityrow1pow: {
     id: "realityrow1pow",
@@ -599,9 +611,11 @@ export const glyphEffects = {
     singleDesc: "Multiplier from Reality Upgrade Amplifiers ^{value}",
     totalDesc: "Reality Upgrade Amplifier multiplier ^{value}",
     shortDesc: "Amplifier Multiplier ^{value}",
-    effect: level => level.div(1.25e5).add(1),
+    effect: level => level.div(1.25e5).add(1).mul(GlyphAlteration.sacrificeBoost("reality").div(250).add(1)),
     formatEffect: x => format(x, 3, 3),
     combine: GlyphCombiner.addExponents,
+    alteredColor: () => GlyphAlteration.getBoostColor("reality"),
+    alterationType: ALTERATION_TYPE.BOOST
   },
   realityDTglyph: {
     id: "realityDTglyph",
@@ -614,9 +628,11 @@ export const glyphEffects = {
     genericDesc: "Dilated Time factor for Glyph level",
     shortDesc: "DT pow. for level +{value}",
     // You can only get this effect on level 25000 reality glyphs anyway, might as well make it look nice
-    effect: level => Decimal.sqrt(level.div(10)).div(500),
+    effect: level => Decimal.sqrt(level.div(10)).div(500).add(GlyphAlteration.isEmpowered("reality") ? 0.1 : 0),
     formatEffect: x => format(x, 2, 2),
     combine: GlyphCombiner.add,
+    alteredColor: () => GlyphAlteration.getEmpowermentColor("reality"),
+    alterationType: ALTERATION_TYPE.EMPOWER
   },
   companiondescription: {
     id: "companiondescription",
@@ -649,6 +665,86 @@ export const glyphEffects = {
     effect: (level, strength) => Decimal.pow10(DC.E6.times(strengthToRarity(strength))),
     formatEffect: x => formatPostBreak(x, 2),
     combine: GlyphCombiner.multiplyDecimal,
+    enabledInDoomed: true,
+  },
+  musicalCosmeticBoost: {
+    id: "musicalCosmeticBoost",
+    intID: 38,
+    glyphTypes: [() => "musical"],
+    singleDesc: "Glyphs with the Music cosmetic are {value}% more effective",
+    totalDesc: "Glyphs with the Music cosmetic are {value}% more effective",
+    shortDesc: "Music glyphs improve {value}%",
+    genericDesc: "Glyphs with Music cosmetic are x% more effective",
+    effect: (level, strength) => strength.mul(level).log10().div(250),
+    formatEffect: x => formatPercents(x, 3, 3),
+    combine: GlyphCombiner.add,
+    enabledInDoomed: true,
+  },
+  musicalADpow: {
+    id: "musicalADpow",
+    intID: 39,
+    glyphTypes: [() => "musical"],
+    singleDesc: "Antimatter Dimensions ^{value}",
+    totalDesc: "Antimatter Dimensions ^{value}",
+    shortDesc: "AD ^{value}",
+    genericDesc: "Antimatter Dimensions ^x",
+    effect: (level, strength) => strength.mul(level).log10().div(250).add(1),
+    formatEffect: x => formatPow(x.add(1), 3, 3),
+    combine: GlyphCombiner.addExponents,
+    enabledInDoomed: true,
+  },
+  musicalIPpow: {
+    id: "musicalIPpow",
+    intID: 40,
+    glyphTypes: [() => "musical"],
+    singleDesc: "Infinty Points ^{value}",
+    totalDesc: "Infinty Points ^{value}",
+    shortDesc: "IP ^x",
+    genericDesc: "Infinity points ^{value}",
+    effect: (level, strength) => strength.mul(level).log10().div(1000).add(1),
+    formatEffect: x => formatPow(x.add(1), 3, 3),
+    combine: GlyphCombiner.add,
+    enabledInDoomed: true,
+  },
+  musicalRealmul: {
+    id: "musicalRealmul",
+    intID: 41,
+    glyphTypes: [() => "musical"],
+    singleDesc: "Reality gain ×{value}",
+    totalDesc: "Reality gain ×{value}",
+    shortDesc: "Reality gain ×{value}",
+    genericDesc: "Reality gain multiplier",
+    effect: (level, strength) => strength.mul(level).root(50).add(1).mul(3),
+    formatEffect: x => formatX(x, 2, 2),
+    combine: GlyphCombiner.add,
+    enabledInDoomed: true,
+  },
+  musicalPPtoGS: {
+    id: "musicalPPtoGS",
+    intID: 42,
+    glyphTypes: [() => "musical"],
+    singleDesc: "Perk points multiply game speed at a ^{value} ratio",
+    totalDesc: "Perk points multiply game speed at a ^{value} ratio",
+    shortDesc: "Perk points increase game speed",
+    genericDesc: "Perk points multiply game speed at a ^x ratio",
+    effect: (level, strength) => strength.mul(level).log10().div(2),
+    formatEffect: x => formatPow(x, 2, 2),
+    // Since exponents can be lt 1, dont use addExponents. This allows values like 1.2 + 1.4 = 2.6 not 1.6
+    // This is the same reason we dont add 1 to the value above. Note at 0, this is 0 and x^0 = 1, so 1x.
+    combine: GlyphCombiner.add,
+    enabledInDoomed: true,
+  },
+  musicalSacrificeBoost: {
+    id: "musicalSacrificeBoost",
+    intID: 43,
+    glyphTypes: [() => "musical"],
+    singleDesc: "Glyphs can be sacrificed for {value}% more sacrifice",
+    totalDesc: "Glyphs can be sacrificed for {value}% more sacrifice",
+    shortDesc: "Improve Glyph Sacrifice",
+    genericDesc: "Glyphs can be sacrificed for x% more sacrifice",
+    effect: (level, strength) => strength.mul(level).log10().pow(2),
+    formatEffect: x => formatPercents(x, 2, 2),
+    combine: GlyphCombiner.add,
     enabledInDoomed: true,
   }
 };

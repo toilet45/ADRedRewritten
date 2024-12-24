@@ -60,6 +60,6 @@ export const mendingMilestones = {
   },
   fourteen: {
     mends: 250,
-    reward: "100 Mend Milestone is now based on fastest game time Mend (if faster than fastest real time Mend)"
+    reward: "Mending Milestone 100 is now based on fastest game time Mend (if faster than fastest real time Mend)"
   }
 };

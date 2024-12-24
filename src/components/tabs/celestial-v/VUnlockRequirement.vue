@@ -33,7 +33,7 @@ export default {
     },
     textFormat() {
       if (MendingMilestone.three.isReached && this.dbEntry.id === 1) {
-        return `0 / 0 Realities (3 Mend Milestone)`;
+        return `0 / 0 Realities (Mending Milestone 3)`;
       }
       return `${this.dbEntry.format(this.dbEntry.resource())} / ${this.dbEntry.format(this.dbEntry.requirement)} ${this.dbEntry.name}`;
     }

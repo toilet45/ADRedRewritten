@@ -102,7 +102,7 @@ export const EP = {
     icon: MultiplierTabIcons.GENERIC_V,
   },
   mm1: {
-    name: "1 Mend Milestone",
+    name: "Mending Milestone 1",
     multValue: DC.E1,
     isActive: () => MendingMilestone.one.isReached
   }
