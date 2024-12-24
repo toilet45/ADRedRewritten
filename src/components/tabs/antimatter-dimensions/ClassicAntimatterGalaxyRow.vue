@@ -103,7 +103,8 @@ export default {
       this.requirement.amount.copyFrom(requirement.amount);
       this.requirement.tier = requirement.tier;
       this.canBeBought = requirement.isSatisfied && Galaxy.canBeBought;
-      this.distantStart.copyFrom(EternityChallenge(5).isRunning ? new Decimal() : Galaxy.costScalingStart);
+      // eslint-disable-next-line max-len
+      this.distantStart.copyFrom(EternityChallenge(5).isRunning || EternityChallenge(20).isRunning ? new Decimal() : Galaxy.costScalingStart);
       this.remoteStart.copyFrom(Galaxy.remoteStart);
       this.lockText = Galaxy.lockText;
       this.canBulkBuy = EternityMilestone.autobuyMaxGalaxies.isReached;

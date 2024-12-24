@@ -22,8 +22,9 @@ export function effectiveBaseGalaxies() {
 }
 
 export function getTickSpeedMultiplier() {
-  const disabledByECs = EternityChallenge(16).isRunning || EternityChallenge(17).isRunning || EternityChallenge(18).isRunning;
+  const disabledByECs = EternityChallenge(17).isRunning || EternityChallenge(18).isRunning;
   if (disabledByECs) return DC.D1;
+  if (EternityChallenge(16).isRunning) return new Decimal(1.2);
   if (InfinityChallenge(3).isRunning || Enslaved.isExpanded) return ExpansionUpgrade(8).effectOrDefault(DC.D1);
   if (Ra.isRunning) return DC.C1D1_1245;
   let galaxies = effectiveBaseGalaxies();
@@ -145,7 +146,7 @@ export const Tickspeed = {
 
   get isAvailableForPurchase() {
     return this.isUnlocked &&
-      !EternityChallenge(9).isRunning &&
+      !EternityChallenge(9).isRunning && !EternityChallenge(20).isRunning &&
       !Laitela.continuumActive &&
       (player.break || this.cost.lt(DC.NUMMAX));
   },

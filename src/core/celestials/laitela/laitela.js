@@ -45,7 +45,7 @@ export const Laitela = {
     }
   },
   get matterExtraPurchaseFactor() {
-    if (EternityChallenge(18).isRunning) return DC.D0;
+    if (EternityChallenge(18).isRunning) return DC.D1;
     return Decimal.pow(Currency.darkMatter.max.add(1).max(1).log10().div(50), 0.4)
       .times((SingularityMilestone.continuumMult.effectOrDefault(DC.D0)).add(1)).div(2).add(1);
   },

@@ -58,7 +58,7 @@ export const Enslaved = {
   },
   get canModifyGameTimeStorage() {
     return Enslaved.isUnlocked && !Pelle.isDoomed && !BlackHoles.arePaused && !EternityChallenge(12).isRunning &&
-      !Enslaved.isRunning && !Laitela.isRunning;
+      !Enslaved.isRunning && !Laitela.isRunning && !EternityChallenge(20).isRunning;
   },
   get canModifyRealTimeStorage() {
     return Enslaved.isUnlocked && !Pelle.isDoomed;
@@ -109,7 +109,7 @@ export const Enslaved = {
   },
   canRelease(auto) {
     return !Enslaved.isStoringRealTime && !EternityChallenge(12).isRunning && !Laitela.isRunning &&
-      !(Enslaved.isRunning && auto) && !Pelle.isDoomed;
+      !(Enslaved.isRunning && auto) && !Pelle.isDoomed && !EternityChallenge(20).isRunning;
   },
   // "autoRelease" should only be true when called with the Ra upgrade
   useStoredTime(autoRelease) {

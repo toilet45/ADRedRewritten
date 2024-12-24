@@ -321,7 +321,7 @@ export const eternityChallenges = [
   },
   {
     id: 15,
-    description: () => `Dimension multipliers are divided by the number your have. IP gain is log10.
+    description: () => `Dimension multipliers are reduced by the number you have. IP gain is log10.
     Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
     goal: DC.E100,
     pelleGoal: DC.E100,
@@ -341,8 +341,9 @@ export const eternityChallenges = [
   {
     id: 16,
     description: () => `Dimensions multipliers are all set to ${formatX(1)}. AD multipliers are increased
-    by antimatter, ID multipliers by IP and TD multipliers by EP. Gamespeed is capped at ${formatX(1, 0, 0)}.
-    Infinity Power improves IP gain. Tickspeed is disabled. IP multipliers outside of ID are disabled.`,
+    by Antimatter, ID multipliers by IP and TD multipliers by EP. Gamespeed is capped at
+    ${formatX(1, 0, 0)}. Infinity Power improves IP gain. Tickspeed is ${formatX(1.2, 1, 1)}, and unpurchasable.
+    IP multipliers outside of ID are disabled.`,
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
@@ -417,7 +418,8 @@ export const eternityChallenges = [
   },
   {
     id: 20,
-    description: () => "You are trapped in EC3-18 excluding EC10 and EC11, without IP generation nerfs. All IP multipliers are disabled",
+    description: () => `You are trapped in EC1-12, without IP generation nerfs or failure conditions.
+    All IP multipliers are disabled`,
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
@@ -436,6 +438,7 @@ export const eternityChallenges = [
   {
     id: 21,
     description: () => `All continuous production/generation is logarthmic.`,
+    // AD, ID, TD, IP, Replicanti
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
@@ -454,7 +457,7 @@ export const eternityChallenges = [
   },
   {
     id: 22,
-    description: () => `IP gain is reduced based on Antimatter.`,
+    description: () => `Antimatter gain is reduced based on Antimatter. All IP multipliers are disabled.`,
     goal: DC.E100,
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,

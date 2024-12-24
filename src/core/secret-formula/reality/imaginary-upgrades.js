@@ -102,9 +102,9 @@ export const imaginaryUpgrades = [
     name: "Suspicion of Interference",
     id: 11,
     cost: 5e7,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `${format(1e90)} total Relic Shards
-      (You have ${format(player.celestials.effarig.relicShards, 2)})`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `${format(1e90)} total Relic Shards
+      (You have ${format(player.celestials.effarig.relicShards, 2)})`),
     hasFailed: () => false,
     checkRequirement: () => player.celestials.effarig.relicShards.gte(1e90) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -117,9 +117,9 @@ export const imaginaryUpgrades = [
     name: "Consequences of Illusions",
     id: 12,
     cost: 5e7,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Make a level ${formatInt(9000)} Glyph with a single Glyph level factor weight at
-    ${formatInt(100)}`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Make a level ${formatInt(9000)} Glyph with a single Glyph level factor weight at
+    ${formatInt(100)}`),
     hasFailed: () => false,
     checkRequirement: () => Object.values(player.celestials.effarig.glyphWeights).some(w => w === 100) &&
       gainedGlyphLevel().actualLevel.gte(9000) || MendingUpgrade(17).boughtAmount.gt(5),
@@ -133,9 +133,9 @@ export const imaginaryUpgrades = [
     name: "Transience of Information",
     id: 13,
     cost: 5e7,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach ${format(Number.MAX_VALUE, 2)} projected Reality Machines within
-      The Nameless Ones' Reality`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach ${format(Number.MAX_VALUE, 2)} projected Reality Machines within
+      The Nameless Ones' Reality`),
     hasFailed: () => !Enslaved.isRunning && MendingUpgrade(17).boughtAmount.lt(5),
     // This is for consistency with the UI, which displays an amplified "projected RM" value on the reality button
     checkRequirement: () => (Enslaved.isRunning &&
@@ -151,8 +151,8 @@ export const imaginaryUpgrades = [
     id: 14,
     cost: 3.5e8,
     formatCost: x => format(x, 1),
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach a tickspeed of ${format("1e75000000000")} / sec within Eternity Challenge 5`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach a tickspeed of ${format("1e75000000000")} / sec within Eternity Challenge 5`),
     hasFailed: () => false,
     checkRequirement: () => (EternityChallenge(5).isRunning && Tickspeed.perSecond.add(1).log(10).gte(7.5e10)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -164,10 +164,10 @@ export const imaginaryUpgrades = [
     name: "Fabrication of Ideals",
     id: 15,
     cost: 1e9,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach ${format("1e1500000000000")} antimatter without
-      ever having any 1st Infinity Dimensions`,
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : player.requirementChecks.reality.maxID1.gt(0) && MendingUpgrade(17).boughtAmount.lt(5),
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach ${format("1e1500000000000")} antimatter without
+      ever having any 1st Infinity Dimensions`),
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : player.requirementChecks.reality.maxID1.gt(0) && MendingUpgrade(17).boughtAmount.lt(5)),
     checkRequirement: () => (player.requirementChecks.reality.maxID1.eq(0) && player.antimatter.add(1).log10().gte(1.5e12)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
@@ -185,8 +185,8 @@ export const imaginaryUpgrades = [
     id: 16,
     cost: 3.5e9,
     formatCost: x => format(x, 1),
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Destabilize Lai'tela's Reality in under ${formatInt(30)} seconds twice`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Destabilize Lai'tela's Reality in under ${formatInt(30)} seconds twice`),
     hasFailed: () => false,
     checkRequirement: () => Laitela.maxAllowedDimension <= 6 || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -196,8 +196,8 @@ export const imaginaryUpgrades = [
     name: "Chiral Oscillation",
     id: 17,
     cost: 6e9,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Automatically condense at least ${formatInt(20)} Singularities at once`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Automatically condense at least ${formatInt(20)} Singularities at once`),
     hasFailed: () => false,
     checkRequirement: () => (Singularity.singularitiesGained.gte(20) &&
       Currency.darkEnergy.gte(Singularity.cap.times(SingularityMilestone.autoCondense.effectOrDefault(Infinity)))) || MendingUpgrade(17).boughtAmount.gt(5),
@@ -209,8 +209,8 @@ export const imaginaryUpgrades = [
     id: 18,
     cost: 1.5e10,
     formatCost: x => format(x, 1),
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Have ${formatInt(80000)} total Galaxies`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Have ${formatInt(80000)} total Galaxies`),
     hasFailed: () => false,
     checkRequirement: () => player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total)
       .add(player.galaxies).add(player.mending.multiversalGalaxies).gte(80000) || MendingUpgrade(17).boughtAmount.gt(5),
@@ -222,10 +222,10 @@ export const imaginaryUpgrades = [
     id: 19,
     cost: 2.8e10,
     formatCost: x => format(x, 1),
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach ${formatInt(3.85e6)} Tickspeed Continuum without ever having more than
-      ${formatInt(8)} Time Studies in this Reality`,
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : player.requirementChecks.reality.maxStudies > 8,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach ${formatInt(3.85e6)} Tickspeed Continuum without ever having more than
+      ${formatInt(8)} Time Studies in this Reality`),
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : player.requirementChecks.reality.maxStudies > 8),
     checkRequirement: () => (player.requirementChecks.reality.maxStudies <= 8 &&
       Tickspeed.continuumValue.gte(3.85e6)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -237,8 +237,8 @@ export const imaginaryUpgrades = [
     name: "Vacuum Acceleration",
     id: 20,
     cost: 3e12,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Have a Continuum increase of at least ${formatPercents(1)}`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Have a Continuum increase of at least ${formatPercents(1)}`),
     hasFailed: () => false,
     checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(2) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -251,9 +251,9 @@ export const imaginaryUpgrades = [
     name: "Existential Elimination",
     id: 21,
     cost: 1e13,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach ${format("1e7400000000000")} antimatter with Continuum disabled for the entire Reality`,
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !player.requirementChecks.reality.noContinuum,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach ${format("1e7400000000000")} antimatter with Continuum disabled for the entire Reality`),
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : !player.requirementChecks.reality.noContinuum),
     checkRequirement: () => (player.requirementChecks.reality.noContinuum &&
       Currency.antimatter.value.max(1).log10().gte(7.4e12)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -269,11 +269,11 @@ export const imaginaryUpgrades = [
     id: 22,
     cost: 1.5e14,
     formatCost: x => format(x, 1),
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach ${format("1e150000000000")} antimatter in Effarig's Reality with
-      at least ${formatInt(4)} Cursed Glyphs equipped`,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach ${format("1e150000000000")} antimatter in Effarig's Reality with
+      at least ${formatInt(4)} Cursed Glyphs equipped`),
     // Note: 4 cursed glyphs is -12 glyph count, but equipping a positive glyph in the last slot is allowed
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Effarig.isRunning || player.requirementChecks.reality.maxGlyphs > -10,
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : !Effarig.isRunning || player.requirementChecks.reality.maxGlyphs > -10),
     checkRequirement: () => (Effarig.isRunning && player.requirementChecks.reality.maxGlyphs < -10 &&
       Currency.antimatter.value.add(1).log10().gte(1.5e11)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -285,10 +285,10 @@ export const imaginaryUpgrades = [
     name: "Planar Purification",
     id: 23,
     cost: 6e14,
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach Glyph level ${formatInt(20000)} in Ra's Reality with
-      at most ${formatInt(0)} Glyphs equipped`,
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Ra.isRunning || player.requirementChecks.reality.maxGlyphs > 0,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach Glyph level ${formatInt(20000)} in Ra's Reality with
+      at most ${formatInt(0)} Glyphs equipped`),
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : !Ra.isRunning || player.requirementChecks.reality.maxGlyphs > 0),
     checkRequirement: () => (Ra.isRunning && player.requirementChecks.reality.maxGlyphs <= 0 &&
       gainedGlyphLevel().actualLevel.gte(20000)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -304,10 +304,10 @@ export const imaginaryUpgrades = [
     // We unfortunately don't have the UI space to be more descriptive on this button without causing text overflow,
     // so hopefully the additional modals (from the upgrade lock) will mostly communicate the idea that this is under
     // the same conditions as hard V's Post-destination
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Have ${formatInt(13000)} Antimatter Galaxies in Ra's Reality
-      with a fully inverted Black Hole`,
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Ra.isRunning || player.requirementChecks.reality.slowestBH.gt(1e-300),
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Have ${formatInt(13000)} Antimatter Galaxies in Ra's Reality
+      with a fully inverted Black Hole`),
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : !Ra.isRunning || player.requirementChecks.reality.slowestBH.gt(1e-300)),
     checkRequirement: () => (Ra.isRunning && player.requirementChecks.reality.slowestBH.lte(1e-300) &&
       player.galaxies.gte(13000)) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -323,11 +323,11 @@ export const imaginaryUpgrades = [
     id: 25,
     cost: 1.6e15,
     formatCost: x => format(x, 1),
-    requirement: () => MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)` 
-    : `Reach Reality in Lai'tela's Reality with all Dimensions disabled and
-      at least ${formatInt(4)} empty Glyph slots`,
-    hasFailed: () => MendingUpgrade(17).boughtAmount.gt(5) ? false : !Laitela.isRunning || Laitela.maxAllowedDimension !== 0 ||
-      Glyphs.activeWithoutCompanion.length > 1,
+    requirement: () => (MendingUpgrade(17).boughtAmount.gt(5) ? `None (Mending Upgrade 17)`
+      : `Reach Reality in Lai'tela's Reality with all Dimensions disabled and
+      at least ${formatInt(4)} empty Glyph slots`),
+    hasFailed: () => (MendingUpgrade(17).boughtAmount.gt(5) ? false : !Laitela.isRunning || Laitela.maxAllowedDimension !== 0 ||
+      Glyphs.activeWithoutCompanion.length > 1),
     checkRequirement: () => (Laitela.isRunning && Laitela.maxAllowedDimension === 0 &&
       Glyphs.activeWithoutCompanion.length <= 1 && TimeStudy.reality.isBought) || MendingUpgrade(17).boughtAmount.gt(5),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -338,40 +338,40 @@ export const imaginaryUpgrades = [
   rebuyable({
     name: "???",
     id: 26,
-    initialCost: new Decimal('1F300'),
-    costMult: new Decimal('1F300'),
+    initialCost: new Decimal("1F300"),
+    costMult: new Decimal("1F300"),
     description: () => `???`,
     effect: 1
   }),
   rebuyable({
     name: "???",
     id: 27,
-    initialCost: new Decimal('1F300'),
-    costMult: new Decimal('1F300'),
+    initialCost: new Decimal("1F300"),
+    costMult: new Decimal("1F300"),
     description: () => `???`,
     effect: 1
   }),
   rebuyable({
     name: "???",
     id: 28,
-    initialCost: new Decimal('1F300'),
-    costMult: new Decimal('1F300'),
+    initialCost: new Decimal("1F300"),
+    costMult: new Decimal("1F300"),
     description: () => `???`,
     effect: 1
   }),
   rebuyable({
     name: "???",
     id: 29,
-    initialCost: new Decimal('1F300'),
-    costMult: new Decimal('1F300'),
+    initialCost: new Decimal("1F300"),
+    costMult: new Decimal("1F300"),
     description: () => `???`,
     effect: 1
   }),
   rebuyable({
     name: "???",
     id: 30,
-    initialCost: new Decimal('1F300'),
-    costMult: new Decimal('1F300'),
+    initialCost: new Decimal("1F300"),
+    costMult: new Decimal("1F300"),
     description: () => `???`,
     effect: 1
   }),

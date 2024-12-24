@@ -103,12 +103,24 @@ export function gainedInfinityPoints(mm1gen = false) {
     TimeStudy(111)
   )).toNumber();
   if (Pelle.isDisabled("IPMults")) {
-    if (EternityChallenge(14).isRunning) return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75));
     return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
       .times(Pelle.specialGlyphEffect.infinity)
       .pow(MendingUpgrade(6).effects.other)
       .floor();
+  }
+  if (EternityChallenge(16).isRunning) {
+    const ip = Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75));
+    return ip.mul(Currency.infinityPower.value.max(1).sqrt());
+  }
+  if (EternityChallenge(19).isRunning) {
+    return Decimal.pow10(player.replicanti.amount.max(1).log10().div(div).sub(0.75));
+  }
+  if (EternityChallenge(23).isRunning) {
+    return Decimal.pow10(Tickspeed.perSecond.max(1).log10().max(1).log10().div(div).sub(0.75));
+  }
+  if (EternityChallenge(24).isRunning) {
+    return player.dimensions.antimatter.reduce((a, b) => b.bought.mul(a), DC.D1);
   }
   let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
@@ -134,8 +146,8 @@ export function gainedInfinityPoints(mm1gen = false) {
 
   ip = ip.pow(MendingUpgrade(6).effects.other);
 
-  if (EternityChallenge(13).isRunning) ip = ip.pow(0.03);
-  if (EternityChallenge(15).isRunning) ip = ip.min(1).log10();
+  if (EternityChallenge(13).isRunning) ip = stackedLogPower(ip, 1, 0.03);
+  if (EternityChallenge(15).isRunning) ip = ip.max(1).log10();
 
   return ip.floor();
 }
@@ -302,7 +314,8 @@ export function addMendingTime(trueTime, time, realTime, rm, level, mends, projI
 }
 
 export function gainedInfinities() {
-  if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults") || Enslaved.isExpanded) return DC.D1;
+  if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults") ||
+  Enslaved.isExpanded || EternityChallenge(20).isRunning) return DC.D1;
   let infGain = Effects.max(1, Achievement(87));
 
   infGain = infGain.timesEffectsOf(
@@ -361,11 +374,10 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.FIXED_SPEED)) {
-    if (EternityChallenge(12).isRunning) {
+    if (EternityChallenge(12).isRunning || EternityChallenge(20).isRunning) {
       // eslint-disable-next-line capitalized-comments, no-inline-comments
       return Decimal.mul(1 / 1000, 1/* dev.speedUp */);
     }
-    if (EternityChallenge(16).isRunning) return DC.D1;
   }
 
   let factor = DC.D1;
@@ -416,11 +428,12 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
   const forcedDisableDevspeed = EternityChallenge(12).isRunning || NormalChallenge(11).isRunning ||
-    InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning;
+    InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning || EternityChallenge(20).isRunning;
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMin(1e-300).clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
+  if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);
   return factor;
 }
 
@@ -615,7 +628,8 @@ export function gameLoop(passedDiff, options = {}) {
     player.records.thisInfinity.realTime = player.records.thisInfinity.realTime.add(realDiff);
     player.records.thisInfinity.time = player.records.thisInfinity.time.add(diff);
     player.records.thisEternity.realTime = player.records.thisEternity.realTime.add(realDiff);
-    if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning) {
+    if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning &&
+    !EternityChallenge(20).isRunning) {
       player.records.thisEternity.time = player.records.thisEternity.time.add(
         diff.times(1 + Currency.eternitiesTotal.value.min(1e66).toNumber()));
     } else {
@@ -781,7 +795,7 @@ function passivePrestigeGen() {
     player.reality.partEternitied = player.reality.partEternitied.sub(player.reality.partEternitied.floor());
   }
 
-  if (!EternityChallenge(4).isRunning) {
+  if (!EternityChallenge(4).isRunning && !EternityChallenge(20).isRunning) {
     let infGen = DC.D0;
     if (BreakInfinityUpgrade.infinitiedGen.isBought) {
       // Multipliers are done this way to explicitly exclude ach87 and TS32
@@ -899,11 +913,13 @@ function laitelaBeatText(disabledDim) {
 
 // This gives IP/EP/RM from the respective upgrades that reward the prestige currencies continuously
 function applyAutoprestige(diff) {
-  const disableIPSpeedBoost = EternityChallenge(13).isRunning || EternityChallenge(14).isRunning || EternityChallenge(15).isRunning;
+  const disableIPSpeedBoost = EternityChallenge(13).isRunning || EternityChallenge(14).isRunning ||
+  EternityChallenge(15).isRunning;
   if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded) {
-    Currency.infinityPoints.add(gainedInfinityPoints(true).times((disableIPSpeedBoost ? 1 : Time.deltaTime)
+    const val = (gainedInfinityPoints(true).times((disableIPSpeedBoost ? 1 : Time.deltaTime)
       .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
+    Currency.infinityPoints.add(EternityChallenge(21).isRunning ? val.log10() : val);
   }
 
   if ((TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2)) && !Enslaved.isExpanded) {
@@ -912,7 +928,8 @@ function applyAutoprestige(diff) {
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if ((InfinityUpgrade.ipGen.isCharged || (MendingUpgrade(2).boughtAmount.gte(3) && !Pelle.isDoomed)) && !Enslaved.isExpanded) {
+  if ((InfinityUpgrade.ipGen.isCharged || (MendingUpgrade(2).boughtAmount.gte(3) && !Pelle.isDoomed)) &&
+  !Enslaved.isExpanded) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
       .times(diff.div(1000));

@@ -51,7 +51,7 @@ export default {
       const autobuyer = Autobuyer.replicantiUpgrade(upgrade.id);
       this.isAutoUnlocked = autobuyer.isUnlocked;
       this.isAutobuyerOn = autobuyer.isActive;
-      this.isEC8Running = EternityChallenge(8).isRunning;
+      this.isEC8Running = EternityChallenge(8).isRunning || EternityChallenge(20).isRunning;
     }
   }
 };

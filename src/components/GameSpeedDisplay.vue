@@ -62,7 +62,8 @@ export default {
       this.pulsedSpeed = getGameSpeedupForDisplay();
       this.hasSeenAlteredSpeed = PlayerProgress.seenAlteredSpeed();
       this.isStopped = Enslaved.isStoringRealTime;
-      this.isEC12 = EternityChallenge(12).isRunning || EternityChallenge(16).isRunning;
+      // eslint-disable-next-line max-len
+      this.isEC12 = EternityChallenge(12).isRunning || EternityChallenge(16).isRunning || EternityChallenge(20).isRunning;
       this.isPulsing = this.baseSpeed.neq(this.pulsedSpeed.times(this.currentDevSpeed)) && Enslaved.canRelease(true);
       this.hasDevSpeed = dev.speedUp !== 1;
       this.currentDevSpeed = new Decimal(dev.speedUp);

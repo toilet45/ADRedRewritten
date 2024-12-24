@@ -110,7 +110,7 @@ export class DimBoost {
     } else if (tier === 8) {
       amount = amount.add(targetResets.sub(5).mul(DC.D15.sub(discount)).round());
     }
-    if (EternityChallenge(5).isRunning) {
+    if (EternityChallenge(5).isRunning || EternityChallenge(20).isRunning) {
       amount = Decimal.pow(targetResets.sub(1), 3).add(targetResets).add(amount).sub(1);
     }
 
@@ -132,7 +132,8 @@ export class DimBoost {
     let newUnlock = "";
     if (!allNDUnlocked && boosts.lt(DimBoost.maxDimensionsUnlockable - 4)) {
       newUnlock = `unlock the ${formatInt(boosts.add(5))}th Dimension`;
-    } else if (boosts.eq(4) && !NormalChallenge(10).isRunning && !EternityChallenge(3).isRunning) {
+    } else if (boosts.eq(4) && !NormalChallenge(10).isRunning &&
+    !EternityChallenge(3).isRunning && !EternityChallenge(20).isRunning) {
       newUnlock = "unlock Sacrifice";
     }
 
@@ -275,7 +276,7 @@ function maxBuyDimBoosts() {
   calcBoosts = ad.sub(amount).div(multiplierPerDB);
 
 
-  if (EternityChallenge(5).isRunning) {
+  if (EternityChallenge(5).isRunning || EternityChallenge(20).isRunning) {
     calcBoosts = decimalCubicSolution(DC.D1, DC.D1.neg(), multiplierPerDB.add(2), ad.add(18).neg()).mul(1.14);
   }
 

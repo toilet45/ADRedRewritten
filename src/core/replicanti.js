@@ -127,6 +127,8 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
     // and handling it would make the replicanti code a lot more complicated.
     interval = interval.pow(2);
   }
+
+  if (EternityChallenge(21).isRunning) interval = interval.max(1).log10();
   return interval;
 }
 
@@ -137,7 +139,7 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
 export function totalReplicantiSpeedMult(overCap) {
   let totalMult = DC.D1;
 
-  if (EternityChallenge(18).isRunning) return new Decimal("1e-1750");
+  if (EternityChallenge(18).isRunning) totalMult = totalMult.div("1e1750");
 
   // These are the only effects active in Pelle - the function shortcuts everything else if we're in Pelle
   totalMult = totalMult.times(PelleRifts.decay.effectValue);
@@ -215,7 +217,8 @@ export function replicantiLoop(diff) {
     if (!isUncapped || Replicanti.amount.lte(replicantiCap())) {
       // Some of the gain is "used up" below e308, but if replicanti are uncapped
       // then some may be "left over" for increasing replicanti beyond their cap.
-      remainingGain = fastReplicantiBelow308(remainingGain, areRGsBeingBought);
+      remainingGain = fastReplicantiBelow308(EternityChallenge(21).isRunning
+        ? remainingGain.log10() : remainingGain, areRGsBeingBought);
     }
     if (isUncapped && Replicanti.amount.gte(replicantiCap()) && remainingGain.gt(0)) {
       // Recalculate the interval (it may have increased due to additional replicanti, or,
@@ -226,8 +229,10 @@ export function replicantiLoop(diff) {
       // in a single tick in Pelle.
       const intervalRatio = getReplicantiInterval(true).div(interval);
       remainingGain = remainingGain.div(intervalRatio);
-      Replicanti.amount = remainingGain.div(LOG10_E).times(postScale).plus(1).ln().div(postScale)
-        .add(Replicanti.amount.clampMin(1).ln()).exp();
+      if (EternityChallenge(21).isRunnning) Replicanti.amount = remainingGain.div(LOG10_E).times(postScale).plus(1)
+        .ln().div(postScale).add(Replicanti.amount.clampMin(1));
+      else Replicanti.amount = remainingGain.div(LOG10_E).times(postScale).plus(1)
+        .ln().div(postScale).add(Replicanti.amount.clampMin(1).ln()).exp();
     }
   } else if (tickCount.gt(1)) {
     // Multiple ticks but "slow" gain: This happens at low replicanti chance and amount with a fast interval, which
@@ -236,10 +241,12 @@ export function replicantiLoop(diff) {
     const batchTicks = player.replicanti.chance.add(1).log(2).mul(tickCount).floor();
     const binomialTicks = tickCount.sub(batchTicks.div(player.replicanti.chance.add(1).log(2)));
 
-    Replicanti.amount = Replicanti.amount.times(DC.D2.pow(poissonDistribution(batchTicks)));
+    Replicanti.amount = Replicanti.amount.times(EternityChallenge(21).isRunning ? poissonDistribution(batchTicks)
+      : DC.D2.pow(poissonDistribution(batchTicks)));
     for (let t = 0; t < binomialTicks.floor().toNumber(); t++) {
       const reproduced = binomialDistribution(Replicanti.amount, player.replicanti.chance);
-      Replicanti.amount = Replicanti.amount.plus(reproduced);
+      Replicanti.amount = Replicanti.amount.plus(EternityChallenge(21).isRunnning
+        ? reproduced : Decimal.log10(reproduced));
     }
 
     // The batching might use partial ticks; we add the rest back to the timer so it gets used next loop
@@ -248,7 +255,8 @@ export function replicantiLoop(diff) {
   } else if (tickCount.eq(1)) {
     // Single tick: Take a single binomial sample to properly simulate replicanti growth with randomness
     const reproduced = binomialDistribution(Replicanti.amount, player.replicanti.chance);
-    Replicanti.amount = Replicanti.amount.plus(reproduced);
+    Replicanti.amount = Replicanti.amount.plus(EternityChallenge(21).isRunnning
+      ? reproduced : Decimal.log10(reproduced));
   }
 
   if (!isUncapped) Replicanti.amount = Decimal.min(replicantiCap(), Replicanti.amount);
@@ -318,7 +326,7 @@ class ReplicantiUpgradeState {
     Currency.infinityPoints.subtract(this.cost);
     this.baseCost = Decimal.times(this.baseCost, this.costIncrease);
     this.value = this.nextValue;
-    if (EternityChallenge(8).isRunning) player.eterc8repl--;
+    if (EternityChallenge(8).isRunning || EternityChallenge(20).isRunning) player.eterc8repl--;
     GameUI.update();
   }
 
@@ -451,7 +459,7 @@ export const ReplicantiUpgrade = {
 
     get costIncrease() {
       const galaxies = this.value;
-      let increase = EternityChallenge(6).isRunning
+      let increase = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning
         ? DC.E2.pow(galaxies).times(DC.E2)
         : DC.E5.pow(galaxies).times(DC.E25);
       if (galaxies.gte(this.distantRGStart)) {
@@ -474,8 +482,9 @@ export const ReplicantiUpgrade = {
     bulkPurchaseCalc() {
       // Copypasted constants
       const logBase = new Decimal(170);
-      const logBaseIncrease = EternityChallenge(6).isRunning ? DC.D2 : new Decimal(25);
-      const logCostScaling = EternityChallenge(6).isRunning ? DC.D2 : DC.D5;
+      // eslint-disable-next-line max-len
+      const logBaseIncrease = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? DC.D2 : new Decimal(25);
+      const logCostScaling = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? DC.D2 : DC.D5;
       const distantReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(100);
       const remoteReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(1000);
       const logDistantScaling = new Decimal(50);
@@ -534,8 +543,8 @@ export const ReplicantiUpgrade = {
 
     baseCostAfterCount(count) {
       const logBase = new Decimal(170);
-      const logBaseIncrease = EternityChallenge(6).isRunning ? 2 : 25;
-      const logCostScaling = EternityChallenge(6).isRunning ? 2 : 5;
+      const logBaseIncrease = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? 2 : 25;
+      const logCostScaling = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? 2 : 5;
       const distantReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(100);
       const remoteReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(1000);
       let logCost = logBase.add(count.times(logBaseIncrease))

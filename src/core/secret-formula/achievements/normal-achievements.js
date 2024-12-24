@@ -873,7 +873,7 @@ export const normalAchievements = [
     },
     checkRequirement: () => AchievementTimers.marathon2
       .check(
-        !EternityChallenge(7).isRunning &&
+        !EternityChallenge(7).isRunning && !EternityChallenge(20).isRunning &&
         InfinityDimension(1).productionPerSecond.gt(Currency.infinityPower.value),
         60
       ),
