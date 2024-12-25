@@ -12,7 +12,7 @@ const rebuyable = props => {
     props.initialCost.times(props.costMult)
   );
   const effect = props.effect;
-  props.effect = () => effect;
+  props.effect = () => Decimal.pow(effect, RaUpgrade(props.id).boughtAmount);
   props.description = () => props.textTemplate.replace("{value}", props.formatting(effect));
   // eslint-disable-next-line no-unused-expressions, no-sequences, no-inline-comments, spaced-comment
   props.formatEffect = value => props.formatting(value), /*{
@@ -91,21 +91,21 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 7,
-    cost: new Decimal(2e16), //about Ra 20
+    cost: new Decimal(1e14), //about Ra 20
     description: "Recollection and Fragmentation for the first four Celestials no longer resets on Mend",
     effect: () => DC.D1,
   },
   {
     name: "???",
     id: 8,
-    cost: new Decimal(1e24),
+    cost: new Decimal(1e18),
     description: "The upgrade on the left affects all Celestials",
     effect: () => DC.D1,
   },
   {
     name: "???",
     id: 9,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e22),
     description: "Increment allowed Dimension Boosts in Ra's Reality by 1",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -113,7 +113,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 10,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e27),
     description: "Increase Tickspeed Multiplier in Ra's Reality to x1.3",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -121,7 +121,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 11,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e33),
     description: "Rememberance is now x15 and penality is x0.7",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -129,7 +129,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 12,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e35),
     description: "Memory Chunks are generated outside of Ra's Reality",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -137,7 +137,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 13,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e40), //Ra 50 is about ~e37
     description: "Free Dimension Boosts are effective in Ra's Reality, but only at 10% efficency",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -145,7 +145,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 14,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e65),
     description: "???",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -153,7 +153,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 15,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e80),
     description: "Unlock secondary resources for Memory Chunk gain",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -161,7 +161,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 16,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e120),
     description: "Rememberance is now x75 and penality is x0.9",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -169,7 +169,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 17,
-    cost: new Decimal("1F300"),
+    cost: new Decimal(1e200),
     description: "Remote Galaxy scaling starts later in Ra's Reality based on levels",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -177,15 +177,15 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 18,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("1e350"),
     description: "Unlock Ra's Nightmare (hard Ra)",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
   },
   {
     name: "???",
-    id: 19,
-    cost: new Decimal("1F300"),
+    id: 19, //Ra 90 is about e1081
+    cost: new Decimal("1e1100"),
     description: "???",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -193,7 +193,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 20,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("1e2000"),
     description: "Free Dimboosts work at 50% efficiency",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -201,7 +201,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 21,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("1e5000"),
     description: "Unlock tertiary resources for Memory Chunk gain",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -209,7 +209,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 22,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("1e10000"),
     description: "Remove Rembrance penality, Rememberance boost is now x250, and affects all Celestials at the same time",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -217,7 +217,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 23,
-    cost: new Decimal("1F300"),
+    cost: new Decimal("1e20000"),
     description: "???",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
@@ -225,7 +225,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 24,
-    cost: new Decimal("1e300"),
+    cost: new Decimal("1e50000"),
     description: "Pelle Level 100 requirement is divided by 1e7750",
     effect: () => new Decimal("1e7750"),
   },

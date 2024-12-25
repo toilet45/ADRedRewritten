@@ -88,7 +88,8 @@ export const GlyphInfo = {
     "time",
     "dilation",
     "effarig",
-    "amalgam"
+    "amalgam",
+    "musical"
   ],
 
   rarities: [

@@ -129,7 +129,7 @@ export default {
       </div>
       <span v-if="number === 4">
         <EnterCelestialsRaPet
-          v-for="id in 4"
+          v-for="id in 7"
           :key="id"
           :pet-id="id - 1"
         />

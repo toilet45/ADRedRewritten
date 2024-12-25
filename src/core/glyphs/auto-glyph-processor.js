@@ -81,7 +81,7 @@ export const AutoGlyphProcessor = {
       // Glyphs for non-unlocked or capped Alchemy Resources are assigned NEGATIVE_INFINITY
       // to make them picked last, because we can't refine them.
       case AUTO_GLYPH_SCORE.LOWEST_ALCHEMY: {
-        if (glyph.type === "amalgam") return new Decimal(0);
+        if (glyph.type === "amalgam" || glyph.type === "musical") return new Decimal(0);
         const resource = AlchemyResource[glyph.type];
         const refinementGain = GlyphSacrificeHandler.glyphRefinementGain(glyph);
         return resource.isUnlocked && refinementGain.gt(0)
@@ -89,7 +89,7 @@ export const AutoGlyphProcessor = {
           : new Decimal(-Infinity);
       }
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
-        if (glyph.type === "amalgam") return new Decimal(0);
+        if (glyph.type === "amalgam" || glyph.type === "musical") return new Decimal(0);
         return AlchemyResource[glyph.type].isUnlocked
           ? GlyphSacrificeHandler.glyphRefinementGain(glyph)
           : new Decimal(-Infinity);
@@ -144,7 +144,7 @@ export const AutoGlyphProcessor = {
       GlyphSacrificeHandler.deleteGlyph(glyph, true);
       return;
     }
-    if (glyph.type === "amalgam") {
+    if (glyph.type === "amalgam" || glyph.type === "musical") {
       GlyphSacrificeHandler.sacrificeGlyph(glyph, true);
       return;
     }

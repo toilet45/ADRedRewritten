@@ -133,9 +133,9 @@ class RaPetState extends GameMechanicState {
 
   get requiredMemories() {
     let x = Ra.requiredMemoriesForLevel(this.level);
-    if (this.level >= 75) x = x.div(Effects.sum(RaUpgrade(3)));
+    if (this.level >= 75) x = x.div(RaUpgrade(3).effectOrDefault(1));
     if (this.level >= 100) {
-      x = x.div(Effects.sum(RaUpgrade(6)));
+      x = x.div(RaUpgrade(6).effectOrDefault(1));
       if (this.name === "Pelle") x = x.div(RaUpgrade(24).effectOrDefault(1));
     }
     return x;
@@ -306,7 +306,7 @@ export const Ra = {
     }
     res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
     res = res.mul(Ra.unlocks.memGainOutsideRa.canBeApplied && !Ra.isRunning ? 20 : 1);
-    res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
+    // res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
     return res;
   },
   get memoryBoostResources() {

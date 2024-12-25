@@ -367,7 +367,7 @@ export function gainedMendingPoints() {
   const rebuyMult = new Decimal(0.02).times((MendingUpgrade(1).boughtAmount).add(
     MendingUpgrade(6).boughtAmount).add(MendingUpgrade(11).boughtAmount).add(MendingUpgrade(16).boughtAmount));
 
-  let x = DC.D1;
+  let x = Currency.antimatter.value.max(1).log10().div(9e15);
   x = x.mul(Decimal.pow(1.15, hybridAmount).cbrt());
   x = x.mul(rebuyMult.add(1));
   x = x.mul(Decimal.pow(3, MendingUpgrade(1).boughtAmount));

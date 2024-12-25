@@ -63,6 +63,13 @@ export const Time = {
   get realDeltaTime() {
     return DeltaTimeState.realDeltaTime;
   },
+  /**
+   * Frame delta time, but without any game speed effects, in ms
+   * @returns {TimeSpan}
+   */
+  get realDeltaTimeMs() {
+    return DeltaTimeState.realDeltaTime._ms;
+  },
 
   /**
    * Frame delta time, but without any effects

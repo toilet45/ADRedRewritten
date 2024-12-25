@@ -125,7 +125,7 @@ export function gainedInfinityPoints(mm1gen = false) {
   let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
     : new Decimal(308 / div);
-  if (Enslaved.isExpanded) return ip.timesEffectOf(ExpansionUpgrade(3));
+  if (Enslaved.isExpanded) return ip.times(ExpansionUpgrade(3).effectOrDefault(1));
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
     ip = ip.min(DC.E200);
   }
@@ -438,6 +438,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 }
 
 export function getRealTimeSpeedupFactor() {
+  if (EternityChallenge(12).isRunning) return new Decimal(1);
   return ImaginaryBlackHole(1).isActive ? ImaginaryBlackHole(1).rtPowerUpgrade.value : new Decimal(1);
 }
 export function getGameSpeedupPreExpo() {
@@ -826,6 +827,13 @@ function passivePrestigeGen() {
   if (MendingMilestone.eight.isReached) {
     player.celestials.teresa.pouredAmount = Math.min(1e24, Decimal.max(Currency.realityMachines.value, player.celestials.teresa.pouredAmount).toNumber())
     Teresa.checkForUnlocks();
+  }
+  if (Ra.unlocks.passiveTeresa.canBeApplied) {
+    player.celestials.teresa.bestRunAM = Decimal.max(player.celestials.teresa.bestRunAM, Currency.antimatter.value.pow(0.2));
+  }
+  if (Ra.unlocks.annihilationGain.canBeApplied) {
+    Laitela.celestial.darkMatterMult = Laitela.celestial.darkMatterMult.add(
+      Laitela.darkMatterMultGain.times(Time.realDeltaTimeMs.div(2000)));
   }
 }
 
