@@ -18,6 +18,8 @@ export default {
       isAutobuyerOn: false,
       amAmnt: new Decimal(),
       amCost: new Decimal(),
+      ttAmnt: new Decimal(),
+      ttCost: new Decimal(),
     };
   },
   computed: {
@@ -56,7 +58,13 @@ export default {
       return `${format(am)} AM`;
     },
     buyWithAM() {
-      CelestialTheorems.buyOne(false);
+      CelestialTheorems.buyOne("am", false);
+    },
+    formatTT(tt) {
+      return `${format(tt)} TT`;
+    },
+    buyWithTT() {
+      CelestialTheorems.buyOne("tt", false);
     },
     buyMaxTheorems() {
       CelestialTheorems.buyMax(false);
@@ -67,8 +75,10 @@ export default {
       this.shopMinimized = player.timestudy.shopMinimized;
       this.hasTTAutobuyer = false;
       this.minimizeAvailable = false;
-      this.amAmnt.copyFrom(TimeTheoremPurchaseType.am.currency);
-      this.amCost.copyFrom(TimeTheoremPurchaseType.am.cost);
+      this.amAmnt.copyFrom(CelestialTheoremPurchaseType.am.currency);
+      this.amCost.copyFrom(CelestialTheoremPurchaseType.am.cost);
+      this.ttAmnt.copyFrom(CelestialTheoremPurchaseType.tt.currency);
+      this.ttCost.copyFrom(CelestialTheoremPurchaseType.tt.cost);
     },
     toggleTTgen() {
       this.invertTTgenDisplay = !this.invertTTgenDisplay;
@@ -121,6 +131,12 @@ export default {
           :cost="amCost"
           :format-cost="formatAM"
           :action="buyWithAM"
+        />
+        <CelestialTheoremBuyButton
+          :budget="ttAmnt"
+          :cost="ttCost"
+          :format-cost="formatTT"
+          :action="buyWithTT"
         />
         <div class="l-tt-buy-max-vbox">
           <button

@@ -586,20 +586,21 @@ export const glyphEffects = {
     intID: 33,
     glyphTypes: [() => "reality"],
     singleDesc: () => (GlyphAlteration.isAdded("reality")
-      ? "All Galaxies are {value} stronger, Replicanti Galaxy Cap ×{value2}"
+      ? "All Galaxies are {value} stronger, Replicanti Galaxy Cap {value2}"
       : "All Galaxies are {value} stronger"),
     totalDesc: () => (GlyphAlteration.isAdded("reality")
-      ? "All Galaxy strength +{value}, RG Cap ×{value2}"
+      ? "All Galaxy strength +{value}, RG Cap {value2}"
       : "All Galaxy strength +{value}"),
     shortDesc: () => (GlyphAlteration.isAdded("reality")
-      ? "Galaxy Strength +{value} and Replicanti Galaxy Cap ×{value2}"
+      ? "Galaxy Strength +{value} and Replicanti Galaxy Cap {value2}"
       : "Galaxy Strength +{value}"),
     genericDesc: () => (GlyphAlteration.isAdded("reality")
       ? "Galaxy Strength +{value} and Replicanti Galaxy Cap multiplied by x"
       : "Galaxy Strength +x"),
     effect: level => Decimal.pow(level.div(100000), 0.5).add(1),
     formatEffect: x => formatPercents(x.sub(1), 2),
-    formatSecondaryEffect: x => formatPercents(x.sub(1), 2),
+    conversion: x => x.mul(5).sub(4),
+    formatSecondaryEffect: x => formatX(x, 2, 2),
     combine: GlyphCombiner.multiply,
     alteredColor: () => GlyphAlteration.getAdditionColor("reality"),
     alterationType: ALTERATION_TYPE.ADDITION
@@ -611,7 +612,7 @@ export const glyphEffects = {
     singleDesc: "Multiplier from Reality Upgrade Amplifiers ^{value}",
     totalDesc: "Reality Upgrade Amplifier multiplier ^{value}",
     shortDesc: "Amplifier Multiplier ^{value}",
-    effect: level => level.div(1.25e5).add(1).mul(GlyphAlteration.sacrificeBoost("reality").div(250).add(1)),
+    effect: level => level.div(1.25e5).add(1).mul(GlyphAlteration.sacrificeBoost("reality").div(5).add(1)),
     formatEffect: x => format(x, 3, 3),
     combine: GlyphCombiner.addExponents,
     alteredColor: () => GlyphAlteration.getBoostColor("reality"),

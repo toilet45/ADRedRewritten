@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     update() {
-      this.isLocked = true;
+      this.isLocked = Ra.pets.v.level < 75;
     }
   }
 };
@@ -42,6 +42,6 @@ export default {
     :class="enabledClass"
     @click="action"
   >
-    {{ isLocked ? `Requires V level 75 to unlock` : formatCost(cost) }}
+    {{ isLocked ? `Requires V level ${formatInt(75)} to unlock` : formatCost(cost) }}
   </button>
 </template>

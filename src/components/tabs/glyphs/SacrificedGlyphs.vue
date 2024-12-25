@@ -58,8 +58,8 @@ export default {
       return player.reality.glyphs.createdRealityGlyph;
     },
     seenRealityGlyphText() {
-      return `Reality Glyphs ${Teresa.hardRunCompleted ? ""
-        : "are unaffected by this multiplier and "}have no altered effects.`;
+      return Teresa.hardRunCompleted ? `Reality Glyphs meet their alteration requirements ${formatX(1e120)} later`
+        : "Reality Glyphs are unaffected by this multiplier and have no altered effects.";
     },
     sacrificeCapsText() {
       return `All effects from Glyph Sacrifice can no longer be increased once they reach ${format(this.maxSacrifice)}`;

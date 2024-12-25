@@ -118,7 +118,7 @@ export default {
       When you respec out of an unlocked Eternity Challenge, you don't need to redo the secondary requirement<br>
       in order to unlock it again until you complete it; only the Time Theorems are required.
     </div>
-    <div v-if="unlockedCount <= 12">
+    <div v-if="unlockedCount < 12">
       You have seen {{ formatInt(unlockedCount) }} out of {{ formatInt(12) }} Eternity Challenges.
     </div>
     <div v-else-if="hasCelStudies && unlockedCount !== 25">
@@ -130,6 +130,7 @@ export default {
     <div v-else>
       You have seen all {{ formatInt(12) }} Eternity Challenges.
     </div>
+    <br>
     <ChallengeGrid
       v-slot="{ challenge }"
       :challenges="challenges"

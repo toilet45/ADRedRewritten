@@ -102,28 +102,21 @@ export class ECCelestialStudyState extends CelestialStudyState {
     return this.cachedCurrentRequirement;
   }
 
-  /* TODO: decide if we want these to be afftected by ECR - no
-  get allSecondaryRequirementsMet() {
-    return Perk.studyECRequirement.isBought || !this.hasForbiddenStudies && this.isEntryGoalMet;
-  }
 
-  get hasForbiddenStudies() {
-    return this.config.secondary.forbiddenStudies?.some(s => CelestialStudy(s).isBought);
+  get allSecondaryRequirementsMet() {
+    return this.isEntryGoalMet;
   }
 
   get isEntryGoalMet() {
     if (this.wasRequirementPreviouslyMet) return true;
-    if (this.config.secondary.forbiddenStudies) return true;
     const current = this.requirementCurrent;
     const total = this.requirementTotal;
     return typeof current === "number" ? current >= total : current.gte(total);
   }
 
   get wasRequirementPreviouslyMet() {
-    if (this.id === 11 || this.id === 12) return false;
     return (player.challenge.eternity.requirementBits & (1 << this.id)) !== 0;
   }
-  */
 
   invalidateRequirement() {
     this.cachedCurrentRequirement = undefined;

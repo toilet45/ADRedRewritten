@@ -494,6 +494,7 @@ export const GlyphAlteration = {
     if (sacPower === undefined) {
       throw new Error("Unknown sacrifice type");
     }
+    if (type === "reality") return sacPower.div(1e120);
     return sacPower;
   },
   get isUnlocked() {

@@ -21,6 +21,22 @@ export function effectiveBaseGalaxies() {
     .add(dilGalaxies).add(mvGalaxies), 0);
 }
 
+// Provides an array of each galaxy type, which can be used for other stuff
+export function effectiveBaseGalaxiesSeperated() {
+  // Note that this already includes the "50% more" active path effect
+  let replicantiGalaxies = Replicanti.galaxies.bought;
+  replicantiGalaxies = replicantiGalaxies.times(1 + TimeStudy(133).effectOrDefault(0) +
+    TimeStudy(132).effectOrDefault(0));
+  // "extra" galaxies unaffected by the passive/idle boosts come from studies 225/226 and Effarig Infinity
+  replicantiGalaxies = replicantiGalaxies.add(Replicanti.galaxies.extra);
+  let dilGalaxies = player.dilation.totalTachyonGalaxies;
+  dilGalaxies = dilGalaxies.mul(DC.D1.add(Decimal.max(0, Replicanti.amount.log10().div(1e6))
+    .times(AlchemyResource.alternation.effectValue)));
+  const mvGalaxies = MendingUpgrade(16).effects.galaxies;
+  return [player.galaxies.add(GalaxyGenerator.galaxies).max(0), replicantiGalaxies.max(0),
+    dilGalaxies.max(0), mvGalaxies.max(0)];
+}
+
 export function getTickSpeedMultiplier() {
   const disabledByECs = EternityChallenge(17).isRunning || EternityChallenge(18).isRunning;
   if (disabledByECs) return DC.D1;
@@ -43,7 +59,8 @@ export function getTickSpeedMultiplier() {
     PelleRifts.decay.milestones[1]
   );
   effects = effects.mul(MendingUpgrade(16).effects.agPow);
-  if (galaxies.lt(3)) {
+  const hasCS21 = CelestialStudy(21).isBought;
+  if (galaxies.lt(3) && !hasCS21) {
     // Magic numbers are to retain balancing from before while displaying
     // them now as positive multipliers rather than negative percentages
     let baseMultiplier = DC.C1D1_1245;
@@ -58,20 +75,36 @@ export function getTickSpeedMultiplier() {
     if (Pelle.isDoomed) galaxies.div(2);
 
     galaxies = galaxies.times(Pelle.specialGlyphEffect.power);
-    return DC.D0_01.clampMin(baseMultiplier.sub((galaxies.times(perGalaxy))));
+    // eslint-disable-next-line max-len
+    return DC.D0_01.clampMin(baseMultiplier.sub((galaxies.times(perGalaxy)))).pow(CelestialStudy(11).effectOrDefault(1));
   }
-  let baseMultiplier = 0.8;
-  if (NormalChallenge(5).isRunning) baseMultiplier = 0.83;
-  galaxies = galaxies.sub(2);
-  galaxies = galaxies.times(effects);
-  galaxies = galaxies.times(getAdjustedGlyphEffect("cursedgalaxies"));
-  galaxies = galaxies.times(getAdjustedGlyphEffect("realitygalaxies"));
-  galaxies = galaxies.times(ImaginaryUpgrade(9).effectOrDefault(DC.D0).add(1));
-  if (Pelle.isDoomed) galaxies = galaxies.div(2);
+  if (!hasCS21) {
+    let baseMultiplier = 0.8;
+    if (NormalChallenge(5).isRunning) baseMultiplier = 0.83;
+    galaxies = galaxies.sub(2);
+    galaxies = galaxies.times(effects);
+    galaxies = galaxies.times(getAdjustedGlyphEffect("cursedgalaxies"));
+    galaxies = galaxies.times(getAdjustedGlyphEffect("realitygalaxies"));
+    galaxies = galaxies.times(ImaginaryUpgrade(9).effectOrDefault(DC.D0).add(1));
+    if (Pelle.isDoomed) galaxies = galaxies.div(2);
 
-  galaxies = galaxies.times(Pelle.specialGlyphEffect.power);
-  const perGalaxy = DC.D0_965;
-  return perGalaxy.pow(galaxies.sub(2)).times(baseMultiplier);
+    galaxies = galaxies.times(Pelle.specialGlyphEffect.power);
+    const perGalaxy = DC.D0_965;
+    return perGalaxy.pow(galaxies.sub(2)).times(baseMultiplier).pow(CelestialStudy(11).effectOrDefault(1));
+  }
+  let baseMultiplier = 1;
+  if (NormalChallenge(5).isRunning) baseMultiplier += 0.1;
+  galaxies = effectiveBaseGalaxiesSeperated();
+  effects = effects.mul(Pelle.specialGlyphEffect.power);
+  const AGs = baseMultiplier.div(effects);
+  const RGs = baseMultiplier.div(effects.mul(EternityChallenge(8).effectOrDefault(0).add(1)));
+  const TGs = baseMultiplier.div(effects);
+  const MvGs = baseMultiplier.div(effects);
+  return AGs.pow(galaxies[0].div(AGs))
+    .mul(RGs.pow(galaxies[1].div(RGs)))
+    .mul(TGs.pow(galaxies[2].div(TGs)))
+    .mul(MvGs.pow(galaxies[3].div(MvGs)))
+    .pow(1e4);
 }
 
 export function buyTickSpeed() {

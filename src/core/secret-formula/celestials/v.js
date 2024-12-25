@@ -1,3 +1,4 @@
+/* eslint-disable line-comment-position */
 import { DC } from "../../constants";
 
 // This is supposed to be in ./navigation.js but importing doesn't work for some stupid reason
@@ -21,6 +22,7 @@ export const v = {
       resource: () => Currency.realities.value,
       requirement: 10000,
       format: x => formatInt(x),
+      // eslint-disable-next-line max-len
       progress: () => Currency.realities.value.div(10000).add(MendingMilestone.three.isReached ? 1 : 0).min(1).toNumber(),
     },
     eternities: {
@@ -238,7 +240,8 @@ export const v = {
       formatRecord: x => `${format(Decimal.pow10(x))}`,
       shardReduction: tiers => Math.floor(500 * tiers),
       maxShardReduction: () => 500,
-      perReductionStep: 50, //e9e15 -> e8.95e15
+      // eslint-disable-next-line capitalized-comments, no-inline-comments
+      perReductionStep: 50, // e9e15 -> e8.95e15
       mode: V_REDUCTION_MODE.DIVISION,
       isHard: true,
       isExtra: true,
@@ -250,7 +253,7 @@ export const v = {
       description: value => `This goal is unknown.`,
       // This achievement has internally negated values since the check is always greater than
       values: [15, 15.4, 15.7, 16, 16.2],
-      condition: () => V.isRunning && player.requirementChecks.reality.maxStudies <= 7 && !TimeStudy.dilation.isBought,
+      condition: () => V.isRunning && false,
       currentValue: () => player.antimatter.max(1).log10().max(1).log10(),
       formatRecord: x => format(Decimal.pow10(x).pow10()),
       shardReduction: tiers => 0.002 * tiers,
@@ -265,7 +268,7 @@ export const v = {
       // eslint-disable-next-line no-unused-vars
       description: value => `This goal is unknown.`,
       values: [650, 750, 850, 1000, 1200],
-      condition: () => V.isRunning && player.requirementChecks.reality.slowestBH.lte("1e-300"),
+      condition: () => V.isRunning && false,
       currentValue: () => player.dilation.dilatedTime.max(1).log10(),
       formatRecord: x => `${format(Decimal.pow(10, x))}`,
       shardReduction: tiers => tiers * 10,

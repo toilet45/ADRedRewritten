@@ -31,9 +31,14 @@ export class CelestialStudyConnection {
 CelestialStudy.allConnections = (function() {
   const CS = id => CelestialStudy(id);
   const EC = id => CelestialStudy.eternityChallenge(id);
-  const val = CelestialStudy.totalVisibleRows();
+  let val = 1;
+  function updateVal() {
+    val = CelestialStudy.totalVisibleRows();
+    return val < 2;
+  }
   const connections = [
-    [CS(11), CS(21), () => val < 2],
+    // Idk why but we have to define val here to be reactive. Better than having like 30 calls
+    [CS(11), CS(21), () => updateVal()],
     [CS(11), CS(22), () => val < 2],
 
     [CS(21), CS(31), () => val < 3],

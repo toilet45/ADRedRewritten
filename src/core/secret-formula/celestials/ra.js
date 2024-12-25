@@ -292,7 +292,7 @@ export const ra = {
       reward: () => `Unlock Hard V-Achievements and unlock a Triad Study every ${formatInt(6)} levels.
         Triad Studies are located at the bottom of the Time Studies page`,
       effect: () => Math.min(12, Math.floor(Ra.pets.v.level / 6)) +
-      (2 * (Ra.pets.v.level >= 65)) + (Ra.pets.v.level >= 75), // Account for V65 and V75
+      (2 * (Ra.pets.v.level >= 75)) + (Ra.pets.v.level >= 65), // Account for V65 and V75
       pet: "v",
       level: 6,
       displayIcon: `<span class="fas fa-trophy"></span>`,
@@ -564,7 +564,7 @@ export const ra = {
     },
     vHardenedUnlock: {
       id: 52,
-      reward: () => `Unlock Extreme-V achievements and the Celestial Study Tree. Gain TWO new Triad Studies.`,
+      reward: () => `Unlock Extreme-V achievements and the Celestial Study Tree. Gain an extra Triad Study.`,
       effect: 1,
       pet: "v",
       level: 60,

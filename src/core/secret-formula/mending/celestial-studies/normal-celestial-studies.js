@@ -79,7 +79,7 @@ export const normalCelestialStudies = [
   {
     id: 41,
     cost: DC.D1,
-    requirement: [],
+    requirement: [31],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
     description: () => `Improve Glyph Sacrifice effects`,
     effect: () => DC.E4,
@@ -87,7 +87,7 @@ export const normalCelestialStudies = [
   {
     id: 42,
     cost: DC.D1,
-    requirement: [],
+    requirement: [31],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
     description: () => `Improve Glyph Alchemy effects`,
     effect: () => DC.E4,
@@ -95,7 +95,7 @@ export const normalCelestialStudies = [
   {
     id: 43,
     cost: DC.D1,
-    requirement: [],
+    requirement: [32],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
     description: () => `Weaken the Time Shard to Tickspeed conversion softcap`,
     effect: () => DC.E4,
@@ -103,7 +103,7 @@ export const normalCelestialStudies = [
   {
     id: 44,
     cost: DC.D1,
-    requirement: [],
+    requirement: [32],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
     description: () => `All dimension production ${formatPow(10)}`,
     effect: () => DC.E1,
@@ -111,7 +111,7 @@ export const normalCelestialStudies = [
   {
     id: 51,
     cost: DC.D1,
-    requirement: [],
+    requirement: [41],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Power glyph sacrfice effect is squared, and affects Remote Galaxy scaling.`,
     effect: () => DC.D2,
@@ -119,7 +119,7 @@ export const normalCelestialStudies = [
   {
     id: 52,
     cost: DC.D1,
-    requirement: [],
+    requirement: [42],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Equipped Reality Glyphs provide a much stronger Galaxy Strength boost`,
     effect: () => DC.E4,
@@ -128,7 +128,7 @@ export const normalCelestialStudies = [
   {
     id: 53,
     cost: DC.D1,
-    requirement: [],
+    requirement: [43],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Dimension caps are muliplied based on Time Glyph Sacrifice`,
     effect: () => DC.E4,
@@ -137,7 +137,7 @@ export const normalCelestialStudies = [
   {
     id: 54,
     cost: DC.D1,
-    requirement: [],
+    requirement: [44],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Antimatter Dimensions gain a power effect based on Power Glyph Sacrifice`,
     effect: () => DC.E4,
@@ -146,7 +146,7 @@ export const normalCelestialStudies = [
   {
     id: 61,
     cost: DC.D1,
-    requirement: [],
+    requirement: [51],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Infinity Glyph Sacrifice is raised to a power, based on the number of equipped Infinity Glyphs`,
     effect: () => DC.E4,
@@ -155,7 +155,7 @@ export const normalCelestialStudies = [
   {
     id: 62,
     cost: DC.D1,
-    requirement: [],
+    requirement: [52],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Glyph Sacrifice is raised to a power, based on the number of equipped Time Glyphs`,
     effect: () => DC.E4,
@@ -164,7 +164,7 @@ export const normalCelestialStudies = [
   {
     id: 63,
     cost: DC.D1,
-    requirement: [],
+    requirement: [53],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Infinity Glyph Sacrifice delays the Infinity Dimension hardcap.`,
     effect: () => DC.E4,
@@ -173,7 +173,7 @@ export const normalCelestialStudies = [
   {
     id: 64,
     cost: DC.D1,
-    requirement: [],
+    requirement: [54],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `All Dimension Exponents gain a very small power, based on Tachyon Particles`,
     effect: () => DC.E4,
@@ -182,7 +182,7 @@ export const normalCelestialStudies = [
   {
     id: 71,
     cost: DC.D1,
-    requirement: [],
+    requirement: [61, 62],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Glyph Sacrifice is calculated using a value ${formatX("1e200")} the cap/sacrifice value`,
     effect: () => DC.E200,
@@ -190,7 +190,7 @@ export const normalCelestialStudies = [
   {
     id: 72,
     cost: DC.D1,
-    requirement: [],
+    requirement: [63, 64],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `All Glyph Effects providing a power effect to a Dimension are ${formatX(1.1, 1, 1)}`,
     effect: () => 1.1,
@@ -198,7 +198,7 @@ export const normalCelestialStudies = [
   {
     id: 81,
     cost: DC.D1,
-    requirement: [],
+    requirement: [71, 72],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Game speed is raised ${formatPow(1.75, 2, 2)}`,
     effect: () => 1.75,
@@ -206,7 +206,7 @@ export const normalCelestialStudies = [
   {
     id: 91,
     cost: DC.D1,
-    requirement: [],
+    requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay the Antimatter softcap based on Antimatter`,
     effect: () => DC.E4,
@@ -215,7 +215,7 @@ export const normalCelestialStudies = [
   {
     id: 92,
     cost: DC.D1,
-    requirement: [],
+    requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay the Infinity Point softcap based on Infinity Points`,
     effect: () => DC.E4,
@@ -224,7 +224,7 @@ export const normalCelestialStudies = [
   {
     id: 93,
     cost: DC.D1,
-    requirement: [],
+    requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay the Eternity Point softcap based on Eternity Points`,
     effect: () => DC.E4,
@@ -233,7 +233,7 @@ export const normalCelestialStudies = [
   {
     id: 102,
     cost: DC.D1,
-    requirement: [],
+    requirement: [92],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_C,
     description: () => `Raise Infinity Point gain based on Mends`,
     effect: () => 4,
@@ -242,7 +242,7 @@ export const normalCelestialStudies = [
   {
     id: 111,
     cost: DC.D1,
-    requirement: [],
+    requirement: [101],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay Antimatter softcap based on Infinity Points`,
     effect: () => DC.E4,
@@ -251,7 +251,7 @@ export const normalCelestialStudies = [
   {
     id: 112,
     cost: DC.D1,
-    requirement: [],
+    requirement: [102],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay Infinity Point softcap based on Eternity Points`,
     effect: () => DC.E4,
@@ -260,7 +260,7 @@ export const normalCelestialStudies = [
   {
     id: 113,
     cost: DC.D1,
-    requirement: [],
+    requirement: [103],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay Eternity Point softcap based on Imaginary Machines`,
     effect: () => DC.E4,
@@ -269,7 +269,7 @@ export const normalCelestialStudies = [
   {
     id: 121,
     cost: DC.D1,
-    requirement: [],
+    requirement: [111, 112, 113],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Replicanti speed is boosted based on Infinity Points`,
     effect: () => DC.E4,
@@ -278,7 +278,7 @@ export const normalCelestialStudies = [
   {
     id: 131,
     cost: DC.D1,
-    requirement: [],
+    requirement: [121],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
     description: () => `Tachyon Galaxies are ${formatX(15)} stronger`,
     effect: () => 15,
@@ -286,7 +286,7 @@ export const normalCelestialStudies = [
   {
     id: 132,
     cost: DC.D1,
-    requirement: [],
+    requirement: [121],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
     description: () => `Antimatter Galaxies are ${formatX(30)} stronger`,
     effect: () => 30,
@@ -294,7 +294,7 @@ export const normalCelestialStudies = [
   {
     id: 151,
     cost: DC.D1,
-    requirement: [],
+    requirement: [/*SCelestialStudy(131).isBought || CelestialStudy(131).isBought && EternityChallenge*/],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions are gain a multiplier based on Replicanti`,
     effect: () => DC.E4,

@@ -492,8 +492,7 @@ export const Glyphs = {
   sort(sortFunction) {
     const glyphsToSort = player.reality.glyphs.inventory.filter(g => g.idx >= this.protectedSlots);
     const freeSpace = GameCache.glyphInventorySpace.value;
-    const sortOrder = ["power", "infinity", "replication", "time", "dilation", "effarig",
-      "reality", "cursed", "companion", "amalgam", "musical"];
+    const sortOrder = [...GlyphInfo.glyphTypes];
     const byType = sortOrder.mapToObject(g => g, () => ({ glyphs: [], padding: 0 }));
     for (const g of glyphsToSort) byType[g.type].glyphs.push(g);
     let totalDesiredPadding = 0;
@@ -754,6 +753,7 @@ export const Glyphs = {
     }
   },
   copyForRecords(glyphList) {
+    if (!glyphList) return [null, null, null, null, null];
     // Sorting by effect ensures consistent ordering by type, based on how the effect bitmasks are structured
     // eslint-disable-next-line max-len
     function sort(val) {

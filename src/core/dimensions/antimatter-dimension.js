@@ -162,6 +162,8 @@ function applyNDMultipliers(mult, tier) {
     multiplier = multiplier.pow(AntimatterDimension(tier).amount.clampMin(1).log10());
   }
 
+  //console.log(multiplier);
+
   return multiplier;
 }
 
@@ -205,6 +207,8 @@ function applyNDPowers(mult, tier) {
   }
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
+  //console.log(multiplier)
 
   return multiplier;
 }

@@ -197,7 +197,8 @@ export const V = {
     let sum = 0;
     for (let i = 0; i < player.celestials.v.runUnlocks.length; i++) {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
-      else sum += player.celestials.v.runUnlocks[i] * 2;
+      else if (i < 12) sum += player.celestials.v.runUnlocks[i] * 2;
+      //console.log(sum, i < 12)
     }
     this.spaceTheorems = sum;
   },
@@ -205,11 +206,11 @@ export const V = {
     player.celestials.v = {
       unlockBits: 0,
       run: false,
-      runUnlocks: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      runUnlocks: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       STSpent: 0,
-      runGlyphs: [[], [], [], [], [], [], [], [], [], [], [], []],
-      runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
+      runGlyphs: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
+      runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
     };
     this.spaceTheorems = 0;
   },

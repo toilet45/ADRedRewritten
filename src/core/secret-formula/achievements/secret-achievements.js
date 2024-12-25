@@ -194,4 +194,45 @@ export const secretAchievements = [
     name: "Stack overflow",
     description: "Have more Automator errors than lines."
   },
+  {
+    id: 51,
+    name: "There was an attempt",
+    description: "Try to create a Reality Glyph without any Reality Alchemy Resource"
+  },
+  {
+    id: 52,
+    name: "Indecisive",
+    description: () => `Turn on and off any "on prestige" trigger ${formatInt(100)} times without changing tab`
+  },
+  {
+    id: 53,
+    name: "???",
+    description: "Have all equipped Glyphs be Music Glyphs.",
+  },
+  {
+    id: 54,
+    name: "???",
+    get description() { return `Stare intently at the statistics tab for ${formatInt(15)} real-time minutes.`; },
+  },
+  {
+    id: 55,
+    name: "???",
+    description: "Drag the Perks around for a minute.",
+    checkRequirement: () => player.requirementChecks.permanent.perkTreeDragging++ / 100 >= 60
+  },
+  {
+    id: 56,
+    name: "???",
+    description: "Store a day of real time."
+  },
+  {
+    id: 57,
+    name: "???",
+    description: "Hide every possible tab."
+  },
+  {
+    id: 58,
+    name: "???",
+    description: "Have more Automator errors than lines."
+  },
 ];
