@@ -36,6 +36,9 @@ export class DimBoost {
         BreakInfinityUpgrade.autobuyMaxDimboosts.chargedEffect
       ).powEffectsOf(InfinityUpgrade.dimboostMult.chargedEffect);
     if (GlyphAlteration.isAdded("effarig")) boost = boost.pow(getSecondaryGlyphEffect("effarigforgotten"));
+    if (CelestialStudy(22).isBought) {
+      boost = boost.pow(boost.clampMin(1).log10());
+    }
     return boost;
   }
 

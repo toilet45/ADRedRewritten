@@ -137,7 +137,8 @@ export const breakInfinityUpgrades = {
     charged: {
       description: () =>
         `Dimension boost multiplier is affected by achievements`,
-      effect: () => Achievements.power.pow(30).add(1),
+      effect: () => (Achievements.power.pow(30).add(1)).times(CelestialStudy(22).isBought
+        ? Achievements.power.pow(30).add(1).log10().pow(1.25).pow10() : 1),
       formatEffect: value => `${formatX(value, 2, 2)}`
     }
   },

@@ -48,13 +48,13 @@ export default {
     respecClassObject() {
       return {
         "o-primary-btn--subtab-option": true,
-        "o-primary-btn--respec-active": this.respec
+        "o-primary-btn--charged-respec-active": this.respec
       };
     }
   },
   watch: {
     respec(newValue) {
-      player.respec = newValue;
+      player.celRespec = newValue;
     },
   },
   created() {

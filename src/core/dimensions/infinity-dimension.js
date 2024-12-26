@@ -176,6 +176,7 @@ class InfinityDimensionState extends DimensionState {
     mult = mult.pow(MendingUpgrade(3).effects.pow);
     mult = mult.pow(Ra.momentumValue);
     mult = mult.powEffectOf(PelleRifts.paradox);
+    mult = mult.powEffectsOf(CelestialStudy(32), CelestialStudy(44), CelestialStudy(64));
 
     if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
       mult = dilatedValueOf(mult);

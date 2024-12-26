@@ -77,8 +77,8 @@ export class CelestialTheoremPurchaseType {
 }
 
 CelestialTheoremPurchaseType.am = new class extends CelestialTheoremPurchaseType {
-  get amount() { return player.celestialstudy.purchased; }
-  set amount(value) { player.celestialstudy.purchased = value; }
+  get amount() { return player.celestialstudy.purchasedAM; }
+  set amount(value) { player.celestialstudy.purchasedAM = value; }
   get id() { return "am"; }
 
   get currency() { return Currency.antimatter; }
@@ -87,8 +87,8 @@ CelestialTheoremPurchaseType.am = new class extends CelestialTheoremPurchaseType
 }();
 
 CelestialTheoremPurchaseType.tt = new class extends CelestialTheoremPurchaseType {
-  get amount() { return player.celestialstudy.purchased; }
-  set amount(value) { player.celestialstudy.purchased = value; }
+  get amount() { return player.celestialstudy.purchasedTT; }
+  set amount(value) { player.celestialstudy.purchasedTT = value; }
   get id() { return "tt"; }
 
   get currency() { return Currency.timeTheorems; }
@@ -103,7 +103,7 @@ export const CelestialTheorems = {
     return am || tt;
   },
   buyMax() {
-    const am = CelestialTheoremPurchaseType.am.purchase(true);
+    // const am = CelestialTheoremPurchaseType.am.purchase(true);
     const tt = CelestialTheoremPurchaseType.tt.purchase(true);
     return am || tt;
   }

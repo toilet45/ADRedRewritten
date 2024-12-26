@@ -711,7 +711,10 @@ export function finishProcessReality(realityProps) {
   player.records.thisReality.realTime = DC.D0;
   player.records.thisReality.maxReplicanti = DC.D0;
   if (!PelleUpgrade.timeStudiesNoReset.canBeApplied) Currency.timeTheorems.reset();
-  Currency.celestialTheorems.reset();
+  if (player.celRespec) {
+    respecCelestialStudies(true);
+    player.celRespec = false;
+  }
   player.celestials.v.STSpent = 0;
   if (!PelleUpgrade.timeStudiesNoReset.canBeApplied) {
     player.dilation.studies = [];

@@ -194,7 +194,11 @@ function applyNDPowers(mult, tier) {
       BreakInfinityUpgrade.totalAMMult.chargedEffect,
       BreakInfinityUpgrade.infinitiedMult.chargedEffect,
       BreakInfinityUpgrade.achievementMult.chargedEffect,
-      BreakInfinityUpgrade.slowestChallengeMult.chargedEffect
+      BreakInfinityUpgrade.slowestChallengeMult.chargedEffect,
+      CelestialStudy(32),
+      CelestialStudy(44),
+      CelestialStudy(54),
+      CelestialStudy(64)
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));

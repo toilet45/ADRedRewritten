@@ -57,7 +57,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [11],
     reqType: CS_REQUIREMENT_TYPE.SOME,
-    description: () => `Dimensional Boost exponent ${formatPow(2)}. Improve Break Upgrade 8.`,
+    description: () => `Dimensional Boost exponent ${formatPow(2)}. Improve Charged Break Upgrade 8.`,
     effect: () => [2, Achievements.power.pow(30).add(1).log10().pow(1.25).pow10()],
   },
   {

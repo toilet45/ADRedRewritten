@@ -25,6 +25,7 @@ export default {
       showTotalCompletions: false,
       isRunning: false,
       isUnlocked: false,
+      maxCompletions: 0
     };
   },
   computed: {
@@ -58,6 +59,7 @@ export default {
       const ec = EternityChallenge(id);
       this.hasRequirement = !Perk.studyECRequirement.isBought && !study.wasRequirementPreviouslyMet;
       this.completions = ec.completions;
+      this.maxCompletions = 5 + Effects.sum(EternityChallenge(13).reward).toNumber();
       this.showTotalCompletions = !Enslaved.isRunning || id !== 1;
       this.isRunning = EternityChallenge.current?.id === id;
       this.isUnlocked = ec.isUnlocked;
@@ -84,7 +86,7 @@ export default {
       EC{{ id }}
     </HintText>
     Eternity Challenge {{ id }}
-    ({{ formatInt(completions) }}<span v-if="showTotalCompletions">/{{ formatInt(5) }}</span>)
+    ({{ formatInt(completions) }}<span v-if="showTotalCompletions">/{{ formatInt(maxCompletions) }}</span>)
     <template v-if="hasRequirement">
       <br>
       Requirement:

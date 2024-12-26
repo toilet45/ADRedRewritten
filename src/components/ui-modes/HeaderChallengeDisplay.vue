@@ -17,7 +17,8 @@ export default {
       resetCelestial: false,
       inPelle: false,
       inExpansion: false,
-      inDamage: false
+      inDamage: false,
+      maxCompletion: 0
     };
   },
   computed: {
@@ -82,10 +83,10 @@ export default {
           let completionText = "";
           if (Enslaved.isRunning && currEC === 1) {
             completionText = `(${formatInt(nextCompletion)}/???)`;
-          } else if (nextCompletion === 6) {
+          } else if (nextCompletion >= this.maxCompletion + 1) {
             completionText = `(already completed)`;
           } else {
-            completionText = `(${formatInt(nextCompletion)}/${formatInt(5)})`;
+            completionText = `(${formatInt(nextCompletion)}/${formatInt(this.maxCompletion)})`;
           }
           names.push(`${part.name(token)} ${completionText}`);
         } else {
@@ -127,6 +128,7 @@ export default {
       this.inPelle = Pelle.isDoomed;
       this.inExpansion = Enslaved.isExpanded;
       this.inDamage = Laitela.isDamaged;
+      this.maxCompletion = player.challenge.eternity.current > 12 ? 5 : 5 + Effects.sum(EternityChallenge(13).reward).toNumber();
     },
     // Process exit requests from the inside out; Challenges first, then dilation, then Celestial Reality. If the
     // relevant option is toggled, we pass a bunch of information over to a modal - otherwise we immediately exit

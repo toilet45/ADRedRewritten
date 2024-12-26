@@ -168,5 +168,193 @@ export class CelestialStudySetup {
 </template>
 
 <style scoped>
+.o-time-study {
+  width: 18rem;
+  height: 10rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: black;
+  border: 0.1rem solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+}
 
+.o-time-study--available {
+  animation: a-time-study 7s infinite;
+  cursor: pointer;
+}
+
+.o-time-study--available:hover {
+  background-color: #00bcd4;
+  animation: none;
+}
+
+.o-time-study--unavailable {
+  color: black;
+}
+
+.o-time-study--unavailable:hover {
+  background-color: var(--color-bad);
+}
+
+.t-metro .o-time-study--unavailable,
+.t-inverted-metro .o-time-study--unavailable,
+.t-s1 .o-time-study--unavailable,
+.t-s8 .o-time-study--unavailable {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 black;
+}
+
+.s-base--metro .o-time-study--unavailable,
+.t-s1 .o-time-study--unavailable {
+  color: black;
+  border: none;
+}
+
+@keyframes a-time-study {
+  0% { box-shadow: inset 0 0 0.3rem 0; }
+  50% { box-shadow: inset 0 0 2rem 0; }
+  100% { box-shadow: inset 0 0 0.3rem 0; }
+}
+
+.o-time-study--small {
+  width: 12rem;
+  font-size: 0.85rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.o-time-study-normal--available {
+  color: var(--color-teresa--base);
+  border-color: var(--color-teresa--base);
+}
+
+.o-time-study-normal--available:hover {
+  color: white;
+  background-color: var(--color-teresa--base);
+  border-color: black;
+}
+
+.o-time-study-eternity-challenge--available {
+  color: #490066;
+  background-color: white;
+  border-color: black;
+}
+
+.o-time-study-eternity-challenge--available:hover {
+  color: white;
+  background-color: #490066;
+}
+
+.o-time-study-eternity-challenge--complete {
+  box-shadow: inset 0 0 3rem var(--color-good-dark);
+}
+
+.o-time-study-triad--available {
+  color: var(--color-v--base);
+  background: black;
+  border-color: black;
+  animation: a-time-study 1.5s infinite;
+}
+
+.o-time-study-triad--available:hover {
+  color: black;
+  background: var(--color-v--base);
+}
+
+.o-time-study-normal--unavailable {
+  background-color: #9e9e9e;
+}
+
+.t-dark .o-time-study--unavailable:hover,
+.t-s6 .o-time-study--unavailable:hover,
+.t-s10 .o-time-study--unavailable:hover {
+  background-color: var(--color-bad);
+  border-color: var(--color-bad);
+}
+
+.o-time-study-eternity-challenge--unavailable {
+  background-color: #9e9e9e;
+}
+
+.o-time-study-dilation--unavailable {
+  background-color: #9ca894;
+}
+
+.o-time-study-triad--unavailable {
+  background-color: #a8a494;
+}
+
+.o-time-study-normal--bought {
+  color: black;
+  background-color: var(--color-teresa--base);
+  border-color: black;
+}
+
+.o-time-study-eternity-challenge--bought {
+  color: white;
+  background-color: #490066;
+  border-color: black;
+}
+
+.o-time-study-eternity-challenge--running {
+  color: var(--color-eternity);
+  background-color: black;
+  border: 0.1rem solid var(--color-eternity);
+  animation: a-eternity-challenge-running 6s infinite;
+}
+
+@keyframes a-eternity-challenge-running {
+  0% { box-shadow: inset 1rem  0       3rem #490066; }
+  25% { box-shadow: inset 0     0.5rem  3rem #490066; }
+  50% { box-shadow: inset -1rem 0       3rem #490066; }
+  75% { box-shadow: inset 0     -0.5rem 3rem #490066; }
+  100% { box-shadow: inset 1rem  0       3rem #490066; }
+}
+
+.o-time-study-triad--bought {
+  color: black;
+  background-color: var(--color-v--base);
+  border-color: black;
+}
+
+.o-time-study--secret {
+  opacity: 0;
+  transition: opacity 1s;
+  transition-delay: 1s;
+  cursor: pointer;
+}
+
+.o-time-study--secret-unlocked {
+  opacity: 1;
+  transition: opacity 1s;
+  transition-delay: 0s;
+  cursor: pointer;
+}
+
+.o-time-study--enslaved {
+  opacity: 0.02;
+  background: var(--color-enslaved--base);
+  transition: all 1s;
+  animation: a-time-study 0.5s infinite;
+  cursor: pointer;
+}
+
+.o-time-study--enslaved-unlocked {
+  opacity: 1;
+  background: var(--color-eternity);
+  animation: a-time-study 2s infinite;
+  cursor: default;
+}
+
+.o-split1-study-normal--available {
+  color: var(--color-effarig--base);
+  border-color: var(--color-effarig--base);
+}
+
+.o-split1-study-normal--available:hover {
+  color: white;
+  background-color: var(--color-effarig--base);
+  border-color: black;
+}
 </style>

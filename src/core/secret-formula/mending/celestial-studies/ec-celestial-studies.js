@@ -17,7 +17,7 @@ export const ecCelestialStudies = [
   {
     id: 14,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [71, 72],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternity Challenge Completions",
@@ -29,7 +29,7 @@ export const ecCelestialStudies = [
   {
     id: 15,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternity Challenge Completions",
@@ -41,7 +41,7 @@ export const ecCelestialStudies = [
   {
     id: 16,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [91],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternity Challenge Completions",
@@ -53,7 +53,7 @@ export const ecCelestialStudies = [
   {
     id: 17,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [93],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternity Challenge Completions",
@@ -65,7 +65,7 @@ export const ecCelestialStudies = [
   {
     id: 18,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [93],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternity Challenge Completions",
