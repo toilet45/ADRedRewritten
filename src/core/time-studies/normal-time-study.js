@@ -133,7 +133,7 @@ TimeStudy.preferredPaths = {
     },
     set path(value) {
       const options = [1, 2, 3];
-      if (Ra.unlocks.MvDUnlock.isUnlocked) options.push(4);
+      if (Ra.unlocks.MvDUnlock.canBeApplied) options.push(4);
       player.timestudy.preferredPaths[0] = value.filter(id => options.includes(id));
     },
     get studies() {

@@ -29,6 +29,9 @@ function giveEternityRewards(auto) {
     }
     player.challenge.eternity.requirementBits &= ~(1 << challenge.id);
     respecTimeStudies(auto);
+    if (challenge.id > 12) {
+      respecCelestialStudies(auto);
+    }
   }
 
   addEternityTime(

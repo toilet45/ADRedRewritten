@@ -83,6 +83,7 @@ export class EternityChallengeState extends GameMechanicState {
 
   get maxCompletions() {
     if (this.id === 25) return 1;
+    if (this.id > 12) return 5;
     return Enslaved.isRunning && this.id === 1 ? 1000 : 5 + Effects.sum(EternityChallenge(13).reward).toNumber();
   }
 

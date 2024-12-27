@@ -163,7 +163,7 @@ export function respecCelestialStudies(auto) {
     player.challenge.eternity.unlocked = 0;
   }
   if (!auto) {
-    Tab.eternity.celStudies.show();
+    Tab.eternity.celstudies.show();
   }
   GameCache.currentStudyTree.invalidate();
 }
