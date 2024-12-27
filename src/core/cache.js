@@ -70,13 +70,13 @@ export const GameCache = {
   tickSpeedMultDecrease: new Lazy(() => (new Decimal(Enslaved.isExpanded ? 1e100 : 10)).sub(Effects.sum(
     BreakInfinityUpgrade.tickspeedCostMult,
     EternityChallenge(11).reward
-  ))),
+  )).clampMin(1.3)),
 
   dimensionMultDecrease: new Lazy(() => new Decimal(10).sub(Effects.sum(
     BreakInfinityUpgrade.dimCostMult,
     EternityChallenge(6).reward,
     BreakInfinityUpgrade.autobuyerSpeed.chargedEffect
-  ))),
+  )).clampMin(1.5)),
 
   timeStudies: new Lazy(() => NormalTimeStudyState.studies
     .map(s => player.timestudy.studies.includes(s.id))),
