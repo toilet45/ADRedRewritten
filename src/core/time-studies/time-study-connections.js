@@ -54,7 +54,7 @@ TimeStudy.allConnections = (function() {
     [TS(61), TS(71)],
     [TS(61), TS(72)],
     [TS(61), TS(73)],
-    [TS(61), TS(74), () => (Ra.pets.laitela.level >= 75)],
+    //[TS(61), TS(74), () => (Ra.pets.laitela.level >= 75)],
 
     [TS(71), TS(81)],
     [TS(72), TS(82)],
