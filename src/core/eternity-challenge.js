@@ -117,7 +117,7 @@ export class EternityChallengeState extends GameMechanicState {
       totalCompletions: this.completions,
     };
     if (this.isFullyCompleted) return status;
-    if (!Perk.studyECBulk.isBought) {
+    if (!Perk.studyECBulk.isBought || this.id > 12) {
       if (this.canBeCompleted) {
         ++status.totalCompletions;
         status.gainedCompletions = 1;

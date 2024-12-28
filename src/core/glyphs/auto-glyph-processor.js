@@ -359,6 +359,11 @@ export function getGlyphLevelInputs() {
     new Decimal(250).div(MendingUpgrade(4).effectOrDefault(1)));
   scaledLevel = logScaleSoftcap(scaledLevel, staticFactors.hyperLogarithmicInstability,
     new Decimal(175).div(MendingUpgrade(4).effectOrDefault(1)));
+
+  scaledLevel = logScaleSoftcap(scaledLevel, staticFactors.superInstability,
+    new Decimal(105).div(MendingUpgrade(4).effectOrDefault(1)));
+  scaledLevel = logScaleSoftcap(scaledLevel, staticFactors.hyperSuperInstability,
+    new Decimal(75).div(MendingUpgrade(4).effectOrDefault(1)));
   const scalePenalty = scaledLevel.gt(0) ? baseLevel.div(scaledLevel) : DC.D1;
   const incAfterInstability = staticFactors.achievements.add(staticFactors.realityUpgrades);
   baseLevel = baseLevel.add(incAfterInstability);
@@ -387,6 +392,8 @@ export function staticGlyphWeights() {
   const hyperInstability = Glyphs.hyperInstabilityThreshold;
   const logarithmicInstability = Glyphs.logarithmicInstabilityThreshold;
   const hyperLogarithmicInstability = Glyphs.hyperLogarithmicInstabilityThreshold;
+  const superInstability = Glyphs.superInstabilityThreshold;
+  const hyperSuperInstability = Glyphs.hyperSuperInstabilityThreshold;
   const realityUpgrades = [Array.range(1, 5).every(x => RealityUpgrade(x).boughtAmount.gt(0))]
     .concat(Array.range(1, 4).map(x => Array.range(1, 5).every(y => RealityUpgrade(5 * x + y).isBought)))
     .filter(x => x)
@@ -398,6 +405,8 @@ export function staticGlyphWeights() {
     hyperInstability,
     logarithmicInstability,
     hyperLogarithmicInstability,
+    superInstability,
+    hyperSuperInstability,
     realityUpgrades,
     achievements
   };

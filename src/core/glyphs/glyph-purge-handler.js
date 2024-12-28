@@ -73,7 +73,7 @@ export const GlyphSacrificeHandler = {
       Modal.glyphSacrifice.show({ idx: glyph.idx, gain: toGain });
       return;
     }
-    player.reality.glyphs.sac[glyph.type] = player.reality.glyphs.sac[glyph.type].add(toGain).clampMax(Glyphs.sacCap);
+    player.reality.glyphs.sac[glyph.type] = player.reality.glyphs.sac[glyph.type].add(toGain);
     GameCache.logTotalGlyphSacrifice.invalidate();
     Glyphs.removeFromInventory(glyph);
     EventHub.dispatch(GAME_EVENT.GLYPH_SACRIFICED, glyph);

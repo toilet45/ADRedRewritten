@@ -683,6 +683,12 @@ export const Glyphs = {
   get hyperLogarithmicInstabilityThreshold() {
     return this.logarithmicInstabilityThreshold.add(50000);
   },
+  get superInstabilityThreshold() {
+    return this.instabilityThreshold.add(224000);
+  },
+  get hyperSuperInstabilityThreshold() {
+    return this.instabilityThreshold.add(349000);
+  },
   get sacCap() {
     let x = DC.E100;
     x = x.pow(Teresa.hardRunRewardPower);

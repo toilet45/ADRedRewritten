@@ -24,7 +24,7 @@ export class CelestialTheoremPurchaseType {
   get cost() {
     return this.id === "am"
       ? this.costBase.pow(this.costIncrement.pow(this.amount.pow(2)).add(1))
-      : this.costBase.mul(this.costIncrement.pow(this.amount));
+      : this.costBase.mul(this.costIncrement.pow(this.amount.pow(2)));
   }
 
   /**
@@ -51,7 +51,7 @@ export class CelestialTheoremPurchaseType {
     if (!this.canAfford) return false;
     if (this.id === "tt") {
       const pur = bulk
-        ? this.currency.value.div(this.costBase).log(this.costIncrement).add(1).floor()
+        ? this.currency.value.div(this.costBase).log(this.costIncrement).sqrt().floor()
         : 1;
       Currency.celestialTheorems.add(pur);
       this.add(pur);

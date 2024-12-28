@@ -267,7 +267,9 @@ export default {
           v-if="showEXButton"
         >
           <br>
-          Each Extreme V-Achievement counts as x V-Achievements and will reward Celestial Theorems instead
+          Each Extreme V-Achievement do not count as V-Achievements, but will instead reward Celestial Theorems.
+          <br>
+          Goal reduction is stupidly expensive for Extreme V-Achievements.
         </div>
       </div>
       <div

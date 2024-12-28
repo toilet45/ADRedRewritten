@@ -127,7 +127,7 @@ export default {
       }
 
       if (EternityChallenge.isRunning) {
-        if (!Perk.studyECBulk.isBought) {
+        if (!Perk.studyECBulk.isBought || EternityChallenge.current.id > 12) {
           this.type = EP_BUTTON_DISPLAY_TYPE.CHALLENGE;
           return;
         }

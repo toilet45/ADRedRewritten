@@ -198,7 +198,6 @@ function applyNDPowers(mult, tier) {
       CelestialStudy(32),
       CelestialStudy(44),
       CelestialStudy(54),
-      CelestialStudy(64)
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
@@ -213,6 +212,8 @@ function applyNDPowers(mult, tier) {
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
 
   //console.log(multiplier)
+
+  multiplier = stackedLogPower(multiplier, 1, CelestialStudy(64).effectOrDefault(1));
 
   return multiplier;
 }

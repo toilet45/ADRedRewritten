@@ -22,7 +22,8 @@ export default {
       untilAllEC: TimeSpan.zero,
       hasECR: false,
       hasCelStudies: false,
-      EC13Completions: 0
+      EC13Completions: 0,
+      EC20Completions: 0
     };
   },
   computed: {
@@ -67,7 +68,8 @@ export default {
       }
       this.hasECR = Perk.studyECRequirement.isBought;
       this.hasCelStudies = Ra.unlocks.vHardenedUnlock.canBeApplied;
-      this.EC13Completions = EternityChallenge(13).completions;
+      this.EC13Completions = EternityChallenge(13).completions + EternityChallenge(20).completions;
+      this.EC20Completions = EternityChallenge(20).completions;
     },
     isChallengeVisible(challenge) {
       if (challenge.id >= 13) return challenge.completions > 0 || challenge.isUnlocked || challenge.hasUnlocked;
@@ -110,8 +112,19 @@ export default {
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
     </div>
     <div v-else>
-      Complete Eternity Challenges again for a bigger reward,
-      maximum of {{ formatInt(EC13Completions + 5) }} times.<br>
+      Complete Eternity Challenges again for a bigger reward.<br>
+      Eternity Challenges 1-12 can be completed a maximum of {{ formatInt(EC13Completions + 5) }} times.<br>
+      <div v-if="unlockedCount > 12">
+        Eternity Challenge{{ unlockedCount == 13 ? " 13" : `s 13-${formatInt(Math.clampMax(unlockedCount, 19))}` }}
+        can be completed a maximum of {{ formatInt(EC20Completions + 5) }} times.<br>
+      </div>
+      <div v-if="unlockedCount > 19">
+        Eternity Challenge{{ unlockedCount > 20 ? "s 20+" : " 20" }}
+        can be completed a maximum of {{ formatInt(5) }} times.<br>
+      </div>
+      <!-- eslint-disable-next-line vue/multiline-html-element-content-newline -->
+      <div v-if="unlockedCount > 24"> Eternity Challenge 25 can only be completed once. <br>
+      </div>
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
     </div>
     <div v-if="!hasECR">

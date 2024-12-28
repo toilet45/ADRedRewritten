@@ -22,7 +22,7 @@ export const ecCelestialStudies = [
     secondary: {
       resource: "Time Theorems",
       current: () => player.timestudy.theorem,
-      required: completions => DC.E33333.mul(DC.E5000.pow(completions)),
+      required: completions => DC.E33333.mul(DC.E5000.pow(Decimal.pow(completions, 2))),
       formatValue: value => format(value, 0, 0)
     }
   },
@@ -34,7 +34,7 @@ export const ecCelestialStudies = [
     secondary: {
       resource: "Peak Gamespeed",
       current: () => player.celestials.ra.peakGamespeed,
-      required: completions => DC.E1200.mul(DC.E150.pow(completions)),
+      required: completions => DC.E1200.mul(DC.E300.pow(completions)),
       formatValue: format
     }
   },
@@ -46,7 +46,7 @@ export const ecCelestialStudies = [
     secondary: {
       resource: "Reality Glyph Sacrifice",
       current: () => player.reality.glyphs.sac.reality,
-      required: completions => DC.E200.mul(DC.E20.pow(completions)),
+      required: completions => DC.E300.mul(DC.E100.pow(completions)),
       formatValue: format
     }
   },

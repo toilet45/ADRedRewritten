@@ -33,10 +33,13 @@ export default {
       enslavedHint: "",
       showInstability: false,
       showLogarithmicInstability: false,
+      showSuperInstability: false,
       instabilityThreshold: new Decimal(),
       hyperInstabilityThreshold: new Decimal(),
       logarithmicInstabilityThreshold: new Decimal(),
       hyperLogarithmicInstabilityThreshold: new Decimal(),
+      superInstabilityThreshold: new Decimal(),
+      hyperSuperInstabilityThreshold: new Decimal(),
       isInCelestialReality: false,
       canAmplify: false,
       glyphTextColors: true,
@@ -65,9 +68,13 @@ export default {
       this.hyperInstabilityThreshold.copyFrom(Glyphs.hyperInstabilityThreshold);
       this.logarithmicInstabilityThreshold.copyFrom(Glyphs.logarithmicInstabilityThreshold);
       this.hyperLogarithmicInstabilityThreshold.copyFrom(Glyphs.hyperLogarithmicInstabilityThreshold);
+      this.superInstabilityThreshold.copyFrom(Glyphs.superInstabilityThreshold);
+      this.hyperSuperInstabilityThreshold.copyFrom(Glyphs.hyperSuperInstabilityThreshold);
       this.showInstability = player.records.bestReality.glyphLevel.gt(this.instabilityThreshold.sub(200));
       this.showLogarithmicInstability = player.records.bestReality.glyphLevel
         .gt(this.logarithmicInstabilityThreshold.sub(1e4));
+      this.showSuperInstability = player.records.bestReality.glyphLevel
+        .gt(this.superInstabilityThreshold.sub(2.5e4));
       this.isInCelestialReality = isInCelestialReality();
       this.canAmplify = Enslaved.isUnlocked && !this.isInCelestialReality;
       this.autoRestartCelestialRuns = player.options.retryCelestial;
@@ -171,6 +178,14 @@ export default {
           Glyph levels higher than {{ formatInt(logarithmicInstabilityThreshold) }} are becoming far harder to reach.
           <br>
           This becomes even stronger when reaching levels above {{ formatInt(hyperLogarithmicInstabilityThreshold) }}.
+        </div>
+        <div v-if="showSuperInstability">
+          <br>
+          Glyphs are becoming insanely unstable.
+          <br>
+          Glyph levels higher than {{ formatInt(superInstabilityThreshold) }} are becoming far harder to reach.
+          <br>
+          This becomes even stronger when reaching levels above {{ formatInt(hyperSuperInstabilityThreshold) }}.
         </div>
         <SingleGlyphCustomzationPanel />
         <ExpandingControlBox

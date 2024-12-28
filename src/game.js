@@ -96,6 +96,7 @@ export function breakInfinity() {
   GameUI.update();
 }
 
+// eslint-disable-next-line complexity
 export function gainedInfinityPoints(mm1gen = false) {
   const div = new Decimal(Effects.min(
     308,
@@ -149,6 +150,10 @@ export function gainedInfinityPoints(mm1gen = false) {
   if (EternityChallenge(13).isRunning) ip = stackedLogPower(ip, 1, 0.075);
   if (EternityChallenge(15).isRunning) ip = ip.max(1).log10();
 
+  if (ip.gt("e5e32")) {
+    ip = ip.log10().div("5e32").pow(0.666).mul("5e32").pow10();
+  }
+
   return ip.floor();
 }
 
@@ -192,7 +197,7 @@ export function gainedEternityPoints() {
   ep = ep.pow(MendingUpgrade(6).effects.other);
 
   if (ep.gt("ee30")) {
-    ep = ep.log10().div(1e30).pow(0.777).mul(1e30).pow10();
+    ep = ep.log10().div("1e30").pow(0.777).mul("1e30").pow10();
   }
 
   return ep.floor();

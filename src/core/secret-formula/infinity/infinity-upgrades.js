@@ -1,7 +1,7 @@
 import { DC } from "../../constants";
 
-function softcap(softcapStart, value) {
-  return value.gt(softcapStart) ? value.div(softcapStart).cbrt().mul(softcapStart) : value;
+function softcap(softcapStart, value, func = Decimal.cbrt) {
+  return value.gt(softcapStart) ? func(value.div(softcapStart)).mul(softcapStart) : value;
 }
 function dimInfinityMult() {
   return Currency.infinitiesTotal.value.times(0.2).plus(1);
@@ -21,8 +21,8 @@ export const infinityUpgrades = {
     charged: {
       description: "Antimatter Dimensions gain a power effect based on time played and Teresa level",
       effect: () =>
-        softcap(new Decimal(1.2), Decimal.log10(Decimal.log10(Time.totalTimePlayed.totalMilliseconds))
-          .times(Decimal.pow(Ra.pets.teresa.level, 0.5)).div(150).add(1)),
+        Decimal.log10(Decimal.log10(Time.totalTimePlayed.totalMilliseconds))
+          .times(Decimal.pow(Ra.pets.teresa.level, 0.5)).div(150).add(1),
       formatEffect: value => formatPow(value, 4, 4)
     }
   },
@@ -100,7 +100,7 @@ export const infinityUpgrades = {
     charged: {
       description: () => `The multiplier for buying ${formatInt(10)} Antimatter Dimensions gains ` +
         "a power effect based on Teresa level",
-      effect: () => softcap(1.25, new Decimal(1 + Ra.pets.teresa.level / 200)).toNumber(),
+      effect: () => new Decimal(1 + Ra.pets.teresa.level / 200),
       formatEffect: value => formatPow(value, 3, 3)
     }
   },
@@ -126,8 +126,8 @@ export const infinityUpgrades = {
       description:
         "Antimatter Dimensions gain a power effect based on time spent in current Infinity and Teresa level",
       effect: () =>
-        softcap(new Decimal(1.2), Decimal.log10(Decimal.log10(Time.thisInfinity.totalMilliseconds.add(100)))
-          .times(Math.sqrt(Ra.pets.teresa.level)).div(150).add(1)),
+        Decimal.log10(Decimal.log10(Time.thisInfinity.totalMilliseconds.add(100)))
+          .times(Math.sqrt(Ra.pets.teresa.level)).div(150).add(1),
       formatEffect: value => formatPow(value, 4, 4)
     }
   },
@@ -141,7 +141,8 @@ export const infinityUpgrades = {
     charged: {
       description: "Multiplier to 1st Antimatter Dimension based on unspent Infinity Points, powered by Teresa level",
       effect: () => Decimal.pow10(softcap(new Decimal("1e13"),
-        Currency.infinityPoints.value.dividedBy(2).pow(Math.sqrt(Ra.pets.teresa.level) * 1.5).plus(1).log10())),
+        Currency.infinityPoints.value.dividedBy(2).pow(Math.sqrt(Ra.pets.teresa.level) * 1.5).plus(1).log10(),
+        Decimal.sqrt)),
       formatEffect: value => formatX(value, 2, 2)
     }
   },
@@ -188,8 +189,8 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Start every reset with ${formatInt(1250000)} Dimension Boosts, and Dimension Boosts
-      are ${formatPercents(0.01)} cheaper out of Eternity Challenge 5`,
-      effect: () => [new Decimal(1250000), 0.99],
+      are ${formatPercents(0.9995, 2, 2)} cheaper out of Eternity Challenge 5`,
+      effect: () => [new Decimal(1250000), 0.9995],
     }
   },
   skipReset2: {
@@ -201,8 +202,8 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Start every reset with ${formatInt(8500)} Antimatter Galaxies, and Antimatter Galaxies
-      are ${formatPercents(0.01)} cheaper.`,
-      effect: () => [new Decimal(8500), 0.99],
+      are ${formatPercents(0.99999999, 6, 6)} cheaper.`,
+      effect: () => [new Decimal(8500), 0.99999999],
     }
   },
   skipReset3: {
@@ -214,7 +215,7 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Gain extra Dimension Boosts based on Teresa level and Infinity Count`,
-      effect: () => Currency.infinitiesTotal.value.max(1).log10().mul(Ra.pets.teresa.level).pow(1.25).floor(),
+      effect: () => Currency.infinitiesTotal.value.max(1).log10().pow(Math.cbrt(Ra.pets.teresa.level)).floor(),
       formatEffect: value => `+${formatInt(value)}`
     }
   },
@@ -228,7 +229,7 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Gain extra Multiversal Galaxies based on Teresa level and Mending Count`,
-      effect: () => Currency.mends.value.max(1).pow(0.75).mul(Ra.pets.teresa.level).floor(),
+      effect: () => Currency.mends.value.max(1).pow(1.33).mul(Ra.pets.teresa.level).floor(),
       formatEffect: value => `+${formatInt(value)}`
     }
   },

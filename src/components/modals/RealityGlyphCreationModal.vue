@@ -44,6 +44,9 @@ export default {
       const value = config.effect(this.realityGlyphLevel, rarityToStrength(100));
       const effectTemplate = config.singleDesc;
       return effectTemplate.replace("{value}", config.formatEffect(value));
+    },
+    giveSecretAchievement() {
+      SecretAchievement(51).unlock();
     }
   },
 };
@@ -89,6 +92,7 @@ export default {
       <PrimaryButton
         v-else
         :enabled="false"
+        @click="giveSecretAchievement"
       >
         Reality Glyph level must be higher than {{ formatInt(0) }}
       </PrimaryButton>
@@ -103,5 +107,10 @@ export default {
 
 .o-available-effects {
   font-weight: bold;
+}
+
+.x-troll {
+  border-color: #222; /*var(--color-accent);*/
+  border: #222;/*var(--color-accent)*/
 }
 </style>

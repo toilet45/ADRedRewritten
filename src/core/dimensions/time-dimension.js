@@ -275,7 +275,7 @@ class TimeDimensionState extends DimensionState {
     mult = mult.pow(Ra.momentumValue);
     mult = mult.pow(ImaginaryUpgrade(11).effectOrDefault(1));
     mult = mult.powEffectOf(PelleRifts.paradox);
-    mult = mult.powEffectsOf(CelestialStudy(32), CelestialStudy(44), CelestialStudy(64));
+    mult = mult.powEffectsOf(CelestialStudy(32), CelestialStudy(44));
 
     if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
       mult = dilatedValueOf(mult);
@@ -292,6 +292,8 @@ class TimeDimensionState extends DimensionState {
     if (EternityChallenge(15).isRunning) {
       mult = mult.pow(TimeDimension(tier).amount.clampMin(1).log10());
     }
+
+    mult = stackedLogPower(mult, 1, CelestialStudy(64).effectOrDefault(1));
 
     return mult;
   }

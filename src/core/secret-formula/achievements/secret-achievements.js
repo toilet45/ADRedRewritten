@@ -169,7 +169,7 @@ export const secretAchievements = [
   {
     id: 44,
     name: "Are you statisfied now?",
-    get description() { return `Stare intently at the statistics tab for ${formatInt(15)} real-time minutes.`; },
+    get description() { return `Stare intently at the statistics tab for ${formatInt(15)} true-time minutes.`; },
     checkRequirement: () => AchievementTimers.stats.check(Tab.statistics.isOpen, 900),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
@@ -206,8 +206,9 @@ export const secretAchievements = [
   },
   {
     id: 53,
-    name: "???",
-    description: "Have all equipped Glyphs be Music Glyphs.",
+    name: "Reading Challenge",
+    description: () => `Have the How-to-play modal open for over ${formatInt(90)} consecutive true-time minutes`,
+    checkRequirement: () => AchievementTimers.h2p.check(Modal.h2p.isOpen, 5400),
   },
   {
     id: 54,

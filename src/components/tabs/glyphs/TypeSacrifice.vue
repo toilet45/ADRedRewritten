@@ -64,10 +64,10 @@ export default {
       return matchType && (this.hasDragover || (keybindActive && validSac));
     },
     formatNewAmount() {
-      return format(this.currentSacrifice.sacrificeValue.clampMax(this.sacCap), 2, 2);
+      return format(this.currentSacrifice.sacrificeValue, 2, 2);
     },
     formatTotalAmount() {
-      return format(this.amount.add(this.currentSacrifice.sacrificeValue).clampMax(this.sacCap), 2, 2);
+      return format(this.amount.add(this.currentSacrifice.sacrificeValue), 2, 2);
     },
   },
   created() {

@@ -73,7 +73,7 @@ export const normalCelestialStudies = [
     requirement: [22],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_A,
     description: () => `Improve the production of all Dimensions significantly based on Mends`,
-    effect: () => Currency.mends.value.max(1).div(25).add(1),
+    effect: () => Currency.mends.value.max(1).div(25).clampMax(4).add(1).add(Currency.mends.value.max(1).log10().max(1).log10()),
     formatEffect: value => formatPow(value, 2, 2)
   },
   {
@@ -86,7 +86,7 @@ export const normalCelestialStudies = [
   },
   {
     id: 42,
-    cost: DC.D1,
+    cost: DC.D2,
     requirement: [31],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B1,
     description: () => `Improve Glyph Alchemy effects`,
@@ -102,7 +102,7 @@ export const normalCelestialStudies = [
   },
   {
     id: 44,
-    cost: DC.D1,
+    cost: DC.D2,
     requirement: [32],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
     description: () => `All dimension production ${formatPow(4)}`,
@@ -110,7 +110,7 @@ export const normalCelestialStudies = [
   },
   {
     id: 51,
-    cost: DC.D1,
+    cost: DC.D2,
     requirement: [41],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Power glyph sacrfice effect is squared, and affects Remote Galaxy scaling.`,
@@ -118,7 +118,7 @@ export const normalCelestialStudies = [
   },
   {
     id: 52,
-    cost: DC.D1,
+    cost: DC.D2,
     requirement: [42],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Equipped Reality Glyphs provide a much stronger Galaxy Strength boost`,
@@ -127,7 +127,7 @@ export const normalCelestialStudies = [
   },
   {
     id: 53,
-    cost: DC.D1,
+    cost: DC.D2,
     requirement: [43],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Dimension caps are muliplied based on Time Glyph Sacrifice`,
@@ -136,11 +136,11 @@ export const normalCelestialStudies = [
   },
   {
     id: 54,
-    cost: DC.D1,
+    cost: DC.D2,
     requirement: [44],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Antimatter Dimensions gain a power effect based on Power Glyph Sacrifice`,
-    effect: () => player.reality.glyphs.sac.power.log10().root(4).div(2).clampMax(4).add(1),
+    effect: () => player.reality.glyphs.sac.power.log10().root(3).div(1.5).clampMax(9).add(1),
     formatEffect: value => formatPow(value, 2, 1)
   },
   {
@@ -172,7 +172,7 @@ export const normalCelestialStudies = [
   },
   {
     id: 64,
-    cost: DC.D1,
+    cost: DC.D3,
     requirement: [54],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `All Dimension Exponents gain a very small power, based on Tachyon Particles`,

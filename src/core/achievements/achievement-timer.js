@@ -31,5 +31,6 @@ export const AchievementTimers = {
   marathon1: new AchievementTimer(false),
   marathon2: new AchievementTimer(false),
   pain: new AchievementTimer(true),
-  stats: new AchievementTimer(true)
+  stats: new AchievementTimer(true),
+  h2p: new AchievementTimer(true)
 };
