@@ -389,8 +389,7 @@ class TimeDimensionState extends DimensionState {
       }
     }
     contValue = Decimal.min(contValue, (contValue.sub(e6kThreshold)).div(TimeDimensions.scalingPast1e6000).add(e6kThreshold));
-    contValue = contValue.times(Laitela.matterExtraPurchaseFactor.add(10)).div(10);
-    contValue = Decimal.clampMax(contValue, TimeDimensions.purchaseCap.times(10));
+    contValue = contValue.clampMax(TimeDimensions.purchaseCap.times(10)).times(Laitela.matterExtraPurchaseFactor.div(10));
     return Decimal.clampMin(contValue, 0);
   }
 

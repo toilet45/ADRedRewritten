@@ -146,7 +146,7 @@ export function gainedInfinityPoints(mm1gen = false) {
 
   ip = ip.pow(MendingUpgrade(6).effects.other);
 
-  if (EternityChallenge(13).isRunning) ip = stackedLogPower(ip, 1, 0.03);
+  if (EternityChallenge(13).isRunning) ip = stackedLogPower(ip, 1, 0.075);
   if (EternityChallenge(15).isRunning) ip = ip.max(1).log10();
 
   return ip.floor();
@@ -190,6 +190,10 @@ export function gainedEternityPoints() {
   }
 
   ep = ep.pow(MendingUpgrade(6).effects.other);
+
+  if (ep.gt("ee30")) {
+    ep = ep.log10().div(1e30).pow(0.777).mul(1e30).pow10();
+  }
 
   return ep.floor();
 }

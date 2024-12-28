@@ -129,7 +129,7 @@ export default {
         : TimeSpan.fromSeconds(this.estimateToMax).toStringShort();
     },
     endlesslyCapped() {
-      return this.seenRGcap ? `up to ${formatInt(1e7)} times` : "endlessly";
+      return this.seenRGcap ? `up to ${formatInt(getSecondaryGlyphEffect("realitygalaxies").mul(1e7))} times` : "endlessly";
     }
   },
   methods: {
@@ -258,7 +258,7 @@ export default {
       <div
         v-if="seenRGcap"
       >
-        Max Replicanti Upgrade caps at {{ formatInt(1e7) }} purchases.
+        Max Replicanti Upgrade can be purchased {{ endlesslyCapped }}
       </div>
       <br>
       <div v-if="isInEC8">

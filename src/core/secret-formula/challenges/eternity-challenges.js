@@ -43,7 +43,7 @@ export const eternityChallenges = [
     reward: {
       description: "1st Infinity Dimension multiplier based on Infinity Power",
       effect: completions => Currency.infinityPower.value.pow(1.5 / (700 - completions * 100)).clampMin(1),
-      cap: () => (MendingUpgrade(8).isBought ? DC.E10000 : DC.E100),
+      cap: () => (MendingUpgrade(8).isBought ? DC.E10000 : DC.E100).pow(Decimal.sub(EternityChallenge(2).completions, 4).max(1).pow(Decimal.sub(EternityChallenge(4).completions, 2).mul(20).max(1))),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -86,7 +86,8 @@ export const eternityChallenges = [
     reward: {
       description: "Infinity Dimension multiplier based on unspent IP",
       effect: completions => Decimal.max(1, Currency.infinityPoints.value.pow(0.003 + completions * 0.002)),
-      cap: () => (MendingUpgrade(8).isBought ? DC.E20000 : DC.E200),
+      // eslint-disable-next-line max-len
+      cap: () => (MendingUpgrade(8).isBought ? DC.E20000 : DC.E200).pow(Decimal.sub(EternityChallenge(4).completions, 4).max(1).pow(Decimal.sub(EternityChallenge(4).completions, 5).mul(20).max(1))),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -128,7 +129,12 @@ export const eternityChallenges = [
     scaleStart: 5,
     reward: {
       description: "Further reduce Antimatter Dimension cost multiplier growth",
-      effect: completions => completions * 0.2,
+      // eslint-disable-next-line no-nested-ternary
+      effect: completions => (completions > 10
+        ? 1 + completions * 0.025
+        : completions > 5
+          ? 0.75 + completions * 0.05
+          : completions * 0.2),
       formatEffect: value => {
         const total = Player.dimensionMultDecrease.add(Effects.sum(EternityChallenge(6).reward)).round().sub(value);
         return `-${format(value, 2, 1)} (${formatX(total, 2, 1)} total)`;
@@ -195,7 +201,7 @@ export const eternityChallenges = [
     reward: {
       description: "Infinity Dimension multiplier based on Time Shards",
       effect: completions => Currency.timeShards.value.pow(completions * 0.1).clampMin(1),
-      cap: () => (MendingUpgrade(8).isBought ? DC.E45000 : DC.E400),
+      cap: () => (MendingUpgrade(8).isBought ? DC.E45000 : DC.E400).pow(Decimal.sub(EternityChallenge(9).completions, 4).max(1).pow(Decimal.sub(EternityChallenge(9).completions, 5).mul(20).max(1))),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -248,7 +254,10 @@ export const eternityChallenges = [
     scaleStart: 5,
     reward: {
       description: "Further reduce Tickspeed cost multiplier growth",
-      effect: completions => completions * 0.07,
+      // eslint-disable-next-line no-nested-ternary
+      effect: completions => (completions > 10
+        ? 0.6 + completions / 100
+        : completions * 0.07),
       formatEffect: value => {
         const total = Player.tickSpeedMultDecrease.add(Effects.sum(EternityChallenge(11).reward)).round().sub(value);
         return `-${format(value, 2, 2)} (${formatX(total, 2, 2)} total)`;
@@ -283,7 +292,7 @@ export const eternityChallenges = [
   },
   {
     id: 13,
-    description: () => `IP gain exponent is raised ^${format(0.03, 2, 2)}.
+    description: () => `IP gain exponent is raised ^${format(0.075, 3, 3)}.
     Gamespeed does not affect Passive IP gain`,
     goal: DC.E100,
     pelleGoal: DC.E100,
@@ -411,9 +420,9 @@ export const eternityChallenges = [
     scaleStart: Infinity,
     reward: {
       description: "IP boosts Replicanti Speed",
-      effect: completions => Currency.infinityPoints.value.max(1).log10().max(1).log10()
-        .pow(0.2).mul(completions * 5 + 1),
-      formatEffect: value => `^${format(value, 3, 3)}`
+      effect: completions => DC.E100.pow(Currency.infinityPoints.value.max(1).log10().max(1).log10()
+        .pow(0.2).mul(completions * 5 + 1)),
+      formatEffect: value => `${formatX(value, 3, 3)}`
     }
   },
   {
@@ -512,13 +521,10 @@ export const eternityChallenges = [
   {
     id: 25,
     description: () => `Suffering`,
-    // Actual effects:
-    // AD1 production is log(log(x))
-    // Tickspeed is locked to 1x
-    // Gamespeed is locked to 1000x game, 1e6x real.
-    // IP gain exponent ^0.25
-    // Glyphs provide no effect while in the EC.
-    // Replicanti multiplier is 1x.
+    // Actual effect:
+    // AD production is log(x)
+    // All IP multipliers are disabled
+    // Gamespeed is capped to 1x rt and gt
     goal: DC.F4,
     pelleGoal: DC.E10,
     goalIncrease: DC.E10,

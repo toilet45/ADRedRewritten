@@ -105,8 +105,8 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [32],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_B2,
-    description: () => `All dimension production ${formatPow(10)}`,
-    effect: () => DC.E1,
+    description: () => `All dimension production ${formatPow(4)}`,
+    effect: () => new Decimal(4),
   },
   {
     id: 51,
@@ -140,7 +140,7 @@ export const normalCelestialStudies = [
     requirement: [44],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Antimatter Dimensions gain a power effect based on Power Glyph Sacrifice`,
-    effect: () => DC.E4,
+    effect: () => player.reality.glyphs.sac.power.log10().root(4).div(2).clampMax(4).add(1),
     formatEffect: value => formatPow(value, 2, 1)
   },
   {
@@ -176,14 +176,14 @@ export const normalCelestialStudies = [
     requirement: [54],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `All Dimension Exponents gain a very small power, based on Tachyon Particles`,
-    effect: () => DC.E4,
-    formatEffect: value => formatPow(value, 2, 1)
+    effect: () => player.dilation.tachyonParticles.log10().root(25).div(150).add(1),
+    formatEffect: value => formatPow(value, 4, 4)
   },
   {
     id: 71,
     cost: DC.D1,
     requirement: [61, 62],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `Glyph Sacrifice is calculated using a value ${formatX("1e200")} the cap/sacrifice value`,
     effect: () => DC.E200,
   },
@@ -191,7 +191,7 @@ export const normalCelestialStudies = [
     id: 72,
     cost: DC.D1,
     requirement: [63, 64],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `All Glyph Effects providing a power effect to a Dimension are ${formatX(1.1, 1, 1)}`,
     effect: () => 1.1,
   },
@@ -199,7 +199,7 @@ export const normalCelestialStudies = [
     id: 81,
     cost: DC.D1,
     requirement: [71, 72],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `Game speed is raised ${formatPow(1.75, 2, 2)}`,
     effect: () => 1.75,
   },

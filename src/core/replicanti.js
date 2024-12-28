@@ -439,7 +439,7 @@ export const ReplicantiUpgrade = {
     }
 
     get cap() {
-      return Effects.min(1e7);
+      return getSecondaryGlyphEffect("realitygalaxies").mul(1e7);
     }
 
     get isCapped() {

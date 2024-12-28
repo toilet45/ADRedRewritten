@@ -20,10 +20,10 @@ export const ecCelestialStudies = [
     requirement: [71, 72],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Time Theorems",
+      current: () => player.timestudy.theorem,
+      required: completions => DC.E33333.mul(DC.E5000.pow(completions)),
+      formatValue: value => format(value, 0, 0)
     }
   },
   {
@@ -32,10 +32,10 @@ export const ecCelestialStudies = [
     requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Peak Gamespeed",
+      current: () => player.celestials.ra.peakGamespeed,
+      required: completions => DC.E1200.mul(DC.E150.pow(completions)),
+      formatValue: format
     }
   },
   {
@@ -44,10 +44,10 @@ export const ecCelestialStudies = [
     requirement: [91],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Reality Glyph Sacrifice",
+      current: () => player.reality.glyphs.sac.reality,
+      required: completions => DC.E200.mul(DC.E20.pow(completions)),
+      formatValue: format
     }
   },
   {
@@ -56,10 +56,10 @@ export const ecCelestialStudies = [
     requirement: [93],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Tickspeed",
+      current: () => Tickspeed.current.recip(),
+      required: completions => DC.EE33.pow(Decimal.pow10(completions * 1.5)),
+      formatValue: format
     }
   },
   {

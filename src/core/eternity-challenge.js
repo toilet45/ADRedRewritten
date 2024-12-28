@@ -83,8 +83,9 @@ export class EternityChallengeState extends GameMechanicState {
 
   get maxCompletions() {
     if (this.id === 25) return 1;
-    if (this.id > 12) return 5;
-    return Enslaved.isRunning && this.id === 1 ? 1000 : 5 + Effects.sum(EternityChallenge(13).reward).toNumber();
+    if (this.id > 20) return 5;
+    if (this.id > 12) return 5 + Effects.sum(EternityChallenge(20).reward).toNumber();
+    return Enslaved.isRunning && this.id === 1 ? 1000 : 5 + Effects.sum(EternityChallenge(13).reward, EternityChallenge(20).reward).toNumber();
   }
 
   get remainingCompletions() {
@@ -171,7 +172,16 @@ export class EternityChallengeState extends GameMechanicState {
     return this.isGoalReached && this.isWithinRestriction;
   }
 
+  // Goal for the NEXT completion, based on current completions
   goalAtCompletions(completions) {
+    if (completions > 4) {
+      switch (this.scaled.goalIncreaseType) {
+        case "exponential":
+          return Decimal.pow(this.goalIncrease.log10(), completions - 5).mul(this.scaled.goal.log10()).pow10();
+        default:
+          break;
+      }
+    }
     return completions > 0
       ? this.initialGoal.times(this.goalIncrease.pow(Math.min(completions, this.maxCompletions - 1)))
       : this.initialGoal;
