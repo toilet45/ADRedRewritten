@@ -176,7 +176,7 @@ export const normalCelestialStudies = [
     requirement: [54],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `All Dimension Exponents gain a very small power, based on Tachyon Particles`,
-    effect: () => player.dilation.tachyonParticles.log10().root(25).div(150).add(1),
+    effect: () => player.dilation.tachyonParticles.clampMin(1).log10().root(25).div(150).add(1),
     formatEffect: value => formatPow(value, 4, 4)
   },
   {
