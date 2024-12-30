@@ -159,7 +159,7 @@ function applyNDMultipliers(mult, tier) {
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
 
   if (EternityChallenge(15).isRunning) {
-    multiplier = multiplier.pow(AntimatterDimension(tier).amount.clampMin(1).log10());
+    multiplier = multiplier.pow(DC.D1.div(AntimatterDimension(tier).amount.clampMin(1).log10().clampMin(1)));
   }
 
   //console.log(multiplier);

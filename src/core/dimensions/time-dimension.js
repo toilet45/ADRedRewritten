@@ -290,7 +290,7 @@ class TimeDimensionState extends DimensionState {
     if (Laitela.isDamaged) mult = mult.pow(0.6);
 
     if (EternityChallenge(15).isRunning) {
-      mult = mult.pow(TimeDimension(tier).amount.clampMin(1).log10());
+      mult = mult.pow(DC.D1.div(TimeDimension(tier).amount.clampMin(1).log10().clampMin(1)));
     }
 
     mult = stackedLogPower(mult, 1, CelestialStudy(64).effectOrDefault(1));

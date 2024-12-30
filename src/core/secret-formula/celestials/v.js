@@ -74,7 +74,7 @@ export const v = {
       // This achievement has internally negated values since the check is always greater than
       values: [-5, -4, -3, -2, -1, 0],
       condition: () => V.isRunning && TimeStudy.reality.isBought,
-      currentValue: () => -Glyphs.activeWithoutCompanion.length,
+      currentValue: () => -player.requirementChecks.reality.maxGlyphs,
       formatRecord: x => (x >= -5 ? formatInt(-x) : "Not reached"),
       shardReduction: () => 0,
       maxShardReduction: () => 0,

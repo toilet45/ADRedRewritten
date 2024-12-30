@@ -193,7 +193,7 @@ class InfinityDimensionState extends DimensionState {
     }
 
     if (EternityChallenge(15).isRunning) {
-      mult = mult.pow(InfinityDimension(tier).amount.clampMin(1).log10());
+      mult = mult.pow(DC.D1.div(InfinityDimension(tier).amount.clampMin(1).log10().clampMin(1)));
     }
 
     mult = stackedLogPower(mult, 1, CelestialStudy(64).effectOrDefault(1));

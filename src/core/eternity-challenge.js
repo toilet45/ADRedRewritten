@@ -1,6 +1,7 @@
 import { DC } from "./constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { GameMechanicState } from "./game-mechanics";
+import { blockifyTextAutomator } from "./automator/compiler";
 
 export function startEternityChallenge() {
   initializeChallengeCompletions();
@@ -279,6 +280,9 @@ export class EternityChallengeState extends GameMechanicState {
   exit(isRestarting) {
     if (Player.isInAntimatterChallenge) {
       Player.antimatterChallenge.exit();
+    }
+    if (player.challenge.eternity.current > 12 && !isRestarting) {
+      respecCelestialStudies();
     }
     player.challenge.eternity.current = 0;
     if (!isRestarting) player.respec = true;
