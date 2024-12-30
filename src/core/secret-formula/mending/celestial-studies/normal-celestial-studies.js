@@ -140,7 +140,7 @@ export const normalCelestialStudies = [
     requirement: [44],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Antimatter Dimensions gain a power effect based on Power Glyph Sacrifice`,
-    effect: () => player.reality.glyphs.sac.power.log10().root(3).div(1.5).clampMax(9).add(1),
+    effect: () => player.reality.glyphs.sac.power.clampMin(1).log10().root(3).div(1.5).clampMax(9).add(1),
     formatEffect: value => formatPow(value, 2, 1)
   },
   {
