@@ -261,8 +261,17 @@ export const Ra = {
   unlocks,
   pets,
   remembrance: {
-    multiplier: 5,
-    nerf: 0.5,
+    get multiplier() {
+      if (RaUpgrade(22).canBeApplied) return 250;
+      if (RaUpgrade(16).canBeApplied) return 75;
+      if (RaUpgrade(11).canBeApplied) return 15;
+      return 5;
+    },
+    get nerf() {
+      if (RaUpgrade(16).canBeApplied) return 1;
+      if (RaUpgrade(11).canBeApplied) return 0.7;
+      return 0.5;
+    },
     requiredLevels: 20,
     get isUnlocked() {
       return Ra.totalPetLevel >= this.requiredLevels;

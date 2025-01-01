@@ -350,6 +350,12 @@ export function mendingReset() {
   if (!MendingUpgrade(18).isBought) {
     Tab.dimensions.antimatter.show();
   }
+  if (Player.automatorUnlocked && AutomatorBackend.state.forceRestart) {
+    // Make sure to restart the current script instead of using the editor script - the editor script might
+    // not be a valid script to run; this at best stops it from running and at worst causes a crash
+    AutomatorBackend.start(AutomatorBackend.state.topLevelScript);
+    AutomatorBackend.restart();
+  }
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 

@@ -24,6 +24,7 @@ export default {
       currentChars: 0,
       hasUndo: false,
       hasRedo: false,
+      tierFour: false
     };
   },
   computed: {
@@ -85,6 +86,7 @@ export default {
       this.currentChars = AutomatorData.singleScriptCharacters();
       this.hasUndo = AutomatorData.undoBuffer.length > 0;
       this.hasRedo = AutomatorData.redoBuffer.length > 0;
+      this.tierFour = PlayerProgress.mendingUnlocked();
     },
     rewind: () => AutomatorBackend.restart(),
     play() {
@@ -150,7 +152,7 @@ export default {
           @click="repeat"
         />
         <AutomatorButton
-          v-tooltip="'Automatically restart the active script when finishing or restarting a Reality'"
+          v-tooltip="`Automatically restart the active script when finishing or restarting a ${tierFour ? 'Reality or higher reset' : 'Reality'}`"
           class="fa-reply"
           :class="{ 'c-automator__button--active' : forceRestartOn }"
           @click="restart"

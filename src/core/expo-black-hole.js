@@ -224,7 +224,7 @@ class ImaginaryBlackHoleState {
 
   get isActive() {
     return this.isCharged && (this.id === 1 || ImaginaryBlackHole(this.id - 1).isActive) &&
-    !Pelle.isDisabled("blackhole") && !BlackHoles.areNegative;
+    !Pelle.isDisabled("blackhole") && !BlackHoles.areNegative && !BlackHoles.arePaused;
   }
 
   // Proportion of active time, scaled 0 to 1

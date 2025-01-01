@@ -67,6 +67,9 @@ export const Laitela = {
   get darkMatterMultRatio() {
     return (this.celestial.darkMatterMult.add(this.darkMatterMultGain)).div(this.celestial.darkMatterMult);
   },
+  get darkMatterMultRatioManual() {
+    return (this.celestial.darkMatterMult.add(this.darkMatterMultGain.times(1500))).div(this.celestial.darkMatterMult);
+  },
   get annihilationUnlocked() {
     return ImaginaryUpgrade(19).isBought;
   },
@@ -76,9 +79,10 @@ export const Laitela = {
   get canAnnihilate() {
     return Laitela.annihilationUnlocked && Currency.darkMatter.gte(this.annihilationDMRequirement);
   },
-  annihilate(force) {
+  annihilate(force, auto = false) {
     if (!force && !this.canAnnihilate) return false;
-    this.celestial.darkMatterMult = this.celestial.darkMatterMult.add(this.darkMatterMultGain);
+    this.celestial.darkMatterMult = this.celestial.darkMatterMult.add(this.darkMatterMultGain.times(
+      Ra.unlocks.annihilationGain.canBeApplied && !auto ? 1500 : 1));
     DarkMatterDimensions.reset();
     Laitela.quotes.annihilation.show();
     Achievement(176).unlock();

@@ -236,7 +236,7 @@ export default {
         />
       </div>
     </template>
-    <template v-if="isExpoUnlocked">
+    <template v-if="isExpoUnlocked && isUnlocked">
       Black Hole 3 is only active if Black Holes 1 and 2 are not paused or inverted
       <div :class="gridStyle()">
         <ImaginaryBlackHoleUpgradeRow

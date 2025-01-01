@@ -25,6 +25,9 @@ export class Galaxy {
     let amnt = new Decimal(800);
     if (RealityUpgrade(21).isBought) amnt = DC.E5;
     amnt = amnt.add(MendingUpgrade(11).effectOrDefault(0));
+    if (Ra.isRunning) {
+      amnt.add(Effects.sum(RaUpgrade(17)));
+    }
     return amnt;
   }
 

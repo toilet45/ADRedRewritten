@@ -12,6 +12,7 @@ export default {
       capRM: new Decimal(),
       scaleTime: new Decimal(),
       capStr: "",
+      visibleRows: 0
     };
   },
   computed: {
@@ -20,11 +21,15 @@ export default {
       will not be disabled and may still cause requirements to be failed.`,
   },
   methods: {
+    addExtraUpgradeRows() {
+      return Ra.unlocks.lockedImaginaryUpgUnlock.canBeApplied ? 6 : 5;
+    },
     update() {
       this.baseRMCap.copyFrom(MachineHandler.baseRMCap);
       this.capRM.copyFrom(MachineHandler.hardcapRM);
       this.scaleTime.copyFrom(MachineHandler.scaleTimeForIM);
       this.capStr = formatMachines(MachineHandler.hardcapRM, MachineHandler.currentIMCap);
+      this.visibleRows = this.addExtraUpgradeRows();
     },
     id(row, column) {
       return (row - 1) * 5 + column - 1;
@@ -60,7 +65,7 @@ export default {
       </span>
     </div>
     <div
-      v-for="row in 6"
+      v-for="row in visibleRows"
       :key="row"
       class="l-reality-upgrade-grid__row"
     >

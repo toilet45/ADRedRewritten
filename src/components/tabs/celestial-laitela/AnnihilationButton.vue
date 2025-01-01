@@ -6,12 +6,15 @@ export default {
       darkMatter: new Decimal(0),
       darkMatterMult: new Decimal(),
       darkMatterMultGain: new Decimal(),
+      darkMatterMultGainManual: new Decimal(),
       autobuyerUnlocked: false,
       annihilationButtonVisible: false,
       matterRequirement: 0,
       darkMatterMultRatio: 0,
+      darkMatterMultRatioManual: 0,
       autoAnnihilationInput: new Decimal(),
       isEnabled: true,
+      lai15: false
     };
   },
   computed: {
@@ -28,7 +31,10 @@ export default {
       this.annihilationButtonVisible = Laitela.canAnnihilate || this.autobuyerUnlocked;
       this.matterRequirement = Laitela.annihilationDMRequirement;
       this.darkMatterMultRatio = Laitela.darkMatterMultRatio;
+      this.darkMatterMultRatioManual = Laitela.darkMatterMultRatioManual;
       this.isEnabled = player.auto.annihilation.isActive;
+      this.darkMatterMultGainManual = this.darkMatterMultGain.times(1500);
+      this.lai15 = Ra.unlocks.annihilationGain.canBeApplied;
     },
     annihilate() {
       Laitela.annihilate();
@@ -67,11 +73,10 @@ export default {
       <br>
       <br>
       Annihilation will reset your Dark Matter and Dark Matter Dimension amounts, but also add
-      <b>+{{ format(darkMatterMultGain, 2, 2) }}</b> to your Annihilation multiplier.
+      <b>+{{ format(darkMatterMultGain, 2, 2) }}</b><span v-if="lai15"> (<b>+{{ format(darkMatterMultGainManual, 2, 2) }} if manual</b>) </span>to your Annihilation multiplier.
       <br>
-      (<b>{{ formatX(darkMatterMultRatio, 2, 2) }}</b> from previous multiplier)
+      (<b>{{ formatX(darkMatterMultRatio, 2, 2) }}</b><span v-if="lai15"> (<b>{{ formatX(darkMatterMultRatioManual, 2, 2) }} if manual</b>) </span> from previous multiplier)
       <span v-if="autobuyerUnlocked">
-        <br>
         <br>
         Auto-Annihilate when adding
         <input

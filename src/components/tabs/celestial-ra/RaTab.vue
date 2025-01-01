@@ -27,7 +27,8 @@ export default {
       isRunning: false,
       memoryBoosts: "",
       shopUnlocked: false,
-      raPoints: new Decimal()
+      raPoints: new Decimal(),
+      shopRows: 0,
     };
   },
   computed: {
@@ -109,6 +110,12 @@ export default {
     isDoomed: () => Pelle.isDoomed,
   },
   methods: {
+    currentShopRows() {
+      let x = 2;
+      if (Ra.unlocks.raShopNewRow.canBeApplied) x += 1;
+      if (Ra.unlocks.raShopFinalRow.canBeApplied) x += 1;
+      return x;
+    },
     id(row, column) {
       return (row - 1) * 6 + column - 1;
     },
@@ -126,6 +133,7 @@ export default {
       this.memoryBoosts = Ra.memoryBoostResources;
       this.shopUnlocked = Ra.unlocks.raShopUnlock.canBeApplied;
       this.raPoints.copyFrom(Ra.pets.ra.memories);
+      this.shopRows = this.currentShopRows();
     },
     startRun() {
       if (this.isDoomed) return;
@@ -230,7 +238,7 @@ export default {
         You have {{ format(raPoints, 2) }} Ra Memories
       </div>
       <div
-        v-for="row in 4"
+        v-for="row in shopRows"
         :key="row"
         class="l-reality-upgrade-grid__row"
       >
