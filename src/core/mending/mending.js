@@ -53,7 +53,7 @@ function updateMendingRecords(MvRgain) {
   player.records.thisMend.realTime = DC.D0;
   player.records.thisMend.trueTime = 0;
 }
-
+// eslint-disable-next-line complexity
 export function mendingReset() {
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_BEFORE);
   if (player.mending.firstMend === 0) {
@@ -141,6 +141,11 @@ export function mendingReset() {
     5: new Decimal(),
   };
   player.reality.upgradeBits = MendingMilestone.nine.isReached ? 67108863 : 0;
+  if (MendingMilestone.nine.isReached) {
+    for (let i = 6; i < 26; i++) {
+      RealityUpgrade(i).onPurchased();
+    }
+  }
   player.reality.upgReqs = 0;
   player.reality.imaginaryUpgradeBits = 0;
   player.reality.imaginaryUpgReqs = 0;

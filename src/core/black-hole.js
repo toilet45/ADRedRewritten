@@ -349,6 +349,7 @@ export const BlackHoles = {
   unlock() {
     if (!this.canBeUnlocked) return;
     player.blackHole[0].unlocked = true;
+    if (MendingMilestone.nine.isReached) player.blackHole[1].unlocked = true;
     Currency.realityMachines.purchase(100);
     player.records.timePlayedAtBHUnlock = player.records.thisMend.time;
     EventHub.dispatch(GAME_EVENT.BLACK_HOLE_UNLOCKED);

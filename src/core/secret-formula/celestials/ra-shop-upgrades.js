@@ -113,7 +113,7 @@ export const raShopUpgrades = [
     name: "???",
     id: 10,
     cost: new Decimal(1e27),
-    description: "Increase Tickspeed Multiplier in Ra's Reality to x???",
+    description: "???",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -128,9 +128,17 @@ export const raShopUpgrades = [
     name: "???",
     id: 12,
     cost: new Decimal(1e35),
-    description: "???",
-    effect: () => DC.D1,
-    formatEffect: value => formatX(value, 2, 2)
+    description: "Replicanti Galaxy hardcap in Ra is increased based on Celestial levels",
+    effect: () => {
+      let x = Ra.totalPetLevel * 50000;
+      if (x > 10000000) {
+        x /= 100000;
+        x **= 0.2;
+        x *= 10000000;
+      }
+      return x;
+    },
+    formatEffect: value => `+${formatInt(value)}`
   },
   {
     name: "???",

@@ -283,10 +283,12 @@ export const v = {
       name: "Minimum",
       // eslint-disable-next-line no-unused-vars
       description: value => `This goal is unknown.`,
-      values: [6500, 7000, 8000, 9000, 10000],
-      condition: () => V.isRunning && false,
-      currentValue: () => gainedGlyphLevel().actualLevel,
-      formatRecord: x => formatInt(x),
+      // Reach x AM with only 1 1st AD without any purchased time studies
+      values: [1e14, 1e300, 1e300, 1e300, 1e300],
+      condition: () => V.isRunning && AntimatterDimension(1).amount.lt(2) && InfinityDimension(1).amount.eq(0) &&
+        TimeDimension(1).amount.eq(0) && player.requirementChecks.reality.maxStudies <= 0,
+      currentValue: () => Currency.antimatter.value.clampMin(1).log10(),
+      formatRecord: x => format(x, 2, 2),
       shardReduction: tiers => Math.floor(500 * tiers),
       maxShardReduction: () => 500,
       perReductionStep: 5,

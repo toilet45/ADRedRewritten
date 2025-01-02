@@ -95,7 +95,13 @@ export class NormalCelestialStudyState extends CelestialStudyState {
     if (this.isBought || !this.isAffordable || !this.canBeBought) return false;
     if (GameEnd.creditsEverClosed) return false;
     player.celestialstudy.studies.push(this.id);
-    Currency.celestialTheorems.subtract(this.cost);
+    // Don't go into the V CTs if we have enough bought ones
+    if (Currency.celestialTheorems.value.gte(this.cost)) Currency.celestialTheorems.subtract(this.cost);
+    else {
+      const vDebt = this.cost.sub(Currency.celestialTheorems.value);
+      Currency.celestialTheorems.value = new Decimal(0);
+      player.celestials.v.CTSpent = player.celestials.v.CTSpent.add(vDebt);
+    }
     GameCache.celestialStudies.invalidate();
     CelestialStudyTree.commitToGameState([CelestialStudy(this.id)]);
     return true;

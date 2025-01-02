@@ -161,6 +161,7 @@ export const V = {
   displayName: "V",
   possessiveName: "V's",
   spaceTheorems: 0,
+  celestialTheorems: DC.D0,
   checkForUnlocks() {
     for (const unl of VUnlocks.all) {
       if (unl === VUnlocks.vAchievementUnlock) continue;
@@ -195,12 +196,15 @@ export const V = {
   },
   updateTotalRunUnlocks() {
     let sum = 0;
+    let ctSum = DC.D0;
     for (let i = 0; i < player.celestials.v.runUnlocks.length; i++) {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else if (i < 12) sum += player.celestials.v.runUnlocks[i] * 2;
+      else ctSum = ctSum.add(player.celestials.v.runUnlocks[i]);
       //console.log(sum, i < 12)
     }
     this.spaceTheorems = sum;
+    this.celestialTheorems = ctSum;
   },
   reset() {
     player.celestials.v = {
@@ -211,11 +215,17 @@ export const V = {
       STSpent: 0,
       runGlyphs: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
       runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
+      CTSpent: DC.D0
     };
     this.spaceTheorems = 0;
+    respecCelestialStudies(true);
+    this.celestialTheorems = DC.D0;
   },
   get availableST() {
     return V.spaceTheorems - player.celestials.v.STSpent;
+  },
+  get availableCT() {
+    return V.celestialTheorems.minus(player.celestials.v.CTSpent);
   },
   get isRunning() {
     return player.celestials.v.run;

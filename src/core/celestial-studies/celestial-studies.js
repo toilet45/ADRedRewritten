@@ -1,4 +1,5 @@
 import { GameMechanicState } from "../game-mechanics";
+import { V } from "../globals";
 /* IDK if needed rn
 function showSecondPreferredWarning(currTree) {
   const canPickSecond = currTree.allowedDimPathCount === 2 && currTree.currDimPathCount < 2;
@@ -179,11 +180,22 @@ export class CelestialStudyState extends GameMechanicState {
   }
 
   refund() {
-    Currency.celestialTheorems.add(this.cost);
+    if (player.celestials.v.CTSpent.gt(0)) {
+      if (player.celestials.v.CTSpent.sub(this.cost).lt(0)) {
+        const surplus = this.cost.sub(player.celestials.v.CTSpent);
+        player.celestials.v.CTSpent = new Decimal(0);
+        Currency.celestialStudies.add(surplus);
+      }
+      else {
+        V.celestialTheorems.add(this.cost);
+        player.celestials.v.CTSpent = player.celestials.v.CTSpent.sub(this.cost);
+      }
+    }
+    else Currency.celestialTheorems.add(this.cost);
   }
 
   get isAffordable() {
-    return Currency.celestialTheorems.gte(this.cost);
+    return Currency.celestialTheorems.value.add(V.availableCT).gte(this.cost);
   }
 
   get canBeBought() {

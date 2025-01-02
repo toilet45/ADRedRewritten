@@ -129,7 +129,7 @@ export default {
         : TimeSpan.fromSeconds(this.estimateToMax).toStringShort();
     },
     endlesslyCapped() {
-      return this.seenRGcap ? `up to ${formatInt(getSecondaryGlyphEffect("realitygalaxies").mul(1e7))} times` : "endlessly";
+      return this.seenRGcap ? `up to ${formatInt(ReplicantiUpgrade.galaxies.cap)} times` : "endlessly";
     }
   },
   methods: {

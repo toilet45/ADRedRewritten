@@ -20,11 +20,13 @@ export default {
       amCost: new Decimal(),
       ttAmnt: new Decimal(),
       ttCost: new Decimal(),
+      VCelTheorems: new Decimal(),
+      showBought: false
     };
   },
   computed: {
     minimized() {
-      return this.minimizeAvailable && this.shopMinimized;
+      return this.shopMinimized;
     },
     formatCelestialTheoremType() {
       if (this.theoremAmount.gte(1e6)) {
@@ -71,14 +73,16 @@ export default {
     },
     update() {
       this.theoremAmount.copyFrom(Currency.celestialTheorems);
+      this.VCelTheorems = V.availableCT;
       this.totalTimeTheorems.copyFrom(Currency.celestialTheorems.max);
-      this.shopMinimized = player.timestudy.shopMinimized;
+      this.shopMinimized = !Ra.unlocks.celTreeUnlocks.canBeApplied;
       this.hasTTAutobuyer = false;
       this.minimizeAvailable = false;
       this.amAmnt.copyFrom(CelestialTheoremPurchaseType.am.currency);
       this.amCost.copyFrom(CelestialTheoremPurchaseType.am.cost);
       this.ttAmnt.copyFrom(CelestialTheoremPurchaseType.tt.currency);
       this.ttCost.copyFrom(CelestialTheoremPurchaseType.tt.cost);
+      this.showBought = this.minimizeAvailable;
     },
     toggleTTgen() {
       this.invertTTgenDisplay = !this.invertTTgenDisplay;
@@ -101,8 +105,16 @@ export default {
           <i class="fas fa-cog" />
         </button>
         <p class="timetheorems">
-          <span class="c-ct-amount">
-            {{ quantifyInt("Celestial Theorem", theoremAmount, 2, 0, formatCelestialTheoremType) }}
+          <span
+            v-if="!showBought"
+            class="c-ct-amount">
+            {{ quantifyInt("Celestial Theorem", VCelTheorems, 2, 0, formatCelestialTheoremType) }}
+          </span>
+          <span
+            v-else
+            class="c-ct-amount"
+          >
+           {{ formatInt(VCelTheorems) }} + {{ quantifyInt("Celestial Theorem", theoremAmount, 2, 0, formatCelestialTheoremType) }}
           </span>
         </p>
         <div class="l-load-tree-area">

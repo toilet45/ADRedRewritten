@@ -5,7 +5,7 @@ export const ecCelestialStudies = [
   {
     id: 13,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [22],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Eternity Challenge Completions",
