@@ -447,8 +447,10 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 }
 
 export function getRealTimeSpeedupFactor() {
-  if (EternityChallenge(12).isRunning) return new Decimal(1);
-  return ImaginaryBlackHole(1).isActive ? ImaginaryBlackHole(1).rtPowerUpgrade.value : new Decimal(1);
+  if (EternityChallenge(12).isRunning || !ImaginaryBlackHole(1).isActive) return new Decimal(1);
+  let x = ImaginaryBlackHole(1).rtPowerUpgrade.value;
+  x = x.timesEffectOf(RaUpgrade(13));
+  return x;
 }
 export function getGameSpeedupPreExpo() {
   return getGameSpeedupFactor().pow(Decimal.div(1, getExpoSpeedupFactor()));

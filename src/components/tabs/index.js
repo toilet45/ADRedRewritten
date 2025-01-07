@@ -23,6 +23,7 @@ import LaitelaTab from "./celestial-laitela/LaitelaTab";
 import MendingMilestonesTab from "./mending-milestones/MendingMilestonesTab";
 import MendingUpgradesTab from "./mending-upgrades/MendingUpgradesTab";
 import MultiplierBreakdownTab from "./statistics/MultiplierBreakdownTab";
+import MultiversalDimensionsTab from "./multiversal-dimensions/MultiversalDimensionsTab";
 import NormalAchievementsTab from "./normal-achievements/NormalAchievementsTab";
 import NormalChallengesTab from "./normal-challenges/NormalChallengesTab";
 import OptionsGameplayTab from "./options-gameplay/OptionsGameplayTab";
@@ -94,7 +95,8 @@ const TabComponents = {
   MendingMilestonesTab,
   TimeExpansionTab,
   UniversalDamageTab,
-  CelestialStudiesTab
+  CelestialStudiesTab,
+  MultiversalDimensionsTab
 };
 
 export default TabComponents;

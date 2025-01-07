@@ -342,7 +342,11 @@ export function mendingReset() {
     iMCapSet: [],
     laitelaSet: [],
   };
-  if (!MendingMilestone.ten.isReached) {
+  if (MendingMilestone.ten.isReached) {
+    for (const achievement of Achievements.preMend) {
+      achievement.unlock();
+    }
+  } else {
     lockAchievementsOnMend();
   }
   InfinityChallenges.clearCompletions();

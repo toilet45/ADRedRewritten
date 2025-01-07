@@ -11,10 +11,11 @@ export const replicanti = {
     overlay: ["Ξ"],
   },
   achievement: {
-    name: "Achievement 134",
+    name: "Achievements",
     // This is explicitly 2 in the replicanti code as well, inside of a replicanti amount check
     multValue: 2,
-    isActive: () => Achievement(134).canBeApplied && Replicanti.amount.lte(replicantiCap()) && !Pelle.isDoomed,
+    powValue: () => DC.D1.timesEffectOf(Achievement(193)),
+    isActive: () => (Achievement(134).canBeApplied && Replicanti.amount.lte(replicantiCap()) && !Pelle.isDoomed) || Achievement(193).canBeApplied,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   timeStudy: {

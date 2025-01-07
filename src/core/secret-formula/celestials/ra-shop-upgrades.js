@@ -75,7 +75,7 @@ export const raShopUpgrades = [
     id: 5,
     initialCost: DC.E75,
     costMult: new Decimal(50),
-    formatting: value => `+${format(value, 2, 2)}`,
+    formatting: value => `+${formatInt(value)}`,
     textTemplate: "Recollection and Fragmentation purchase caps are increased by 1 level",
     effect: DC.D1
   }),
@@ -113,8 +113,12 @@ export const raShopUpgrades = [
     name: "???",
     id: 10,
     cost: new Decimal(1e27),
-    description: "???",
-    effect: () => DC.D1,
+    description: "Ra's Memories boost Memory gain of the other Celestials",
+    effect: () => {
+      let x = Ra.pets.ra.memories.clampMin(1).log10().div(2).clampMin(1);
+      if (x.gt(50)) x = x.div(10).pow(0.3).times(50);
+      return x;
+    },
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -144,17 +148,21 @@ export const raShopUpgrades = [
     name: "???",
     id: 13,
     cost: new Decimal(1e40), //Ra 50 is about ~e37
-    description: "???",
-    effect: () => DC.D1,
+    description: "Nameless' Memories increase real time speed at a reduced rate",
+    effect: () => Ra.pets.enslaved.memories.clampMin(1).log10().div(15),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
     name: "???",
     id: 14,
     cost: new Decimal(1e55),
-    description: "???",
-    effect: () => DC.D1,
-    formatEffect: value => formatX(value, 2, 2)
+    description: "V's Memories increase Infinity Power Conversion factor",
+    effect: () => {
+      let x = Ra.pets.ra.memories.clampMin(1).log10().div(15);
+      if (x.gt(5)) x = x.div(5).pow(0.2).times(5);
+      return x;
+    },
+    formatEffect: value => `+${format(value, 2, 2)}`
   },
   {
     name: "???",
@@ -190,7 +198,7 @@ export const raShopUpgrades = [
     name: "???",
     id: 18,
     cost: new Decimal(1e150),
-    description: "???",
+    description: "The left and above upgrades are applied outside of Ra at a reduced rate (/10)",
     effect: () => DC.D1,
     formatEffect: value => formatX(value, 2, 2)
   },

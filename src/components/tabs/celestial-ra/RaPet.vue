@@ -37,6 +37,7 @@ export default {
       nextMemoryChunkUpgradeEstimate: "",
       maxMU19Level: 0,
       mu19bought: false,
+      secondSources: false
     };
   },
   computed: {
@@ -62,7 +63,7 @@ export default {
       return this.pet.unlocks;
     },
     chunkTooltip() {
-      return `Based on ${this.pet.chunkGain}`;
+      return `Based on ${this.pet.chunkGain}` + (this.secondSources ? ` AND ${this.pet.secondaryChunkGain}` : ``);
     },
     memoryGainTooltip() {
       return `Based on ${this.pet.memoryGain}`;
@@ -103,6 +104,7 @@ export default {
 
       this.nextMemoryUpgradeEstimate = Ra.timeToGoalString(pet, this.memoryUpgradeCost.sub(this.memories));
       this.nextMemoryChunkUpgradeEstimate = Ra.timeToGoalString(pet, this.chunkUpgradeCost.sub(this.memories));
+      this.secondSources = RaUpgrade(15).canBeApplied;
     },
     nextUnlockLevel() {
       const missingUpgrades = this.pet.unlocks

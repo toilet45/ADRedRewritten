@@ -207,18 +207,16 @@ export const V = {
     this.celestialTheorems = ctSum;
   },
   reset() {
-    player.celestials.v = {
-      unlockBits: 0,
-      run: false,
-      runUnlocks: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      STSpent: 0,
-      runGlyphs: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
-      runRecords: [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
-      CTSpent: DC.D0
-    };
+    player.celestials.v.unlockBits = 0;
+    player.celestials.v.run = false;
+    player.celestials.v.runUnlocks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player.celestials.v.goalReductionSteps = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player.celestials.v.STSpent = 0;
+    player.celestials.v.runGlyphs = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
+    player.celestials.v.runRecords = [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0];
     this.spaceTheorems = 0;
     respecCelestialStudies(true);
+    player.celestials.v.CTSpent = DC.D0;
     this.celestialTheorems = DC.D0;
   },
   get availableST() {

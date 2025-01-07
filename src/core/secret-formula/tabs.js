@@ -37,6 +37,16 @@ export const tabs = [
         id: 2,
         hidable: true,
       },
+      {
+        key: "multiversal",
+        name: "Multiversal Dimensions",
+        hideAt: 2.4,
+        symbol: "<i class='fas fa-staff-snake'></i>",
+        component: "MultiversalDimensionsTab",
+        condition: () => Ra.unlocks.MvDUnlock.canBeApplied,
+        id: 3,
+        hidable: true,
+      },
     ]
   },
   {

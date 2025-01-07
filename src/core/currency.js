@@ -536,3 +536,13 @@ Currency.raPoints = new class extends DecimalCurrency {
   get value() { return player.celestials.ra.pets.ra.memories; }
   set value(value) { player.celestials.ra.pets.ra.memories = value; }
 }();
+
+Currency.galacticShards = new class extends DecimalCurrency {
+  get value() {
+    return player.galacticShards;
+  }
+
+  set value(value) {
+    player.galacticShards = value;
+  }
+}();

@@ -35,6 +35,11 @@ window.player = {
       cost: [DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350][tier],
       amount: DC.D0,
       bought: DC.D0
+    })),
+    multiversal: Array.range(0, 8).map(tier => ({
+      cost: [DC.E24, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX][tier],
+      amount: DC.D0,
+      bought: DC.D0
     }))
   },
   buyUntil10: true,
@@ -884,7 +889,13 @@ window.player = {
       singularityCapIncreases: DC.D0,
       lastCheckedMilestones: DC.D0,
       milestoneGlow: true,
-      damaged: false
+      damaged: false,
+      universalDamage: {
+        credits: {
+          light: DC.D0,
+          dark: DC.D0
+        }
+      }
     },
     pelle: {
       doomed: false,
@@ -1134,7 +1145,8 @@ window.player = {
   },
   softlockModals: {
     mendingUpgradeOne: false
-  }
+  },
+  galacticShards: DC.D0
 };
 
 export const Player = {

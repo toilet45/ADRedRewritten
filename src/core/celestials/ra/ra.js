@@ -75,6 +75,10 @@ class RaPetState extends GameMechanicState {
     return this.config.chunkGain;
   }
 
+  get secondaryChunkGain() {
+    return this.config.secondaryChunkGain;
+  }
+
   get memoryGain() {
     return this.config.memoryGain;
   }
@@ -160,7 +164,11 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryUpgradeCurrentMult() {
-    return Decimal.pow(1.3, this.data.memoryUpgrades).timesEffectOf(RaUpgrade(1));
+    let x = Decimal.pow(1.3, this.data.memoryUpgrades).timesEffectOf(RaUpgrade(1));
+    if (this.name !== "Ra") {
+      x = x.times(RaUpgrade(10).effectOrDefault(1));
+    }
+    return x;
   }
 
   get chunkUpgradeCurrentMult() {

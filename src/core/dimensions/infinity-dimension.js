@@ -444,6 +444,6 @@ export const InfinityDimensions = {
 
   get powerConversionRate() {
     return getAdjustedGlyphEffect("infinityrate").add(7).add(MendingUpgrade(12).effects.ipConversion)
-      .add(PelleUpgrade.infConversion.effectOrDefault(0)).mul(PelleRifts.paradox.milestones[2].effectOrDefault(1));
+      .add(PelleUpgrade.infConversion.effectOrDefault(0)).add(RaUpgrade(14).effectOrDefault(0)).mul(PelleRifts.paradox.milestones[2].effectOrDefault(1));
   }
 };

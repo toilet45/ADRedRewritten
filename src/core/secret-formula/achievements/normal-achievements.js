@@ -1338,7 +1338,7 @@ export const normalAchievements = [
     // Weirdly specific reward? Yes, its V's ST bonus because we forgot to disable it
     // when balancing Pelle and only realised too late.
     get reward() { return `All Antimatter Dimensions are raised to ${formatPow(1.0812403840463596, 0, 3)}`; },
-    effect: 1.0812403840463596
+    effect: () => Pelle.isDoomed ? 1.0812403840463596 : 1,
   },
   {
     id: 184,
@@ -1372,7 +1372,7 @@ export const normalAchievements = [
       return `Increase the multiplier per repeatable Dilated Time
       multiplier upgrade by ${formatX(1.35, 0, 2)}.`;
     },
-    effect: 1.35
+    effect: () => Pelle.isDoomed ? 1.35 : 1,
   },
   {
     id: 188,
@@ -1405,8 +1405,10 @@ export const normalAchievements = [
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return "TBD";
-    }
+      return `Replicanti replicates faster based on Ra's Memories`;
+    },
+    effect: () => Ra.pets.ra.memories.clampMin(1).log10().clampMin(1).log10().clampMin(1).pow(0.1),
+    formatEffect: value => `${formatPow(value, 2, 2)}`
   },
   {
     id: 194,
@@ -1417,10 +1419,10 @@ export const normalAchievements = [
   },
   {
     id: 195,
-    name: "???",
-    description: "something about hard Teresa",
-    checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    name: "Are we really reusing this joke?",
+    description: "Reach a 1.79e308 Glyph Sacrifice cap",
+    checkRequirement: () => Teresa.hardRunRewardPower.gte(new Decimal(Number.MAX_VALUE).log10().div(100)),
+    checkEvent: GAME_EVENT.REALITY_RESET_AFTER
   },
   {
     id: 196,

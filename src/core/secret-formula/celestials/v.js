@@ -284,7 +284,7 @@ export const v = {
       // eslint-disable-next-line no-unused-vars
       description: value => `This goal is unknown.`,
       // Reach x AM with only 1 1st AD without any purchased time studies
-      values: [1e14, 1e300, 1e300, 1e300, 1e300],
+      values: [1e14, 1e28, 1e35, 1e42, 1e50],
       condition: () => V.isRunning && AntimatterDimension(1).amount.lt(2) && InfinityDimension(1).amount.eq(0) &&
         TimeDimension(1).amount.eq(0) && player.requirementChecks.reality.maxStudies <= 0,
       currentValue: () => Currency.antimatter.value.clampMin(1).log10(),
