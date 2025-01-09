@@ -149,7 +149,7 @@ export const raShopUpgrades = [
     id: 13,
     cost: new Decimal(1e40), //Ra 50 is about ~e37
     description: "Nameless' Memories increase real time speed at a reduced rate",
-    effect: () => Ra.pets.enslaved.memories.clampMin(1).log10().div(15),
+    effect: () => Ra.pets.enslaved.memories.clampMin(1).log10().clampMin(1).div(15).clampMin(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {

@@ -94,7 +94,7 @@ export function getDimensionFinalMultiplierUncached(tier) {
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
 
-  if (multiplier.gt(DC.BIMAX)) {
+  if (multiplier.gt(ADInstabilityStart())) {
     // Equal to 10^(log(x)/9e15)^(log^2(log(x)/9e15)^-1/3)
     // THIS AFFECTS ALL ANTIMATTER DIMENSIONS. BE EXTREMELY CAUTION WHEN TWEAKING
     // THIS IS A VERY POWERFUL SOFTCAP AND SMALL CHANGES CAN CAUSE OOM^3 OF CHANGE
@@ -102,6 +102,49 @@ export function getDimensionFinalMultiplierUncached(tier) {
     const log2adjMult = adjMult.log10().log10();
     multiplier = Decimal.pow10(adjMult.pow(log2adjMult.cbrt().recip()).mul(9e15));
   }
+  return multiplier;
+}
+
+export function ADInstabilityStart() {
+  return DC.BIMAX.powEffectOf(CelestialStudy(111));
+}
+
+export function getDimensionFinalMultiplierUncachedWithoutSC(tier) {
+  if (tier < 1 || tier > 8) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
+  if ((NormalChallenge(10).isRunning && tier > 6) || Enslaved.isExpanded) return DC.D1;
+  if (EternityChallenge(11).isRunning || EternityChallenge(20).isRunning) {
+    return Currency.infinityPower.value.pow(
+      InfinityDimensions.powerConversionRate
+    ).max(1).times(DimBoost.multiplierToNDTier(tier));
+  }
+
+  let multiplier = DC.D1;
+
+  multiplier = applyNDMultipliers(multiplier, tier);
+  multiplier = applyNDPowers(multiplier, tier);
+
+  const glyphDilationPowMultiplier = getAdjustedGlyphEffect("dilationpow");
+  if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
+    multiplier = dilatedValueOf(multiplier.pow(glyphDilationPowMultiplier));
+  } else if (Enslaved.isRunning) {
+    multiplier = dilatedValueOf(multiplier);
+  }
+  multiplier = multiplier.timesEffectOf(DilationUpgrade.ndMultDT);
+
+  if (Effarig.isRunning) {
+    multiplier = Effarig.multiplier(multiplier);
+  } else if (V.isRunning) {
+    multiplier = multiplier.pow(0.5);
+  } else if (Teresa.isRunning && Teresa.hardModeToggled && tier === 1) {
+    multiplier = stackedLogPower(multiplier, 1, 0.75);
+  }
+
+  // This power effect goes intentionally after all the nerf effects and shouldn't be moved before them
+  if (AlchemyResource.inflation.isUnlocked && multiplier.gte(AlchemyResource.inflation.effectValue)) {
+    multiplier = multiplier.pow(1.05);
+  }
+
+  if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
   return multiplier;
 }
 

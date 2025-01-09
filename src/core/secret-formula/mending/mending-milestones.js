@@ -51,15 +51,7 @@ export const mendingMilestones = {
     reward: "Lai'tela autobuyers are permanently unlocked"
   },
   twelve: {
-    mends: 80,
-    reward: "[TBD]"
-  },
-  thirteen: {
     mends: 100,
     reward: () => `Generate Mends based on fastest real-time Mend (Currently: 1 every [time])`
   },
-  fourteen: {
-    mends: 250,
-    reward: "Mending Milestone 100 is now based on fastest game time Mend (if faster than fastest real time Mend)"
-  }
 };

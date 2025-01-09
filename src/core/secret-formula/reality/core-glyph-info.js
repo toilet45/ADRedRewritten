@@ -335,7 +335,7 @@ export const GlyphInfo = {
         const sac = player.reality.glyphs.sac.power.add(added ?? 0);
         const capped = Decimal.min(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
         const base = Decimal.log10(capped.add(1)).div(100);
-        return Decimal.floor(Decimal.pow(base, 1.2).times(750)).times(GlyphInfo.amalgam.sacrificeInfo.effect());
+        return Decimal.floor(Decimal.pow(base, 1.2).times(750)).times(GlyphInfo.amalgam.sacrificeInfo.effect()).powEffectOf(CelestialStudy(51));
       },
       description: amount => {
         const cap = GlyphSacrificeHandler.maxSacrificeForEffects;
@@ -344,8 +344,8 @@ export const GlyphInfo = {
         const nextGalaxyText = amount.lt(cap.log10().mul(7.5))
           ? ` (next at ${format(nextDistantGalaxy, 2, 2)})`
           : "";
-        if (amount.gt(750)) return `Distant Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
-        return `Distant Galaxy scaling starts ${formatInt(amount)} later${amount.gt(750) ? ` and Remote Galaxy scaling starts ${formatInt(amount.sub(750))} later` : ``}
+        if (amount.gt(750) && !CelestialStudy(51).isBought) return `Distant Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
+        return `Distant Galaxy scaling starts ${formatInt(amount)} later${amount.gt(750) ? ` and Remote Galaxy scaling starts ${formatInt(amount.div(10))} later` : ``}
         ${nextGalaxyText}`;
       },
       cap: () => GlyphSacrificeHandler.maxSacrificeForEffects

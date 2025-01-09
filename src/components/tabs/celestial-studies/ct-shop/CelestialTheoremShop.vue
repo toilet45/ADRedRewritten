@@ -82,7 +82,7 @@ export default {
       this.amCost.copyFrom(CelestialTheoremPurchaseType.am.cost);
       this.ttAmnt.copyFrom(CelestialTheoremPurchaseType.tt.currency);
       this.ttCost.copyFrom(CelestialTheoremPurchaseType.tt.cost);
-      this.showBought = this.minimizeAvailable;
+      this.showBought = Ra.unlocks.celTreeUnlocks.canBeApplied;
     },
     toggleTTgen() {
       this.invertTTgenDisplay = !this.invertTTgenDisplay;

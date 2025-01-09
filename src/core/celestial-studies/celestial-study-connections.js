@@ -77,11 +77,11 @@ CelestialStudy.allConnections = (function() {
     [CS(81), EC(16), () => val < 9],
 
     [CS(91), EC(17), () => val < 10],
-    [CS(92), CS(102), () => val < 10],
+    [CS(92), CS(101), () => val < 10],
     [CS(93), EC(18), () => val < 10],
 
     [EC(17), CS(111), () => val < 11],
-    [CS(102), CS(112), () => val < 11],
+    [CS(101), CS(112), () => val < 11],
     [EC(18), CS(113), () => val < 11],
 
     [CS(111), CS(121), () => val < 12],

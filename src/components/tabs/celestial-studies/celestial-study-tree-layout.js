@@ -68,7 +68,7 @@ export default class CelestialStudyTreeLayout {
       normalRow(                     CS(71),   EC(14),   CS(72)                       ),
       normalRow(                     EC(15),   CS(81),   EC(16)                       ),
       normalRow(                     CS(91),   CS(92),   CS(93)                       ),
-      normalRow(                    EC(17),   CS(102),   EC(18)                       ),
+      normalRow(                    EC(17),   CS(101),   EC(18)                       ),
       normalRow(                   CS(111),   CS(112),   CS(113)                      ),
       normalRow(                      null,   CS(121),   null                         ),
       normalRow(                      CS(131),   null,   CS(132)                      ),

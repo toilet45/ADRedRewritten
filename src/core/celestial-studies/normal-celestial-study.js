@@ -141,7 +141,7 @@ CelestialStudy.boughtNormalCS = function() {
  * @returns {Number}
  */
 CelestialStudy.totalVisibleRows = function() {
-  return DC.D6.add(Ra.unlocks.celTreeUnlocks.effectOrDefault(0)).toNumber();//(DC.D6.plusEffectsOf(Ra.unlocks.celTreeUnlocks, EternityChallenge(14).reward)).toNumber();
+  return (DC.D6.plusEffectsOf(Ra.unlocks.celTreeUnlocks, EternityChallenge(14).reward)).toNumber();
 };
 
 /* Not finalized yet

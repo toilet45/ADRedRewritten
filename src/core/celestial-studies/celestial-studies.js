@@ -185,13 +185,11 @@ export class CelestialStudyState extends GameMechanicState {
         const surplus = this.cost.sub(player.celestials.v.CTSpent);
         player.celestials.v.CTSpent = new Decimal(0);
         Currency.celestialStudies.add(surplus);
-      }
-      else {
+      } else {
         V.celestialTheorems.add(this.cost);
         player.celestials.v.CTSpent = player.celestials.v.CTSpent.sub(this.cost);
       }
-    }
-    else Currency.celestialTheorems.add(this.cost);
+    } else Currency.celestialTheorems.add(this.cost);
   }
 
   get isAffordable() {

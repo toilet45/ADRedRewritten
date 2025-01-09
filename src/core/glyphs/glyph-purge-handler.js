@@ -67,7 +67,8 @@ export const GlyphSacrificeHandler = {
     if (Pelle.isDoomed) return;
     // This also needs to be here because this method is called directly from drag-and-drop sacrificing
     if (this.handleSpecialGlyphTypes(glyph)) return;
-    const toGain = this.glyphSacrificeGain(glyph);
+    let toGain = this.glyphSacrificeGain(glyph);
+    if (glyph.type === "infinity") toGain = toGain.pow(CelestialStudy(61).effectOrDefault(1));
     const askConfirmation = !force && player.options.confirmations.glyphSacrifice;
     if (askConfirmation) {
       Modal.glyphSacrifice.show({ idx: glyph.idx, gain: toGain });

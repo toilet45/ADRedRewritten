@@ -25,6 +25,9 @@ export default {
       isDoomed: false,
       antimatter: new Decimal(0),
       antimatterPerSec: new Decimal(0),
+      displayInstability: false,
+      instabilityStart: new Decimal(),
+      scPow: new Decimal()
     };
   },
   methods: {
@@ -37,6 +40,9 @@ export default {
       this.antimatter.copyFrom(Currency.antimatter);
       this.hasRealityButton = PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought;
       if (!this.hasRealityButton) this.antimatterPerSec.copyFrom(Currency.antimatter.productionPerSecond);
+      this.displayInstability = false; //AntimatterDimension(1).multiplier.log10().gt("9e15") && MendingUpgrade(20).isBought;
+      this.instabilityStart = ADInstabilityStart();
+      this.scPow = Decimal.log(getDimensionFinalMultiplierUncached(1), getDimensionFinalMultiplierUncachedWithoutSC(1)).recip();
     },
   },
 };
@@ -48,6 +54,7 @@ export default {
     class="c-prestige-button-container"
   >
     <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
+    <span v-if="displayInstability">Due to Dimensional Instability, your Antimatter Dimension multipliers are being rooted by {{ format(scPow, 3, 3) }} past {{format(instabilityStart, 2, 2)}}</span>
     <div
       v-if="hasRealityButton"
       class="c-reality-container"

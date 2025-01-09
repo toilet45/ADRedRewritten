@@ -28,6 +28,7 @@ export class Galaxy {
     if (Ra.isRunning) {
       amnt.add(Effects.sum(RaUpgrade(17)));
     }
+    // amnt = amnt.add(CelestialStudy(51).isBought ? GlyphInfo.power.sacrificeInfo.effect().div(10) : 0);
     return amnt;
   }
 
