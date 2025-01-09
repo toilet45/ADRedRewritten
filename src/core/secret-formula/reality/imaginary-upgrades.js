@@ -336,12 +336,13 @@ export const imaginaryUpgrades = [
     description: "Unlock Pelle, Celestial of Antimatter",
   },
   rebuyable({
-    name: "???",
+    name: "Perfected Persistance",
     id: 26,
-    initialCost: new Decimal("1F300"),
-    costMult: new Decimal("1F300"),
-    description: () => `???`,
-    effect: 1
+    initialCost: new Decimal("1e35"),
+    costMult: new Decimal("1e5"),
+    description: () => `Increase glyph cap by ${formatX(1e10)} (pre HT)`,
+    effect: DC.E10,
+    isDecimal: true
   }),
   rebuyable({
     name: "???",

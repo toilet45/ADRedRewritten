@@ -691,6 +691,7 @@ export const Glyphs = {
   },
   get sacCap() {
     let x = DC.E100;
+    x = x.mul(ImaginaryUpgrade(26).effectOrDefault(1));
     x = x.pow(Teresa.hardRunRewardPower);
     return x;
   },

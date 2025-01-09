@@ -53,7 +53,7 @@ export class CelestialTheoremPurchaseType {
       const pur = bulk
         ? this.currency.value.div(this.costBase).log(this.costIncrement).sqrt().floor()
         : 1;
-      Currency.celestialTheorems.add(pur);
+      Currency.celestialTheorems.add(pur, true);
       this.add(pur);
       return true;
     }
@@ -62,7 +62,7 @@ export class CelestialTheoremPurchaseType {
       // eslint-disable-next-line max-len
       ? this.currency.value.max(1).log10().max(1).log10().div(this.costBase.log10()).sub(1).log(this.costIncrement).sqrt()
       : 1;
-    Currency.celestialTheorems.add(pur);
+    Currency.celestialTheorems.add(pur, true);
     this.add(pur);
     return true;
   }

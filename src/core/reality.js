@@ -368,8 +368,9 @@ function giveRealityRewards(realityProps) {
   }
 
   if (Teresa.isRunning && Teresa.hardModeToggled) {
-    const current = new Decimal("1e100").pow(Teresa.hardRunRewardPower);
-    const newMultiplier = new Decimal("1e100").pow(Teresa.hardRewardMultiplier(player.antimatter));
+    const base = new Decimal("1e100").mul(ImaginaryUpgrade(26).effectOrDefault(1));
+    const current = base.pow(Teresa.hardRunRewardPower);
+    const newMultiplier = base.pow(Teresa.hardRewardMultiplier(player.antimatter));
     const isHigher = newMultiplier.gt(current);
     const modalText = `You have completed Teresa's Hardened Reality! ${isHigher
       ? `Since you gained more Antimatter, you increased your

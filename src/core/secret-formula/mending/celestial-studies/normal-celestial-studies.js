@@ -148,9 +148,7 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [51],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Infinity Glyph Sacrifice is raised to a power, based on the number of equipped Infinity Glyphs`,
-    effect: () => DC.E4,
-    formatEffect: value => formatPow(value, 2, 1)
+    description: () => `Infinity Glyph Sacrifice becomes a power effect to the ${formatInt(8)}th Infinity Dimension`,
   },
   {
     id: 62,
@@ -158,7 +156,8 @@ export const normalCelestialStudies = [
     requirement: [52],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Glyph Sacrifice is raised to a power, based on the number of equipped Time Glyphs`,
-    effect: () => DC.E4,
+    effect: () => DC.D1.add(Glyphs.active.filter(n => n.type === "time").length)
+      .pow(Decimal.pow(Glyphs.active.filter(n => n.type === "time").length + 3, 3)),
     formatEffect: value => formatPow(value, 2, 1)
   },
   {

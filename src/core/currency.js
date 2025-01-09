@@ -396,8 +396,8 @@ Currency.celestialTheorems = new class extends DecimalCurrency {
 
   get max() { return player.celestialstudy.maxTheorem; }
 
-  add(amount) {
-    player.celestialstudy.maxTheorem = player.celestialstudy.maxTheorem.plus(amount);
+  add(amount, incCap = false) {
+    if (incCap) player.celestialstudy.maxTheorem = player.celestialstudy.maxTheorem.plus(amount.max(0));
     super.add(amount);
   }
 

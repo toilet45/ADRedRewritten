@@ -3,7 +3,8 @@ import { DC } from "../constants";
 export const GlyphSacrificeHandler = {
   // Anything scaling on sacrifice caps at this value, even though the actual sacrifice values can go higher
   get maxSacrificeForEffects() {
-    return DC.E100.pow(Teresa.hardRunCompleted ? Teresa.hardRunRewardPower : 1);
+    return DC.E100.mul(ImaginaryUpgrade(26).effectOrDefault(1))
+      .pow(Teresa.hardRunCompleted ? Teresa.hardRunRewardPower : 1);
   },
   // This is used for glyph UI-related things in a few places, but is handled here as a getter which is only called
   // sparingly - that is, whenever the cache is invalidated after a glyph is sacrificed. Thus it only gets recalculated

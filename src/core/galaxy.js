@@ -28,7 +28,7 @@ export class Galaxy {
     if (Ra.isRunning) {
       amnt.add(Effects.sum(RaUpgrade(17)));
     }
-    // amnt = amnt.add(CelestialStudy(51).isBought ? GlyphInfo.power.sacrificeInfo.effect().div(10) : 0);
+    amnt = amnt.add(CelestialStudy(51).isBought ? GlyphInfo.power.sacrificeInfo.effect().div(10) : 0);
     return amnt;
   }
 
@@ -44,7 +44,7 @@ export class Galaxy {
   static buyableGalaxies(currency, minVal = player.galaxies) {
     let alter = Decimal.mul(GlyphAlteration.isAdded("power") ? getSecondaryGlyphEffect("powerpow") : DC.D1,
       MendingUpgrade(16).effects.agCost);
-    alter = alter.mul(InfinityUpgrade.skipReset1.chargedEffect.effectOrDefault(DC.D1));
+    alter = alter.div(DC.D1.sub(InfinityUpgrade.skipReset1.chargedEffect.effectOrDefault(DC.D0)));
     const dis = Galaxy.costScalingStart;
     const scale = Galaxy.costMult;
     let base = Galaxy.baseCost.sub(Effects.sum(InfinityUpgrade.resetBoost));
@@ -108,8 +108,8 @@ export class Galaxy {
     */
 
     if (Galaxy.requirementAt(Decimal.max(1e6, Galaxy.remoteStart)).amount.lt(currency)) {
-      return Decimal.log(currency.div(Galaxy.requirementAt(Decimal.max(1e6, Galaxy.remoteStart))).div(alter), 1.008)
-        .add(Decimal.max(1e6, Galaxy.remoteStart)).floor().max(minVal);
+      const start = Decimal.max(1e6, Galaxy.remoteStart);
+      return Decimal.log(currency.div(Galaxy.requirementAt(start).amount).div(alter), 1.008).add(start).floor().max(minVal);
     }
     // Ignore BBBS' warning, even though its theoretically quite dangerous
     // We can do this because at most, 1e6 galaxies of dimension would be put into this
