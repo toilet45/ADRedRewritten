@@ -89,6 +89,9 @@ export function mendingReset() {
   Pelle.reset();
   player.isGameEnd = false;
 
+  player.celestials.enslaved.expanded = false;
+  player.celestials.laitela.damaged = false;
+
   // Reality (Tier 3)
   const protectedSlots = player.reality.glyphs.protectedRows;
   player.reality.glyphs.protectedRows = 0;

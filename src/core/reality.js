@@ -143,12 +143,17 @@ export function simulatedRealityCount(advancePartSimCounters) {
  * Triggered when the user clicks the reality button. This triggers the glyph selection
  * process, if applicable. Auto sacrifice is never triggered.
  */
-export function requestManualReality(expand = false) {
-  if (GlyphSelection.active || !isRealityAvailable()) return;
+export function requestManualReality(specialReality = 0) {
+  if ((GlyphSelection.active || !isRealityAvailable()) && specialReality <= 0) return;
   if (GameEnd.creditsEverClosed) return;
-  if (expand) {
-    // TODO seperate cases for TE and UD
-    return;
+  switch (specialReality) {
+    case 1: {
+      startManualReality(false);
+      player.celestials.enslaved.expanded = true;
+      Quotes.enslaved.expansion.show();
+      return;
+    }
+    default:
   }
   if (player.options.confirmations.glyphSelection || ui.view.shiftDown) {
     Modal.reality.show();
@@ -753,6 +758,9 @@ export function finishProcessReality(realityProps) {
   Enslaved.autoReleaseTick = 0;
   player.celestials.enslaved.hasSecretStudy = false;
   player.celestials.laitela.entropy = DC.D0;
+
+  player.celestials.enslaved.expanded = false;
+  player.celestials.laitela.damaged = false;
 
   playerInfinityUpgradesOnReset();
   resetInfinityRuns();

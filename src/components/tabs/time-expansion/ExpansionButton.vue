@@ -28,7 +28,8 @@ export default {
     },
     expand() {
       if (this.creditsClosed) return;
-      requestManualReality(true);
+      if (this.isRunning) beginProcessReality(getRealityProps(true));
+      else requestManualReality(1);
     }
   }
 };

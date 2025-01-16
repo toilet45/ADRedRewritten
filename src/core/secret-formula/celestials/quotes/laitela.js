@@ -134,4 +134,11 @@ export const laitelaQuotes = {
       "The end...",
     ]
   },
+  ud: {
+    id: 10,
+    requirement: () => Laitela.isDamaged,
+    lines: [
+      "*make Hexa fill this so Royal doesn't put a fanfiction in here*"
+    ]
+  }
 };

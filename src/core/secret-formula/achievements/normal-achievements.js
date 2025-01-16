@@ -1414,7 +1414,7 @@ export const normalAchievements = [
     id: 194,
     name: "DOMAIN EXPANSION: FISTFULL OF NAMELESS",
     description: "Expand your Reality",
-    checkRequirement: () => false,
+    checkRequirement: () => Enslaved.isExpanded,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -1428,7 +1428,7 @@ export const normalAchievements = [
     id: 196,
     name: "That's a lotta damage",
     description: "Damage your Universe",
-    checkRequirement: () => false,
+    checkRequirement: () => Laitela.isDamaged,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Dark Matter Dimensions gain a boost based on ???`;

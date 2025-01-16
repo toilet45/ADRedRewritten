@@ -52,7 +52,7 @@ export class CelestialTheoremPurchaseType {
     if (this.id === "tt") {
       const pur = bulk
         ? this.currency.value.div(this.costBase).log(this.costIncrement).sqrt().floor()
-        : 1;
+        : DC.D1;
       Currency.celestialTheorems.add(pur, true);
       this.add(pur);
       return true;
@@ -61,7 +61,7 @@ export class CelestialTheoremPurchaseType {
       // Prayge that this calculation works and that we never have to touch it again (we will)
       // eslint-disable-next-line max-len
       ? this.currency.value.max(1).log10().max(1).log10().div(this.costBase.log10()).sub(1).log(this.costIncrement).sqrt()
-      : 1;
+      : DC.D1;
     Currency.celestialTheorems.add(pur, true);
     this.add(pur);
     return true;
@@ -103,7 +103,7 @@ export const CelestialTheorems = {
     return am || tt;
   },
   buyMax() {
-    // const am = CelestialTheoremPurchaseType.am.purchase(true);
+    const am = CelestialTheoremPurchaseType.am.purchase(true);
     const tt = CelestialTheoremPurchaseType.tt.purchase(true);
     return am || tt;
   }

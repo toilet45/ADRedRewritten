@@ -53,7 +53,7 @@ export const ecCelestialStudies = [
   {
     id: 17,
     cost: new Decimal(0),
-    requirement: [93],
+    requirement: [91],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Tickspeed",

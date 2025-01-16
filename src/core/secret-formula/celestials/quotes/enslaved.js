@@ -47,4 +47,13 @@ export const enslavedQuotes = {
       "Freedom from torture... is torture itself.",
     ]
   },
+  expansion: {
+    id: 6,
+    lines: [
+      "You've...returned? Why?",
+      "Behold...",
+      "MY TRUE POWER!!!", //change Nameless' logo to a broken chain (and maybe name to "The Named Ones")
+      "NOW YOU WILL BEAR MY CHAINS."
+    ]
+  }
 };

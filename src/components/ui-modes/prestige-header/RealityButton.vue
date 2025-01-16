@@ -57,6 +57,7 @@ export default {
     },
     classObject() {
       return {
+        "c-expansion-button--unlocked": this.expanded,
         "c-reality-button--unlocked": this.canReality,
         "c-reality-button--locked": !this.canReality,
         "c-reality-button--special": this.showSpecialEffect,
@@ -128,6 +129,10 @@ export default {
       this.expanded = Enslaved.isExpanded;
     },
     handleClick() {
+      if (this.expanded) {
+        beginProcessReality(getRealityProps(true));
+        return;
+      }
       if (this.canReality) {
         requestManualReality();
       }
@@ -160,7 +165,26 @@ export default {
 </script>
 
 <template>
-  <div class="l-reality-button">
+  <div
+    v-if="expanded"
+    class="l-expansion-button"
+  >
+    <button
+      class="c-expansion-button infotooltip"
+      :class="classObject"
+      @click="handleClick"
+    >
+      <div class="l-expansion-button">
+        <div class="c-expansion-button__header">
+          This Reality...too expansive...must escape
+        </div>
+      </div>
+    </button>
+  </div>
+  <div
+    v-else
+    class="l-reality-button"
+  >
     <button
       class="c-reality-button infotooltip"
       :class="classObject"
@@ -208,5 +232,52 @@ export default {
 </template>
 
 <style scoped>
+.l-expansion-button {
+  width: 35rem;
+  height: 6rem;
+}
 
+.t-metro .l-expansion-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.l-expansion-button__contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c-expansion-button__header {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.c-expansion-button {
+  width: 100%;
+  height: 100%;
+  font-family: Typewriter;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: var(--color-background);
+  border-style: solid;
+  border-width: var(--var-border-width, 0.2rem);
+  border-radius: var(--var-border-radius, 0.4rem);
+}
+
+.t-s6 .c-expansion-button,
+.t-s10 .c-expansion-button {
+  background: black;
+}
+
+.c-expansion-button--unlocked {
+  color: var(--color-enslaved--base);
+  border-color: var(--color-enslaved--base);
+  cursor: pointer;
+}
+
+.c-expansion-button--unlocked:hover,
+.c-expansion-button--unlocked.force-hover {
+  color: black;
+  background: var(--color-enslaved--base);
+}
 </style>

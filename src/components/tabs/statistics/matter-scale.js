@@ -148,6 +148,7 @@ export const MatterScale = {
   ],
 
   macroLengths: [
+    { amount: new Decimal(0), name: "undefined" },
     { amount: new Decimal("0.835e-15"), name: "protons" },
     { amount: new Decimal("11.7e-15"), name: "uranium nuclei" },
     { amount: new Decimal("1.06e-10"), name: "hydrogen atoms" },

@@ -443,6 +443,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);
+  if (Enslaved.isExpanded) factor = factor.pow(1.2);
   return factor;
 }
 
@@ -668,7 +669,7 @@ export function gameLoop(passedDiff, options = {}) {
   // behavior of eternity farming.
   preProductionGenerateIP(diff);
 
-  if (!Pelle.isDoomed && !Enslaved.isExpanded) {
+  if (!(Pelle.isDoomed || Enslaved.isExpanded)) {
     passivePrestigeGen();
   }
 

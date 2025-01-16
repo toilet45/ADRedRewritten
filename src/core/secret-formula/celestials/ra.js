@@ -10,7 +10,8 @@ export const ra = {
       secondaryChunkGain: "Infinity Points",
       memoryGain: "current RM",
       requiredUnlock: () => undefined,
-      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.eternityPoints.value.add(1).log10().div(1e4), 3).mul(4),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.eternityPoints.value.add(1).log10().div(1e4), 3).mul(4)
+        .times(RaUpgrade(15).canBeApplied ? Currency.infinityPoints.value.clampMin(1).log10().clampMin(1).pow(0.2).clampMin(1) : 1),
       memoryProductionMultiplier: () => Ra.unlocks.teresaXP.effectOrDefault(new Decimal(1))
     },
     effarig: {
@@ -21,7 +22,17 @@ export const ra = {
       secondaryChunkGain: "average of Glyph Sacrifice effects",
       memoryGain: "best Glyph level",
       requiredUnlock: () => Ra.unlocks.effarigUnlock,
-      rawMemoryChunksPerSecond: () => Decimal.pow(Effarig.shardsGained, 0.1).mul(4),
+      rawMemoryChunksPerSecond: () => {
+        let nonZero = 0;
+        let secondaryEffectVal = new Decimal(1);
+        for (const key of Object.keys(player.reality.glyphs.sac)) {
+          if (player.reality.glyphs.sac[key].gt(0)) {
+            secondaryEffectVal = secondaryEffectVal.add(player.reality.glyphs.sac[key]);
+            nonZero += 1;
+          }
+        }
+        return Decimal.pow(Effarig.shardsGained, 0.1).mul(4).times(RaUpgrade(15).canBeApplied ? (nonZero === 0 ? 1 : secondaryEffectVal.div(nonZero).log10().clampMin(1).times(250)) : 1);
+      },
       memoryProductionMultiplier: () => Ra.unlocks.effarigXP.effectOrDefault(new Decimal(1))
     },
     enslaved: {
@@ -32,7 +43,7 @@ export const ra = {
       secondaryChunkGain: "Gamespeed",
       memoryGain: "total time played",
       requiredUnlock: () => Ra.unlocks.enslavedUnlock,
-      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.timeShards.value.add(1).log10().div(3e5), 2).mul(4),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.timeShards.value.add(1).log10().div(3e5).clampMin(1) , 2).mul(4).times(RaUpgrade(15).canBeApplied ? getGameSpeedupFactor().clampMin(1).log10().times(120).clampMin(1) : 1),
       memoryProductionMultiplier: () => Ra.unlocks.enslavedXP.effectOrDefault(new Decimal(1))
     },
     v: {
@@ -43,7 +54,8 @@ export const ra = {
       secondaryChunkGain: "Time Shards",
       memoryGain: "total Memory levels",
       requiredUnlock: () => Ra.unlocks.vUnlock,
-      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.infinityPower.value.add(1).log10().div(1e7), 1.5).mul(4),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.infinityPower.value.add(1).log10().div(1e7), 1.5).mul(4)
+        .times(RaUpgrade(15).canBeApplied ? Currency.timeShards.value.clampMin(1).log10().clampMin(1).log10().clampMin(1).pow(5) : 1),
       memoryProductionMultiplier: () => Ra.unlocks.vXP.effectOrDefault(new Decimal(1))
     },
     ra: {
@@ -56,7 +68,8 @@ export const ra = {
       // eslint-disable-next-line no-unused-expressions, no-labels, no-unused-labels
       requiredUnlock: () => MendingUpgrade(19).isBought, // I dont wanna write edgecase so this does
       rawMemoryChunksPerSecond: () => Currency.replicanti.value.add(1).log10().add(1).log10().mul(2)
-        .floor().mul(3).pow(4),
+        .floor().mul(3).pow(4)
+        .times(RaUpgrade(15).canBeApplied ? Currency.dilatedTime.value.clampMin(1).log10().times(15).clampMin(1) : 1),
       memoryProductionMultiplier: () => Decimal.root(
         Ra.unlocks.vXP.effectOrDefault(new Decimal(1))
           .mul(Ra.unlocks.enslavedXP.effectOrDefault(new Decimal(1)))
@@ -74,7 +87,7 @@ export const ra = {
       secondaryChunkGain: "Dark Energy",
       memoryGain: "singularities",
       requiredUnlock: () => Ra.unlocks.laiMemoryUnlock,
-      rawMemoryChunksPerSecond: () => player.galaxies.div(100).pow(1.5),
+      rawMemoryChunksPerSecond: () => player.galaxies.div(100).pow(1.5).times(RaUpgrade(15).canBeApplied ? Currency.darkEnergy.value.pow(1 / 12.345).clampMin(1) : 1),
       memoryProductionMultiplier: () => Ra.unlocks.laiXP.effectOrDefault(new Decimal(1))
     },
     pelle: {
@@ -85,7 +98,8 @@ export const ra = {
       secondaryChunkGain: "Generated Galaxies",
       memoryGain: "best AM",
       requiredUnlock: () => Ra.unlocks.pelleMemoryUnlock,
-      rawMemoryChunksPerSecond: () => Currency.antimatter.value.add(1).log10().add(1).log10().mul(4).floor(),
+      rawMemoryChunksPerSecond: () => Currency.antimatter.value.add(1).log10().add(1).log10().mul(4).floor()
+        .times(RaUpgrade(15).canBeApplied ? GalaxyGenerator.generatedGalaxies.clampMin(1).log10().pow(4).clampMin(1) : 1),
       memoryProductionMultiplier: () => Ra.unlocks.pelleXP.effectOrDefault(new Decimal(1))
     }
   },
