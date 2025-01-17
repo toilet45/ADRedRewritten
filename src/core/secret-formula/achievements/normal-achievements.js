@@ -1415,7 +1415,8 @@ export const normalAchievements = [
     name: "DOMAIN EXPANSION: FISTFULL OF NAMELESS",
     description: "Expand your Reality",
     checkRequirement: () => Enslaved.isExpanded,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    reward: `Start Mended Multiverses with Nameless completed`
   },
   {
     id: 195,

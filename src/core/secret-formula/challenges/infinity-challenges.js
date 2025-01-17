@@ -131,4 +131,56 @@ export const infinityChallenges = [
     },
     unlockAM: DC.E28000,
   },
+  {
+    id: 9,
+    description: () => `TBD`,
+    goal: DC.BEMAX,
+    isQuickResettable: false,
+    effect: () => DC.D1,
+    reward: {
+      description: `TBD`,
+      effect: () => DC.D1,
+      formatEffect: value => formatX(value, 2, 2)
+    },
+    unlockAM: DC.E1,
+  },
+  {
+    id: 10,
+    description: () => `TBD`,
+    goal: DC.BEMAX,
+    isQuickResettable: false,
+    effect: () => DC.D1,
+    reward: {
+      description: `TBD`,
+      effect: () => DC.D1,
+      formatEffect: value => formatX(value, 2, 2)
+    },
+    unlockAM: DC.E1,
+  },
+  {
+    id: 11,
+    description: () => `TBD`,
+    goal: DC.BEMAX,
+    isQuickResettable: false,
+    effect: () => DC.D1,
+    reward: {
+      description: `TBD`,
+      effect: () => DC.D1,
+      formatEffect: value => formatX(value, 2, 2)
+    },
+    unlockAM: DC.E1,
+  },
+  {
+    id: 12,
+    description: () => `TBD`,
+    goal: DC.BEMAX,
+    isQuickResettable: false,
+    effect: () => DC.D1,
+    reward: {
+      description: `TBD`,
+      effect: () => DC.D1,
+      formatEffect: value => formatX(value, 2, 2)
+    },
+    unlockAM: DC.E1,
+  }
 ];

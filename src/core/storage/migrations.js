@@ -469,6 +469,9 @@ export const migrations = {
     },
     102: player => {
       player.reality.glyphs.sac.amalgam = new Decimal();
+    },
+    103: player => {
+      player.challenge.infinity.bestTimes = player.challenge.infinity.bestTimes.concat(Array.repeat(new Decimal("1F9e15"), 4));
     }
   },
 

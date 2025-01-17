@@ -131,7 +131,7 @@ export const GameCache = {
 
   challengeTimeSum: new Lazy(() => player.challenge.normal.bestTimes.reduce(Decimal.sumReducer)),
 
-  infinityChallengeTimeSum: new Lazy(() => player.challenge.infinity.bestTimes.reduce(Decimal.sumReducer)),
+  infinityChallengeTimeSum: new Lazy(() => player.challenge.infinity.bestTimes.slice(0, 8).reduce(Decimal.sumReducer)),
 };
 
 EventHub.logic.on(GAME_EVENT.GLYPHS_CHANGED, () => {

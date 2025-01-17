@@ -56,7 +56,7 @@ window.player = {
     },
     infinity: {
       current: 0,
-      bestTimes: Array.repeat(DC.BEMAX, 8),
+      bestTimes: Array.repeat(DC.BEMAX, 12),
       completedBits: 0,
     },
     eternity: {
@@ -457,7 +457,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: DC.D0,
-  version: 102,
+  version: 103,
   infinityPower: DC.D1,
   postC4Tier: 0,
   eternityPoints: DC.D0,

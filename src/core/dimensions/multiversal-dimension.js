@@ -92,12 +92,28 @@ export function updateMultiversalDimensionCosts() {
   }
 }
 
+export function getFreeGalxiesFromMvD() {
+  const shards = Currency.galacticShards.value;
+  return shards.log(1.25).floor();
+}
+
+export function getReqForNextMVGalaxy() {
+  return Decimal.pow(1.25, getFreeGalxiesFromMvD().add(1));
+}
+
+export function getGalaxyPowerFromMvD() {
+  const shards = Currency.galacticShards.value;
+  let x = shards.div(100000);
+  if (x.gt(1)) x = x.pow(0.4);
+  return x;
+}
+
 class MultiversalDimensionState extends DimensionState {
   constructor(tier) {
     super(() => player.dimensions.multiversal, tier);
-    const BASE_COSTS = [null, DC.E24, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX, DC.BEMAX];
+    const BASE_COSTS = [null, DC.E24, DC.E40, DC.E65, DC.E100, DC.E250, DC.E500, DC.E1000, DC.E2000];
     this._baseCost = BASE_COSTS[tier];
-    const COST_MULTS = [null, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300].map(e => (e ? new Decimal(e) : null));
+    const COST_MULTS = [null, 1e6, 1e15, 1e25, 1e50, 1e100, 1e150, 1e200, 1e300].map(e => (e ? new Decimal(e) : null));
     this._costMultiplier = COST_MULTS[tier];
     // eslint-disable-next-line max-len
     const E6000_SCALING_AMOUNTS = [null, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300].map(e => (e ? new Decimal(e) : null));
@@ -148,6 +164,9 @@ class MultiversalDimensionState extends DimensionState {
     const dim = MultiversalDimension(tier);
     // eslint-disable-next-line no-nested-ternary
     const bought = dim.bought;
+    mult = mult.times(Decimal.pow(2, bought.sub(1))).clampMin(1);
+
+    if (tier === 1) mult = mult.timesEffectOf(TimeStudy(74));
 
     if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
       mult = dilatedValueOf(mult);

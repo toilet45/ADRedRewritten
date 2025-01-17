@@ -177,9 +177,11 @@ export const normalTimeStudies = [
     requirement: [61, () => (Perk.studyECRequirement.isBought ||
       (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)) && Ra.unlocks.MvDUnlock.canBeApplied],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: "Put smth here",
-    effect: () => DC.D1,
-    unlocked: () => false
+    description: "Sacrifice affects the 1st Multiversal Dimension with a ludicrously reduced effect",
+    effect: () => Sacrifice.totalBoost.clampMin(1).log10().clampMin(1).log10().clampMin(1),
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied,
+    cap: () => (new Decimal(1e6)),
+    formatEffect: value => formatX(value, 2, 1)
   },
   {
     id: 81,
@@ -218,9 +220,9 @@ export const normalTimeStudies = [
     cost: DC.D5,
     requirement: [74],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Put smth here",
+    description: "Gain free Dimension boosts based on Galactic Shards",
     effect: () => DC.D1,
-    unlocked: () => false
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied
   },
   {
     id: 91,
@@ -261,9 +263,9 @@ export const normalTimeStudies = [
     cost: DC.D5,
     requirement: [84],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Put smth here",
+    description: "Multiversal Dimension multiplier based on Mended Multiverses",
     effect: () => DC.D1,
-    unlocked: () => false
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied
   },
   {
     id: 101,
@@ -303,9 +305,9 @@ export const normalTimeStudies = [
     cost: DC.D5,
     requirement: [94],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Put smth here",
+    description: "Increase Replicanti Galaxy limit based on Galactic Shards",
     effect: () => DC.D1,
-    unlocked: () => false
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied
   },
   {
     id: 111,

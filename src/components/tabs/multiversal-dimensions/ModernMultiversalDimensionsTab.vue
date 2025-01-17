@@ -28,7 +28,10 @@ export default {
       nextDimCapIncrease: new Decimal(0),
       creditsClosed: false,
       isContinuumUnlocked: false,
-      shards: new Decimal(0)
+      shards: new Decimal(0),
+      freeGalaxies: new Decimal(0),
+      galaxyBoost: new Decimal(0),
+      nextGalaxy: new Decimal(0)
     };
   },
   computed: {
@@ -36,7 +39,7 @@ export default {
   },
   methods: {
     update() {
-      this.shardsPerSecond.copyFrom(MultiversalDimension(1).productionPerSecond);
+      this.shardsPerSecond = MultiversalDimension(1).amount.times(MultiversalDimension(1).multiplier);
       // eslint-disable-next-line max-len
       this.incomeType = "Time Shards";
       this.areAutobuyersUnlocked = false;//Autobuyer.timeDimension(1).isUnlocked;
@@ -44,6 +47,9 @@ export default {
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isContinuumUnlocked = false;//Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied;
       this.shards.copyFrom(Currency.galacticShards.value);
+      this.freeGalaxies = getFreeGalxiesFromMvD();
+      this.galaxyBoost = getGalaxyPowerFromMvD();
+      this.nextGalaxy = getReqForNextMVGalaxy();
     },
     maxAll() {
       tryUnlockMultiversalDimensions();
@@ -60,10 +66,10 @@ export default {
   <div class="l-multiversal-dim-tab l-centered-vertical-tab">
     <p>
       You have
-      <span class="c-multiversal-dim-description__accent">{{ formatInt(shards) }}</span> Galactic Shards making
-      all Galaxies <span class="c-multiversal-dim-description__accent">{{ formatPercents(0, 2, 2) }}</span> stronger.
+      <span class="c-multiversal-dim-description__accent">{{ format(shards, 2, 0) }}</span> Galactic Shards making
+      all Galaxies <span class="c-multiversal-dim-description__accent">{{ formatPercents(galaxyBoost, 2, 2) }}</span> stronger and giving <span class="c-multiversal-dim-description__accent">{{ formatInt(freeGalaxies, 2, 2) }}</span> free Multiversal Galaxies (next at <span class="c-multiversal-dim-description__accent">{{ format(nextGalaxy, 2, 2) }}</span> Shards).
       <br>
-      You are gaining <span class="c-multiversal-dim-description__accent">{{ format(shardsPerSecond, 2, 2) }}</span> shards per second (unaffected by game time)
+      You are gaining <span class="c-multiversal-dim-description__accent">{{ format(shardsPerSecond, 2, 2) }}</span> shards per second (unaffected by time speed)
     </p>
     <div class="l-dimensions-container">
       <NewMultiversalDimensionRow
@@ -73,6 +79,7 @@ export default {
         :are-autobuyers-unlocked="areAutobuyersUnlocked"
       />
     </div>
+    Free Multiversal Galaxies from Multiversal Dimensions are capped at x
   </div>
 </template>
 

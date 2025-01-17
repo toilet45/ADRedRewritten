@@ -479,7 +479,8 @@ export function getGameSpeedupForDisplay() {
 export function trueTimeMechanics(trueDiff) {
   // Upgrade multiversal galaxies in player object
   player.mending.multiversalGalaxies = MendingUpgrade(16).effects.galaxies
-    .add(InfinityUpgrade.skipResetGalaxy.chargedEffect.effectOrDefault(0));
+    .add(InfinityUpgrade.skipResetGalaxy.chargedEffect.effectOrDefault(0))
+    .add(getFreeGalxiesFromMvD());
 
   // Ra-Nameless auto-release stored time (once every 5 ticks)
   if (Enslaved.isAutoReleasing) {
@@ -513,6 +514,7 @@ export function realTimeMechanics(realDiff, trueDiff) {
   }
 
   DarkMatterDimensions.tick(realDiff);
+  MultiversalDimensions.tick(new Decimal(trueDiff));
 
   // When storing real time, skip everything else having to do with production once stats are updated
   if (Enslaved.isStoringRealTime) {
@@ -972,7 +974,7 @@ function updateImaginaryMachines(diff) {
 
 function updateTachyonGalaxies() {
   const tachyonGalaxyMult = Effects.max(1, DilationUpgrade.doubleGalaxies);
-  const tachyonGalaxyThreshold = 1000;
+  const tachyonGalaxyThreshold = Ra.unlocks.galaxyCostReduce.canBeApplied ? Infinity : 1000;
   const thresholdMult = getTachyonGalaxyMult();
   player.dilation.baseTachyonGalaxies = Decimal.max(player.dilation.baseTachyonGalaxies,
     DC.D1.plus(Decimal.floor(Decimal.log(Currency.dilatedTime.value.dividedBy(1000), thresholdMult))));

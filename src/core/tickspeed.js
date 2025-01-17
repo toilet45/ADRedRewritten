@@ -59,6 +59,7 @@ export function getTickSpeedMultiplier() {
     PelleRifts.decay.milestones[1]
   );
   effects = effects.mul(MendingUpgrade(16).effects.agPow);
+  effects = effects.times(getGalaxyPowerFromMvD().add(1));
   const hasCS21 = CelestialStudy(21).isBought;
   if (galaxies.lt(3) && !hasCS21) {
     // Magic numbers are to retain balancing from before while displaying

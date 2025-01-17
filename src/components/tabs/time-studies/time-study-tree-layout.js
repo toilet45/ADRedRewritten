@@ -78,10 +78,10 @@ export default class TimeStudyTreeLayout {
       normalRow(                       null,   TS(61),  TS(62)                        ));
     if (type.mvdUnlocked) {
       this.rows.push(
-        normalRow(                 null, TS(71),  TS(72),  TS(73), TS(74)               ),
-        normalRow(                 null, TS(81),  TS(82),  TS(83), TS(84)               ),
-        normalRow(                 null, TS(91),  TS(92),  TS(93), TS(94)               ),
-        normalRow(                 null, TS(101), TS(102), TS(103), TS(104)             ));
+        normalRow(                 TS(71),  TS(72),  TS(73), TS(74)               ),
+        normalRow(                 TS(81),  TS(82),  TS(83), TS(84)               ),
+        normalRow(                 TS(91),  TS(92),  TS(93), TS(94)               ),
+        normalRow(                 TS(101), TS(102), TS(103), TS(104)             ));
     } else {
       this.rows.push(
         normalRow(                      TS(71),  TS(72),  TS(73)                        ),
@@ -90,7 +90,7 @@ export default class TimeStudyTreeLayout {
         normalRow(                      TS(101), TS(102), TS(103)                       ));
     }
     if (type.triadDim) {
-      this.rows.push(normalRow(null, TS(321), TS(322), TS(323), TS(324)));
+      this.rows.push(normalRow(TS(321), TS(322), TS(323), TS(324)));
     }
     this.rows.push(
       normalRow(                       EC(7),  TS(111),  TS(306)                      ),
