@@ -99,8 +99,7 @@ export function getDimensionFinalMultiplierUncached(tier) {
     // THIS AFFECTS ALL ANTIMATTER DIMENSIONS. BE EXTREMELY CAUTION WHEN TWEAKING
     // THIS IS A VERY POWERFUL SOFTCAP AND SMALL CHANGES CAN CAUSE OOM^3 OF CHANGE
     const adjMult = multiplier.log10().div(9e15);
-    const log2adjMult = adjMult.log10().log10();
-    multiplier = Decimal.pow10(adjMult.pow(log2adjMult.cbrt().recip()).mul(9e15));
+    multiplier = Decimal.pow10(adjMult.pow(0.9).mul(9e15));
   }
   return multiplier;
 }

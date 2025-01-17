@@ -18,7 +18,7 @@ export default {
         .map(config => new MendingMilestoneState(config));
     },
     rows() {
-      return Math.ceil(this.milestones.length / 2);
+      return Math.ceil(this.milestones.length / 3);
     }
   },
   methods: {
@@ -26,7 +26,7 @@ export default {
       this.mendCount.copyFrom(Currency.mends.value.floor());
     },
     getMilestone(row, column) {
-      return () => this.milestones[(row - 1) * 2 + column - 1];
+      return () => this.milestones[(row - 1) * 3 + column - 1];
     }
   }
 };
@@ -41,8 +41,8 @@ export default {
       class="l-mend-milestone-grid__row"
     >
       <MendingMilestoneButton
-        v-for="column in 2"
-        :key="row * 2 + column"
+        v-for="column in 3"
+        :key="row * 3 + column"
         :get-milestone="getMilestone(row, column)"
         class="l-mend-milestone-grid__cell"
       />

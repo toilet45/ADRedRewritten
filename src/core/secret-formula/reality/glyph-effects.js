@@ -36,7 +36,8 @@ export const glyphEffects = {
     singleDesc: "Time Dimension power +{value}",
     totalDesc: "Time Dimension multipliers ^{value}",
     shortDesc: "TD power +{value}",
-    effect: (level, strength) => Decimal.pow(level, 0.32).times(Decimal.pow(strength, 0.45).div(75)).add(1.01),
+    effect: (level, strength) => Decimal.pow(level, 0.32).times(Decimal.pow(strength, 0.45).div(75)).add(1.01)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -123,7 +124,8 @@ export const glyphEffects = {
     effect: (level, strength) => {
       const val = Decimal.pow(level, 0.17).times(Decimal.pow(strength, 0.35)).div(100)
         .add(GlyphAlteration.sacrificeBoost("dilation").div(50)).neg().add(1);
-      return val.max(level.mul(strength).div(3.5).log10().mul(2).recip());
+      return val.max(level.mul(strength).div(3.5).log10().clampMin(5)
+        .mul(GlyphAlteration.sacrificeBoost("dilation").log10().mul(2)).recip());
     },
     formatEffect: x => format(x.recip(), 3, 3),
     alteredColor: () => GlyphAlteration.getBoostColor("dilation"),
@@ -170,7 +172,8 @@ export const glyphEffects = {
     totalDesc: "Antimatter Dimension multipliers ^{value} while Dilated",
     genericDesc: "Antimatter Dimensions ^x while Dilated",
     shortDesc: "Dilated AD power +{value}",
-    effect: (level, strength) => Decimal.pow(level, 0.7).times(Decimal.pow(strength, 0.7)).div(25).add(1.1),
+    effect: (level, strength) => Decimal.pow(level, 0.7).times(Decimal.pow(strength, 0.7)).div(25).add(1.1)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 2, 2),
     formatSingleEffect: x => format(x.sub(1), 2, 2),
     combine: GlyphCombiner.addExponents,
@@ -271,7 +274,8 @@ export const glyphEffects = {
     totalDesc: "Infinity Dimension multipliers ^{value}",
     shortDesc: "ID power +{value}",
     effect: (level, strength) => Decimal.pow(level, 0.21).times(Decimal.pow(strength, 0.4)).div(75)
-      .add(GlyphAlteration.sacrificeBoost("infinity").div(50)).add(1.007),
+      .add(GlyphAlteration.sacrificeBoost("infinity").div(50)).add(1.007)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -352,7 +356,8 @@ export const glyphEffects = {
     shortDesc: () => (GlyphAlteration.isAdded("power")
       ? "AD power +{value} and AG cost ×{value2}"
       : "AD power +{value}"),
-    effect: (level, strength) => Decimal.pow(level, 0.2).times(Decimal.pow(strength, 0.4)).div(75).add(1.015),
+    effect: (level, strength) => Decimal.pow(level, 0.2).times(Decimal.pow(strength, 0.4)).div(75).add(1.015)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -492,7 +497,8 @@ export const glyphEffects = {
     totalDesc: "All Dimension multipliers ^{value}",
     genericDesc: "All Dimension multipliers ^x",
     shortDesc: "All Dimension power +{value}",
-    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(500).add(1),
+    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(500).add(1)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -517,7 +523,8 @@ export const glyphEffects = {
     totalDesc: "Time Shard gain ^{value}",
     genericDesc: "Time Shards ^x",
     shortDesc: "Time Shard power +{value}",
-    effect: (level, strength) => (strength.div(3.5)).times(Decimal.pow(level, 0.35)).div(400).add(1),
+    effect: (level, strength) => (strength.div(3.5)).times(Decimal.pow(level, 0.35)).div(400).add(1)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -542,7 +549,8 @@ export const glyphEffects = {
     singleDesc: "All Dimension multipliers ^{value}",
     shortDesc: "All Dimensions ^{value}",
     // Multiplies by 0.734 per glyph
-    effect: level => Decimal.pow(level, 0.035).recip(),
+    effect: level => Decimal.pow(level, 0.035).recip()
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     combine: GlyphCombiner.multiply,
   },
@@ -689,7 +697,8 @@ export const glyphEffects = {
     totalDesc: "Antimatter Dimensions ^{value}",
     shortDesc: "AD ^{value}",
     genericDesc: "Antimatter Dimensions ^x",
-    effect: (level, strength) => strength.mul(level).log10().div(250).add(1),
+    effect: (level, strength) => strength.mul(level).log10().div(250).add(1)
+      .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => formatPow(x.add(1), 3, 3),
     combine: GlyphCombiner.addExponents,
     enabledInDoomed: true,

@@ -244,8 +244,8 @@ export const normalCelestialStudies = [
     requirement: [91, () => EternityChallenge(17).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay Antimatter softcap based on Infinity Points`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => Currency.infinityPoints.value.max(1).log10().max(1).log10().cbrt().add(1),
+    formatEffect: value => formatPow(value, 3, 3)
   },
   {
     id: 112,
@@ -253,8 +253,8 @@ export const normalCelestialStudies = [
     requirement: [101],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay Infinity Point softcap based on Eternity Points`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => Currency.eternityPoints.value.max(1).log10().max(1).log10().pow(2).add(1),
+    formatEffect: value => formatPow(value, 3, 3)
   },
   {
     id: 113,
@@ -262,8 +262,8 @@ export const normalCelestialStudies = [
     requirement: [93, () => EternityChallenge(18).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Delay Eternity Point softcap based on Imaginary Machines`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => Currency.imaginaryMachines.value.max(1).log10().sqrt().add(1),
+    formatEffect: value => formatPow(value, 3, 3)
   },
   {
     id: 121,
