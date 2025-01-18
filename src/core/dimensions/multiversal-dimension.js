@@ -33,32 +33,21 @@ export function toggleAllMultiversalDims() {
   }
 }
 
-export function calcHighestPurchaseableMvD(tier, currency) {
-  const logC = currency.log10();
-  const logBase = MultiversalDimension(tier)._baseCost.log10();
-  let logMult = Decimal.log10(MultiversalDimension(tier)._costMultiplier);
 
-  // TODO: make Hexa figure out scaling
-  return Decimal.max(0, logC.sub(logBase).div(logMult).add(1)).floor();
-
-  throw new Error("calcHighestPurchasableTD reached too far in code");
-}
-
-export function buyMaxMultiversalDimension(tier, portionToSpend = 1, isMaxAll = false) {
-  const canSpend = Currency.mendingPoints.value.times(portionToSpend);
-  const dim = MultiversalDimension(tier);
-  if (canSpend.lt(dim.cost) || dim.bought.gte(MultiversalDimensions.purchaseCap)) return false;
-
-
-  let pur = Decimal.sub(calcHighestPurchaseableMvD(tier, canSpend), dim.bought);
-  pur = pur.clampMin(0).clampMax(MultiversalDimensions.purchaseCap);
-  const cost = dim.nextCost(pur.add(dim.bought).sub(1));
-  if (pur.lte(0)) return false;
-  Currency.mendingPoints.subtract(cost);
-  dim.amount = dim.amount.plus(pur);
-  dim.bought = dim.bought.add(pur);
-  dim.cost = dim.nextCost(dim.bought);
-  return true;
+export function buyMaxMultiversalDimension(tier, portionToSpend = 1, bulk = Infinity) {
+  dimension = MultiversalDimension(tier);
+  const maxBought = dimension.costScale.getMaxBought(
+    Decimal.floor(dimension.bought), Currency.mendingPoints.value.mul(portionToSpend), DC.D1
+  );
+  if (maxBought === null) {
+    return;
+  }
+  let buying = maxBought.quantity;
+  if (buying.gt(bulk)) buying = new Decimal(bulk);
+  dimension.amount = dimension.amount.plus(buying);
+  dimension.bought = dimension.bought.add(buying);
+  Currency.mendingPoints.sub(Decimal.pow10(maxBought.logPrice));
+  Currency.mendingPoints = Currency.mendingPoints.value.max(0);
 }
 
 export function maxAllMultiversalDimensions() {
@@ -74,14 +63,14 @@ export function maxAllMultiversalDimensions() {
 
   // Loop buying the cheapest dimension possible; explicit infinite loops make me nervous
   const purchasableDimensions = MultiversalDimensions.all.filter(d => d.isUnlocked);
-  for (let stop = 0; stop < 1000; stop++) {
+  for (let stop = 0; stop < 50; stop++) {
     const cheapestDim = purchasableDimensions.reduce((a, b) => (b.cost.gte(a.cost) ? a : b));
     if (!buySingleMultiversalDimension(cheapestDim.tier, true)) break;
   }
 }
 
 export function multiversalDimensionCommonMultiplier() {
-  let mult = new Decimal(1);
+  const mult = new Decimal(1);
   return mult;
 }
 
@@ -94,17 +83,17 @@ export function updateMultiversalDimensionCosts() {
 
 export function getFreeGalxiesFromMvD() {
   const shards = Currency.galacticShards.value;
-  return shards.log(1.25).floor();
+  return shards.max(1).log10().pow(1.5).floor();
 }
 
 export function getReqForNextMVGalaxy() {
-  return Decimal.pow(1.25, getFreeGalxiesFromMvD().add(1));
+  return getFreeGalxiesFromMvD().add(1).root(1.5).pow10();
 }
 
 export function getGalaxyPowerFromMvD() {
   const shards = Currency.galacticShards.value;
-  let x = shards.div(100000);
-  if (x.gt(1)) x = x.pow(0.4);
+  let x = shards.max(1).log10().pow(1.5).div(100);
+  if (x.gt(1)) x = x.sub(1).cbrt().add(1);
   return x;
 }
 
@@ -115,38 +104,27 @@ class MultiversalDimensionState extends DimensionState {
     this._baseCost = BASE_COSTS[tier];
     const COST_MULTS = [null, 1e6, 1e15, 1e25, 1e50, 1e100, 1e150, 1e200, 1e300].map(e => (e ? new Decimal(e) : null));
     this._costMultiplier = COST_MULTS[tier];
-    // eslint-disable-next-line max-len
-    const E6000_SCALING_AMOUNTS = [null, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300].map(e => (e ? new Decimal(e) : null));
-    this._e6000ScalingAmount = E6000_SCALING_AMOUNTS[tier];
-    const COST_THRESHOLDS = [DC.NUMMAX, DC.E1300, DC.E6000];
-    this._costIncreaseThresholds = COST_THRESHOLDS;
   }
 
-  /** @returns {Decimal} */
+  get costScale() {
+    return new ExponentialCostScaling({
+      baseCost: this._baseCost,
+      baseIncrease: this._costMultiplier,
+      costScale: DC.D4,
+      scalingCostThreshold: this._baseCost.pow(this.tier / 2 + 2)
+    });
+  }
+
+
+  /**
+   * @returns {Decimal}
+   */
   get cost() {
-    return this.data.cost;
-  }
-
-  /** @param {Decimal} value */
-  set cost(value) { this.data.cost = value; }
-
-  nextCost(bought) {
-    const costMultIncreases = [1, 1.5, 2.2];
-    for (let i = 0; i < this._costIncreaseThresholds.length; i++) {
-      const cost = Decimal.pow(this.costMultiplier.mul(costMultIncreases[i]), bought).times(this.baseCost);
-      if (cost.lt(this._costIncreaseThresholds[i])) return cost;
-    }
-
-    let base = this.costMultiplier;
-    if (this._tier <= 4) base = base.mul(2.2);
-    const exponent = this.e6000ScalingAmount.add((bought.sub(this.e6000ScalingAmount))
-      .times(MultiversalDimensions.scalingPast1e6000));
-    const cost = Decimal.pow(base, exponent).times(this.baseCost);
-    return cost;
+    return this.costScale.calculateCost(this.bought.floor());
   }
 
   get isUnlocked() {
-    return true; //Ra.unlocks.MvDUnlock.canBeApplied;
+    return Ra.unlocks.MvDUnlock.canBeApplied;
   }
 
   get isAvailableForPurchase() {
@@ -168,25 +146,11 @@ class MultiversalDimensionState extends DimensionState {
 
     if (tier === 1) mult = mult.timesEffectOf(TimeStudy(74));
 
-    if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
-      mult = dilatedValueOf(mult);
-    }
-
-    if (Effarig.isRunning) {
-      mult = Effarig.multiplier(mult);
-    } else if (V.isRunning) {
-      mult = mult.pow(0.5);
-    }
-
-    if (Laitela.isDamaged) mult = mult.pow(0.6);
     return mult;
   }
 
   get productionPerSecond() {
-    if ((Laitela.isRunning && this.tier > Laitela.maxAllowedDimension)) {
-      return DC.D0;
-    }
-    let production = this.totalAmount.times(this.multiplier);
+    const production = this.totalAmount.times(this.multiplier);
     return production;
   }
 
@@ -214,14 +178,6 @@ class MultiversalDimensionState extends DimensionState {
 
   get costMultiplier() {
     return this._costMultiplier;
-  }
-
-  get powerMultiplier() {
-    return DC.D4;
-  }
-
-  get e6000ScalingAmount() {
-    return this._e6000ScalingAmount;
   }
 
   get costIncreaseThresholds() {

@@ -69,7 +69,7 @@ export default {
       <span class="c-multiversal-dim-description__accent">{{ format(shards, 2, 0) }}</span> Galactic Shards making
       all Galaxies <span class="c-multiversal-dim-description__accent">{{ formatPercents(galaxyBoost, 2, 2) }}</span> stronger and giving <span class="c-multiversal-dim-description__accent">{{ formatInt(freeGalaxies, 2, 2) }}</span> free Multiversal Galaxies (next at <span class="c-multiversal-dim-description__accent">{{ format(nextGalaxy, 2, 2) }}</span> Shards).
       <br>
-      You are gaining <span class="c-multiversal-dim-description__accent">{{ format(shardsPerSecond, 2, 2) }}</span> shards per second (unaffected by time speed)
+      You are gaining <span class="c-multiversal-dim-description__accent">{{ format(shardsPerSecond, 2, 2) }}</span> shards per second (unaffected by game speed)
     </p>
     <div class="l-dimensions-container">
       <NewMultiversalDimensionRow
@@ -79,7 +79,6 @@ export default {
         :are-autobuyers-unlocked="areAutobuyersUnlocked"
       />
     </div>
-    Free Multiversal Galaxies from Multiversal Dimensions are capped at x
   </div>
 </template>
 

@@ -441,6 +441,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMin(1e-300).clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
+  factor = factor.pow(CelestialStudy(81).effectOrDefault(1));
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);
   if (Enslaved.isExpanded) factor = factor.pow(1.2);
@@ -452,9 +453,6 @@ export function getRealTimeSpeedupFactor() {
   let x = ImaginaryBlackHole(1).rtPowerUpgrade.value;
   x = x.timesEffectOf(RaUpgrade(13));
   return x;
-}
-export function getGameSpeedupPreExpo() {
-  return getGameSpeedupFactor().pow(Decimal.div(1, getExpoSpeedupFactor()));
 }
 
 export function getExpoSpeedupFactor() {
@@ -514,7 +512,7 @@ export function realTimeMechanics(realDiff, trueDiff) {
   }
 
   DarkMatterDimensions.tick(realDiff);
-  MultiversalDimensions.tick(new Decimal(trueDiff));
+  MultiversalDimensions.tick(realDiff);
 
   // When storing real time, skip everything else having to do with production once stats are updated
   if (Enslaved.isStoringRealTime) {

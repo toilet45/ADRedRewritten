@@ -28,7 +28,7 @@ export const ecCelestialStudies = [
   },
   {
     id: 15,
-    cost: new Decimal(0),
+    cost: new Decimal(5),
     requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
@@ -40,7 +40,7 @@ export const ecCelestialStudies = [
   },
   {
     id: 16,
-    cost: new Decimal(0),
+    cost: new Decimal(5),
     requirement: [91],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
@@ -52,7 +52,7 @@ export const ecCelestialStudies = [
   },
   {
     id: 17,
-    cost: new Decimal(0),
+    cost: new Decimal(5),
     requirement: [91],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {

@@ -102,7 +102,15 @@ export const normalTimeStudies = [
     cost: DC.D4,
     requirement: [31],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `All Galaxies give a ${formatX(DC.D1_2, 1, 1)} multiplier to Infinity Points gained`,
+    description: () => `All Galaxies give a ${
+
+      [TS(111), EC(7)],
+      [TS(111), TS(306), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 6)],
+  
+      [TS(111), TS(121)],
+      [TS(111), TS(122)],
+      [TS(111), TS(123)],
+  formatX(DC.D1_2, 1, 1)} multiplier to Infinity Points gained`,
     effect: () => DC.D1_2.pow(player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total).add(player.galaxies)),
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -827,7 +835,7 @@ export const normalTimeStudies = [
     effect: () => [Time.thisMendRealTime.totalMilliseconds.clampMin(1),
       Time.thisMendRealTime.totalMilliseconds.div(1000).clampMin(1).root(4).mul(5)],
     formatEffect: value => `${formatX(value[0], 1, 1)}, ${formatX(value[1], 1, 1)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 10
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11
   },
   {
     id: 321,
@@ -839,7 +847,7 @@ export const normalTimeStudies = [
     description: "Antimatter Dimensions gain a power effect based on Antimatter",
     effect: () => Currency.antimatter.value.max(1).log(10).max(1).log(10).root(5).div(25).add(1),
     formatEffect: value => `${formatPow(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 11
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12
   },
   {
     id: 322,
@@ -851,30 +859,30 @@ export const normalTimeStudies = [
     description: "Infinity Dimensions gain a power effect based on Infinity Points",
     effect: () => Currency.infinityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(40).add(1),
     formatEffect: value => `${formatPow(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 13
   },
   {
     id: 323,
     cost: DC.D0,
     STCost: 12,
-    requirement: [() => Ra.unlocks.celTreeUnlocks.canBeApplied, 103],
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14, 103],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [103],
     description: "Time Dimensions gain a power effect based on Eternity Points",
     effect: () => Currency.eternityPoints.value.max(1).log(10).max(1).log(10).cbrt().div(25).add(1),
     formatEffect: value => `${formatPow(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.celTreeUnlocks.canBeApplied,
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 14,
   },
   {
     id: 324,
     cost: DC.D0,
     STCost: 12,
-    requirement: [() => Ra.unlocks.celTreeUnlocks.canBeApplied, 104],
+    requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15, 104, () => Ra.unlocks.MvDUnlock.canBeApplied],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [104],
     description: "Multiversal Dimensions gain a multiplier based on Multiversal Remains",
     effect: () => Currency.mendingPoints.value.max(1).log10().div(20).add(1).cbrt(),
     formatEffect: value => `${formatX(value, 3, 3)}`,
-    unlocked: () => Ra.unlocks.celTreeUnlocks.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
+    unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 15 && Ra.unlocks.MvDUnlock.canBeApplied
   }
 ];

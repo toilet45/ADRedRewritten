@@ -154,6 +154,11 @@ export default {
     >
       <EternityChallengeBox :challenge="challenge" />
     </ChallengeGrid>
+    <br>
+    <div v-if="hasCelStudies">
+      Some Eternity Challenges provide bonus rewards on certain completions.
+      These bonus rewards can be seen in the how to play modal, under "Bonus EC Rewards"
+    </div>
   </div>
 </template>
 
