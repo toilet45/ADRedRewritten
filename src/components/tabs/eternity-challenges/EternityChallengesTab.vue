@@ -126,6 +126,9 @@ export default {
       <div v-if="unlockedCount > 24"> Eternity Challenge 25 can only be completed once. <br>
       </div>
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
+      <div v-if="unlockedCount > 12">
+        Eternity Challenges 13+ have all "Start with x IP" rewards disabled
+      </div>
     </div>
     <div v-if="!hasECR">
       When you respec out of an unlocked Eternity Challenge, you don't need to redo the secondary requirement<br>

@@ -283,7 +283,7 @@ Currency.infinityPoints = new class extends DecimalCurrency {
   }
 
   get startingValue() {
-    if (Pelle.isDisabled()) return new Decimal();
+    if (Pelle.isDisabled() || player.challenge.eternity.current > 12) return new Decimal();
     return Effects.max(
       new Decimal(),
       Perk.startIP1,

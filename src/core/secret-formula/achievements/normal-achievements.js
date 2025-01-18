@@ -1422,8 +1422,8 @@ export const normalAchievements = [
     id: 195,
     name: "Are we really reusing this joke?",
     description: "Reach a 1.79e308 Glyph Sacrifice cap",
-    checkRequirement: () => Teresa.hardRunRewardPower.gte(new Decimal(Number.MAX_VALUE).log10().div(100)),
-    checkEvent: GAME_EVENT.REALITY_RESET_AFTER
+    checkRequirement: () => Glyphs.sacCap.gte(Number.MAX_VALUE),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
     id: 196,
