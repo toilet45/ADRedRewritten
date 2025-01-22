@@ -102,15 +102,7 @@ export const normalTimeStudies = [
     cost: DC.D4,
     requirement: [31],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `All Galaxies give a ${
-
-      [TS(111), EC(7)],
-      [TS(111), TS(306), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 6)],
-  
-      [TS(111), TS(121)],
-      [TS(111), TS(122)],
-      [TS(111), TS(123)],
-  formatX(DC.D1_2, 1, 1)} multiplier to Infinity Points gained`,
+    description: () => `All Galaxies give a ${formatX(DC.D1_2, 1, 1)} multiplier to Infinity Points gained`,
     effect: () => DC.D1_2.pow(player.dilation.totalTachyonGalaxies.add(Replicanti.galaxies.total).add(player.galaxies)),
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -183,7 +175,7 @@ export const normalTimeStudies = [
     id: 74,
     cost: DC.D5,
     requirement: [61, () => (Perk.studyECRequirement.isBought ||
-      (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)) && Ra.unlocks.MvDUnlock.canBeApplied],
+      (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)) && Ra.unlocks.MvDUnlock.canBeApplied && Ra.unlocks.dimStudyPath.canBeApplied],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     description: "Sacrifice affects the 1st Multiversal Dimension with a ludicrously reduced effect",
     effect: () => Sacrifice.totalBoost.clampMin(1).log10().clampMin(1).log10().clampMin(1),
@@ -230,7 +222,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Gain free Dimension boosts based on Galactic Shards",
     effect: () => DC.D1,
-    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
   },
   {
     id: 91,
@@ -273,7 +265,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Multiversal Dimension multiplier based on Mended Multiverses",
     effect: () => DC.D1,
-    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
   },
   {
     id: 101,
@@ -315,7 +307,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Increase Replicanti Galaxy limit based on Galactic Shards",
     effect: () => DC.D1,
-    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
   },
   {
     id: 111,
