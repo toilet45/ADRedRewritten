@@ -386,7 +386,7 @@ export const InfinityDimensions = {
   },
 
   get capIncrease() {
-    return Decimal.floor(Tesseracts.capIncrease());
+    return Decimal.floor(Tesseracts.capIncrease().timesEffectOf(CelestialStudy(63)));
   },
 
   get totalDimCap() {

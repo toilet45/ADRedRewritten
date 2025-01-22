@@ -77,7 +77,7 @@ export default {
             { type: "distant", function: "quadratic", amount: this.distantStart },
             { type: "remote", function: "exponential", amount: this.remoteStart }
           ];
-          console.log("fuck")
+          // console.log("fuck")
           return `Increased Galaxy cost scaling: ${scalings.sort((a, b) => a.amount.sub(b.amount).toNumber())
             .map(scaling => `${scaling.function} scaling past ${this.formatGalaxies(scaling.amount)} (${scaling.type})`)
             .join(", ").capitalize()}`;
@@ -88,7 +88,7 @@ export default {
           { type: "distant", function: "quadratic", amount: this.distantStart },
           { type: "remote", function: "exponential", amount: this.remoteStart }
         ];
-        console.log("fuck")
+        // console.log("fuck")
         return `Increased Galaxy cost scaling: ${scalings.sort((a, b) => a.amount.sub(b.amount).toNumber())
           .map(scaling => `${scaling.function} scaling past ${this.formatGalaxies(scaling.amount)} (${scaling.type})`)
           .join(", ").capitalize()}`;
@@ -117,7 +117,7 @@ export default {
       // eslint-disable-next-line max-len
       this.distantStart.copyFrom(EternityChallenge(5).isRunning || EternityChallenge(20).isRunning ? new Decimal() : Galaxy.costScalingStart);
       this.remoteStart.copyFrom(Galaxy.remoteStart);
-      console.log(this.costScalingText)
+      // console.log(this.costScalingText)
       this.lockText = Galaxy.lockText;
       this.canBulkBuy = EternityMilestone.autobuyMaxGalaxies.isReached;
       this.creditsClosed = GameEnd.creditsEverClosed;

@@ -227,10 +227,14 @@ export function mendingReset() {
   player.bankedEternities = DC.D0;
   player.eternityUpgrades.clear();
   player.totalTickGained = DC.D0;
-  player.eternityChalls = {};
+  for (let i = 1; i < 26; i++) {
+    EternityChallenge(i).completions = 0;
+  }
   player.challenge.eternity.current = 0;
-  player.challenge.eternity.unlocked = 0;
-  player.challenge.eternity.requirementBits = 0;
+  if (player.challenge.eternity.unlocked < 13) {
+    player.challenge.eternity.unlocked = 0;
+    player.challenge.eternity.requirementBits = 0;
+  }
   player.respec = false;
   player.eterc8ids = 50;
   player.eterc8repl = 40;

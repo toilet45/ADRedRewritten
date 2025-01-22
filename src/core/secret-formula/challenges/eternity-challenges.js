@@ -294,9 +294,9 @@ export const eternityChallenges = [
     id: 13,
     description: () => `IP gain exponent is raised ^${format(0.075, 3, 3)}.
     Gamespeed does not affect Passive IP gain`,
-    goal: DC.E100,
+    goal: DC.E1300,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goalIncrease: DC.E200,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -313,9 +313,9 @@ export const eternityChallenges = [
     id: 14,
     description: () => `1st Antimatter Dimension Production exponent ^${format(0.025, 3, 3)}.
     Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
-    goal: DC.E100,
-    pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goal: DC.E35,
+    pelleGoal: DC.BIMAX,
+    goalIncrease: DC.E5,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -332,9 +332,9 @@ export const eternityChallenges = [
     id: 15,
     description: () => `Dimension multipliers are reduced by the number you have. IP gain is log10.
     Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
-    goal: DC.E100,
+    goal: DC.E40,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goalIncrease: DC.E10,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -353,9 +353,9 @@ export const eternityChallenges = [
     by Antimatter, ID multipliers by IP and TD multipliers by EP. Gamespeed is capped at
     ${formatX(1, 0, 0)}. Infinity Power improves IP gain. Tickspeed is ${formatX(1.2, 1, 1)}, and unpurchasable.
     IP multipliers outside of ID are disabled.`,
-    goal: DC.E100,
+    goal: DC.E80000,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goalIncrease: DC.E5000,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -391,9 +391,9 @@ export const eternityChallenges = [
     description: () => `Continuum is set to +${formatInt(0)}% purchases. All Tickspeed and Dimension Multipliers are
     disabled, except for buy ${formatInt(10)}. Buy ${formatInt(10)} multiplier is capped at ${formatX(2)}.
     Passive IP gain is disabled. Replicanti speed is divided by ${format("1e1750")}`,
-    goal: DC.E100,
+    goal: DC.E2_5E9,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goalIncrease: DC.E5E8,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,

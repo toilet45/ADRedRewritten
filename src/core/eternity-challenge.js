@@ -175,7 +175,7 @@ export class EternityChallengeState extends GameMechanicState {
 
   // Goal for the NEXT completion, based on current completions
   goalAtCompletions(completions) {
-    if (completions > 4) {
+    if (completions > 4 && !(Enslaved.isRunning || this.id === 1)) {
       switch (this.scaled.goalIncreaseType) {
         case "exponential":
           return Decimal.pow(this.goalIncrease.log10(), completions - 5).mul(this.scaled.goal.log10()).pow10();

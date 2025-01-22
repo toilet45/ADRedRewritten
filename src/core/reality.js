@@ -701,15 +701,17 @@ export function finishProcessReality(realityProps) {
   if (!PelleUpgrade.keepEternityUpgrades.canBeApplied) player.eternityUpgrades.clear();
   player.totalTickGained = DC.D0;
   if (!PelleUpgrade.keepEternityChallenges.canBeApplied) {
-    for (let i = 1; i < 12; i++) {
+    for (let i = 1; i < 13; i++) {
       EternityChallenge(i).completions = 0;
     }
-  };
+  }
   player.reality.unlockedEC = 0;
   player.reality.lastAutoEC = DC.D0;
   player.challenge.eternity.current = 0;
-  if (!PelleUpgrade.timeStudiesNoReset.canBeApplied) player.challenge.eternity.unlocked = 0;
-  player.challenge.eternity.requirementBits = 0;
+  if (player.challenge.eternity.unlocked < 13) {
+    if (!PelleUpgrade.timeStudiesNoReset.canBeApplied) player.challenge.eternity.unlocked = 0;
+    player.challenge.eternity.requirementBits = 0;
+  }
   player.respec = false;
   player.eterc8ids = 50;
   player.eterc8repl = 40;

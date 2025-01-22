@@ -141,9 +141,6 @@ export function maxAllTimeDimensions() {
 
 export function timeDimensionCommonMultiplier() {
   if (Enslaved.isExpanded) return DC.D1;
-  if (EternityChallenge(16).isRunning || EternityChallenge(18).isRunning) {
-    return DC.D1;
-  }
   let mult = new Decimal(1)
     .timesEffectsOf(
       Achievement(105),
@@ -250,6 +247,12 @@ class TimeDimensionState extends DimensionState {
   }
 
   get multiplier() {
+    if (EternityChallenge(16).isRunning) {
+      return Currency.eternityPoints.value.clampMin(1).log10().clampMin(1);
+    }
+    if (EternityChallenge(18).isRunning) {
+      return DC.D1;
+    }
     const tier = this._tier;
 
     if (EternityChallenge(11).isRunning || Enslaved.isExpanded || EternityChallenge(20).isRunning) return DC.D1;
@@ -423,7 +426,7 @@ export const TimeDimensions = {
   },
 
   get purchaseCap() {
-    return DC.E18;
+    return DC.E18.timesEffectOf(CelestialStudy(53));
   },
 
   tick(diff) {

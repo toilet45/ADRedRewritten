@@ -41,7 +41,7 @@ export const ecCelestialStudies = [
   {
     id: 16,
     cost: new Decimal(5),
-    requirement: [91],
+    requirement: [81],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Reality Glyph Sacrifice",

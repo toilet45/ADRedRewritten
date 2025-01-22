@@ -259,7 +259,12 @@ export const DC = deepFreeze({
   NUMSAFE:              new Decimal(Number.MAX_SAFE_INTEGER),
   NUMMAX:               new Decimal(Number.MAX_VALUE),
   BIMAX:                new Decimal("e9e15"),
-  BEMAX:                new Decimal("10^^9000000000000000")
+  BEMAX:                new Decimal("10^^9000000000000000"),
+
+  // Random EC challenge values
+  E80000:               new Decimal("1e80000"),
+  E5E8:                 new Decimal("1e500000000"),
+  E2_5E9:               new Decimal("1e2500000000")
 });
 
 window.AUTOBUYER_MODE = {

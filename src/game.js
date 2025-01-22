@@ -935,8 +935,8 @@ function laitelaBeatText(disabledDim) {
 function applyAutoprestige(diff) {
   const disableIPSpeedBoost = EternityChallenge(13).isRunning || EternityChallenge(14).isRunning ||
   EternityChallenge(15).isRunning;
-  if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded) {
-    const val = (gainedInfinityPoints(true).times((disableIPSpeedBoost ? DC.D1 : Time.deltaTime)
+  if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded && !EternityChallenge(18).isRunning) {
+    const val = (gainedInfinityPoints(true).times((disableIPSpeedBoost ? Time.realDeltaTimeMs : Time.deltaTime)
       .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
     Currency.infinityPoints.add(EternityChallenge(21).isRunning ? val.log10() : val);

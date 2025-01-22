@@ -127,7 +127,7 @@ export default {
       </div>
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
       <div v-if="unlockedCount > 12">
-        Eternity Challenges 13+ have all "Start with x IP" rewards disabled
+        Eternity Challenges 13+ have ECB and all "Start with x IP" rewards disabled
       </div>
     </div>
     <div v-if="!hasECR">

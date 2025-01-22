@@ -652,6 +652,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get multiplier() {
+    if (EternityChallenge(16).isRunning) return Currency.antimatter.value.clampMin(1).log10().clampMin(1);
     return Enslaved.isExpanded ? DC.D1 : GameCache.antimatterDimensionFinalMultipliers[this.tier].value;
   }
 
