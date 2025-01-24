@@ -150,6 +150,9 @@ export function requestManualReality(specialReality = 0) {
     case 1: {
       startManualReality(false);
       player.celestials.enslaved.expanded = true;
+      Currency.eternities.reset();
+      Currency.eternityPoints.reset();
+      Currency.infinityPoints.reset();
       Quotes.enslaved.expansion.show();
       return;
     }

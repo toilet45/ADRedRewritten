@@ -126,7 +126,7 @@ export function gainedInfinityPoints(mm1gen = false) {
   let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
     : new Decimal(308 / div);
-  if (Enslaved.isExpanded) return ip.times(ExpansionUpgrade(3).effectOrDefault(1));
+  if (Enslaved.isExpanded) return ip.times(ExpansionUpgrade(3).effectOrDefault(1)).floor();
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
     ip = ip.min(DC.E200);
   }
@@ -804,13 +804,13 @@ function passivePrestigeGen() {
     eternitiedGain = new Decimal(Time.deltaTime).times(
       Decimal.pow(eternitiedGain, AlchemyResource.eternity.effectValue));
     player.reality.partEternitied = player.reality.partEternitied.plus(eternitiedGain);
-    Currency.eternities.add(player.reality.partEternitied.floor());
+    Currency.eternities.add(Enslaved.isExpanded ? 0 : player.reality.partEternitied.floor());
     player.reality.partEternitied = player.reality.partEternitied.sub(player.reality.partEternitied.floor());
   }
 
   if (!EternityChallenge(4).isRunning && !EternityChallenge(20).isRunning) {
     let infGen = DC.D0;
-    if (BreakInfinityUpgrade.infinitiedGen.isBought) {
+    if (BreakInfinityUpgrade.infinitiedGen.isBought && !Enslaved.isExpanded) {
       // Multipliers are done this way to explicitly exclude ach87 and TS32
       infGen = infGen.plus(Time.deltaTimeMs.div(2).div(Decimal.clampMin(50, player.records.bestInfinity.time)));
       infGen = infGen.timesEffectsOf(
@@ -833,7 +833,7 @@ function passivePrestigeGen() {
         Currency.eternities.value.minus(eternitiedGain.div(2).floor())).times(Time.deltaTime));
     }
     infGen = infGen.plus(player.partInfinitied);
-    Currency.infinities.add(infGen.floor());
+    Currency.infinities.add(Enslaved.isExpanded ? 0 : infGen.floor());
     player.partInfinitied = infGen.minus(infGen.floor()).toNumber();
   }
   if (MendingMilestone.eight.isReached) {

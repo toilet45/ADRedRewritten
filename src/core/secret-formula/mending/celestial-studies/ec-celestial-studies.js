@@ -68,22 +68,22 @@ export const ecCelestialStudies = [
     requirement: [93],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "AD Continuum",
+      current: () => AntimatterDimension(1).continuumValue,
+      required: completions => new Decimal(1e24).times(completions * 100),
+      formatValue: format
     }
   },
   {
     id: 19,
     cost: new Decimal(0),
-    requirement: [11],
+    requirement: [131, 132],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Replicanti",
+      current: () => Currency.replicanti.value,
+      required: completions => new Decimal("1e8e8").times(Decimal.pow("1e5e7", completions)),
+      formatValue: format
     }
   },
   {
@@ -92,9 +92,9 @@ export const ecCelestialStudies = [
     requirement: [11],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
+      resource: "Multiversal Remains",
+      current: () => Currency.mendingPoints.value,
+      required: completions => new Decimal(1e50).times(1e10 * completions),
       formatValue: formatInt
     }
   },

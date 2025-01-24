@@ -53,8 +53,26 @@ export default {
     pathClass() {
       switch (this.study.type) {
         case CELESTIAL_STUDY_TYPE.NORMAL:
-          switch (this.setup.path) {
-            default: return "o-time-study-normal";
+          switch (this.study.id) {
+            case 31:
+            case 32:
+            case 151:
+            case 152:
+              return "o-split1-study-normal";
+            case 41:
+            case 42:
+              return "o-split2-study-normal";
+            case 43:
+            case 44:
+              return "o-split3-study-normal";
+            case 91:
+            case 92:
+            case 93:
+            case 131:
+            case 132:
+              return "o-split4-study-normal";
+            default:
+              return "o-time-study-normal";
           }
         case CELESTIAL_STUDY_TYPE.ETERNITY_CHALLENGE:
           return "o-time-study-eternity-challenge";
@@ -348,13 +366,86 @@ export class CelestialStudySetup {
 }
 
 .o-split1-study-normal--available {
-  color: var(--color-effarig--base);
-  border-color: var(--color-effarig--base);
+  color: var(--color-mending);
+  border-color: var(--color-mending);
 }
 
 .o-split1-study-normal--available:hover {
   color: white;
+  background-color: var(--color-mending);
+  border-color: black;
+}
+
+.o-split1-study-normal--unavailable {
+  background-color: var(--color-mending-light);
+}
+
+.o-split1-study-normal--bought {
+  color: black;
+  background-color: var(--color-mending);
+  border-color: black;
+}
+
+.o-split2-study-normal--available {
+  color: var(--color-effarig--base);
+  border-color: var(--color-effarig--base);
+}
+
+.o-split2-study-normal--available:hover {
+  color: white;
   background-color: var(--color-effarig--base);
+  border-color: black;
+}
+
+.o-split2-study-normal--unavailable {
+  background-color: #eec9c9;
+}
+
+.o-split2-study-normal--bought {
+  color: black;
+  background-color: var(--color-effarig--base);
+  border-color: black;
+}
+
+.o-split3-study-normal--available {
+  color: var(--color-eternity);
+  border-color: var(--color-eternity);
+}
+
+.o-split3-study-normal--available:hover {
+  color: white;
+  background-color: var(--color-eternity);
+  border-color: black;
+}
+
+.o-split3-study-normal--unavailable {
+  background-color: #c8a8e6;
+}
+
+.o-split3-study-normal--bought {
+  color: black;
+  background-color: var(--color-eternity);
+  border-color: black;
+}
+
+.o-split4-study-normal--available {
+  color: var(--color-reality);
+  border-color: var(--color-reality);
+}
+
+.o-split4-study-normal--available:hover {
+  color: white;
+  background-color: var(--color-reality);
+  border-color: black;
+}
+
+.o-split4-study-normal--unavailable {
+  background-color: var(--color-reality-light);
+}
+
+.o-split4-study-normal--bought {
+  color: black;
+  background-color: var(--color-reality);
   border-color: black;
 }
 </style>

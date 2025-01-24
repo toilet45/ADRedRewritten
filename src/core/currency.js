@@ -283,7 +283,7 @@ Currency.infinityPoints = new class extends DecimalCurrency {
   }
 
   get startingValue() {
-    if (Pelle.isDisabled() || player.challenge.eternity.current > 12) return new Decimal();
+    if (Pelle.isDisabled() || player.challenge.eternity.current > 12 || Enslaved.isExpanded) return new Decimal();
     return Effects.max(
       new Decimal(),
       Perk.startIP1,
@@ -308,7 +308,7 @@ Currency.eternities = new class extends DecimalCurrency {
   set value(value) { player.eternities = value; }
 
   get startingValue() {
-    if (Pelle.isDoomed) return new Decimal(0);
+    if (Pelle.isDoomed || Enslaved.isExpanded) return new Decimal(0);
     return Effects.max(
       0,
       RealityUpgrade(10)
@@ -343,7 +343,7 @@ Currency.eternityPoints = new class extends DecimalCurrency {
   }
 
   get startingValue() {
-    if (Pelle.isDisabled()) return new Decimal(0);
+    if (Pelle.isDisabled() || Enslaved.isExpanded) return new Decimal(0);
     return Effects.max(
       0,
       Perk.startEP1,

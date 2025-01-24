@@ -206,7 +206,7 @@ export const normalCelestialStudies = [
     id: 91,
     cost: DC.D1,
     requirement: [81],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_C,
     description: () => `Delay the Antimatter softcap based on Antimatter`,
     effect: () => Currency.antimatter.value.max(1).log10().max(1).log10().root(5).add(1),
     formatEffect: value => formatPow(value, 2, 1)
@@ -215,7 +215,7 @@ export const normalCelestialStudies = [
     id: 92,
     cost: DC.D1,
     requirement: [81],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_C,
     description: () => `Delay the Infinity Point softcap based on Infinity Points`,
     effect: () => Currency.infinityPoints.value.max(1).log10().max(1).log10().root(3).add(1),
     formatEffect: value => formatPow(value, 2, 1)
@@ -224,7 +224,7 @@ export const normalCelestialStudies = [
     id: 93,
     cost: DC.D1,
     requirement: [81],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.CHOICE_C,
     description: () => `Delay the Eternity Point softcap based on Eternity Points`,
     effect: () => Currency.eternityPoints.value.max(1).log10().max(1).log10().add(1),
     formatEffect: value => formatPow(value, 2, 1)
@@ -233,7 +233,7 @@ export const normalCelestialStudies = [
     id: 101,
     cost: DC.D1,
     requirement: [92],
-    reqType: CS_REQUIREMENT_TYPE.CHOICE_C,
+    reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Raise Infinity Point gain based on Mends`,
     effect: () => 4,
     formatEffect: value => formatPow(value, 2, 2)
@@ -269,7 +269,7 @@ export const normalCelestialStudies = [
     id: 121,
     cost: DC.D1,
     requirement: [111, 112, 113],
-    reqType: CS_REQUIREMENT_TYPE.ALL,
+    reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `Replicanti speed is boosted based on Infinity Points`,
     effect: () => DC.E4,
     formatEffect: value => formatX(value, 2, 1)
@@ -293,7 +293,7 @@ export const normalCelestialStudies = [
   {
     id: 151,
     cost: DC.D1,
-    requirement: [/*SCelestialStudy(131).isBought || CelestialStudy(131).isBought && EternityChallenge*/],
+    requirement: [131, 132, () => EternityChallenge(19).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions are gain a multiplier based on Replicanti`,
     effect: () => DC.E4,
@@ -302,7 +302,7 @@ export const normalCelestialStudies = [
   {
     id: 152,
     cost: DC.D1,
-    requirement: [],
+    requirement: [131, 132, () => EternityChallenge(19).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions gain a multiplier based on Tachyon Particles`,
     effect: () => DC.E4,

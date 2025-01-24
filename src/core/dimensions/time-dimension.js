@@ -377,7 +377,7 @@ class TimeDimensionState extends DimensionState {
     const e6kThreshold = this.e6000ScalingAmount;
     const mult = this.costMultiplier;
 
-    const logMoney = Currency.eternityPoints.value.log10();
+    const logMoney = Currency.eternityPoints.value.clampMin(1).log10().clampMin(1);
     let logMult = Decimal.log10(mult);
     let logBase = this.baseCost.log10();
     let contValue = (logMoney.sub(logBase)).div(logMult);

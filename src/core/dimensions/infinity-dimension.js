@@ -249,7 +249,7 @@ class InfinityDimensionState extends DimensionState {
 
   get continuumValue() {
     if (Pelle.isDoomed || !this.isUnlocked || !Laitela.continuumActive || !Ra.unlocks.infinityDimensionContinuum.canBeApplied) return DC.D0;
-    const logMoney = Currency.infinityPoints.value.log10();
+    const logMoney = Currency.infinityPoints.value.clampMin(1).log10().clampMin(1);
     const logMult = Decimal.log10(this.costMultiplier);
     const logBase = this.baseCost.log10();
     let contValue = (logMoney.sub(logBase)).div(logMult);

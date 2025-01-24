@@ -172,7 +172,7 @@ export function secondSoftReset(enteringAntimatterChallenge) {
 }
 
 export function preProductionGenerateIP(diff) {
-  if (InfinityUpgrade.ipGen.isBought) {
+  if (InfinityUpgrade.ipGen.isBought && !Enslaved.isExpanded) {
     const genPeriod = Time.bestInfinity.totalMilliseconds.clampMin(1e-100).times(10);
     let genCount;
     if (diff.gte(1e100)) {
@@ -189,5 +189,5 @@ export function preProductionGenerateIP(diff) {
     const gainedThisTick = genCount.times(gainedPerGen);
     Currency.infinityPoints.add(gainedThisTick);
   }
-  Currency.infinityPoints.add(BreakInfinityUpgrade.ipGen.effectOrDefault(DC.D0).times(diff.div(60000)));
+  Currency.infinityPoints.add(Enslaved.isExpanded ? 0 : BreakInfinityUpgrade.ipGen.effectOrDefault(DC.D0).times(diff.div(60000)));
 }
