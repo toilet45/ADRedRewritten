@@ -143,6 +143,10 @@ class MultiversalDimensionState extends DimensionState {
     // eslint-disable-next-line no-nested-ternary
     const bought = dim.bought;
     mult = mult.times(Decimal.pow(2, bought.sub(1))).clampMin(1);
+    mult = mult.timesEffectsOf(
+      CelestialStudy(151),
+      CelestialStudy(152)
+    );
 
     if (tier === 1) mult = mult.timesEffectOf(TimeStudy(74));
 

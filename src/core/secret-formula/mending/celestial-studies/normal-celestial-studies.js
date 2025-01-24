@@ -122,8 +122,7 @@ export const normalCelestialStudies = [
     requirement: [42],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Equipped Reality Glyphs provide a much stronger Galaxy Strength boost`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => 5.5,
   },
   {
     id: 53,
@@ -280,7 +279,7 @@ export const normalCelestialStudies = [
     requirement: [121],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
     description: () => `Tachyon Galaxies are ${formatX(15)} stronger`,
-    effect: () => 15,
+    effect: () => 16,
   },
   {
     id: 132,
@@ -288,7 +287,7 @@ export const normalCelestialStudies = [
     requirement: [121],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
     description: () => `Antimatter Galaxies are ${formatX(30)} stronger`,
-    effect: () => 30,
+    effect: () => 31,
   },
   {
     id: 151,
@@ -296,7 +295,7 @@ export const normalCelestialStudies = [
     requirement: [131, 132, () => EternityChallenge(19).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions are gain a multiplier based on Replicanti`,
-    effect: () => DC.E4,
+    effect: () => Currency.replicanti.value.clampMin(1).log10().clampMin(1).div(1e7).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -305,7 +304,7 @@ export const normalCelestialStudies = [
     requirement: [131, 132, () => EternityChallenge(19).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions gain a multiplier based on Tachyon Particles`,
-    effect: () => DC.E4,
+    effect: () => Currency.tachyonParticles.value.clampMin(1).log10().clampMin(1).div(1000).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {

@@ -409,9 +409,9 @@ export const eternityChallenges = [
   {
     id: 19,
     description: () => `All IP multipliers are disabled. IP gain is based on Replicanti`,
-    goal: DC.E100,
+    goal: DC.E3E6,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goalIncrease: DC.E500000,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,

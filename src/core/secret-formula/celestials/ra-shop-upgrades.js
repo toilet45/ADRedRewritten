@@ -140,7 +140,7 @@ export const raShopUpgrades = [
         x **= 0.2;
         x *= 10000000;
       }
-      return x;
+      return new Decimal(x);
     },
     formatEffect: value => `+${formatInt(value)}`
   },

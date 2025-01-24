@@ -97,9 +97,9 @@ export function getTickSpeedMultiplier() {
   if (NormalChallenge(5).isRunning) baseMultiplier = baseMultiplier.add(0.1);
   galaxies = effectiveBaseGalaxiesSeperated();
   effects = effects.mul(Pelle.specialGlyphEffect.power);
-  const AGs = baseMultiplier.div(effects);
+  const AGs = baseMultiplier.div(effects.mul(CelestialStudy(132).effectOrDefault(1)));
   const RGs = baseMultiplier.div(effects.mul(EternityChallenge(8).reward.effectOrDefault(DC.D0).add(1)));
-  const TGs = baseMultiplier.div(effects);
+  const TGs = baseMultiplier.div(effects.mul(CelestialStudy(131).effectOrDefault(1)));
   const MvGs = baseMultiplier.div(effects);
   return AGs.pow(galaxies[0].div(AGs))
     .mul(RGs.pow(galaxies[1].div(RGs)))

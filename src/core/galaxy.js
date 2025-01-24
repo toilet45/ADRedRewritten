@@ -27,6 +27,8 @@ export class Galaxy {
     amnt = amnt.add(MendingUpgrade(11).effectOrDefault(0));
     if (Ra.isRunning) {
       amnt.add(Effects.sum(RaUpgrade(17)));
+    } else {
+      amnt.add(RaUpgrade(17).effectOrDefault(DC.D0).div(10));
     }
     amnt = amnt.add(CelestialStudy(51).isBought ? GlyphInfo.power.sacrificeInfo.effect().div(10) : 0);
     return amnt;

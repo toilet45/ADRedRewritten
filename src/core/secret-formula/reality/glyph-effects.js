@@ -605,7 +605,9 @@ export const glyphEffects = {
     genericDesc: () => (GlyphAlteration.isAdded("reality")
       ? "Galaxy Strength +{value} and Replicanti Galaxy Cap multiplied by x"
       : "Galaxy Strength +x"),
-    effect: level => Decimal.pow(level.div(100000), 0.5).add(1),
+    effect: level => Decimal.pow(level.div(100000), 0.5).timesEffectOf(
+      CelestialStudy(52)
+    ).add(1),
     formatEffect: x => formatPercents(x.sub(1), 2),
     conversion: x => x.mul(5).sub(4),
     formatSecondaryEffect: x => formatX(x, 2, 2),
