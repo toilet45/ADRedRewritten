@@ -127,7 +127,7 @@ class InfinityDimensionState extends DimensionState {
       // other ID production is per-10-seconds).
       EternityChallenge(7).reward.applyEffect(v => toGain = v.times(10));
       // eslint-disable-next-line max-len
-      if (EternityChallenge(7).isRunning || EternityChallenge(20).isRunning) EternityChallenge(7).applyEffect(v => toGain = v.times(10));
+      if (EternityChallenge(7).isRunning || EternityChallenge(19).isRunning) EternityChallenge(7).applyEffect(v => toGain = v.times(10));
     } else {
       toGain = InfinityDimension(tier + 1).productionPerSecond;
     }
@@ -137,15 +137,15 @@ class InfinityDimensionState extends DimensionState {
 
   get productionPerSecond() {
     if (EternityChallenge(24).isRunning) return player.dimensions.infinity.reduce((a, b) => b.bought.mul(a), DC.D1);
-    if (EternityChallenge(2).isRunning || EternityChallenge(10).isRunning || EternityChallenge(20).isRunning ||
+    if (EternityChallenge(2).isRunning || EternityChallenge(10).isRunning || EternityChallenge(19).isRunning ||
       (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension) || EternityChallenge(17).isRunning) {
       return DC.D0;
     }
     let production = this.totalAmount;
-    if (EternityChallenge(11).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(11).isRunning || EternityChallenge(19).isRunning) {
       return production;
     }
-    if (EternityChallenge(7).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(7).isRunning || EternityChallenge(19).isRunning) {
       production = production.times(Tickspeed.perSecond);
     }
     if (EternityChallenge(21).isRunning) production = production.max(1).log10();
@@ -154,7 +154,7 @@ class InfinityDimensionState extends DimensionState {
 
   get multiplier() {
     const tier = this.tier;
-    if (EternityChallenge(11).isRunning || EternityChallenge(20).isRunning) return DC.D1;
+    if (EternityChallenge(11).isRunning || EternityChallenge(19).isRunning) return DC.D1;
     let mult = GameCache.infinityDimensionCommonMultiplier.value
       .timesEffectsOf(
         tier === 1 ? Achievement(94) : null,
@@ -204,7 +204,7 @@ class InfinityDimensionState extends DimensionState {
   get isProducing() {
     const tier = this.tier;
     if (EternityChallenge(2).isRunning ||
-      EternityChallenge(10).isRunning || EternityChallenge(20).isRunning ||
+      EternityChallenge(10).isRunning || EternityChallenge(19).isRunning ||
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
     }
@@ -302,7 +302,7 @@ class InfinityDimensionState extends DimensionState {
     this.amount = this.amount.plus(10);
     this.baseAmount = this.baseAmount.add(10);
 
-    if (EternityChallenge(8).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(8).isRunning || EternityChallenge(19).isRunning) {
       player.eterc8ids -= 1;
     }
 
@@ -320,7 +320,7 @@ class InfinityDimensionState extends DimensionState {
     }
 
     let purchasesUntilHardcap = this.purchaseCap.sub(this.purchases);
-    if (EternityChallenge(8).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(8).isRunning || EternityChallenge(19).isRunning) {
       purchasesUntilHardcap = Decimal.clampMax(purchasesUntilHardcap, player.eterc8ids);
     }
 
@@ -340,7 +340,7 @@ class InfinityDimensionState extends DimensionState {
     this.amount = this.amount.plus(costScaling.purchases.times(10));
     this.baseAmount = DC.E1.times(costScaling.purchases).add(this.baseAmount);
 
-    if (EternityChallenge(8).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(8).isRunning || EternityChallenge(19).isRunning) {
       player.eterc8ids -= costScaling.purchases.toNumber();
     }
     return true;
@@ -396,11 +396,11 @@ export const InfinityDimensions = {
   canBuy() {
     return !EternityChallenge(2).isRunning &&
       !EternityChallenge(10).isRunning &&
-      (!(EternityChallenge(8).isRunning || EternityChallenge(20).isRunning) || player.eterc8ids > 0);
+      (!(EternityChallenge(8).isRunning || EternityChallenge(19).isRunning) || player.eterc8ids > 0);
   },
 
   canAutobuy() {
-    return this.canBuy() && !(EternityChallenge(8).isRunning || EternityChallenge(20).isRunning);
+    return this.canBuy() && !(EternityChallenge(8).isRunning || EternityChallenge(19).isRunning);
   },
 
   tick(diff) {
@@ -408,7 +408,7 @@ export const InfinityDimensions = {
       InfinityDimension(tier).produceDimensions(InfinityDimension(tier - 1), diff.div(10));
     }
 
-    if (EternityChallenge(7).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(7).isRunning || EternityChallenge(19).isRunning) {
       if (!NormalChallenge(10).isRunning) {
         InfinityDimension(1).produceDimensions(AntimatterDimension(7), diff);
       }

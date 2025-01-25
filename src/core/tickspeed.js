@@ -180,7 +180,7 @@ export const Tickspeed = {
 
   get isAvailableForPurchase() {
     return this.isUnlocked &&
-      !EternityChallenge(9).isRunning && !EternityChallenge(20).isRunning &&
+      !EternityChallenge(9).isRunning && !EternityChallenge(19).isRunning &&
       !Laitela.continuumActive &&
       (player.break || this.cost.lt(DC.NUMMAX));
   },

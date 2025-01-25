@@ -68,8 +68,8 @@ export default {
       }
       this.hasECR = Perk.studyECRequirement.isBought;
       this.hasCelStudies = Ra.unlocks.vHardenedUnlock.canBeApplied;
-      this.EC13Completions = EternityChallenge(13).completions + EternityChallenge(20).completions;
-      this.EC20Completions = EternityChallenge(20).completions;
+      this.EC13Completions = EternityChallenge(13).completions + EternityChallenge(19).completions;
+      this.EC20Completions = EternityChallenge(19).completions;
     },
     isChallengeVisible(challenge) {
       if (challenge.id >= 13) return challenge.completions > 0 || challenge.isUnlocked || challenge.hasUnlocked;

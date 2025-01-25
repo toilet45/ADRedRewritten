@@ -408,6 +408,25 @@ export const eternityChallenges = [
   },
   {
     id: 19,
+    description: () => `You are trapped in EC1-12, without IP generation nerfs or failure conditions.
+    All IP multipliers are disabled`,
+    goal: DC.E100,
+    pelleGoal: DC.E100,
+    goalIncrease: DC.E50,
+    scaled: {
+      goal: DC.EE15,
+      goalIncrease: DC.E1,
+      goalIncreaseType: "exponential"
+    },
+    scaleStart: Infinity,
+    reward: {
+      description: "Maximum Completions for Eternity Challenges 1-18 are increased",
+      effect: completions => completions,
+      formatEffect: value => `+${formatInt(value)}`
+    }
+  },
+  {
+    id: 20,
     description: () => `All IP multipliers are disabled. IP gain is based on Replicanti`,
     goal: DC.E3E6,
     pelleGoal: DC.E100,
@@ -423,25 +442,6 @@ export const eternityChallenges = [
       effect: completions => DC.E100.pow(Currency.infinityPoints.value.max(1).log10().max(1).log10()
         .pow(0.2).mul(completions * 5 + 1)),
       formatEffect: value => `${formatX(value, 3, 3)}`
-    }
-  },
-  {
-    id: 20,
-    description: () => `You are trapped in EC1-12, without IP generation nerfs or failure conditions.
-    All IP multipliers are disabled`,
-    goal: DC.E100,
-    pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
-    scaled: {
-      goal: DC.EE15,
-      goalIncrease: DC.E1,
-      goalIncreaseType: "exponential"
-    },
-    scaleStart: Infinity,
-    reward: {
-      description: "Maximum Completions for Eternity Challenges 1-19 are increased",
-      effect: completions => completions,
-      formatEffect: value => `+${formatInt(value)}`
     }
   },
   {

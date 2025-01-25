@@ -292,7 +292,7 @@ export const normalCelestialStudies = [
   {
     id: 151,
     cost: DC.D1,
-    requirement: [131, 132, () => EternityChallenge(19).completions > 0],
+    requirement: [131, 132, () => EternityChallenge(20).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions are gain a multiplier based on Replicanti`,
     effect: () => Currency.replicanti.value.clampMin(1).log10().clampMin(1).div(1e7).clampMin(1),
@@ -301,7 +301,7 @@ export const normalCelestialStudies = [
   {
     id: 152,
     cost: DC.D1,
-    requirement: [131, 132, () => EternityChallenge(19).completions > 0],
+    requirement: [131, 132, () => EternityChallenge(20).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_E,
     description: () => `Multiversal Dimensions gain a multiplier based on Tachyon Particles`,
     effect: () => Currency.tachyonParticles.value.clampMin(1).log10().clampMin(1).div(1000).clampMin(1),

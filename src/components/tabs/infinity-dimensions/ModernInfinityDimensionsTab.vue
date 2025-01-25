@@ -41,7 +41,7 @@ export default {
   methods: {
     update() {
       this.showLockedDimCostNote = !InfinityDimension(8).isUnlocked;
-      this.isEC9Running = EternityChallenge(9).isRunning || EternityChallenge(20).isRunning;
+      this.isEC9Running = EternityChallenge(9).isRunning || EternityChallenge(19).isRunning;
       this.infinityPower.copyFrom(Currency.infinityPower);
       this.conversionRate.copyFrom(InfinityDimensions.powerConversionRate);
       if (this.isEC9Running) {
@@ -51,8 +51,8 @@ export default {
       }
       this.powerPerSecond.copyFrom(InfinityDimension(1).productionPerSecond);
       // eslint-disable-next-line max-len
-      this.incomeType = EternityChallenge(7).isRunning || EternityChallenge(20).isRunning ? "Seventh Dimensions" : "Infinity Power";
-      this.isEC8Running = EternityChallenge(8).isRunning || EternityChallenge(20).isRunning;
+      this.incomeType = EternityChallenge(7).isRunning || EternityChallenge(19).isRunning ? "Seventh Dimensions" : "Infinity Power";
+      this.isEC8Running = EternityChallenge(8).isRunning || EternityChallenge(19).isRunning;
       if (this.isEC8Running) {
         this.EC8PurchasesLeft = player.eterc8ids;
       }

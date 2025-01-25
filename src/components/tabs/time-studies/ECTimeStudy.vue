@@ -59,7 +59,7 @@ export default {
       const ec = EternityChallenge(id);
       this.hasRequirement = !Perk.studyECRequirement.isBought && !study.wasRequirementPreviouslyMet;
       this.completions = ec.completions;
-      this.maxCompletions = 5 + Effects.sum(EternityChallenge(13).reward).toNumber();
+      this.maxCompletions = 5 + Effects.sum(EternityChallenge(13).reward, EternityChallenge(19).reward).toNumber();
       this.showTotalCompletions = !Enslaved.isRunning || id !== 1;
       this.isRunning = EternityChallenge.current?.id === id;
       this.isUnlocked = ec.isUnlocked;

@@ -141,7 +141,7 @@ export default {
         this.isUnlockAffordable = Currency.infinityPoints.gte(this.unlockCost);
         return;
       }
-      this.isInEC8 = EternityChallenge(8).isRunning || EternityChallenge(20).isRunning;
+      this.isInEC8 = EternityChallenge(8).isRunning || EternityChallenge(19).isRunning;
       if (this.isInEC8) {
         this.ec8Purchases = player.eterc8repl;
       }

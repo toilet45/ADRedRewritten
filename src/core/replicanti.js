@@ -328,7 +328,7 @@ class ReplicantiUpgradeState {
     Currency.infinityPoints.subtract(this.cost);
     this.baseCost = Decimal.times(this.baseCost, this.costIncrease);
     this.value = this.nextValue;
-    if (EternityChallenge(8).isRunning || EternityChallenge(20).isRunning) player.eterc8repl--;
+    if (EternityChallenge(8).isRunning || EternityChallenge(19).isRunning) player.eterc8repl--;
     GameUI.update();
   }
 
@@ -461,7 +461,7 @@ export const ReplicantiUpgrade = {
 
     get costIncrease() {
       const galaxies = this.value;
-      let increase = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning
+      let increase = EternityChallenge(6).isRunning || EternityChallenge(19).isRunning
         ? DC.E2.pow(galaxies).times(DC.E2)
         : DC.E5.pow(galaxies).times(DC.E25);
       if (galaxies.gte(this.distantRGStart)) {
@@ -485,8 +485,8 @@ export const ReplicantiUpgrade = {
       // Copypasted constants
       const logBase = new Decimal(170);
       // eslint-disable-next-line max-len
-      const logBaseIncrease = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? DC.D2 : new Decimal(25);
-      const logCostScaling = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? DC.D2 : DC.D5;
+      const logBaseIncrease = EternityChallenge(6).isRunning || EternityChallenge(19).isRunning ? DC.D2 : new Decimal(25);
+      const logCostScaling = EternityChallenge(6).isRunning || EternityChallenge(19).isRunning ? DC.D2 : DC.D5;
       const distantReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(100);
       const remoteReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(1000);
       const logDistantScaling = new Decimal(50);
@@ -545,8 +545,8 @@ export const ReplicantiUpgrade = {
 
     baseCostAfterCount(count) {
       const logBase = new Decimal(170);
-      const logBaseIncrease = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? 2 : 25;
-      const logCostScaling = EternityChallenge(6).isRunning || EternityChallenge(20).isRunning ? 2 : 5;
+      const logBaseIncrease = EternityChallenge(6).isRunning || EternityChallenge(19).isRunning ? 2 : 25;
+      const logCostScaling = EternityChallenge(6).isRunning || EternityChallenge(19).isRunning ? 2 : 5;
       const distantReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(100);
       const remoteReplicatedGalaxyStart = GlyphInfo.replication.sacrificeInfo.effect().add(1000);
       let logCost = logBase.add(count.times(logBaseIncrease))

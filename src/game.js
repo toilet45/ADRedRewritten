@@ -114,7 +114,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     const ip = Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75));
     return ip.mul(Currency.infinityPower.value.max(1).sqrt());
   }
-  if (EternityChallenge(19).isRunning) {
+  if (EternityChallenge(20).isRunning) {
     return Decimal.pow10(player.replicanti.amount.max(1).log10().div(div).sub(0.75));
   }
   if (EternityChallenge(23).isRunning) {
@@ -324,7 +324,7 @@ export function addMendingTime(trueTime, time, realTime, rm, level, mends, projI
 
 export function gainedInfinities() {
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults") ||
-  Enslaved.isExpanded || EternityChallenge(20).isRunning) return DC.D1;
+  Enslaved.isExpanded || EternityChallenge(19).isRunning) return DC.D1;
   let infGain = Effects.max(1, Achievement(87));
 
   infGain = infGain.timesEffectsOf(
@@ -383,7 +383,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.FIXED_SPEED)) {
-    if (EternityChallenge(12).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(12).isRunning || EternityChallenge(19).isRunning) {
       // eslint-disable-next-line capitalized-comments, no-inline-comments
       return Decimal.mul(1 / 1000, 1/* dev.speedUp */);
     }
@@ -437,7 +437,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   factor = factor.mul(PelleUpgrade.timeSpeedMult.effectValue);
   const forcedDisableDevspeed = EternityChallenge(12).isRunning || NormalChallenge(11).isRunning ||
-    InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning || EternityChallenge(20).isRunning;
+    InfinityChallenge(6).isRunning || InfinityChallenge(8).isRunning || EternityChallenge(19).isRunning;
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMin(1e-300).clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
@@ -642,7 +642,7 @@ export function gameLoop(passedDiff, options = {}) {
     player.records.thisInfinity.time = player.records.thisInfinity.time.add(diff);
     player.records.thisEternity.realTime = player.records.thisEternity.realTime.add(realDiff);
     if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning &&
-    !EternityChallenge(20).isRunning) {
+    !EternityChallenge(19).isRunning) {
       player.records.thisEternity.time = player.records.thisEternity.time.add(
         diff.times(1 + Currency.eternitiesTotal.value.min(1e66).toNumber()));
     } else {
@@ -808,7 +808,7 @@ function passivePrestigeGen() {
     player.reality.partEternitied = player.reality.partEternitied.sub(player.reality.partEternitied.floor());
   }
 
-  if (!EternityChallenge(4).isRunning && !EternityChallenge(20).isRunning) {
+  if (!EternityChallenge(4).isRunning && !EternityChallenge(19).isRunning) {
     let infGen = DC.D0;
     if (BreakInfinityUpgrade.infinitiedGen.isBought && !Enslaved.isExpanded) {
       // Multipliers are done this way to explicitly exclude ach87 and TS32

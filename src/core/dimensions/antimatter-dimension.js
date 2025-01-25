@@ -12,7 +12,7 @@ export function antimatterDimensionCommonMultiplier() {
   }
   multiplier = multiplier.times(Achievements.power.powEffectOf(MendingUpgrade(13).effects.adPow));
 
-  if (!EternityChallenge(9).isRunning && !EternityChallenge(20).isRunning) {
+  if (!EternityChallenge(9).isRunning && !EternityChallenge(19).isRunning) {
     multiplier = multiplier.times(Currency.infinityPower.value.pow(InfinityDimensions.powerConversionRate).max(1));
   }
   multiplier = multiplier.timesEffectsOf(
@@ -60,7 +60,7 @@ export function antimatterDimensionCommonMultiplier() {
 export function getDimensionFinalMultiplierUncached(tier) {
   if (tier < 1 || tier > 8) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
   if ((NormalChallenge(10).isRunning && tier > 6) || Enslaved.isExpanded) return DC.D1;
-  if (EternityChallenge(11).isRunning || EternityChallenge(20).isRunning) {
+  if (EternityChallenge(11).isRunning || EternityChallenge(19).isRunning) {
     return Currency.infinityPower.value.pow(
       InfinityDimensions.powerConversionRate
     ).max(1).times(DimBoost.multiplierToNDTier(tier));
@@ -111,7 +111,7 @@ export function ADInstabilityStart() {
 export function getDimensionFinalMultiplierUncachedWithoutSC(tier) {
   if (tier < 1 || tier > 8) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
   if ((NormalChallenge(10).isRunning && tier > 6) || Enslaved.isExpanded) return DC.D1;
-  if (EternityChallenge(11).isRunning || EternityChallenge(20).isRunning) {
+  if (EternityChallenge(11).isRunning || EternityChallenge(19).isRunning) {
     return Currency.infinityPower.value.pow(
       InfinityDimensions.powerConversionRate
     ).max(1).times(DimBoost.multiplierToNDTier(tier));
@@ -506,13 +506,13 @@ class AntimatterDimensionState extends DimensionState {
   get rateOfChange() {
     const tier = this.tier;
     if (tier === 8 ||
-      (tier > 3 && (EternityChallenge(3).isRunning || EternityChallenge(20).isRunning)) ||
+      (tier > 3 && (EternityChallenge(3).isRunning || EternityChallenge(19).isRunning)) ||
       (tier > 6 && NormalChallenge(12).isRunning)) {
       return DC.D0;
     }
 
     let toGain;
-    if (tier === 7 && EternityChallenge(7).isRunning || EternityChallenge(20).isRunning) {
+    if (tier === 7 && EternityChallenge(7).isRunning || EternityChallenge(19).isRunning) {
       toGain = InfinityDimension(1).productionPerSecond.times(10);
     } else if (NormalChallenge(12).isRunning) {
       toGain = AntimatterDimension(tier + 2).productionPerSecond;
@@ -751,7 +751,7 @@ export const AntimatterDimensions = {
     const hasBigCrunchGoal = !player.break || Player.isInAntimatterChallenge;
     if (hasBigCrunchGoal && Currency.antimatter.gte(Player.infinityGoal)) return;
 
-    let maxTierProduced = EternityChallenge(3).isRunning || EternityChallenge(20).isRunning ? 3 : 7;
+    let maxTierProduced = EternityChallenge(3).isRunning || EternityChallenge(19).isRunning ? 3 : 7;
     let nextTierOffset = 1;
     if (NormalChallenge(12).isRunning) {
       maxTierProduced--;

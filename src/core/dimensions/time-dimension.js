@@ -161,7 +161,7 @@ export function timeDimensionCommonMultiplier() {
       PelleRifts.chaos
     );
 
-  if (EternityChallenge(9).isRunning || EternityChallenge(20).isRunning) {
+  if (EternityChallenge(9).isRunning || EternityChallenge(19).isRunning) {
     mult = mult.times(
       Decimal.pow(
         // eslint-disable-next-line max-len
@@ -255,7 +255,7 @@ class TimeDimensionState extends DimensionState {
     }
     const tier = this._tier;
 
-    if (EternityChallenge(11).isRunning || Enslaved.isExpanded || EternityChallenge(20).isRunning) return DC.D1;
+    if (EternityChallenge(11).isRunning || Enslaved.isExpanded || EternityChallenge(19).isRunning) return DC.D1;
     let mult = GameCache.timeDimensionCommonMultiplier.value
       .timesEffectsOf(
         tier === 1 ? TimeStudy(11) : null,
@@ -303,18 +303,18 @@ class TimeDimensionState extends DimensionState {
 
   get productionPerSecond() {
     if (EternityChallenge(24).isRunning) return player.dimensions.infinity.reduce((a, b) => b.bought.mul(a), DC.D1);
-    if (EternityChallenge(1).isRunning || EternityChallenge(10).isRunning || EternityChallenge(20).isRunning ||
+    if (EternityChallenge(1).isRunning || EternityChallenge(10).isRunning || EternityChallenge(19).isRunning ||
     (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension)) {
       return DC.D0;
     }
-    if (EternityChallenge(11).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(11).isRunning || EternityChallenge(19).isRunning) {
       return this.totalAmount;
     }
     let production = this.totalAmount.times(this.multiplier);
-    if (EternityChallenge(7).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(7).isRunning || EternityChallenge(19).isRunning) {
       production = production.times(Tickspeed.perSecond);
     }
-    if (this._tier === 1 && !EternityChallenge(7).isRunning && !EternityChallenge(20).isRunning) {
+    if (this._tier === 1 && !EternityChallenge(7).isRunning && !EternityChallenge(19).isRunning) {
       production = production.pow(getAdjustedGlyphEffect("timeshardpow"));
     }
     if (EternityChallenge(21).isRunning) production = production.max(1).log10();
@@ -335,7 +335,7 @@ class TimeDimensionState extends DimensionState {
     const tier = this.tier;
     if (EternityChallenge(1).isRunning ||
       EternityChallenge(10).isRunning ||
-      EternityChallenge(20).isRunning ||
+      EternityChallenge(19).isRunning ||
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
     }
@@ -434,7 +434,7 @@ export const TimeDimensions = {
       TimeDimension(tier).produceDimensions(TimeDimension(tier - 1), diff.div(10));
     }
 
-    if (EternityChallenge(7).isRunning || EternityChallenge(20).isRunning) {
+    if (EternityChallenge(7).isRunning || EternityChallenge(19).isRunning) {
       TimeDimension(1).produceDimensions(InfinityDimension(8), diff);
     } else {
       TimeDimension(1).produceCurrency(Currency.timeShards, diff);

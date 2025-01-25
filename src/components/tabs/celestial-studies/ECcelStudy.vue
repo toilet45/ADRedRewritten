@@ -25,6 +25,7 @@ export default {
       showTotalCompletions: false,
       isRunning: false,
       isUnlocked: false,
+      maxCompletions: 0
     };
   },
   computed: {
@@ -45,10 +46,10 @@ export default {
     },
     // Linebreaks added to avoid twitching in scientific notation
     needsFirstLinebreak() {
-      return this.study.id === 7;
+      return this.study.id === 19;
     },
     needsSecondLinebreak() {
-      return [3, 4, 7].includes(this.study.id);
+      return [19].includes(this.study.id);
     }
   },
   methods: {
@@ -61,6 +62,7 @@ export default {
       this.showTotalCompletions = !Enslaved.isRunning || id !== 1;
       this.isRunning = EternityChallenge.current?.id === id;
       this.isUnlocked = ec.isUnlocked;
+      this.maxCompletions = 5 + Effects.sum(EternityChallenge(19).reward).toNumber();
       if (!this.hasRequirement) return;
       const requirement = this.requirement;
       if (this.hasNumberRequirement) {
@@ -84,7 +86,7 @@ export default {
       EC{{ id }}
     </HintText>
     Eternity Challenge {{ id }}
-    ({{ formatInt(completions) }}<span v-if="showTotalCompletions">/{{ formatInt(5) }}</span>)
+    ({{ formatInt(completions) }}<span v-if="showTotalCompletions">/{{ formatInt(maxCompletions) }}</span>)
     <template v-if="hasRequirement">
       <br>
       Requirement:
