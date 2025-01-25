@@ -921,6 +921,7 @@ window.binomialDistributionBTRD = function binomialDistributionBTRD(numSamples, 
  * @returns {number} (integer) number of events in poisson process
  */
 window.poissonDistributionPTRD = function poissonDistributionPTRD(mu) {
+  if (!isFinite(mu)) return 0;
   const sMu = Math.sqrt(mu);
   const b = 0.931 + 2.53 * sMu;
   const a = -0.059 + 0.02483 * b;

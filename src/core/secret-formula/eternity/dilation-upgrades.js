@@ -130,7 +130,7 @@ export const dilationUpgrades = {
   timeStudySplit: {
     id: 8,
     cost: 1e10,
-    description: "You can buy all three Time Study paths from the Dimension Split"
+    description: "You can buy three Time Study paths from the Dimension Split"
   },
   dilationPenalty: {
     id: 9,

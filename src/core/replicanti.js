@@ -243,12 +243,13 @@ export function replicantiLoop(diff) {
     const batchTicks = player.replicanti.chance.add(1).log(2).mul(tickCount).floor();
     const binomialTicks = tickCount.sub(batchTicks.div(player.replicanti.chance.add(1).log(2)));
 
-    Replicanti.amount = Replicanti.amount.times(EternityChallenge(21).isRunning ? poissonDistribution(batchTicks)
-      : DC.D2.pow(poissonDistribution(batchTicks)));
+    // eslint-disable-next-line max-len
+    Replicanti.amount = Replicanti.amount.times(EternityChallenge(21).isRunning ? Decimal.mul(LOG10_2, poissonDistribution(batchTicks))
+      : DC.D2.pow(poissonDistribution(batchTicks))).max(1);
     for (let t = 0; t < binomialTicks.floor().toNumber(); t++) {
       const reproduced = binomialDistribution(Replicanti.amount, player.replicanti.chance);
       Replicanti.amount = Replicanti.amount.plus(EternityChallenge(21).isRunnning
-        ? reproduced : Decimal.log10(reproduced));
+        ? reproduced : Decimal.log10(reproduced)).max(1);
     }
 
     // The batching might use partial ticks; we add the rest back to the timer so it gets used next loop
@@ -258,7 +259,7 @@ export function replicantiLoop(diff) {
     // Single tick: Take a single binomial sample to properly simulate replicanti growth with randomness
     const reproduced = binomialDistribution(Replicanti.amount, player.replicanti.chance);
     Replicanti.amount = Replicanti.amount.plus(EternityChallenge(21).isRunnning
-      ? reproduced : Decimal.log10(reproduced));
+      ? Decimal.log10(reproduced.max(0)) : reproduced);
   }
 
   if (!isUncapped) Replicanti.amount = Decimal.min(replicantiCap(), Replicanti.amount);
