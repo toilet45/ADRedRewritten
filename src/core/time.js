@@ -412,3 +412,21 @@ export const Time = {
     return this.fromMilliseconds(() => GameCache.infinityChallengeTimeSum.value);
   }
 };
+
+export const timeEffects = {
+  get gameTimeSpeedup() {
+    return getGameSpeedupFactor().mul(getRealTimeSpeedupFactor());
+  },
+
+  get gameTimeSpeedupDislay() {
+    return getGameSpeedupForDisplay().mul(getRealTimeSpeedupFactor());
+  },
+
+  get realTimeSpeedup() {
+    return getRealTimeSpeedupFactor();
+  },
+
+  get realTimeSpeedupDislay() {
+    return getRealTimeSpeedupFactor();
+  },
+}

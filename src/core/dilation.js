@@ -216,8 +216,9 @@ export function getBaseTP(antimatter, requireEternity) {
 
 // Returns the TP that would be gained this run
 export function getTP(antimatter, requireEternity) {
-  return getBaseTP(antimatter, requireEternity).times(tachyonGainMultiplier())
+  const val = getBaseTP(antimatter, requireEternity).times(tachyonGainMultiplier())
     .pow(Effects.product(MendingUpgrade(15).effects.tpPow, TimeStudy.TPformula));
+  return val.gt("e120000") ? val.log10().div(120000).pow(0.95).mul(120000).pow10() : val;
 }
 
 // Returns the amount of TP gained, subtracting out current TP; used for displaying gained TP, text on the
@@ -234,7 +235,6 @@ export function getTachyonReq() {
     effectiveTP
       .times(Math.pow(400, 1.5))
       .pow(2 / 3)
-      .toNumber()
   );
 }
 

@@ -1338,7 +1338,7 @@ export const normalAchievements = [
     // Weirdly specific reward? Yes, its V's ST bonus because we forgot to disable it
     // when balancing Pelle and only realised too late.
     get reward() { return `All Antimatter Dimensions are raised to ${formatPow(1.0812403840463596, 0, 3)}`; },
-    effect: () => Pelle.isDoomed ? 1.0812403840463596 : 1,
+    effect: () => (Pelle.isDoomed || MendingMilestone.fifteen.isReached ? 1.0812403840463596 : 1),
   },
   {
     id: 184,
@@ -1372,7 +1372,7 @@ export const normalAchievements = [
       return `Increase the multiplier per repeatable Dilated Time
       multiplier upgrade by ${formatX(1.35, 0, 2)}.`;
     },
-    effect: () => Pelle.isDoomed ? 1.35 : 1,
+    effect: () => (Pelle.isDoomed ? 1.35 : 1),
   },
   {
     id: 188,
@@ -1461,8 +1461,8 @@ export const normalAchievements = [
   },
   {
     id: 202,
-    name: "???",
-    description: "???",
+    name: "Counting past 12",
+    description: "Complete Eternity Challenge 13 (or higher) atleast once",
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
@@ -1503,9 +1503,12 @@ export const normalAchievements = [
   },
   {
     id: 208,
-    name: "???",
-    description: "???",
-    checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    name: "Completionist",
+    description: "Reach level 100 for all Ra memories.",
+    checkRequirement: () => Ra.totalPetLevel >= 700,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Achievements in row 21 are visible and obtainable.`;
+    }
   },
 ];

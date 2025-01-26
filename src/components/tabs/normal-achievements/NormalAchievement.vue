@@ -118,7 +118,8 @@ export default {
       this.showUnlockState = player.options.showHintText.achievementUnlockStates;
       this.realityUnlocked = PlayerProgress.realityUnlocked();
       this.reward = this.config.reward;
-      if (this.achievement.row === 18 && this.reward !== undefined && !Pelle.isDoomed) {
+      if (this.achievement.row === 18 && this.reward !== undefined && !Pelle.isDoomed &&
+      (this.achievement.id !== 183 && MendingMilestone.fourteen.isReached)) {
         this.reward = "Rewards from Doomed Achievements are Disabled out of Pelle";
       }
 

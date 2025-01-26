@@ -154,9 +154,9 @@ export const normalCelestialStudies = [
     cost: DC.D1,
     requirement: [52],
     reqType: CS_REQUIREMENT_TYPE.ALL,
-    description: () => `Time Glyph Sacrifice is raised to a power, based on the number of equipped Time Glyphs`,
-    effect: () => DC.D1.add(Glyphs.active.filter(n => n.type === "time").length)
-      .pow(Decimal.pow(Glyphs.active.filter(n => n.type === "time").length + 3, 3)),
+    description: () => `Time Glyph Sacrifice becomes a power effect to the ${formatInt(8)}th Time Dimension,
+     improved based on equipped Time Glyph count`,
+    effect: () => DC.D1.add(Glyphs.active.filter(n => n.type === "time").length).sqrt(),
     formatEffect: value => formatPow(value, 2, 1)
   },
   {

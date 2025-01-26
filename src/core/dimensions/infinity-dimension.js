@@ -153,6 +153,7 @@ class InfinityDimensionState extends DimensionState {
   }
 
   get multiplier() {
+    if (Enslaved.isExpanded) return DC.D1;
     const tier = this.tier;
     if (EternityChallenge(11).isRunning || EternityChallenge(19).isRunning) return DC.D1;
     let mult = GameCache.infinityDimensionCommonMultiplier.value

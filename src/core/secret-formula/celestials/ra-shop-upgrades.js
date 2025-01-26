@@ -12,7 +12,11 @@ const rebuyable = props => {
     props.initialCost.times(props.costMult)
   );
   const effect = props.effect;
-  props.effect = () => Decimal.pow(effect, RaUpgrade(props.id).boughtAmount);
+  props.effect = () => {
+    if (props.id === 5) return Decimal.mul(effect, RaUpgrade(props.id).boughtAmount);
+    if (props.id === 2) return Decimal.mul(effect.sub(1), RaUpgrade(props.id).boughtAmount).add(1);
+    return Decimal.pow(effect, RaUpgrade(props.id).boughtAmount);
+  }
   props.description = () => props.textTemplate.replace("{value}", props.formatting(effect));
   // eslint-disable-next-line no-unused-expressions, no-sequences, no-inline-comments, spaced-comment
   props.formatEffect = value => props.formatting(value), /*{
@@ -91,7 +95,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 7,
-    cost: new Decimal(1e14), //about Ra 20
+    cost: new Decimal(1e14), // About Ra 20
     description: "Recollection and Fragmentation for the first four Celestials no longer resets on Mend",
     effect: () => DC.D1,
   },
@@ -147,7 +151,7 @@ export const raShopUpgrades = [
   {
     name: "???",
     id: 13,
-    cost: new Decimal(1e40), //Ra 50 is about ~e37
+    cost: new Decimal(1e40), // Ra 50 is about ~e37
     description: "Nameless' Memories increase real time speed at a reduced rate",
     effect: () => Ra.pets.enslaved.memories.clampMin(1).log10().clampMin(1).div(15).clampMin(1),
     formatEffect: value => formatX(value, 2, 2)
@@ -204,7 +208,7 @@ export const raShopUpgrades = [
   },
   {
     name: "???",
-    id: 19, //Ra 90 is about e1081
+    id: 19, // Ra 90 is about e1081
     cost: new Decimal("1e1100"),
     description: "???",
     effect: () => DC.D1,

@@ -20,7 +20,8 @@ export default {
       cappedResources: 0,
       hasStrike: false,
       hasGalaxyGenerator: false,
-      alchIncreasedCap: false
+      alchIncreasedCap: false,
+      needsAlchemy: true
     };
   },
   computed: {
@@ -41,11 +42,12 @@ export default {
         this.completedRows = Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked));
         this.cappedResources = AlchemyResources.all.countWhere(r => r.amount.gte(25000));
         this.canEnterPelle = this.completedRows === this.totalRows &&
-          this.cappedResources === this.totalAlchemyResources;
+          (this.cappedResources === this.totalAlchemyResources || needsAlchemy);
       }
       this.hasStrike = PelleStrikes.all.some(s => s.hasStrike);
       this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0);
       this.alchIncreasedCap = Ra.unlocks.alchHardcapIncrease.canBeApplied;
+      this.needsAlchemy = !MendingMilestone.thirteen.isReached || false;
     },
     toggleBought() {
       Pelle.cel.showBought = !Pelle.cel.showBought;
@@ -96,12 +98,22 @@ export default {
       class="pelle-unlock-requirements"
     >
       You must have {{ formatInt(totalRows) }} rows of Achievements
-      and all of your Glyph Alchemy Resources {{ alchIncreasedCap ? `at least level ${formatInt(25000)}` : 'capped' }} to unlock Pelle, Celestial of Antimatter.
+      <div v-if="needsAlchemy">
+        and all of your Glyph Alchemy Resources {{ alchIncreasedCap ? `at least level ${formatInt(25000)}` : 'capped' }}
+      </div>
+      to unlock Pelle, Celestial of Antimatter.
       <br>
+      <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+      <div v-if="!needsAlchemy"><br><br><br></div>
       <br>
       {{ formatInt(completedRows) }} / {{ formatInt(totalRows) }} Achievement rows completed
-      <br>
-      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} {{alchIncreasedCap ? `level ${formatInt(25000)}` : 'capped'}} Alchemy Resources
+      <div v-if="needsAlchemy">
+        {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }}
+        {{ alchIncreasedCap ? `level ${formatInt(25000)}` : 'capped' }} Alchemy Resources
+      </div>
+      <div v-else>
+        Alchemy Requirement is abolished by Mending Milestone {{ formatInt(6) }}
+      </div>
     </div>
   </div>
 </template>

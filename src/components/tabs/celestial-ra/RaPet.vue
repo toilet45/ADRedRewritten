@@ -63,7 +63,7 @@ export default {
       return this.pet.unlocks;
     },
     chunkTooltip() {
-      return `Based on ${this.pet.chunkGain}` + (this.secondSources ? ` AND ${this.pet.secondaryChunkGain}` : ``);
+      return `Based on ${this.pet.chunkGain}${this.secondSources ? ` and ${this.pet.secondaryChunkGain}` : ``}`;
     },
     memoryGainTooltip() {
       return `Based on ${this.pet.memoryGain}`;
@@ -89,7 +89,7 @@ export default {
       this.memories.copyFrom(pet.memories);
       this.requiredMemories.copyFrom(pet.requiredMemories);
       this.memoryChunks.copyFrom(pet.memoryChunks);
-      this.memoryChunksPerSecond.copyFrom(pet.memoryChunksPerSecond);
+      this.memoryChunksPerSecond.copyFrom(pet.memoryChunksPerSecond.mul(timeEffects.realTimeSpeedup));
       this.memoriesPerSecond.copyFrom(pet.memoryChunks.mul(Ra.productionPerMemoryChunk).mul(this.currentMemoryMult));
       this.canGetMemoryChunks = pet.canGetMemoryChunks;
       this.memoryMultiplier.copyFrom(pet.memoryProductionMultiplier);

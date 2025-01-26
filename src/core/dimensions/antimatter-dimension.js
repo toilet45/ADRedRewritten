@@ -692,7 +692,7 @@ class AntimatterDimensionState extends DimensionState {
     if (Teresa.isRunning && Teresa.hardModeToggled && tier === 1) {
       production = Decimal.pow10(production.max(1).log10().pow(0.9));
     }
-    if (EternityChallenge(14).isRunning) production = stackedLogPower(production, 1, 0.025);
+    if (EternityChallenge(14).isRunning && tier === 1) production = stackedLogPower(production, 1, 0.03);
     if (EternityChallenge(21).isRunning) production = production.max(1).log10();
     if (EternityChallenge(22).isRunning && tier === 1) production = production.div(player.antimatter.log10().cbrt());
     production = production.min(this.cappedProductionInNormalChallenges);
