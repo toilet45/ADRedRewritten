@@ -70,7 +70,7 @@ export const ecCelestialStudies = [
     secondary: {
       resource: "AD Continuum",
       current: () => AntimatterDimension(1).continuumValue,
-      required: completions => new Decimal(1e24).times(completions * 100),
+      required: completions => new Decimal(1e24).times(100 ** completions),
       formatValue: format
     }
   },
@@ -94,7 +94,7 @@ export const ecCelestialStudies = [
     secondary: {
       resource: "Multiversal Remains",
       current: () => Currency.mendingPoints.value,
-      required: completions => new Decimal(1e50).times(1e10 * completions),
+      required: completions => new Decimal(1e50).times(DC.E10.pow(completions)),
       formatValue: formatInt
     }
   },

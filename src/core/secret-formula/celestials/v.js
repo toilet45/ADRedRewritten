@@ -251,13 +251,14 @@ export const v = {
       name: "Unit",
       // eslint-disable-next-line no-unused-vars
       description: value => `This goal is unknown.`,
-      // This achievement has internally negated values since the check is always greater than
-      values: [15, 15.4, 15.7, 16, 16.2],
-      condition: () => V.isRunning && false,
-      currentValue: () => player.antimatter.max(1).log10().max(1).log10(),
-      formatRecord: x => format(Decimal.pow10(x).pow10()),
-      shardReduction: tiers => 0.002 * tiers,
-      maxShardReduction: () => 0.5,
+      // Reach gained Glyph level of x with no equipped glyphs and a glyph level factor that's not EP at 100
+      values: [8500, 9000, 9500, 10000, 10500],
+      condition: () => V.isRunning && Object.values(player.celestials.effarig.glyphWeights).some(w => w === 100) &&
+        player.celestials.effarig.glyphWeights.ep <= 0 && Glyphs.activeWithoutCompanion.length === 0,
+      currentValue: () => gainedGlyphLevel().actualLevel.toNumber(),
+      formatRecord: x => formatInt(x),
+      shardReduction: tiers => 5 * tiers,
+      maxShardReduction: () => 100,
       mode: V_REDUCTION_MODE.SUBTRACTION,
       isHard: true,
       isExtra: true,
@@ -284,7 +285,7 @@ export const v = {
       // eslint-disable-next-line no-unused-vars
       description: value => `This goal is unknown.`,
       // Reach x AM with only 1 1st AD without any purchased time studies
-      values: [1e14, 1e28, 1e35, 1e42, 1e50],
+      values: [1e14, 1e21, 1e28, 1e35, 1e42],
       condition: () => V.isRunning && AntimatterDimension(1).amount.lt(2) && InfinityDimension(1).amount.eq(0) &&
         TimeDimension(1).amount.eq(0) && player.requirementChecks.reality.maxStudies <= 0,
       currentValue: () => Currency.antimatter.value.clampMin(1).log10(),

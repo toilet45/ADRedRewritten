@@ -294,9 +294,9 @@ export const eternityChallenges = [
     id: 13,
     description: () => `IP gain exponent is raised ^${format(0.075, 3, 3)}.
     Gamespeed does not affect Passive IP gain`,
-    goal: DC.E1300,
+    goal: DC.E100,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E200,
+    goalIncrease: DC.E50,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -317,7 +317,7 @@ export const eternityChallenges = [
     pelleGoal: DC.BIMAX,
     goalIncrease: DC.E5,
     scaled: {
-      goal: DC.EE15,
+      goal: DC.E100,
       goalIncrease: DC.E1,
       goalIncreaseType: "exponential"
     },
@@ -336,7 +336,7 @@ export const eternityChallenges = [
     pelleGoal: DC.E100,
     goalIncrease: DC.E10,
     scaled: {
-      goal: DC.EE15,
+      goal: DC.E100,
       goalIncrease: DC.E1,
       goalIncreaseType: "exponential"
     },

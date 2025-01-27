@@ -166,7 +166,7 @@ export function totalReplicantiSpeedMult(overCap) {
     totalMult = totalMult
       .times(Replicanti.amount.max(1).log10().mul(getSecondaryGlyphEffect("replicationdtgain")).clampMin(1));
   }
-  totalMult = totalMult.timesEffectsOf(AlchemyResource.replication, Ra.unlocks.continuousTTBoost.effects.replicanti);
+  totalMult = totalMult.timesEffectsOf(AlchemyResource.replication, Ra.unlocks.continuousTTBoost.effects.replicanti, CelestialStudy(121));
 
   totalMult = totalMult.powEffectOf(Achievement(193));
 

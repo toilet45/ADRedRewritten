@@ -221,8 +221,9 @@ export const normalTimeStudies = [
     requirement: [74],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Gain free Dimension boosts based on Galactic Shards",
-    effect: () => DC.D1,
-    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
+    effect: () => Currency.galacticShards.value.pow(0.54321),
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied,
+    formatEffect: value => `+${format(value, 2, 0)}`
   },
   {
     id: 91,
@@ -264,8 +265,9 @@ export const normalTimeStudies = [
     requirement: [84],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Multiversal Dimension multiplier based on Mended Multiverses",
-    effect: () => DC.D1,
-    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
+    effect: () => Currency.mends.value.clampMin(1).log10().pow(2).clampMin(1),
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied,
+    formatEffect: value => formatX(value, 2, 1)
   },
   {
     id: 101,
@@ -306,8 +308,9 @@ export const normalTimeStudies = [
     requirement: [94],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Increase Replicanti Galaxy limit based on Galactic Shards",
-    effect: () => DC.D1,
-    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied
+    effect: () => Currency.galacticShards.value.clampMin(1).log10().pow(4).clampMin(1),
+    unlocked: () => Ra.unlocks.dimStudyPath.canBeApplied && Ra.unlocks.MvDUnlock.canBeApplied,
+    formatEffect: value => `+${formatInt(value)}`
   },
   {
     id: 111,

@@ -130,8 +130,8 @@ export const normalCelestialStudies = [
     requirement: [43],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Dimension caps are muliplied based on Time Glyph Sacrifice`,
-    effect: () => DC.E4,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => player.reality.glyphs.sac.time.clampMin(1).log10().div(2).clampMin(1),
+    formatEffect: value => formatX(value, 2, 0)
   },
   {
     id: 54,
@@ -156,7 +156,14 @@ export const normalCelestialStudies = [
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Time Glyph Sacrifice becomes a power effect to the ${formatInt(8)}th Time Dimension,
      improved based on equipped Time Glyph count`,
-    effect: () => DC.D1.add(Glyphs.active.filter(n => n.type === "time").length).sqrt(),
+    effect: () => {
+      let active = 0;
+      for (let i = 0; i < Glyphs.active.length; i++) {
+        if (Glyphs.active[i] !== null && Glyphs.active[i].type === "time") active++;
+      }
+      return (1 + active) ** 0.5;
+      // DC.D1.add(Glyphs.active.filter(n => n.type === "time").length).sqrt();
+    },
     formatEffect: value => formatPow(value, 2, 1)
   },
   {
@@ -165,7 +172,7 @@ export const normalCelestialStudies = [
     requirement: [53],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Infinity Glyph Sacrifice delays the Infinity Dimension hardcap.`,
-    effect: () => DC.E4,
+    effect: () => player.reality.glyphs.sac.infinity.clampMin(1).log10().pow(2.225).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -270,7 +277,7 @@ export const normalCelestialStudies = [
     requirement: [111, 112, 113],
     reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `Replicanti speed is boosted based on Infinity Points`,
-    effect: () => DC.E4,
+    effect: () => Currency.infinityPoints.value.clampMin(1).log10().pow(0.5).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {

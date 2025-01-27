@@ -229,7 +229,15 @@ export const infinityUpgrades = {
     charged: {
       description: () =>
         `Gain extra Multiversal Galaxies based on Teresa level and Mending Count`,
-      effect: () => Currency.mends.value.max(1).pow(1.33).mul(Ra.pets.teresa.level).floor(),
+      effect: () => {
+        let x = Currency.mends.value.clampMin(1).log10().pow(2.5).mul(Ra.pets.teresa.level).pow(1.5);
+        if (x.gt(250000)) {
+          x = x.div(250000);
+          x = x.pow(0.4);
+          x = x.mul(250000);
+        }
+        return x.floor();
+      },
       formatEffect: value => `+${formatInt(value)}`
     }
   },
