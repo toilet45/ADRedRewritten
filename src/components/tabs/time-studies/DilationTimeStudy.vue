@@ -57,7 +57,7 @@ export default {
         this.showRequirement = !Pelle.isDoomed;
       }
       this.currTT.copyFrom(Currency.timeTheorems.value);
-      this.ttGen.copyFrom(getTTPerSecond().times(getGameSpeedupFactor()));
+      this.ttGen.copyFrom(getTTPerSecond().times(timeEffects.gameTimeSpeedup));
     },
     clickHandler() {
       switch (this.id) {

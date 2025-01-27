@@ -118,7 +118,7 @@ export default {
       this.showTTCost = !this.isUnlocked && !this.shiftDown;
       if (this.tier > 4) this.ttCost = TimeStudy.timeDimension(this.tier).cost;
       this.currTT.copyFrom(Currency.timeTheorems.value);
-      this.ttGen.copyFrom(getTTPerSecond().times(getGameSpeedupFactor()));
+      this.ttGen.copyFrom(getTTPerSecond().times(timeEffects.gameTimeSpeedup));
       this.isContinuumUnlocked = Laitela.continuumActive && Ra.unlocks.timeDimensionContinuum.canBeApplied;
       if (this.isContinuumUnlocked) this.continuumValue = dimension.continuumValue;
     },

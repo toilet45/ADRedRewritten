@@ -82,6 +82,15 @@ export function stackedLogPower(value, stacks, power) {
   return outputVal;
 }
 
+export function stackedLog(value, stacks) {
+  let outputVal = new Decimal(value);
+  for (let i = 0; i < stacks; i++) {
+    if (outputVal.abs().eq(0)) outputVal = new Decimal(1);
+    outputVal = outputVal.log10();
+  }
+  return outputVal;
+}
+
 export function breakInfinity() {
   if (!Autobuyer.bigCrunch.hasMaxedInterval) return;
   if (InfinityChallenge.isRunning) return;
@@ -369,7 +378,11 @@ export const GAME_SPEED_EFFECT = {
 
 export function gameSpeedupSoftcap(speed) {
   if (speed.lt("1e500")) return speed;
-  return speed.div("1e500").log10().div(308).mul(0.75).mul(308).pow10().mul("1e500");
+  const dvsr = ExpansionUpgrade(12).isBought ? 400 : 308;
+  let spd = speed.log10();
+  spd = spd.sub(500);
+  spd = spd.mul(Decimal.pow(1e-6, log(spd).pow(2).div(dvsr)));
+  return spd.add(500).pow10();
 }
 // eslint-disable-next-line complexity
 export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride) {
@@ -444,7 +457,9 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   factor = factor.pow(CelestialStudy(81).effectOrDefault(1));
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);
-  if (Enslaved.isExpanded) factor = factor.pow(1.2);
+  factor = factor.mul(ExpansionUpgrade(3).effectOrDefault(1));
+  if (ExpansionUpgrade(7).isBought && factor.gt(1)) factor = factor.pow(1.234);
+  if (Enslaved.isExpanded) factor = factor.pow(factor.add(1).log10().add(1).log10().add(1));
   return factor;
 }
 
@@ -484,10 +499,12 @@ export function trueTimeMechanics(trueDiff) {
   if (Enslaved.isAutoReleasing) {
     Enslaved.autoReleaseTick++;
   }
-  if (Enslaved.autoReleaseTick >= 5) {
+  if (Enslaved.autoReleaseTick >= 5 && !Enslaved.isExpanded) {
     Enslaved.autoReleaseTick = 0;
     Enslaved.useStoredTime(true);
     Enslaved.isReleaseTick = true;
+  } else if (Enslaved.autoReleaseTick >= 5) {
+    Enslaved.autoReleaseTick = 0;
   } else if (!Enslaved.isReleaseTick) {
     Enslaved.nextTickDiff = new Decimal(trueDiff);
   }

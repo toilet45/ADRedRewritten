@@ -49,8 +49,10 @@ export class NormalCelestialStudyState extends CelestialStudyState {
       ? CelestialStudy(req).isBought
       : req());
     switch (this.config.reqType) {
-      case CS_REQUIREMENT_TYPE.AT_LEAST_ONE:
+      case CS_REQUIREMENT_TYPE.AT_LEAST_ONE || CS_REQUIREMENT_TYPE.SOME:
         return this.config.requirement.some(r => check(r));
+      case CS_REQUIREMENT_TYPE.SOME_REQ:
+        return this.config.requirement.some(r => check(r)) && this.config.secondRequirement.every(r => check(r));
       case CS_REQUIREMENT_TYPE.ALL:
         return this.config.requirement.every(r => check(r));
       case CS_REQUIREMENT_TYPE.CHOICE_A:
@@ -64,13 +66,12 @@ export class NormalCelestialStudyState extends CelestialStudyState {
       case CS_REQUIREMENT_TYPE.CHOICE_D:
         return !(CelestialStudy(131).isBought || CelestialStudy(132).isBought) && this.config.requirement.some(r => check(r));
       case CS_REQUIREMENT_TYPE.CHOICE_E:
-        return !(CelestialStudy(151).isBought || CelestialStudy(152).isBought) && this.config.requirement.some(r => check(r));
+        return !(CelestialStudy(151).isBought || CelestialStudy(152).isBought) && this.config.requirement.some(r => check(r)) && this.config.secondRequirement.every(r => check(r));
       case CS_REQUIREMENT_TYPE.CHOICE_F:
-        return !(CelestialStudy(171).isBought || CelestialStudy(172).isBought) && this.config.requirement.some(r => check(r));
-      case CS_REQUIREMENT_TYPE.CHOICE_G1:
-        return !(CelestialStudy(181).isBought || CelestialStudy(182).isBought || CelestialStudy(183).isBought || CelestialStudy(184).isBought) && this.config.requirement.some(r => check(r));
-      case CS_REQUIREMENT_TYPE.CHOICE_G2:
-        return !(CelestialStudy(185).isBought || CelestialStudy(186).isBought || CelestialStudy(187).isBought || CelestialStudy(188).isBought) && this.config.requirement.some(r => check(r));
+        return !(CelestialStudy(171).isBought || CelestialStudy(172).isBought) && this.config.requirement.some(r => check(r)) && this.config.secondRequirement.every(r => check(r));
+      case CS_REQUIREMENT_TYPE.CHOICE_G:
+        return !(CelestialStudy(181).isBought || CelestialStudy(182).isBought || CelestialStudy(183).isBought || CelestialStudy(184).isBought || CelestialStudy(185).isBought ||
+        CelestialStudy(186).isBought || CelestialStudy(187).isBought || CelestialStudy(188).isBought) && this.config.requirement.some(r => check(r));
       default:
         throw Error(`Unrecognized CS requirement type: ${this.reqType}`);
     }

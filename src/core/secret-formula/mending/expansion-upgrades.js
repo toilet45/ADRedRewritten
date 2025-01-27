@@ -1,22 +1,14 @@
 import { DC } from "../../constants";
 
 const rebuyable = props => {
-  props.cost = () => getHybridCostScaling(
-    player.celestials.enslaved.expandRebuyables[props.id],
-    DC.E30,
-    props.initialCost,
-    props.costMult,
-    props.costMult.div(10),
-    DC.E309,
-    DC.E3,
-    props.initialCost.times(props.costMult)
-  );
+  // eslint-disable-next-line max-len
+  props.cost = () => props.initialCost.times(Decimal.pow(props.costMultplayer.celestials.enslaved.expandRebuyables[props.id]));
   const effect = props.effect;
   props.effect = () => effect;
-  props.description = () => props.textTemplate.replace("{value}", format(effect));
+  props.description = () => props.textTemplate;
   props.formatEffect = value => {
     if (props.id === 1) return formatInt(value);
-    if (props.id === 2) return value.lt(11) ? `+${formatPercents(value.sub(1), 2, 0)}` : formatX(value, 2, 2);
+    if (props.id === 2) return value.lt(11) ? `+${formatPercents(value.sub(1), 2, 2)}` : formatX(value, 2, 2);
     if (props.id === 3) return format(value, 2, 0);
     if (props.id === 4) return format(value, 2, 0);
     if (props.id === 5) return `${formatInt(value)}^log²(x) -> ${formatInt(value.add(5))}^log²(x)`;
@@ -33,7 +25,7 @@ export const expansionUpgrades = [
     id: 1,
     initialCost: new Decimal(100),
     costMult: new Decimal(10),
-    textTemplate: "Glyph Levels +{value} in Time Expansion",
+    textTemplate: `Glyph Levels +${formatInt(100)} in Time Expansion`,
     effect: () => DC.E1.mul(player.celestials.enslaved.expandRebuyables[1])
   }),
   rebuyable({
@@ -41,7 +33,7 @@ export const expansionUpgrades = [
     id: 2,
     initialCost: new Decimal(1000),
     costMult: new Decimal(1000),
-    textTemplate: "Equipped Glyphs are {value}% stronger",
+    textTemplate: `Equipped Glyphs are ${formatPercents(0.01)} stronger`,
     effect: () => player.celestials.enslaved.expandRebuyables[2].div(100).add(1)
   }),
   rebuyable({
@@ -49,7 +41,7 @@ export const expansionUpgrades = [
     id: 3,
     initialCost: new Decimal(500),
     costMult: new Decimal(20),
-    textTemplate: "Infinity Point and Eternity Point gain x{value}",
+    textTemplate: `Infinity Point and Eternity Point gain ${formatX(2)}`,
     effect: () => DC.D2.pow(player.celestials.enslaved.expandRebuyables[3])
   }),
   rebuyable({
@@ -57,22 +49,22 @@ export const expansionUpgrades = [
     id: 4,
     initialCost: new Decimal(1000),
     costMult: new Decimal(30),
-    textTemplate: "Multiply Gamespeed by x{value} after softcaps",
-    effect: () => new Decimal(1e10).mul(player.celestials.enslaved.expandRebuyables[4])
+    textTemplate: `Multiply Gamespeed by x${format(1e10)} after softcaps`,
+    effect: () => new Decimal(1e10).pow(player.celestials.enslaved.expandRebuyables[4])
   }),
   rebuyable({
     name: "Expansion Upgrade 5",
     id: 5,
     initialCost: DC.D3,
     costMult: new Decimal(50),
-    textTemplate: "Increase hyper logarithm scaling base by {value}",
+    textTemplate: `Increase sixth glyph instability base by ${formatInt(5)}`,
     effect: () => DC.D5.mul(player.celestials.enslaved.expandRebuyables[5]).add(2),
   }),
   {
     name: "Expansion Upgrade 6",
     id: 6,
     cost: 15,
-    description: () => `All Gamespeed effects ${formatPow(1.234, 3, 3)}`,
+    description: () => `Gamespeed is raised ${formatPow(1.234, 3, 3)} if above ${formatInt(1)}`,
     effect: () => new Decimal(1.234),
     formatEffect: value => formatPow(value, 2, 2)
   },
@@ -81,8 +73,7 @@ export const expansionUpgrades = [
     id: 7,
     cost: 15,
     description: "Memory gain is boosted based on Gamespeed",
-    // Is x40 at e400 Gamespeed, TODO: softcap at 50x? --- Nope, needs buff
-    effect: () => Decimal.max(1, (getGameSpeedupFactor().add(1)).log10().div(10)),
+    effect: () => Decimal.max(1, (timeEffects.gameTimeSpeedup.add(1)).log10().pow(2).div(10)),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -113,7 +104,7 @@ export const expansionUpgrades = [
     id: 11,
     cost: 50,
     description: () => `Infinity Dimensions affect Time Dimensions at a reduced rate in Time Expansion`,
-    effect: () => DC.D1,
+    effect: () => (Enslaved.isExpaned ? DC.D1 : DC.D1),
     formatEffect: value => `${format(value)}`
   },
   {
@@ -121,8 +112,7 @@ export const expansionUpgrades = [
     id: 12,
     cost: 50,
     description: () => `Gamespeed softcap applies every ${format("1e400")} instead of every ${format("1e308")}`,
-    effect: () => new Decimal("1e400"),
-    formatEffect: value => formatX(value, 2, 2)
+    effect: () => DC.D1,
   },
   {
     name: "Expansion Upgrade 13",
@@ -136,7 +126,6 @@ export const expansionUpgrades = [
     id: 14,
     cost: 50,
     description: "Unlock Hypercubes",
-    shortDescription: () => `Hypercube Unlock`,
     effect: () => DC.D1,
   },
   {

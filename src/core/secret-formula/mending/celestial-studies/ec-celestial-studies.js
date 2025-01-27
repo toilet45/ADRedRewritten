@@ -80,10 +80,10 @@ export const ecCelestialStudies = [
     requirement: [131, 132],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Replicanti",
-      current: () => Currency.replicanti.value,
-      required: completions => new Decimal("1e8e8").times(Decimal.pow("1e5e7", completions)),
-      formatValue: format
+      resource: "Eternity Challenge Completions",
+      current: () => EternityChallenges.completions,
+      required: completions => 150 + 30 * completions + (Enslaved.isRunning ? 995 : 0),
+      formatValue: formatInt
     }
   },
   {
@@ -156,7 +156,7 @@ export const ecCelestialStudies = [
       current: () => EternityChallenge(21).completions + EternityChallenge(22).completions +
       EternityChallenge(23).completions + EternityChallenge(24).completions,
       // eslint-disable-next-line no-unused-vars
-      required: completions => 20,
+      required: completions => (completions + 2) * 10,
       formatValue: formatInt
     }
   },

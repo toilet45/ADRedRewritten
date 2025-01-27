@@ -95,6 +95,10 @@ class RaPetState extends GameMechanicState {
     return this.config.rawMemoryChunksPerSecond();
   }
 
+  get secondaryChunkMultiplier() {
+    return this.config.secondaryChunkMultiplier();
+  }
+
   get memoryProductionMultiplier() {
     let x = this.config.memoryProductionMultiplier();
     x = x.times(this.level < 25 && (this.name === "Teresa" || this.name === "Effarig" ||
@@ -136,7 +140,7 @@ class RaPetState extends GameMechanicState {
   }
 
   get requiredMemories() {
-    let x = Ra.requiredMemoriesForLevel(this.level);
+    let x = Ra.requiredMemoriesForLevel(this.level, this.name);
     if (this.level >= 75) x = x.div(RaUpgrade(3).effectOrDefault(1));
     if (this.level >= 100) {
       x = x.div(RaUpgrade(6).effectOrDefault(1));
@@ -152,6 +156,7 @@ class RaPetState extends GameMechanicState {
       .mul(GlyphInfo.reality.sacrificeInfo.effect());
     if (this.hasRemembrance) res = res.mul(Ra.remembrance.multiplier);
     else if (Ra.petWithRemembrance) res = res.mul(Ra.remembrance.nerf);
+    if (RaUpgrade(15).isBought) res = res.mul(this.secondaryChunkMultiplier);
     return res.times(dev.speedUp);
   }
 
@@ -192,11 +197,11 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryUpgradeCapped() {
-    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24 + Effects.sum(RaUpgrade(5)).toNumber()).div(2));
+    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2).mul(Effects.sum(RaUpgrade(5)).mul(5)));
   }
 
   get chunkUpgradeCapped() {
-    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24 + Effects.sum(RaUpgrade(5)).toNumber()).div(2));
+    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2).mul(Effects.sum(RaUpgrade(5)).mul(25)));
   }
 
   purchaseMemoryUpgrade() {
@@ -323,7 +328,7 @@ export const Ra = {
     }
     res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
     res = res.mul(Ra.unlocks.memGainOutsideRa.canBeApplied && !Ra.isRunning ? 20 : 1);
-    // res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
+    res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
     return res;
   },
   get memoryBoostResources() {
@@ -342,14 +347,24 @@ export const Ra = {
     return `${boostList.slice(0, -1).join(", ")}, and ${boostList[boostList.length - 1]}`;
   },
   // This is the exp required ON "level" in order to reach "level + 1"
-  requiredMemoriesForLevel(level) {
+  requiredMemoriesForLevel(level, petName = "teresa") {
     if (level >= (MendingUpgrade(19).isBought ? 100 : 25)) return DC.BEMAX;
     const adjustedLevel = Decimal.pow(level, 2).div(10).add(level - (Ra.unlocks.scaleReduce ? 3 : 0)).max(1);
     const post15Scaling = Decimal.pow(1.5, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 17 : 15)));
     const post25Scaling = Decimal.pow(1.05, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 27 : 25)).pow(2));
     const post65Scaling = Decimal.pow(1.2, Decimal.max(0, level - (Ra.unlocks.scaleReduce ? 67 : 65)).pow(3));
-    return Decimal.floor(Decimal.pow(adjustedLevel, 5.52).mul(post15Scaling)
+    let req = Decimal.floor(Decimal.pow(adjustedLevel, 5.52).mul(post15Scaling)
       .mul(post25Scaling).mul(post65Scaling).mul(DC.E6));
+    if (["teresa", "effarig", "enslaved", "v"].includes(petName.toLowerCase()) && level < 25) return req;
+    if (petName.toLowerCase() === "ra") req = req.pow(0.65);
+    if (petName.toLowerCase() === "teresa") req = req.pow(1.1);
+    if (petName.toLowerCase() === "effarig") req = req.pow(1.25);
+    if (petName.toLowerCase() === "enslaved") req = req.pow(1.4);
+    if (petName.toLowerCase() === "v") req = req.pow(1.65);
+    if (petName.toLowerCase() === "laitela") req = req.mul(1e12).pow(2);
+    if (petName.toLowerCase() === "pelle") req = req.pow(4).mul(1e50);
+    if (level > 90) req = req.pow(1 + (level - 85) / 100);
+    return req;
   },
   // Returns a string containing a time estimate for gaining a specific amount of exp (UI only)
   timeToGoalString(pet, expToGain) {

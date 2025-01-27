@@ -402,8 +402,8 @@ window.CS_REQUIREMENT_TYPE = {
   CHOICE_D: 6,
   CHOICE_E: 7,
   CHOICE_F: 8,
-  CHOICE_G1: 9,
-  CHOICE_G2: 10
+  CHOICE_G: 9,
+  SOME_REQ: 10,
 };
 
 window.ALCHEMY_RESOURCE = {
