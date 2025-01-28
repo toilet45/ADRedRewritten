@@ -73,7 +73,7 @@ export default {
       <br>
       <br>
       Annihilation will reset your Dark Matter and Dark Matter Dimension amounts, but also add
-      <b>+{{ format(darkMatterMultGain, 2, 2) }}</b><span v-if="lai15"> (<b>+{{ format(darkMatterMultGainManual, 2, 2) }} if manual</b>) </span>to your Annihilation multiplier.
+      <b>+{{ format(darkMatterMultGain, 2, 2) }}</b><span v-if="lai15"> (<b>+{{ format(darkMatterMultGainManual, 2, 2) }} if manual</b>) </span> to your Annihilation multiplier.
       <br>
       (<b>{{ formatX(darkMatterMultRatio, 2, 2) }}</b><span v-if="lai15"> (<b>{{ formatX(darkMatterMultRatioManual, 2, 2) }} if manual</b>) </span> from previous multiplier)
       <span v-if="autobuyerUnlocked">

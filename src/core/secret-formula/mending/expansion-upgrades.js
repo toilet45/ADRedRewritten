@@ -2,7 +2,7 @@ import { DC } from "../../constants";
 
 const rebuyable = props => {
   // eslint-disable-next-line max-len
-  props.cost = () => props.initialCost.times(Decimal.pow(props.costMultplayer.celestials.enslaved.expandRebuyables[props.id]));
+  props.cost = () => props.initialCost.times(Decimal.pow(player.celestials.enslaved.expandRebuyables[props.id]));
   const effect = props.effect;
   props.effect = () => effect;
   props.description = () => props.textTemplate;
@@ -25,7 +25,7 @@ export const expansionUpgrades = [
     id: 1,
     initialCost: new Decimal(100),
     costMult: new Decimal(10),
-    textTemplate: `Glyph Levels +${formatInt(100)} in Time Expansion`,
+    textTemplate: "Glyph Levels +100 in Time Expansion",
     effect: () => DC.E1.mul(player.celestials.enslaved.expandRebuyables[1])
   }),
   rebuyable({
@@ -33,7 +33,7 @@ export const expansionUpgrades = [
     id: 2,
     initialCost: new Decimal(1000),
     costMult: new Decimal(1000),
-    textTemplate: `Equipped Glyphs are ${formatPercents(0.01)} stronger`,
+    textTemplate: "Equipped Glyphs are 1% stronger",
     effect: () => player.celestials.enslaved.expandRebuyables[2].div(100).add(1)
   }),
   rebuyable({
@@ -41,7 +41,7 @@ export const expansionUpgrades = [
     id: 3,
     initialCost: new Decimal(500),
     costMult: new Decimal(20),
-    textTemplate: `Infinity Point and Eternity Point gain ${formatX(2)}`,
+    textTemplate: "Multiply Infinity Point and Eternity Point gain by 2",
     effect: () => DC.D2.pow(player.celestials.enslaved.expandRebuyables[3])
   }),
   rebuyable({
@@ -49,7 +49,7 @@ export const expansionUpgrades = [
     id: 4,
     initialCost: new Decimal(1000),
     costMult: new Decimal(30),
-    textTemplate: `Multiply Gamespeed by x${format(1e10)} after softcaps`,
+    textTemplate: `Multiply Gamespeed by 1e10 after softcaps`,
     effect: () => new Decimal(1e10).pow(player.celestials.enslaved.expandRebuyables[4])
   }),
   rebuyable({
@@ -57,7 +57,7 @@ export const expansionUpgrades = [
     id: 5,
     initialCost: DC.D3,
     costMult: new Decimal(50),
-    textTemplate: `Increase sixth glyph instability base by ${formatInt(5)}`,
+    textTemplate: "Increase sixth glyph instability base by 5",
     effect: () => DC.D5.mul(player.celestials.enslaved.expandRebuyables[5]).add(2),
   }),
   {

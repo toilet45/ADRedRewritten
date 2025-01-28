@@ -381,7 +381,7 @@ export function gameSpeedupSoftcap(speed) {
   const dvsr = ExpansionUpgrade(12).isBought ? 400 : 308;
   let spd = speed.log10();
   spd = spd.sub(500);
-  spd = spd.mul(Decimal.pow(1e-6, log(spd).pow(2).div(dvsr)));
+  spd = spd.mul(Decimal.pow(1e-6, Decimal.log10(spd).pow(2).div(dvsr)));
   return spd.add(500).pow10();
 }
 // eslint-disable-next-line complexity

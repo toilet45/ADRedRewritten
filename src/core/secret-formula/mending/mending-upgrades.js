@@ -246,12 +246,12 @@ export const mendingUpgrades = [
     name: "19",
     id: 19,
     cost: new Decimal("210"),
-    description: "Unlock Ra's Memories, which go up to level 100.",
+    description: "Unlock Ra's Memories",
   },
   {
     name: "20",
     id: 20,
     cost: new Decimal("250"),
-    description: "Unlock Warp Reality",
+    description: "Unlock Warp Reality and increase Ra's memory level cap too 100",
   },
 ];

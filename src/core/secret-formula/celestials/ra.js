@@ -32,7 +32,7 @@ export const ra = {
             nonZero += 1;
           }
         }
-        return secondaryEffectVal.div(nonZero.clampMin(1)).log10().times(250);
+        return secondaryEffectVal.div(Math.max(nonZero, 1)).log10().times(250);
       },
       memoryProductionMultiplier: () => Ra.unlocks.effarigXP.effectOrDefault(new Decimal(1))
     },
