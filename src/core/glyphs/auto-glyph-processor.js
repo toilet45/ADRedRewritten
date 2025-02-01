@@ -365,7 +365,7 @@ export function getGlyphLevelInputs() {
   scaledLevel = logScaleSoftcap(scaledLevel, staticFactors.hyperSuperInstability,
     new Decimal(75).div(MendingUpgrade(4).effectOrDefault(1)));
   const scalePenalty = scaledLevel.gt(0) ? baseLevel.div(scaledLevel) : DC.D1;
-  const incAfterInstability = staticFactors.achievements.add(staticFactors.realityUpgrades);
+  const incAfterInstability = staticFactors.achievements.add(staticFactors.realityUpgrades).times(PerkShopUpgrade.glyphInstability.effectOrDefault(1));
   baseLevel = baseLevel.add(incAfterInstability);
   scaledLevel = scaledLevel.add(incAfterInstability);
   return {

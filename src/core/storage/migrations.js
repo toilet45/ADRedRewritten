@@ -472,6 +472,9 @@ export const migrations = {
     },
     103: player => {
       player.challenge.infinity.bestTimes = player.challenge.infinity.bestTimes.concat(Array.repeat(new Decimal("1F9e15"), 4));
+    },
+    104: player => {
+      player.celestials.teresa.perkShop = player.celestials.teresa.perkShop.concat(Array.repeat(new Decimal(), 2));
     }
   },
 

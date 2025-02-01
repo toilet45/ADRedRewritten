@@ -43,7 +43,8 @@ export default {
       hard_lastMachines: new Decimal(0),
       hard_lastiM: new Decimal(),
       hard_runReward: new Decimal(),
-      hardModeUnlocked: false
+      hardModeUnlocked: false,
+      hasTeresa65: false
     };
   },
   computed: {
@@ -64,6 +65,10 @@ export default {
         PerkShopUpgrade.musicGlyph,
       ];
       if (this.raisedPerkShop) upgrades.push(PerkShopUpgrade.fillMusicGlyph);
+      if (this.hasTeresa65) {
+        upgrades.push(PerkShopUpgrade.glyphInstability);
+        upgrades.push(PerkShopUpgrade.imCap);
+      }
       return upgrades;
     },
     runButtonClassObject() {
@@ -146,6 +151,7 @@ export default {
         .filter(unlock => this.rm.plus(this.pouredAmount).gte(unlock.price) && !unlock.isUnlocked).length > 0;
       this.hardTeresaToggled = Teresa.hardModeToggled;
       this.hardModeUnlocked = Teresa.hardModeUnlocked;
+      this.hasTeresa65 = Ra.unlocks.perkShopUpgrades.canBeApplied;
     },
     startRun() {
       if (this.isDoomed) return;

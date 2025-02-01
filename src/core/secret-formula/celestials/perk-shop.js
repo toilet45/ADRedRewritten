@@ -82,4 +82,26 @@ export const perkShop = {
     costCap: () => Number.MAX_VALUE,
     cap: () => Number.MAX_VALUE
   }),
+  glyphInstability: rebuyable({
+    id: 6,
+    initialCost: 1e12,
+    increment: 5,
+    description: () => `Glyph Level post instability +${formatPercents(0.005, 1, 1)}`,
+    effect: bought => Decimal.mul(0.005, bought).toNumber() + 1,
+    formatEffect: value => formatPercents(value, 1, 1),
+    formatCost: value => format(value, 2),
+    costCap: () => 1.53e23,
+    cap: () => 1.08
+  }),
+  imCap: rebuyable({
+    id: 7,
+    initialCost: 1e10,
+    increment: 100,
+    description: () => `Multiply Imaginary Machine cap by ${formatX(2)}`,
+    effect: bought => Decimal.pow(2, bought).toNumber(),
+    formatEffect: value => formatX(value, 2),
+    formatCost: value => format(value, 2),
+    costCap: () => 1e20,
+    cap: () => 32
+  }),
 };

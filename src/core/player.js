@@ -457,7 +457,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: DC.D0,
-  version: 103,
+  version: 104,
   infinityPower: DC.D1,
   postC4Tier: 0,
   eternityPoints: DC.D0,
@@ -708,7 +708,7 @@ window.player = {
         lastRepeatediM: DC.D0,
         toggled: false,
       },
-      perkShop: Array.repeat(DC.D0, 6),
+      perkShop: Array.repeat(DC.D0, 8),
       lastRepeatedMachines: DC.D0,
       lastRepeatediM: DC.D0,
     },
