@@ -415,6 +415,15 @@ export const tabs = [
         id: 5,
         hidable: true,
       },
+      {
+        key: "alchemy_2",
+        name: "Advanced Alchemy",
+        symbol: "?",
+        component: "AlchemyV2Tab",
+        condition: () => Ra.unlocks.alchemyTwo.isUnlocked,
+        id: 6,
+        hidable: true
+      }
     ],
   },
   {

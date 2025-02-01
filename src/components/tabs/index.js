@@ -1,5 +1,6 @@
 // Temporarily aggregate tab components here until GameUI is migrated to SFC
 import AlchemyTab from "./alchemy/AlchemyTab";
+import AlchemyV2Tab from "./alchemy-v2/AlchemyV2Tab";
 import AntimatterDimensionsTab from "./antimatter-dimensions/AntimatterDimensionsTab";
 import AutobuyersTab from "./autobuyers/AutobuyersTab";
 import AutomatorTab from "./automator/AutomatorTab";
@@ -96,7 +97,8 @@ const TabComponents = {
   TimeExpansionTab,
   UniversalDamageTab,
   CelestialStudiesTab,
-  MultiversalDimensionsTab
+  MultiversalDimensionsTab,
+  AlchemyV2Tab
 };
 
 export default TabComponents;

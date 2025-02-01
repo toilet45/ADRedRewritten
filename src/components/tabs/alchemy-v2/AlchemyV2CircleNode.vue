@@ -1,12 +1,12 @@
 <script>
-import AlchemyResourceArc from "./AlchemyV2ResourceArc";
+import AlchemyV2ResourceArc from "./AlchemyV2ResourceArc";
 import HintText from "@/components/HintText";
 
 export default {
-  name: "AlchemyCircleNode",
+  name: "AlchemyV2CircleNode",
   components: {
     HintText,
-    AlchemyResourceArc
+    AlchemyV2ResourceArc
   },
   props: {
     node: {
@@ -75,7 +75,7 @@ export default {
     @mouseleave="$emit('mouseleave')"
     @click="emitClick"
   >
-    <AlchemyResourceArc
+    <AlchemyV2ResourceArc
       :resource="resource"
       :class-object="classObject"
     />

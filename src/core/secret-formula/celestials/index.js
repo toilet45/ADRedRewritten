@@ -1,4 +1,5 @@
 import { alchemyResources } from "./alchemy";
+import { alchemyResourcesV2 } from "./alchemy-v2";
 import { celestialNavigation } from "./navigation";
 import { effarigUnlocks } from "./effarig";
 import { enslaved } from "./enslaved";
@@ -22,6 +23,9 @@ export const celestials = {
   },
   alchemy: {
     resources: alchemyResources
+  },
+  alchemyV2: {
+    resources: alchemyResourcesV2
   },
   pelle: {
     galaxyGeneratorUpgrades: pelleGalaxyGeneratorUpgrades,

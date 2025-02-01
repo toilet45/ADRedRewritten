@@ -439,7 +439,7 @@ export const ra = {
     },
     alchemyTwo: {
       id: 36,
-      reward: () => `Unlock a second set of alchemy resources. A resource is unlocked every ${formatInt(10)} levels`,
+      reward: () => `Unlock Advanced Alchemy resources.`,
       effect: () => Math.min(7, Math.floor((Ra.pets.effarig.level - 30) / 10)),
       pet: "effarig",
       level: 40,

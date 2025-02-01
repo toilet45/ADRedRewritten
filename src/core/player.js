@@ -827,6 +827,11 @@ window.player = {
           amount: DC.D0,
           reaction: false
         })),
+      alchemyV2: Array.repeat(0, 11)
+        .map(() => ({
+          amount: DC.D0,
+          reaction: false
+        })),
       highestRefinementValue: {
         power: DC.D0,
         infinity: DC.D0,
@@ -834,6 +839,14 @@ window.player = {
         replication: DC.D0,
         dilation: DC.D0,
         effarig: DC.D0
+      },
+      highestV2RefinementValue: {
+        cursed: DC.D0,
+        effarig: DC.D0,
+        amalgamated: DC.D0,
+        reality: DC.D0,
+        damaged: DC.D0,
+        horrific: DC.D0
       },
       quoteBits: 0,
       momentumTime: DC.D0,

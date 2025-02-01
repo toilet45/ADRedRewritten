@@ -1,16 +1,16 @@
 <script>
 import { AlchemyV2CircleLayout } from "./alchemy-v2-circle-layout";
 // eslint-disable-next-line sort-imports
-import AlchemyCircleNode from "./AlchemyCircleNode";
-import AlchemyResourceInfo from "./AlchemyResourceInfo";
+import AlchemyV2CircleNode from "./AlchemyV2CircleNode";
+import AlchemyV2ResourceInfo from "./AlchemyV2ResourceInfo";
 import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
-  name: "AlchemyTab",
+  name: "AlchemyV2Tab",
   components: {
     PrimaryButton,
-    AlchemyCircleNode,
-    AlchemyResourceInfo
+    AlchemyV2CircleNode,
+    AlchemyV2ResourceInfo
   },
   data() {
     return {
@@ -28,7 +28,7 @@ export default {
     };
   },
   computed: {
-    resources: () => AlchemyResources.all,
+    resources: () => AlchemyResources.allAdvanced,
     layout: () => new AlchemyV2CircleLayout(),
     sizeMultiplier: () => 5,
     infoResource() {
@@ -52,7 +52,7 @@ export default {
       };
     },
     reactions() {
-      return AlchemyReactions.all.compact().filter(r => r.product.isUnlocked);
+      return AdvancedAlchemyReactions.all.compact().filter(r => r.product.isUnlocked);
     },
     isDoomed() {
       return Pelle.isDoomed;
@@ -63,10 +63,10 @@ export default {
   },
   methods: {
     update() {
-      this.reactionsAvailable = structuredClone(AlchemyResources.all.filter(res => !res.isBaseResource && res.isUnlocked).length !== 0);
+      this.reactionsAvailable = structuredClone(AlchemyResources.allAdvanced.filter(res => !res.isBaseResource && res.isUnlocked).length !== 0);
       this.realityCreationVisible = Ra.pets.effarig.level >= 25;
       this.animationTimer += 35;
-      this.alchemyCap = Ra.alchemyResourceCap;
+      this.alchemyCap = Ra.advancedAlchemyResourceCap;
       this.capFactor = new Decimal(GlyphSacrificeHandler.glyphRefinementEfficiency).recip();
       this.createdRealityGlyph = player.reality.glyphs.createdRealityGlyph;
       this.allReactionsDisabled = this.reactions.every(reaction => !reaction.isActive);
@@ -219,7 +219,7 @@ export default {
         View Reality Glyph creation
       </PrimaryButton>
     </div>
-    <AlchemyResourceInfo
+    <AlchemyV2ResourceInfo
       :key="infoResourceId"
       :resource="infoResource"
     />
@@ -251,7 +251,7 @@ export default {
           :class="orbitClass"
         />
       </svg>
-      <AlchemyCircleNode
+      <AlchemyV2CircleNode
         v-for="(node, i) in layout.nodes"
         :key="i"
         :node="node"

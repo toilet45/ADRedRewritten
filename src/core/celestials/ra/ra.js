@@ -499,6 +499,9 @@ export const Ra = {
   get alchemyResourceCap() {
     return Ra.unlocks.alchHardcapIncrease.canBeApplied ? 50000 : 25000;
   },
+  get advancedAlchemyResourceCap() {
+    return 0;
+  },
   get momentumValue() {
     const hoursFromUnlock = TimeSpan.fromMilliseconds(player.celestials.ra.momentumTime).totalHours;
     return Decimal.min(hoursFromUnlock.times(0.005).add(1), AlchemyResource.momentum.effectValue);

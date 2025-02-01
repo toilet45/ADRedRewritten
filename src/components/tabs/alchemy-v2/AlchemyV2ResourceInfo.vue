@@ -2,7 +2,7 @@
 import EffectDisplay from "@/components/EffectDisplay";
 
 export default {
-  name: "AlchemyResourceInfo",
+  name: "AlchemyV2ResourceInfo",
   components: {
     EffectDisplay
   },

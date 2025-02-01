@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "AlchemyResourceArc",
+  name: "AlchemyV2ResourceArc",
   props: {
     resource: {
       type: Object,

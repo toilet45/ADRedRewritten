@@ -1,6 +1,6 @@
 class AlchemyV2OrbitLayout {
   constructor(tier, radius, angleOffset = 0) {
-    this._resources = AlchemyResources.all
+    this._resources = AlchemyResources.allAdvanced
       .filter(y => y.config.tier === tier)
       .sort((x, y) => x.config.uiOrder - y.config.uiOrder);
     this._radius = radius;
@@ -47,7 +47,7 @@ export class AlchemyV2CircleLayout {
       node.y = (node.y / size + 0.5) * 100;
     }
     const reactionArrows = [];
-    for (const reaction of AlchemyReactions.all.compact()) {
+    for (const reaction of AdvancedAlchemyReactions.all.compact()) {
       const productNode = nodes
         .find(n => n.resource === reaction.product);
       const reagentNodes = reaction.reagents
