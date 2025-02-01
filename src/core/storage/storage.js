@@ -89,15 +89,15 @@ export const GameStorage = {
   },
 
   get localStorageKey() {
-    return DEV ? "dimensionTestSave" : "dimensionSave";
+    return DEV ? "ADRRdimensionTestSave" : "ADRRdimensionSave";
   },
 
   backupDataKey(saveSlot, backupSlot) {
-    return DEV ? `backupTestSave-${saveSlot}-${backupSlot}` : `backupSave-${saveSlot}-${backupSlot}`;
+    return DEV ? `ADRRbackupTestSave-${saveSlot}-${backupSlot}` : `ADRRbackupSave-${saveSlot}-${backupSlot}`;
   },
 
   backupTimeKey(saveSlot) {
-    return DEV ? `backupTestTimes-${saveSlot}` : `backupTimes-${saveSlot}`;
+    return DEV ? `ADRRbackupTestTimes-${saveSlot}` : `ADRRbackupTimes-${saveSlot}`;
   },
 
   load() {

@@ -197,11 +197,13 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryUpgradeCapped() {
-    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2).mul(Effects.sum(RaUpgrade(5)).add(1).mul(5)));
+    return this.memoryUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2)
+      .mul(Effects.sum(RaUpgrade(5)).mul(5).add(1)));
   }
 
   get chunkUpgradeCapped() {
-    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2).mul(Effects.sum(RaUpgrade(5)).add(1).mul(25)));
+    return this.chunkUpgradeCost.gte(Ra.requiredMemoriesForLevel(24).div(2)
+      .mul(Effects.sum(RaUpgrade(5)).mul(25).add(1)));
   }
 
   purchaseMemoryUpgrade() {
