@@ -223,7 +223,7 @@ export const realityUpgrades = [
     name: "Disparity of Rarity",
     id: 16,
     cost: 1500,
-    requirement: () => `Reality with ${formatInt(4)} Glyphs equipped of uncommon or better rarity
+    requirement: () => `Reality with atleast ${formatInt(4)} Glyphs equipped of uncommon or better rarity
       (${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.strength.gte(1.5)))} equipped)`,
     hasFailed: () => {
       const availableGlyphs = Glyphs.inventory.countWhere(g => g && g.strength.gte(1.5));
@@ -231,7 +231,7 @@ export const realityUpgrades = [
       const availableSlots = Glyphs.activeSlotCount - Glyphs.activeList.length;
       return equipped + Math.min(availableGlyphs, availableSlots) < 4;
     },
-    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.strength.gte(1.5)) === 4,
+    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.strength.gte(1.5)) >= 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "Improve the Glyph rarity formula",
     effect: new Decimal(1.3),
@@ -241,16 +241,15 @@ export const realityUpgrades = [
     name: "Duplicity of Potency",
     id: 17,
     cost: 1500,
-    requirement: () => `Reality with ${formatInt(4)} Glyphs equipped, each having at least ${formatInt(2)} effects
-      (${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.effects.length >= 2))}
-      equipped)`,
+    requirement: () => `Reality with atleast ${formatInt(4)} Glyphs equipped, each having at least ${formatInt(2)}
+    effects (${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.effects.length >= 2))} equipped)`,
     hasFailed: () => {
       const availableGlyphs = Glyphs.inventory.countWhere(g => g && g.effects.length >= 2);
       const equipped = Glyphs.activeWithoutCompanion.countWhere(g => g.effects.length >= 2);
       const availableSlots = Glyphs.activeSlotCount - Glyphs.activeList.length;
       return equipped + Math.min(availableGlyphs, availableSlots) < 4;
     },
-    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.effects.length >= 2) === 4,
+    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.effects.length >= 2) >= 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: () => `${formatPercents(0.5)} chance to get an additional effect on Glyphs`,
     effect: DC.D0_5,
@@ -260,7 +259,7 @@ export const realityUpgrades = [
     name: "Measure of Forever",
     id: 18,
     cost: 1500,
-    requirement: () => `Reality with ${formatInt(4)} Glyphs equipped, each at level ${formatInt(10)} or higher
+    requirement: () => `Reality with atleast ${formatInt(4)} Glyphs equipped, each at level ${formatInt(10)} or higher
       (${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.level.gte(10)))} equipped)`,
     hasFailed: () => {
       const availableGlyphs = Glyphs.inventory.countWhere(g => g && g.level.gte(10));
@@ -268,7 +267,7 @@ export const realityUpgrades = [
       const availableSlots = Glyphs.activeSlotCount - Glyphs.activeList.length;
       return equipped + Math.min(availableGlyphs, availableSlots) < 4;
     },
-    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.level.gte(10)) === 4,
+    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.level.gte(10)) >= 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "Eternity count boosts Glyph level",
     effect: () => Decimal.sqrt(Currency.eternitiesTotal.value.plus(1).log10()).mul(0.45).max(1),
