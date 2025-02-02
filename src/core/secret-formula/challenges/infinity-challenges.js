@@ -142,7 +142,7 @@ export const infinityChallenges = [
       effect: () => DC.D1,
       formatEffect: value => formatX(value, 2, 2)
     },
-    unlockAM: DC.E1,
+    unlockAM: DC.BEMAX,
   },
   {
     id: 10,
@@ -155,7 +155,7 @@ export const infinityChallenges = [
       effect: () => DC.D1,
       formatEffect: value => formatX(value, 2, 2)
     },
-    unlockAM: DC.E1,
+    unlockAM: DC.BEMAX,
   },
   {
     id: 11,
@@ -168,7 +168,7 @@ export const infinityChallenges = [
       effect: () => DC.D1,
       formatEffect: value => formatX(value, 2, 2)
     },
-    unlockAM: DC.E1,
+    unlockAM: DC.BEMAX,
   },
   {
     id: 12,
@@ -181,6 +181,6 @@ export const infinityChallenges = [
       effect: () => DC.D1,
       formatEffect: value => formatX(value, 2, 2)
     },
-    unlockAM: DC.E1,
+    unlockAM: DC.BEMAX,
   }
 ];
