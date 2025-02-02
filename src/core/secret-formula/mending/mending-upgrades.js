@@ -64,7 +64,7 @@ export const mendingUpgrades = [
     id: 3,
     costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, DC.D0],
     // TODO: change this desc
-    description: () => `Antimatter, Infinity, and Time Dimensions are multipled then raised to a power`,
+    description: () => `Antimatter, Infinity, and Time Dimensions gain a multiplier and to a power`,
     effects: p => ({
       mult: [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
         DC.E5000, DC.E5000, DC.E5000, DC.E5000,
@@ -90,13 +90,13 @@ export const mendingUpgrades = [
       : `Mends multiply Memory and Dark Matter gain`),
     effect: () => {
       let x = Currency.mends.value.add(1);
-      // Softcap at x20
+      // Softcap at x20, harcap at x1000
       if (x.gt(20)) {
         x = x.div(20);
         x = x.pow(0.33);
         x = x.times(20);
       }
-      return x;
+      return x.max(1000);
     },
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -117,8 +117,7 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "7",
     id: 7,
-    costs: [DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8,
-      DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D8, DC.D0],
+    costs: [...Array.repeat(DC.D8, 21)],
     // TODO: change this desc
     // eslint-disable-next-line max-len
     description: p => `Bank some of your Eternities on Reality${p >= 10 ? ", and some of your Realities on Mend." : ""}`,
@@ -162,7 +161,7 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "12",
     id: 12,
-    costs: [...Array.repeat(new Decimal(50), 20)],
+    costs: [...Array.repeat(new Decimal(50), 21)],
     // TODO: change this desc
     description: () => `Infinity Power conversion, and free Tickspeed scaling increase`,
     effects: p => ({
@@ -215,12 +214,14 @@ export const mendingUpgrades = [
       agPow: Decimal.pow(1.001, p)
     }),
     formatEffect: effects =>
-      `+${format(effects.galaxies)} MG, /${format(effects.agCost, 3, 3)}, +${formatPercents(effects.agPow.sub(1), 3, 3)}`
+      // Its literally 121 instead of 120 we can just ignore it
+      // eslint-disable-next-line max-len
+      `+${formatInt(effects.galaxies)} MG, /${format(effects.agCost, 3, 3)}, +${formatPercents(effects.agPow.sub(1), 3, 3)}`
   }),
   hybridRebuyable({
     name: "QoL Bonanza",
     id: 17,
-    costs: [new Decimal(175), ...Array.repeat(new Decimal(65), 7)],
+    costs: [new Decimal(175), ...Array.repeat(new Decimal(65), 8)],
     // eslint-disable-next-line no-unused-vars
     description: p => ["Start every Mend with Continuum unlocked (works in Pelle)",
       "Automatically purchase and sacrifice Music Glyphs",
@@ -252,6 +253,6 @@ export const mendingUpgrades = [
     name: "20",
     id: 20,
     cost: new Decimal("250"),
-    description: "Unlock Warp Reality and increase Ra's memory level cap too 100",
+    description: `Unlock Warp Reality, allowing Antimatter to exceed ${format("e9e15", 2, 2)}`,
   },
 ];

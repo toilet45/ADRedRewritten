@@ -47,8 +47,12 @@ export default {
     },
     handleSpeedUpInput() {
       const speedUp = parseFloat(this.input);
-      if (!isFinite(speedUp) || isNaN(speedUp) || speedUp <= 0 || speedUp > 1e300) {
-        this.displayText = "Invalid speed";
+      if (!isFinite(speedUp) || speedUp > 3600) {
+        this.displayText = `Input speed was above 3600, so it has been set to 3600x.`;
+        this.isValidSpeed = true;
+        this.speedUp = 3600;
+      } else if (isNaN(speedUp) || speedUp <= 0) {
+        this.displayText = "Speed is invalid (either NaN or lte 0)";
         this.isValidSpeed = false;
       } else {
         this.displayText = `Speed will be set to ${speedUp}x`;
@@ -74,7 +78,7 @@ export default {
       <div>
         Set game speed up for testing purposes.
         A report will be displayed after setting the speed up back to 1 informing how
-        long was the speed up effecitvely.
+        long was the speed up effectively. This speedup is capped at 3600x, or 1 hour per second.
       </div>
       <div class="c-modal-hard-reset-danger">
         This speed up will affect EVERYTHING except (NC11, IC1, IC6, IC8, and EC12)
