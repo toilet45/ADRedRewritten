@@ -64,7 +64,7 @@ export const mendingUpgrades = [
     id: 3,
     costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, DC.D0],
     // TODO: change this desc
-    description: () => `Antimatter, Infinity, and Time Dimensions gain a multiplier and to a power`,
+    description: () => `Antimatter, Infinity, and Time Dimensions gain a multiplier and a power effect`,
     effects: p => ({
       mult: [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
         DC.E5000, DC.E5000, DC.E5000, DC.E5000,
