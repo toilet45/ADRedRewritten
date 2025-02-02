@@ -201,19 +201,19 @@ export const V = {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else if (i < 12) sum += player.celestials.v.runUnlocks[i] * 2;
       else ctSum = ctSum.add(player.celestials.v.runUnlocks[i]);
-      //console.log(sum, i < 12)
     }
     this.spaceTheorems = sum;
     this.celestialTheorems = ctSum;
   },
   reset() {
+    player.celestials.v.difficulty = 0;
     player.celestials.v.unlockBits = 0;
     player.celestials.v.run = false;
     player.celestials.v.runUnlocks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player.celestials.v.goalReductionSteps = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player.celestials.v.STSpent = 0;
     player.celestials.v.runGlyphs = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
-    player.celestials.v.runRecords = [-10, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, 0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0];
+    player.celestials.v.runRecords = [-10, ...Array.repeat(DC.D0, 5), 0, ...Array.repeat(DC.D0, 8)];
     this.spaceTheorems = 0;
     respecCelestialStudies(true);
     player.celestials.v.CTSpent = DC.D0;
