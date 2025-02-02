@@ -253,6 +253,6 @@ export const mendingUpgrades = [
     name: "20",
     id: 20,
     cost: new Decimal("250"),
-    description: `Unlock Warp Reality, allowing Antimatter to exceed ${format("e9e15", 2, 2)}`,
+    description: () => `Unlock Warp Reality, allowing Antimatter to exceed ${format("e9e15", 2, 2)}`,
   },
 ];
