@@ -372,6 +372,8 @@ export function mendingReset() {
     AutomatorBackend.start(AutomatorBackend.state.topLevelScript);
     AutomatorBackend.restart();
   }
+  // Refresh the active glyphs. I have 0 idea if this is necessary, but this should stop 0 slots from occuring.
+  Glyphs.refreshActive()
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 
