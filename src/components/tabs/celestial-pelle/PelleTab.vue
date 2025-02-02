@@ -47,7 +47,7 @@ export default {
       this.hasStrike = PelleStrikes.all.some(s => s.hasStrike);
       this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0);
       this.alchIncreasedCap = Ra.unlocks.alchHardcapIncrease.canBeApplied;
-      this.needsAlchemy = !MendingMilestone.thirteen.isReached || false;
+      this.needsAlchemy = !MendingMilestone.thirteen.isReached;
     },
     toggleBought() {
       Pelle.cel.showBought = !Pelle.cel.showBought;
