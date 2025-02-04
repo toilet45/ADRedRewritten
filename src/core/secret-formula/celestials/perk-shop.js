@@ -88,7 +88,7 @@ export const perkShop = {
     increment: 5,
     description: () => `Glyph Level post instability +${formatPercents(0.005, 1, 1)}`,
     effect: bought => Decimal.mul(0.005, bought).toNumber() + 1,
-    formatEffect: value => formatPercents(value, 1, 1),
+    formatEffect: value => formatPercents(value - 1, 1, 1),
     formatCost: value => format(value, 2),
     costCap: () => 1.53e23,
     cap: () => 1.08

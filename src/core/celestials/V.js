@@ -214,6 +214,7 @@ export const V = {
     player.celestials.v.STSpent = 0;
     player.celestials.v.runGlyphs = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
     player.celestials.v.runRecords = [-10, ...Array.repeat(DC.D0, 5), 0, ...Array.repeat(DC.D0, 8)];
+    player.celestials.v.difficulty = 0;
     this.spaceTheorems = 0;
     respecCelestialStudies(true);
     player.celestials.v.CTSpent = DC.D0;
