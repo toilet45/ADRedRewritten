@@ -100,10 +100,7 @@ class RaPetState extends GameMechanicState {
   }
 
   get memoryProductionMultiplier() {
-    let x = this.config.memoryProductionMultiplier();
-    x = x.times(this.level < 25 && (this.name === "Teresa" || this.name === "Effarig" ||
-       this.name === "The Nameless Ones" || this.name === "V") ? MendingUpgrade(5).effectOrDefault(1) : 1);
-    return x;
+    return this.config.memoryProductionMultiplier();
   }
 
   get isUnlocked() {
@@ -328,6 +325,7 @@ export const Ra = {
     for (const pet of Ra.pets.all) {
       if (pet.isUnlocked) res = res.mul(pet.memoryProductionMultiplier);
     }
+    res = res.mul(MendingUpgrade(5).effectOrDefault(1));
     res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
     res = res.mul(Ra.unlocks.memGainOutsideRa.canBeApplied && !Ra.isRunning ? 20 : 1);
     res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
