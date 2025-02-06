@@ -42,7 +42,7 @@ export class RebuyableMechanicState extends GameMechanicState {
   set boughtAmount(value) { throw new NotImplementedError(); }
 
   get isEffectActive() {
-    return isNumber(this.boughtAmount) ? this.boughtAmount > 0 : this.boughtAmount.gt(0);
+    return Decimal.gt(this.boughtAmount, 0);
   }
 
   get canBeBought() {

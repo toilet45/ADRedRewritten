@@ -96,7 +96,7 @@ export const mendingUpgrades = [
         x = x.pow(0.33);
         x = x.times(20);
       }
-      return x.max(1000);
+      return x.clampMax(1000);
     },
     formatEffect: value => formatX(value, 2, 2)
   },

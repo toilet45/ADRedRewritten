@@ -272,7 +272,8 @@ export const migrations = {
       // this prop was left in the save file instead of being cleaned up
       delete player.options.confirmations.resetCelestial;
     },
-    20: player => {
+    // The game shits itself on this code, so we have it commented out incase we **really** need to put it back later
+    /* 20: player => {
       // GLYPH FILTER INTERNAL FORMAT REFACTOR
       // For the case of importing a save created before the reality update, many of these props are undefined due to
       // having never been in the player object in the first place. In this case we fill with defaults, which are mostly
@@ -354,7 +355,7 @@ export const migrations = {
       // Glyph light/dark formatting was refactored as well; these values are in reference to the GLYPH_BG_SETTING enum
       player.options.glyphBG = player.options.lightGlyphs ? 1 : 2;
       delete player.options.lightGlyphs;
-    },
+    }, */
     21: player => {
       // Added tracking for unlocked ECs even after they re-lock - makes old save data consistent
       for (let ec = 1; ec <= 12; ec++) {
@@ -363,6 +364,7 @@ export const migrations = {
 
       // Added max RM tracking for cel1 records - also for data consistency (though not 100% accurate)
       player.reality.maxRM = new Decimal(player.reality.realityMachines);
+      console.log(player)
     },
     22: player => {
       // Added 3 new perk layouts, inserted before blob
@@ -413,6 +415,7 @@ export const migrations = {
       if (definedConstants.length !== player.reality.automator.constantSortOrder.length) {
         player.reality.automator.constantSortOrder = [...definedConstants];
       }
+      console.log(player)
     },
     25: player => {
       // If the player has r146 "Perks of living" achievement we give them the DAB perk automatically
@@ -422,15 +425,21 @@ export const migrations = {
 
       // This update has a rebalance that assumes the 3rd dilation repeatable is unpurchasable in cel7
       if (player.celestials.pelle.doomed) player.dilation.rebuyables[3] = 0;
+      console.log(player)
     },
     26: player => {
       delete player.infinity?.upgradeBits;
+      console.log(player)
     },
     // 83 is used because 8 = B, and 3 = E, so 83 = BE, short for BE port (blob edition).
     // Recommended to start any modded migrations at 100.
     83: player => {
+      console.log(player);
       beMigration(player);
+      console.log(player);
     },
+    // Dummy object so the above thing actually loads
+    84: player => {},
     100: player => {
       player.celestials.ra.pets = { ...player.celestials.ra.pets,
         ra: {
@@ -1278,7 +1287,7 @@ export const migrations = {
     this.prePatch(saveData);
     // This adds all the undefined properties to the save which are in player.js
     const player = deepmergeAll([Player.defaultStart, saveData]);
-    const versions = Object.keys(this.patches).map(parseFloat).sort();
+    const versions = Object.keys(this.patches).map(parseFloat).sort((a, b) => (a - b));
     let version;
     while ((version = versions.find(v => player.version < v && v < maxVersion)) !== undefined) {
       const patch = this.patches[version];
