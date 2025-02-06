@@ -62,6 +62,7 @@ function fastReplicantiBelow308(log10GainFactor, isAutobuyerActive) {
   const shouldBuyRG = isAutobuyerActive && !RealityUpgrade(6).isLockingMechanics;
   // More than e308 galaxies per tick causes the game to die, and I don't think it's worth the performance hit of
   // Decimalifying the entire calculation.  And yes, this can and does actually happen super-lategame.
+  if (!Replicanti.amount.isFinite()) debugger;
   const uncappedAmount = DC.E1.pow(log10GainFactor.plus(Replicanti.amount.max(1).log10()));
   // Checking for uncapped equaling zero is because Decimal.pow returns zero for overflow for some reason
   if (log10GainFactor.gt(Number.MAX_VALUE) || uncappedAmount.eq(0)) {
@@ -88,6 +89,7 @@ function fastReplicantiBelow308(log10GainFactor, isAutobuyerActive) {
   const remainingGain = log10GainFactor.minus(maxUsedGain).clampMin(0);
   Replicanti.amount = Decimal.pow10(replicantiExponent.sub(gainNeededPerRG.times(toBuy)))
     .clampMax(replicantiCap());
+  if (!toBuy.isFinite()) debugger;
   addReplicantiGalaxies(toBuy);
   return remainingGain;
 }
@@ -249,7 +251,7 @@ export function replicantiLoop(diff) {
     for (let t = 0; t < binomialTicks.floor().toNumber(); t++) {
       const reproduced = binomialDistribution(Replicanti.amount, player.replicanti.chance);
       Replicanti.amount = Replicanti.amount.plus(EternityChallenge(21).isRunnning
-        ? reproduced : Decimal.log10(reproduced)).max(1);
+        ? Decimal.log10(reproduced.max(1)).max(1) : reproduced);
     }
 
     // The batching might use partial ticks; we add the rest back to the timer so it gets used next loop
