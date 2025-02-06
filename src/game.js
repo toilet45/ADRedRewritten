@@ -159,6 +159,16 @@ export function gainedInfinityPoints(mm1gen = false) {
   if (EternityChallenge(13).isRunning) ip = stackedLogPower(ip, 1, 0.075);
   if (EternityChallenge(15).isRunning) ip = ip.max(1).log10();
 
+  if (InfinityChallenge(9).isRunning) {
+    let dimPurchases = new Decimal(0);
+    for (let i = 1; i < 9; i++) {
+      dimPurchases = dimPurchases.add(
+        Laitela.continuumActive ? AntimatterDimension(i).bought : AntimatterDimension(i).continuumValue);
+    }
+
+    ip = ip.times(dimPurchases);
+  }
+
   if (ip.gt("e5e32")) {
     ip = ip.log10().div("5e32").pow(0.666).mul("5e32").pow10();
   }
@@ -951,7 +961,7 @@ function laitelaBeatText(disabledDim) {
 // This gives IP/EP/RM from the respective upgrades that reward the prestige currencies continuously
 function applyAutoprestige(diff) {
   const disableIPSpeedBoost = EternityChallenge(13).isRunning || EternityChallenge(14).isRunning ||
-  EternityChallenge(15).isRunning;
+  EternityChallenge(15).isRunning || player.challenge.infinity.current > 8;
   if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded && !EternityChallenge(18).isRunning) {
     const val = (gainedInfinityPoints(true).times((disableIPSpeedBoost ? Time.realDeltaTimeMs : Time.deltaTime)
       .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))

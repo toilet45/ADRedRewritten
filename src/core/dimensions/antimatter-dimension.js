@@ -53,10 +53,12 @@ export function antimatterDimensionCommonMultiplier() {
   if (Pelle.isDoomed) multiplier = multiplier.dividedBy(10);
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+  if (player.challenge.infinity.current > 8) multiplier = multiplier.pow(0.5);
 
   return multiplier;
 }
 
+// eslint-disable-next-line complexity
 export function getDimensionFinalMultiplierUncached(tier) {
   if (tier < 1 || tier > 8) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
   if ((NormalChallenge(10).isRunning && tier > 6) || Enslaved.isExpanded) return DC.D1;
@@ -93,6 +95,12 @@ export function getDimensionFinalMultiplierUncached(tier) {
   }
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
+
+  if (InfinityChallenge(9).isRunning) {
+    for (let i = 1; i < 9; i++) {
+      if (i !== tier) multiplier = multiplier.div(Decimal.pow(100, Laitela.continuumActive ? AntimatterDimension(i).continuumAmount : AntimatterDimension(i).bought))
+    }
+  }
 
   if (multiplier.gt(ADInstabilityStart())) {
     // Equal to 10^(log(x)/9e15)^(log^2(log(x)/9e15)^-1/3)

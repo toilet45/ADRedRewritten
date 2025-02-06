@@ -133,12 +133,15 @@ export const infinityChallenges = [
   },
   {
     id: 9,
-    description: () => `TBD`,
+    description: () => `Antimatter generation exponent ${formatPow(0.5, 1, 1)}
+     and Gamespeed does not affect IP generation. IP gain is improved based on AD purchases.
+     When purchasing a Dimension tier, the other tiers' production is / 100 after other nerfs.
+     Tickspeed is disabled`,
     goal: DC.BEMAX,
     isQuickResettable: false,
     effect: () => DC.D1,
     reward: {
-      description: `TBD`,
+      description: `The buy 10 multiplier for a Dimension applies a small power effect to that Dimension`,
       effect: () => DC.D1,
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -146,38 +149,40 @@ export const infinityChallenges = [
   },
   {
     id: 10,
-    description: () => `TBD`,
+    description: () => `IC9's AM and IP nerfs and you're trapped in Infinity Challenges 4 and 5. Dimension cost scaling exponents are tetrated and Continuum is also disabled >:)`,
     goal: DC.BEMAX,
     isQuickResettable: false,
     effect: () => DC.BEMAX,
     reward: {
-      description: `TBD`,
-      effect: () => DC.D1,
-      formatEffect: value => formatX(value, 2, 2)
+      description: `Infinity Challenges 4 and 5 rewards are better (^1.05 -> ^3; 10%, -1 -> 300%, ^0.99995)`,
     },
     unlockAM: DC.BEMAX,
   },
   {
     id: 11,
-    description: () => `TBD`,
+    description: () => `IC9's AM and IP nerfs and free Tickspeed is capped at half of purchased Tickspeed.
+     Most Galaxy and Dimension Boost buffs are logarithmic.
+     Dimension Boosts affect Tickspeed and Galaxies boost Dimension multipliers.`,
     goal: DC.BEMAX,
     isQuickResettable: false,
     effect: () => DC.D1,
     reward: {
-      description: `TBD`,
-      effect: () => DC.D1,
-      formatEffect: value => formatX(value, 2, 2)
+      description: `Remote Galaxy Scaling delayed based on Dimension Boosts`,
+      effect: () => DimBoost.totalBoosts.clampMin(1).log10().div(1000).add(1),
+      formatEffect: value => `${formatX(value, 3, 3)} later`
     },
     unlockAM: DC.BEMAX,
   },
   {
     id: 12,
-    description: () => `TBD`,
+    description: () => `IC9's AM and IP nerfs and the AD multiplier for a tier
+     is divided by the average of mults of the other tiers, as well as the products of their amounts.
+     All Antimatter Dimensions produce Antimatter.`,
     goal: DC.BEMAX,
     isQuickResettable: false,
     effect: () => DC.D1,
     reward: {
-      description: `TBD`,
+      description: `Improve Infinity Challenge 9's reward`,
       effect: () => DC.D1,
       formatEffect: value => formatX(value, 2, 2)
     },
