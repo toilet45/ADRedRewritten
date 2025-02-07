@@ -25,7 +25,7 @@ export const MachineHandler = {
     }
     let rmGain = DC.E3.pow(log10FinalEP.div(4000).sub(1));
     // Increase base RM gain if <10 RM
-    if (rmGain.gte(1) && rmGain.lt(10)) rmGain = (log10FinalEP).minus(26).mul(27).div(4000);
+    if (rmGain.gte(1) && rmGain.lt(10)) rmGain = (log10FinalEP).mul(27).div(4000).minus(26);
     rmGain = rmGain.times(this.realityMachineMultiplier);
     return rmGain.floor();
   },
