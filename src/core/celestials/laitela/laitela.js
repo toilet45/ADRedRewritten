@@ -35,7 +35,7 @@ export const Laitela = {
     return (ImaginaryUpgrade(15).isBought && !Pelle.isDisabled("continuum")) || MendingUpgrade(17).boughtAmount.gt(0);
   },
   get continuumActive() {
-    return this.continuumUnlocked && !player.auto.disableContinuum && !Pelle.isDisabled("continuum");
+    return this.continuumUnlocked && !(player.auto.disableContinuum || Pelle.isDisabled("continuum") || InfinityChallenge(10).isRunning);
   },
   setContinuum(x) {
     player.auto.disableContinuum = !x;

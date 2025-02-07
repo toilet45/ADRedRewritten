@@ -3091,12 +3091,14 @@ export const news = [
           is trying to make? "Can't you read the sign? If your comprehension is that bad then Infinity Challenge 5
           will squash you without even giving you a fair chan-" How... Interesting. This is your local news host,
           and we'll come back with further information later.`;
-      else
+      else if (!InfinityChallenge(10).isRunning && Ra.unlocks.newIC.canBeApplied)
         protestText =
           `Finally, let's chat with this woman who doesn't seem to be in either side. What's your opinion on the
           matter? "Personally, I thought Tickspeed Autobuyer Challenge was worse than both-" "GET HER!!" "WAIT NO-"
           Well, seems like this just took a turn, so I'm getting as far away as I possibly can. This is your local
           news host, and we'll come back with further information... someday.`;
+      else
+        protestText = `they're all wrong, IC10 is the worst`;
       return `Hello, this is your local always reliable news source, and today people are taking over the streets
         as they fight over which Infinity Challenge is worse. ${protestText}`;
     },
@@ -3320,6 +3322,16 @@ export const news = [
     id: "l91",
     text: `DID YOU REMEMBER?`,
     get unlocked() { return new Date().getMonth() === 9 && new Date().getDate() === 22; }
+  },
+  {
+    id: "l92",
+    text: `I am Pelle, and I endorse Fatty Feburary and MulliMarch`,
+    get unlocked() { return Pelle.isDoomed() && (new Date().getMonth() === 2 || new Date().getMonth() === 3); }
+  },
+  {
+    id: "l93",
+    text: "The evening before, the 6th Celestial was stalked by an unknown simp. The next day, authorities reopened the case after an known simp claimed responsibility.",
+    get unlocked() { return player.options.saveFileName === "Biometrix" || player.options.saveFileName === "Bio"; }
   },
   {
     id: "r1",

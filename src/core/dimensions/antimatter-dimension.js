@@ -222,7 +222,7 @@ function applyNDPowers(mult, tier) {
   const glyphPowMultiplier = new Decimal(getAdjustedGlyphEffect("powerpow"));
   const glyphEffarigPowMultiplier = getAdjustedGlyphEffect("effarigdimensions");
 
-  if (InfinityChallenge(4).isRunning && player.postC4Tier !== tier) {
+  if ((InfinityChallenge(4).isRunning || InfinityChallenge(10).isRunning) && player.postC4Tier !== tier) {
     multiplier = multiplier.pow(InfinityChallenge(4).effectValue);
   }
   if (InfinityChallenge(4).isCompleted) {
@@ -397,7 +397,7 @@ export function buyMaxDimension(tier, bulk = Infinity) {
   if (bulkLeft.lte(0)) return;
 
   // Buy in a while loop in order to properly trigger abnormal price increases
-  if (NormalChallenge(9).isRunning || InfinityChallenge(5).isRunning) {
+  if (NormalChallenge(9).isRunning || InfinityChallenge(5).isRunning || InfinityChallenge(10).isRunning) {
     while (dimension.isAffordableUntil10 && dimension.cost.lt(goal) && bulkLeft.gt(0)) {
       // We can use dimension.currencyAmount or Currency.antimatter here, they're the same,
       // but it seems safest to use dimension.currencyAmount for consistency.
@@ -636,7 +636,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   challengeCostBump() {
-    if (InfinityChallenge(5).isRunning) this.multiplyIC5Costs();
+    if (InfinityChallenge(5).isRunning || InfinityChallenge(10).isRunning) this.multiplyIC5Costs();
     else if (NormalChallenge(9).isRunning) this.multiplySameCosts();
   }
 
