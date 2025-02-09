@@ -161,7 +161,7 @@ export const infinityChallenges = [
   {
     id: 11,
     description: () => `IC9's AM and IP nerfs and free Tickspeed is capped at half of purchased Tickspeed.
-     Most Galaxy and Dimension Boost buffs are logarithmic.
+     Most non Galaxy and Dimension Boost buffs are logarithmic.
      Dimension Boosts affect Tickspeed and Galaxies boost Dimension multipliers.`,
     goal: DC.BEMAX,
     isQuickResettable: false,
