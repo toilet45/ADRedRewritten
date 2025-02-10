@@ -7,12 +7,15 @@ const rebuyable = props => {
   props.effect = () => effect;
   props.description = () => props.textTemplate;
   props.formatEffect = value => {
-    if (props.id === 1) return formatInt(value);
-    if (props.id === 2) return value.lt(11) ? `+${formatPercents(value.sub(1), 2, 2)}` : formatX(value, 2, 2);
-    if (props.id === 3) return format(value, 2, 0);
-    if (props.id === 4) return format(value, 2, 0);
-    if (props.id === 5) return `${formatInt(value)}^log²(x) -> ${formatInt(value.add(5))}^log²(x)`;
-    return formatX(value, 2, 0);
+    switch (props.id) {
+      case 1: return `+${formatInt(value)}`;
+      case 2: {
+        if (new Decimal(value).lt(11)) return `+${formatPercents(new Decimal(value).sub(1), 2, 2)}`;
+        return formatX(value, 2, 2);
+      }
+      case 5: return `${formatInt(value)}^log²(x) -> ${formatInt(new Decimal(value).add(5))}^log²(x)`;
+      default: return formatX(value, 2, 0);
+    }
   };
   props.formatCost = value => format(value, 2, 0);
   return props;
@@ -81,7 +84,7 @@ export const expansionUpgrades = [
     id: 8,
     cost: 15,
     description: () => `Increase Tickspeed Multiplier to ${formatX(1.01, 2, 2)} in Time Expansion`,
-    effect: () => new Decimal(1.01),
+    effect: () => new Decimal(1 / 1.01),
     formatEffect: value => formatX(value, 2, 2)
   },
   {

@@ -343,7 +343,8 @@ export function addMendingTime(trueTime, time, realTime, rm, level, mends, projI
 
 export function gainedInfinities() {
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults") ||
-  Enslaved.isExpanded || EternityChallenge(19).isRunning) return DC.D1;
+    EternityChallenge(19).isRunning) return DC.D1;
+  if (Enslaved.isExpanded) return new Decimal(1);
   let infGain = Effects.max(1, Achievement(87));
 
   infGain = infGain.timesEffectsOf(
@@ -465,6 +466,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
   factor = factor.pow(CelestialStudy(81).effectOrDefault(1));
+  if (factor.gt(1)) factor = factor.pow(ExpansionUpgrade(6).effectOrDefault(1));
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);
   factor = factor.mul(ExpansionUpgrade(3).effectOrDefault(1));

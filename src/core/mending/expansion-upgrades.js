@@ -43,6 +43,17 @@ class ExpansionUpgradeState extends BitPurchasableMechanicState {
   }
 
   onPurchased() {
+    switch (this.id) {
+      case 9: {
+        player.challenge.infinity.completedBits |= 48;
+        break;
+      }
+      case 10: {
+        Currency.eternities.bumpTo(1);
+        Currency.eternityPoints.bumpTo(6);
+        break;
+      }
+    }
     EventHub.dispatch(GAME_EVENT.EXPANSION_UPGRADE_BOUGHT);
   }
 }

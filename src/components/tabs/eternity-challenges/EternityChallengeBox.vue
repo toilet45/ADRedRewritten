@@ -85,8 +85,7 @@ export default {
       if (this.canBeUnlocked) {
         if (this.challenge.id < 13) {
           TimeStudy.eternityChallenge(this.challenge.id).purchase();
-        }
-        else {
+        } else {
           CelestialStudy.eternityChallenge(this.challenge.id).purchase();
         }
       } else this.challenge.requestStart();
@@ -112,7 +111,7 @@ export default {
       <DescriptionDisplay :config="config" />
     </template>
     <template #bottom>
-      <div :style="{ visiblity: completions < 5 ? 'visible' : 'hidden' }">
+      <div :style="{ visiblity: !isCompleted ? 'visible' : 'hidden' }">
         <div>
           Completed {{ quantifyInt("time", completions) }}
         </div>
@@ -134,9 +133,9 @@ export default {
           v-if="completions > 0"
           :config="currentRewardConfig"
         />
-        <span v-if="completions > 0 && completions < 5">|</span>
+        <span v-if="completions > 0 && !isCompleted">|</span>
         <EffectDisplay
-          v-if="completions < 5"
+          v-if="!isCompleted"
           :config="nextRewardConfig"
           label="Next"
           :ignore-capped="true"

@@ -19,7 +19,9 @@ export default {
       bestShardRateVal: new Decimal(),
       ppGained: new Decimal(),
       celestialRunText: ["", "", "", "", ""],
-      expanded: false
+      expanded: false,
+      gainedTR: new Decimal(),
+      canGainTR: false
     };
   },
   computed: {
@@ -127,6 +129,8 @@ export default {
         [Teresa.isRunning && !Teresa.hardModeToggled, teresaReward, teresaThreshold],
         [Teresa.isRunning && Teresa.hardModeToggled, hardTeresaReward, hardTeresaThreshold]];
       this.expanded = Enslaved.isExpanded;
+      this.gainedTR = Enslaved.gainedTR;
+      this.canGainTR = this.gainedTR.gt(0);
     },
     handleClick() {
       if (this.expanded) {
@@ -159,6 +163,9 @@ export default {
       }
       return Currency.eternityPoints.value.max(1).log10().gte(4000) &&
         ((Effarig.isRunning && !EffarigUnlock.reality.isUnlocked) || (Enslaved.isRunning && !Enslaved.isCompleted));
+    },
+    timeRemnantGainText() {
+      return `Have at least ${format(1e100)} Infinity Points to gain Time Remnants`;
     }
   }
 };
@@ -177,6 +184,9 @@ export default {
       <div class="l-expansion-button">
         <div class="c-expansion-button__header">
           This Reality...too expansive...must escape
+          <br>
+          <span v-if="canGainTR"> Gain {{ quantify("Time Remnant", gainedTR) }}</span>
+          <span v-else> Reach {{ format(1e100) }} Infinity Points to gain Time Remnants</span>
         </div>
       </div>
     </button>

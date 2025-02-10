@@ -254,7 +254,7 @@ class InfinityDimensionState extends DimensionState {
     const logMult = Decimal.log10(this.costMultiplier);
     const logBase = this.baseCost.log10();
     let contValue = (logMoney.sub(logBase)).div(logMult);
-    contValue = contValue.clampMax(this.purchaseCap.mul(10)).times(Laitela.matterExtraPurchaseFactor.div(10));
+    contValue = contValue.clampMax(this.purchaseCap.mul(10)).times(Laitela.matterExtraPurchaseFactor.add(1).div(10));
     return Decimal.clampMin(contValue, 0);
   }
 

@@ -22,9 +22,9 @@ export default {
       this.isRunning = player.celestials.enslaved.expanded;
       if (!this.isRunning) return;
       // This lets this.hasGain be true even before eternity.
-      this.hasGain = false;
+      this.hasGain = Enslaved.gainedTR.gt(0);
       this.creditsClosed = GameEnd.creditsEverClosed;
-      this.enslavedPointGain = new Decimal(0);
+      this.enslavedPointGain = Enslaved.gainedTR;
     },
     expand() {
       if (this.creditsClosed) return;

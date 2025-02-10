@@ -1,6 +1,10 @@
 import { GameMechanicState } from "./game-mechanics";
 
 export function tryCompleteInfinityChallenges() {
+  if (Enslaved.isExpanded && ExpansionUpgrade(9).canBeApplied) {
+    InfinityChallenge(4).complete();
+    InfinityChallenge(5).complete();
+  }
   if (EternityMilestone.autoIC.isReached) {
     const toComplete = InfinityChallenges.all.filter(x => x.isUnlocked && !x.isCompleted && x.id < 9);
     for (const challenge of toComplete) challenge.complete();
@@ -32,7 +36,7 @@ class InfinityChallengeState extends GameMechanicState {
     if (this.id > 8) {
       return Ra.unlocks.newIC.canBeApplied;
     }
-    return player.records.thisEternity.maxAM.gte(this.unlockAM) || (Achievement(133).isUnlocked && !Pelle.isDoomed) ||
+    return player.records.thisEternity.maxAM.gte(this.unlockAM) || (Achievement(133).isUnlocked && !Pelle.isDoomed && !Enslaved.isExpanded) ||
       (PelleUpgrade.keepInfinityChallenges.canBeApplied && Pelle.cel.records.totalAntimatter.gte(this.unlockAM));
   }
 

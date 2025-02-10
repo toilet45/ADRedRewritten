@@ -248,6 +248,9 @@ export const Enslaved = {
   get isExpanded() {
     return player.celestials.enslaved.expanded;
   },
+  get gainedTR() {
+    return player.records.thisReality.maxIP.clampMin(1).log10().sub(100).floor().clampMin(0);
+  },
   /* expand() {
     player.celestials.enslaved.expanded = true;
   }, */

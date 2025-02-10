@@ -185,7 +185,7 @@ export function initializeChallengeCompletions(isReality) {
   if (!isReality && EternityMilestone.keepAutobuyers.isReached || Pelle.isDoomed || MendingMilestone.one.isReached) {
     NormalChallenges.completeAll();
   }
-  if (Achievement(133).isUnlocked && !Pelle.isDoomed) InfinityChallenges.completeAll();
+  if (Achievement(133).isUnlocked && !Pelle.isDoomed && !Enslaved.isExpanded) InfinityChallenges.completeAll();
   player.challenge.normal.current = 0;
   player.challenge.infinity.current = 0;
 }
@@ -241,6 +241,7 @@ function askEternityConfirmation() {
 }
 
 export function gainedEternities() {
+  if (Enslaved.isExpanded) return new Decimal(1);
   return Pelle.isDisabled("eternityMults")
     ? new Decimal(1)
     : new Decimal(getAdjustedGlyphEffect("timeetermult"))

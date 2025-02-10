@@ -151,8 +151,13 @@ export function requestManualReality(specialReality = 0) {
       startManualReality(false);
       player.celestials.enslaved.expanded = true;
       Currency.eternities.reset();
+      Currency.eternitiesBanked.reset();
       Currency.eternityPoints.reset();
       Currency.infinityPoints.reset();
+      Currency.infinities.reset();
+      InfinityChallenges.clearCompletions();
+      player.records.thisReality.maxIP = new Decimal(0);
+      player.records.thisEternity.maxIP = new Decimal(0);
       Quotes.enslaved.expansion.show();
       return;
     }
@@ -763,7 +768,9 @@ export function finishProcessReality(realityProps) {
   Enslaved.autoReleaseTick = 0;
   player.celestials.enslaved.hasSecretStudy = false;
   player.celestials.laitela.entropy = DC.D0;
-
+  if (Enslaved.isExpanded) {
+    Currency.enslavedPoints.add(Enslaved.gainedTR);
+  }
   player.celestials.enslaved.expanded = false;
   player.celestials.laitela.damaged = false;
 

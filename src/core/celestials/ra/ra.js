@@ -341,6 +341,7 @@ export const Ra = {
     if (Ra.unlocks.achToMemories.canBeApplied) boostList.push("Achievement Multiplier");
     if (Ra.unlocks.memGainOutsideRa.canBeApplied & !Ra.isRunning) boostList.push("Ra level 30");
     if (MendingUpgrade(5).isBought) boostList.push("Mending Upgrade 5");
+    if (ExpansionUpgrade(7).isBought) boostList.push("Time Expansion Upgrade 5");
 
     if (boostList.length === 1) return `${boostList[0]}`;
     if (boostList.length === 2) return `${boostList[0]} and ${boostList[1]}`;
