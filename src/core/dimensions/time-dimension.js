@@ -426,7 +426,7 @@ export const TimeDimensions = {
   },
 
   get purchaseCap() {
-    return DC.E18.timesEffectOf(CelestialStudy(53));
+    return DC.E18.add(Penteracts.effectivePentCount.times(1e17)).timesEffectOf(CelestialStudy(53));
   },
 
   tick(diff) {

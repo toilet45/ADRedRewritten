@@ -128,7 +128,7 @@ export const expansionUpgrades = [
     name: "Expansion Upgrade 14",
     id: 14,
     cost: 50,
-    description: "Unlock Hypercubes",
+    description: "Unlock Penteracts, which increase the purchase caps for Time Dimensions",
     effect: () => DC.D1,
   },
   {

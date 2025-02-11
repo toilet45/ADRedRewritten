@@ -1468,8 +1468,10 @@ export const normalAchievements = [
   },
   {
     id: 203,
-    name: "???",
-    description: "???",
+    name: "This achievement doesn't exist 4",
+    get description() {
+      return `Reach ${format(9.999e99, 3, 3)} Imaginary Machines`;
+    },
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },

@@ -49,9 +49,9 @@ export default {
       // eslint-disable-next-line max-len
       this.incomeType = EternityChallenge(7).isRunning || EternityChallenge(19).isRunning ? "Eighth Infinity Dimensions" : "Time Shards";
       this.areAutobuyersUnlocked = Autobuyer.timeDimension(1).isUnlocked;
-      this.penteractsUnlocked = false;
+      this.penteractsUnlocked = ExpansionUpgrade(14).isBought;
       this.penteractCost.copyFrom(Penteracts.nextCost);
-      this.canBuyPenteracts = false;
+      this.canBuyPenteracts = Penteracts.canBuyPenteract;
       this.boughtPenteracts.copyFrom(Penteracts.bought);
       this.extraPenteracts.copyFrom(Penteracts.extra);
       this.totalDimCap = TimeDimensions.purchaseCap;

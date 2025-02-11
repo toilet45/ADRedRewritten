@@ -41,7 +41,7 @@ export function getTickSpeedMultiplier() {
   const disabledByECs = EternityChallenge(17).isRunning || EternityChallenge(18).isRunning;
   if (disabledByECs) return DC.D1;
   if (InfinityChallenge(9).isRunning) return DC.D1;
-  if (EternityChallenge(16).isRunning) return new Decimal(1.2);
+  if (EternityChallenge(16).isRunning) return new Decimal(1 / 1.2);
   if (InfinityChallenge(3).isRunning || Enslaved.isExpanded) return ExpansionUpgrade(8).effectOrDefault(DC.D1);
   if (Ra.isRunning) return DC.C1D1_1245;
   let galaxies = effectiveBaseGalaxies();

@@ -251,9 +251,6 @@ export const Enslaved = {
   get gainedTR() {
     return player.records.thisReality.maxIP.clampMin(1).log10().sub(100).floor().clampMin(0);
   },
-  /* expand() {
-    player.celestials.enslaved.expanded = true;
-  }, */
   quotes: Quotes.enslaved,
   // Unicode f0c1.
   symbol: "\uf0c1",
@@ -367,7 +364,7 @@ export const Penteracts = {
 
   costs(index) {
     // Start at ee18 EP, then ee21, ee24, etc (hexa put better cost scaling)
-    return new Decimal("ee18").times(Decimal.pow("e1000", index.add(1)));
+    return new Decimal("ee18").pow(Decimal.pow("1000", index.add(1)));
     // eslint-disable-next-line no-param-reassign
     // index = index.add(1);
     // if (index.lte(3)) return Decimal.pow10(index.times(2e7));
@@ -379,13 +376,13 @@ export const Penteracts = {
   },
 
   get canBuyPenteract() {
-    return Currency.eternityPoints.gte(Penteracts.nextCost) && false;
+    return Currency.eternityPoints.gte(Penteracts.nextCost) && ExpansionUpgrade(14).isBought;
     // && "whatever the TE upgrade is"
   },
 
   pentCapIncrease(count = this.bought) {
     const totalCount = count;
-    const base = totalCount.lt(1) ? DC.D0 : new Decimal(2e13);
+    const base = totalCount.lt(1) ? DC.D0 : new Decimal(1e17).times(totalCount);
     return base;
   },
 
