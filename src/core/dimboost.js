@@ -121,6 +121,7 @@ export class DimBoost {
     if (InfinityChallenge(5).isCompleted) amount = amount.sub(1);
 
     amount = amount.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
+    if (InfinityUpgrade.skipReset1.isCharged) amount = amount.mul(1 - 0.9995);
 
     amount = Decimal.round(amount);
 
@@ -268,11 +269,11 @@ function maxBuyDimBoosts() {
   }
 
   amount = amount.sub(Effects.sum(InfinityUpgrade.resetBoost));
-  if (InfinityUpgrade.skipReset1.isCharged) amount = amount.mul(0.99);
   if (InfinityChallenge(5).isCompleted) amount = amount.sub(1);
 
   multiplierPerDB = multiplierPerDB.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
   amount = amount.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
+  if (InfinityUpgrade.skipReset1.isCharged) amount = amount.mul(1 - 0.9995);
 
   const ad = AntimatterDimension(tier).totalAmount;
   let calcBoosts;

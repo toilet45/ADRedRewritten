@@ -318,7 +318,8 @@ export const Tesseracts = {
     // eslint-disable-next-line no-param-reassign
     index = index.add(1);
     if (index.lte(3)) return Decimal.pow10(index.times(2e7));
-    return Decimal.pow10((index.sub(3)).factorial().times(Decimal.pow(2, index.sub(3))).times(6e7));
+    return Decimal.pow10((index.sub(3)).factorial().times(Decimal.pow(2, index.sub(3))).times(6e7)).pow(
+      Ra.unlocks.cheaperTess.canBeApplied ? 0.1 : 1);
   },
 
   get nextCost() {

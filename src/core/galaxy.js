@@ -46,7 +46,8 @@ export class Galaxy {
   static buyableGalaxies(currency, minVal = player.galaxies) {
     let alter = Decimal.mul(GlyphAlteration.isAdded("power") ? getSecondaryGlyphEffect("powerpow") : DC.D1,
       MendingUpgrade(16).effects.agCost);
-    alter = alter.div(DC.D1.sub(InfinityUpgrade.skipReset1.chargedEffect.effectOrDefault(DC.D0)));
+    alter = alter.div(DC.D1.sub(
+      InfinityUpgrade.skipReset2.isCharged ? InfinityUpgrade.skipReset2.chargedEffect.effectValue[1] : 0));
     const dis = Galaxy.costScalingStart;
     const scale = Galaxy.costMult;
     let base = Galaxy.baseCost.sub(Effects.sum(InfinityUpgrade.resetBoost));
@@ -144,6 +145,8 @@ export class Galaxy {
     if (InfinityChallenge(5).isCompleted) amount = amount.sub(1);
 
     if (GlyphAlteration.isAdded("power")) amount = amount.mul(getSecondaryGlyphEffect("powerpow"));
+    amount = amount.div(
+      InfinityUpgrade.skipReset2.isCharged ? 1e6 : 1);
 
     amount = Decimal.floor(amount);
     const tier = Galaxy.requiredTier;
@@ -155,7 +158,7 @@ export class Galaxy {
   }
 
   static get baseCost() {
-    return NormalChallenge(10).isRunning ? DC.D99 : DC.D80;
+    return (NormalChallenge(10).isRunning ? DC.D99 : DC.D80).div(InfinityUpgrade.skipReset2.isCharged ? 1e6 : 1);
   }
 
   static get requiredTier() {

@@ -862,6 +862,9 @@ function passivePrestigeGen() {
         Currency.eternities.value.minus(eternitiedGain.div(2).floor())).times(Time.deltaTime));
     }
     infGen = infGen.plus(player.partInfinitied);
+    if (BreakInfinityUpgrade.infinitiedGen.isCharged) {
+      infGen = infGen.pow(1.33);
+    }
     Currency.infinities.add(Enslaved.isExpanded ? 0 : infGen.floor());
     player.partInfinitied = infGen.minus(infGen.floor()).toNumber();
   }

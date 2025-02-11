@@ -259,7 +259,7 @@ export const FreeTickspeed = {
   BASE_SOFTCAP: new Decimal(3e5),
   GROWTH_RATE: () => (CelestialStudy(43).isBought ? DC.D1.add(3e-9) : DC.D1.add(6e-6)),
   GROWTH_EXP: DC.D2,
-  tickmult: () => Effects.min(1.33, TimeStudy(171)).mul(getAdjustedGlyphEffect("cursedtickspeed").max(1)),
+  tickmult: () => Effects.min(1.33, TimeStudy(171)).mul(getAdjustedGlyphEffect("cursedtickspeed").sub(Ra.unlocks.cheaperTess.canBeApplied ? 0.01 : 0).max(1)),
 
   get amount() {
     return player.totalTickGained;
