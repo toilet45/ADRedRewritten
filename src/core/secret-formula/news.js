@@ -3326,7 +3326,7 @@ export const news = [
   {
     id: "l92",
     text: `I am Pelle, and I endorse Fatty Feburary and MulliMarch`,
-    get unlocked() { return Pelle.isDoomed() && (new Date().getMonth() === 2 || new Date().getMonth() === 3); }
+    get unlocked() { return Pelle.isDoomed && (new Date().getMonth() === 2 || new Date().getMonth() === 3); }
   },
   {
     id: "l93",

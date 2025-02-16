@@ -62,7 +62,7 @@ export default {
       this.showTotalCompletions = !Enslaved.isRunning || id !== 1;
       this.isRunning = EternityChallenge.current?.id === id;
       this.isUnlocked = ec.isUnlocked;
-      this.maxCompletions = 5 + Effects.sum(EternityChallenge(19).reward).toNumber();
+      this.maxCompletions = id == 25 ? 1 : (id > 18 ? 5 : 5 + Effects.sum(EternityChallenge(19).reward).toNumber());
       if (!this.hasRequirement) return;
       const requirement = this.requirement;
       if (this.hasNumberRequirement) {

@@ -444,7 +444,7 @@ export const ReplicantiUpgrade = {
     }
 
     get cap() {
-      return getSecondaryGlyphEffect("realitygalaxies").mul(1e7).add(Ra.isRunning ? Effects.sum(RaUpgrade(12)) : RaUpgrade(12).effectOrDefault(DC.D0).div(10));
+      return getSecondaryGlyphEffect("realitygalaxies").mul(1e7).add(Ra.isRunning ? Effects.sum(RaUpgrade(12)) : RaUpgrade(12).effectOrDefault(DC.D0).div(10)).add(TimeStudy(104).effectOrDefault(0));
     }
 
     get isCapped() {

@@ -548,3 +548,23 @@ Currency.galacticShards = new class extends DecimalCurrency {
     player.galacticShards = value;
   }
 }();
+
+Currency.lightCredits = new class extends DecimalCurrency {
+  get value() {
+    return player.celestials.laitela.universalDamage.credits.light;
+  }
+
+  set value(value) {
+    player.celestials.laitela.universalDamage.credits.light = value;
+  }
+}();
+
+Currency.darkCredits = new class extends DecimalCurrency {
+  get value() {
+    return player.celestials.laitela.universalDamage.credits.dark;
+  }
+
+  set value(value) {
+    player.celestials.laitela.universalDamage.credits.dark = value;
+  }
+}();

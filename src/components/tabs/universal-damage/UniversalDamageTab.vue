@@ -6,6 +6,9 @@ export default {
   data() {
     return {
       damaged: false,
+      lightCredits: new Decimal(),
+      darkCredits: new Decimal(),
+      isDoomed: false
     };
   },
   computed: {
@@ -24,6 +27,9 @@ export default {
   methods: {
     update() {
       this.damaged = Laitela.isDamaged;
+      this.lightCredits.copyFrom(Currency.lightCredits.value);
+      this.darkCredits.copyFrom(Currency.darkCredits.value);
+      this.isDoomed = Pelle.isDoomed;
     },
   }
 };
@@ -54,26 +60,64 @@ export default {
           </div>
         </div>
       </div>
-      <div
-        v-if="false"
-        class="c-teresa-shop"
-      >
-        <span class="o-teresa-pp">
-          You have {{ quantify("Perk Point", 4, 2, 0) }}.
-        </span>
-        <PerkShopUpgradeButton
-          v-for="upgrade in upgrades"
-          :key="upgrade.id"
-          :upgrade="upgrade"
-        />
-      </div>
-      <div
-        v-else
-        class="l-rm-container-labels l-teresa-mechanic-container"
-      />
+      <p>
+        You have <span class="c-light-credit-description__accent"> {{ format(lightCredits, 2, 0) }}</span> Light Credits
+        and <span class="c-dark-credit-description__accent"> {{ format(darkCredits, 2, 0) }}</span> Dark Credits.
+      </p>
     </div>
   </div>
 </template>
 
 <style scoped>
+.c-light-credit-description__accent {
+  font-size: 3.5rem;
+  color: black;
+}
+
+.t-metro .c-light-credit-description__accent,
+.t-s8 .c-light-credit-description__accent {
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 50%), -0.1rem 0.1rem 0.1rem black;
+}
+
+.t-dark .c-light-credit-description__accent,
+.t-amoled .c-light-credit-description__accent,
+.t-amoled-metro .c-light-credit-description__accent,
+.t-s6 .c-light-credit-description__accent,
+.t-s10 .c-light-credit-description__accent,
+.t-s11 .c-light-credit-description__accent {
+  color: white;
+  text-shadow: 0 0 0.7rem #ffffff;
+}
+
+.t-metro .c-light-credit-description__accent,
+.t-dark-metro .c-light-credit-description__accent,
+.t-s8 .c-light-credit-description__accent {
+  color: #dddddd;
+}
+
+.c-dark-credit-description__accent {
+  font-size: 3.5rem;
+  color: black;
+}
+
+.t-metro .c-dark-credit-description__accent,
+.t-s8 .c-dark-credit-description__accent {
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 50%), -0.1rem 0.1rem 0.1rem black;
+}
+
+.t-dark .c-dark-credit-description__accent,
+.t-amoled .c-dark-credit-description__accent,
+.t-amoled-metro .c-dark-credit-description__accent,
+.t-s6 .c-dark-credit-description__accent,
+.t-s10 .c-dark-credit-description__accent,
+.t-s11 .c-dark-credit-description__accent {
+  color: #272727;
+  text-shadow: 0 0 0.7rem #ffffff;
+}
+
+.t-metro .c-dark-credit-description__accent,
+.t-dark-metro .c-dark-credit-description__accent,
+.t-s8 .c-dark-credit-description__accent {
+  color: #272727;
+}
 </style>
