@@ -112,6 +112,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     Achievement(103),
     TimeStudy(111)
   )).toNumber();
+  const ipSoftcap = new Decimal("e5e32").powEffectsOf(CelestialStudy(92), CelestialStudy(112));
   if (Pelle.isDisabled("IPMults")) {
     return Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
@@ -156,6 +157,8 @@ export function gainedInfinityPoints(mm1gen = false) {
 
   ip = ip.pow(MendingUpgrade(6).effects.other);
 
+  ip = ip.powEffectOf(CelestialStudy(101));
+
   if (EternityChallenge(13).isRunning) ip = stackedLogPower(ip, 1, 0.075);
   if (EternityChallenge(15).isRunning) ip = ip.max(1).log10();
 
@@ -169,7 +172,7 @@ export function gainedInfinityPoints(mm1gen = false) {
     ip = ip.times(dimPurchases);
   }
 
-  if (ip.gt("e5e32")) {
+  if (ip.gt(ipSoftcap)) {
     ip = ip.log10().div("5e32").pow(0.666).mul("5e32").pow10();
   }
 
@@ -196,6 +199,8 @@ export function gainedEternityPoints() {
   const base = new Decimal(5).plusEffectOf(
     TimeStudy(306)
   );
+  const epSoftcap = new Decimal("ee30").powEffectsOf(
+    CelestialStudy(93), CelestialStudy(113));
   let ep = base.pow(player.records.thisEternity.maxIP.plus(
     gainedInfinityPoints()).log10().div(new Decimal(308).sub(PelleRifts.recursion.effectValue)).sub(0.7))
     .times(totalEPMult());
@@ -215,7 +220,7 @@ export function gainedEternityPoints() {
 
   ep = ep.pow(MendingUpgrade(6).effects.other);
 
-  if (ep.gt("ee30")) {
+  if (ep.gt(epSoftcap)) {
     ep = ep.log10().div("1e30").pow(0.777).mul("1e30").pow10();
   }
 
@@ -465,7 +470,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (!Ra.unlocks.gamespeedUncap.canBeApplied) factor = factor.clampMin(1e-300).clampMax(1e300);
   factor = factor.mul(forcedDisableDevspeed ? 1 : dev.speedUp);
 
-  factor = factor.pow(CelestialStudy(81).effectOrDefault(1));
+  if (factor.gt(1)) factor = factor.pow(CelestialStudy(81).effectOrDefault(1));
   if (factor.gt(1)) factor = factor.pow(ExpansionUpgrade(6).effectOrDefault(1));
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);

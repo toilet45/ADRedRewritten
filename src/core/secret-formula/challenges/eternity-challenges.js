@@ -298,7 +298,7 @@ export const eternityChallenges = [
     pelleGoal: DC.E100,
     goalIncrease: DC.E50,
     scaled: {
-      goal: DC.EE15,
+      goal: DC.E1900,
       goalIncrease: DC.E1,
       goalIncreaseType: "exponential"
     },
@@ -317,7 +317,7 @@ export const eternityChallenges = [
     pelleGoal: DC.BIMAX,
     goalIncrease: DC.E5,
     scaled: {
-      goal: DC.E100,
+      goal: DC.E80,
       goalIncrease: DC.E1,
       goalIncreaseType: "exponential"
     },

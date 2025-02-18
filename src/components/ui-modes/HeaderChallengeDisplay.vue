@@ -120,15 +120,15 @@ export default {
       this.infinityUnlocked = PlayerProgress.infinityUnlocked();
       this.activityTokens = this.parts.map(part => part.activityToken());
       // Dilation in Pelle can't be left once entered, but we still want to allow leaving more nested challenges
-      this.showExit = this.inPelle && player.dilation.active
+      this.showExit = (this.inPelle && player.dilation.active
         ? this.activeChallengeNames.length > 1
-        : this.activeChallengeNames.length !== 0;
+        : this.activeChallengeNames.length !== 0) || this.inPelle && Ra.unlocks.undoDoom.canBeApplied;
       this.exitText = this.exitDisplay();
       this.resetCelestial = player.options.retryCelestial;
       this.inPelle = Pelle.isDoomed;
       this.inExpansion = Enslaved.isExpanded;
       this.inDamage = Laitela.isDamaged;
-      this.maxCompletion = player.challenge.eternity.current > 12 ? 5 : 5 + Effects.sum(EternityChallenge(13).reward).toNumber();
+      this.maxCompletion = this.challengeCaps();
     },
     // Process exit requests from the inside out; Challenges first, then dilation, then Celestial Reality. If the
     // relevant option is toggled, we pass a bunch of information over to a modal - otherwise we immediately exit
@@ -156,7 +156,10 @@ export default {
         };
       } else {
         names = { chall: this.activeChallengeNames[0], normal: "Reality" };
-        clickFn = () => beginProcessReality(getRealityProps(true));
+        clickFn = () => {
+          if (this.inPelle) Pelle.reset();
+          beginProcessReality(getRealityProps(true));
+        };
       }
 
       if (player.options.confirmations.exitChallenge) {
@@ -199,6 +202,13 @@ export default {
       if (player.dilation.active) return "Exit Dilation";
       if (this.resetCelestial) return "Restart Reality";
       return "Exit Reality";
+    },
+    challengeCaps() {
+      const challengeID = player.challenge.eternity.current;
+      if (challengeID === 25) return 1;
+      if (challengeID > 18) return 5;
+      if (challengeID > 12) return 5 + Effects.sum(EternityChallenge(19).reward).toNumber();
+      return 5 + Effects.sum(EternityChallenge(14).reward, EternityChallenge(19).reward).toNumber();
     },
     textClassObject() {
       return {

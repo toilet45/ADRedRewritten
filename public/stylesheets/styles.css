@@ -2207,7 +2207,6 @@ br {
 /* #endregion o-prestige-btn */
 
 /* #region o-mending-prestige-button*/
-
 .o-mend-button {
   font-weight: bold;
   color: var(--color-mending);
@@ -2265,6 +2264,34 @@ br {
   pointer-events: none;
 }
 
+.o-damaged-mend-button {
+  font-weight: bold;
+  color: var(--color-laitela--accent);
+  background-color: var(--color-laitela--base);
+  border-color: var(--color-laitela--accent);
+}
+
+.o-damaged-mend-button:hover {
+  color: black;
+  background-color: white;
+}
+
+.o-damaged-mend-button span {
+  transition-duration: 0.2s;
+}
+
+.o-damaged-mend-button:hover span {
+  color: black;
+}
+
+.t-metro .o-damaged-mend-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.o-damaged-mend-button--unavailable {
+  opacity: 0.5;
+  cursor: default;
+}
 /* #endregion o-mending-prestige-button*/
 
 /* #region l-spoon-btn-group */

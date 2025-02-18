@@ -241,8 +241,10 @@ export const normalCelestialStudies = [
     requirement: [92],
     reqType: CS_REQUIREMENT_TYPE.ALL,
     description: () => `Raise Infinity Point gain based on Mends`,
-    effect: () => 4,
-    formatEffect: value => formatPow(value, 2, 2)
+    effect: () => Currency.mends.value.clampMin(1).log10().clampMin(
+      1).log10().add(1).pow(10),
+    formatEffect: value => formatPow(value, 2, 2),
+    cap: DC.E3
   },
   {
     id: 111,
@@ -286,7 +288,7 @@ export const normalCelestialStudies = [
     requirement: [121],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
     description: () => `Tachyon Galaxies are ${formatX(15)} stronger`,
-    effect: () => 16,
+    effect: () => 15,
   },
   {
     id: 132,
@@ -294,7 +296,7 @@ export const normalCelestialStudies = [
     requirement: [121],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_D,
     description: () => `Antimatter Galaxies are ${formatX(30)} stronger`,
-    effect: () => 31,
+    effect: () => 30,
   },
   {
     id: 151,

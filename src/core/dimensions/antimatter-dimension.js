@@ -113,7 +113,7 @@ export function getDimensionFinalMultiplierUncached(tier) {
 }
 
 export function ADInstabilityStart() {
-  return DC.BIMAX.powEffectOf(CelestialStudy(111));
+  return DC.BIMAX.powEffectsOf(CelestialStudy(91), CelestialStudy(111));
 }
 
 export function getDimensionFinalMultiplierUncachedWithoutSC(tier) {
