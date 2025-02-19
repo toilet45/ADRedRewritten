@@ -31,6 +31,9 @@ export default {
       this.darkCredits.copyFrom(Currency.darkCredits.value);
       this.isDoomed = Pelle.isDoomed;
     },
+    startRun() {
+      mendingReset(1);
+    },
   }
 };
 </script>

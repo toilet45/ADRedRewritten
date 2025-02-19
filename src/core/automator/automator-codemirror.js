@@ -95,7 +95,7 @@ CodeMirror.defineSimpleMode("automato", {
   studiesList: [
     commentRule,
     { sol: true, next: "start" },
-    { regex: /(antimatter|infinity|time)(?=[\s,|]|$)/ui, token: "number" },
+    { regex: /(antimatter|infinity|time|multiversal)(?=[\s,|]|$)/ui, token: "number" },
     { regex: /(active|passive|idle)(?=[\s,|]|$)/ui, token: "number" },
     { regex: /(light|dark)(?=[\s,|]|$)/ui, token: "number" },
     { regex: /([1-9][0-9]+)(?=[\s,!|-]|$)/ui, token: "number" },
@@ -152,7 +152,7 @@ CodeMirror.defineSimpleMode("automato", {
     { regex: /'.*'/ui, token: "string", next: "commandDone" },
     { regex: /(on|off|bh1|bh2|dilation|load|respec)(\s|$)/ui, token: "variable-2" },
     { regex: /(eternity|reality|use)(\s|$)/ui, token: "variable-2" },
-    { regex: /(antimatter|infinity|time)(\s|$|(?=,))/ui, token: "variable-2" },
+    { regex: /(antimatter|infinity|time|multiversal)(\s|$|(?=,))/ui, token: "variable-2" },
     { regex: /(active|passive|idle)(\s|$|(?=,))/ui, token: "variable-2" },
     { regex: /(light|dark)(\s|$|(?=,))/ui, token: "variable-2" },
     { regex: /x[\t ]+highest(\s|$)/ui, token: "variable-2" },

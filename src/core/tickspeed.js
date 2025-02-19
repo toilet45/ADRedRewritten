@@ -57,7 +57,8 @@ export function getTickSpeedMultiplier() {
     Achievement(178),
     InfinityChallenge(5).reward,
     PelleUpgrade.galaxyPower,
-    PelleRifts.decay.milestones[1]
+    PelleRifts.decay.milestones[1],
+    CelestialStudy(172)
   );
   effects = effects.mul(MendingUpgrade(16).effects.agPow);
   effects = effects.times(getGalaxyPowerFromMvD().add(1));
@@ -78,7 +79,10 @@ export function getTickSpeedMultiplier() {
 
     galaxies = galaxies.times(Pelle.specialGlyphEffect.power);
     // eslint-disable-next-line max-len
-    return DC.D0_01.clampMin(baseMultiplier.sub((galaxies.times(perGalaxy)))).pow(CelestialStudy(11).effectOrDefault(1));
+    return DC.D0_01.clampMin(baseMultiplier.sub((galaxies.times(perGalaxy)))).powEffectsOf(
+      CelestialStudy(11),
+      CelestialStudy(171)
+    );
   }
   if (!hasCS21) {
     let baseMultiplier = 0.8;
@@ -92,7 +96,10 @@ export function getTickSpeedMultiplier() {
 
     galaxies = galaxies.times(Pelle.specialGlyphEffect.power);
     const perGalaxy = DC.D0_965;
-    return perGalaxy.pow(galaxies.sub(2)).times(baseMultiplier).pow(CelestialStudy(11).effectOrDefault(1));
+    return perGalaxy.pow(galaxies.sub(2)).times(baseMultiplier).powEffectsOf(
+      CelestialStudy(11),
+      CelestialStudy(171)
+    );
   }
   let baseMultiplier = DC.D1;
   if (NormalChallenge(5).isRunning) baseMultiplier = baseMultiplier.add(0.1);

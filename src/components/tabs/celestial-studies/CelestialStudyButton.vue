@@ -28,6 +28,8 @@ export default {
       isAvailableForPurchase: false,
       eternityChallengeRunning: false,
       isCompleteEC: false,
+      doomedRealityStudy: false,
+      isDisabledByEnslaved: false
     };
   },
   computed: {
@@ -61,6 +63,14 @@ export default {
               return "o-split1-study-normal";
             case 41:
             case 42:
+            case 181:
+            case 182:
+            case 183:
+            case 184:
+            case 185:
+            case 186:
+            case 187:
+            case 188:
               return "o-split2-study-normal";
             case 43:
             case 44:
@@ -70,6 +80,8 @@ export default {
             case 93:
             case 131:
             case 132:
+            case 171:
+            case 172:
               return "o-split4-study-normal";
             default:
               return "o-time-study-normal";
@@ -133,6 +145,8 @@ export default {
       }
       this.isCompleteEC = this.study.type === CELESTIAL_STUDY_TYPE.ETERNITY_CHALLENGE &&
         EternityChallenge(this.study.id).remainingCompletions === 0;
+      this.doomedRealityStudy = false;
+      this.isDisabledByEnslaved = false;
     },
     handleClick() {
       if (this.specialClick === null || !this.study.isBought) this.study.purchase();

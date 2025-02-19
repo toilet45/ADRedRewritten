@@ -321,7 +321,7 @@ export const normalCelestialStudies = [
   {
     id: 171,
     cost: DC.D1,
-    requirement: [131, 132],
+    requirement: [151, 152],
     secondRequirement: [() => EternityChallenge(20).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_F,
     description: () => `Tickspeed exponent ${formatX(1.2, 1, 1)}`,
@@ -330,7 +330,7 @@ export const normalCelestialStudies = [
   {
     id: 172,
     cost: DC.D1,
-    requirement: [131, 132],
+    requirement: [151, 152],
     secondRequirement: [() => EternityChallenge(20).completions > 0],
     reqType: CS_REQUIREMENT_TYPE.CHOICE_F,
     description: () => `Galaxy Power +${formatInt(1550)}%`,

@@ -54,16 +54,18 @@ function updateMendingRecords(MvRgain) {
   player.records.thisMend.trueTime = 0;
 }
 // eslint-disable-next-line complexity
-export function mendingReset() {
+export function mendingReset(specialMend = 0) {
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_BEFORE);
   if (player.mending.firstMend === 0) {
     player.mending.firstMend = Date.now();
   }
   // Do this first so we can do records and stuff based on stats, without fucking anything over
-  Currency.mendingPoints.add(gainedMendingPoints());
-  Currency.mends.add(gainedMends());
-  player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
-    .mul(MendingUpgrade(7).effects.realities));
+  if (specialMend !== 0) {
+    Currency.mendingPoints.add(gainedMendingPoints());
+    Currency.mends.add(gainedMends());
+    player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
+      .mul(MendingUpgrade(7).effects.realities));
+  }
   addMendingTime(
     Time.thisMendTrueTime,
     Time.thisMendTime,
@@ -349,7 +351,7 @@ export function mendingReset() {
     iMCapSet: [],
     laitelaSet: [],
   };
-  if (MendingMilestone.ten.isReached) {
+  if (MendingMilestone.ten.isReached && specialMend === 1) {
     for (const achievement of Achievements.preMend) {
       achievement.unlock();
     }
@@ -366,6 +368,9 @@ export function mendingReset() {
   if (!MendingUpgrade(18).isBought) {
     Tab.dimensions.antimatter.show();
   }
+  if (specialMend === 1) {
+    player.celestials.laitela.damaged = true;
+  }
   if (Player.automatorUnlocked && AutomatorBackend.state.forceRestart) {
     // Make sure to restart the current script instead of using the editor script - the editor script might
     // not be a valid script to run; this at best stops it from running and at worst causes a crash
@@ -373,7 +378,7 @@ export function mendingReset() {
     AutomatorBackend.restart();
   }
   // Refresh the active glyphs. I have 0 idea if this is necessary, but this should stop 0 slots from occuring.
-  Glyphs.refreshActive()
+  Glyphs.refreshActive();
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 
