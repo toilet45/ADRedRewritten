@@ -398,7 +398,7 @@ export const normalCelestialStudies = [
     requirement: [181, 182, 183, 184, 185, 186, 187, 188],
     reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `Celestial Theorem Antimatter costs are significantly lower`,
-    effect: () => 1.1,
+    effect: () => 1 / 1.1,
     formatEffect: value => formatPow(value, 2, 2)
   },
   {

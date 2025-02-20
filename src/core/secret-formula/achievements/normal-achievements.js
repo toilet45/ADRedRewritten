@@ -1468,12 +1468,17 @@ export const normalAchievements = [
   },
   {
     id: 203,
-    name: "This achievement doesn't exist 4",
+    name: "Essa conquista não existe 4",
     get description() {
       return `Reach ${format(9.999e99, 3, 3)} Imaginary Machines`;
     },
-    checkRequirement: () => false,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    get reward() {
+      return `Imaginary Machines affect the Reality Machine cap`;
+    },
+    checkRequirement: () => Currency.imaginaryMachines.value.gt(9.999e99),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    effect: () => Currency.imaginaryMachines.value.pow(0.667),
+    formatEffect: value => formatX(value, 2, 2)
   },
   {
     id: 204,

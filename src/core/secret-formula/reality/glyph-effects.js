@@ -419,7 +419,7 @@ export const glyphEffects = {
     shortDesc: "RM ×{value}",
     effect: (level, strength) => (GlyphAlteration.isEmpowered("effarig")
       ? Decimal.pow(level, 1.5)
-      : Decimal.pow(level, 0.6).times(strength)),
+      : Decimal.pow(level, 0.6).times(strength)).pow(CelestialStudy(186).isBought ? 25 : 1),
     formatEffect: x => format(x, 2, 2),
     combine: GlyphCombiner.multiply,
     alteredColor: () => GlyphAlteration.getEmpowermentColor("effarig"),
@@ -432,7 +432,7 @@ export const glyphEffects = {
     singleDesc: "Glyph Instability starting level +{value}",
     genericDesc: "Glyph Instability delay",
     shortDesc: "Instability delay +{value}",
-    effect: (level, strength) => Decimal.floor(Decimal.pow(level.times(strength), 0.5).times(10)),
+    effect: (level, strength) => Decimal.floor(Decimal.pow(level.times(strength), 0.5).times(10).pow(CelestialStudy(186).isBought ? 1.08 : 1)),
     formatEffect: x => formatInt(x),
     combine: GlyphCombiner.add,
   },
@@ -444,7 +444,7 @@ export const glyphEffects = {
     totalDesc: "Game speed ^{value}",
     genericDesc: "Game speed ^x",
     shortDesc: "Game speed power +{value}",
-    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(75).add(1),
+    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(75).add(1).times(CelestialStudy(186).isBought ? 2.05 : 1),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -458,7 +458,7 @@ export const glyphEffects = {
     genericDesc: "Achievement multiplier ^x",
     shortDesc: "Achievement mult. power +{value}",
     effect: (level, strength) => Decimal.pow(level, 0.4).times(Decimal.pow(strength, 0.6)).div(60)
-      .add(GlyphAlteration.sacrificeBoost("effarig").div(10)).add(1),
+      .add(GlyphAlteration.sacrificeBoost("effarig").div(10)).add(1).times(CelestialStudy(186).isBought ? 2.25 : 1),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
     combine: GlyphCombiner.addExponents,
@@ -481,7 +481,7 @@ export const glyphEffects = {
     shortDesc: () => (GlyphAlteration.isAdded("effarig")
       ? `Buy ${formatInt(10)} mult. ^{value}, Dimboost mult. ^{value2}`
       : `Buy ${formatInt(10)} mult. ^{value}`),
-    effect: (level, strength) => DC.D2.times(Decimal.pow(level, 0.25)).times(Decimal.pow(strength, 0.4)).add(1),
+    effect: (level, strength) => DC.D2.times(Decimal.pow(level, 0.25)).times(Decimal.pow(strength, 0.4)).add(1).pow(CelestialStudy(186).isBought ? 1.08 : 1),
     formatEffect: x => format(x, 2, 2),
     combine: GlyphCombiner.multiply,
     conversion: x => Decimal.pow(x, 0.4),
@@ -497,7 +497,7 @@ export const glyphEffects = {
     totalDesc: "All Dimension multipliers ^{value}",
     genericDesc: "All Dimension multipliers ^x",
     shortDesc: "All Dimension power +{value}",
-    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(500).add(1)
+    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(500).add(1).times(CelestialStudy(186).isBought ? 2.77 : 1)
       .mul(CelestialStudy(72).effectOrDefault(1)),
     formatEffect: x => format(x, 3, 3),
     formatSingleEffect: x => format(x.sub(1), 3, 3),
@@ -510,7 +510,7 @@ export const glyphEffects = {
     singleDesc: () => `Antimatter production:\n${formatInt(10)}^x ➜ ${formatInt(10)}^(x^{value})`,
     genericDesc: "Antimatter production exponent power",
     shortDesc: "AM production exponent ^{value}",
-    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(5000).add(1),
+    effect: (level, strength) => Decimal.pow(level, 0.25).times(Decimal.pow(strength, 0.4)).div(5000).times(CelestialStudy(186).isBought ? 5 : 1).add(1),
     formatEffect: x => format(x, 4, 4),
     combine: GlyphCombiner.multiply,
   },

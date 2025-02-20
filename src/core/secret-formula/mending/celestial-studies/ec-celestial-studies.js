@@ -104,10 +104,10 @@ export const ecCelestialStudies = [
     requirement: [11],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Imaginary Machines",
+      current: () => Currency.imaginaryMachines.value,
+      required: completions => new Decimal(1e90 * (1e5 ** completions)),
+      formatValue: format
     }
   },
   {
@@ -116,10 +116,10 @@ export const ecCelestialStudies = [
     requirement: [11],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
-      formatValue: formatInt
+      resource: "Antimatter",
+      current: () => Currency.antimatter.value,
+      required: completions => new Decimal(1e55).times(1e5 ** completions).pow10(),
+      formatValue: format
     }
   },
   {
@@ -128,9 +128,9 @@ export const ecCelestialStudies = [
     requirement: [11],
     reqType: CS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: "Eternity Challenge Completions",
-      current: () => EternityChallenges.completions,
-      required: completions => 60 + 15 * completions + (Enslaved.isRunning ? 995 : 0),
+      resource: "Antimatter Galaxies",
+      current: () => player.galaxies,
+      required: completions => new Decimal(7.5e7 + (5e6 * completions + 1)),
       formatValue: formatInt
     }
   },
