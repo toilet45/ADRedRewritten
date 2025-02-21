@@ -130,7 +130,7 @@ export const ecCelestialStudies = [
     secondary: {
       resource: "Antimatter Galaxies",
       current: () => player.galaxies,
-      required: completions => new Decimal(7.5e7 + (5e6 * completions + 1)),
+      required: completions => new Decimal(7.5e7 + (5e6 * (completions + 1))),
       formatValue: formatInt
     }
   },

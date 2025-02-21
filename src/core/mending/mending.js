@@ -60,7 +60,7 @@ export function mendingReset(specialMend = 0) {
     player.mending.firstMend = Date.now();
   }
   // Do this first so we can do records and stuff based on stats, without fucking anything over
-  if (specialMend !== 0) {
+  if (specialMend === 0) {
     Currency.mendingPoints.add(gainedMendingPoints());
     Currency.mends.add(gainedMends());
     player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
@@ -351,7 +351,7 @@ export function mendingReset(specialMend = 0) {
     iMCapSet: [],
     laitelaSet: [],
   };
-  if (MendingMilestone.ten.isReached && specialMend === 1) {
+  if (MendingMilestone.ten.isReached && specialMend !== 1) {
     for (const achievement of Achievements.preMend) {
       achievement.unlock();
     }
