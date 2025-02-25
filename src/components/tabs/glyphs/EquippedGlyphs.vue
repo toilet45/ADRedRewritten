@@ -112,7 +112,7 @@ export default {
       this.undoVisible = TeresaUnlocks.undo.canBeApplied;
       this.undoAvailable = this.undoVisible && this.undoSlotsAvailable && player.reality.glyphs.undo.length > 0;
       this.cosmeticGlow = player.reality.glyphs.cosmetics.glowNotification;
-      this.updateLvUnlock = MendingUpgrade(17).boughtAmount.gt(4);
+      this.updateLvUnlock = (!Laitela.isDamaged && MendingUpgrade(17).boughtAmount.gt(4));
       this.updateLv = player.reality.updateGLOnReality;
       this.cursedUnlocked = Ra.unlocks.unlockHardV.canBeApplied;
     },

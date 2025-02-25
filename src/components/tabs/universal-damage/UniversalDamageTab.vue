@@ -64,8 +64,8 @@ export default {
         </div>
       </div>
       <p>
-        You have <span class="c-light-credit-description__accent"> {{ format(lightCredits, 2, 0) }}</span> Light Credits
-        and <span class="c-dark-credit-description__accent"> {{ format(darkCredits, 2, 0) }}</span> Dark Credits.
+        You have <span class="c-light-credit-description__accent"> {{ format(lightCredits, 2, 0) }}</span> Light {{ pluralize('Credit', lightCredits)}}
+        and <span class="c-dark-credit-description__accent"> {{ format(darkCredits, 2, 0) }}</span> Dark {{ pluralize('Credit', darkCredits)}}.
       </p>
     </div>
   </div>

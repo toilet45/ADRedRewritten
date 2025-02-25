@@ -206,7 +206,7 @@ export function rewardTP() {
 // act dynamically on this fixed base value elsewhere solves that issue
 export function getBaseTP(antimatter, requireEternity) {
   if (!Player.canEternity && requireEternity) return DC.D0;
-  const am = (isInCelestialReality() || Pelle.isDoomed || MendingUpgrade(15).isBought)
+  const am = (isInCelestialReality() || Pelle.isDoomed || (MendingUpgrade(15).isBought && !Laitela.isDamaged))
     ? antimatter
     : Ra.unlocks.unlockDilationStartingTP.effectOrDefault(antimatter);
   let baseTP = am.max(1).log10().div(Effects.min(400, MendingUpgrade(15).effects.tpDiv)).pow(1.5);

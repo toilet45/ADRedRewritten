@@ -3,7 +3,7 @@ import { DC } from "../constants";
 import { GlyphInfo } from "../secret-formula/reality/core-glyph-info";
 
 export function isMendingAvailable() {
-  return Currency.antimatter.gte(MendingMilestone.six.isReached ? DC.E5E14 : DC.BIMAX);
+  return Currency.antimatter.gte(MendingMilestone.six.isReached ? DC.E5E14 : DC.BIMAX) || Laitela.isDamaged;
 }
 
 export function mendingResetRequest() {
@@ -25,7 +25,13 @@ function getGlyphTypes() {
   return v;
 }
 
-function updateMendingRecords(MvRgain) {
+function updateMendingRecords(MvRgain, updateBestTimes) {
+  if (!updateBestTimes) {
+    player.records.thisMend.time = DC.D0;
+    player.records.thisMend.realTime = DC.D0;
+    player.records.thisMend.trueTime = 0;
+    return;
+  }
   const thisRunRMmin = MvRgain.div(Time.thisMendRealTime.totalMinutes.clampMin(0.0005));
   if (player.records.bestMend.MvRmin.lt(thisRunRMmin)) {
     player.records.bestMend.MvRmin = thisRunRMmin;
@@ -54,13 +60,19 @@ function updateMendingRecords(MvRgain) {
   player.records.thisMend.trueTime = 0;
 }
 // eslint-disable-next-line complexity
-export function mendingReset(specialMend = 0) {
+export function mendingReset(special = 0) {
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_BEFORE);
+  let specialMend = special;
   if (player.mending.firstMend === 0) {
     player.mending.firstMend = Date.now();
   }
   // Do this first so we can do records and stuff based on stats, without fucking anything over
-  if (specialMend === 0) {
+  if (Laitela.isDamaged) {
+    Currency.lightCredits.add(Laitela.gainedCredits()[0]);
+    Currency.darkCredits.add(Laitela.gainedCredits()[1]);
+    player.celestials.laitela.damaged = false;
+  }
+  else if (specialMend === 0) {
     Currency.mendingPoints.add(gainedMendingPoints());
     Currency.mends.add(gainedMends());
     player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
@@ -76,7 +88,7 @@ export function mendingReset(specialMend = 0) {
     MachineHandler.currentIMCap,
     gainedMendingPoints()
   );
-  updateMendingRecords(gainedMendingPoints());
+  updateMendingRecords(gainedMendingPoints(), specialMend === 0);
 
   // Begin resetting the things
   // Celestials

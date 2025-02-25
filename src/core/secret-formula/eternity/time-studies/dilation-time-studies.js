@@ -58,16 +58,16 @@ export const dilationTimeStudies = [
     id: 11,
     description: "Improve the Tachyon Particle Formula",
     cost: DC.E20,
-    requirement: () => TimeStudy.timeDimension(7).isBought && MendingUpgrade(9).isBought,
-    unlocked: () => MendingUpgrade(9).isBought,
+    requirement: () => TimeStudy.timeDimension(7).isBought && MendingUpgrade(9).isBought && !Laitela.isDamaged,
+    unlocked: () => MendingUpgrade(9).isBought && !Laitela.isDamaged,
     effect: 1.1
   },
   {
     id: 12,
     description: "Improve the gain of Tachyon Galaxies.",
     cost: DC.E29,
-    requirement: () => TimeStudy.timeDimension(5).isBought && MendingUpgrade(9).isBought,
-    unlocked: () => MendingUpgrade(9).isBought,
+    requirement: () => TimeStudy.timeDimension(5).isBought && MendingUpgrade(9).isBought && !Laitela.isDamaged,
+    unlocked: () => MendingUpgrade(9).isBought && !Laitela.isDamaged,
     effect: 1.1,
   }
 ];

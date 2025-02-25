@@ -488,7 +488,7 @@ export const normalTimeStudies = [
       () => EternityChallenge(2).completions > 0 || Perk.bypassEC2Lock.isBought,
       () => EternityChallenge(3).completions > 0 || Perk.bypassEC3Lock.isBought],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: () => `You gain ${formatPercents(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 0.01)}
+    description: () => `You gain ${formatPercents(MendingUpgrade(2).boughtAmount.gte(1) && !Laitela.isDamaged ? 1 : 0.01)}
     of your Infinity Points gained on crunch each second`,
     effect: () => gainedInfinityPoints().times(Time.deltaTime.div(100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige)

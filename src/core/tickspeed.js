@@ -273,7 +273,7 @@ export const FreeTickspeed = {
   },
 
   get softcap() {
-    let softcap = Effects.max(FreeTickspeed.BASE_SOFTCAP, MendingUpgrade(10));
+    let softcap = Laitela.isDamaged ? FreeTickspeed.BASE_SOFTCAP : Effects.max(FreeTickspeed.BASE_SOFTCAP, MendingUpgrade(10));
     if (Enslaved.has(ENSLAVED_UNLOCKS.FREE_TICKSPEED_SOFTCAP)) {
       softcap = softcap.add(1e5);
     }

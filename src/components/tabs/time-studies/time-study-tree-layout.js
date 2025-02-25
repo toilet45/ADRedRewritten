@@ -231,7 +231,7 @@ export default class TimeStudyTreeLayout {
     return {
       alt62: Perk.bypassEC5Lock.isBought,
       alt181: Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought,
-      mu9: MendingUpgrade(9).isBought,
+      mu9: MendingUpgrade(9).isBought && !Laitela.isDamaged,
       triad: Ra.canBuyTriad,
       triadPace: (Ra.unlocks.unlockHardV.effectOrDefault(0) >= 9),
       triadDim: (Ra.unlocks.unlockHardV.effectOrDefault(0) >= 12),

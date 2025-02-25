@@ -21,7 +21,8 @@ export default {
       hasStrike: false,
       hasGalaxyGenerator: false,
       alchIncreasedCap: false,
-      needsAlchemy: true
+      needsAlchemy: true,
+      externalBans: false
     };
   },
   computed: {
@@ -38,11 +39,12 @@ export default {
   methods: {
     update() {
       this.isDoomed = Pelle.isDoomed;
+      this.externalBans = Laitela.isDamaged;
       if (!this.isDoomed) {
         this.completedRows = Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked));
         this.cappedResources = AlchemyResources.all.countWhere(r => r.amount.gte(25000));
         this.canEnterPelle = this.completedRows === this.totalRows &&
-          (this.cappedResources === this.totalAlchemyResources || !this.needsAlchemy);
+          (this.cappedResources === this.totalAlchemyResources || !this.needsAlchemy) && !this.externalBans;
       }
       this.hasStrike = PelleStrikes.all.some(s => s.hasStrike);
       this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0);
@@ -97,11 +99,16 @@ export default {
       v-else
       class="pelle-unlock-requirements"
     >
-      You must have {{ formatInt(totalRows) }} rows of Achievements
-      <div v-if="needsAlchemy">
-        and all of your Glyph Alchemy Resources {{ alchIncreasedCap ? `at least level ${formatInt(25000)}` : 'capped' }}
+      <div v-if="externalBans">
+        They cannot help you Destroyer
       </div>
-      to unlock Pelle, Celestial of Antimatter.
+      <div v-else>
+        You must have {{ formatInt(totalRows) }} rows of Achievements
+        <div v-if="needsAlchemy">
+          and all of your Glyph Alchemy Resources {{ alchIncreasedCap ? `at least level ${formatInt(25000)}` : 'capped' }}
+        </div>
+        to unlock Pelle, Celestial of Antimatter.
+      </div>
       <br>
       <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
       <div v-if="!needsAlchemy"><br><br><br></div>

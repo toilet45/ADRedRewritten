@@ -5,7 +5,7 @@ export const MachineHandler = {
   get baseRMCap() { return DC.E1000; },
 
   get hardcapRM() {
-    return this.baseRMCap.times(ImaginaryUpgrade(6).effectOrDefault(1)).mul(MendingUpgrade(6).effects.rm);
+    return this.baseRMCap.timesEffectsOf(ImaginaryUpgrade(6), Achievement(203)).mul(MendingUpgrade(6).effects.rm);
   },
 
   get distanceToRMCap() {
@@ -35,11 +35,11 @@ export const MachineHandler = {
   },
 
   get isIMUnlocked() {
-    return Currency.realityMachines.value.gte(this.hardcapRM) || Currency.imaginaryMachines.gt(0) || MendingUpgrade(17).boughtAmount.gt(7);
+    return Currency.realityMachines.value.gte(this.hardcapRM) || Currency.imaginaryMachines.gt(0) || (MendingUpgrade(17).boughtAmount.gt(7) && !Laitela.isDamaged);
   },
 
   get baseIMCap() {
-    return (Decimal.pow(Decimal.clampMin(this.uncappedRM.max(1).log10().sub(MendingUpgrade(17).boughtAmount.gte(8) ? 0 : 1000), 0), 2))
+    return (Decimal.pow(Decimal.clampMin(this.uncappedRM.max(1).log10().sub((MendingUpgrade(17).boughtAmount.gte(8) && !Laitela.isDamaged) ? 0 : 1000), 0), 2))
       .times((Decimal.pow(Decimal.clampMin(this.uncappedRM.max(1).log10().sub(100000), 1), 0.2)));
   },
 
@@ -54,7 +54,7 @@ export const MachineHandler = {
 
   // Use iMCap to store the base cap; applying multipliers separately avoids some design issues the 3xTP upgrade has
   updateIMCap() {
-    if (this.uncappedRM.gte(this.baseRMCap) || MendingUpgrade(17).boughtAmount.gte(8)) {
+    if (this.uncappedRM.gte(this.baseRMCap) || MendingUpgrade(17).boughtAmount.gte(8) && !Laitela.isDamaged) {
       if (this.baseIMCap.gt(player.reality.iMCap)) {
         player.records.bestReality.iMCapSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
         player.reality.iMCap = this.baseIMCap;
@@ -68,7 +68,7 @@ export const MachineHandler = {
   },
 
   gainedImaginaryMachines(diff) {
-    if (MendingUpgrade(2).boughtAmount.gte(4)) return this.currentIMCap.sub(Currency.imaginaryMachines.value);
+    if (MendingUpgrade(2).boughtAmount.gte(4) && !Laitela.isDamaged) return this.currentIMCap.sub(Currency.imaginaryMachines.value);
     return (this.currentIMCap.sub(Currency.imaginaryMachines.value)).times(DC.D1
       .sub(Decimal.pow(2, (new Decimal(0).sub(diff).div(1000).div(this.scaleTimeForIM)))));
   },

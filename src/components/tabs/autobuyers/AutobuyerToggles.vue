@@ -33,7 +33,7 @@ export default {
     update() {
       this.isDoomed = Pelle.isDoomed;
       this.autobuyersOn = player.auto.autobuyersOn;
-      this.showContinuum = Laitela.isUnlocked || MendingUpgrade(17).boughtAmount.gt(0);
+      this.showContinuum = Laitela.isUnlocked || (MendingUpgrade(17).boughtAmount.gt(0) && !Laitela.isDamaged);
       this.disableContinuum = player.auto.disableContinuum;
       this.allAutobuyersDisabled = Autobuyers.unlocked.every(autobuyer => !autobuyer.isActive);
     },

@@ -91,7 +91,7 @@ export class InfinityUpgradeState extends SetPurchasableMechanicState {
 
 export function totalIPMult() {
   const disabledByECs = EternityChallenge(14).isRunning || EternityChallenge(15).isRunning ||
-  EternityChallenge(21).isRunning;
+  EternityChallenge(21).isRunning || EternityChallenge(22).isRunning;
   if ((Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.INFINITY) || disabledByECs) {
     return DC.D1;
   }

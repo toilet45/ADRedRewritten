@@ -326,7 +326,7 @@ export const v = {
       effect: () => Achievements.power,
       // Base rate is 60 ECs at 20 minutes each
       // eslint-disable-next-line no-nested-ternary
-      format: x => (MendingUpgrade(14).isBoguht ? "Instant (Mending Upgrade 14)"
+      format: x => (MendingUpgrade(14).isBought && !Laitela.isDamaged ? "Instant (Mending Upgrade 14)"
         : Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied
           ? "Instant (Ra upgrade)"
           : `${TimeSpan.fromMinutes(new Decimal(1200).div(x)).toStringShort()} for full completion`),

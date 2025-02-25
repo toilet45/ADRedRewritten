@@ -329,6 +329,7 @@ export const Ra = {
     res = res.mul(Ra.unlocks.achToMemories.effectOrDefault(new Decimal(1)));
     res = res.mul(Ra.unlocks.memGainOutsideRa.canBeApplied && !Ra.isRunning ? 20 : 1);
     res = res.mul(ExpansionUpgrade(7).effectOrDefault(1));
+    res = res.mul(EternityChallenge(21).reward.effectOrDefault(1));
     return res;
   },
   get memoryBoostResources() {

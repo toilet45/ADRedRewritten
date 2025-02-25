@@ -448,9 +448,9 @@ export const eternityChallenges = [
     id: 21,
     description: () => `All continuous production/generation is logarthmic.`,
     // AD, ID, TD, IP, Replicanti
-    goal: DC.E100,
+    goal: DC.E10000,
     pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    goalIncrease: DC.E5000,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -460,7 +460,7 @@ export const eternityChallenges = [
     reward: {
       description: "Memory production multiplier",
       // eslint-disable-next-line max-len
-      effect: completions => Decimal.pow(Decimal.pow(50, Math.pow(completions, 2)), EternityChallenge(22).effectOrDefault(1)),
+      effect: completions => Decimal.pow(Decimal.pow(50, Math.pow(completions, 2)), EternityChallenge(22).reward.effectOrDefault(1)),
       formatEffect: value => `${formatX(value)}`
     }
   },

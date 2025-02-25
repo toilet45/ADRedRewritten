@@ -129,8 +129,6 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
     // and handling it would make the replicanti code a lot more complicated.
     interval = interval.pow(2);
   }
-
-  if (EternityChallenge(21).isRunning) interval = interval.max(1).log10();
   return interval;
 }
 
@@ -176,7 +174,7 @@ export function totalReplicantiSpeedMult(overCap) {
   );
 
   totalMult = totalMult.powEffectOf(Achievement(193));
-
+  if (EternityChallenge(21).isRunning) totalMult = totalMult.log10();
   return totalMult.clampMin(1);
 }
 
@@ -226,8 +224,7 @@ export function replicantiLoop(diff) {
     if (!isUncapped || Replicanti.amount.lte(replicantiCap())) {
       // Some of the gain is "used up" below e308, but if replicanti are uncapped
       // then some may be "left over" for increasing replicanti beyond their cap.
-      remainingGain = fastReplicantiBelow308(EternityChallenge(21).isRunning
-        ? remainingGain.log10() : remainingGain, areRGsBeingBought);
+      remainingGain = fastReplicantiBelow308(remainingGain, areRGsBeingBought);
     }
     if (isUncapped && Replicanti.amount.gte(replicantiCap()) && remainingGain.gt(0)) {
       // Recalculate the interval (it may have increased due to additional replicanti, or,

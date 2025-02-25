@@ -66,10 +66,10 @@ export const mendingUpgrades = [
     // TODO: change this desc
     description: () => `Antimatter, Infinity, and Time Dimensions gain a multiplier and a power effect`,
     effects: p => ({
-      mult: [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
+      mult: Laitela.isDamaged ? DC.D1 : [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
         DC.E5000, DC.E5000, DC.E5000, DC.E5000,
         DC.E5000, DC.E5000, DC.E5000][p],
-      pow: new Decimal([1, 1, 1, 1, 1, 1.01, 1.02, 1.03, 1.05, 1.075, 1.1, 1.1][p])
+      pow: Laitela.isDamaged ? DC.D1 : new Decimal([1, 1, 1, 1, 1, 1.01, 1.02, 1.03, 1.05, 1.075, 1.1, 1.1][p])
     }),
     formatEffect: effects => `${formatX(effects.mult)}, ${formatPow(effects.pow, 3, 3)}`,
     purchaseLimit: 10
@@ -79,7 +79,7 @@ export const mendingUpgrades = [
     id: 4,
     cost: DC.D2,
     description: () => `Glyph Instability is slightly weaker`,
-    effect: () => DC.D0_965
+    effect: () => Laitela.isDamaged ? DC.D1 : DC.D0_965
   },
   {
     name: "5",
@@ -122,8 +122,8 @@ export const mendingUpgrades = [
     // eslint-disable-next-line max-len
     description: p => `Bank some of your Eternities on Reality${p >= 10 ? ", and some of your Realities on Mend." : ""}`,
     effects: p => ({
-      eternities: DC.D5.mul(p).min(50),
-      realities: DC.D2.mul(p).sub(20).max(0)
+      eternities: Laitela.isDamaged ? DC.D0 : DC.D5.mul(p).min(50),
+      realities: Laitela.isDamaged ? DC.D0 : DC.D2.mul(p).sub(20).max(0)
     }),
     formatEffect: effects =>
       // eslint-disable-next-line max-len
@@ -177,12 +177,12 @@ export const mendingUpgrades = [
     cost: new Decimal("66"),
     description: () => `Achievement multiplier is far stronger`,
     effects: {
-      adPow: 10000,
-      idPow: 777,
-      tdPow: 111,
-      tpPow: 10,
-      ttGenPow: 4,
-      bhPow: 2,
+      adPow: () => Laitela.isDamaged ? 1 : 10000,
+      idPow: () => Laitela.isDamaged ? 1 : 777,
+      tdPow: () => Laitela.isDamaged ? 1 : 111,
+      tpPow: () => Laitela.isDamaged ? 1 : 10,
+      ttGenPow: () => Laitela.isDamaged ? 1 : 4,
+      bhPow: () =>Laitela.isDamaged ? 1 : 2,
     }
   },
   {
@@ -197,8 +197,8 @@ export const mendingUpgrades = [
     cost: new Decimal("123"),
     description: () => `Generate Tachyon Particles based on best Antimatter this Mend, TP formula is better`,
     effects: {
-      tpDiv: 222,
-      tpPow: 1.15
+      tpDiv: () => Laitela.isDamaged ? 1 : 222,
+      tpPow: () => Laitela.isDamaged ? 1 : 1.15
     }
   },
   rebuyable({

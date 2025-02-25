@@ -12,7 +12,9 @@ export default {
       hover: false,
       creditsClosed: false,
       needsDoom: true,
-      isDamaged: false
+      isDamaged: false,
+      gainedLC: new Decimal(0),
+      gainedDKC: new Decimal(0)
     };
   },
   computed: {
@@ -37,6 +39,8 @@ export default {
       this.gainedMvR.copyFrom(gainedMvR);
       this.currentMvRRate.copyFrom(gainedMvR.div(Decimal.max(0.0005, Time.thisMendRealTime.totalMinutes)));
       this.isDamaged = Laitela.isDamaged;
+      this.gainedLC = Laitela.gainedCredits()[0];
+      this.gainedDKC = Laitela.gainedCredits()[1];
     },
     mend() {
       if (!isMendingAvailable) return;
@@ -64,10 +68,10 @@ export default {
     <template v-else>
       <b>
         Mend this Universe for
-        <span>{{ format(0, 2) }}</span>
-        <span> Light {{ pluralize("Credit", 0) }}</span> and
-        <span> {{ format(0, 2) }}</span>
-        <span> Dark {{ pluralize("Credit", 0) }}</span>
+        <span>{{ format(gainedLC, 2) }}</span>
+        <span> Light {{ pluralize("Credit", gainedLC) }}</span> and
+        <span> {{ format(gainedDKC, 2) }}</span>
+        <span> Dark {{ pluralize("Credit", gainedDKC) }}</span>
         <span> ({{ format(0, 2, 2) }} light/min</span> and
         <span> {{ format(0, 2, 2) }} dark/min)</span>
       </b>

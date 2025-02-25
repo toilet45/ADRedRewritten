@@ -772,7 +772,6 @@ export function finishProcessReality(realityProps) {
     Currency.enslavedPoints.add(Enslaved.gainedTR);
   }
   player.celestials.enslaved.expanded = false;
-  player.celestials.laitela.damaged = false;
 
   playerInfinityUpgradesOnReset();
   resetInfinityRuns();

@@ -71,6 +71,20 @@ export default {
             type: "decimal"
           },
         };
+        /* case AUTO_MEND_MODE.LIGHT: return {
+          title: "Mend at X Light Credits",
+          input: {
+            property: "amount",
+            type: "decimal"
+          },
+        };
+        case AUTO_MEND_MODE.DARK: return {
+          title: "Mend at X Dark Credits",
+          input: {
+            property: "amount",
+            type: "decimal"
+          },
+        }; */
       }
       throw new Error("Unknown Auto Mend mode");
     },

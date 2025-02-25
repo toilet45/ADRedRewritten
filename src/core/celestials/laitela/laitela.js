@@ -10,7 +10,7 @@ export const Laitela = {
     return player.celestials.laitela;
   },
   get isUnlocked() {
-    return ImaginaryUpgrade(15).isBought;
+    return ImaginaryUpgrade(15).isBought || Laitela.isDamaged;
   },
   initializeRun() {
     clearCelestialRuns();
@@ -32,7 +32,7 @@ export const Laitela = {
     return Laitela.maxAllowedDimension === 0;
   },
   get continuumUnlocked() {
-    return (ImaginaryUpgrade(15).isBought && !Pelle.isDisabled("continuum")) || MendingUpgrade(17).boughtAmount.gt(0);
+    return (ImaginaryUpgrade(15).isBought && !Pelle.isDisabled("continuum")) || MendingUpgrade(17).boughtAmount.gt(0) || this.isDamaged;
   },
   get continuumActive() {
     return this.continuumUnlocked && !(player.auto.disableContinuum || Pelle.isDisabled("continuum") || InfinityChallenge(10).isRunning);
@@ -46,7 +46,7 @@ export const Laitela = {
   },
   get matterExtraPurchaseFactor() {
     if (EternityChallenge(18).isRunning) return DC.D1;
-    return Decimal.pow(Currency.darkMatter.max.add(1).max(1).log10().div(50), 0.4)
+    return Decimal.pow(Currency.darkMatter.max.clampMax(Number.MAX_VALUE).add(1).max(1).log10().div(50), 0.4)
       .times((SingularityMilestone.continuumMult.effectOrDefault(DC.D0)).add(1)).div(2).add(1);
   },
   get realityReward() {
@@ -87,6 +87,13 @@ export const Laitela = {
     Laitela.quotes.annihilation.show();
     Achievement(176).unlock();
     return true;
+  },
+  gainedCredits() {
+    const AM = player.records.totalAntimatter;
+    let LC = AM.clampMin(1).log10().div(1e9).pow(0.4).floor();
+    const DM = Currency.darkMatter.max;
+    let DKC = DM.clampMin(1).log10().div(5).pow(0.8).floor();
+    return [LC, DKC];
   },
   // Max purchase interval, then DM, then DE, working highest tier down in each case. No reason for the order.
   maxAllDMDimensions(maxTier) {

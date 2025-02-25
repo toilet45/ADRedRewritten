@@ -92,6 +92,10 @@ class MendingUpgradeState extends BitPurchasableMechanicState {
         Achievement(193).unlock();
         break;
       }
+      case 20: {
+        player.reality.warped = true;
+        break;
+      }
       default:
     }
   }

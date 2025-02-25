@@ -78,11 +78,12 @@ export class MendAutobuyerState extends AutobuyerState {
   }
 
   get willMend() {
+    if (Laitela.isDamaged) return false;
     switch (this.mode) {
       case AUTO_MEND_MODE.AMOUNT:
         return gainedMendingPoints().gte(this.amount);
       case AUTO_MEND_MODE.TIME:
-        return Time.thisMendRealTime.totalSeconds.toNumber() > this.time;
+        return Time.thisMendTrueTime.totalSeconds.toNumber() > this.time;
       case AUTO_MEND_MODE.X_HIGHEST:
       default:
         return gainedMendingPoints().gte(this.highestPrevPrestige.times(this.xHighest));

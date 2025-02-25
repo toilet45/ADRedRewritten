@@ -136,6 +136,12 @@ export function gainedInfinityPoints(mm1gen = false) {
   let ip = (player.break || mm1gen)
     ? Decimal.pow10(player.records.thisInfinity.maxAM.max(1).log10().div(div).sub(0.75))
     : new Decimal(308 / div);
+  if (EternityChallenge(22).isRunning) {
+    if (ip.gt(ipSoftcap)) {
+      ip = ip.log10().div("5e32").pow(0.666).mul("5e32").pow10();
+    }
+    return ip.floor();
+  }
   if (Enslaved.isExpanded) return ip.times(ExpansionUpgrade(3).effectOrDefault(1)).floor();
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
     ip = ip.min(DC.E200);
@@ -716,7 +722,7 @@ export function gameLoop(passedDiff, options = {}) {
   Currency.realities.add(uncountabilityGain);
   Currency.perkPoints.add(uncountabilityGain);
 
-  if (Perk.autocompleteEC1.canBeApplied || MendingUpgrade(14).isBought) {
+  if (Perk.autocompleteEC1.canBeApplied || (MendingUpgrade(14).isBought && !Laitela.isDamaged)) {
     player.reality.lastAutoEC = player.reality.lastAutoEC.add(realDiff);
   }
 
@@ -891,7 +897,7 @@ function applyAutoUnlockPerks() {
   if (!TimeDimension(8).isUnlocked && Perk.autounlockTD.canBeApplied) {
     for (let dim = 5; dim <= 8; ++dim) TimeStudy.timeDimension(dim).purchase();
   }
-  if (MendingUpgrade(9).isBought && Perk.autounlockTD.canBeApplied) {
+  if (MendingUpgrade(9).isBought && Perk.autounlockTD.canBeApplied && !Laitela.isDamaged) {
     TimeStudy.TGformula.purchase(true);
     TimeStudy.TPformula.purchase(true);
   }
@@ -972,20 +978,20 @@ function laitelaBeatText(disabledDim) {
 function applyAutoprestige(diff) {
   const disableIPSpeedBoost = EternityChallenge(13).isRunning || EternityChallenge(14).isRunning ||
   EternityChallenge(15).isRunning || player.challenge.infinity.current > 8;
-  if ((TimeStudy(181).canBeApplied || MendingUpgrade(2).boughtAmount.gte(1)) && !Enslaved.isExpanded && !EternityChallenge(18).isRunning) {
+  if ((TimeStudy(181).canBeApplied || (MendingUpgrade(2).boughtAmount.gte(1) && !Laitela.isDamaged)) && !Enslaved.isExpanded && !EternityChallenge(18).isRunning) {
     const val = (gainedInfinityPoints(true).times((disableIPSpeedBoost ? Time.realDeltaTimeMs : Time.deltaTime)
-      .div(MendingUpgrade(2).boughtAmount.gte(1) ? 1 : 100))
+      .div(MendingUpgrade(2).boughtAmount.gte(1) && !Laitela.isDamaged ? 1 : 100))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
-    Currency.infinityPoints.add(EternityChallenge(21).isRunning ? val.log10() : val);
+    Currency.infinityPoints.add(EternityChallenge(21).isRunning ? val.clampMin(1).log10().clampMin(1) : val);
   }
 
-  if ((TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2)) && !Enslaved.isExpanded) {
+  if ((TeresaUnlocks.epGen.canBeApplied || MendingUpgrade(2).boughtAmount.gte(2) && !Laitela.isDamaged) && !Enslaved.isExpanded) {
     Currency.eternityPoints.add(player.records.thisEternity.bestEPmin.times(DC.D0_01)
       .times(getGameSpeedupFactor().times(diff.div(1000)))
       .timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if ((InfinityUpgrade.ipGen.isCharged || (MendingUpgrade(2).boughtAmount.gte(3) && !Pelle.isDoomed)) &&
+  if ((InfinityUpgrade.ipGen.isCharged || (MendingUpgrade(2).boughtAmount.gte(3) && !Laitela.isDamaged && !Pelle.isDoomed)) &&
   !Enslaved.isExpanded) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
@@ -997,7 +1003,7 @@ function applyAutoprestige(diff) {
     Currency.eternityPoints.add(gainedEternityPoints().times(DC.D0_1).times(diff.div(1000)));
   }
 
-  if (MendingUpgrade(2).boughtAmount.gte(5) && !Enslaved.isExpanded) {
+  if (MendingUpgrade(2).boughtAmount.gte(5) && !Laitela.isDamaged && !Enslaved.isExpanded) {
     Currency.remnants.add(Pelle.remnantsGain);
   }
 }

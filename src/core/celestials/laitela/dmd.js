@@ -41,6 +41,7 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get isUnlocked() {
+    if (Laitela.isDamaged) return true;
     switch (this.tier) {
       case 8: return Ra.pets.laitela.level >= 100;
       case 7: return Ra.pets.laitela.level >= 75;

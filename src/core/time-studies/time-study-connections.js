@@ -190,10 +190,10 @@ TimeStudy.allConnections = (function() {
     [TimeStudy.dilation, TimeStudy.timeDimension(5)],
     [TimeStudy.dilation, TS(308), () => !(Ra.unlocks.unlockHardV.effectOrDefault(0) >= 8)],
     [TimeStudy.timeDimension(5), TimeStudy.timeDimension(6)],
-    [TimeStudy.timeDimension(5), TimeStudy.TGformula, () => !MendingUpgrade(9).isBought],
+    [TimeStudy.timeDimension(5), TimeStudy.TGformula, () => !MendingUpgrade(9).isBought || Laitela.isDamaged],
     [TimeStudy.timeDimension(6), TimeStudy.timeDimension(7)],
     [TimeStudy.timeDimension(7), TimeStudy.timeDimension(8)],
-    [TimeStudy.timeDimension(7), TimeStudy.TPformula, () => !MendingUpgrade(9).isBought],
+    [TimeStudy.timeDimension(7), TimeStudy.TPformula, () => !MendingUpgrade(9).isBought || Laitela.isDamaged],
     [TimeStudy.timeDimension(8), TimeStudy.reality],
   ].map(props => new TimeStudyConnection(props[0], props[1], props[2]));
 

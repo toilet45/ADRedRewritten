@@ -292,12 +292,15 @@ window.AUTO_REALITY_MODE = {
   BOTH: 3,
   TIME: 4,
   RELIC_SHARD: 5,
+  TIME_FRAGMENTS: 6
 };
 
 window.AUTO_MEND_MODE = {
   AMOUNT: 0,
   TIME: 1,
-  X_HIGHEST: 2
+  X_HIGHEST: 2,
+  LIGHT: 3,
+  DARK: 4
 };
 
 window.RECENT_PRESTIGE_RESOURCE = {
