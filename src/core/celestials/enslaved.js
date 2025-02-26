@@ -109,7 +109,8 @@ export const Enslaved = {
   },
   canRelease(auto) {
     return !Enslaved.isStoringRealTime && !EternityChallenge(12).isRunning && !Laitela.isRunning &&
-      !(Enslaved.isRunning && auto) && !Pelle.isDoomed && !EternityChallenge(19).isRunning;
+      !(Enslaved.isRunning && auto) && !Pelle.isDoomed && !EternityChallenge(19).isRunning &&
+      !EternityChallenge(16).isRunning;
   },
   // "autoRelease" should only be true when called with the Ra upgrade
   useStoredTime(autoRelease) {

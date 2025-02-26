@@ -91,7 +91,7 @@ export function getDimensionFinalMultiplierUncached(tier) {
 
   // This power effect goes intentionally after all the nerf effects and shouldn't be moved before them
   if (AlchemyResource.inflation.isUnlocked && multiplier.gte(AlchemyResource.inflation.effectValue)) {
-    multiplier = multiplier.pow(1.05);
+    if (!EternityChallenge(17).isRunning) multiplier = multiplier.pow(1.05);
   }
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
@@ -148,7 +148,7 @@ export function getDimensionFinalMultiplierUncachedWithoutSC(tier) {
 
   // This power effect goes intentionally after all the nerf effects and shouldn't be moved before them
   if (AlchemyResource.inflation.isUnlocked && multiplier.gte(AlchemyResource.inflation.effectValue)) {
-    multiplier = multiplier.pow(1.05);
+    if (!EternityChallenge(17).isRunning) multiplier = multiplier.pow(1.05);
   }
 
   if (Laitela.isDamaged) multiplier = multiplier.pow(0.6);
@@ -188,7 +188,7 @@ function applyNDMultipliers(mult, tier) {
         TimeStudy(234)
       );
   }
-  if (tier === 8) {
+  if (tier === 8 && !EternityChallenge(17).isRunning) {
     multiplier = multiplier.times(Sacrifice.totalBoost);
   }
 
@@ -219,6 +219,7 @@ function applyNDMultipliers(mult, tier) {
 
 function applyNDPowers(mult, tier) {
   let multiplier = mult;
+  if (EternityChallenge(17).isRunning) return multiplier;
   const glyphPowMultiplier = new Decimal(getAdjustedGlyphEffect("powerpow"));
   const glyphEffarigPowMultiplier = getAdjustedGlyphEffect("effarigdimensions");
 
@@ -263,7 +264,7 @@ function applyNDPowers(mult, tier) {
 
   //console.log(multiplier)
 
-  multiplier = stackedLogPower(multiplier, 1, CelestialStudy(64).effectOrDefault(1));
+  if (!EternityChallenge(17).isRunning) multiplier = stackedLogPower(multiplier, 1, CelestialStudy(64).effectOrDefault(1));
 
   return multiplier;
 }
@@ -702,7 +703,7 @@ class AntimatterDimensionState extends DimensionState {
     }
     if (EternityChallenge(14).isRunning && tier === 1) production = stackedLogPower(production, 1, 0.03);
     if (EternityChallenge(21).isRunning) production = production.max(1).log10();
-    if (EternityChallenge(22).isRunning && tier === 1) production = production.div(player.antimatter.log10().cbrt());
+    if (EternityChallenge(22).isRunning && tier === 1) production = production.root(player.antimatter.log10().cbrt());
     production = production.min(this.cappedProductionInNormalChallenges);
     return production;
   }

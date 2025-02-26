@@ -18,6 +18,9 @@ export class DimBoost {
     if (NormalChallenge(8).isRunning) {
       return DC.D1;
     }
+    if (EternityChallenge(17).isRunning) {
+      return DC.D1;
+    }
 
     let boost = new Decimal(Effects.max(
       2,

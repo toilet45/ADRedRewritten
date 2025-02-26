@@ -26,7 +26,7 @@ export const perkShop = {
     effect: bought => Decimal.pow(1.05, bought),
     formatEffect: value => formatX(value, 2, 2),
     formatCost: value => format(value, 2),
-    costCap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 1048576 : 2048),
+    costCap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 2 ** 20 : 2 ** 11),
     cap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? Decimal.pow(1.05, 20) : Decimal.pow(1.05, 11))
   }),
   rmMult: rebuyable({
@@ -37,8 +37,8 @@ export const perkShop = {
     effect: bought => Decimal.pow(2, bought),
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
-    costCap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 1048576 : 2048),
-    cap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 1048576 : 2048)
+    costCap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 2 ** 20 : 2 ** 11),
+    cap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 2 ** 20 : 2 ** 11)
   }),
   bulkDilation: rebuyable({
     id: 2,
@@ -49,7 +49,7 @@ export const perkShop = {
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
     costCap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 1638400 : 1600),
-    cap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 16384 : 16),
+    cap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 2 ** 14 : 16),
   }),
   autoSpeed: rebuyable({
     id: 3,
@@ -67,7 +67,7 @@ export const perkShop = {
     id: 4,
     description: () => `Receive a Music Glyph of a random type that is ${formatPercents(Ra.unlocks.musicAtHighest.canBeApplied ? 1 : 0.8)} of your highest level.
       (Try clicking it!)`,
-    cost: () => MendingUpgrade(17).boughtAmount.gt(2) ? 0 : 1,
+    cost: () => (MendingUpgrade(17).boughtAmount.gt(2) ? 0 : 1),
     formatCost: value => formatInt(value),
     costCap: () => Number.MAX_VALUE,
     cap: () => Number.MAX_VALUE
@@ -76,7 +76,7 @@ export const perkShop = {
   fillMusicGlyph: rebuyable({
     id: 5,
     description: () => `Fill all empty slots in your inventory with Music Glyphs`,
-    cost: () => MendingUpgrade(17).boughtAmount.gt(2) ? 0 : Math.clampMin(GameCache.glyphInventorySpace.value, 1),
+    cost: () => (MendingUpgrade(17).boughtAmount.gt(2) ? 0 : Math.clampMin(GameCache.glyphInventorySpace.value, 1)),
     otherReq: () => GameCache.glyphInventorySpace.value > 0,
     formatCost: value => formatInt(value),
     costCap: () => Number.MAX_VALUE,
