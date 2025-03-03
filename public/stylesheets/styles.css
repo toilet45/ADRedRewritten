@@ -3630,6 +3630,26 @@ br {
   border-radius: var(--var-border-radius, 1rem);
 }
 
+.o-hyperdoom {
+  width: 16rem;
+  height: 16rem;
+  position: relative;
+  text-align: center;
+  font-family: Typewriter, serif;
+  font-size: 0.8rem;
+  color: black;
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.8rem);
+  margin: 0 auto;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.o-hyperdoom-images {
+  background-image: url("../images/hyperdoom-settings.png");
+  background-size: 96rem;
+}
+
 .c-challenge-box__reward-description--small-text {
   font-size: 0.95rem;
 }

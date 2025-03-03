@@ -279,7 +279,7 @@ export const normalCelestialStudies = [
     requirement: [111, 112, 113],
     reqType: CS_REQUIREMENT_TYPE.SOME,
     description: () => `Replicanti speed is boosted based on Infinity Points`,
-    effect: () => Currency.infinityPoints.value.clampMin(1).log10().pow(0.5).clampMin(1),
+    effect: () => Currency.infinityPoints.value.clampMin(1).log10().max(1).log10().pow(3).pow10().clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   {

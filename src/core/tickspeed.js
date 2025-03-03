@@ -37,6 +37,7 @@ export function effectiveBaseGalaxiesSeperated() {
     dilGalaxies.max(0), mvGalaxies.max(0)];
 }
 
+// eslint-disable-next-line complexity
 export function getTickSpeedMultiplier() {
   const disabledByECs = EternityChallenge(17).isRunning || EternityChallenge(18).isRunning;
   if (disabledByECs) return DC.D1;
@@ -105,12 +106,14 @@ export function getTickSpeedMultiplier() {
   if (NormalChallenge(5).isRunning) baseMultiplier = baseMultiplier.add(0.1);
   galaxies = effectiveBaseGalaxiesSeperated();
   effects = effects.mul(Pelle.specialGlyphEffect.power);
+  if (Pelle.isDoomed) effects = effects.div(2);
   const AGs = baseMultiplier.div(effects.mul(CelestialStudy(132).effectOrDefault(1)));
   const RGs = baseMultiplier.div(effects.mul(EternityChallenge(8).reward.effectOrDefault(DC.D0).add(1)));
   const TGs = baseMultiplier.div(effects.mul(CelestialStudy(131).effectOrDefault(1)));
   const MvGs = baseMultiplier.div(effects);
+  // Note AGs, RGs, TGs, and MvGs are all lt 1, so dividing makes it *larger*.
   return AGs.pow(galaxies[0].div(AGs))
-    .mul(RGs.pow(galaxies[1].div(RGs)))
+    .mul(RGs.pow(galaxies[1].pow(0.8).div(RGs)))
     .mul(TGs.pow(galaxies[2].div(TGs)))
     .mul(MvGs.pow(galaxies[3].div(MvGs)))
     .pow(1e4);

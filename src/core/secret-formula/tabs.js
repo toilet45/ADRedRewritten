@@ -568,6 +568,15 @@ export const tabs = [
         condition: () => Ra.unlocks.universalDamageUnlock.canBeApplied,
         id: 3,
         hidable: true
+      },
+      {
+        key: "hyperdoom",
+        name: "Hyperdoom",
+        symbol: "?",
+        component: "HyperdoomTab",
+        condition: () => true,
+        id: 4,
+        hidable: true
       }
     ]
   }

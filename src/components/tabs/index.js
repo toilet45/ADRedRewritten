@@ -16,6 +16,7 @@ import EternityMilestonesTab from "./eternity-milestones/EternityMilestonesTab";
 import EternityUpgradesTab from "./eternity-upgrades/EternityUpgradesTab";
 import GlyphSetRecordsTab from "./glyph-set-records/GlyphSetRecordsTab";
 import GlyphsTab from "./glyphs/GlyphsTab";
+import HyperdoomTab from "./hyperdoom/HyperdoomTab";
 import ImaginaryUpgradesTab from "./imaginary-upgrades/ImaginaryUpgradesTab";
 import InfinityChallengesTab from "./infinity-challenges/InfinityChallengesTab";
 import InfinityDimensionsTab from "./infinity-dimensions/InfinityDimensionsTab";
@@ -98,7 +99,8 @@ const TabComponents = {
   UniversalDamageTab,
   CelestialStudiesTab,
   MultiversalDimensionsTab,
-  AlchemyV2Tab
+  AlchemyV2Tab,
+  HyperdoomTab
 };
 
 export default TabComponents;

@@ -74,7 +74,7 @@ export class NormalTimeStudyState extends TimeStudyState {
   }
 
   get isEffectActive() {
-    return this.isBought;
+    return !EternityChallenge(17).isRunning && this.isBought;
   }
 
   purchase(auto = false) {

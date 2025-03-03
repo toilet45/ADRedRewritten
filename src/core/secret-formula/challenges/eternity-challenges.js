@@ -313,9 +313,9 @@ export const eternityChallenges = [
     id: 14,
     description: () => `1st Antimatter Dimension Production exponent ^${format(0.025, 3, 3)}.
     Gamespeed does not affect Passive IP gain. All IP multipliers are disabled.`,
-    goal: DC.E35,
+    goal: DC.E200,
     pelleGoal: DC.BIMAX,
-    goalIncrease: DC.E5,
+    goalIncrease: DC.E20,
     scaled: {
       goal: DC.E80,
       goalIncrease: DC.E1,
@@ -349,13 +349,13 @@ export const eternityChallenges = [
   },
   {
     id: 16,
-    description: () => `Dimensions multipliers are all set to ${formatX(1)}. AD multipliers are increased
-    by Antimatter, ID multipliers by IP and TD multipliers by EP. Gamespeed is capped at
+    description: () => `AD, ID and TD multipliers are ${formatX(1)}. AD multipliers are increased
+    by Antimatter, ID by IP and TDs by EP. Gamespeed is capped at
     ${formatX(1, 0, 0)}. Infinity Power improves IP gain. Tickspeed is ${formatX(1.2, 1, 1)}, and unpurchasable.
     IP multipliers outside of ID are disabled.`,
-    goal: DC.E80000,
-    pelleGoal: DC.E100,
-    goalIncrease: DC.E5000,
+    goal: DC.E6E6,
+    pelleGoal: DC.E6E6,
+    goalIncrease: DC.E1E6,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -364,16 +364,19 @@ export const eternityChallenges = [
     scaleStart: Infinity,
     reward: {
       description: "Infinity Power provides a power effect to IP exponent",
-      effect: completions => Currency.infinityPower.value.max(1).log10().max(1).log10().mul(completions).div(1e5),
+      // eslint-disable-next-line max-len
+      effect: completions => Currency.infinityPower.value.max(1).log10().max(1).log10().mul(completions).div(5e4).add(1),
       formatEffect: value => `^${format(value, 3, 6)}`
     }
   },
   {
     id: 17,
-    description: () => `Tickspeed multiplier is ${formatX(1)}, Infinity Dimensions are disabled.`,
-    goal: DC.E100,
-    pelleGoal: DC.E100,
-    goalIncrease: DC.E50,
+    description: () => `Tickspeed multiplier is ${formatX(1)}.
+    Sacrifice, All AD Power Effects, IP multipliers, Dimension Boosts and Infinity Dimensions are disabled.
+    Time Studies provide no effect`,
+    goal: DC.E5E16,
+    pelleGoal: DC.E5E16,
+    goalIncrease: DC.EE16,
     scaled: {
       goal: DC.EE15,
       goalIncrease: DC.E1,
@@ -381,7 +384,7 @@ export const eternityChallenges = [
     },
     scaleStart: Infinity,
     reward: {
-      description: "IP exponent is raised to a power",
+      description: "Tickspeed exponent is raised to a power",
       effect: completions => completions / 1000 + 1,
       formatEffect: value => `^${format(value, 3, 3)}`
     }
@@ -429,7 +432,7 @@ export const eternityChallenges = [
     id: 20,
     description: () => `All IP multipliers are disabled. IP gain is based on Replicanti`,
     goal: DC.E3E6,
-    pelleGoal: DC.E100,
+    pelleGoal: DC.E3E6,
     goalIncrease: DC.E500000,
     scaled: {
       goal: DC.EE15,
