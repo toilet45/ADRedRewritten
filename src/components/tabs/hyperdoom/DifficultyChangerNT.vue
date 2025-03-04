@@ -8,7 +8,7 @@ export default {
     },
     // eslint-disable-next-line line-comment-position, no-inline-comments
     id: { // In the form of xy, where x is row and y is column
-      type: Number,
+      type: String,
       required: true
     }
   },

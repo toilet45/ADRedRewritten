@@ -574,7 +574,7 @@ export const tabs = [
         name: "Hyperdoom",
         symbol: "?",
         component: "HyperdoomTab",
-        condition: () => true,
+        condition: () => Ra.unlocks.hyperdoomUnlock.canBeApplied,
         id: 4,
         hidable: true
       }
