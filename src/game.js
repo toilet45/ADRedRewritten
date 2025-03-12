@@ -197,7 +197,8 @@ function totalEPMult() {
         TimeStudy(121),
         TimeStudy(123),
         RealityUpgrade(12),
-        GlyphEffect.epMult
+        GlyphEffect.epMult,
+        ExpansionUpgrade(3)
       ).times(MendingMilestone.one.isReached ? 10 : 1);
 }
 
@@ -480,7 +481,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (factor.gt(1)) factor = factor.pow(ExpansionUpgrade(6).effectOrDefault(1));
   if (effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = gameSpeedupSoftcap(factor);
   if (EternityChallenge(16).isRunning && effects.includes(GAME_SPEED_EFFECT.SOFTCAP)) factor = factor.clampMax(DC.D1);
-  factor = factor.mul(ExpansionUpgrade(3).effectOrDefault(1));
+  factor = factor.mul(ExpansionUpgrade(4).effectOrDefault(1));
   if (ExpansionUpgrade(7).isBought && factor.gt(1)) factor = factor.pow(1.234);
   if (Enslaved.isExpanded) factor = factor.pow(factor.add(1).log10().add(1).log10().add(1));
   return factor;

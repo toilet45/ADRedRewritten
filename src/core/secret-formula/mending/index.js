@@ -1,3 +1,5 @@
+import { damagedUpgrades } from "./damaged-upgrades";
+
 import { expansionUpgrades } from "./expansion-upgrades";
 import { mendingMilestones } from "./mending-milestones";
 import { mendingUpgrades } from "./mending-upgrades";
@@ -13,4 +15,5 @@ export const mending = {
     ec: ecCelestialStudies,
     normal: normalCelestialStudies
   },
+  damagedUpgrades
 };

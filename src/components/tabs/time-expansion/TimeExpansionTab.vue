@@ -32,7 +32,7 @@ export default {
 <template>
   <span>
     You have
-    <span class="c-ensp-dim-description__accent">{{ format(enslavedPoints, 2, 1) }}</span>
+    <span class="c-ensp-dim-description__accent">{{ format(enslavedPoints, 2, 0) }}</span>
     {{ pluralize("Time Remnant", enslavedPoints) }}.
     <br>
     <ExpansionButton />

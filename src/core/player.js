@@ -907,7 +907,20 @@ window.player = {
         credits: {
           light: DC.D0,
           dark: DC.D0
-        }
+        },
+        upgrades: Array.repeat(DC.D0, 5),
+        damagedBH: {
+          unlocked: false,
+          active: false,
+          timeTypeBoost: 0,
+          power: [DC.D0, DC.D0],
+          interval: DC.D0,
+          respec: false
+        },
+        tessOnIPMult: DC.D0,
+        tessOnIPSC: DC.D0,
+        petWithDC: "",
+        upgradeBits: 0
       }
     },
     pelle: {
@@ -1111,7 +1124,8 @@ window.player = {
       singularities: true,
       celestialMemories: true,
       blackHole: true,
-      realityShards: true
+      realityShards: true,
+      multiversalRemains: true,
     },
     hiddenTabBits: 0,
     hiddenSubtabBits: Array.repeat(0, 11),

@@ -563,7 +563,7 @@ export const tabs = [
       {
         key: "universal_damage",
         name: "Universal Damage",
-        symbol: "?",
+        symbol: `<i class="fa-solid fa-yin-yang"></i>`,
         component: "UniversalDamageTab",
         condition: () => Ra.unlocks.universalDamageUnlock.canBeApplied,
         id: 3,

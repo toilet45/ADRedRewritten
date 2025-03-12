@@ -163,7 +163,7 @@ class HybridRebuyableMendingUpgradeState extends RebuyableMechanicState {
   }
 
   get boughtAmount() {
-    return player.mending.hybrids[this.id];
+    return player.mending?.hybrids[this.id];
   }
 
   set boughtAmount(value) {

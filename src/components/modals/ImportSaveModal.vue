@@ -172,6 +172,9 @@ export default {
         <div v-if="progress.isRealityUnlocked">
           Realities: {{ formatPostBreak(player.realities, 2) }}
         </div>
+        <div v-if="progress.isMendingUnlocked">
+          Mends: {{ formatPostBreak(player.mending?.mends, 2) }}
+        </div>
         <div v-if="progress.hasFullCompletion">
           Full game completions: {{ formatInt(player.records.fullGameCompletions) }}
         </div>

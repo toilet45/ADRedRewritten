@@ -2,17 +2,14 @@ import { DC } from "../../constants";
 
 const rebuyable = props => {
   // eslint-disable-next-line max-len
-  props.cost = () => props.initialCost.times(Decimal.pow(player.celestials.enslaved.expandRebuyables[props.id]));
+  props.cost = () => props.initialCost.times(Decimal.pow(props.costMult, player.celestials.enslaved.expandRebuyables[props.id]));
   const effect = props.effect;
-  props.effect = () => effect;
+  props.effect = effect;
   props.description = () => props.textTemplate;
   props.formatEffect = value => {
     switch (props.id) {
       case 1: return `+${formatInt(value)}`;
-      case 2: {
-        if (new Decimal(value).lt(11)) return `+${formatPercents(new Decimal(value).sub(1), 2, 2)}`;
-        return formatX(value, 2, 2);
-      }
+      case 2: return formatX(value, 2, 2);
       case 5: return `${formatInt(value)}^log²(x) -> ${formatInt(new Decimal(value).add(5))}^log²(x)`;
       default: return formatX(value, 2, 0);
     }
@@ -29,7 +26,7 @@ export const expansionUpgrades = [
     initialCost: new Decimal(100),
     costMult: new Decimal(10),
     textTemplate: "Glyph Levels +100 in Time Expansion",
-    effect: () => DC.E1.mul(player.celestials.enslaved.expandRebuyables[1])
+    effect: () => DC.E2.mul(player.celestials.enslaved.expandRebuyables[1])
   }),
   rebuyable({
     name: "Expansion Upgrade 2",

@@ -99,7 +99,7 @@ export class Modal {
     // Most of the time the close event will be a prestige event, in which case we want it to trigger on all higher
     // prestiges as well
     const prestigeOrder = [GAME_EVENT.DIMBOOST_AFTER, GAME_EVENT.GALAXY_RESET_AFTER, GAME_EVENT.BIG_CRUNCH_AFTER,
-      GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.REALITY_RESET_AFTER];
+      GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.REALITY_RESET_AFTER, GAME_EVENT.MENDING_RESET_AFTER];
     let shouldClose = false;
     for (const prestige of prestigeOrder) {
       if (prestige === closeEvent) shouldClose = true;
@@ -284,15 +284,17 @@ function getSaveInfo(save) {
     totalAntimatter: new Decimal(0),
     infinities: new Decimal(0),
     eternities: new Decimal(0),
-    realities: 0,
+    realities: new Decimal(0),
+    mends: new Decimal(0),
     infinityPoints: new Decimal(0),
     eternityPoints: new Decimal(0),
     realityMachines: new Decimal(0),
     imaginaryMachines: new Decimal(0),
+    multiversalRemains: new Decimal(0),
     dilatedTime: new Decimal(0),
-    bestLevel: 0,
+    bestLevel: new Decimal(0),
     pelleAM: new Decimal(0),
-    remnants: 0,
+    remnants: new Decimal(0),
     realityShards: new Decimal(0),
     // This is a slight workaround to hide DT/level once Doomed
     pelleLore: 0,
@@ -301,21 +303,23 @@ function getSaveInfo(save) {
   };
   // This code ends up getting run on raw save data before any migrations are applied, so we need to default to props
   // which only exist on the pre-reality version when applicable. Note that new Decimal(undefined) gives zero.
-  resources.realTimePlayed = save.records?.realTimePlayed ?? 100 * save.totalTimePlayed;
+  resources.realTimePlayed = save.records?.realTimePlayed ?? new Decimal(save.totalTimePlayed).mul(100);
   resources.totalAntimatter.copyFrom(new Decimal(save.records?.totalAntimatter));
   resources.infinities.copyFrom(new Decimal(save.infinities));
   resources.eternities.copyFrom(new Decimal(save.eternities));
-  resources.realities = save.realities ?? 0;
+  resources.realities = save.realities ?? new Decimal(0);
+  resources.mends = save.mending?.mends ?? new Decimal(0);
   resources.infinityPoints.copyFrom(new Decimal(save.infinityPoints));
   resources.eternityPoints.copyFrom(new Decimal(save.eternityPoints));
   resources.realityMachines.copyFrom(new Decimal(save.reality?.realityMachines));
   resources.imaginaryMachines.copyFrom(new Decimal(save.reality?.imaginaryMachines));
+  resources.multiversalRemains.copyFrom(new Decimal(save.mending?.mendingPoints));
   // Use max DT instead of current DT because spending it can cause it to drop and trigger the conflict modal
   // unnecessarily. We only use current DT as a fallback (eg. loading a save from pre-reality versions)
   resources.dilatedTime.copyFrom(new Decimal(save.records?.thisReality.maxDT ?? (save.dilation?.dilatedTime ?? 0)));
-  resources.bestLevel = save.records?.bestReality.glyphLevel ?? 0;
+  resources.bestLevel = save.records?.bestReality.glyphLevel ?? new Decimal(0);
   resources.pelleAM.copyFrom(new Decimal(save.celestials?.pelle.records.totalAntimatter));
-  resources.remnants = save.celestials?.pelle.remnants ?? 0;
+  resources.remnants = save.celestials?.pelle.remnants ?? new Decimal(0);
   resources.realityShards.copyFrom(new Decimal(save.celestials?.pelle.realityShards));
   resources.pelleLore = save.celestials?.pelle.quoteBits ?? 0;
   resources.saveName = save.options?.saveFileName ?? "";

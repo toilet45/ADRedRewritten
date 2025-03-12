@@ -42,16 +42,16 @@ export default {
     },
     prestigeCount() {
       return this.compareLayeredValues(
-        ["remnants", "realities", "eternities", "infinities"],
-        ["Remnants:", "Realities:", "Eternities:", "Infinities:"],
+        ["mends", "remnants", "realities", "eternities", "infinities"],
+        ["Mends", "Remnants:", "Realities:", "Eternities:", "Infinities:"],
         [format, this.formatSmall, this.formatSmall, this.formatSmall],
         "(No prestige layers reached yet.)"
       );
     },
     prestigeResource() {
       return this.compareLayeredValues(
-        ["realityShards", "imaginaryMachines", "realityMachines", "eternityPoints", "infinityPoints"],
-        ["Reality Shards:", "Reality Machines:", "Reality Machines:", "Eternity Points:", "Infinity Points:"],
+        ["multiversalRemains", "realityShards", "imaginaryMachines", "realityMachines", "eternityPoints", "infinityPoints"],
+        ["Multiversal Remains", "Reality Shards:", "Reality Machines:", "Reality Machines:", "Eternity Points:", "Infinity Points:"],
         [format, x => formatMachines(this.saveData.realityMachines, x), format, format, format],
         ""
       );

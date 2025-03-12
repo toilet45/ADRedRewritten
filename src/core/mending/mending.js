@@ -68,11 +68,9 @@ export function mendingReset(special = 0) {
   }
   // Do this first so we can do records and stuff based on stats, without fucking anything over
   if (Laitela.isDamaged) {
-    Currency.lightCredits.add(Laitela.gainedCredits()[0]);
-    Currency.darkCredits.add(Laitela.gainedCredits()[1]);
+    updateUDCredits();
     player.celestials.laitela.damaged = false;
-  }
-  else if (specialMend === 0) {
+  } else if (specialMend === 0) {
     Currency.mendingPoints.add(gainedMendingPoints());
     Currency.mends.add(gainedMends());
     player.realitiesBanked = player.realitiesBanked.add(Currency.realities.value.div(100)
@@ -439,6 +437,19 @@ export function lockAchievementsOnMend() {
     }
   }
   player.reality.achTimer = DC.D0;
+}
+
+function updateUDCredits() {
+  Currency.lightCredits.add(Laitela.gainedCredits()[0]);
+  Currency.darkCredits.add(Laitela.gainedCredits()[1]);
+  const resetCredits = (Decimal.min(Currency.lightCredits.value, Currency.darkCredits.value).eq(0) &&
+    Currency.lightCredits.value.neq(Currency.darkCredits.value)) ||
+    Currency.lightCredits.value.gt(Decimal.mul(2, Currency.darkCredits.value)) ||
+    Currency.darkCredits.value.gt(Decimal.mul(2, Currency.lightCredits.value));
+  if (resetCredits) {
+    Currency.lightCredits.reset();
+    Currency.darkCredits.reset();
+  }
 }
 
 export class MendingMilestoneState {

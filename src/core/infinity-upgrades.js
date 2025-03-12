@@ -109,7 +109,8 @@ export function totalIPMult() {
       Achievement(141).effects.ipGain,
       InfinityUpgrade.ipMult,
       DilationUpgrade.ipMultDT,
-      GlyphEffect.ipMult
+      GlyphEffect.ipMult,
+      ExpansionUpgrade(3)
     );
 
   if (MendingMilestone.one.isReached) {

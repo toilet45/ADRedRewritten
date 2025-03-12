@@ -54,7 +54,7 @@ export default {
             :class="runButtonClassObject"
             @click="startRun()"
           >
-            Ϟ
+            <i class="fa-solid fa-yin-yang"></i>
           </div>
           {{ runDescription }}
           <br><br>

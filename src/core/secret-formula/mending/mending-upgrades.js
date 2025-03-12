@@ -12,15 +12,15 @@ const rebuyable = props => {
     props.initialCost.times(props.costMult)
   );
   const { effect, effects } = props;
-  if (props.effect) props.effect = p => effect(p ?? player.mending.rebuyables[props.id]);
-  if (props.effects) props.effects = p => effects(p ?? player.mending.rebuyables[props.id]);
+  if (props.effect) props.effect = p => effect(p ?? player.mending?.rebuyables[props.id]);
+  if (props.effects) props.effects = p => effects(p ?? player.mending?.rebuyables[props.id]);
   props.formatCost = value => format(value, 2, 0);
   props.isRebuyable = true;
   return props;
 };
 
 const hybridRebuyable = props => {
-  const purAmnt = () => Math.min(player.mending.hybrids[props.id].toNumber(), props.purchaseLimit);
+  const purAmnt = () => Math.min(player.mending?.hybrids[props.id].toNumber(), props.purchaseLimit);
   props.cost = () => props.costs[purAmnt()];
   const { effect, effects, description } = props;
   props.description = () => description(purAmnt());

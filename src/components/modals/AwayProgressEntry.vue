@@ -72,10 +72,15 @@ export default {
       return quantifyInt("time", activations);
     },
     isVeryLarge() {
-      return this.isBlackHole
+      return (this.isBlackHole
         ? false
-        : Decimal.gt(this.before, Decimal.pow10(1e9));
-    }
+        : Decimal.gt(this.before, Decimal.pow10(1e9))) && !this.isStupidLarge;
+    },
+    isStupidLarge() {
+      // Is there any difference of the number of e's?
+      return this.after.layer - this.before.layer > 1;
+      // Checking for at least a diff of 2 of OoM^x so it doesn't show for ee15 to ee16
+    },
   },
   methods: {
     // We want different formatting above and below 1e9 to improve readability
@@ -84,6 +89,7 @@ export default {
       // not any text is even shown at all and sometimes this gets checked on variables which don't have values yet
       if (number === undefined) return "";
       // Surrounding text is formatted differently to specify that this is log10
+      if (this.isStupidLarge) return format(new Decimal(number).layer);
       if (this.isVeryLarge) return format(Decimal.floor(number.log10()));
       if (Decimal.lt(number, 1e9)) {
         // Both numbers and decimals get passed in here so this is needed
@@ -115,7 +121,8 @@ export default {
     </span>
     <span v-else>
       <b>{{ formattedName }}</b>
-      <i v-if="isVeryLarge"> exponent</i>
+      <i v-if="isStupidLarge"> magintude exponent</i>
+      <i v-else-if="isVeryLarge"> exponent</i>
       increased from
       {{ formatBefore }} to {{ formatAfter }}
     </span>
@@ -203,17 +210,35 @@ export default {
   color: var(--color-ra-pet--v);
 }
 
+.c-modal-away-progress__ra-memories {
+  color: var(--color-ra-pet--ra);
+}
+
+.c-modal-away-progress__laitela-memories {
+  color: var(--color-ra-pet--laitela);
+}
+
+.c-modal-away-progress__pelle-memories {
+  color: var(--color-ra-pet--pelle);
+}
+
 .c-modal-away-progress__teresa-memories,
 .c-modal-away-progress__effarig-memories,
 .c-modal-away-progress__enslaved-memories,
-.c-modal-away-progress__v-memories {
+.c-modal-away-progress__v-memories,
+.c-modal-away-progress__ra-memories,
+.c-modal-away-progress__laitela-memories,
+.c-modal-away-progress__pelle-memories {
   filter: brightness(0.8);
 }
 
 .t-dark .c-modal-away-progress__teresa-memories,
 .t-dark .c-modal-away-progress__effarig-memories,
 .t-dark .c-modal-away-progress__enslaved-memories,
-.t-dark .c-modal-away-progress__v-memories {
+.t-dark .c-modal-away-progress__v-memories,
+.t-dark .c-modal-away-progress__ra-memories,
+.t-dark .c-modal-away-progress__laitela-memories,
+.t-dark .c-modal-away-progress__pelle-memories {
   filter: none;
 }
 
@@ -235,6 +260,14 @@ export default {
 
 .c-modal-away-progress__reality-shards {
   color: var(--color-pelle--base);
+}
+
+.c-modal-away-progress__multiversal-remains {
+  color: var(--color-mending);
+}
+
+.c-modal-away-progress__galactic-shards {
+  color: #77b5fc;
 }
 
 .c-modal-away-progress__disabled b,

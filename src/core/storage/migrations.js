@@ -475,6 +475,13 @@ export const migrations = {
           realDiff: new Decimal(),
           ascensionCount: new Decimal()
         })));
+      player.mending.hybrids = {
+        2: new Decimal(),
+        3: new Decimal(),
+        7: new Decimal(),
+        12: new Decimal(),
+        17: new Decimal()
+      }
     },
     102: player => {
       player.reality.glyphs.sac.amalgam = new Decimal();

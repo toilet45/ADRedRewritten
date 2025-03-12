@@ -895,6 +895,7 @@ export function getAdjustedGlyphLevel(glyph, realityGlyphBoost = Glyphs.levelBoo
     if (Pelle.isDoomed) return Decimal.min(level, Pelle.glyphMaxLevel);
     if (Enslaved.isRunning) return Decimal.max(level, Enslaved.glyphLevelMin);
     if (Effarig.isRunning) return Decimal.min(level, Effarig.glyphLevelCap);
+    if (Enslaved.isExpanded) return level.add(ExpansionUpgrade(1).effectOrDefault(0));
   }
   if (GlyphInfo[glyph.type].isBasic) return Decimal.add(level, realityGlyphBoost);
   return level;
