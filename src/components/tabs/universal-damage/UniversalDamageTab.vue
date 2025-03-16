@@ -1,7 +1,10 @@
 <script>
+import DamagedUpgradeButton from "./DamagedUpgradeButton";
+
 export default {
   name: "UniversalDamageTab",
   components: {
+    DamagedUpgradeButton
   },
   data() {
     return {
@@ -12,6 +15,7 @@ export default {
     };
   },
   computed: {
+    upgrades: () => DamagedUpgrades.all,
     runButtonClassObject() {
       return {
         "c-universal-damage-button__icon": true,
@@ -25,6 +29,9 @@ export default {
     }
   },
   methods: {
+    id(row, column) {
+      return (row - 1) * 3 + column - 1;
+    },
     update() {
       this.damaged = Laitela.isDamaged;
       this.lightCredits.copyFrom(Currency.lightCredits.value);
@@ -67,6 +74,22 @@ export default {
         You have <span class="c-light-credit-description__accent"> {{ format(lightCredits, 2, 0) }}</span> Light {{ pluralize('Credit', lightCredits)}}
         and <span class="c-dark-credit-description__accent"> {{ format(darkCredits, 2, 0) }}</span> Dark {{ pluralize('Credit', darkCredits)}}.
       </p>
+      <div class="l-reality-upgrade-grid">
+        <div class="c-reality-upgrade-infotext">
+          Light and Dark Credits must be within 2x each other otherwise they annihilate each other to 0
+        </div>
+        <div
+          v-for="row in 2"
+          :key="row"
+          class="l-reality-upgrade-grid__row"
+        >
+          <DamagedUpgradeButton
+            v-for="column in 3"
+            :key="id(row, column)"
+            :upgrade="upgrades[id(row, column)]"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -31,16 +31,16 @@ class DamagedUpgradeState extends BitPurchasableMechanicState {
     player.celestials.laitela.universalDamage.upgradeBits = value;
   }
 
+  get costs() {
+    return this.config.costs();
+  }
+
   get isAffordable() {
     return this.currencies[0].gte(this.costs[0]) && this.currencies[1].gte(this.costs[1]);
   }
 
   get isAvailableForPurchase() {
     return true;
-  }
-
-  get costs() {
-    return this.config.costs();
   }
 
   onPurchased() {
