@@ -45,6 +45,21 @@ export const mendingUpgrades = [
   hybridRebuyable({
     name: "2",
     id: 2,
+    costs: [DC.D0, ...Array.repeat(DC.D1, 5), DC.D2, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, DC.D0],
+    // TODO: change this desc
+    description: p => `Antimatter ${p > 2 ? ", Infinity, and Time" : ""}${p === 1 ? "and Infinity" : ""} Dimensions gain a multiplier and a power effect`,
+    effects: p => ({
+      mult: Laitela.isDamaged ? DC.D1 : [DC.D1, DC.E3, DC.E6, DC.E10, DC.E20, DC.E35, DC.E75,
+        DC.E200, DC.E500, DC.E1100, DC.E2000,
+        DC.E3500, DC.E5000, DC.E5000][p],
+      pow: Laitela.isDamaged ? DC.D1 : new Decimal([1, 1, 1, 1, 1, 1, 1, 1.01, 1.02, 1.03, 1.05, 1.075, 1.1, 1.1][p])
+    }),
+    formatEffect: effects => `${formatX(effects.mult)}, ${formatPow(effects.pow, 3, 3)}`,
+    purchaseLimit: 10
+  }),
+  hybridRebuyable({
+    name: "3",
+    id: 3,
     costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D0],
     description: p => ["Gain passive Prestige Point gain",
       "Gain passive Prestige Point gain",
@@ -59,27 +74,12 @@ export const mendingUpgrades = [
     },
     purchaseLimit: 5
   }),
-  hybridRebuyable({
-    name: "3",
-    id: 3,
-    costs: [DC.D0, DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D2, DC.D2, DC.D3, DC.D3, DC.D0],
-    // TODO: change this desc
-    description: () => `Antimatter, Infinity, and Time Dimensions gain a multiplier and a power effect`,
-    effects: p => ({
-      mult: Laitela.isDamaged ? DC.D1 : [DC.D1, DC.E3, DC.E20, DC.E100, DC.E5000,
-        DC.E5000, DC.E5000, DC.E5000, DC.E5000,
-        DC.E5000, DC.E5000, DC.E5000][p],
-      pow: Laitela.isDamaged ? DC.D1 : new Decimal([1, 1, 1, 1, 1, 1.01, 1.02, 1.03, 1.05, 1.075, 1.1, 1.1][p])
-    }),
-    formatEffect: effects => `${formatX(effects.mult)}, ${formatPow(effects.pow, 3, 3)}`,
-    purchaseLimit: 10
-  }),
   {
     name: "4",
     id: 4,
     cost: DC.D2,
     description: () => `Glyph Instability is slightly weaker`,
-    effect: () => Laitela.isDamaged ? DC.D1 : DC.D0_965
+    effect: () => (Laitela.isDamaged ? DC.D1 : DC.D0_965)
   },
   {
     name: "5",
@@ -90,7 +90,7 @@ export const mendingUpgrades = [
       : `Mends multiply Memory and Dark Matter gain`),
     effect: () => {
       let x = Currency.mends.value.add(1);
-      // Softcap at x20, harcap at x1000
+      // Softcap at x20, hardcap at x1000
       if (x.gt(20)) {
         x = x.div(20);
         x = x.pow(0.33);
@@ -177,12 +177,12 @@ export const mendingUpgrades = [
     cost: new Decimal("66"),
     description: () => `Achievement multiplier is far stronger`,
     effects: {
-      adPow: () => Laitela.isDamaged ? 1 : 10000,
-      idPow: () => Laitela.isDamaged ? 1 : 777,
-      tdPow: () => Laitela.isDamaged ? 1 : 111,
-      tpPow: () => Laitela.isDamaged ? 1 : 10,
-      ttGenPow: () => Laitela.isDamaged ? 1 : 4,
-      bhPow: () =>Laitela.isDamaged ? 1 : 2,
+      adPow: () => (Laitela.isDamaged ? 1 : 10000),
+      idPow: () => (Laitela.isDamaged ? 1 : 777),
+      tdPow: () => (Laitela.isDamaged ? 1 : 111),
+      tpPow: () => (Laitela.isDamaged ? 1 : 10),
+      ttGenPow: () => (Laitela.isDamaged ? 1 : 4),
+      bhPow: () => (Laitela.isDamaged ? 1 : 2),
     }
   },
   {
@@ -197,8 +197,8 @@ export const mendingUpgrades = [
     cost: new Decimal("123"),
     description: () => `Generate Tachyon Particles based on best Antimatter this Mend, TP formula is better`,
     effects: {
-      tpDiv: () => Laitela.isDamaged ? 1 : 222,
-      tpPow: () => Laitela.isDamaged ? 1 : 1.15
+      tpDiv: () => (Laitela.isDamaged ? 1 : 222),
+      tpPow: () => (Laitela.isDamaged ? 1 : 1.15)
     }
   },
   rebuyable({

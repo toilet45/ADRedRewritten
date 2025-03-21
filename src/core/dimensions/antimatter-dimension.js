@@ -48,7 +48,7 @@ export function antimatterDimensionCommonMultiplier() {
   multiplier = multiplier.times(getAdjustedGlyphEffect("powermult"));
   multiplier = multiplier.times(Currency.realityMachines.value.powEffectOf(AlchemyResource.force));
 
-  multiplier = multiplier.times(MendingUpgrade(3).effects.mult);
+  multiplier = multiplier.times(MendingUpgrade(2).effects.mult);
 
   if (Pelle.isDoomed) multiplier = multiplier.dividedBy(10);
 
@@ -252,7 +252,7 @@ function applyNDPowers(mult, tier) {
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
-  multiplier = multiplier.pow(MendingUpgrade(3).effects.pow);
+  multiplier = multiplier.pow(MendingUpgrade(2).effects.pow);
 
   multiplier = multiplier.pow(VUnlocks.adPow.effectOrDefault(1));
 

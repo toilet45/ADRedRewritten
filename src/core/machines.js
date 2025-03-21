@@ -68,7 +68,7 @@ export const MachineHandler = {
   },
 
   gainedImaginaryMachines(diff) {
-    if (MendingUpgrade(2).boughtAmount.gte(4) && !Laitela.isDamaged) return this.currentIMCap.sub(Currency.imaginaryMachines.value);
+    if (MendingUpgrade(3).boughtAmount.gte(4) && !Laitela.isDamaged) return this.currentIMCap.sub(Currency.imaginaryMachines.value);
     return (this.currentIMCap.sub(Currency.imaginaryMachines.value)).times(DC.D1
       .sub(Decimal.pow(2, (new Decimal(0).sub(diff).div(1000).div(this.scaleTimeForIM)))));
   },

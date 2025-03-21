@@ -170,7 +170,7 @@ export function timeDimensionCommonMultiplier() {
         .clampMin(1));
   }
 
-  mult = mult.times(MendingUpgrade(3).effects.mult);
+  mult = mult.times(MendingUpgrade(3).boughtAmount.gte(3) ? MendingUpgrade(2).effects.mult : 1);
   mult = mult.pow(Effects.product(
     TimeStudy(323)
   ));
@@ -274,7 +274,7 @@ class TimeDimensionState extends DimensionState {
     mult = mult.pow(getAdjustedGlyphEffect("effarigdimensions"));
     mult = mult.pow(getAdjustedGlyphEffect("curseddimensions"));
     mult = mult.powEffectOf(AlchemyResource.time);
-    mult = mult.pow(MendingUpgrade(3).effects.pow);
+    mult = mult.pow(MendingUpgrade(3).boughtAmount.gte(3) ? MendingUpgrade(2).effects.pow : 1);
     mult = mult.pow(Ra.momentumValue);
     mult = mult.pow(ImaginaryUpgrade(11).effectOrDefault(1));
     mult = mult.powEffectOf(PelleRifts.paradox);

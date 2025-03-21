@@ -385,6 +385,8 @@ window.player = {
       bestEPmin: DC.D0,
       bestEPminVal: DC.D0,
       bestInfinitiesPerMs: DC.D0,
+      realTimeSinceEternalElim: DC.NUMMAX,
+      realTimeWithV30: DC.D0,
     },
     bestEternity: {
       time: DC.BEMAX,

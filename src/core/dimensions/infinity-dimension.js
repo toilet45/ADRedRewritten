@@ -30,7 +30,7 @@ export function infinityDimensionCommonMultiplier() {
     mult = mult.times(replicantiMult());
   }
 
-  mult = mult.times(MendingUpgrade(3).effects.mult);
+  mult = mult.times(MendingUpgrade(3).boughtAmount.gte(2) ? MendingUpgrade(2).effects.mult : 1);
   mult = mult.pow(Effects.product(
     TimeStudy(322)
   ));
@@ -174,7 +174,7 @@ class InfinityDimensionState extends DimensionState {
     mult = mult.pow(getAdjustedGlyphEffect("effarigdimensions"));
     mult = mult.pow(getAdjustedGlyphEffect("curseddimensions"));
     mult = mult.powEffectOf(AlchemyResource.infinity);
-    mult = mult.pow(MendingUpgrade(3).effects.pow);
+    mult = mult.pow(MendingUpgrade(3).boughtAmount.gte(2) ? MendingUpgrade(2).effects.pow : 1);
     mult = mult.pow(Ra.momentumValue);
     mult = mult.powEffectOf(PelleRifts.paradox);
     mult = mult.powEffectsOf(CelestialStudy(32), CelestialStudy(44));

@@ -146,7 +146,7 @@ export default {
     update() {
       const study = this.study;
       this.isAlreadyActive = true;
-      if (study.id === 181 && (MendingUpgrade(2).boughtAmount.gte(1) && !Laitela.isDamaged)) {
+      if (study.id === 181 && (MendingUpgrade(3).boughtAmount.gte(1) && !Laitela.isDamaged)) {
         this.isAlreadyActive = false;
       }
       this.isUseless = (Pelle.uselessTimeStudies.includes(this.study.id) && Pelle.isDoomed) || !this.isAlreadyActive;

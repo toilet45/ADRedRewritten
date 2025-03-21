@@ -149,7 +149,8 @@ export const infinityChallenges = [
   },
   {
     id: 10,
-    description: () => `IC9's AM and IP nerfs and you're trapped in Infinity Challenges 4 and 5. Dimension cost scaling exponents are tetrated and Continuum is also disabled >:)`,
+    description: () => `IC9's AM and IP nerfs and you're trapped in Infinity Challenges 4 and 5.
+    Dimension cost scaling exponents are tetrated and Continuum is also disabled >:)`,
     goal: DC.BEMAX,
     isQuickResettable: false,
     effect: () => DC.BEMAX,
