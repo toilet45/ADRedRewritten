@@ -8,6 +8,20 @@ export const MatterScale = {
 
   estimate(matter) {
     if (!matter) return ["There is no antimatter yet."];
+    // This goes till atleast about ee280, should be plenty fn
+    if (matter.gt(DC.EE190)) {
+      const scale = this.macroScale(matter.log10().div("e186.1781555").div("5.391e44"));
+      const amount = matter.log10().div("e186.1781555").div("5.391e44").div(scale.amount);
+      return ["If every digit of your antimatter count was written at planck spacetime (planck time * planck volume),",
+        `you would fill ${amount} ${scale.name} of universal spacetime`
+      ];
+    }
+    if (matter.gt(DC.EE65)) {
+      return ["If every digit of your antimatter count was written at a plank volume, you would be",
+        `${formatPercents(matter.log10().log10().div(186.1781555), 7, 7)} (logarithmically)`,
+        "of the way to filling theobservable universe"
+      ];
+    }
     if (matter.gt(DC.EE16)) {
       const size = this.macroScaleLengths(matter.log10().div(6.25e34));
       return [
@@ -108,6 +122,23 @@ export const MatterScale = {
     return macro[high - 1];
   },
 
+  timeScales(matter) {
+    const macro = this.timeMeasures;
+    const last = macro.last();
+    if (matter.gte(last.amount)) return last;
+    let low = 0;
+    let high = macro.length;
+    while (low !== high) {
+      const mid = Math.floor((low + high) / 2);
+      if (macro[mid].amount.lte(matter)) {
+        low = mid + 1;
+      } else {
+        high = mid;
+      }
+    }
+    return macro[high - 1];
+  },
+
   microObjects: [
     { amount: new Decimal("1e-54"), name: "attometers cubed" },
     { amount: new Decimal("1e-63"), name: "zeptometers cubed" },
@@ -148,7 +179,7 @@ export const MatterScale = {
   ],
 
   macroLengths: [
-    { amount: new Decimal(0), name: "undefined" },
+    { amount: new Decimal("4.22419e-105"), name: "planck lengths" },
     { amount: new Decimal("0.835e-15"), name: "protons" },
     { amount: new Decimal("11.7e-15"), name: "uranium nuclei" },
     { amount: new Decimal("1.06e-10"), name: "hydrogen atoms" },
@@ -171,5 +202,24 @@ export const MatterScale = {
     { amount: new Decimal("30.857e21"), name: "Megaparsecs" },
     { amount: new Decimal("30.857e24"), name: "Gigaparsecs" },
     { amount: new Decimal("2.764e27"), name: "Loops of the observable universe" },
+  ],
+
+  timeMeasures: [
+    { amount: new Decimal("5.39e-44"), name: "amounts of Planck time" },
+    { amount: new Decimal("e-30"), name: "quectoseconds" },
+    { amount: new Decimal("e-24"), name: "yoctoseconds" },
+    { amount: new Decimal("24.2e-18"), name: "amounts of Atomic time" },
+    { amount: new Decimal("e-13"), name: "svedbergs" },
+    { amount: new Decimal("e-9"), name: "nanoseconds" },
+    { amount: new Decimal("e-6"), name: "microseconds" },
+    { amount: new Decimal("e-3"), name: "nanoseconds" },
+    { amount: new Decimal("1"), name: "seconds" },
+    { amount: new Decimal("86400"), name: "days" },
+    { amount: new Decimal("31536000"), name: "years" },
+    { amount: new Decimal("31536000000"), name: "millenia" },
+    { amount: new Decimal("31536e12"), name: "eons" },
+    { amount: new Decimal("31536e17"), name: "Red dwarf star lifetimes (0.25M)" },
+    { amount: new Decimal("1e30"), name: "Rough Black hole lifetimes (e-15M)" },
+    { amount: new Decimal("53e40"), name: "Minimum Proton Decay half-lifes" },
   ]
 };

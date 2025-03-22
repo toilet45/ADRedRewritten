@@ -364,7 +364,6 @@ export const migrations = {
 
       // Added max RM tracking for cel1 records - also for data consistency (though not 100% accurate)
       player.reality.maxRM = new Decimal(player.reality.realityMachines);
-      console.log(player)
     },
     22: player => {
       // Added 3 new perk layouts, inserted before blob
@@ -415,7 +414,6 @@ export const migrations = {
       if (definedConstants.length !== player.reality.automator.constantSortOrder.length) {
         player.reality.automator.constantSortOrder = [...definedConstants];
       }
-      console.log(player)
     },
     25: player => {
       // If the player has r146 "Perks of living" achievement we give them the DAB perk automatically
@@ -425,18 +423,14 @@ export const migrations = {
 
       // This update has a rebalance that assumes the 3rd dilation repeatable is unpurchasable in cel7
       if (player.celestials.pelle.doomed) player.dilation.rebuyables[3] = 0;
-      console.log(player)
     },
     26: player => {
       delete player.infinity?.upgradeBits;
-      console.log(player)
     },
     // 83 is used because 8 = B, and 3 = E, so 83 = BE, short for BE port (blob edition).
     // Recommended to start any modded migrations at 100.
     83: player => {
-      console.log(player);
       beMigration(player);
-      console.log(player);
     },
     // Dummy object so the above thing actually loads
     84: player => {},
@@ -493,6 +487,11 @@ export const migrations = {
     },
     104: player => {
       player.celestials.teresa.perkShop = player.celestials.teresa.perkShop.concat(Array.repeat(new Decimal(), 2));
+    },
+    104.1: player => {
+      const store = player.mending.hybrids[2];
+      player.mending.hybrids[2] = player.mending.hybrids[3];
+      player.mending.hybrids[3] = store;
     }
   },
 

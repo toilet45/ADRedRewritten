@@ -297,8 +297,8 @@ export const ID = {
   },
   mu3: {
     name: "Mending Upgrade 3",
-    multValue: () => MendingUpgrade(3).effects.mult,
-    powValue: () => MendingUpgrade(3).effects.pow,
+    multValue: () => MendingUpgrade(2).effects.mult,
+    powValue: () => MendingUpgrade(2).effects.pow,
     isActive: () => MendingUpgrade(3).boughtAmount.gt(0)
   }
 };

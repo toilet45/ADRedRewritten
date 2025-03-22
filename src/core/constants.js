@@ -177,6 +177,7 @@ export const DC = deepFreeze({
   E3000:                new Decimal("1e3000"),
   E3200:                new Decimal("1e3200"),
   E3350:                new Decimal("1e3350"),
+  E3500:                new Decimal("1e3500"),
   E4000:                new Decimal("1e4000"),
   E5000:                new Decimal("1e5000"),
   E6000:                new Decimal("1e6000"),
@@ -223,6 +224,7 @@ export const DC = deepFreeze({
   E1E8:                 new Decimal("1e100000000"),
   EE8:                  new Decimal("ee8"),
   E1_5E12:              new Decimal("1e1500000000000"),
+  EE13:                 new Decimal("ee13"),
   EE14:                 new Decimal("ee14"),
   E5E14:                new Decimal("1e500000000000000"),
   E1E15:                new Decimal("1e1000000000000000"),
@@ -249,6 +251,8 @@ export const DC = deepFreeze({
   E5E29:                new Decimal("e5e29"),
   EE30:                 new Decimal("ee30"),
   EE33:                 new Decimal("ee33"),
+  EE65:                 new Decimal("ee65"),
+  EE190:                 new Decimal("ee190"),
 
   // F values (10^^x)
   F3:                   new Decimal("10^^3"),

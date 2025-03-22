@@ -46,7 +46,10 @@ export const eternityChallenges = [
         if (completions > 5) return Currency.infinityPower.value.pow(0.0075).clampMin(1);
         return Currency.infinityPower.value.pow(1.5 / (700 - completions * 100)).clampMin(1);
       },
-      cap: () => (MendingUpgrade(8).isBought ? DC.E10000 : DC.E100).pow(Decimal.sub((EternityChallenge(2).completions), 4).max(EternityChallenge(2).completions > 5 ? 1 + (0.01 * (EternityChallenge(2).completions - 5)) : 1).pow(Decimal.sub(EternityChallenge(4).completions), 2).mul(20).max(1)),
+      cap: () => (MendingUpgrade(8).isBought ? DC.E10000 : DC.E100)
+        .pow(Decimal.sub((EternityChallenge(2).completions), 4)
+          .max(EternityChallenge(2).completions > 5 ? 1 + (0.01 * (EternityChallenge(2).completions - 5)) : 1)
+          .pow(Decimal.sub(EternityChallenge(4).completions), 2).mul(20).max(1)),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
@@ -204,7 +207,8 @@ export const eternityChallenges = [
     reward: {
       description: "Infinity Dimension multiplier based on Time Shards",
       effect: completions => Currency.timeShards.value.pow(completions * 0.1).clampMin(1),
-      cap: () => (MendingUpgrade(8).isBought ? DC.E45000 : DC.E400).pow(Decimal.sub(EternityChallenge(9).completions, 4).max(1).pow(Decimal.sub(EternityChallenge(9).completions, 5).mul(20).max(1))),
+      cap: () => (MendingUpgrade(8).isBought ? DC.E45000 : DC.E400).pow(Decimal.sub(EternityChallenge(9).completions, 4)
+        .max(1).pow(Decimal.sub(EternityChallenge(9).completions, 5).mul(20).max(1))),
       formatEffect: value => formatX(value, 2, 1)
     }
   },
