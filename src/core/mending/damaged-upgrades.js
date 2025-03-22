@@ -43,10 +43,28 @@ class DamagedUpgradeState extends BitPurchasableMechanicState {
     return true;
   }
 
+  purchase() {
+    if (!this.canBeBought) return false;
+    if (GameEnd.creditsEverClosed) return false;
+    this.currencies[0].subtract(this.costs[0]);
+    this.currencies[1].subtract(this.costs[1]);
+    this.onPurchased();
+    GameUI.update();
+    return true;
+  }
+
   onPurchased() {
     switch (this.id) {
       default:
         break;
+    }
+    const resetCredits = (Decimal.min(Currency.lightCredits.value, Currency.darkCredits.value).eq(0) &&
+    Currency.lightCredits.value.neq(Currency.darkCredits.value)) ||
+    Currency.lightCredits.value.gt(Decimal.mul(2, Currency.darkCredits.value)) ||
+    Currency.darkCredits.value.gt(Decimal.mul(2, Currency.lightCredits.value));
+    if (resetCredits) {
+      Currency.lightCredits.reset();
+      Currency.darkCredits.reset();
     }
   }
 }
@@ -70,6 +88,28 @@ class RebuyableDamagedUpgradeState extends RebuyableMechanicState {
 
   set boughtAmount(value) {
     player.celestials.laitela.universalDamage.upgrades[this.id - 1] = value;
+  }
+
+  purchase() {
+    if (!this.canBeBought) return false;
+    if (GameEnd.creditsEverClosed) return false;
+    this.currencies[0].subtract(this.costs[0]);
+    this.currencies[1].subtract(this.costs[1]);
+    this.boughtAmount = this.boughtAmount.add(1);
+    this.onPurchased();
+    GameUI.update();
+    return true;
+  }
+
+  onPurchased() {
+    const resetCredits = (Decimal.min(Currency.lightCredits.value, Currency.darkCredits.value).eq(0) &&
+    Currency.lightCredits.value.neq(Currency.darkCredits.value)) ||
+    Currency.lightCredits.value.gt(Decimal.mul(2, Currency.darkCredits.value)) ||
+    Currency.darkCredits.value.gt(Decimal.mul(2, Currency.lightCredits.value));
+    if (resetCredits) {
+      Currency.lightCredits.reset();
+      Currency.darkCredits.reset();
+    }
   }
 }
 

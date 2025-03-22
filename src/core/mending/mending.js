@@ -105,18 +105,20 @@ export function mendingReset(special = 0) {
   player.celestials.laitela.damaged = false;
 
   // Reality (Tier 3)
-  const protectedSlots = player.reality.glyphs.protectedRows;
-  player.reality.glyphs.protectedRows = 0;
-  for (let g = 0; g < 120; g++) {
-    const glyph = Glyphs.inventory[g];
-    if (glyph !== null && glyph.type !== "companion") GlyphSacrificeHandler.deleteGlyph(glyph, true);
+  if (DamagedUpgrade(3).boughtAmount.lte(0)) {
+    const protectedSlots = player.reality.glyphs.protectedRows;
+    player.reality.glyphs.protectedRows = 0;
+    for (let g = 0; g < 120; g++) {
+      const glyph = Glyphs.inventory[g];
+      if (glyph !== null && glyph.type !== "companion") GlyphSacrificeHandler.deleteGlyph(glyph, true);
+    }
+    Glyphs.unequipAll(true);
+    for (let h = 0; h < 120; h++) {
+      const glyph = Glyphs.inventory[h];
+      if (glyph !== null && glyph.type !== "companion") GlyphSacrificeHandler.deleteGlyph(glyph, true);
+    }
+    player.reality.glyphs.protectedRows = protectedSlots;
   }
-  Glyphs.unequipAll(true);
-  for (let h = 0; h < 120; h++) {
-    const glyph = Glyphs.inventory[h];
-    if (glyph !== null && glyph.type !== "companion") GlyphSacrificeHandler.deleteGlyph(glyph, true);
-  }
-  player.reality.glyphs.protectedRows = protectedSlots;
   player.reality.realityMachines = DC.D0;
   player.reality.maxRM = DC.D0;
   player.reality.imaginaryMachines = DC.D0;
@@ -367,6 +369,11 @@ export function mendingReset(special = 0) {
     }
   } else {
     lockAchievementsOnMend();
+  }
+  if (specialMend === 0) {
+    for (let i = 1; i < 6; i++) {
+      DamagedUpgrade(i).boughtAmount = DamagedUpgrade(i).boughtAmount.sub(1).clampMin(0);
+    }
   }
   InfinityChallenges.clearCompletions();
   Currency.infinityPoints.reset();

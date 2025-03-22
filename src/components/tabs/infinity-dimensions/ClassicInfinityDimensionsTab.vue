@@ -30,13 +30,17 @@ export default {
       extraTesseracts: new Decimal(0),
       creditsClosed: false,
       showLockedDimCostNote: true,
-      isContinuumUnlocked: false
+      isContinuumUnlocked: false,
+      redistributedTesseractsOnIPMult: new Decimal(0),
+      redistributedTesseractsOnIPSC: new Decimal(0)
     };
   },
   computed: {
     tesseractCountString() {
       const extra = this.extraTesseracts.gt(0) ? ` + ${format(this.extraTesseracts, 2, 2)}` : "";
-      return `${format(this.boughtTesseracts)}${extra}`;
+      const redistributedTess = Decimal.add(this.redistributedTesseractsOnIPMult, this.redistributedTesseractsOnIPSC);
+      const redistributed = redistributedTess.gt(0) ? ` - ${format(redistributedTess, 2, 0)}` : "";
+      return `${format(this.boughtTesseracts)}${extra}${redistributed}`;
     },
   },
   methods: {
@@ -69,6 +73,8 @@ export default {
       this.extraTesseracts.copyFrom(Tesseracts.extra);
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isContinuumUnlocked = Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied;
+      this.redistributedTesseractsOnIPSC = new Decimal(1).copyFrom(Tesseracts.redistributedOnIPSoftCap);
+      this.redistributedTesseractsOnIPMult = new Decimal(3).copyFrom(Tesseracts.redistributedOnIPMultCap);
     },
     maxAll() {
       InfinityDimensions.buyMax();

@@ -430,7 +430,7 @@ export const ra = {
     alchHardcapIncrease: {
       id: 35,
       reward: () => `Alchemy hardcap is increased to ${formatInt(50000)},
-      but harder to gain beyond ${formatInt(25000)}. Pelle's Alchemy requirement is changed to require at least level ${formatInt(25000)} resources`,
+      but harder to gain beyond ${formatInt(25000)}. Pelle's Alchemy requirement is changed to require at least level ${formatInt(25000)} resources.`,
       effect: 50000,
       pet: "effarig",
       level: 30,
@@ -561,7 +561,7 @@ export const ra = {
     achToMemories: {
       id: 49,
       reward: () => `Achievements now provide a multiplier to Memories.`,
-      effect: () => Achievements.power.cbrt(),
+      effect: () => Achievements.power.pow(1 / 9),
       pet: "v",
       level: 30,
       displayIcon: `<i class='fas fa-brain'></i>`,

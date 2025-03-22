@@ -34,6 +34,7 @@ export default {
       productionPerSecond: new Decimal(0),
       percentPerSecond: 0,
       hoverOverAscension: false,
+      breakDM: false
     };
   },
   computed: {
@@ -147,6 +148,7 @@ export default {
       this.productionPerSecond = this.dimensionProduction(this.tier);
       this.percentPerSecond = Decimal.divide(this.productionPerSecond, this.amount).clampMax(1).toNumber();
       if (!this.isIntervalCapped) this.hoverOverAscension = false;
+      this.breakDM = Laitela.isDamaged || DamagedUpgrade(4).boughtAmount.gt(0);
     },
     handleIntervalClick() {
       if (this.isIntervalCapped) DarkMatterDimension(this.tier).ascend();
@@ -162,7 +164,7 @@ export default {
     // however; it looks better in-game if we just format it as Infinity instead, as the resource used for these costs
     // is itself hardcapped at e308 and we specifically want to format here (and nowhere else) as Infinity.
     formatDMCost(cost) {
-      return cost.gt(Number.MAX_VALUE) ? Notations.current.infinite : format(cost, 2);
+      return !this.breakDM && cost.gt(Number.MAX_VALUE) ? Notations.current.infinite : format(cost, 2);
     },
     dimensionProduction(tier) {
       if (tier === 8) return new Decimal(0);

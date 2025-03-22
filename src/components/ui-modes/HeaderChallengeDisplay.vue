@@ -105,14 +105,19 @@ export default {
       if (this.inPelle && this.activeChallengeNames.length > 0) {
         return `${this.activeChallengeNames.join(" + ")} in a Doomed Reality. Good luck.`;
       }
-      if (this.inExpansion) return "an Expanded Reality";
-      if (this.inDamage) return "a Damaged Reality";
-      if (this.inPelle) return "a Doomed Reality. Good luck.";
+      if (this.activeChallengeNames.length > 0) {
+        if (this.inExpansion) return `${this.activeChallengeNames.join(" + ")} in an Expanded Reality`;
+        if (this.inDamage) return `${this.activeChallengeNames.join(" + ")} in a Damaged Universe`;
+        if (this.inPelle) return `${this.activeChallengeNames.join(" + ")} in a Doomed Reality. Good luck.`;
+        return this.activeChallengeNames.join(" + ");
+      }
       if (this.activeChallengeNames.length === 0) {
         // eslint-disable-next-line max-len
-        return `${PlayerProgress.mendingUnlocked() ? "a Mended Multiverse" : "the Antimatter Universe"} (no active challenges)`;
+        if (this.inExpansion) return "an Expanded Reality";
+        if (this.inDamage) return "a Damaged Universe";
+        if (this.inPelle) return "a Doomed Reality. Good luck.";
       }
-      return this.activeChallengeNames.join(" + ");
+      return `${PlayerProgress.mendingUnlocked() ? "a Mended Multiverse" : "the Antimatter Universe"} (no active challenges)`;
     },
   },
   methods: {

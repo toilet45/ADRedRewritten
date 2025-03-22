@@ -304,7 +304,7 @@ export const Tesseracts = {
   // -1 + x = x - 1, so do this to reduce making more decimals than necessary
 
   get effectiveCount() {
-    return this.bought.add(this.extra);
+    return this.bought.add(this.extra).sub(this.redistributedOnIPMultCap).sub(this.redistributedOnIPSoftCap).clampMin(0);
   },
 
   buyTesseract() {
@@ -318,9 +318,9 @@ export const Tesseracts = {
   costs(index) {
     // eslint-disable-next-line no-param-reassign
     index = index.add(1);
-    if (index.lte(3)) return Decimal.pow10(index.times(2e7));
+    if (index.lte(3)) return Decimal.pow10(index.times(2e7)).powEffectOf(DamagedUpgrade(1));
     return Decimal.pow10((index.sub(3)).factorial().times(Decimal.pow(2, index.sub(3))).times(6e7)).pow(
-      Ra.unlocks.cheaperTess.canBeApplied ? 0.1 : 1);
+      Ra.unlocks.cheaperTess.canBeApplied ? 0.1 : 1).powEffectOf(DamagedUpgrade(1));
   },
 
   get nextCost() {
@@ -332,7 +332,7 @@ export const Tesseracts = {
   },
 
   capIncrease(count = this.bought) {
-    const totalCount = count.times(SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1));
+    const totalCount = count.sub(this.redistributedOnIPMultCap).sub(this.redistributedOnIPSoftCap).times(SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1));
     const base = totalCount.lt(1) ? DC.D0 : Decimal.pow(2, totalCount).times(2.5e5);
     return base.times(DC.D1.add(AlchemyResource.boundless.effectValue));
   },
@@ -340,6 +340,14 @@ export const Tesseracts = {
   get nextTesseractIncrease() {
     return this.capIncrease(this.bought.add(1)).sub(this.capIncrease(this.bought));
   },
+
+  get redistributedOnIPMultCap() {
+    return player.celestials.laitela.universalDamage.tessOnIPMult;
+  },
+
+  get redistributedOnIPSoftCap() {
+    return player.celestials.laitela.universalDamage.tessOnIPSC;
+  }
 };
 
 export const Penteracts = {

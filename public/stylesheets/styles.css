@@ -6275,7 +6275,7 @@ kbd {
   color: #ffffff;
   text-shadow: 0.1rem 0.1rem 0.5rem;
   background-color: #000000;
-  border: var(--var-border-width, 0.4rem) solid var(--color-mending);
+  border: var(--var-border-width, 0.4rem) solid white;
   border-radius: 50%;
   margin: 1.5rem auto;
   transition-duration: 0.2s;
@@ -6284,7 +6284,7 @@ kbd {
 
 .c-universal-damage-button__icon:hover {
   color: #000000;
-  background-color: #444444;
+  background-color: #FFFFFF;
 }
 
 .c-universal-damage-button__icon--running {

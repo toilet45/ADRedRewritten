@@ -76,7 +76,14 @@ export default {
       </p>
       <div class="l-reality-upgrade-grid">
         <div class="c-reality-upgrade-infotext">
-          Light and Dark Credits must be within 2x each other otherwise they annihilate each other to 0
+          All upgrades except for the sixth are only active for a certain amount of Mends.
+          <br>
+          You can spend Credits to increase the amount of active Mends by one.
+          <br>
+          Entering Universal Damage or other special Mends will not decrement this.
+          <br>
+          <br>
+          Light and Dark Credits must be within {{ formatX(2) }} each other otherwise they annihilate each other to 0
         </div>
         <div
           v-for="row in 2"

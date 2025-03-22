@@ -909,6 +909,13 @@ function applyAutoUnlockPerks() {
 
 function laitelaRealityTick(realDiff) {
   const laitelaInfo = player.celestials.laitela;
+  if (Laitela.isDamaged) {
+    for (const quote of Laitela.quotes.all.slice(10)) {
+      if (quote.requirement) {
+        quote.show();
+      }
+    }
+  }
   if (!Laitela.isRunning) return;
   if (laitelaInfo.entropy.gte(0)) {
     laitelaInfo.entropy = laitelaInfo.entropy.add(realDiff.div(1e3).mul(Laitela.entropyGainPerSecond));

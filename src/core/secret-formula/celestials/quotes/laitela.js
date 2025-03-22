@@ -140,5 +140,54 @@ export const laitelaQuotes = {
     lines: [
       "*make Hexa fill this so Royal doesn't put a fanfiction in here*"
     ]
+  },
+  udTeresa: {
+    id: 11,
+    requirement: () => Laitela.isDamaged && Teresa.isRunning,
+    lines: [
+      "The Girls' night out"
+    ]
+  },
+  udEffarig: {
+    id: 12,
+    requirement: () => Laitela.isDamaged && Effarig.isRunning,
+    lines: [
+      "The Old Man"
+    ]
+  },
+  udEnslaved: {
+    id: 13,
+    requirement: () => Laitela.isDamaged && Enslaved.isRunning,
+    lines: [
+      "The Regret"
+    ]
+  },
+  udV: {
+    id: 14,
+    requirement: () => Laitela.isDamaged && V.isRunning,
+    lines: [
+      "The crush, I mean the annoyed"
+    ]
+  },
+  udRa: {
+    id: 15,
+    requirement: () => Laitela.isDamaged && Ra.isRunning,
+    lines: [
+      "The...I forgor"
+    ]
+  },
+  udLaiception: {
+    id: 16,
+    requirement: () => Laitela.isDamaged && Laitela.isRunning,
+    lines: [
+      "JUST LAI...JUST LAI"
+    ]
+  },
+  udPelle: {
+    id: 17,
+    requirement: () => Laitela.isDamaged && Tab.celestials.pelle.isOpen,
+    lines: [
+      "You're in my domain [Destroyer], they cannot help you"
+    ]
   }
 };

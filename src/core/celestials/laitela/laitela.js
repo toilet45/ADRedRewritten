@@ -90,9 +90,9 @@ export const Laitela = {
   },
   gainedCredits() {
     const AM = player.records.totalAntimatter;
-    let LC = AM.clampMin(1).log10().div(1e9).pow(0.4).floor();
+    let LC = AM.clampMin(1).log10().div(1e10).pow(0.4).floor();
     const DM = Currency.darkMatter.max;
-    let DKC = DM.clampMin(1).log10().div(5).pow(0.8).floor();
+    let DKC = DM.clampMin(1).log10().div(1.05).pow(0.8).floor();
     return [LC, DKC];
   },
   // Max purchase interval, then DM, then DE, working highest tier down in each case. No reason for the order.
