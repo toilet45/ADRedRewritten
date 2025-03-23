@@ -260,7 +260,7 @@ export const normalTimeStudies = [
       ? "Antimatter Dimension power effect based on real time spent in this Eternity"
       : "Antimatter Dimension multiplier based on time spent in this Eternity"),
     effect: () => (Ra.unlocks.newVhard.isUnlocked
-      ? player.records.thisEternity.realTimeWithV40.div(60000).max(1).log(100).max(2)
+      ? Time.thisEternityRealTime.div(60000).max(1).log(100).max(2)
       : Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15))),
     cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.D2 : DC.E300),
     formatEffect: value => (Ra.unlocks.newVhard.isUnlocked

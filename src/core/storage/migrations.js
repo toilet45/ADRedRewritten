@@ -432,8 +432,6 @@ export const migrations = {
     83: player => {
       beMigration(player);
     },
-    // Dummy object so the above thing actually loads
-    84: player => {},
     100: player => {
       player.celestials.ra.pets = { ...player.celestials.ra.pets,
         ra: {

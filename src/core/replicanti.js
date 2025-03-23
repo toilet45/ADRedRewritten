@@ -62,6 +62,7 @@ function fastReplicantiBelow308(log10GainFactor, isAutobuyerActive) {
   const shouldBuyRG = isAutobuyerActive && !RealityUpgrade(6).isLockingMechanics;
   // More than e308 galaxies per tick causes the game to die, and I don't think it's worth the performance hit of
   // Decimalifying the entire calculation.  And yes, this can and does actually happen super-lategame.
+  // eslint-disable-next-line no-debugger
   if (!Replicanti.amount.isFinite()) debugger;
   const uncappedAmount = DC.E1.pow(log10GainFactor.plus(Replicanti.amount.max(1).log10()));
   // Checking for uncapped equaling zero is because Decimal.pow returns zero for overflow for some reason
@@ -89,6 +90,7 @@ function fastReplicantiBelow308(log10GainFactor, isAutobuyerActive) {
   const remainingGain = log10GainFactor.minus(maxUsedGain).clampMin(0);
   Replicanti.amount = Decimal.pow10(replicantiExponent.sub(gainNeededPerRG.times(toBuy)))
     .clampMax(replicantiCap());
+  // eslint-disable-next-line no-debugger
   if (!toBuy.isFinite()) debugger;
   addReplicantiGalaxies(toBuy);
   return remainingGain;
@@ -446,7 +448,8 @@ export const ReplicantiUpgrade = {
     }
 
     get cap() {
-      return getSecondaryGlyphEffect("realitygalaxies").mul(1e7).add(Ra.isRunning ? Effects.sum(RaUpgrade(12)) : RaUpgrade(12).effectOrDefault(DC.D0).div(10)).add(TimeStudy(104).effectOrDefault(0));
+      return getSecondaryGlyphEffect("realitygalaxies").mul(1e7)
+        .add(Ra.isRunning ? Effects.sum(RaUpgrade(12)) : RaUpgrade(12).effectOrDefault(DC.D0).div(10)).add(TimeStudy(104).effectOrDefault(0));
     }
 
     get isCapped() {

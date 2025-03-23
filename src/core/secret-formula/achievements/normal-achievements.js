@@ -1388,7 +1388,7 @@ export const normalAchievements = [
     checkRequirement: () => true,
     checkEvent: GAME_EVENT.MENDING_RESET_AFTER,
     get reward() {
-      return `Achievement 166 is changed to be "at least 6969 levels", Achievement 154 is 100%, Reality has no Achievement requirement, and no RM hardcap on the first Reality`;
+      return `Achievement 166 is changed to be "at least 6969 levels", Achievement 154 is 100%, Reality has no Achievement requirement, and no initial RM hardcap`;
     }
   },
   {
@@ -1405,10 +1405,10 @@ export const normalAchievements = [
     checkRequirement: () => false,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Replicanti replicates faster based on Ra's Memories`;
+      return `Reduce Replicanti Interval based on Ra's own Memories`;
     },
     effect: () => Ra.pets.ra.memories.clampMin(1).log10().clampMin(1).log10().clampMin(1).pow(0.1),
-    formatEffect: value => `${formatPow(value, 2, 2)}`
+    formatEffect: value => `${formatPow(value, 2, 2)} (Before increases in Interval)`
   },
   {
     id: 194,
@@ -1416,12 +1416,12 @@ export const normalAchievements = [
     description: "Expand your Reality",
     checkRequirement: () => Enslaved.isExpanded,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    reward: `Start Mended Multiverses with Nameless completed`
+    reward: `Start Realities with The Nameless Ones' Reality Completed`
   },
   {
     id: 195,
     name: "Are we really reusing this joke?",
-    description: "Reach a 1.79e308 Glyph Sacrifice cap",
+    description: `Reach a Glyph Sacrifice Cap of atleast ${format(DC.NUMMAX, 2, 2)}`,
     checkRequirement: () => Glyphs.sacCap.gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
@@ -1515,7 +1515,7 @@ export const normalAchievements = [
     checkRequirement: () => Ra.totalPetLevel >= 700,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Achievements in row 21 are visible and obtainable.`;
+      return `Achievements in row 21 are now visible and obtainable.`;
     }
   },
 ];

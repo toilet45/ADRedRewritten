@@ -16,7 +16,7 @@ const rebuyable = props => {
     if (props.id === 5) return Decimal.mul(effect, RaUpgrade(props.id).boughtAmount);
     if (props.id === 2) return Decimal.mul(effect.sub(1), RaUpgrade(props.id).boughtAmount).add(1);
     return Decimal.pow(effect, RaUpgrade(props.id).boughtAmount);
-  }
+  };
   props.description = () => props.textTemplate.replace("{value}", props.formatting(effect));
   // eslint-disable-next-line no-unused-expressions, no-sequences, no-inline-comments, spaced-comment
   props.formatEffect = value => props.formatting(value), /*{
