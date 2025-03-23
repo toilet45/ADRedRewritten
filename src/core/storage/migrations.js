@@ -438,22 +438,22 @@ export const migrations = {
       player.celestials.ra.pets = { ...player.celestials.ra.pets,
         ra: {
           level: 1,
-          memories: DC.D0,
-          memoryChunks: DC.D0,
+          memories: new Decimal(0),
+          memoryChunks: new Decimal(0),
           memoryUpgrades: 0,
           chunkUpgrades: 0
         },
         laitela: {
           level: 1,
-          memories: DC.D0,
-          memoryChunks: DC.D0,
+          memories: new Decimal(0),
+          memoryChunks: new Decimal(0),
           memoryUpgrades: 0,
           chunkUpgrades: 0
         },
         pelle: {
           level: 1,
-          memories: DC.D0,
-          memoryChunks: DC.D0,
+          memories: new Decimal(0),
+          memoryChunks: new Decimal(0),
           memoryUpgrades: 0,
           chunkUpgrades: 0
         } };
