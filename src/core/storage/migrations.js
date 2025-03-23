@@ -490,6 +490,15 @@ export const migrations = {
       const store = player.mending.hybrids[2];
       player.mending.hybrids[2] = player.mending.hybrids[3];
       player.mending.hybrids[3] = store;
+    },
+    104.2: player => {
+      if (!PlayerProgress.mendingUnlocked()) {
+        player.records.thisMend = {
+          time: player.records.totalTimePlayed,
+          realTime: player.records.realTimePlayed,
+          trueTime: player.records.trueTimePlayed
+        };
+      }
     }
   },
 
