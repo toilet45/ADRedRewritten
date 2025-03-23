@@ -1421,7 +1421,9 @@ export const normalAchievements = [
   {
     id: 195,
     name: "Are we really reusing this joke?",
-    description: () => `Reach a Glyph Sacrifice Cap of atleast ${format(DC.NUMMAX, 2, 2)}`,
+    get description() {
+      return `Reach a Glyph Sacrifice Cap of atleast ${format(DC.NUMMAX, 2, 2)}`
+    },
     checkRequirement: () => Glyphs.sacCap.gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
