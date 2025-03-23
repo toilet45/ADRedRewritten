@@ -162,7 +162,7 @@ export const normalTimeStudies = [
         (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: () => (Ra.unlocks.newVhard.isUnlocked
-      ? "Unlock Infinite Sacrifice, which allows you to perform a Dimensionao Sacrifice for Infinity Dimensions"
+      ? "Unlock Infinite Sacrifice, which allows you to perform a Dimensional Sacrifice for Infinity Dimensions"
       : "Dimensional Sacrifice affects 4th Infinity Dimension with greatly reduced effect"),
     effect: () => (Ra.unlocks.newVhard.isUnlocked
       ? DC.D1 : Sacrifice.totalBoost.pow(0.04).clampMin(1)),
