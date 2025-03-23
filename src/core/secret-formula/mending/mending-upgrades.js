@@ -36,7 +36,7 @@ export const mendingUpgrades = [
   rebuyable({
     name: "1",
     id: 1,
-    initialCost: DC.D1,
+    initialCost: DC.D3,
     costMult: DC.E2,
     description: () => `Multiply Multiversal Remain gain by ${formatX(3)}`,
     effect: p => DC.D3.pow(p),
@@ -55,15 +55,15 @@ export const mendingUpgrades = [
       pow: Laitela.isDamaged ? DC.D1 : new Decimal([1, 1, 1, 1, 1, 1, 1, 1.01, 1.02, 1.03, 1.05, 1.075, 1.1, 1.1][p])
     }),
     formatEffect: effects => `${formatX(effects.mult)}, ${formatPow(effects.pow, 3, 3)}`,
-    purchaseLimit: 10
+    purchaseLimit: 12
   }),
   hybridRebuyable({
     name: "3",
     id: 3,
-    costs: [DC.D1, DC.D1, DC.D1, DC.D1, DC.D2, DC.D0],
-    description: p => ["Gain passive Prestige Point gain",
-      "Gain passive Prestige Point gain",
-      "Gain passive Prestige Point gain",
+    costs: [DC.D0, DC.D1, DC.D1, DC.D2, DC.D2, DC.D0],
+    description: p => ["Gain passive Infinity Point gain",
+      "Gain passive Eternity Point gain",
+      "Gain passive Reality Machine gain",
       "Imaginary Machines are always equal to their cap",
       "Remnants are always equal to their cap",
       "Gain passive Prestige Point gain"][p],
@@ -106,7 +106,7 @@ export const mendingUpgrades = [
     initialCost: DC.D5,
     costMult: DC.E3,
     // TODO: change this desc
-    description: "RM cap, and IP/EP power",
+    description: "RM cap multiplier, and IP/EP power effect",
     effects: p => ({
       rm: DC.E50.pow(p),
       // If above 0.01, then multiply by 100, sqrt, and div by 100 (i.e. sqrt but starting earlier)
@@ -163,7 +163,7 @@ export const mendingUpgrades = [
     id: 12,
     costs: [...Array.repeat(new Decimal(50), 21)],
     // TODO: change this desc
-    description: () => `Infinity Power conversion, and free Tickspeed scaling increase`,
+    description: () => `Increase Infinity Power conversion, and decrease free Tickspeed scaling`,
     effects: p => ({
       ipConversion: p.mul(0.1),
       tsScaling: p.mul(0.01)

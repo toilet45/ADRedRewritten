@@ -432,28 +432,26 @@ export const migrations = {
     83: player => {
       beMigration(player);
     },
-    // Dummy object so the above thing actually loads
-    84: player => {},
     100: player => {
       player.celestials.ra.pets = { ...player.celestials.ra.pets,
         ra: {
           level: 1,
-          memories: DC.D0,
-          memoryChunks: DC.D0,
+          memories: new Decimal(),
+          memoryChunks: new Decimal(),
           memoryUpgrades: 0,
           chunkUpgrades: 0
         },
         laitela: {
           level: 1,
-          memories: DC.D0,
-          memoryChunks: DC.D0,
+          memories: new Decimal(),
+          memoryChunks: new Decimal(),
           memoryUpgrades: 0,
           chunkUpgrades: 0
         },
         pelle: {
           level: 1,
-          memories: DC.D0,
-          memoryChunks: DC.D0,
+          memories: new Decimal(),
+          memoryChunks: new Decimal(),
           memoryUpgrades: 0,
           chunkUpgrades: 0
         } };
