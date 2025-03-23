@@ -566,6 +566,7 @@ window.player = {
       filter: {
         select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
         trash: AUTO_GLYPH_REJECT.SACRIFICE,
+        alchemyTier: 1,
         simple: 0,
         types: Object.keys(getGlyphTypes())
           .filter(t => GlyphInfo.generatedGlyphTypes.includes(t))

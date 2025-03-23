@@ -4,6 +4,8 @@ export default {
   data() {
     return {
       mode: AUTO_GLYPH_REJECT.SACRIFICE,
+      alchemyTiersUnlocked: false,
+      tier: 1,
     };
   },
   computed: {
@@ -25,9 +27,14 @@ export default {
     },
     update() {
       this.mode = AutoGlyphProcessor.sacMode;
+      this.alchemyTiersUnlocked = Ra.unlocks.alchemyTwo.canBeApplied;
+      this.tier = player.reality.glyphs.filter.alchemyTier;
     },
     setMode(m) {
       AutoGlyphProcessor.sacMode = m;
+    },
+    setTier(m) {
+      player.reality.glyphs.filter.alchemyTier = m;
     },
     modeDesc(id) {
       return AutoGlyphProcessor.trashModeDesc(id);
@@ -51,6 +58,22 @@ export default {
       >
         {{ modeDesc(modeID) }}
       </div>
+    </div>
+    <div v-if="alchemyTiersUnlocked">
+      Alchemy tier prioritized when refining glyphs:
+      <br>
+      <button
+        class="o-primary-btn l-button-container"
+        @click="setTier(1)"
+      >
+        Basic
+      </button>
+      <button
+        class="o-primary-btn l-button-container"
+        @click="setTier(2)"
+      >
+        Advanced
+      </button>
     </div>
   </div>
 </template>

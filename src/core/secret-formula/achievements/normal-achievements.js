@@ -1456,7 +1456,7 @@ export const normalAchievements = [
     id: 201,
     name: "Limit Break^2",
     description: "Warp Reality",
-    checkRequirement: () => false,
+    checkRequirement: () => player.reality.warped,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {

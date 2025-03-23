@@ -154,20 +154,26 @@ export const GlyphSacrificeHandler = {
     }
     const rawRefinementGain = this.glyphRawRefinementGain(glyph);
     const refinementGain = this.glyphRefinementGain(glyph);
-    resource.amount = resource.amount.add(refinementGain);
-    const decoherenceGain = rawRefinementGain.mul(AlchemyResource.decoherence.effectValue);
-    for (const glyphTypeName of GlyphInfo.alchemyGlyphTypes) {
-      if (glyphTypeName !== glyph.type) {
-        const glyphType = GlyphInfo[glyphTypeName];
-        const otherResource = AlchemyResources.all[glyphType.alchemyResource];
-        const maxResource = Decimal.max(otherResource.cap, otherResource.amount);
-        otherResource.amount = Decimal.clampMax(otherResource.amount.add(decoherenceGain), maxResource);
-      }
-    }
-    if (resource.isBaseResource) {
-      const highest = this.highestRefinementValue(glyph);
-      const above25k = highest.gt(25000);
-      resource.highestRefinementValue = above25k ? highest.sub(25000).mul(1e5).cbrt().add(25000) : highest;
+    if (player.reality.glyphs.filter.alchemyTier === 1) resource.amount = resource.amount.add(refinementGain);
+    switch (player.reality.glyphs.filter.alchemyTier) {
+      case 1:
+        const decoherenceGain = rawRefinementGain.mul(AlchemyResource.decoherence.effectValue);
+        for (const glyphTypeName of GlyphInfo.alchemyGlyphTypes) {
+          if (glyphTypeName !== glyph.type) {
+            const glyphType = GlyphInfo[glyphTypeName];
+            const otherResource = AlchemyResources.all[glyphType.alchemyResource];
+            const maxResource = Decimal.max(otherResource.cap, otherResource.amount);
+            otherResource.amount = Decimal.clampMax(otherResource.amount.add(decoherenceGain), maxResource);
+          }
+        }
+        if (resource.isBaseResource) {
+          const highest = this.highestRefinementValue(glyph);
+          const above25k = highest.gt(25000);
+          resource.highestRefinementValue = above25k ? highest.sub(25000).mul(1e5).cbrt().add(25000) : highest;
+        }
+        break;
+      default:
+        break;
     }
     Glyphs.removeFromInventory(glyph);
   }

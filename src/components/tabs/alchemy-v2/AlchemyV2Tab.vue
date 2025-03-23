@@ -211,13 +211,6 @@ export default {
       >
         {{ allReactionsDisabled ? "Enable" : "Disable" }} all reactions
       </PrimaryButton>
-      <PrimaryButton
-        v-if="realityCreationVisible"
-        :class="realityGlyphCreationClass"
-        onclick="Modal.realityGlyph.show()"
-      >
-        View Reality Glyph creation
-      </PrimaryButton>
     </div>
     <AlchemyV2ResourceInfo
       :key="infoResourceId"
