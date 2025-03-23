@@ -111,6 +111,20 @@ export default {
       </PrimaryButton>
     </div>
     <div>
+      <!-- eslint-disable vue/html-comment-content-newline, vue/html-comment-indent -->
+      <!-- <PrimaryButton
+        v-show="isSacrificeUnlocked"
+        v-tooltip="sacrificeTooltip"
+        :enabled="isSacrificeAffordable"
+        class="o-primary-btn--sacrifice"
+        @click="sacrifice"
+      >
+        <span v-if="isSacrificeAffordable">Infinite Sacrifice ({{ formatPow(sacrificeBoost, 4, 4) }})</span>
+        <span v-else>Infinite Sacrifice Disabled ({{ disabledCondition }})</span>
+      </PrimaryButton> -->
+      <!-- eslint-enable vue/html-comment-content-newline, vue/html-comment-indent -->
+    </div>
+    <div>
       <p>
         You have
         <span class="c-infinity-dim-description__accent">{{ format(infinityPower, 2, 1) }}</span>

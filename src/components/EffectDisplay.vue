@@ -78,6 +78,11 @@ export default {
 
         const value = effect();
 
+        if (value === undefined) {
+          this.isVisible = false;
+          return;
+        }
+
         if (isNumber(value)) {
           this.effectValue = value;
           this.updateEffect = () => this.effectValue = effect();

@@ -144,7 +144,9 @@ export const normalTimeStudies = [
     cost: DC.D4,
     requirement: [61, () => Perk.studyECRequirement.isBought || !EternityChallenge(12).isUnlocked],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
-    description: "Dimensional Sacrifice affects all other Antimatter Dimensions with reduced effect",
+    description: () => (Ra.unlocks.newVhard.isUnlocked && Time.thisInfinityRealTime.totalMinutes.lt(50)
+      ? `For the first ${formatInt(50)} minutes (real time) of your infinity, AD dimensions are heavily nerfed.`
+      : "Dimensional Sacrifice affects all other Antimatter Dimensions with reduced effect"),
     // eslint-disable-next-line no-nested-ternary
     effect: () => (Ra.unlocks.newVhard.isUnlocked
       ? (Time.thisInfinityRealTime.totalMinutes.lt(50)
@@ -168,7 +170,8 @@ export const normalTimeStudies = [
       ? DC.D1 : Sacrifice.totalBoost.pow(0.04).clampMin(1)),
     cap: () => (Ra.unlocks.newVhard.isUnlocked
       ? DC.D1 : DC.E30000),
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
+      ? undefined : formatX(value, 2, 1))
   },
   {
     id: 73,
@@ -182,7 +185,8 @@ export const normalTimeStudies = [
       ? DC.D1 : Sacrifice.totalBoost.pow(0.005).clampMin(1)),
     cap: () => (Ra.unlocks.newVhard.isUnlocked
       ? DC.D1 : DC.E1300),
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
+      ? undefined : formatX(value, 2, 1))
   },
   {
     id: 74,
@@ -219,7 +223,8 @@ export const normalTimeStudies = [
       : DC.D1_0000109.pow(Decimal.pow(DimBoost.totalBoosts, 2))),
     cap: () => (Ra.unlocks.newVhard.isUnlocked
       ? DC.D1 : DC.E1E7),
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
+      ? undefined : formatX(value, 2, 1))
   },
   {
     id: 83,
@@ -230,11 +235,11 @@ export const normalTimeStudies = [
       ? "Unlock Eternal Elimination, allowing you to temporarily nerf TD production for a Dimension Boost multiplier"
       : "Dimension Boost multiplier based on tick upgrades gained from TDs"),
     effect: () => (Ra.unlocks.newVhard.isUnlocked
-      ? Decimal.pow(20 * 60000, 4).pow10().div(player.records.thisEternity.realTimeSinceEternalElim.pow(3).pow10()).recip().max(1)
+      ? Decimal.pow(20 * 60000, 4).pow10().div(player.records.thisEternity.realTimeSinceEternalElim.pow(3).pow10()).recip().clampMax(1)
       : DC.D1_0004.pow(player.totalTickGained)),
     cap: () => (Ra.unlocks.newVhard.isUnlocked
-      ? DC.BIMAX : DC.E30),
-    formatEffect: value => `Current Nerf: ${formatX(value, 2, 2)}`
+      ? DC.D2 : DC.E30),
+    formatEffect: value => formatX(value, 2, 2)
   },
   {
     id: 84,
@@ -255,10 +260,11 @@ export const normalTimeStudies = [
       ? "Antimatter Dimension power effect based on real time spent in this Eternity"
       : "Antimatter Dimension multiplier based on time spent in this Eternity"),
     effect: () => (Ra.unlocks.newVhard.isUnlocked
-      ? player.records.thisEternity.realTimeWithV30.div(60000).max(1).log(100).max(2)
+      ? player.records.thisEternity.realTimeWithV40.div(60000).max(1).log(100).max(2)
       : Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15))),
     cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.D2 : DC.E300),
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
+      ? formatPow(value, 3, 3) : formatX(value, 2, 1))
   },
   {
     id: 92,
@@ -272,7 +278,8 @@ export const normalTimeStudies = [
       ? DC.D2.pow(new Decimal(60).div(Decimal.max(Time.bestEternity.totalSeconds, 2)))
       : (Decimal.max(Time.bestEternity.totalSeconds.log10().abs(), 1)).recip().pow(0.05)),
     cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.C2P30),
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
+      ? formatPow(value, 3, 3) : formatX(value, 2, 1))
   },
   {
     id: 93,
@@ -285,7 +292,8 @@ export const normalTimeStudies = [
     effect: () => (Ra.unlocks.newVhard.isUnlocked
       ? DC.D1
       : Decimal.pow(player.totalTickGained, 0.25).clampMin(1)),
-    formatEffect: value => formatX(value, 2, 1)
+    formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
+      ? undefined : formatX(value, 2, 1))
   },
   {
     id: 94,

@@ -32,7 +32,6 @@ export function antimatterDimensionCommonMultiplier() {
     Achievement(84),
     Achievement(91),
     Achievement(92),
-    TimeStudy(91),
     TimeStudy(101),
     TimeStudy(161),
     TimeStudy(193),
@@ -43,6 +42,10 @@ export function antimatterDimensionCommonMultiplier() {
     AlchemyResource.dimensionality,
     PelleUpgrade.antimatterDimensionMult
   );
+
+  if (!Ra.unlocks.newVhard.isUnlocked) {
+    multiplier = multiplier.timesEffectOf(TimeStudy(91));
+  }
 
   multiplier = multiplier.dividedByEffectOf(InfinityChallenge(6));
   multiplier = multiplier.times(getAdjustedGlyphEffect("powermult"));
@@ -250,6 +253,10 @@ function applyNDPowers(mult, tier) {
       CelestialStudy(44),
       CelestialStudy(54),
     );
+
+  if (Ra.unlocks.newVhard.isUnlocked) {
+    multiplier = multiplier.pow(TimeStudy(91).effectOrDefault(1));
+  }
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
   multiplier = multiplier.pow(MendingUpgrade(2).effects.pow);

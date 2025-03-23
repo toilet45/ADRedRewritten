@@ -44,6 +44,8 @@ window.player = {
   },
   buyUntil10: true,
   sacrificed: DC.D0,
+  infinitysacrificed: DC.D0,
+  eternitysacrificed: DC.D0,
   achievementBits: Array.repeat(0, 17),
   secretAchievementBits: Array.repeat(0, 4),
   infinityUpgrades: new Set(),
@@ -386,7 +388,7 @@ window.player = {
       bestEPminVal: DC.D0,
       bestInfinitiesPerMs: DC.D0,
       realTimeSinceEternalElim: DC.NUMMAX,
-      realTimeWithV30: DC.D0,
+      realTimeWithV40: DC.D0,
     },
     bestEternity: {
       time: DC.BEMAX,
