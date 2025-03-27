@@ -104,7 +104,7 @@ export const DT = {
   },
   mm1: {
     name: "Mending Milestone 1",
-    multValue: () => new Decimal(20),
+    multValue: () => GameDatabase.mending.mmOneBoost().dt,
     isActive: () => MendingMilestone.one.isReached
   }
 };

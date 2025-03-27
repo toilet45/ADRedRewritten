@@ -246,7 +246,7 @@ export function gainedEternities() {
     ? new Decimal(1)
     : new Decimal(getAdjustedGlyphEffect("timeetermult"))
       .timesEffectsOf(RealityUpgrade(3), Achievement(113))
-      .times(MendingMilestone.one.isReached ? 5 : 1)
+      .times(MendingMilestone.one.isReached ? GameDatabase.mending.mmOneBoost().eternities : 1)
       .pow(AlchemyResource.eternity.effectValue);
 }
 

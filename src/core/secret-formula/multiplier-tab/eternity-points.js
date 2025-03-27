@@ -103,7 +103,7 @@ export const EP = {
   },
   mm1: {
     name: "Mending Milestone 1",
-    multValue: DC.E1,
+    multValue: GameDatabase.mending.mmOneBoost().ep,
     isActive: () => MendingMilestone.one.isReached
   }
 };

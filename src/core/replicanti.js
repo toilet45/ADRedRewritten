@@ -110,7 +110,7 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
   }
 
   if (MendingMilestone.one.isReached) {
-    interval = interval.div(10);
+    interval = interval.div(GameDatabase.mending.mmOneBoost().rep);
   }
 
   if (overCap) {

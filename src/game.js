@@ -199,7 +199,7 @@ function totalEPMult() {
         RealityUpgrade(12),
         GlyphEffect.epMult,
         ExpansionUpgrade(3)
-      ).times(MendingMilestone.one.isReached ? 10 : 1);
+      ).times(MendingMilestone.one.isReached ? GameDatabase.mending.mmOneBoost().ep : 1);
 }
 
 export function gainedEternityPoints() {
@@ -369,7 +369,7 @@ export function gainedInfinities() {
   );
 
   if (MendingMilestone.one.isReached) {
-    infGain = infGain.times(10);
+    infGain = GameDatabase.mending.mmOneBoost().infinities;
   }
 
   infGain = infGain.times(getAdjustedGlyphEffect("infinityinfmult"));

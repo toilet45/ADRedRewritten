@@ -1,11 +1,23 @@
+export function mmOneBoost() {
+  return {
+    infinities: Decimal.pow(5, Currency.mends.value.add(10).log10()).clampMax(1e4),
+    ip: Currency.mends.value.pow(5).clampMax(1e10),
+    rep: Currency.mends.value.add(1).clampMax(10),
+    eternities: Currency.mends.value.add(1).log10().mul(4).add(1).clampMax(50),
+    ep: Currency.mends.value.pow(2).clampMax(1e5),
+    tp: Currency.mends.value.add(1).clampMax(15),
+    dt: Currency.mends.value.add(1).pow(Currency.mends.value.add(1).cbrt()).clampMax(1e20)
+  };
+}
+
 export const mendingMilestones = {
   one: {
     mends: 1,
     reward: `Infinity is always broken and all pre-Eternity autobuyers are unlocked and maxed.
     Gain a multiplier to various pre-Reality resources (hover for details)`,
-    activeCondition: () => `${formatX(10)} Infinities, ${formatX(100)} Infinity Points, ${formatX(10)} Replicanti Speed,
-    ${formatX(10)} Eternity Points, ${formatX(5)} Eternties, ${formatX(5)} Tachyon Particles,
-    and ${formatX(20)} Dilated Time.`
+    activeCondition: () => `${formatX(mmOneBoost.infinities)} Infinities, ${formatX(mmOneBoost.ip)} Infinity Points, ${formatX(mmOneBoost.rep)} Replicanti Speed,
+    ${formatX(mmOneBoost.ep)} Eternity Points, ${formatX(mmOneBoost.eternities)} Eternties, ${formatX(mmOneBoost.tp)} Tachyon Particles,
+    and ${formatX(mmOneBoost.dt)} Dilated Time.`
   },
   two: {
     mends: 2,

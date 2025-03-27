@@ -114,7 +114,7 @@ export function totalIPMult() {
     );
 
   if (MendingMilestone.one.isReached) {
-    ipMult = ipMult.times(100);
+    ipMult = ipMult.times(GameDatabase.mending.mmOneBoost().ip);
   }
 
   ipMult = ipMult.times(Replicanti.amount.powEffectOf(AlchemyResource.exponential));

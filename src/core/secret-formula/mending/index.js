@@ -1,7 +1,8 @@
 import { damagedUpgrades } from "./damaged-upgrades";
 
 import { expansionUpgrades } from "./expansion-upgrades";
-import { mendingMilestones } from "./mending-milestones";
+// eslint-disable-next-line sort-imports
+import { mendingMilestones, mmOneBoost } from "./mending-milestones";
 import { mendingUpgrades } from "./mending-upgrades";
 
 import { ecCelestialStudies } from "./celestial-studies/ec-celestial-studies";
@@ -15,5 +16,6 @@ export const mending = {
     ec: ecCelestialStudies,
     normal: normalCelestialStudies
   },
-  damagedUpgrades
+  damagedUpgrades,
+  mmOneBoost
 };

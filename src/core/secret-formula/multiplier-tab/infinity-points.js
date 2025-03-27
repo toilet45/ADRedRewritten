@@ -122,7 +122,7 @@ export const IP = {
   },
   mm1: {
     name: "Mending Milestone 1",
-    multValue: DC.E2,
+    multValue: GameDatabase.mending.mmOneBoost().ip,
     isActive: () => MendingMilestone.one.isReached
   }
 };

@@ -43,7 +43,7 @@ export const eternities = {
   },
   mm1: {
     name: "Mending Milestone 1",
-    multValue: DC.D5,
+    multValue: GameDatabase.mending.mmOneBoost().eternities,
     isActive: () => MendingMilestone.one.isReached
   }
 };
