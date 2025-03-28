@@ -1432,8 +1432,9 @@ export const normalAchievements = [
     checkRequirement: () => Laitela.isDamaged,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Dark Matter Dimensions gain a boost based on ???`;
-    }
+      return `Achievement multiplier affects Dark Matter Dimensions (no effect in Universal Damage)`;
+    },
+    effect: () => Laitela.isDamaged ? new Decimal(1) : Achievements.power.clampMin(1).log10().pow(4.25).clampMin(1)
   },
   {
     id: 197,

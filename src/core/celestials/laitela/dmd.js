@@ -80,7 +80,8 @@ export class DarkMatterDimensionState extends DimensionState {
       SingularityMilestone.darkFromDM4,
       SingularityMilestone.darkFromGamespeed,
       SingularityMilestone.darkFromDilatedTime,
-      MendingUpgrade(5)
+      MendingUpgrade(5),
+      Achievement(196)
     );
   }
 

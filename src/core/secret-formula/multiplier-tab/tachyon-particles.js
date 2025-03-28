@@ -75,7 +75,7 @@ export const TP = {
   },
   mm1: {
     name: "Mending Milestone 1",
-    multValue: GameDatabase.mending.mmOneBoost().tp,
+    multValue: () => GameDatabase.mending.mmOneBoost().tp,
     isActive: () => MendingMilestone.one.isReached
   }
 };

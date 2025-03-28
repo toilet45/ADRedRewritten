@@ -27,8 +27,10 @@ export default {
       achMultToTP: false,
       achMultToTT: false,
       achMultToMem: false,
+      achMultToDMD: false,
       renderedRowIndices: [],
-      hasMended: false
+      hasMended: false,
+      damaged: false
     };
   },
   computed: {
@@ -42,6 +44,8 @@ export default {
       const achTPEffect = formatX(this.achTPEffect, 2, 3);
       let bhpow = this.achievementPower.gt(1e35) ? formatX(this.achievementPower.div(1e35).cbrt().mul(1e35), 2, 3)
         : formatX(this.achievementPower, 2, 3);
+
+      const dmdpow = formatX(this.achievementPower.clampMin(1).log10().pow(4.25).clampMin(1));
 
       if (MendingUpgrade(13).isBought) {
         const adpow = formatX(this.achievementPower.pow(10000), 2, 3);
@@ -64,6 +68,7 @@ export default {
         if (this.achMultToBH) boostList.push(`Black Hole Power: ${bhpow}`);
         if (this.achMultToTT) boostList.push(`Time Theorem production: ${otherpow}`);
         if (this.achMultToMem) boostList.push(`Memory Gain: ${mempow}`);
+        if (this.achMultToDMD) boostList.push(`Dark Matter Dimensions: ${this.damaged ? formatX(1, 1, 1) : dmdpow}`);
         return `${boostList.join("<br>")}`;
       }
 
@@ -78,6 +83,7 @@ export default {
       if (this.achMultToTP) boostList.push(`Tachyon Particles: ${achTPEffect}`);
       if (this.achMultToBH) boostList.push(`Black Hole Power: ${bhpow}`);
       if (this.achMultToTT) boostList.push(`Time Theorem production: ${achievementPower}`);
+      if (this.achMultToDMD) boostList.push(`Dark Matter Dimensions: ${this.damaged ? formatX(1, 1, 1) : dmdpow}`);
       return `${boostList.join("<br>")}`;
     },
   },
@@ -116,7 +122,9 @@ export default {
       this.achMultToBH = VUnlocks.achievementBH.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
       this.achMultToMem = Ra.unlocks.achToMemories.canBeApplied;
+      this.achMultToDMD = Achievement(196).isUnlocked;
       this.hasMended = PlayerProgress.mendingUnlocked();
+      this.damaged = Laitela.isDamaged;
     },
     startRowRendering() {
       const unlockedRows = [];

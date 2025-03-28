@@ -83,7 +83,7 @@ export const replicanti = {
   },
   mm1: {
     name: "Mending Milestone 1",
-    multValue: GameDatabase.mending.mmOneBoost().rep,
+    multValue: () => GameDatabase.mending.mmOneBoost().rep,
     isActive: () => MendingMilestone.one.isReached
   }
 };

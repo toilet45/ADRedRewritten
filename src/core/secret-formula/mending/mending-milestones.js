@@ -14,10 +14,10 @@ export const mendingMilestones = {
   one: {
     mends: 1,
     reward: `Infinity is always broken and all pre-Eternity autobuyers are unlocked and maxed.
-    Gain a multiplier to various pre-Reality resources (hover for details)`,
-    activeCondition: () => `${formatX(mmOneBoost.infinities)} Infinities, ${formatX(mmOneBoost.ip)} Infinity Points, ${formatX(mmOneBoost.rep)} Replicanti Speed,
-    ${formatX(mmOneBoost.ep)} Eternity Points, ${formatX(mmOneBoost.eternities)} Eternties, ${formatX(mmOneBoost.tp)} Tachyon Particles,
-    and ${formatX(mmOneBoost.dt)} Dilated Time.`
+    Gain a multiplier to various pre-Reality resources based on Mends (hover for details)`,
+    activeCondition: () => `${formatX(GameDatabase.mending.mmOneBoost().infinities)} Infinities, ${formatX(GameDatabase.mending.mmOneBoost().ip)} Infinity Points, ${formatX(GameDatabase.mending.mmOneBoost().rep)} Replicanti Speed,
+    ${formatX(GameDatabase.mending.mmOneBoost().ep)} Eternity Points, ${formatX(GameDatabase.mending.mmOneBoost().eternities)} Eternties, ${formatX(GameDatabase.mending.mmOneBoost().tp)} Tachyon Particles,
+    and ${formatX(GameDatabase.mending.mmOneBoost().dt)} Dilated Time.`
   },
   two: {
     mends: 2,

@@ -54,11 +54,16 @@ export const eternityUpgrades = {
   tdMultRealTime: {
     id: 6,
     cost: 1e50,
-    description: () => (Pelle.isDoomed
-      ? "Time Dimensions are multiplied by days played in this Armageddon"
-      : "Time Dimensions are multiplied by days played"
-    ),
-    effect: () => (Pelle.isDoomed ? Time.thisReality.totalDays.add(1) : Decimal.max(Time.totalTimePlayed.totalDays, 1)),
+    description() {
+      if (Pelle.isDoomed) return "Time Dimensions are multiplied by days played in this Armageddon";
+      if (PlayerProgress.mendingUnlocked()) return "Time Dimensions are multiplied by days played in this Mended Multiverse";
+      return "Time Dimensions are multiplied by days played";
+    },
+    effect() {
+      if (Pelle.isDoomed) return Time.thisReality.totalDays.add(1);
+      if (PlayerProgress.mendingUnlocked()) return Decimal.max(Time.thisMend.totalDays, 1e10);
+      return Decimal.max(Time.totalTimePlayed.totalDays, 1);
+    },
     formatEffect: value => formatX(value, 2, 1)
   }
 };

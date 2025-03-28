@@ -369,7 +369,7 @@ export function gainedInfinities() {
   );
 
   if (MendingMilestone.one.isReached) {
-    infGain = GameDatabase.mending.mmOneBoost().infinities;
+    infGain = infGain.times(GameDatabase.mending.mmOneBoost().infinities);
   }
 
   infGain = infGain.times(getAdjustedGlyphEffect("infinityinfmult"));
