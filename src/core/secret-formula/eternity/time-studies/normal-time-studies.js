@@ -272,11 +272,11 @@ export const normalTimeStudies = [
     requirement: [82],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => (Ra.unlocks.newVhard.isUnlocked
-      ? "Infinity Dimension multiplier based on fastest Eternity time"
-      : "Infinity Dimension power effect based on fastest Eternity time"),
+      ? "Infinity Dimension power effect based on fastest Eternity time"
+      : "Infinity Dimension multiplier based on fastest Eternity time"),
     effect: () => (Ra.unlocks.newVhard.isUnlocked
-      ? DC.D2.pow(new Decimal(60).div(Decimal.max(Time.bestEternity.totalSeconds, 2)))
-      : (Decimal.max(Time.bestEternity.totalSeconds.log10().abs(), 1)).recip().pow(0.05)),
+      ? (Decimal.max(Time.bestEternity.totalSeconds.log10().abs(), 1)).recip().pow(0.05)
+      : DC.D2.pow(new Decimal(60).div(Decimal.max(Time.bestEternity.totalSeconds, 2)))),
     cap: () => (Ra.unlocks.newVhard.isUnlocked ? DC.EE18 : DC.C2P30),
     formatEffect: value => (Ra.unlocks.newVhard.isUnlocked
       ? formatPow(value, 3, 3) : formatX(value, 2, 1))
