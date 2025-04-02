@@ -163,7 +163,7 @@ export default {
     },
     updateChallengeWithRUPG() {
       const ec = EternityChallenge.current;
-      this.fullyCompleted = ec.isFullyCompleted;
+      this.fullyCompleted = ec.completions === ec.maxCompletions;
       if (this.fullyCompleted) return;
       const status = ec.gainedCompletionStatus;
       this.gainedCompletions = status.gainedCompletions;

@@ -175,10 +175,11 @@ export class EternityChallengeState extends GameMechanicState {
 
   // Goal for the NEXT completion, based on current completions
   goalAtCompletions(completions) {
-    if (completions > 4 && !(Enslaved.isRunning || this.id === 1)) {
+    if (completions === this.maxCompletions) return this.goalAtCompletions(completions - 1);
+    if (completions > 4 && !(Enslaved.isRunning && this.id === 1)) {
       switch (this.scaled.goalIncreaseType) {
         case "exponential":
-          return Decimal.pow(this.goalIncrease.log10(), completions - 5).mul(this.scaled.goal.log10()).pow10();
+          return Decimal.pow(this.goalIncrease.log10(), completions - 4).mul(this.scaled.goal.log10()).pow10();
         default:
           break;
       }
@@ -190,12 +191,13 @@ export class EternityChallengeState extends GameMechanicState {
 
   completionsAtIP(ip) {
     if (ip.lt(this.initialGoal)) return 0;
-    const completions = (ip.dividedBy(this.initialGoal)).log10().div(this.goalIncrease.log10()).add(1);
+    let completions = (ip.dividedBy(this.initialGoal)).log10().div(this.goalIncrease.log10()).add(1);
+    if (this.maxCompletions <= this.scaleStart) completions = completions.clampMax(this.scaleStart);
     if (completions.gt(this.scaleStart)) {
       let sCompletions = new Decimal(this.scaleStart);
       switch (this.scaled.goalIncreaseType) {
         case "exponential":
-          sCompletions = sCompletions.add(ip.log10().div(this.scaled.goal.log10()).log(this.scaled.goalIncrease));
+          sCompletions = sCompletions.add(ip.log10().div(this.scaled.goal.log10()).log(this.scaled.goalIncrease)).clampMin(0);
           break;
         default:
           break;

@@ -195,9 +195,11 @@ export function initializeResourcesAfterEternity() {
   Currency.infinities.reset();
   player.records.bestInfinity.time = DC.BEMAX;
   player.records.bestInfinity.realTime = DC.BEMAX;
+  player.records.bestInfinity.trueTime = Number.MAX_VALUE;
   player.records.thisInfinity.time = DC.D0;
   player.records.thisInfinity.lastBuyTime = DC.D0;
   player.records.thisInfinity.realTime = DC.D0;
+  player.records.thisInfinity.trueTime = 0;
   player.dimensionBoosts = (EternityMilestone.keepInfinityUpgrades.isReached) ? DC.D4 : DC.D0;
   player.galaxies = (EternityMilestone.keepInfinityUpgrades.isReached) ? DC.D1 : DC.D0;
   player.partInfinityPoint = 0;
@@ -207,6 +209,7 @@ export function initializeResourcesAfterEternity() {
   Currency.timeShards.reset();
   player.records.thisEternity.time = DC.D0;
   player.records.thisEternity.realTime = DC.D0;
+  player.records.thisEternity.trueTime = 0;
   player.totalTickGained = DC.D0;
   player.eterc8ids = 50;
   player.eterc8repl = 40;

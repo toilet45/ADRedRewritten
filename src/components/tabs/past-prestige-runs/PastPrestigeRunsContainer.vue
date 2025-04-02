@@ -66,6 +66,7 @@ export default {
       return this.layer.getRuns;
     },
     hasRealTime: () => PlayerProgress.seenAlteredSpeed(),
+    hasTrueTime: () => ImaginaryBlackHole(1).isUnlocked,
   },
   methods: {
     update() {
@@ -127,7 +128,7 @@ export default {
 
       const cells = [name, this.gameTime(run)];
       if (this.hasRealTime) cells.push(this.realTime(run));
-      if (this.hasRealTime) cells.push(this.trueTime(run));
+      if (this.hasTrueTime) cells.push(this.trueTime(run));
 
       const resources = [this.prestigeCurrencyGain(run), this.prestigeCurrencyRate(run),
         this.prestigeCountGain(run), this.prestigeCountRate(run)];
@@ -148,7 +149,7 @@ export default {
     infoCol() {
       const cells = ["Run", this.hasRealTime ? "Game Time" : "Time in Run"];
       if (this.hasRealTime) cells.push("Real Time");
-      if (this.hasRealTime) cells.push("True Time");
+      if (this.hasTrueTime) cells.push("Actual Time");
       cells.push(...this.resourceTitles);
       if (this.hasChallenges) cells.push("Challenge");
 

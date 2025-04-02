@@ -56,12 +56,12 @@ export const eternityUpgrades = {
     cost: 1e50,
     description() {
       if (Pelle.isDoomed) return "Time Dimensions are multiplied by days played in this Armageddon";
-      if (PlayerProgress.mendingUnlocked()) return "Time Dimensions are multiplied by days played in this Mended Multiverse";
+      if (PlayerProgress.mendingUnlocked()) return "Time Dimensions are multiplied by days played in this Mend (minimum of total real-time days played)";
       return "Time Dimensions are multiplied by days played";
     },
     effect() {
       if (Pelle.isDoomed) return Time.thisReality.totalDays.add(1);
-      if (PlayerProgress.mendingUnlocked()) return Decimal.max(Time.thisMend.totalDays, 1e10);
+      if (PlayerProgress.mendingUnlocked()) return Decimal.max(Time.thisMend.totalDays, Time.realTimePlayed.totalDays);
       return Decimal.max(Time.totalTimePlayed.totalDays, 1);
     },
     formatEffect: value => formatX(value, 2, 1)

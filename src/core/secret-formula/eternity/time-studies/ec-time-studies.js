@@ -33,7 +33,7 @@ export const ecTimeStudies = [
     secondary: {
       resource: "8th Antimatter Dimensions",
       current: () => AntimatterDimension(8).totalAmount,
-      required: completions => new Decimal(17300 + completions, 4 * 1250),
+      required: completions => new Decimal(17300 + completions * 1250),
       formatValue: value => formatInt(Math.floor(value.toNumber()))
     }
   },
