@@ -163,6 +163,7 @@ export const GameStorage = {
     this.oldBackupTimer = player.backupTimer;
     Modal.hideAll();
     Quote.clearAll();
+    TranscendentQuote.clearAll();
     AutomatorBackend.clearEditor();
     this.loadPlayerObject(newPlayer);
     GlyphAppearanceHandler.clearInvalidCosmetics();

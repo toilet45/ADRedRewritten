@@ -138,7 +138,7 @@ class TabState {
   }
 
   show(manual, subtab = undefined) {
-    if (!manual && !player.options.automaticTabSwitching || Quote.isOpen) return;
+    if (!manual && !player.options.automaticTabSwitching || Quote.isOpen || TranscendentQuote.isOpen) return;
     if (subtab !== undefined) {
       if (!Enslaved.isRunning) subtab.unhideTab();
       this._currentSubtab = subtab;

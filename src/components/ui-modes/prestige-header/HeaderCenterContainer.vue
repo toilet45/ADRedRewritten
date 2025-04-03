@@ -27,7 +27,9 @@ export default {
       antimatterPerSec: new Decimal(0),
       displayInstability: false,
       instabilityStart: new Decimal(),
-      scPow: new Decimal()
+      scPow: new Decimal(),
+      showEND: false,
+      amText: ""
     };
   },
   methods: {
@@ -43,6 +45,8 @@ export default {
       this.displayInstability = false; //AntimatterDimension(1).multiplier.log10().gt("9e15") && MendingUpgrade(20).isBought;
       this.instabilityStart = ADInstabilityStart();
       this.scPow = Decimal.log(getDimensionFinalMultiplierUncached(1), getDimensionFinalMultiplierUncachedWithoutSC(1)).recip();
+      this.showEND = (PlayerProgress.mendingUnlocked() && !player.celestials.pelle.doomed && this.antimatter.gte("e9e15") && !player.reality.warped);
+      this.amText = this.showEnd ? "END" : format(this.antimatter, 2, 1);
     },
   },
 };
@@ -53,7 +57,7 @@ export default {
     v-if="shouldDisplay"
     class="c-prestige-button-container"
   >
-    <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
+    <span>You have <span class="c-game-header__antimatter">{{ amText }}</span> antimatter.</span>
     <span v-if="displayInstability">Due to Dimensional Instability, your Antimatter Dimension multipliers are being rooted by {{ format(scPow, 3, 3) }} past {{format(instabilityStart, 2, 2)}}</span>
     <div
       v-if="hasRealityButton"

@@ -77,6 +77,7 @@ import SoftcapPurchaseModal from "@/components/modals/SoftcapPurchaseModal";
 import SpeedrunModeModal from "@/components/modals/SpeedrunModeModal";
 import StudyStringModal from "@/components/modals/StudyStringModal";
 import SwitchAutomatorEditorModal from "@/components/modals/SwitchAutomatorEditorModal";
+import WarpRealityModal from "@/components/modals/WarpRealityModal";
 import UiChoiceModal from "@/components/modals/UiChoiceModal";
 import UndoGlyphModal from "@/components/modals/UndoGlyphModal";
 import UpgradeMechanicLockModal from "@/components/modals/UpgradeMechanicLockModal";
@@ -272,6 +273,7 @@ Modal.singularityMilestones = new Modal(SingularityMilestonesModal);
 Modal.pelleEffects = new Modal(PelleEffectsModal);
 Modal.sacrifice = new Modal(SacrificeModal, 1, GAME_EVENT.DIMBOOST_AFTER);
 Modal.breakInfinity = new Modal(BreakInfinityModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
+Modal.warpReality = new Modal(WarpRealityModal);
 
 Modal.s12Games = new Modal(S12GamesModal);
 

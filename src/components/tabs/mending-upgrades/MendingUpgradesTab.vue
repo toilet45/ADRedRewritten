@@ -1,14 +1,17 @@
 <script>
 import MendingUpgradeButton from "./MendingUpgradeButton";
+import WarpRealityButton from "./WarpRealityButton";
 
 export default {
   name: "MendingUpgradesTab",
   components: {
-    MendingUpgradeButton
+    MendingUpgradeButton,
+    WarpRealityButton
   },
   data() {
     return {
-      mendingPoints: new Decimal()
+      mendingPoints: new Decimal(),
+      showWarpButton: false
     };
   },
   computed: {
@@ -26,6 +29,7 @@ export default {
     },
     update() {
       this.mendingPoints.copyFrom(Currency.mendingPoints.value);
+      this.showWarpButton = MendingUpgrade(20).isBought;
     }
   }
 };
@@ -38,6 +42,10 @@ export default {
       <span class="c-mending-tab__mending-points">{{ format(mendingPoints, 2) }}</span>
       {{ pluralize("Multiversal Remain", mendingPoints) }}.
     </div>
+    <WarpRealityButton
+      v-if="showWarpButton"
+      class="l-break-infinity-tab__break-btn"
+    />
     <!-- eslint-disable max-len -->
     Each upgrade in the first column can be bought endlessly and gives an additive {{ formatX(1.02, 2, 2) }} multiplier to Multiversal Remain gain. <br>
     Mending Upgrade 3 and all second column upgrades can be bought a finite amount of times and give a compounding {{ formatX(Math.cbrt(1.15), 3, 3) }} multiplier to Multiversal Remain gain per purchase. <br>

@@ -17,6 +17,9 @@ export default {
     };
   },
   computed: {
+    isWarpedLocked() {
+      return this.pet.name === "Ra" && !player.reality.warped && this.level === 25;
+    },
     pet() {
       return this.petConfig.pet;
     },
@@ -137,21 +140,28 @@ export default {
     >
       <span class="fas fa-arrow-up" />
       <div class="c-ra-pet-upgrade__tooltip">
-        <div class="c-ra-pet-upgrade__tooltip__name">
-          Level {{ pet.name }} to {{ formatInt(level + 1) }}
-        </div>
-        <div class="c-ra-pet-upgrade__tooltip__description">
-          {{ reward }}
-          <div
-            v-if="showNextScalingUpgrade"
-            :style="{ 'margin-top': nextUnlock.reward ? '0.6rem' : '0' }"
-          >
-            {{ nextScalingUpgrade }}
+        <div v-if="isWarpedLocked">
+          <div class="c-ra-pet-upgrade__tooltip__name">
+            Warp Reality to Level Up further
           </div>
         </div>
-        <div class="c-ra-pet-upgrade__tooltip__footer">
-          Cost: {{ quantify("Memory", requiredMemories, 2, 2) }}
-          <span v-if="memories.lte(requiredMemories)">{{ nextLevelEstimate }}</span>
+        <div v-else>
+          <div class="c-ra-pet-upgrade__tooltip__name">
+            Level {{ pet.name }} to {{ formatInt(level + 1) }}
+          </div>
+          <div class="c-ra-pet-upgrade__tooltip__description">
+            {{ reward }}
+            <div
+              v-if="showNextScalingUpgrade"
+              :style="{ 'margin-top': nextUnlock.reward ? '0.6rem' : '0' }"
+            >
+              {{ nextScalingUpgrade }}
+            </div>
+          </div>
+          <div class="c-ra-pet-upgrade__tooltip__footer">
+            Cost: {{ quantify("Memory", requiredMemories, 2, 2) }}
+            <span v-if="memories.lte(requiredMemories)">{{ nextLevelEstimate }}</span>
+          </div>
         </div>
       </div>
     </div>

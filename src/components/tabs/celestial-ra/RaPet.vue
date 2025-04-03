@@ -18,7 +18,6 @@ export default {
     return {
       isUnlocked: false,
       isRaCapped: false,
-      isCapped: false,
       level: 0,
       memories: new Decimal(),
       requiredMemories: new Decimal(),
@@ -42,6 +41,12 @@ export default {
   },
   computed: {
     levelCap() { return this.pet.name === "Ra" ? 100 : Ra.levelCap; },
+    isCapped() {
+      return this.pet?.level >= this.levelCap;
+    },
+    isRaCapped() {
+      return Ra.totalPetLevel === Ra.maxTotalPetLevel;;
+    },
     showScalingUpgrade() {
       return this.petConfig.scalingUpgradeVisible(this.level);
     },
@@ -80,9 +85,7 @@ export default {
   },
   methods: {
     update() {
-      this.isRaCapped = Ra.totalPetLevel === Ra.maxTotalPetLevel;
       const pet = this.pet;
-      this.isCapped = pet?.level >= this.levelCap;
       this.isUnlocked = pet?.isUnlocked;
       if (!this.isUnlocked) return;
       this.level = pet.level;

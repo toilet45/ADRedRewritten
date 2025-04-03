@@ -97,3 +97,7 @@ export * from "./automator/script-templates";
 
 export * from "./mending/index";
 export * from "./celestial-studies";
+
+export * from "./transcendents/quotes";
+export * from "./transcendents/kohler/kohler";
+export * from "./transcendents/transcendents";

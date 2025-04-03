@@ -112,6 +112,8 @@ html {
   --color-mending: #cc2988;
   --color-mending-dark: #57113a;
   --color-mending-light: #f0dde8;
+
+  --color-kohler--base: #cc2988;
 }
 
 :root .t-metro,

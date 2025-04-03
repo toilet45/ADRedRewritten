@@ -150,6 +150,7 @@ export function mendingReset(special = 0) {
       }))
   };
   player.reality.glyphs.filter.types = filterTypesCopy;
+  player.reality.glyphs.filter.alchemyTier = 1;
   player.reality.rebuyables = {
     1: new Decimal(),
     2: new Decimal(),

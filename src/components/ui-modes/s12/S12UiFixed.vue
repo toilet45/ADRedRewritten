@@ -7,6 +7,8 @@ import ModalProgressBar from "@/components/modals/ModalProgressBar";
 import NewGame from "@/components/tabs/celestial-pelle/NewGame";
 import PopupModal from "@/components/modals/PopupModal";
 import SpectateGame from "@/components/SpectateGame";
+import TranscendentQuoteHistoryDisplay from "@/components/modals/transcendent-quotes/TranscendentQuoteHistoryDisplay";
+import TranscendentQuoteModal from "@/components/modals/transcendent-quotes/TranscendentQuoteModal";
 
 import S12Taskbar from "./S12Taskbar";
 
@@ -22,6 +24,8 @@ export default {
     SpectateGame,
     NewGame,
     S12Taskbar,
+    TranscendentQuoteModal,
+    TranscendentQuoteHistoryDisplay
   },
   data() {
     return {
@@ -46,6 +50,14 @@ export default {
   <span>
     <div class="c-game-ui--fixed">
       <ModalProgressBar v-if="view.modal.progressBar" />
+      <TranscendentQuoteModal
+        v-else-if="view.transcendentQuotes.current"
+        :transcendent-quote="view.transcendentQuotes.current"
+      />
+      <TranscendentQuoteHistoryDisplay
+        v-else-if="view.transcendentQuotes.history"
+        :transcendent-quotes="view.transcendentQuotes.history"
+      />
       <CelestialQuoteModal
         v-else-if="view.quotes.current"
         :quote="view.quotes.current"

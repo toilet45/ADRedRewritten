@@ -67,6 +67,7 @@ export const NG = {
     const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
     Modal.hideAll();
     Quote.clearAll();
+    TranscendentQuote.clearAll();
     GameStorage.hardReset();
     player.options = JSON.parse(backUpOptions);
     // We need to force this one to be true because otherwise the player will be unable to select their glyphs

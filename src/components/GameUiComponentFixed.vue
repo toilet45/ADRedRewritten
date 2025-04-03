@@ -13,6 +13,8 @@ import SaveTimer from "@/components/SaveTimer";
 import SpectateGame from "@/components/SpectateGame";
 import SpeedrunStatus from "@/components/SpeedrunStatus";
 import TimeTheoremShop from "@/components/tabs/time-studies/tt-shop/TimeTheoremShop";
+import TranscendentQuoteHistoryDisplay from "@/components/modals/transcendent-quotes/TranscendentQuoteHistoryDisplay";
+import TranscendentQuoteModal from "@/components/modals/transcendent-quotes/TranscendentQuoteModal";
 
 export default {
   name: "GameUiComponentFixed",
@@ -30,7 +32,9 @@ export default {
     FadeAway,
     CreditsContainer,
     SpectateGame,
-    NewGame
+    NewGame,
+    TranscendentQuoteModal,
+    TranscendentQuoteHistoryDisplay
   },
   data() {
     return {
@@ -83,6 +87,14 @@ export default {
     <SpeedrunStatus :style="hideIfMatoFullscreen" />
     <template v-if="view.theme !== 'S12'">
       <ModalProgressBar v-if="view.modal.progressBar" />
+      <TranscendentQuoteModal
+        v-else-if="view.transcendentQuotes.current"
+        :transcendent-quote="view.transcendentQuotes.current"
+      />
+      <TranscendentQuoteHistoryDisplay
+        v-else-if="view.transcendentQuotes.history"
+        :transcendent-quotes="view.transcendentQuotes.history"
+      />
       <CelestialQuoteModal
         v-else-if="view.quotes.current"
         :quote="view.quotes.current"

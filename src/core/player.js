@@ -1177,7 +1177,14 @@ window.player = {
   softlockModals: {
     mendingUpgradeOne: false
   },
-  galacticShards: DC.D0
+  galacticShards: DC.D0,
+  transcendents: {
+    kohler: {
+      quoteBits: 0,
+      run: false,
+      trueRun: false
+    }
+  }
 };
 
 export const Player = {
