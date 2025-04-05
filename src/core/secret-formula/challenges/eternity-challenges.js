@@ -457,7 +457,7 @@ export const eternityChallenges = [
   {
     id: 21,
     description: () => `All continuous production/generation is logarthmic.`,
-    // AD, ID, TD, IP, Replicanti
+    // AD, ID, TD, IP, Replicanti, continuum
     goal: DC.E10000,
     pelleGoal: DC.E100,
     goalIncrease: DC.E5000,
@@ -532,9 +532,10 @@ export const eternityChallenges = [
     id: 25,
     description: () => `Suffering`,
     // Actual effect:
-    // AD production is log(x)
-    // All IP multipliers are disabled
-    // Gamespeed is capped to 1x rt and gt
+    // AD production -> log(x)^0.1
+    // Gamespeed capped at 1x realtime, 1x gametime
+    // IP mults disabled.
+    // Rep is disabled.
     goal: DC.F4,
     pelleGoal: DC.E10,
     goalIncrease: DC.E10,
