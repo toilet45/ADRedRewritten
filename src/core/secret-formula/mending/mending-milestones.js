@@ -7,8 +7,8 @@ export function mmOneBoost() {
     ep: Currency.mends.value.pow(2).clampMax(1e5),
     tp: Currency.mends.value.add(1).clampMax(15),
     dt: Currency.mends.value.add(1).pow(Currency.mends.value.add(1).cbrt()).clampMax(1e20),
-    ec11start: Decimal.pow10(Currency.mends.value().add(4).mul(10)).clampMax(1e100),
-    ec11scale: Decimal.pow10(Currency.mends.value().sqrt().mul(5)).clampMax(1e25)
+    ec11start: Decimal.pow10(Currency.mends.value.add(4).mul(10)).clampMax(1e100),
+    ec11scale: Decimal.pow10(Currency.mends.value.sqrt().mul(5)).clampMax(1e25)
   };
 }
 
