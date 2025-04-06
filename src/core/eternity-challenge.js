@@ -145,7 +145,7 @@ export class EternityChallengeState extends GameMechanicState {
       return this.config.pelleGoal;
     }
     if (this.id === 11 && PlayerProgress.mendingUnlocked()) {
-      return this.config.goal.sub(GameDatabase.mending.mmOneBoost().ec11start);
+      return this.config.goal.div(GameDatabase.mending.mmOneBoost().ec11start);
     }
     return this.config.goal;
   }
@@ -155,7 +155,7 @@ export class EternityChallengeState extends GameMechanicState {
       return this.config.pelleGoalIncrease;
     }
     if (this.id === 11 && PlayerProgress.mendingUnlocked()) {
-      return this.config.goalIncrease.sub(GameDatabase.mending.mmOneBoost().ec11scale);
+      return this.config.goalIncrease.div(GameDatabase.mending.mmOneBoost().ec11scale);
     }
     return this.config.goalIncrease;
   }
