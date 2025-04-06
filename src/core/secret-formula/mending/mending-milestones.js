@@ -6,7 +6,9 @@ export function mmOneBoost() {
     eternities: Currency.mends.value.add(1).log10().mul(4).add(1).clampMax(50),
     ep: Currency.mends.value.pow(2).clampMax(1e5),
     tp: Currency.mends.value.add(1).clampMax(15),
-    dt: Currency.mends.value.add(1).pow(Currency.mends.value.add(1).cbrt()).clampMax(1e20)
+    dt: Currency.mends.value.add(1).pow(Currency.mends.value.add(1).cbrt()).clampMax(1e20),
+    ec11start: Decimal.pow10(Currency.mends.value().add(4).mul(10)).clampMax(1e100),
+    ec11scale: Decimal.pow10(Currency.mends.value().sqrt().mul(5)).clampMax(1e25)
   };
 }
 
@@ -17,7 +19,7 @@ export const mendingMilestones = {
     Gain a multiplier to various pre-Reality resources based on Mends (hover for details)`,
     activeCondition: () => `${formatX(GameDatabase.mending.mmOneBoost().infinities)} Infinities, ${formatX(GameDatabase.mending.mmOneBoost().ip)} Infinity Points, ${formatX(GameDatabase.mending.mmOneBoost().rep)} Replicanti Speed,
     ${formatX(GameDatabase.mending.mmOneBoost().ep)} Eternity Points, ${formatX(GameDatabase.mending.mmOneBoost().eternities)} Eternties, ${formatX(GameDatabase.mending.mmOneBoost().tp)} Tachyon Particles,
-    and ${formatX(GameDatabase.mending.mmOneBoost().dt)} Dilated Time.`
+    and ${formatX(GameDatabase.mending.mmOneBoost().dt)} Dilated Time. EC11 goal starts ${GameDatabase.mending.mmOneBoost().ec11start} earlier and scales ${GameDatabase.mending.mmOneBoost().ec11scale} slower`
   },
   two: {
     mends: 2,

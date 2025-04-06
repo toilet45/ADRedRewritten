@@ -144,12 +144,18 @@ export class EternityChallengeState extends GameMechanicState {
     if (Pelle.isDoomed && this.config.pelleGoal) {
       return this.config.pelleGoal;
     }
+    if (this.id === 11 && PlayerProgress.mendingUnlocked()) {
+      return this.config.goal.sub(GameDatabase.mending.mmOneBoost().ec11start);
+    }
     return this.config.goal;
   }
 
   get goalIncrease() {
     if (Pelle.isDoomed && this.config.pelleGoalIncrease) {
       return this.config.pelleGoalIncrease;
+    }
+    if (this.id === 11 && PlayerProgress.mendingUnlocked()) {
+      return this.config.goalIncrease.sub(GameDatabase.mending.mmOneBoost().ec11scale);
     }
     return this.config.goalIncrease;
   }
