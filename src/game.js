@@ -555,6 +555,9 @@ export function realTimeMechanics(realDiff, trueDiff) {
   DarkMatterDimensions.tick(realDiff);
   MultiversalDimensions.tick(realDiff);
 
+  player.sacrifices.infinity.sacrificeNerf = player.sacrifices.infinity.sacrificeNerf.sub(realDiff.div(1e3));
+  player.sacrifices.eternity.sacrificeNerf = player.sacrifices.eternity.sacrificeNerf.sub(realDiff.div(1e3));
+
   // When storing real time, skip everything else having to do with production once stats are updated
   if (Enslaved.isStoringRealTime) {
     player.records.realTimePlayed = player.records.realTimePlayed.add(realDiff);

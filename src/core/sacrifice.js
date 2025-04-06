@@ -146,3 +146,138 @@ export function sacrificeBtnClick() {
     sacrificeReset();
   }
 }
+
+export class IDSacrifice {
+  // This is tied to the "buying an 8th dimension" achievement in order to hide it from new players before they reach
+  // sacrifice for the first time.
+  static get isVisible() {
+    return TimeStudy(72).isBought && Ra.unlocks.newVhard.canBeApplied;
+  }
+
+  static get canSacrifice() {
+    return this.nextBoost.gt(1) && !(EternityChallenge(2).isRunning || EternityChallenge(10).isRunning ||
+    EternityChallenge(16).isRunning || EternityChallenge(17).isRunning || EternityChallenge(19).isRunning)
+  }
+
+  static get disabledCondition() {
+    if (EternityChallenge(2).isRunning || EternityChallenge(10).isRunning || EternityChallenge(16).isRunning ||
+    EternityChallenge(17).isRunning || EternityChallenge(19).isRunning) return "Infinity Dimensions are disabled";
+    if (this.nextBoost.lt(1.01)) return `${formatPow(1, 3, 3)} power`;
+    return "Need to Crunch";
+  }
+
+  // Keep changes incase we want to use it in the future
+  // eslint-disable-next-line no-unused-vars
+  static getSacrificeDescription(changes) {
+    return `log₁₀${formatPow(2, 0, 0)}(ID1)/${formatInt(50)} + ${formatInt(1)}`;
+  }
+
+  // Keep as not const incase we ever want to change
+  static get sacrificeDevisor() {
+    let base;
+    // eslint-disable-next-line prefer-const
+    base = new Decimal(50).recip();
+    return base;
+  }
+
+  static get nextBoost() {
+    const id1Amount = InfinityDimension(1).amount;
+    if (id1Amount.lte(10)) return DC.D1;
+    return stackedLog(id1Amount, 2).div(50).add(1);
+  }
+
+  static get totalBoost() {
+    if (player.sacrifices.infinity.sacrificeNerf.gt(1)) {
+      return DC.D5.pow(player.sacrifices.infinity.sacrificeNerf.log10()).recip();
+    }
+    if (player.sacrifices.infinity.mult.lt(1)) return DC.D1;
+    return player.sacrifices.infinity.mult;
+  }
+}
+
+export function IDSacrificeReset() {
+  if (!IDSacrifice.canSacrifice) return false;
+  EventHub.dispatch(GAME_EVENT.INF_SACRIFICE_RESET_BEFORE);
+  const nextBoost = IDSacrifice.nextBoost;
+  player.sacrifices.infinity.mult = nextBoost;
+  player.sacrifices.infinity.sacrificeNerf = new Decimal(600);
+  EventHub.dispatch(GAME_EVENT.INF_SACRIFICE_RESET_AFTER);
+  return true;
+}
+
+export function IDsacrificeBtnClick() {
+  if (!IDSacrifice.isVisible || !IDSacrifice.canSacrifice) return;
+  if (player.options.confirmations.IDsacrifice) {
+    Modal.IDsacrifice.show();
+  } else {
+    IDSacrificeReset();
+  }
+}
+
+export class TDSacrifice {
+  // This is tied to the "buying an 8th dimension" achievement in order to hide it from new players before they reach
+  // sacrifice for the first time.
+  static get isVisible() {
+    return TimeStudy(73).isBought && Ra.unlocks.newVhard.canBeApplied;
+  }
+
+  static get canSacrifice() {
+    return this.nextBoost.gt(1) && !(EternityChallenge(1).isRunning || EternityChallenge(10).isRunning ||
+    EternityChallenge(16).isRunning || EternityChallenge(19).isRunning);
+  }
+
+  static get disabledCondition() {
+    if (EternityChallenge(1).isRunning || EternityChallenge(10).isRunning || EternityChallenge(16).isRunning ||
+    EternityChallenge(19).isRunning) return "Time Dimensions are disabled";
+    if (this.nextBoost.lt(1.01)) return `${formatPow(1, 3, 3)} power`;
+    return "Need to Crunch";
+  }
+
+  // Keep changes incase we want to use it in the future
+  // eslint-disable-next-line no-unused-vars
+  static getSacrificeDescription(changes) {
+    return `log₁₀${formatPow(2, 0, 0)}(TD1)/${formatInt(44)} + ${formatInt(1)}`;
+  }
+
+  // Keep as not const incase we ever want to change
+  static get sacrificeDevisor() {
+    let base;
+    // eslint-disable-next-line prefer-const
+    base = new Decimal(44).recip();
+    return base;
+  }
+
+  static get nextBoost() {
+    const td1Amount = TimeDimension(1).amount;
+    if (td1Amount.lte(10)) return DC.D1;
+    return stackedLog(td1Amount, 2).div(44).add(1);
+  }
+
+  static get totalBoost() {
+    if (player.sacrifices.eternity.sacrificeNerf.gt(1)) {
+      return DC.D2.pow(player.sacrifices.eternity.sacrificeNerf.log10()).recip();
+    }
+    if (player.sacrifices.eternity.mult.lt(1)) return DC.D1;
+    return player.sacrifices.eternity.mult;
+  }
+}
+
+export function TDSacrificeReset() {
+  if (!IDSacrifice.canSacrifice) return false;
+  EventHub.dispatch(GAME_EVENT.ETER_SACRIFICE_RESET_BEFORE);
+  const nextBoost = TDSacrifice.nextBoost;
+  player.sacrifices.eternity.mult = nextBoost;
+  player.sacrifices.eternity.sacrificeNerf = new Decimal(1800);
+  EventHub.dispatch(GAME_EVENT.ETER_SACRIFICE_RESET_BEFORE);
+  return true;
+}
+
+export function TDsacrificeBtnClick() {
+  if (!TDsacrifice.isVisible || !TDsacrifice.canSacrifice) return;
+  if (player.options.confirmations.TDsacrifice) {
+    Modal.TDsacrifice.show();
+  } else {
+    TDSacrificeReset();
+  }
+}
+

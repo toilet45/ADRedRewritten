@@ -1,12 +1,14 @@
 <script>
 import InfinityDimensionRow from "./ClassicInfinityDimensionRow";
+import InfinityDimensionsTabHeader from "./ClassicInfinityDimensionsTabHeader"
 import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
   name: "ClassicInfinityDimensionsTab",
   components: {
     PrimaryButton,
-    InfinityDimensionRow
+    InfinityDimensionRow,
+    InfinityDimensionsTabHeader
   },
   data() {
     return {
@@ -110,20 +112,7 @@ export default {
         Toggle all autobuyers
       </PrimaryButton>
     </div>
-    <div>
-      <!-- eslint-disable vue/html-comment-content-newline, vue/html-comment-indent -->
-      <!-- <PrimaryButton
-        v-show="isSacrificeUnlocked"
-        v-tooltip="sacrificeTooltip"
-        :enabled="isSacrificeAffordable"
-        class="o-primary-btn--sacrifice"
-        @click="sacrifice"
-      >
-        <span v-if="isSacrificeAffordable">Infinite Sacrifice ({{ formatPow(sacrificeBoost, 4, 4) }})</span>
-        <span v-else>Infinite Sacrifice Disabled ({{ disabledCondition }})</span>
-      </PrimaryButton> -->
-      <!-- eslint-enable vue/html-comment-content-newline, vue/html-comment-indent -->
-    </div>
+    <InfinityDimensionsTabHeader />
     <div>
       <p>
         You have

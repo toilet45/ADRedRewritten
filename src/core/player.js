@@ -44,8 +44,16 @@ window.player = {
   },
   buyUntil10: true,
   sacrificed: DC.D0,
-  infinitysacrificed: DC.D0,
-  eternitysacrificed: DC.D0,
+  sacrifices: {
+    infinity: {
+      mult: DC.D0,
+      sacrificeNerf: DC.D0
+    },
+    eternity: {
+      mult: DC.D0,
+      sacrificeNerf: DC.D0
+    }
+  },
   achievementBits: Array.repeat(0, 17),
   secretAchievementBits: Array.repeat(0, 4),
   infinityUpgrades: new Set(),
@@ -1102,7 +1110,9 @@ window.player = {
       dimensionBoost: true,
       switchAutomatorMode: true,
       respecIAP: true,
-      mend: true
+      mend: true,
+      IDsacrifice: true,
+      TDsacrifice: true,
     },
     awayProgress: {
       antimatter: true,

@@ -40,7 +40,8 @@ export const GameSaveSerializer = {
   // confuse your saves with AD saves but can still import AD saves (this will
   // also require changing some other code slightly, particularly decode).
   startingString: {
-    savefile: "AntimatterDimensionsSavefileFormat",
+    savefile: "ADRedemptionRewrittenSavefileFormat",
+    savefilealt: "AntimatterDimensionsSavefileFormat",
     "automator script": "AntimatterDimensionsAutomatorScriptFormat",
     "automator data": "AntimatterDimensionsAutomatorDataFormat",
     "glyph filter": "AntimatterDimensionsGlyphFilterFormat",
@@ -48,6 +49,7 @@ export const GameSaveSerializer = {
   // The ending strings aren't as verbose so that we can save a little space.
   endingString: {
     savefile: "EndOfSavefile",
+    savefilealt: "EndOfSavefile",
     "automator script": "EndOfAutomatorScript",
     "automator data": "EndOfAutomatorData",
     "glyph filter": "EndOfGlyphFilter",
@@ -126,6 +128,11 @@ export const GameSaveSerializer = {
       const len = this.startingString[type].length;
       const version = text.slice(len, len + 3);
       return this.getSteps(type, version).reduceRight((x, step) => step.decode(x, type), text);
+    }
+    if (type === "savefile" && text.startsWith(this.startingString.savefilealt)) {
+      const len = this.startingString.savefilealt.length;
+      const version = text.slice(len, len + 3);
+      return this.getSteps("savefilealt", version).reduceRight((x, step) => step.decode(x, "savefilealt"), text);
     }
     return atob(text);
   }

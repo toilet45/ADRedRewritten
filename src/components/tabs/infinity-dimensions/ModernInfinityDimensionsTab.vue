@@ -31,7 +31,11 @@ export default {
       showLockedDimCostNote: true,
       isContinuumActive: false,
       redistributedTesseractsOnIPMult: new Decimal(0),
-      redistributedTesseractsOnIPSC: new Decimal(0)
+      redistributedTesseractsOnIPSC: new Decimal(0),
+      isSacrificeAffordable: false,
+      isSacrificeUnlocked: false,
+      currentSacrifice: new Decimal(1),
+      sacrificeBoost: new Decimal(1),
     };
   },
   computed: {
@@ -40,6 +44,9 @@ export default {
       const redistributedTess = Decimal.add(this.redistributedTesseractsOnIPMult, this.redistributedTesseractsOnIPSC);
       const redistributed = redistributedTess.gt(0) ? ` - ${format(redistributedTess, 2, 0)}` : "";
       return `${format(this.boughtTesseracts)}${extra}${redistributed}`;
+    },
+    sacrificeTooltip() {
+      return `Providing a ${formatPow(this.sacrificeBoost, 3, 3)} power effect to all Infinity Dimensions`;
     },
   },
   methods: {
@@ -73,6 +80,11 @@ export default {
       this.isContinuumActive = Laitela.continuumActive && Ra.unlocks.infinityDimensionContinuum.canBeApplied;
       this.redistributedTesseractsOnIPSC.copyFrom(Tesseracts.redistributedOnIPSoftCap);
       this.redistributedTesseractsOnIPMult.copyFrom(Tesseracts.redistributedOnIPMultCap);
+      this.isSacrificeAffordable = IDSacrifice.canSacrifice;
+      const isSacrificeUnlocked = IDSacrifice.isVisible;
+      this.isSacrificeUnlocked = isSacrificeUnlocked;
+      this.currentSacrifice.copyFrom(IDSacrifice.totalBoost);
+      this.sacrificeBoost.copyFrom(IDSacrifice.nextBoost);
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -82,7 +94,10 @@ export default {
     },
     buyTesseract() {
       Tesseracts.buyTesseract();
-    }
+    },
+    sacrifice() {
+      IDsacrificeBtnClick();
+    },
   }
 };
 </script>
@@ -106,6 +121,18 @@ export default {
         @click="toggleAllAutobuyers"
       >
         Toggle all autobuyers
+      </PrimaryButton>
+    </div>
+    <div>
+      <PrimaryButton
+        v-show="isSacrificeUnlocked"
+        v-tooltip="sacrificeTooltip"
+        :enabled="isSacrificeAffordable"
+        class="o-primary-btn--sacrifice"
+        @click="sacrifice"
+      >
+        <span v-if="isSacrificeAffordable">Dimensional Sacrifice ({{ formatPow(sacrificeBoost, 3, 3) }})</span>
+        <span v-else>Dimensional Sacrifice Disabled ({{ disabledCondition }})</span>
       </PrimaryButton>
     </div>
     <div>

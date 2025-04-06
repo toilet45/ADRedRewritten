@@ -2651,6 +2651,30 @@ br {
 
 /* #endregion l-antimatter-dim-tab-header */
 
+/* #region l-infinity-dim-tab-header */
+
+.l-infinity-dim-tab__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+/* #endregion l-infinity-dim-tab-header */
+
+/* #region l-eternity-dim-tab-header */
+
+.l-eternity-dim-tab__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+/* #endregion l-eternity-dim-tab-header */
+
 /* #region c-antimatter-dim-row */
 
 .c-dimension-row {
