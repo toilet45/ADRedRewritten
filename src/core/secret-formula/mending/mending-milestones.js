@@ -79,6 +79,6 @@ export const mendingMilestones = {
   },
   twelve: {
     mends: 100,
-    reward: () => `Generate Mends based on fastest real-time Mend (Currently: 1 every [time])`
+    reward: () => `Mends multiply their own gain (Currently ${formatX(Currency.mends.value.clampMin(1).log10().add(1).clampMin(1), 2, 2)})`
   },
 };

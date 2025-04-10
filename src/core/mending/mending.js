@@ -272,7 +272,6 @@ export function mendingReset(special = 0) {
   player.dilation.totalTachyonGalaxies = DC.D0;
   Currency.dilatedTime.reset();
   player.dilation.lastEP = DC.DM1;
-  Currency.antimatter.reset();
 
   playerInfinityUpgradesOnReset();
   resetInfinityRuns();
@@ -383,6 +382,7 @@ export function mendingReset(special = 0) {
   for (let i = 0; i < prebreakAch.length; i++) {
     Achievement(prebreakAch[i]).unlock();
   }
+  Currency.antimatter.reset();
   if (!MendingUpgrade(18).isBought) {
     Tab.dimensions.antimatter.show();
   }
@@ -397,6 +397,7 @@ export function mendingReset(special = 0) {
   }
   // Refresh the active glyphs. I have 0 idea if this is necessary, but this should stop 0 slots from occuring.
   Glyphs.refreshActive();
+  GlyphAppearanceHandler.unlockSet();
   EventHub.dispatch(GAME_EVENT.MENDING_RESET_AFTER);
 }
 
@@ -425,8 +426,11 @@ export function gainedMendingPoints() {
 }
 
 export function gainedMends() {
-  const x = DC.D1;
-  return x;
+  let x = DC.D1;
+  if (MendingMilestone.twelve.isReached) {
+    x = x.times(Currency.mends.value.clampMin(1).log10().add(1)).clampMin(1);
+  }
+  return x.floor();
 }
 
 export function lockAchievementsOnMend() {

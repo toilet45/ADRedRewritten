@@ -131,9 +131,12 @@ export default {
         class="o-primary-btn--sacrifice"
         @click="sacrifice"
       >
-        <span v-if="isSacrificeAffordable">Dimensional Sacrifice ({{ formatPow(sacrificeBoost, 3, 3) }})</span>
-        <span v-else>Dimensional Sacrifice Disabled ({{ disabledCondition }})</span>
+        <span v-if="isSacrificeAffordable">Infinite Sacrifice ({{ formatPow(sacrificeBoost, 3, 3) }})</span>
+        <span v-else>Infinite Sacrifice Disabled ({{ disabledCondition }})</span>
       </PrimaryButton>
+      <div v-if="isSacrificeUnlocked">
+        Infinite Sacrifice power: {{ formatPow(currentSacrifice, 3, 3) }}
+      </div>
     </div>
     <div>
       <p>

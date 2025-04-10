@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     sacrificeTooltip() {
-      return `Providing a ${formatPow(this.sacrificeBoost, 3, 3)} power effect to all Infinity Dimensions`;
+      return `Nerf Infinity Dimensions for the next 10 minutes (real time) but provide a ${formatPow(this.sacrificeBoost, 3, 3)} power effect to all Infinity Dimensions`;
     },
   },
   methods: {
@@ -50,11 +50,15 @@ export default {
       @click="sacrifice"
     >
       <span v-if="isSacrificeAffordable">
-        Dimensional Sacrifice ({{ formatX(sacrificeBoost, 2, 2) }})
+        Infinite Sacrifice ({{ formatPow(sacrificeBoost, 3, 3) }})
       </span>
       <span v-else>
-        Dimensional Sacrifice Disabled ({{ disabledCondition }})
+        Infinite Sacrifice Disabled ({{ disabledCondition }})
       </span>
     </PrimaryButton>
+    <div v-if="isSacrificeUnlocked">
+      <br>
+      Infinite Sacrifice Power: {{ formatPow(currentSacrifice, 2, 2) }}
+    </div>
   </div>
 </template>
