@@ -207,15 +207,13 @@ export const mendingUpgrades = [
     initialCost: new Decimal("150"),
     costMult: new Decimal("25"),
     // TODO: change this desc
-    description: "Gain Multiversal Galaxies, Divide Antimatter Galaxy cost, Increase power of all Galaxies",
+    description: "Gain Multiversal Galaxies, Divide Antimatter Galaxy cost, and Increase Galaxy Power",
     effects: p => ({
       galaxies: p.mul(6),
       agCost: Decimal.pow(1.001, p),
       agPow: Decimal.pow(1.001, p)
     }),
     formatEffect: effects =>
-      // Its literally 121 instead of 120 we can just ignore it
-      // eslint-disable-next-line max-len
       `+${formatInt(effects.galaxies)} MG, /${format(effects.agCost, 3, 3)}, +${formatPercents(effects.agPow.sub(1), 3, 3)}`
   }),
   hybridRebuyable({
@@ -234,7 +232,7 @@ export const mendingUpgrades = [
       `All QoL bought`][p],
     // eslint-disable-next-line no-unused-vars
     effect: p => p,
-    formatEffect: p => `${format(p)} / ${formatInt(8)}`,
+    formatEffect: p => `${formatInt(p)} / ${formatInt(8)}`,
     purchaseLimit: 8,
   }),
   {
